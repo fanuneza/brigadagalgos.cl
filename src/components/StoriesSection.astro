@@ -1,0 +1,97 @@
+---
+---
+
+<section class="section-padding stories">
+  <div class="container">
+    <p class="stories__eyebrow">Historias de éxito</p>
+    <h2 class="stories__heading">Galgos que encontraron su hogar</h2>
+
+    <div class="stories__scroll">
+      {[1, 2, 3].map((i) => (
+        <article class="story-card">
+          <div class="story-card__photo photo-placeholder" aria-hidden="true">
+            <span class="pendiente">[PENDIENTE: foto]</span>
+          </div>
+          <p class="story-card__name pendiente">[PENDIENTE: nombre del galgo]</p>
+          <p class="story-card__quote pendiente">[PENDIENTE: historia de éxito]</p>
+        </article>
+      ))}
+    </div>
+
+    <p class="stories__notice pendiente">[PENDIENTE: Historias de éxito — contenido pendiente]</p>
+  </div>
+</section>
+
+<style>
+  .stories__eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semi);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--color-primary-700);
+    margin: 0 0 var(--space-3);
+  }
+
+  .stories__heading {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-8);
+  }
+
+  .stories__scroll {
+    display: flex;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-3);
+  }
+
+  .story-card {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .story-card__photo {
+    aspect-ratio: 1;
+    width: 100%;
+  }
+
+  .story-card__name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    padding: var(--space-4) var(--space-4) 0;
+    margin: 0;
+  }
+
+  .story-card__quote {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    padding: var(--space-2) var(--space-4) var(--space-4);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .stories__notice {
+    margin-top: var(--space-6);
+    display: inline-block;
+  }
+
+  @media (min-width: 1024px) {
+    .stories__scroll {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow-x: visible;
+    }
+
+    .story-card {
+      flex: none;
+    }
+  }
+</style>

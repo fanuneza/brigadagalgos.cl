@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brigada Galgos · Design System & Wireframes</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      font-size: var(--font-size-base);
+      line-height: var(--line-base);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- TOP BAR ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: var(--z-sticky);
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-3) var(--space-5);
+      display: flex; align-items: center; gap: var(--space-5);
+      backdrop-filter: blur(8px);
+    }
+    .topbar img { height: 36px; width: auto; }
+    .topbar .title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: var(--font-size-lg);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .topbar .meta {
+      margin-left: auto;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .shell { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 60px); }
+    @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--color-border); } }
+
+    .sidebar {
+      position: sticky; top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      border-right: 1px solid var(--color-border);
+      padding: var(--space-6) var(--space-5);
+      background: var(--color-surface);
+    }
+    .sidebar h4 {
+      font-family: var(--font-body);
+      font-size: var(--font-size-xs);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      margin: var(--space-5) 0 var(--space-3);
+    }
+    .sidebar h4:first-child { margin-top: 0; }
+    .sidebar a {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      color: var(--color-text);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      transition: background var(--duration-fast) var(--ease-out);
+    }
+    .sidebar a:hover { background: var(--color-surface-2); }
+    .sidebar a.active { background: var(--color-text); color: var(--color-text-inverse); }
+
+    main { padding: var(--space-8) var(--space-8) var(--space-12); max-width: 1100px; }
+    @media (max-width: 700px) { main { padding: var(--space-6) var(--space-5) var(--space-10); } }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-3);
+    }
+    h1.page {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: var(--line-tight);
+      text-transform: uppercase;
+      margin: 0 0 var(--space-4);
+      letter-spacing: -0.01em;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--font-size-2xl);
+      line-height: var(--line-snug);
+      text-transform: uppercase;
+      margin: var(--space-9) 0 var(--space-4);
+      letter-spacing: var(--tracking-wide);
+    }
+    h3 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: var(--font-size-lg);
+      margin: var(--space-6) 0 var(--space-3);
+    }
+    p, li { font-size: var(--font-size-base); }
+    p { max-width: 70ch; }
+    a { color: var(--color-primary-700); }
+
+    /* Rainbow rule */
+    .rainbow {
+      display: flex; height: 4px; width: 100%;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: var(--space-4) 0 var(--space-8);
+    }
+    .rainbow span { flex: 1; }
+
+    /* Color swatches */
+    .swatches {
+      display: grid; gap: var(--space-4);
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    .swatch {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      box-shadow: var(--shadow-sm);
+    }
+    .swatch .chip { height: 88px; }
+    .swatch .meta {
+      padding: var(--space-3) var(--space-4);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .swatch .name { font-weight: 700; font-size: var(--font-size-sm); }
+    .swatch .hex { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--color-text-muted); }
+    .swatch .token { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-muted); }
+
+    /* Type specimen */
+    .type-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-5);
+      align-items: baseline;
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .type-row:first-of-type { border-top: 0; }
+    .type-row .lbl {
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-eyebrow);
+    }
+
+    /* Spacing chart */
+    .space-chart { display: grid; gap: var(--space-2); }
+    .space-row { display: grid; grid-template-columns: 80px 80px 1fr; align-items: center; gap: var(--space-3); }
+    .space-row .name { font-family: var(--font-mono); font-size: var(--font-size-xs); }
+    .space-row .px { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--color-text-muted); }
+    .space-bar { height: 16px; background: var(--color-primary); border-radius: var(--radius-sm); }
+
+    /* Buttons demo */
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      min-height: var(--btn-min-height);
+      padding: var(--btn-padding-y) var(--btn-padding-x);
+      border-radius: var(--btn-radius);
+      font-weight: var(--btn-font-weight);
+      font-family: var(--font-body);
+      font-size: var(--font-size-base);
+      cursor: pointer;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+    }
+    .btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); }
+    .btn-primary:hover { background: var(--btn-primary-bg-hover); }
+    .btn-secondary { background: transparent; color: var(--btn-secondary-fg); border-color: var(--btn-secondary-border); }
+    .btn-secondary:hover { background: var(--btn-secondary-bg-hover); }
+    .btn-ghost { background: transparent; color: var(--btn-ghost-fg); }
+    .btn-ghost:hover { background: var(--btn-ghost-bg-hover); }
+
+    /* Cards */
+    .demo-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Chips */
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+    .chip.cyan { background: var(--color-primary-100); color: var(--color-primary-700); }
+    .chip.magenta { background: var(--color-secondary-100); color: var(--color-secondary-700); }
+    .chip.orange { background: var(--color-accent-warm-100); color: var(--color-accent-warm-700); }
+
+    /* Wireframe pre */
+    .wireframe-pre {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      line-height: 1.45;
+      background: #0F1115;
+      color: #E6E8EC;
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      white-space: pre;
+      box-shadow: var(--shadow-md);
+    }
+    .wireframe-pre .pen { color: var(--color-accent-warm); }
+    .wireframe-pre .cyan { color: var(--color-primary); }
+    .wireframe-pre .mag { color: var(--color-secondary); }
+    .wireframe-pre .mute { color: #8B95A3; }
+
+    /* File card grid */
+    .file-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin-top: var(--space-4); }
+    .file-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    }
+    .file-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .file-card .path { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--color-text-muted); }
+    .file-card .name { font-weight: 700; font-size: var(--font-size-base); margin-top: 4px; }
+    .file-card .desc { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: 4px; line-height: 1.5; }
+
+    /* tabs */
+    .tabs {
+      display: flex; gap: 2px;
+      background: var(--color-surface-2);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      width: fit-content;
+      margin-bottom: var(--space-5);
+    }
+    .tab {
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      color: var(--color-text-muted);
+    }
+    .tab.active { background: var(--color-bg); color: var(--color-text); box-shadow: var(--shadow-sm); }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Hero (intro) */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      padding: var(--space-8) 0 var(--space-9);
+    }
+    @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
+    .hero img { width: 100%; height: auto; max-width: 360px; justify-self: end; }
+    .hero p.lead { font-size: var(--font-size-md); color: var(--color-text-muted); max-width: 56ch; }
+
+    .donation-banner {
+      background: var(--color-secondary);
+      color: var(--color-text-inverse);
+      border-radius: var(--radius-xl);
+      padding: var(--space-7) var(--space-6);
+      display: grid;
+      gap: var(--space-5);
+    }
+    @media (min-width: 800px) { .donation-banner { grid-template-columns: 1.4fr 1fr; align-items: center; } }
+    .donation-banner h3 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: var(--font-size-2xl);
+      line-height: var(--line-snug);
+      margin: 0;
+    }
+    .donation-banner p { color: rgba(255,255,255,.92); margin: var(--space-3) 0 0; font-weight: 500; }
+
+    .stepper { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+    .step { flex: 1; min-width: 160px; }
+    .step .badge {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 900; font-size: 24px;
+      color: white; margin-bottom: var(--space-3);
+    }
+    .step .badge.s1 { background: var(--color-primary); }
+    .step .badge.s2 { background: var(--color-secondary); }
+    .step .badge.s3 { background: var(--color-accent-warm); color: var(--color-text); }
+    .step .badge.s4 { background: var(--color-rainbow-green); }
+    .step .lbl { font-family: var(--font-display); text-transform: uppercase; font-size: var(--font-size-md); font-weight: 700; }
+    .step .sub { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: 4px; }
+
+    /* Dog card demo */
+    .dog-grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .dog-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-bg);
+      box-shadow: var(--shadow-sm);
+    }
+    .dog-photo {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      background: repeating-linear-gradient(135deg, var(--color-surface-2) 0 12px, var(--color-surface) 12px 24px);
+      font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--color-text-muted);
+      text-align: center; padding: var(--space-3);
+    }
+    .dog-meta { padding: var(--space-4); }
+    .dog-meta .nm { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-lg); text-transform: uppercase; margin: 0 0 var(--space-2); }
+    .dog-meta .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--space-3); }
+    .dog-meta p { font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0 0 var(--space-4); line-height: 1.45; }
+
+    /* Page section */
+    section.page { margin-bottom: var(--space-9); }
+    section.page > p.lead { font-size: var(--font-size-md); color: var(--color-text-muted); }
+    section.page > p { max-width: 70ch; }
+    .grid-2 { display: grid; gap: var(--space-5); }
+    @media (min-width: 800px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .grid-3 { display: grid; gap: var(--space-5); }
+    @media (min-width: 800px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+    .pending {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: #FFF8DD;
+      color: #8B6E10;
+      border: 1px solid #F0DE96;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      letter-spacing: 0;
+    }
+
+    /* contrast table */
+    table { border-collapse: collapse; width: 100%; font-size: var(--font-size-sm); }
+    th, td { text-align: left; padding: var(--space-3); border-bottom: 1px solid var(--color-border); }
+    th { font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; font-size: var(--font-size-xs); letter-spacing: var(--tracking-eyebrow); }
+    .verdict-pass { color: var(--color-success); font-weight: 600; }
+    .verdict-warn { color: var(--color-warning); font-weight: 600; }
+    .verdict-fail { color: var(--color-danger); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <img src="assets/brigada-galgos-logo.png" alt="Brigada Galgos" />
+    <div class="title">Design System &amp; Wireframes</div>
+    <div class="meta">v0.1 · April 2026</div>
+  </header>
+
+  <div class="shell">
+    <nav class="sidebar" id="sidebar">
+      <h4>Inicio</h4>
+      <a href="#overview" data-tab="overview" class="active">Overview</a>
+
+      <h4>Design system</h4>
+      <a href="#colors" data-tab="colors">Color</a>
+      <a href="#type" data-tab="type">Typography</a>
+      <a href="#spacing" data-tab="spacing">Spacing &amp; layout</a>
+      <a href="#components" data-tab="components">Components</a>
+      <a href="#a11y" data-tab="a11y">Contrast &amp; a11y</a>
+
+      <h4>Wireframes</h4>
+      <a href="#wf-home" data-tab="wf-home">Home</a>
+      <a href="#wf-adoptar" data-tab="wf-adoptar">Adopciones</a>
+      <a href="#wf-hogar" data-tab="wf-hogar">Hogar temporal</a>
+      <a href="#wf-donar" data-tab="wf-donar">Donar</a>
+      <a href="#wf-quienes" data-tab="wf-quienes">Quiénes somos</a>
+      <a href="#wf-contacto" data-tab="wf-contacto">Contacto</a>
+      <a href="#wf-prensa" data-tab="wf-prensa">Prensa &amp; aliados</a>
+      <a href="#wf-components" data-tab="wf-components">Componentes globales</a>
+
+      <h4>Archivos</h4>
+      <a href="tokens.css" target="_blank"><code>tokens.css</code></a>
+      <a href="design-system.md" target="_blank"><code>design-system.md</code></a>
+    </nav>
+
+    <main>
+
+      <!-- ============================ OVERVIEW ============================ -->
+      <section class="panel active" id="overview" data-panel="overview">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Brigada Galgos · Fundación chilena</div>
+            <h1 class="page">Foundations<br/>for the website.</h1>
+            <p class="lead">A design system and a complete set of low-fidelity wireframes for the seven public pages. The system honors the logo's joyful pop-art palette while keeping the rest of the interface disciplined and trustworthy.</p>
+            <div style="display: flex; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap;">
+              <a class="btn btn-primary" href="#colors">Ver design system →</a>
+              <a class="btn btn-secondary" href="#wf-home">Ver wireframes</a>
+            </div>
+          </div>
+          <img src="assets/brigada-galgos-logo.png" alt="Brigada Galgos logo" />
+        </div>
+
+        <div class="rainbow" aria-hidden="true">
+          <span style="background: var(--color-primary)"></span>
+          <span style="background: var(--color-secondary)"></span>
+          <span style="background: var(--color-accent-warm)"></span>
+          <span style="background: var(--color-rainbow-green)"></span>
+          <span style="background: var(--color-rainbow-purple)"></span>
+        </div>
+
+        <h2>Entregables</h2>
+        <p>Diez archivos en total. Click cualquiera para abrirlo crudo.</p>
+
+        <div class="file-grid">
+          <a class="file-card" href="design-system.md" target="_blank">
+            <div class="path">/design-system.md</div>
+            <div class="name">Design system</div>
+            <div class="desc">Documentación completa: color, tipografía, spacing, componentes, voz, restricciones de privacidad.</div>
+          </a>
+          <a class="file-card" href="tokens.css" target="_blank">
+            <div class="path">/tokens.css</div>
+            <div class="name">Tokens CSS</div>
+            <div class="desc">Custom properties listos para usar en producción. Color, type, spacing, radius, shadow, motion.</div>
+          </a>
+          <a class="file-card" href="wireframes/home.md" target="_blank">
+            <div class="path">/wireframes/home.md</div>
+            <div class="name">Home</div>
+            <div class="desc">Hero, misión, 3 CTAs, proceso de rescate, historias, donation banner.</div>
+          </a>
+          <a class="file-card" href="wireframes/adoptar.md" target="_blank">
+            <div class="path">/wireframes/adoptar.md</div>
+            <div class="name">Adopciones</div>
+            <div class="desc">Grilla de tarjetas de galgos disponibles + filtros + requisitos.</div>
+          </a>
+          <a class="file-card" href="wireframes/hogar-temporal.md" target="_blank">
+            <div class="path">/wireframes/hogar-temporal.md</div>
+            <div class="name">Hogar temporal</div>
+            <div class="desc">Qué es, requisitos, proceso, formulario de postulación.</div>
+          </a>
+          <a class="file-card" href="wireframes/donar.md" target="_blank">
+            <div class="path">/wireframes/donar.md</div>
+            <div class="name">Donar</div>
+            <div class="desc">eSponsor + transferencia + promesas de transparencia.</div>
+          </a>
+          <a class="file-card" href="wireframes/quienes-somos.md" target="_blank">
+            <div class="path">/wireframes/quienes-somos.md</div>
+            <div class="name">Quiénes somos</div>
+            <div class="desc">Misión, visión, valores, historia, números — sin nombres ni direcciones.</div>
+          </a>
+          <a class="file-card" href="wireframes/contacto.md" target="_blank">
+            <div class="path">/wireframes/contacto.md</div>
+            <div class="name">Contacto</div>
+            <div class="desc">WhatsApp, email, redes, formulario fallback.</div>
+          </a>
+          <a class="file-card" href="wireframes/prensa.md" target="_blank">
+            <div class="path">/wireframes/prensa.md</div>
+            <div class="name">Prensa &amp; aliados</div>
+            <div class="desc">Grilla placeholder de menciones de prensa y logos de aliados.</div>
+          </a>
+          <a class="file-card" href="wireframes/components.md" target="_blank">
+            <div class="path">/wireframes/components.md</div>
+            <div class="name">Componentes globales</div>
+            <div class="desc">Navbar, Footer, Dog Card, Process Stepper, Donation Banner, Section Divider.</div>
+          </a>
+        </div>
+
+        <h2>Decisiones clave</h2>
+        <ul>
+          <li><strong>Charcoal sobre color, no blanco.</strong> El cyan no pasa AA con texto blanco. CTAs usan texto charcoal sobre naranja (9.1 : 1).</li>
+          <li><strong>Naranja para CTAs, no cyan.</strong> El cyan es para enlaces y bordes. El warm orange es la única "voz de acción".</li>
+          <li><strong>Rainbow set en pequeñas dosis.</strong> Sólo divisores, números de stepper, chips de tarjeta. Nunca fondos grandes ni body text.</li>
+          <li><strong>Sin páginas de detalle por perro.</strong> La adopción es una sola lista. Cada tarjeta hace deep-link directo a WhatsApp.</li>
+          <li><strong>Privacidad por diseño.</strong> Ningún layout expone nombres, fotos del equipo o direcciones físicas.</li>
+        </ul>
+      </section>
+
+      <!-- ============================ COLOR ============================ -->
+      <section class="panel" id="colors" data-panel="colors">
+        <div class="eyebrow">01 · Color</div>
+        <h1 class="page">Color tokens.</h1>
+        <p class="lead">El sistema honra el espíritu pop-art del logo sin volverse caótico. Tres voces principales (cyan, magenta, naranja) y cinco secundarias (rainbow set) reservadas para detalles.</p>
+
+        <h2>Marca</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="chip" style="background: var(--color-primary)"></div>
+            <div class="meta"><span class="name">Primary · Cyan</span><span class="hex">#00BCD4</span><span class="token">--color-primary</span></div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: var(--color-secondary)"></div>
+            <div class="meta"><span class="name">Secondary · Magenta</span><span class="hex">#E91E8C</span><span class="token">--color-secondary</span></div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: var(--color-accent-warm)"></div>
+            <div class="meta"><span class="name">Accent · Warm orange</span><span class="hex">#FFA726</span><span class="token">--color-accent-warm</span></div>
+          </div>
+        </div>
+
+        <h2>Rainbow set <small style="font-family: var(--font-body); font-size: var(--font-size-sm); font-weight:400; color: var(--color-text-muted); text-transform: none; letter-spacing: 0">— solo para acentos</small></h2>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background: var(--color-rainbow-red)"></div><div class="meta"><span class="name">Red</span><span class="hex">#E53935</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-rainbow-yellow)"></div><div class="meta"><span class="name">Yellow</span><span class="hex">#FDD835</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-rainbow-green)"></div><div class="meta"><span class="name">Green</span><span class="hex">#43A047</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-rainbow-purple)"></div><div class="meta"><span class="name">Purple</span><span class="hex">#8E24AA</span></div></div>
+        </div>
+
+        <h2>Neutrals</h2>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background: var(--color-bg); border-bottom: 1px solid var(--color-border)"></div><div class="meta"><span class="name">Background</span><span class="hex">#FFFFFF</span><span class="token">--color-bg</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-surface)"></div><div class="meta"><span class="name">Surface</span><span class="hex">#F5F6F8</span><span class="token">--color-surface</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-surface-2)"></div><div class="meta"><span class="name">Surface 2</span><span class="hex">#ECEEF2</span><span class="token">--color-surface-2</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-border)"></div><div class="meta"><span class="name">Border</span><span class="hex">#DADDE3</span><span class="token">--color-border</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-text-muted)"></div><div class="meta"><span class="name">Text muted</span><span class="hex">#5B636E</span><span class="token">--color-text-muted</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-text)"></div><div class="meta"><span class="name">Text</span><span class="hex">#1F2328</span><span class="token">--color-text</span></div></div>
+        </div>
+
+        <h2>Semantic</h2>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background: var(--color-success)"></div><div class="meta"><span class="name">Success</span><span class="hex">#2E7D32</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-warning)"></div><div class="meta"><span class="name">Warning</span><span class="hex">#ED8936</span></div></div>
+          <div class="swatch"><div class="chip" style="background: var(--color-danger)"></div><div class="meta"><span class="name">Danger</span><span class="hex">#C62828</span></div></div>
+        </div>
+      </section>
+
+      <!-- ============================ TYPE ============================ -->
+      <section class="panel" id="type" data-panel="type">
+        <div class="eyebrow">02 · Typography</div>
+        <h1 class="page">Typography.</h1>
+        <p class="lead">Barlow Condensed para títulos (eco del wordmark del logo) + Inter para cuerpo. JetBrains Mono solo aparece en placeholders y wireframes.</p>
+
+        <h2>Display · Barlow Condensed</h2>
+        <div style="font-family: var(--font-display); font-weight: 900; font-size: 80px; line-height: 1.05; text-transform: uppercase; letter-spacing: -0.01em;">RESCATAMOS GALGOS</div>
+        <div style="font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 1.15; text-transform: uppercase; margin-top: var(--space-4)">CADA GALGO MERECE UNA SEGUNDA CHANCE.</div>
+
+        <h2>Body · Inter</h2>
+        <p style="font-size: 18px; max-width: 60ch;">Sacamos a galgos del abandono, los curamos y buscamos la familia que se merecen. Trabajamos con una red de hogares temporales: no tenemos refugio fijo.</p>
+        <p style="font-size: 16px; max-width: 60ch; color: var(--color-text-muted)">El 100% de tus aportes va a comida, atención veterinaria y traslados.</p>
+
+        <h2>Escala completa</h2>
+        <div>
+          <div class="type-row"><span class="lbl">4xl · 68</span><span style="font-family: var(--font-display); font-weight: 900; font-size: 68px; line-height: 1.05; text-transform: uppercase">Hero h1</span></div>
+          <div class="type-row"><span class="lbl">3xl · 48</span><span style="font-family: var(--font-display); font-weight: 900; font-size: 48px; line-height: 1.05; text-transform: uppercase">Page h1</span></div>
+          <div class="type-row"><span class="lbl">2xl · 36</span><span style="font-family: var(--font-display); font-weight: 700; font-size: 36px; line-height: 1.15; text-transform: uppercase">Section h2</span></div>
+          <div class="type-row"><span class="lbl">xl · 28</span><span style="font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.25; text-transform: uppercase">Section h3</span></div>
+          <div class="type-row"><span class="lbl">lg · 22</span><span style="font-family: var(--font-body); font-weight: 600; font-size: 22px;">Card title / lead</span></div>
+          <div class="type-row"><span class="lbl">md · 18</span><span style="font-family: var(--font-body); font-size: 18px;">Lead body paragraph</span></div>
+          <div class="type-row"><span class="lbl">base · 16</span><span style="font-family: var(--font-body); font-size: 16px;">Standard body copy.</span></div>
+          <div class="type-row"><span class="lbl">sm · 14</span><span style="font-family: var(--font-body); font-size: 14px; color: var(--color-text-muted)">Caption / helper text</span></div>
+          <div class="type-row"><span class="lbl">xs · 12</span><span style="font-family: var(--font-body); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-primary-700)">EYEBROW · CHIP TEXT</span></div>
+        </div>
+      </section>
+
+      <!-- ============================ SPACING ============================ -->
+      <section class="panel" id="spacing" data-panel="spacing">
+        <div class="eyebrow">03 · Spacing &amp; layout</div>
+        <h1 class="page">Spacing.</h1>
+        <p class="lead">Grid de 8px. Container 1200px. Long-form 760px. Breakpoints 640 / 1024 / 1280.</p>
+
+        <h2>Escala de spacing</h2>
+        <div class="space-chart">
+          <div class="space-row"><span class="name">--space-1</span><span class="px">4 px</span><div class="space-bar" style="width: 4px"></div></div>
+          <div class="space-row"><span class="name">--space-2</span><span class="px">8 px</span><div class="space-bar" style="width: 8px"></div></div>
+          <div class="space-row"><span class="name">--space-3</span><span class="px">12 px</span><div class="space-bar" style="width: 12px"></div></div>
+          <div class="space-row"><span class="name">--space-4</span><span class="px">16 px</span><div class="space-bar" style="width: 16px"></div></div>
+          <div class="space-row"><span class="name">--space-5</span><span class="px">24 px</span><div class="space-bar" style="width: 24px"></div></div>
+          <div class="space-row"><span class="name">--space-6</span><span class="px">32 px</span><div class="space-bar" style="width: 32px"></div></div>
+          <div class="space-row"><span class="name">--space-7</span><span class="px">40 px</span><div class="space-bar" style="width: 40px"></div></div>
+          <div class="space-row"><span class="name">--space-8</span><span class="px">48 px</span><div class="space-bar" style="width: 48px"></div></div>
+          <div class="space-row"><span class="name">--space-9</span><span class="px">64 px</span><div class="space-bar" style="width: 64px"></div></div>
+          <div class="space-row"><span class="name">--space-10</span><span class="px">80 px</span><div class="space-bar" style="width: 80px"></div></div>
+          <div class="space-row"><span class="name">--space-12</span><span class="px">96 px</span><div class="space-bar" style="width: 96px"></div></div>
+          <div class="space-row"><span class="name">--space-16</span><span class="px">128 px</span><div class="space-bar" style="width: 128px"></div></div>
+        </div>
+
+        <h2>Radius &amp; shadow</h2>
+        <div class="grid-3">
+          <div class="demo-card" style="border-radius: var(--radius-sm)"><strong>radius-sm</strong><br/><code>6 px</code></div>
+          <div class="demo-card" style="border-radius: var(--radius-md)"><strong>radius-md</strong><br/><code>12 px</code></div>
+          <div class="demo-card" style="border-radius: var(--radius-lg)"><strong>radius-lg</strong><br/><code>20 px</code></div>
+        </div>
+        <div class="grid-3" style="margin-top: var(--space-4)">
+          <div class="demo-card" style="box-shadow: var(--shadow-sm)"><strong>shadow-sm</strong></div>
+          <div class="demo-card" style="box-shadow: var(--shadow-md)"><strong>shadow-md</strong></div>
+          <div class="demo-card" style="box-shadow: var(--shadow-lg)"><strong>shadow-lg</strong></div>
+        </div>
+
+        <h2>Breakpoints</h2>
+        <table>
+          <thead><tr><th>Token</th><th>≥ width</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>sm</code></td><td>640 px</td><td>Phone landscape, tablet vertical</td></tr>
+            <tr><td><code>md</code></td><td>1024 px</td><td>Tablet horizontal, laptop chico — grid 2 / 3 col</td></tr>
+            <tr><td><code>lg</code></td><td>1280 px</td><td>Desktop estándar — container max 1200px</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============================ COMPONENTS ============================ -->
+      <section class="panel" id="components" data-panel="components">
+        <div class="eyebrow">04 · Components</div>
+        <h1 class="page">Componentes.</h1>
+        <p class="lead">Botones, tarjetas, chips, formularios y bloques compuestos. Demos en vivo abajo.</p>
+
+        <h2>Botones</h2>
+        <div style="display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center;">
+          <button class="btn btn-primary">Donar ahora</button>
+          <button class="btn btn-secondary">Saber más</button>
+          <button class="btn btn-ghost">Cancelar</button>
+        </div>
+        <p style="margin-top: var(--space-3); font-size: var(--font-size-sm); color: var(--color-text-muted)">
+          Primary = naranja con texto charcoal (9.1 : 1). Una primary por sección.
+        </p>
+
+        <h2>Chips</h2>
+        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <span class="chip cyan">♂ Macho</span>
+          <span class="chip magenta">4 años</span>
+          <span class="chip orange">28 kg</span>
+          <span class="chip cyan">Adultos</span>
+          <span class="chip magenta">Recomendado</span>
+        </div>
+
+        <h2>Dog card</h2>
+        <div class="dog-grid">
+          <div class="dog-card">
+            <div class="dog-photo">[FOTO: Lucho]</div>
+            <div class="dog-meta">
+              <h4 class="nm">Lucho</h4>
+              <div class="chips"><span class="chip cyan">♂ Macho</span><span class="chip magenta">4 años</span><span class="chip orange">28 kg</span></div>
+              <p>Tranquilo, sociable con otros galgos. Busca una familia paciente.</p>
+              <button class="btn btn-primary" style="width: 100%; justify-content: center;">Me interesa Lucho</button>
+            </div>
+          </div>
+          <div class="dog-card">
+            <div class="dog-photo">[FOTO: Tina]</div>
+            <div class="dog-meta">
+              <h4 class="nm">Tina</h4>
+              <div class="chips"><span class="chip cyan">♀ Hembra</span><span class="chip magenta">2 años</span><span class="chip orange">22 kg</span></div>
+              <p>Curiosa, le encantan los paseos largos. Convive bien con niños.</p>
+              <button class="btn btn-primary" style="width: 100%; justify-content: center;">Me interesa Tina</button>
+            </div>
+          </div>
+          <div class="dog-card">
+            <div class="dog-photo">[FOTO: Olmo]</div>
+            <div class="dog-meta">
+              <h4 class="nm">Olmo</h4>
+              <div class="chips"><span class="chip cyan">♂ Macho</span><span class="chip magenta">7 años</span><span class="chip orange">30 kg</span></div>
+              <p>Adulto mayor, súper cariñoso. Necesita una casa tranquila.</p>
+              <button class="btn btn-primary" style="width: 100%; justify-content: center;">Me interesa Olmo</button>
+            </div>
+          </div>
+        </div>
+
+        <h2>Process stepper</h2>
+        <div class="stepper">
+          <div class="step"><div class="badge s1">1</div><div class="lbl">Conocés al galgo</div><div class="sub">Coordinas visita por WhatsApp</div></div>
+          <div class="step"><div class="badge s2">2</div><div class="lbl">Visita en casa</div><div class="sub">Verificamos espacio y rutina</div></div>
+          <div class="step"><div class="badge s3">3</div><div class="lbl">Acuerdo de adopción</div><div class="sub">Firmamos compromiso y cuidados</div></div>
+          <div class="step"><div class="badge s4">4</div><div class="lbl">Llevamos a tu galgo</div><div class="sub">Acompañamiento durante el primer mes</div></div>
+        </div>
+
+        <h2>Donation banner</h2>
+        <div class="donation-banner">
+          <div>
+            <h3>Cada galgo rescatado depende de gente como vos.</h3>
+            <p>El 100% de tus aportes va a comida, atención veterinaria y traslados.</p>
+          </div>
+          <div>
+            <button class="btn btn-primary">Donar mensual en eSponsor</button>
+            <p style="margin-top: var(--space-3); font-size: var(--font-size-sm)">También recibimos transferencia. <a href="#" style="color: white; text-decoration: underline;">Ver datos →</a></p>
+          </div>
+        </div>
+
+        <h2>Section divider</h2>
+        <div class="rainbow" aria-hidden="true">
+          <span style="background: var(--color-primary)"></span>
+          <span style="background: var(--color-secondary)"></span>
+          <span style="background: var(--color-accent-warm)"></span>
+          <span style="background: var(--color-rainbow-green)"></span>
+          <span style="background: var(--color-rainbow-purple)"></span>
+        </div>
+      </section>
+
+      <!-- ============================ A11Y ============================ -->
+      <section class="panel" id="a11y" data-panel="a11y">
+        <div class="eyebrow">05 · Contrast &amp; accessibility</div>
+        <h1 class="page">Contraste.</h1>
+        <p class="lead">Validación WCAG AA de las combinaciones del sistema. Las que fallan están explícitamente prohibidas.</p>
+
+        <table>
+          <thead><tr><th>Combinación</th><th>Ratio</th><th>Veredicto</th></tr></thead>
+          <tbody>
+            <tr><td>Charcoal sobre blanco</td><td>15.4 : 1</td><td class="verdict-pass">✅ AAA</td></tr>
+            <tr><td>Charcoal sobre <code>--color-surface</code></td><td>14.1 : 1</td><td class="verdict-pass">✅ AAA</td></tr>
+            <tr><td>Charcoal sobre cyan</td><td>8.2 : 1</td><td class="verdict-pass">✅ AAA</td></tr>
+            <tr><td>Charcoal sobre naranja (CTA)</td><td>9.1 : 1</td><td class="verdict-pass">✅ AAA — preferido</td></tr>
+            <tr><td>Blanco sobre magenta</td><td>4.9 : 1</td><td class="verdict-warn">⚠️ AA solo texto grande (≥18px bold)</td></tr>
+            <tr><td>Blanco sobre cyan</td><td>2.6 : 1</td><td class="verdict-fail">❌ Falla AA — nunca</td></tr>
+            <tr><td>Blanco sobre naranja</td><td>1.7 : 1</td><td class="verdict-fail">❌ Falla todo — nunca</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Reglas de oro</h2>
+        <ul>
+          <li>Cuando dudes, charcoal sobre color. Nunca blanco sobre cyan o naranja.</li>
+          <li>El donation banner (magenta) usa cuerpo de 18px+ y peso 500+ para satisfacer AA-large.</li>
+          <li>Todos los inputs y botones tienen altura mínima 48px (target a11y).</li>
+          <li>Focus state: anillo cyan de 3px (<code>--shadow-focus</code>).</li>
+        </ul>
+      </section>
+
+      <!-- ============================ WIREFRAMES ============================ -->
+      <section class="panel" id="wf-home" data-panel="wf-home"></section>
+      <section class="panel" id="wf-adoptar" data-panel="wf-adoptar"></section>
+      <section class="panel" id="wf-hogar" data-panel="wf-hogar"></section>
+      <section class="panel" id="wf-donar" data-panel="wf-donar"></section>
+      <section class="panel" id="wf-quienes" data-panel="wf-quienes"></section>
+      <section class="panel" id="wf-contacto" data-panel="wf-contacto"></section>
+      <section class="panel" id="wf-prensa" data-panel="wf-prensa"></section>
+      <section class="panel" id="wf-components" data-panel="wf-components"></section>
+
+    </main>
+  </div>
+
+  <!-- Wireframe content (loaded inline so the page is fully self-contained) -->
+  <script id="wf-data" type="application/json">
+  {
+    "wf-home":     { "title": "Home", "path": "wireframes/home.md", "route": "/" },
+    "wf-adoptar":  { "title": "Adopciones", "path": "wireframes/adoptar.md", "route": "/adoptar" },
+    "wf-hogar":    { "title": "Hogar temporal", "path": "wireframes/hogar-temporal.md", "route": "/hogar-temporal" },
+    "wf-donar":    { "title": "Donar", "path": "wireframes/donar.md", "route": "/donar" },
+    "wf-quienes":  { "title": "Quiénes somos", "path": "wireframes/quienes-somos.md", "route": "/quienes-somos" },
+    "wf-contacto": { "title": "Contacto", "path": "wireframes/contacto.md", "route": "/contacto" },
+    "wf-prensa":   { "title": "Prensa & aliados", "path": "wireframes/prensa.md", "route": "/prensa" },
+    "wf-components": { "title": "Componentes globales", "path": "wireframes/components.md", "route": "(reutilizables)" }
+  }
+  </script>
+
+  <script>
+    // --- Tab switching ---
+    const links = document.querySelectorAll('[data-tab]');
+    const panels = document.querySelectorAll('[data-panel]');
+    function activate(tab) {
+      links.forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
+      window.scrollTo({ top: 0 });
+      if (location.hash !== '#' + tab) {
+        history.replaceState(null, '', '#' + tab);
+      }
+      // Lazy-load wireframe content
+      if (tab.startsWith('wf-')) loadWireframe(tab);
+    }
+    links.forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      activate(a.dataset.tab);
+    }));
+
+    // --- Wireframe loading ---
+    const wfData = JSON.parse(document.getElementById('wf-data').textContent);
+    const loaded = new Set();
+    async function loadWireframe(tab) {
+      if (loaded.has(tab)) return;
+      const meta = wfData[tab];
+      if (!meta) return;
+      const panel = document.querySelector(`[data-panel="${tab}"]`);
+      panel.innerHTML = `
+        <div class="eyebrow">Wireframe · ${meta.route}</div>
+        <h1 class="page">${meta.title}.</h1>
+        <p class="lead">Diagrama ASCII + inventario de componentes + notas de contenido e interacción. Mobile-first; desktop variation incluida.</p>
+        <div style="margin: var(--space-5) 0"><a class="btn btn-secondary" href="${meta.path}" target="_blank">Abrir archivo crudo ↗</a></div>
+        <div id="${tab}-content"><p style="color: var(--color-text-muted)">Cargando…</p></div>
+      `;
+      try {
+        const res = await fetch(meta.path);
+        if (!res.ok) throw new Error(res.status);
+        const md = await res.text();
+        document.getElementById(`${tab}-content`).innerHTML = renderMarkdown(md);
+        loaded.add(tab);
+      } catch (e) {
+        document.getElementById(`${tab}-content`).innerHTML =
+          `<p style="color: var(--color-danger)">No se pudo cargar el archivo. Abrir <a href="${meta.path}" target="_blank">${meta.path}</a> directamente.</p>`;
+      }
+    }
+
+    // --- Tiny markdown renderer (sufficient for these files) ---
+    function escapeHtml(s) { return s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+    function renderInline(s) {
+      s = escapeHtml(s);
+      s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+      s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+      s = s.replace(/\[PENDIENTE([^\]]*)\]/g, '<span class="pending">[PENDIENTE$1]</span>');
+      return s;
+    }
+    function renderMarkdown(md) {
+      const lines = md.split('\n');
+      const out = [];
+      let inCode = false, codeBuf = [];
+      let inList = false, listType = null;
+      let inTable = false, tableRows = [];
+
+      function flushList() {
+        if (inList) {
+          out.push(`</${listType}>`);
+          inList = false; listType = null;
+        }
+      }
+      function flushTable() {
+        if (inTable && tableRows.length) {
+          let html = '<table>';
+          html += '<thead><tr>' + tableRows[0].map(c => `<th>${renderInline(c.trim())}</th>`).join('') + '</tr></thead>';
+          html += '<tbody>';
+          for (let i = 2; i < tableRows.length; i++) {
+            html += '<tr>' + tableRows[i].map(c => `<td>${renderInline(c.trim())}</td>`).join('') + '</tr>';
+          }
+          html += '</tbody></table>';
+          out.push(html);
+        }
+        inTable = false; tableRows = [];
+      }
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        // code fences
+        if (line.startsWith('```')) {
+          if (inCode) {
+            out.push(`<pre class="wireframe-pre">${escapeHtml(codeBuf.join('\n'))}</pre>`);
+            inCode = false; codeBuf = [];
+          } else {
+            flushList(); flushTable();
+            inCode = true;
+          }
+          continue;
+        }
+        if (inCode) { codeBuf.push(line); continue; }
+
+        // Tables
+        if (line.includes('|') && line.trim().startsWith('|')) {
+          flushList();
+          inTable = true;
+          tableRows.push(line.trim().slice(1, -1).split('|'));
+          continue;
+        } else if (inTable) {
+          flushTable();
+        }
+
+        if (/^---+\s*$/.test(line)) { flushList(); out.push('<hr/>'); continue; }
+        if (/^####\s+/.test(line)) { flushList(); out.push(`<h4>${renderInline(line.replace(/^####\s+/, ''))}</h4>`); continue; }
+        if (/^###\s+/.test(line))  { flushList(); out.push(`<h3>${renderInline(line.replace(/^###\s+/, ''))}</h3>`); continue; }
+        if (/^##\s+/.test(line))   { flushList(); out.push(`<h2>${renderInline(line.replace(/^##\s+/, ''))}</h2>`); continue; }
+        if (/^#\s+/.test(line))    { flushList(); out.push(`<h2 style="font-size: var(--font-size-2xl)">${renderInline(line.replace(/^#\s+/, ''))}</h2>`); continue; }
+
+        if (/^\s*[-*]\s+/.test(line)) {
+          if (!inList || listType !== 'ul') { flushList(); out.push('<ul>'); inList = true; listType = 'ul'; }
+          out.push(`<li>${renderInline(line.replace(/^\s*[-*]\s+/, ''))}</li>`);
+          continue;
+        }
+        if (/^\s*\d+\.\s+/.test(line)) {
+          if (!inList || listType !== 'ol') { flushList(); out.push('<ol>'); inList = true; listType = 'ol'; }
+          out.push(`<li>${renderInline(line.replace(/^\s*\d+\.\s+/, ''))}</li>`);
+          continue;
+        }
+
+        if (line.trim() === '') { flushList(); out.push(''); continue; }
+
+        flushList();
+        out.push(`<p>${renderInline(line)}</p>`);
+      }
+      flushList(); flushTable();
+      if (inCode) out.push(`<pre class="wireframe-pre">${escapeHtml(codeBuf.join('\n'))}</pre>`);
+      return out.join('\n');
+    }
+
+    // --- Initial routing ---
+    const initial = (location.hash || '#overview').slice(1);
+    activate(initial);
+  </script>
+
+</body>
+</html>

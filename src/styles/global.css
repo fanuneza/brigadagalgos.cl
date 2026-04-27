@@ -1,0 +1,97 @@
+@import "../../design-system/tokens.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: var(--line-tight);
+  font-weight: var(--weight-black);
+  margin: 0;
+}
+
+.container {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@media (min-width: 1024px) {
+  .container { padding-inline: var(--gutter-lg); }
+}
+
+.container--narrow { max-width: var(--content-narrow); }
+
+.section-padding {
+  padding-block: var(--space-9);
+}
+@media (min-width: 1024px) {
+  .section-padding { padding-block: var(--space-12); }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-min-height);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: var(--btn-font-weight);
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+.btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+.btn--primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border-color: var(--btn-primary-border);
+}
+.btn--primary:hover { background: var(--btn-primary-bg-hover); }
+
+.btn--secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-fg);
+  border-color: var(--btn-secondary-border);
+}
+.btn--secondary:hover { background: var(--btn-secondary-bg-hover); }
+
+.btn--ghost {
+  background: var(--btn-ghost-bg);
+  color: var(--btn-ghost-fg);
+}
+.btn--ghost:hover { background: var(--btn-ghost-bg-hover); }
+
+.pendiente {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.photo-placeholder {
+  background: var(--color-surface-2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}

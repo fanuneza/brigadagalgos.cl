@@ -141,3 +141,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Claude / dev artifacts
+Claude*
+.claude/
+docs/
+handoffs/
+AGENTS.md
+process-notes.md
+smoke-*.png
+.astro/
+.playwright-mcp/
+
+# design-system/ is intentionally NOT ignored — tokens.css is required at build time

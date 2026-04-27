@@ -1,0 +1,109 @@
+---
+---
+
+<section class="hero section-padding">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <h1>Rescatamos galgos en Chile.</h1>
+      <p class="hero__lead">Sacamos a galgos del abandono, los curamos
+        y buscamos la familia que se merecen.</p>
+      <div class="hero__ctas">
+        <a href="/adoptar" class="btn btn--primary">Quiero adoptar</a>
+        <a href="/hogar-temporal" class="btn btn--secondary">Quiero ser hogar temporal</a>
+        <a href="/donar" class="btn btn--ghost">Donar</a>
+      </div>
+    </div>
+
+    <picture class="hero__photo">
+      <source
+        media="(min-width: 1024px)"
+        srcset="/images/hero-landscape.webp"
+        type="image/webp"
+      />
+      <img
+        src="/images/hero-portrait.webp"
+        alt="Galgo rescatado mirando hacia adelante"
+        class="hero__img"
+        loading="eager"
+        decoding="async"
+        width="800"
+        height="1000"
+      />
+    </picture>
+  </div>
+</section>
+
+<style>
+  .hero__grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  h1 {
+    font-size: var(--font-size-3xl);
+    color: var(--color-text);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .hero__lead {
+    font-size: var(--font-size-md);
+    color: var(--color-text-muted);
+    line-height: var(--line-base);
+    margin: 0;
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .hero__ctas .btn--primary,
+  .hero__ctas .btn--secondary {
+    width: 100%;
+  }
+
+  .hero__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    display: block;
+    aspect-ratio: 4/5;
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .hero__ctas {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .hero__ctas .btn--primary,
+    .hero__ctas .btn--secondary {
+      width: auto;
+    }
+
+    .hero__img {
+      aspect-ratio: 5/4;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__img { transition: none; }
+  }
+</style>
