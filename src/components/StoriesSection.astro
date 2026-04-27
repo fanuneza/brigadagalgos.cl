@@ -1,24 +1,43 @@
 ---
+const stories = [
+  {
+    slug: 'rocko',
+    name: 'Rocko',
+    quote: 'Llegó con miedo a todo. Hoy duerme en cama, acurrucado contra su familia adoptante.',
+  },
+  {
+    slug: 'luna',
+    name: 'Luna',
+    quote: 'La encontramos muy débil, pesaba 12 kilos. Ocho meses después, su hogar temporal no se pudo resistir y la adoptó.',
+  },
+  {
+    slug: 'toni',
+    name: 'Toni',
+    quote: 'Cuatro meses en rescate, tres cirugías. Su familia dice que no se imaginan la vida sin él.',
+  },
+];
 ---
 
-<section class="section-padding stories">
+<section class="section-padding stories" style="background: var(--color-surface);">
   <div class="container">
-    <p class="stories__eyebrow">Historias de éxito</p>
-    <h2 class="stories__heading">Galgos que encontraron su hogar</h2>
+    <p class="stories__eyebrow">Historias</p>
+    <h2 class="stories__heading">Salieron adelante.</h2>
 
     <div class="stories__scroll">
-      {[1, 2, 3].map((i) => (
+      {stories.map((dog) => (
         <article class="story-card">
           <div class="story-card__photo photo-placeholder" aria-hidden="true">
-            <span class="pendiente">[PENDIENTE: foto]</span>
+            <span class="pendiente">[PENDIENTE: foto de {dog.name}]</span>
           </div>
-          <p class="story-card__name pendiente">[PENDIENTE: nombre del galgo]</p>
-          <p class="story-card__quote pendiente">[PENDIENTE: historia de éxito]</p>
+          <div class="story-card__body">
+            <p class="story-card__name">{dog.name}</p>
+            <p class="story-card__quote">"{dog.quote}"</p>
+          </div>
         </article>
       ))}
     </div>
 
-    <p class="stories__notice pendiente">[PENDIENTE: Historias de éxito — contenido pendiente]</p>
+    <p class="stories__pending pendiente">[PENDIENTE: fotos y citas reales de cada galgo adoptado]</p>
   </div>
 </section>
 
@@ -38,6 +57,10 @@
     margin-bottom: var(--space-8);
   }
 
+  @media (min-width: 1024px) {
+    .stories__heading { font-size: var(--font-size-3xl); }
+  }
+
   .stories__scroll {
     display: flex;
     gap: var(--space-5);
@@ -48,37 +71,46 @@
   }
 
   .story-card {
-    flex: 0 0 240px;
+    flex: 0 0 260px;
     scroll-snap-align: start;
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--color-border);
     background: var(--color-bg);
+    box-shadow: var(--shadow-sm);
   }
 
   .story-card__photo {
     aspect-ratio: 1;
     width: 100%;
+    min-height: 200px;
+  }
+
+  .story-card__body {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
   }
 
   .story-card__name {
     font-family: var(--font-display);
     font-size: var(--font-size-lg);
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-black);
     text-transform: uppercase;
-    padding: var(--space-4) var(--space-4) 0;
+    color: var(--color-text);
     margin: 0;
   }
 
   .story-card__quote {
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
-    padding: var(--space-2) var(--space-4) var(--space-4);
+    line-height: var(--line-base);
     font-style: italic;
     margin: 0;
   }
 
-  .stories__notice {
+  .stories__pending {
     margin-top: var(--space-6);
     display: inline-block;
   }
@@ -89,9 +121,6 @@
       grid-template-columns: repeat(3, 1fr);
       overflow-x: visible;
     }
-
-    .story-card {
-      flex: none;
-    }
+    .story-card { flex: none; }
   }
 </style>

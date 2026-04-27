@@ -1,17 +1,47 @@
 ---
 const steps = [
-  { num: 1, label: 'Recibimos el aviso',                  bg: 'var(--color-primary)',      fg: 'var(--color-text-inverse)' },
-  { num: 2, label: 'Lo evaluamos y rescatamos',           bg: 'var(--color-secondary)',     fg: 'var(--color-text-inverse)' },
-  { num: 3, label: 'Atención veterinaria completa',       bg: 'var(--color-accent-warm)',   fg: 'var(--color-text)' }, // charcoal — white on orange fails AA (1.7:1)
-  { num: 4, label: 'Hogar temporal y rehabilitación',     bg: 'var(--color-rainbow-green)', fg: 'var(--color-text-inverse)' },
-  { num: 5, label: 'Adopción definitiva',                 bg: 'var(--color-rainbow-purple)',fg: 'var(--color-text-inverse)' },
+  {
+    num: 1,
+    label: 'Recibimos el aviso',
+    sub: 'Alguien ve al galgo y nos contacta por WhatsApp o redes.',
+    bg: 'var(--color-primary)',
+    fg: 'var(--color-text-inverse)',
+  },
+  {
+    num: 2,
+    label: 'Lo evaluamos y rescatamos',
+    sub: 'Vamos al lugar, evaluamos la situación y lo trasladamos.',
+    bg: 'var(--color-secondary)',
+    fg: 'var(--color-text-inverse)',
+  },
+  {
+    num: 3,
+    label: 'Atención veterinaria',
+    sub: 'Revisión completa, vacunas, desparasitación y lo que necesite.',
+    bg: 'var(--color-accent-warm)',
+    fg: 'var(--color-text)', /* charcoal — blanco sobre naranja falla AA (1.7:1) */
+  },
+  {
+    num: 4,
+    label: 'Hogar temporal',
+    sub: 'Una familia lo recibe y lo rehabilita mientras buscamos adopción.',
+    bg: 'var(--color-rainbow-green)',
+    fg: 'var(--color-text-inverse)',
+  },
+  {
+    num: 5,
+    label: 'Adopción definitiva',
+    sub: 'Encontramos la familia ideal y hacemos el seguimiento del primer mes.',
+    bg: 'var(--color-rainbow-purple)',
+    fg: 'var(--color-text-inverse)',
+  },
 ];
 ---
 
-<section class="section-padding" style="background: var(--color-surface);">
+<section class="section-padding stepper-section">
   <div class="container">
-    <p class="stepper__eyebrow">Así funciona</p>
-    <h2 class="stepper__heading">El proceso de rescate</h2>
+    <p class="stepper__eyebrow">El proceso</p>
+    <h2 class="stepper__heading">Así rescatamos un galgo.</h2>
     <ol class="stepper" role="list">
       {steps.map((step) => (
         <li class="step">
@@ -22,7 +52,10 @@ const steps = [
           >
             {step.num}
           </div>
-          <span class="step__label">{step.label}</span>
+          <div class="step__body">
+            <span class="step__label">{step.label}</span>
+            <span class="step__sub">{step.sub}</span>
+          </div>
         </li>
       ))}
     </ol>
@@ -42,13 +75,17 @@ const steps = [
 
   .stepper__heading {
     font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-9);
+  }
+
+  @media (min-width: 1024px) {
+    .stepper__heading { font-size: var(--font-size-3xl); }
   }
 
   .stepper {
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: 0;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -59,6 +96,7 @@ const steps = [
     align-items: flex-start;
     gap: var(--space-4);
     position: relative;
+    padding-bottom: var(--space-6);
   }
 
   /* Vertical connector on mobile */
@@ -68,7 +106,7 @@ const steps = [
     left: 23px;
     top: 48px;
     width: 2px;
-    height: var(--space-5);
+    bottom: 0;
     background: var(--color-border);
   }
 
@@ -83,6 +121,15 @@ const steps = [
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: var(--weight-black);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: 10px;
   }
 
   .step__label {
@@ -91,14 +138,21 @@ const steps = [
     font-weight: var(--weight-semi);
     text-transform: uppercase;
     line-height: var(--line-tight);
-    padding-top: 10px;
+    color: var(--color-text);
   }
 
+  .step__sub {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-base);
+  }
+
+  /* Desktop — horizontal */
   @media (min-width: 1024px) {
     .stepper {
       flex-direction: row;
       align-items: flex-start;
-      justify-content: space-between;
+      gap: 0;
     }
 
     .step {
@@ -106,18 +160,22 @@ const steps = [
       align-items: center;
       text-align: center;
       flex: 1;
+      padding-bottom: 0;
+      padding-inline: var(--space-3);
     }
 
-    .step__label {
-      padding-top: var(--space-3);
+    .step__body {
+      padding-top: var(--space-4);
+      align-items: center;
     }
 
-    /* Horizontal connector on desktop */
+    /* Horizontal connector */
     .step:not(:last-child)::after {
       left: calc(50% + 28px);
       top: 23px;
       width: calc(100% - 56px);
       height: 2px;
+      bottom: auto;
     }
   }
 </style>

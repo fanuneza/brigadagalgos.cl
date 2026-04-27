@@ -4,8 +4,8 @@
 <section class="donation-banner">
   <div class="container donation-banner__grid">
     <div class="donation-banner__text">
-      <h2>Cada galgo rescatado depende de gente como tú.</h2>
-      <p>El 100% de tus aportes va a comida, atención veterinaria y traslados.</p>
+      <h2>Cada rescate depende de gente como tú.</h2>
+      <p>El 100% de tus aportes va a comida, atención veterinaria y traslados. Sin intermediarios.</p>
     </div>
     <div class="donation-banner__cta">
       <a
@@ -28,7 +28,6 @@
     color: var(--color-text-inverse);
     padding-block: var(--space-9);
   }
-
   @media (min-width: 1024px) {
     .donation-banner { padding-block: var(--space-12); }
   }
@@ -37,7 +36,6 @@
     display: grid;
     gap: var(--space-8);
   }
-
   @media (min-width: 1024px) {
     .donation-banner__grid {
       grid-template-columns: 1fr 1fr;
@@ -50,8 +48,11 @@
     color: var(--color-text-inverse);
     margin-bottom: var(--space-3);
   }
+  @media (min-width: 1024px) {
+    .donation-banner h2 { font-size: var(--font-size-3xl); }
+  }
 
-  /* 18px + weight 500 — minimum for AA on magenta background */
+  /* 18px + weight 500 — mínimo para AA sobre fondo magenta */
   .donation-banner p {
     font-size: var(--font-size-md);
     font-weight: var(--weight-medium);
@@ -64,21 +65,17 @@
     gap: var(--space-4);
     align-items: flex-start;
   }
+  @media (min-width: 1024px) {
+    .donation-banner__cta { align-items: flex-end; }
+  }
 
   .donation-banner__transfer {
     font-size: var(--font-size-md);
     font-weight: var(--weight-medium);
   }
-
   .donation-banner__transfer a {
     color: var(--color-text-inverse);
     font-weight: var(--weight-semi);
     text-underline-offset: 3px;
-  }
-
-  @media (min-width: 1024px) {
-    .donation-banner__cta {
-      align-items: flex-end;
-    }
   }
 </style>
