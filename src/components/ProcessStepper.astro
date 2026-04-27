@@ -4,36 +4,31 @@ const steps = [
     num: 1,
     label: 'Recibimos el aviso',
     sub: 'Alguien ve al galgo y nos contacta por WhatsApp o redes.',
-    bg: 'var(--color-primary)',
-    fg: 'var(--color-text-inverse)',
+    colorClass: 'step__badge--primary',
   },
   {
     num: 2,
     label: 'Lo evaluamos y rescatamos',
     sub: 'Vamos al lugar, evaluamos la situación y lo trasladamos.',
-    bg: 'var(--color-secondary)',
-    fg: 'var(--color-text-inverse)',
+    colorClass: 'step__badge--secondary',
   },
   {
     num: 3,
     label: 'Atención veterinaria',
     sub: 'Revisión completa, vacunas, desparasitación y lo que necesite.',
-    bg: 'var(--color-accent-warm)',
-    fg: 'var(--color-text)', /* charcoal — blanco sobre naranja falla AA (1.7:1) */
+    colorClass: 'step__badge--warm',
   },
   {
     num: 4,
     label: 'Hogar temporal',
     sub: 'Una familia lo recibe y lo rehabilita mientras buscamos adopción.',
-    bg: 'var(--color-rainbow-green)',
-    fg: 'var(--color-text-inverse)',
+    colorClass: 'step__badge--green',
   },
   {
     num: 5,
     label: 'Adopción definitiva',
     sub: 'Encontramos la familia ideal y hacemos seguimiento a nuestros galgos.',
-    bg: 'var(--color-rainbow-purple)',
-    fg: 'var(--color-text-inverse)',
+    colorClass: 'step__badge--purple',
   },
 ];
 ---
@@ -46,8 +41,7 @@ const steps = [
       {steps.map((step) => (
         <li class="step">
           <div
-            class="step__badge"
-            style={`background: ${step.bg}; color: ${step.fg};`}
+            class={`step__badge ${step.colorClass}`}
             aria-hidden="true"
           >
             {step.num}
@@ -61,123 +55,3 @@ const steps = [
     </ol>
   </div>
 </section>
-
-<style>
-  .stepper__eyebrow {
-    font-family: var(--font-body);
-    font-size: var(--font-size-xs);
-    font-weight: var(--weight-semi);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-eyebrow);
-    color: var(--color-primary-700);
-    margin: 0 0 var(--space-3);
-  }
-
-  .stepper__heading {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-9);
-  }
-
-  @media (min-width: 1024px) {
-    .stepper__heading { font-size: var(--font-size-3xl); }
-  }
-
-  .stepper {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .step {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-4);
-    position: relative;
-    padding-bottom: var(--space-6);
-  }
-
-  /* Vertical connector on mobile */
-  .step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 23px;
-    top: 48px;
-    width: 2px;
-    bottom: 0;
-    background: var(--color-border);
-  }
-
-  .step__badge {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: var(--weight-black);
-    position: relative;
-    z-index: 1;
-  }
-
-  .step__body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    padding-top: 10px;
-  }
-
-  .step__label {
-    font-family: var(--font-display);
-    font-size: var(--font-size-md);
-    font-weight: var(--weight-semi);
-    text-transform: uppercase;
-    line-height: var(--line-tight);
-    color: var(--color-text);
-    margin: 0;
-  }
-
-  .step__sub {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
-    line-height: var(--line-base);
-    margin: 0;
-  }
-
-  /* Desktop — horizontal */
-  @media (min-width: 1024px) {
-    .stepper {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 0;
-    }
-
-    .step {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      flex: 1;
-      padding-bottom: 0;
-      padding-inline: var(--space-3);
-    }
-
-    .step__body {
-      padding-top: var(--space-4);
-      align-items: center;
-    }
-
-    /* Horizontal connector */
-    .step:not(:last-child)::after {
-      left: calc(50% + 28px);
-      top: 23px;
-      width: calc(100% - 56px);
-      height: 2px;
-      bottom: auto;
-    }
-  }
-</style>

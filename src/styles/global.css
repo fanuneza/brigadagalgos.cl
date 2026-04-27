@@ -1,4 +1,13 @@
 @import "./tokens.css";
+@import "./components/navbar.css";
+@import "./components/hero.css";
+@import "./components/mission.css";
+@import "./components/help-cards.css";
+@import "./components/stepper.css";
+@import "./components/stories.css";
+@import "./components/donation-banner.css";
+@import "./components/footer.css";
+@import "./components/rainbow-divider.css";
 
 *, *::before, *::after { box-sizing: border-box; }
 

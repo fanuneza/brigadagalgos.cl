@@ -1,0 +1,97 @@
+.help-cards {
+  background: var(--color-surface);
+}
+
+.help-cards__header {
+  margin-bottom: var(--space-8);
+}
+
+.help-cards__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-semi);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--color-primary-700);
+  margin: 0 0 var(--space-3);
+}
+
+.help-cards__heading {
+  font-size: var(--font-size-2xl);
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .help-cards__heading { font-size: var(--font-size-3xl); }
+}
+
+.help-cards__grid {
+  display: grid;
+  gap: var(--space-5);
+}
+@media (min-width: 1024px) {
+  .help-cards__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-out),
+              transform var(--duration-base) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card__icon--primary   { background: var(--color-primary); }
+.card__icon--secondary { background: var(--color-secondary); }
+.card__icon--warm      { background: var(--color-accent-warm); }
+
+.card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--weight-black);
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.card__desc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  line-height: var(--line-base);
+  margin: 0;
+  flex: 1;
+}
+
+.card__cta {
+  font-size: var(--font-size-base);
+  font-weight: var(--weight-semi);
+  color: var(--color-primary-700);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+  align-self: flex-start;
+}
+.card__cta:hover { color: var(--color-primary); }
+.card__cta:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
