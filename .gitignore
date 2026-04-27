@@ -150,7 +150,8 @@ handoffs/
 AGENTS.md
 process-notes.md
 smoke-*.png
+iterate-*.png
 .astro/
 .playwright-mcp/
 
-# design-system/ is intentionally NOT ignored — tokens.css is required at build time
+design-system/

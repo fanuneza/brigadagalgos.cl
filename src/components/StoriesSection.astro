@@ -3,16 +3,19 @@ const stories = [
   {
     slug: 'rocko',
     name: 'Rocko',
+    img: 'jannik.webp',
     quote: 'Llegó con miedo a todo. Hoy duerme en cama, acurrucado contra su familia adoptante.',
   },
   {
     slug: 'luna',
     name: 'Luna',
+    img: 'hanlin.webp',
     quote: 'La encontramos muy débil, pesaba 12 kilos. Ocho meses después, su hogar temporal no se pudo resistir y la adoptó.',
   },
   {
     slug: 'toni',
     name: 'Toni',
+    img: 'joe.webp',
     quote: 'Cuatro meses en rescate, tres cirugías. Su familia dice que no se imaginan la vida sin él.',
   },
 ];
@@ -26,8 +29,14 @@ const stories = [
     <div class="stories__scroll">
       {stories.map((dog) => (
         <article class="story-card">
-          <div class="story-card__photo photo-placeholder" aria-hidden="true">
-            <span class="pendiente">[PENDIENTE: foto de {dog.name}]</span>
+          <div class="story-card__photo">
+            <img
+              src={`/images/${dog.img}`}
+              alt={`${dog.name}, galgo rescatado`}
+              class="story-card__img"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="story-card__body">
             <p class="story-card__name">{dog.name}</p>
@@ -36,8 +45,6 @@ const stories = [
         </article>
       ))}
     </div>
-
-    <p class="stories__pending pendiente">[PENDIENTE: fotos y citas reales de cada galgo adoptado]</p>
   </div>
 </section>
 
@@ -83,7 +90,14 @@ const stories = [
   .story-card__photo {
     aspect-ratio: 1;
     width: 100%;
-    min-height: 200px;
+    overflow: hidden;
+  }
+
+  .story-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .story-card__body {
@@ -108,11 +122,6 @@ const stories = [
     line-height: var(--line-base);
     font-style: italic;
     margin: 0;
-  }
-
-  .stories__pending {
-    margin-top: var(--space-6);
-    display: inline-block;
   }
 
   @media (min-width: 1024px) {

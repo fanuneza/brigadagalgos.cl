@@ -5,8 +5,8 @@
   <div class="container">
 
     <div class="help-cards__header">
-      <p class="eyebrow">Cómo ayudar</p>
-      <h2>Hay tres formas.</h2>
+      <p class="help-cards__eyebrow">Cómo ayudar</p>
+      <h2 class="help-cards__heading">Hay tres formas.</h2>
     </div>
 
     <div class="help-cards__grid">
@@ -61,7 +61,7 @@
     margin-bottom: var(--space-8);
   }
 
-  .eyebrow {
+  .help-cards__eyebrow {
     font-family: var(--font-body);
     font-size: var(--font-size-xs);
     font-weight: var(--weight-semi);
@@ -71,13 +71,13 @@
     margin: 0 0 var(--space-3);
   }
 
-  h2 {
+  .help-cards__heading {
     font-size: var(--font-size-2xl);
     margin: 0;
   }
 
   @media (min-width: 1024px) {
-    h2 { font-size: var(--font-size-3xl); }
+    .help-cards__heading { font-size: var(--font-size-3xl); }
   }
 
   .help-cards__grid {

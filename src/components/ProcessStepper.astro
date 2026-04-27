@@ -31,7 +31,7 @@ const steps = [
   {
     num: 5,
     label: 'Adopción definitiva',
-    sub: 'Encontramos la familia ideal y hacemos el seguimiento del primer mes.',
+    sub: 'Encontramos la familia ideal y hacemos seguimiento a nuestros galgos.',
     bg: 'var(--color-rainbow-purple)',
     fg: 'var(--color-text-inverse)',
   },
@@ -53,8 +53,8 @@ const steps = [
             {step.num}
           </div>
           <div class="step__body">
-            <span class="step__label">{step.label}</span>
-            <span class="step__sub">{step.sub}</span>
+            <p class="step__label">{step.label}</p>
+            <p class="step__sub">{step.sub}</p>
           </div>
         </li>
       ))}
@@ -139,12 +139,14 @@ const steps = [
     text-transform: uppercase;
     line-height: var(--line-tight);
     color: var(--color-text);
+    margin: 0;
   }
 
   .step__sub {
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     line-height: var(--line-base);
+    margin: 0;
   }
 
   /* Desktop — horizontal */
