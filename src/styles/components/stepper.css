@@ -60,7 +60,7 @@
   z-index: 1;
 }
 
-.step__badge--primary   { background: var(--color-primary);       color: var(--color-text-inverse); }
+.step__badge--primary   { background: var(--color-primary);       color: var(--color-text); }
 .step__badge--secondary { background: var(--color-secondary);      color: var(--color-text-inverse); }
 .step__badge--warm      { background: var(--color-accent-warm);    color: var(--color-text); }
 .step__badge--green     { background: var(--color-rainbow-green);  color: var(--color-text-inverse); }

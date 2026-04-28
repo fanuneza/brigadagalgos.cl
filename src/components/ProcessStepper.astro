@@ -1,54 +1,39 @@
 ---
-const steps = [
-  {
-    num: 1,
-    label: 'Recibimos el aviso',
-    sub: 'Alguien ve al galgo y nos contacta por WhatsApp o redes.',
-    colorClass: 'step__badge--primary',
-  },
-  {
-    num: 2,
-    label: 'Lo evaluamos y rescatamos',
-    sub: 'Vamos al lugar, evaluamos la situación y lo trasladamos.',
-    colorClass: 'step__badge--secondary',
-  },
-  {
-    num: 3,
-    label: 'Atención veterinaria',
-    sub: 'Revisión completa, vacunas, desparasitación y lo que necesite.',
-    colorClass: 'step__badge--warm',
-  },
-  {
-    num: 4,
-    label: 'Hogar temporal',
-    sub: 'Una familia lo recibe y lo rehabilita mientras buscamos adopción.',
-    colorClass: 'step__badge--green',
-  },
-  {
-    num: 5,
-    label: 'Adopción definitiva',
-    sub: 'Encontramos la familia ideal y hacemos seguimiento a nuestros galgos.',
-    colorClass: 'step__badge--purple',
-  },
-];
+interface Step {
+  label: string;
+  subLabel: string;
+  colorClass: string;
+}
+
+interface Props {
+  steps: Step[];
+  eyebrow?: string;
+  heading?: string;
+}
+
+const {
+  steps,
+  eyebrow = 'EL PROCESO',
+  heading = 'Así rescatamos un galgo.',
+} = Astro.props;
 ---
 
 <section class="section-padding stepper-section">
   <div class="container">
-    <p class="stepper__eyebrow">El proceso</p>
-    <h2 class="stepper__heading">Así rescatamos un galgo.</h2>
+    <p class="stepper__eyebrow">{eyebrow}</p>
+    <h2 class="stepper__heading">{heading}</h2>
     <ol class="stepper" role="list">
-      {steps.map((step) => (
+      {steps.map((step, i) => (
         <li class="step">
           <div
-            class={`step__badge ${step.colorClass}`}
+            class={`step__badge step__badge--${step.colorClass}`}
             aria-hidden="true"
           >
-            {step.num}
+            {i + 1}
           </div>
           <div class="step__body">
             <p class="step__label">{step.label}</p>
-            <p class="step__sub">{step.sub}</p>
+            <p class="step__sub">{step.subLabel}</p>
           </div>
         </li>
       ))}
