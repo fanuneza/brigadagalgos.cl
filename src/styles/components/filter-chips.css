@@ -84,12 +84,23 @@
 
 @media (min-width: 1024px) {
   .requisitos-list {
-    columns: 2;
-    gap: var(--space-4);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2) var(--space-8);
   }
 }
 
 /* Adoptar page — tail CTA */
 .tail-cta {
   text-align: center;
+}
+
+.tail-cta .requisitos-list {
+  text-align: left;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.tail-cta .btn {
+  margin-top: var(--space-6);
 }

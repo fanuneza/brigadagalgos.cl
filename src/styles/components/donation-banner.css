@@ -2,6 +2,8 @@
   background: var(--color-secondary);
   color: var(--color-text-inverse);
   padding-block: var(--space-9);
+  --link-color: var(--color-text-inverse);
+  --link-decoration-color: rgba(255, 255, 255, 0.35);
 }
 @media (min-width: 1024px) {
   .donation-banner { padding-block: var(--space-12); }
@@ -49,7 +51,5 @@
   font-weight: var(--weight-medium);
 }
 .donation-banner__transfer a {
-  color: var(--color-text-inverse);
   font-weight: var(--weight-semi);
-  text-underline-offset: 3px;
 }

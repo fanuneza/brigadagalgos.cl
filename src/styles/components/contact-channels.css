@@ -47,6 +47,10 @@
   margin: 0;
 }
 
+.channel-card > .btn {
+  margin-top: auto;
+}
+
 .channel-card__social {
   display: flex;
   flex-wrap: wrap;

@@ -15,9 +15,9 @@ import PageHero from '../components/PageHero.astro';
 
     <PageHero
       eyebrow="DONAR"
-      h1="Sostén el rescate."
+      h1="Apoya el rescate."
       lead="Tu donación mantiene a los galgos rescatados seguros, alimentados y cuidados mientras esperan un hogar."
-      leadBold="No recibimos financiamiento estatal ni de la industria. Cada peso viene de personas como tú."
+      leadBold="No recibimos financiamiento estatal ni de empresas. Cada peso viene de personas como tú."
     />
 
     <!-- Donation options -->
@@ -29,8 +29,8 @@ import PageHero from '../components/PageHero.astro';
           <div class="donation-card donation-card--mensual">
             <span class="chip chip--recommended">Recomendado</span>
             <p class="donation-card__heading">DONAR MENSUAL</p>
-            <p>Aporta una cantidad fija cada mes a través de eSponsor. Es la forma más útil. Nos permite planificar el rescate.</p>
-            <p>Hazte Amigo de los Galgos y recibe fotos y actualizaciones de los galgos que tu apoyo mantiene seguros.</p>
+            <p>Aporta una cantidad fija cada mes a través de eSponsor. Es la forma más efectiva de apoyarnos: nos permite planificar el rescate con anticipación.</p>
+            <p>Hazte Amigo de los Galgos y recibe fotos y actualizaciones de los animales que tu aporte mantiene seguros.</p>
             <p class="donation-card__amounts">Sugerencias: $5.000 · $10.000 · $20.000</p>
             <a
               href={SITE.esponsor}
@@ -45,16 +45,32 @@ import PageHero from '../components/PageHero.astro';
           <!-- Card 2: Transferencia -->
           <div class="donation-card donation-card--transferencia" id="datos-transferencia">
             <p class="donation-card__heading">TRANSFERENCIA ÚNICA</p>
-            <table class="bank-table">
-              <tbody>
-                <tr><th scope="row">Banco</th><td><span class="pendiente">[PENDIENTE]</span></td></tr>
-                <tr><th scope="row">Tipo de cuenta</th><td><span class="pendiente">[PENDIENTE]</span></td></tr>
-                <tr><th scope="row">Nº de cuenta</th><td><span class="pendiente">[PENDIENTE]</span></td></tr>
-                <tr><th scope="row">RUT</th><td><span class="pendiente">[PENDIENTE]</span></td></tr>
-                <tr><th scope="row">Nombre</th><td>Fundación Brigada Galgos</td></tr>
-                <tr><th scope="row">Email</th><td>{SITE.email}</td></tr>
-              </tbody>
-            </table>
+            <dl class="bank-info">
+              <div class="bank-info__row">
+                <dt class="bank-info__label">Banco</dt>
+                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
+              </div>
+              <div class="bank-info__row">
+                <dt class="bank-info__label">Tipo de cuenta</dt>
+                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
+              </div>
+              <div class="bank-info__row">
+                <dt class="bank-info__label">Nº de cuenta</dt>
+                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
+              </div>
+              <div class="bank-info__row">
+                <dt class="bank-info__label">RUT</dt>
+                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
+              </div>
+              <div class="bank-info__row">
+                <dt class="bank-info__label">Nombre</dt>
+                <dd class="bank-info__value">Fundación Brigada Galgos</dd>
+              </div>
+              <div class="bank-info__row">
+                <dt class="bank-info__label">Email</dt>
+                <dd class="bank-info__value">{SITE.email}</dd>
+              </div>
+            </dl>
             <button class="btn btn--ghost" id="copy-bank-data" disabled>
               Copiar datos
             </button>
@@ -62,7 +78,7 @@ import PageHero from '../components/PageHero.astro';
               <small>Datos bancarios disponibles pronto.</small>
             </p>
             <p class="donation-card__info">
-              Mándanos el comprobante por WhatsApp para confirmarte la recepción.
+              Envíanos el comprobante por WhatsApp para confirmar la recepción.
             </p>
           </div>
 
@@ -70,41 +86,33 @@ import PageHero from '../components/PageHero.astro';
       </div>
     </section>
 
-    <!-- Per-amount impact table -->
+    <!-- Per-amount impact -->
     <section class="section-padding">
       <div class="container container--narrow">
         <p class="eyebrow">QUÉ HACE TU APORTE</p>
         <h2>Cada peso tiene destino.</h2>
-        <table class="bank-table">
-          <thead>
-            <tr>
-              <th scope="col">Monto</th>
-              <th scope="col">Qué hace</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>$5.000/mes</td>
-              <td>Alimenta a un galgo rescatado durante una semana</td>
-            </tr>
-            <tr>
-              <td>$10.000/mes</td>
-              <td>Cubre vacunas y antiparasitarios de un recién rescatado</td>
-            </tr>
-            <tr>
-              <td>$20.000/mes</td>
-              <td>Costea una consulta veterinaria de urgencia</td>
-            </tr>
-            <tr>
-              <td>$50.000/mes</td>
-              <td>Apoya el costo completo de un galgo en rehabilitación por un mes</td>
-            </tr>
-            <tr>
-              <td>Cualquier monto</td>
-              <td>Se usa íntegramente en los galgos. Nadie cobra sueldo.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="impact-cards">
+          <div class="impact-card">
+            <p class="impact-card__amount">$5.000/mes</p>
+            <p class="impact-card__desc">Alimenta a un galgo rescatado durante una semana</p>
+          </div>
+          <div class="impact-card">
+            <p class="impact-card__amount">$10.000/mes</p>
+            <p class="impact-card__desc">Cubre vacunas y antiparasitarios de un recién rescatado</p>
+          </div>
+          <div class="impact-card">
+            <p class="impact-card__amount">$20.000/mes</p>
+            <p class="impact-card__desc">Costea una consulta veterinaria de urgencia</p>
+          </div>
+          <div class="impact-card">
+            <p class="impact-card__amount">$50.000/mes</p>
+            <p class="impact-card__desc">Apoya el costo completo de un galgo en rehabilitación por un mes</p>
+          </div>
+          <div class="impact-card">
+            <p class="impact-card__amount">Cualquier monto</p>
+            <p class="impact-card__desc">Se usa íntegramente en los galgos. Nadie cobra sueldo.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -140,7 +148,7 @@ import PageHero from '../components/PageHero.astro';
     <section class="section-padding tail-cta">
       <div class="container container--narrow">
         <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
-        <h2>Sin plata también se ayuda.</h2>
+        <h2>Más formas de colaborar.</h2>
         <ul class="requisitos-list">
           <li>Dona comida, mantas o medicamentos.</li>
           <li>Ofrece servicios: veterinario, transporte, fotografía.</li>

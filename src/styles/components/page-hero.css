@@ -28,6 +28,8 @@
 }
 
 .page-hero__lead--bold {
-  font-weight: var(--weight-semi);
+  font-size: 1.25rem;
+  font-weight: var(--weight-bold);
   color: var(--color-text);
+  line-height: var(--line-snug);
 }

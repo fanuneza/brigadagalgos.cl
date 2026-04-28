@@ -38,7 +38,7 @@
 }
 
 .navbar__nav { display: none; }
-.navbar__cta { display: none; }
+.navbar__inner .navbar__cta { display: none; }
 
 .navbar__hamburger {
   margin-left: auto;
@@ -161,6 +161,10 @@
   visibility: visible;
 }
 
+@media (min-width: 640px) {
+  .navbar__inner .navbar__cta { display: inline-flex; }
+}
+
 @media (min-width: 1024px) {
   .navbar__inner { height: 72px; gap: var(--space-6); }
 
@@ -184,7 +188,6 @@
     color: var(--color-primary-700);
   }
 
-  .navbar__cta { display: inline-flex; }
   .navbar__hamburger { display: none; }
   .navbar__drawer { display: none; }
 }

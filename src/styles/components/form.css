@@ -4,6 +4,7 @@
   gap: var(--space-5);
   max-width: 640px;
   margin-inline: auto;
+  margin-top: var(--space-6);
 }
 
 .field {
@@ -200,6 +201,10 @@
   color: var(--color-text-muted);
   line-height: var(--line-base);
   margin: 0;
+}
+
+.req-cards + p {
+  margin-top: var(--space-5);
 }
 
 /* Toast */

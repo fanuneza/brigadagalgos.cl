@@ -17,6 +17,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
+p { margin: 0; }
 
 html { scroll-behavior: smooth; }
 body {
@@ -48,10 +49,10 @@ h1, h2, h3 {
 .container--narrow { max-width: var(--content-narrow); }
 
 .section-padding {
-  padding-block: var(--space-9);
+  padding-block: var(--space-8);
 }
 @media (min-width: 1024px) {
-  .section-padding { padding-block: var(--space-12); }
+  .section-padding { padding-block: var(--space-10); }
 }
 
 .btn {
@@ -120,4 +121,21 @@ h1, h2, h3 {
   color: var(--color-text-muted);
   font-family: var(--font-mono);
   font-size: var(--font-size-sm);
+}
+
+a:not([class]) {
+  color: var(--link-color, var(--color-primary-700));
+  text-decoration: underline;
+  text-decoration-color: var(--link-decoration-color, var(--color-primary-100));
+  text-underline-offset: 3px;
+  font-weight: var(--weight-medium);
+  transition: text-decoration-color var(--duration-fast);
+}
+a:not([class]):hover {
+  text-decoration-color: var(--link-color, var(--color-primary-700));
+}
+a:not([class]):focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-focus);
 }

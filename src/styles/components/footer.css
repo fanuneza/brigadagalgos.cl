@@ -17,12 +17,30 @@
   }
 }
 
+.footer__brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  margin-bottom: var(--space-4);
+}
+
 .footer__logo {
   height: 40px;
   width: auto;
   display: block;
-  margin-bottom: var(--space-4);
   filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+.footer__brand-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-inverse);
+  line-height: 1.15;
 }
 
 .footer__tagline {
