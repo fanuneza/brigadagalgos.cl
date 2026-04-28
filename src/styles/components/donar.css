@@ -117,6 +117,7 @@
 }
 
 .bank-table thead th {
-  font-weight: 600;
+  font-weight: var(--weight-semi);
   text-align: left;
+  color: var(--color-text);
 }
