@@ -1,0 +1,117 @@
+---
+import { SITE } from '../config/site.ts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import DogCard from '../components/DogCard.astro';
+
+interface Dog {
+  id: string;
+  name: string;
+  sex: 'Macho' | 'Hembra';
+  age: string;
+  weight: string;
+  personality: string;
+  image: string;
+}
+
+const dogModules = import.meta.glob<{ default: Dog }>('../content/dogs/*.json', { eager: true });
+const dogs = Object.values(dogModules).map(m => m.default);
+---
+
+<BaseLayout
+  title="Adoptar — Brigada Galgos"
+  description="Conoce los galgos disponibles para adopción en Chile. Encuentra a tu compañero ideal."
+>
+  <Navbar />
+  <main>
+
+    <PageHero
+      eyebrow="ADOPTA"
+      h1="Los galgos que esperan familia."
+      lead="Están en hogares temporales, recuperados y listos para conocerte."
+      ctaText="Ver requisitos ↓"
+      ctaHref="#requisitos"
+      ctaVariant="ghost"
+    />
+
+    <!-- Dog grid -->
+    <section class="section-padding">
+      <div class="container">
+
+        <div class="filter-chips" role="group" aria-label="Filtrar galgos">
+          <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>
+          <button class="chip-btn" data-filter="Macho" aria-pressed="false">Macho</button>
+          <button class="chip-btn" data-filter="Hembra" aria-pressed="false">Hembra</button>
+          <button class="chip-btn" data-filter="adulto" aria-pressed="false">Adultos</button>
+          <button class="chip-btn" data-filter="cachorro" aria-pressed="false">Cachorros</button>
+        </div>
+
+        <p class="dog-grid__count" aria-live="polite">
+          <span data-count>{dogs.length}</span> galgos disponibles
+        </p>
+
+        <div class="dog-grid" data-dog-grid>
+          {dogs.map(dog => {
+            const waHref = `${SITE.whatsapp}?text=${encodeURIComponent(`Hola, me interesa adoptar a ${dog.name}`)}`;
+            return (
+              <DogCard dog={dog} waHref={waHref} data-sex={dog.sex} data-age-type="adulto" />
+            );
+          })}
+        </div>
+
+        <div class="dog-grid__empty" hidden aria-hidden="true">
+          <p>Por ahora no hay galgos en adopción. Postula igual y te avisamos cuando llegue el indicado.</p>
+          <a
+            href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera adoptar un galgo')}`}
+            class="btn btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Escríbenos por WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Requirements -->
+    <section id="requisitos" class="section-padding">
+      <div class="container container--narrow">
+        <p class="eyebrow">REQUISITOS</p>
+        <h2>Antes de postular.</h2>
+        <p>Estos requisitos no son para juzgarte. Son para que el galgo esté seguro y la adopción resulte.</p>
+        <ul class="requisitos-list">
+          <li>Casa con patio cerrado, o departamento con malla protectora en ventanas y balcones.</li>
+          <li>Compromiso de paseos diarios.</li>
+          <li>Mayoría de edad y autorización de quien arrienda.</li>
+          <li>Visita en casa antes de la entrega.</li>
+          <li>Firma de acuerdo de adopción.</li>
+        </ul>
+        <span class="pendiente">[PENDIENTE: validar lista final con fundación]</span>
+        <p>Seguimos acompañándote después de la adopción. Cualquier duda, escríbenos.</p>
+      </div>
+    </section>
+
+    <!-- Tail CTA -->
+    <section class="section-padding tail-cta">
+      <div class="container container--narrow">
+        <h3>¿No ves un galgo que te convenza?</h3>
+        <p>Escríbenos por WhatsApp y conversemos. A veces hay galgos en proceso que aún no aparecen aquí.</p>
+        <a
+          href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera saber más sobre adopción')}`}
+          class="btn btn--primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>import '../scripts/filter-chips';</script>
