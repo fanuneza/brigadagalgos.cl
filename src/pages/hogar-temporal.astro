@@ -1,0 +1,212 @@
+---
+import { SITE } from '../config/site.ts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import RequirementCard from '../components/RequirementCard.astro';
+import ProcessStepper from '../components/ProcessStepper.astro';
+
+const fosterSteps = [
+  { label: 'Llenas el formulario', subLabel: 'Completa los campos abajo', color: 'var(--color-primary)' },
+  { label: 'Te llamamos por WhatsApp', subLabel: 'En menos de 48 horas', color: 'var(--color-secondary)' },
+  { label: 'Visita en casa', subLabel: 'Verificamos espacio y rutina', color: 'var(--color-accent-warm)' },
+  { label: 'Llegada del galgo', subLabel: 'Con acompañamiento durante el primer mes', color: 'var(--color-rainbow-green)' },
+];
+---
+
+<BaseLayout
+  title="Hogar temporal — Brigada Galgos"
+  description="Sé hogar temporal de un galgo rescatado. Nosotros cubrimos comida, veterinario y traslados."
+>
+  <Navbar />
+  <main>
+
+    <PageHero
+      eyebrow="HOGAR TEMPORAL"
+      h1="¿No puedes adoptar todavía?"
+      lead="Unas semanas en tu casa pueden cambiar la historia completa de un galgo."
+      leadBold="Nosotros cubrimos comida, veterinario y traslados. Tú aportas techo, caminatas y paciencia."
+      ctaText="Quiero postular"
+      ctaHref="#form"
+      ctaVariant="primary"
+    />
+
+    <section class="section-padding">
+      <div class="container">
+        <p class="eyebrow">QUÉ SE NECESITA</p>
+        <h2>Tres condiciones básicas.</h2>
+        <div class="req-cards">
+          <RequirementCard
+            icon="🏠"
+            title="ESPACIO"
+            body="Casa con patio cerrado, o departamento con malla protectora en ventanas y balcones. Los galgos pueden saltar 2m."
+            pendiente="validar específicos con fundación"
+          />
+          <RequirementCard
+            icon="⏰"
+            title="TIEMPO"
+            body="Disponibilidad para 2 paseos al día y presencia en casa la mayor parte de la semana."
+          />
+          <RequirementCard
+            icon="🤝"
+            title="COMPROMISO"
+            body="Mantener al galgo por el tiempo acordado (mínimo 1 mes), llevarlo a las citas veterinarias y enviar fotos y reportes semanales."
+          />
+        </div>
+        <p>No necesitas casa grande. Un rincón tranquilo, caminatas diarias y ganas de marcar una diferencia.</p>
+      </div>
+    </section>
+
+    <ProcessStepper
+      steps={fosterSteps}
+      eyebrow="EL PROCESO"
+      heading="Así funciona el acogimiento."
+    />
+
+    <!-- Foster stories -->
+    <section class="section-padding">
+      <div class="container">
+        <p class="eyebrow">LO QUE DICEN NUESTROS HOGARES</p>
+        <h2>Personas comunes que marcaron una diferencia.</h2>
+        <div class="stories__scroll">
+          <article class="story-card">
+            <div class="story-card__body">
+              <p class="story-card__name"><span class="pendiente">[PENDIENTE: nombre, ciudad]</span></p>
+              <p class="story-card__quote">"<span class="pendiente">[PENDIENTE: cotización real de hogar temporal]</span>"</p>
+            </div>
+          </article>
+          <article class="story-card">
+            <div class="story-card__body">
+              <p class="story-card__name"><span class="pendiente">[PENDIENTE: nombre, ciudad]</span></p>
+              <p class="story-card__quote">"<span class="pendiente">[PENDIENTE: cotización real de hogar temporal]</span>"</p>
+            </div>
+          </article>
+          <article class="story-card">
+            <div class="story-card__body">
+              <p class="story-card__name"><span class="pendiente">[PENDIENTE: nombre, ciudad]</span></p>
+              <p class="story-card__quote">"<span class="pendiente">[PENDIENTE: cotización real de hogar temporal]</span>"</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application form -->
+    <section id="form" class="section-padding">
+      <div class="container container--narrow">
+        <p class="eyebrow">POSTULAR</p>
+        <h2>Postulación a hogar temporal.</h2>
+
+        <form class="form" data-form id="foster-form" novalidate>
+          <input type="hidden" name="access_key" value={import.meta.env.WEB3FORMS_ACCESS_KEY ?? ''} />
+          <input type="hidden" name="subject" value="Nueva postulación a hogar temporal" />
+
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <div class="phone-input">
+              <span class="phone-prefix" aria-hidden="true">+56</span>
+              <input
+                type="tel"
+                id="whatsapp"
+                name="whatsapp"
+                placeholder="9 1234 5678"
+                pattern="[0-9]{8,9}"
+                inputmode="numeric"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="region">Región</label>
+            <select id="region" name="region" required>
+              <option value="">Selecciona tu región</option>
+              <option value="Arica y Parinacota">Arica y Parinacota</option>
+              <option value="Tarapacá">Tarapacá</option>
+              <option value="Antofagasta">Antofagasta</option>
+              <option value="Atacama">Atacama</option>
+              <option value="Coquimbo">Coquimbo</option>
+              <option value="Valparaíso">Valparaíso</option>
+              <option value="Metropolitana">Metropolitana</option>
+              <option value="O'Higgins">O'Higgins</option>
+              <option value="Maule">Maule</option>
+              <option value="Ñuble">Ñuble</option>
+              <option value="Biobío">Biobío</option>
+              <option value="La Araucanía">La Araucanía</option>
+              <option value="Los Ríos">Los Ríos</option>
+              <option value="Los Lagos">Los Lagos</option>
+              <option value="Aysén">Aysén</option>
+              <option value="Magallanes">Magallanes</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <span id="vivienda-label">Tipo de vivienda</span>
+            <div class="radio-group" role="group" aria-labelledby="vivienda-label">
+              <label class="radio-option">
+                <input type="radio" id="vivienda-patio" name="vivienda" value="Casa con patio" required />
+                Casa con patio
+              </label>
+              <label class="radio-option">
+                <input type="radio" id="vivienda-malla" name="vivienda" value="Depto con malla protectora" />
+                Depto con malla protectora
+              </label>
+              <label class="radio-option">
+                <input type="radio" id="vivienda-sin-malla" name="vivienda" value="Depto sin malla aún" />
+                Depto sin malla aún
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="mascotas">¿Tienes otras mascotas?</label>
+            <textarea id="mascotas" name="mascotas" rows="3" placeholder="Cuéntanos qué mascotas tienes (si ninguna, escribe 'Ninguna')" required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="motivacion">¿Por qué quieres ser hogar temporal?</label>
+            <textarea id="motivacion" name="motivacion" rows="5" placeholder="Cuéntanos un poco sobre ti y tu motivación" required></textarea>
+          </div>
+
+          <div class="field field--checkbox">
+            <input type="checkbox" id="consent" name="consent" required />
+            <label for="consent">Acepto que me contacten por WhatsApp para coordinar la visita.</label>
+          </div>
+
+          <button type="submit" class="btn btn--primary form__submit">
+            <span class="form__submit-label">Enviar postulación</span>
+            <span class="form__submit-spinner" hidden aria-hidden="true">Enviando…</span>
+          </button>
+        </form>
+
+        <div class="form__success" hidden data-form-success id="foster-success">
+          <p class="form__success-title">¡Recibimos tu postulación!</p>
+          <p>Te contactamos en menos de 48 horas por WhatsApp.</p>
+          <a href="/" class="btn btn--secondary">Volver al inicio</a>
+        </div>
+
+        <p class="form__whatsapp-fallback">
+          ¿Prefieres hablar primero?
+          <a href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera ser hogar temporal')}`} target="_blank" rel="noopener noreferrer">
+            Escríbenos directo por WhatsApp →
+          </a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>import '../scripts/form';</script>
