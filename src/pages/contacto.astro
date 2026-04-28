@@ -1,0 +1,142 @@
+---
+import { SITE } from '../config/site.ts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Contacto — Brigada Galgos"
+  description="Escríbenos a Brigada Galgos por WhatsApp, email o redes sociales."
+>
+  <Navbar />
+  <main>
+
+    <PageHero
+      eyebrow="CONTACTO"
+      h1="Conversemos."
+      lead="Nos encanta hablar de galgos. No necesitas tener todo claro para escribirnos."
+    />
+
+    <!-- Channel cards -->
+    <section class="section-padding">
+      <div class="container">
+        <p class="eyebrow">CANALES DIRECTOS</p>
+        <div class="contact-channels">
+
+          <div class="channel-card">
+            <span class="channel-card__icon" aria-hidden="true">💬</span>
+            <p class="channel-card__title">WHATSAPP</p>
+            <p class="channel-card__detail">{SITE.whatsappPhone}</p>
+            <p class="channel-card__hours">
+              Lun a Vie · 10:00 – 19:00
+              <span class="pendiente">[PENDIENTE: confirmar horario real]</span>
+            </p>
+            <a
+              href={SITE.whatsapp}
+              class="btn btn--primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Abrir WhatsApp ↗
+            </a>
+          </div>
+
+          <div class="channel-card">
+            <span class="channel-card__icon" aria-hidden="true">✉️</span>
+            <p class="channel-card__title">EMAIL</p>
+            <p class="channel-card__detail">{SITE.email}</p>
+            <p class="channel-card__hours">Respondemos en 48h hábiles.</p>
+            <a href={`mailto:${SITE.email}`} class="btn btn--secondary">
+              Escribir email
+            </a>
+          </div>
+
+          <div class="channel-card">
+            <span class="channel-card__icon" aria-hidden="true">📸</span>
+            <p class="channel-card__title">REDES</p>
+            <p class="channel-card__body">Las novedades de los galgos viven en Instagram.</p>
+            <div class="channel-card__social">
+              <a href={SITE.instagram} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+              <a href={SITE.facebook} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact form -->
+    <section class="section-padding">
+      <div class="container container--narrow">
+        <p class="eyebrow">ESCRIBINOS</p>
+        <h2>O mandanos un mensaje.</h2>
+
+        <form class="form" data-form id="contact-form" novalidate>
+          <input type="hidden" name="access_key" value={import.meta.env.WEB3FORMS_ACCESS_KEY ?? ''} />
+          <input type="hidden" name="subject" value="Nuevo mensaje — Brigada Galgos" />
+
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="asunto">Asunto</label>
+            <select id="asunto" name="asunto" required>
+              <option value="">Selecciona el asunto</option>
+              <option value="Adopción">Adopción</option>
+              <option value="Hogar temporal">Hogar temporal</option>
+              <option value="Donar">Donar</option>
+              <option value="Prensa">Prensa</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+          </div>
+
+          <div class="field field--checkbox">
+            <input type="checkbox" id="consent" name="consent" required />
+            <label for="consent">Acepto que respondan a este email.</label>
+          </div>
+
+          <button type="submit" class="btn btn--primary form__submit">
+            <span class="form__submit-label">Enviar mensaje</span>
+            <span class="form__submit-spinner" hidden aria-hidden="true">Enviando…</span>
+          </button>
+        </form>
+
+        <div class="form__success" hidden data-form-success id="contact-success">
+          <p class="form__success-title">¡Recibimos tu mensaje!</p>
+          <p>Te respondemos pronto a tu email.</p>
+          <a href="/" class="btn btn--secondary">Volver al inicio</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Press teaser -->
+    <section class="section-padding">
+      <div class="container container--narrow">
+        <p class="eyebrow">PRENSA Y ALIANZAS</p>
+        <p>
+          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa que quiere apoyarnos,
+          visita la página de <a href="/prensa">Prensa &amp; Aliados →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>import '../scripts/form';</script>
