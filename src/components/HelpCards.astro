@@ -1,4 +1,5 @@
 ---
+import { SITE } from '../config/site.ts';
 ---
 
 <section class="section-padding help-cards">
@@ -6,7 +7,7 @@
 
     <div class="help-cards__header">
       <p class="help-cards__eyebrow">Cómo ayudar</p>
-      <h2 class="help-cards__heading">Hay tres formas.</h2>
+      <h2 class="help-cards__heading">Tres formas de ayudar.</h2>
     </div>
 
     <div class="help-cards__grid">
@@ -23,7 +24,7 @@
           </svg>
         </div>
         <h3 class="card__title">Adoptar</h3>
-        <p class="card__desc">Conoce los galgos disponibles y empieza el proceso. Nos encargaremos de acompañarte.</p>
+        <p class="card__desc">Conoce los galgos disponibles y empieza el proceso. Te acompañamos en cada paso.</p>
         <a href="/adoptar" class="card__cta">Ver galgos &rarr;</a>
       </article>
 
@@ -36,8 +37,8 @@
           </svg>
         </div>
         <h3 class="card__title">Hogar temporal</h3>
-        <p class="card__desc">Recibe un galgo en tu casa mientras encuentra hogar definitivo. No se necesita experiencia.</p>
-        <a href="/hogar-temporal" class="card__cta">Postular &rarr;</a>
+        <p class="card__desc">Recibe un galgo en tu casa mientras encuentra hogar definitivo. No necesitas experiencia previa.</p>
+        <a href="/hogar-temporal" class="card__cta">Quiero postular &rarr;</a>
       </article>
 
       <article class="card">
@@ -48,8 +49,8 @@
           </svg>
         </div>
         <h3 class="card__title">Donar</h3>
-        <p class="card__desc">Tu aporte cubre comida, vacunas y traslados. El 100% va directo a los galgos.</p>
-        <a href="https://esponsor.com/brigadagalgos" target="_blank" rel="noopener noreferrer" class="card__cta">Donar ahora &rarr;</a>
+        <p class="card__desc">Tu aporte cubre comida, vacunas y traslados. El 100% va a los galgos — nadie cobra sueldo.</p>
+        <a href={SITE.esponsor} target="_blank" rel="noopener noreferrer" class="card__cta">Quiero donar &rarr;</a>
       </article>
 
     </div>
