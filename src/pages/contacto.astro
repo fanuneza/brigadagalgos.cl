@@ -7,7 +7,7 @@ import PageHero from '../components/PageHero.astro';
 ---
 
 <BaseLayout
-  title="Contacto — Brigada Galgos"
+  title="Contacto | Brigada Galgos"
   description="Escríbenos a Brigada Galgos por WhatsApp, email o redes sociales."
 >
   <Navbar />
@@ -75,7 +75,7 @@ import PageHero from '../components/PageHero.astro';
 
         <form class="form" data-form id="contact-form" novalidate>
           <input type="hidden" name="access_key" value={import.meta.env.WEB3FORMS_ACCESS_KEY ?? ''} />
-          <input type="hidden" name="subject" value="Nuevo mensaje — Brigada Galgos" />
+          <input type="hidden" name="subject" value="Nuevo mensaje desde brigadagalgos.cl" />
 
           <div class="field">
             <label for="nombre">Nombre</label>
