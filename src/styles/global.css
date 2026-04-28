@@ -8,8 +8,15 @@
 @import "./components/donation-banner.css";
 @import "./components/footer.css";
 @import "./components/rainbow-divider.css";
+@import "./components/page-hero.css";
+@import "./components/dog-card.css";
+@import "./components/filter-chips.css";
+@import "./components/form.css";
+@import "./components/donar.css";
+@import "./components/contact-channels.css";
 
 *, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; }
 body {
@@ -84,6 +91,16 @@ h1, h2, h3 {
   color: var(--btn-ghost-fg);
 }
 .btn--ghost:hover { background: var(--btn-ghost-bg-hover); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-semi);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--color-primary-700);
+  margin: 0;
+}
 
 .pendiente {
   font-family: var(--font-mono);

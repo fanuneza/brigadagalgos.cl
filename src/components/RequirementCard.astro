@@ -1,0 +1,19 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  body: string;
+  pendiente?: string;
+}
+
+const { icon, title, body, pendiente } = Astro.props;
+---
+
+<article class="req-card">
+  <span class="req-card__icon" aria-hidden="true">{icon}</span>
+  <p class="req-card__title">{title}</p>
+  <p class="req-card__body">
+    {body}
+    {pendiente && <span class="pendiente">[PENDIENTE: {pendiente}]</span>}
+  </p>
+</article>

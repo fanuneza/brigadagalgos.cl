@@ -1,0 +1,33 @@
+.page-hero {
+  text-align: center;
+}
+
+.page-hero .container--narrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.page-hero h1 {
+  font-size: var(--font-size-3xl);
+}
+
+@media (min-width: 1024px) {
+  .page-hero h1 {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+.page-hero__lead {
+  font-size: 1.125rem;
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
+  max-width: 58ch;
+  margin: 0;
+}
+
+.page-hero__lead--bold {
+  font-weight: var(--weight-semi);
+  color: var(--color-text);
+}

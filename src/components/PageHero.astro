@@ -1,0 +1,23 @@
+---
+interface Props {
+  eyebrow: string;
+  h1: string;
+  lead?: string;
+  leadBold?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  ctaVariant?: 'primary' | 'secondary' | 'ghost';
+}
+
+const { eyebrow, h1, lead, leadBold, ctaText, ctaHref, ctaVariant = 'ghost' } = Astro.props;
+---
+
+<section class="page-hero section-padding">
+  <div class="container container--narrow">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{h1}</h1>
+    {lead && <p class="page-hero__lead">{lead}</p>}
+    {leadBold && <p class="page-hero__lead page-hero__lead--bold">{leadBold}</p>}
+    {ctaText && <a href={ctaHref} class={`btn btn--${ctaVariant}`}>{ctaText}</a>}
+  </div>
+</section>
