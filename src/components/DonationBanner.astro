@@ -1,19 +1,20 @@
 ---
+import { SITE } from '../config/site.ts';
 ---
 
 <section class="donation-banner">
   <div class="container donation-banner__grid">
     <div class="donation-banner__text">
-      <h2>Cada rescate depende de gente como tú.</h2>
-      <p>El 100% de tus aportes va a comida, atención veterinaria y traslados. Sin intermediarios.</p>
+      <h2>Tu aporte mantiene a los galgos seguros mientras esperan familia.</h2>
+      <p>El 100% va a comida, atención veterinaria y traslados. Somos voluntarios — nadie cobra sueldo.</p>
     </div>
     <div class="donation-banner__cta">
       <a
-        href="https://esponsor.com/brigadagalgos"
+        href={SITE.esponsor}
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn--primary"
-      >Donar ahora</a>
+      >Quiero donar</a>
       <p class="donation-banner__transfer">
         También recibimos transferencia.
         <a href="/donar#datos-transferencia">Ver datos &rarr;</a>
