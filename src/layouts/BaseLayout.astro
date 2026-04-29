@@ -7,7 +7,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, ogImage = '/images/hero-landscape.webp' } = Astro.props;
+const { title, description, ogImage = '/images/brigada-galgos-og-image.webp' } = Astro.props;
 
 const siteUrl = 'https://brigadagalgos.cl'; /* [PENDIENTE: confirmar dominio] */
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
