@@ -77,11 +77,12 @@ if (form) {
     e.preventDefault();
     if (!validate()) return;
 
+    const formData = new FormData(form!);
     setSubmitting(true);
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(form!),
+        body: formData,
       });
       const data = await res.json() as { success: boolean; message?: string };
       if (data.success) {
