@@ -1,52 +1,72 @@
 # brigadagalgos.cl
 
-Sitio web de **Brigada Galgos** — fundación chilena que rescata, rehabilita y reubica galgos abandonados.
+Sitio web de **Brigada Galgos**, una fundacion chilena dedicada al rescate, rehabilitacion y reubicacion de galgos abandonados.
 
 ## Stack
 
-- **Framework:** Astro 6.1.9 (SSG — salida estática pura)
-- **Estilos:** CSS plano con tokens de `design-system/tokens.css`
-- **Deploy:** Cloudflare Pages (push-triggered desde `main`)
-- **Fuentes:** Google Fonts (Barlow Condensed + Inter)
+- **Framework:** Astro 6
+- **Salida:** sitio estatico
+- **Estilos:** CSS plano con tokens propios en `design-system/tokens.css`
+- **Deploy:** Cloudflare Pages
+- **Fuentes:** Google Fonts
+
+## Requisitos
+
+- Node.js 20 o superior
+- npm
 
 ## Desarrollo local
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321
+npm run dev
 ```
 
-## Build
+La app queda disponible en `http://localhost:4321`.
 
-```bash
-npm run build      # genera dist/
-npm run preview    # sirve dist/ localmente
-```
+## Scripts
 
-## Deploy
+- `npm run dev` inicia el servidor local de Astro
+- `npm run build` genera la version de produccion en `dist/`
+- `npm run preview` sirve localmente la salida compilada
+- `npm run prepare:casos` genera el sitio de casos desde `scripts/prepare-casos-site.mjs`
 
-El sitio se despliega automáticamente en Cloudflare Pages con cada push a `main`.
+## Paginas
+
+- `/` Inicio
+- `/adoptar`
+- `/hogar-temporal`
+- `/donar`
+- `/contacto`
+
+## Estructura
+
+- `src/pages/` rutas del sitio
+- `src/components/` componentes reutilizables
+- `src/layouts/` layouts base
+- `src/styles/` estilos globales y por componente
+- `src/config/` configuracion del sitio
+- `src/scripts/` scripts de interaccion en cliente
+- `public/` assets estaticos servidos directamente
+- `design-system/` tokens, documentacion y wireframes
+- `scripts/` utilidades de soporte
+
+## Sistema de diseno
+
+Los tokens visuales viven en `design-system/tokens.css` y se importan desde la hoja global. Si necesitas ajustar colores, espaciado o tipografia, modifica primero los tokens y luego revisa los componentes que los consumen.
+
+La documentacion del sistema esta en `design-system/design-system.md`.
+
+## Despliegue
+
+El sitio esta pensado para Cloudflare Pages con:
 
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
-- **Node version:** 20 (variable de entorno `NODE_VERSION=20`)
+- **Node version:** `20`
 
-## Sistema de diseño
+## Notas
 
-Todos los tokens visuales (colores, tipografía, espaciado) viven en `design-system/tokens.css`.
-La hoja de estilos global los importa con una ruta relativa — nunca copies los valores directamente.
-
-Las especificaciones de componentes y las reglas de contraste están en `design-system/design-system.md`.
-Los wireframes por página están en `design-system/wireframes/`.
-
-## Páginas (Stage 1)
-
-| Ruta | Estado |
-|---|---|
-| `/` | ✅ Live |
-| `/adoptar` | Stage 2 |
-| `/hogar-temporal` | Stage 2 |
-| `/donar` | Stage 2 |
-| `/quienes-somos` | Stage 2 |
-| `/prensa` | Stage 2 |
-| `/contacto` | Stage 2 |
+- El sitio usa assets estaticos desde `public/`.
+- Los componentes de layout y footer centralizan la navegacion y el credito del proyecto.
+- Si agregas una nueva pagina, crea el archivo correspondiente en `src/pages/` y valida el build con `npm run build`.
