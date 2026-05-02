@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const adoptionDogs = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/adoption-dogs' }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
