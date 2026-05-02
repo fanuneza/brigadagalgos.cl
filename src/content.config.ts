@@ -15,6 +15,17 @@ const adoptionDogs = defineCollection({
     }),
 });
 
+const successDogs = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/success-dogs' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      story: z.string(),
+      gallery: z.array(image()),
+    }),
+});
+
 export const collections = {
   'adoption-dogs': adoptionDogs,
+  'success-dogs': successDogs,
 };
