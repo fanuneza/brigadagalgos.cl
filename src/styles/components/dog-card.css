@@ -79,19 +79,18 @@
   overflow: hidden;
 }
 
-.dog-card__details,
-.dog-card__support {
+.dog-card__details {
   margin: 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-base);
-}
-
-.dog-card__details {
   color: var(--color-text-muted);
 }
 
-.dog-card__support {
-  color: var(--color-text);
+.dog-grid__support-note {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--space-6);
 }
 
 .dog-card__cta {

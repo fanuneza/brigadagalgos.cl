@@ -128,11 +128,6 @@ function getAgeType(age: string) {
                       </div>
                     </div>
                     <p class="dog-card__details">{dog.details}</p>
-                    <p class="dog-card__support">
-                      Seguimos acompañándote también después de la adopción,
-                      para que el proceso sea bueno para tu familia y para el
-                      galgo.
-                    </p>
                     <a
                       href={waHref}
                       class="btn btn--primary dog-card__cta"
@@ -147,6 +142,10 @@ function getAgeType(age: string) {
             })
           }
         </div>
+
+        <p class="dog-grid__support-note">
+          Seguimos acompañándote también después de la adopción, para que el proceso sea bueno para tu familia y para el galgo.
+        </p>
 
         <div class="dog-grid__empty" hidden aria-hidden="true">
           <p>
