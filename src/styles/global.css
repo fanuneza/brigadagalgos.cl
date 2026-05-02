@@ -1,19 +1,7 @@
 @import "./tokens.css";
 @import "./components/navbar.css";
 @import "./components/hero.css";
-@import "./components/mission.css";
-@import "./components/help-cards.css";
-@import "./components/stepper.css";
-@import "./components/stories.css";
-@import "./components/donation-banner.css";
 @import "./components/footer.css";
-@import "./components/rainbow-divider.css";
-@import "./components/page-hero.css";
-@import "./components/dog-card.css";
-@import "./components/filter-chips.css";
-@import "./components/form.css";
-@import "./components/donar.css";
-@import "./components/contact-channels.css";
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }

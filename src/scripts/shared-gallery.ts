@@ -41,7 +41,7 @@ function getPhotoCaption(item: SharedGalleryItem, index: number) {
 function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, index: number) {
   return `
     <picture>
-      <source media="(max-width: 1023px)" srcset="${photo.card_mobile}" type="image/webp" />
+      <source media="(max-width: 1023px)" srcset="${photo.card_mobile}" />
       <img
         src="${photo.card_desktop}"
         alt="${escapeAttribute(alt)}"

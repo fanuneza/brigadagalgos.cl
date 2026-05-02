@@ -7,7 +7,37 @@ import SharedGalleryLightbox from './SharedGalleryLightbox.astro';
     <p class="stories__eyebrow">Historias</p>
     <h2 class="stories__heading">Nuestros casos de éxito.</h2>
 
-    <p class="stories__status" data-stories-status>Estamos cargando historias reales de rescate.</p>
+    <div class="stories__grid" data-stories-skeleton aria-hidden="true">
+      <article class="story-card story-card--skeleton">
+        <div class="story-card__photo"><div class="story-card__viewport"></div></div>
+        <div class="story-card__body">
+          <div class="skeleton-line skeleton-line--name"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line skeleton-line--short"></div>
+        </div>
+      </article>
+      <article class="story-card story-card--skeleton">
+        <div class="story-card__photo"><div class="story-card__viewport"></div></div>
+        <div class="story-card__body">
+          <div class="skeleton-line skeleton-line--name"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line skeleton-line--short"></div>
+        </div>
+      </article>
+      <article class="story-card story-card--skeleton">
+        <div class="story-card__photo"><div class="story-card__viewport"></div></div>
+        <div class="story-card__body">
+          <div class="skeleton-line skeleton-line--name"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line skeleton-line--short"></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="stories__status" data-stories-status hidden></p>
 
     <div class="stories__grid" data-stories-list hidden></div>
   </div>
@@ -21,6 +51,7 @@ import SharedGalleryLightbox from './SharedGalleryLightbox.astro';
   const root = document.querySelector('[data-stories-root]');
   const list = root?.querySelector('[data-stories-list]');
   const status = root?.querySelector('[data-stories-status]');
+  const skeleton = root?.querySelector('[data-stories-skeleton]');
 
   const STORY_COUNT = 6;
   const VALID_STATES = new Set(['Adoptado', 'Adoptada']);
@@ -104,11 +135,13 @@ import SharedGalleryLightbox from './SharedGalleryLightbox.astro';
       list.replaceChildren(fragment);
       initSharedGalleryLightbox();
       initSharedGalleries(list);
+      skeleton.hidden = true;
       list.hidden = false;
-      status.hidden = true;
     } catch (error) {
       console.error('Failed to load homepage stories', error);
+      skeleton.hidden = true;
       status.textContent = 'No pudimos cargar las historias en este momento.';
+      status.hidden = false;
     }
   }
 

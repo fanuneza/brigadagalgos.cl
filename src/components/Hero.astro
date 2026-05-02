@@ -1,4 +1,12 @@
 ---
+import { getImage } from 'astro:assets';
+import portraitSrc from '../assets/images/hero-portrait.webp';
+import landscapeSrc from '../assets/images/hero-landscape.webp';
+
+const pAvif = await getImage({ src: portraitSrc,  format: 'avif', width: 800 });
+const pWebp = await getImage({ src: portraitSrc,  format: 'webp', width: 800 });
+const lAvif = await getImage({ src: landscapeSrc, format: 'avif', width: 1600 });
+const lWebp = await getImage({ src: landscapeSrc, format: 'webp', width: 1600 });
 ---
 
 <section class="hero section-padding">
@@ -14,20 +22,18 @@
     </div>
 
     <picture class="hero__photo">
-      <source
-        media="(min-width: 1024px)"
-        srcset="/images/hero-landscape.webp"
-        type="image/webp"
-      />
+      <source media="(min-width: 1024px)" srcset={lAvif.src} type="image/avif" />
+      <source media="(min-width: 1024px)" srcset={lWebp.src} type="image/webp" />
+      <source srcset={pAvif.src} type="image/avif" />
       <img
-        src="/images/hero-portrait.webp"
+        src={pWebp.src}
         alt="Galgo rescatado mirando hacia adelante"
         class="hero__img"
         loading="eager"
         decoding="async"
         fetchpriority="high"
-        width="800"
-        height="1000"
+        width={portraitSrc.width}
+        height={portraitSrc.height}
       />
     </picture>
   </div>
