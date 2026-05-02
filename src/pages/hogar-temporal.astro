@@ -8,25 +8,24 @@ import RequirementCard from '../components/RequirementCard.astro';
 import ProcessStepper from '../components/ProcessStepper.astro';
 
 const fosterSteps = [
-  { label: 'Llenas el formulario', subLabel: 'Completa los campos abajo', colorClass: 'primary' },
-  { label: 'Te llamamos por WhatsApp', subLabel: 'En menos de 48 horas', colorClass: 'secondary' },
-  { label: 'Visita en casa', subLabel: 'Verificamos espacio y rutina', colorClass: 'warm' },
-  { label: 'Llegada del galgo', subLabel: 'Con acompañamiento durante el primer mes', colorClass: 'green' },
+  { label: 'Postulas desde la web', subLabel: 'Nos cuentas tu disponibilidad, tu casa y quiénes viven contigo.', colorClass: 'primary' },
+  { label: 'Te contacta el equipo', subLabel: 'Conversamos sobre tiempos, implementos y tipo de convivencia.', colorClass: 'secondary' },
+  { label: 'Entrevista y revisión', subLabel: 'Revisamos requisitos de seguridad y el contexto del hogar.', colorClass: 'warm' },
+  { label: 'Llega el galgo', subLabel: 'Coordinamos la acogida y te acompañamos durante el proceso.', colorClass: 'green' },
 ];
 ---
 
 <BaseLayout
   title="Hogar temporal | Brigada Galgos"
-  description="Sé hogar temporal de un galgo rescatado. Nosotros cubrimos comida, veterinario y traslados."
+  description="Sé hogar temporal de un galgo rescatado. Evaluamos contigo tiempos, seguridad e implementos para una acogida responsable."
 >
   <Navbar />
   <main>
-
     <PageHero
       eyebrow="HOGAR TEMPORAL"
       h1="¿No puedes adoptar todavía?"
-      lead="Unas semanas en tu casa pueden cambiar la historia completa de un galgo."
-      leadBold="Nosotros cubrimos comida, veterinario y traslados. Tú aportas techo, caminatas y paciencia."
+      lead="Abrir tu casa por un tiempo le da al galgo un lugar seguro mientras se recupera y esperamos la familia correcta."
+      leadBold="Evaluamos contigo tiempos, seguridad e implementos. Si falta algo, la fundación puede apoyar con lo necesario."
       ctaText="Quiero postular"
       ctaHref="#form"
       ctaVariant="primary"
@@ -34,27 +33,28 @@ const fosterSteps = [
 
     <section class="section-padding">
       <div class="container">
-        <p class="eyebrow">QUÉ SE NECESITA</p>
-        <h2>Tres condiciones básicas.</h2>
+        <p class="eyebrow">QUÉ SE EVALÚA</p>
+        <h2>Lo revisamos contigo antes de asignar un galgo.</h2>
         <div class="req-cards">
           <RequirementCard
             icon="🏠"
-            title="ESPACIO"
-            body="Casa con patio cerrado, o departamento con malla protectora en ventanas y balcones. Los galgos pueden saltar 2m."
-            pendiente="validar específicos con fundación"
+            title="SEGURIDAD"
+            body="En departamentos debe haber malla en balcones y ventanas. También revisamos cómo será cada salida y cada espacio de descanso."
           />
           <RequirementCard
             icon="⏰"
             title="TIEMPO"
-            body="Disponibilidad para 2 paseos al día y presencia en casa la mayor parte de la semana."
+            body="Tu disponibilidad puede ser desde un día hasta semanas o meses. Lo importante es saber con qué tiempo real cuentas para acompañarlo."
           />
           <RequirementCard
             icon="🤝"
-            title="COMPROMISO"
-            body="Mantener al galgo por el tiempo acordado (mínimo 1 mes), llevarlo a las citas veterinarias y enviar fotos y reportes semanales."
+            title="CONVIVENCIA E IMPLEMENTOS"
+            body="Vemos si tienes correa, arnés, camas o mantas, y cómo conviven perros o gatos en casa. Si falta algo, la fundación puede proveer implementos."
           />
         </div>
-        <p>No necesitas casa grande. Un rincón tranquilo, caminatas diarias y disposición a ayudar son más que suficientes.</p>
+        <p class="requirements__note">Si ya viven otros animales contigo, revisamos vacunas al día, esterilización o castración, edades, carácter y convivencia con machos o hembras.</p>
+        <p class="requirements__note">Si hay gatos, necesitamos que tengan un espacio seguro en altura y saber cómo conviven con perros.</p>
+        <p class="requirements__note"><p><strong>Nunca se debe soltar al galgo.</strong> Los paseos siempre deben ser con arnés, correa y chapita con número de teléfono, porque pueden asustarse fácilmente y correr muy rápido.</p>
       </div>
     </section>
 
@@ -64,35 +64,6 @@ const fosterSteps = [
       heading="Así funciona el acogimiento."
     />
 
-    <!-- Foster stories -->
-    <section class="section-padding">
-      <div class="container">
-        <p class="eyebrow">LO QUE DICEN NUESTROS HOGARES</p>
-        <h2>Personas comunes que marcaron una diferencia.</h2>
-        <div class="stories__scroll">
-          <article class="story-card">
-            <div class="story-card__body">
-              <p class="story-card__name"><span class="pendiente">[PENDIENTE: nombre, ciudad]</span></p>
-              <p class="story-card__quote">"<span class="pendiente">[PENDIENTE: testimonio real de hogar temporal]</span>"</p>
-            </div>
-          </article>
-          <article class="story-card">
-            <div class="story-card__body">
-              <p class="story-card__name"><span class="pendiente">[PENDIENTE: nombre, ciudad]</span></p>
-              <p class="story-card__quote">"<span class="pendiente">[PENDIENTE: testimonio real de hogar temporal]</span>"</p>
-            </div>
-          </article>
-          <article class="story-card">
-            <div class="story-card__body">
-              <p class="story-card__name"><span class="pendiente">[PENDIENTE: nombre, ciudad]</span></p>
-              <p class="story-card__quote">"<span class="pendiente">[PENDIENTE: testimonio real de hogar temporal]</span>"</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Application form -->
     <section id="form" class="section-padding">
       <div class="container container--narrow">
         <p class="eyebrow">POSTULAR</p>
@@ -193,7 +164,7 @@ const fosterSteps = [
 
         <div class="form__success" hidden data-form-success id="foster-success">
           <p class="form__success-title">¡Recibimos tu postulación!</p>
-          <p>Te contactamos en menos de 48 horas por WhatsApp.</p>
+          <p>Te contactamos por WhatsApp.</p>
           <a href="/" class="btn btn--secondary">Volver al inicio</a>
         </div>
 
@@ -205,9 +176,15 @@ const fosterSteps = [
         </p>
       </div>
     </section>
-
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .requirements__note {
+    margin-top: var(--space-3);
+  }
+
+</style>
 
 <script>import '../scripts/form';</script>

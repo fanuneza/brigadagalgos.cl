@@ -1,44 +1,71 @@
 ---
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { SITE } from '../config/site.ts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
-import DogCard from '../components/DogCard.astro';
+import SharedPhotoGallery from '../components/SharedPhotoGallery.astro';
+import SharedGalleryLightbox from '../components/SharedGalleryLightbox.astro';
 
-interface Dog {
+interface AdoptionPicture {
+  source: string;
+  card_mobile: string;
+  card_desktop: string;
+  lightbox: string;
+}
+
+interface AdoptionDog {
   id: string;
   name: string;
   sex: 'Macho' | 'Hembra';
   age: string;
   weight: string;
-  personality: string;
-  image: string;
+  details: string;
+  pictures: AdoptionPicture[];
 }
 
-const dogModules = import.meta.glob<{ default: Dog }>('../content/dogs/*.json', { eager: true });
-const dogs = Object.values(dogModules).map(m => m.default);
+const adoptionFeedPath = path.join(process.cwd(), 'public', 'casos', 'adopcion.json');
+function shuffle<T>(items: T[]) {
+  const copy = [...items];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+  }
+  return copy;
+}
+
+const dogs = shuffle(JSON.parse(await fs.readFile(adoptionFeedPath, 'utf8')) as AdoptionDog[]);
+
+function getAgeType(age: string) {
+  return /cachor/i.test(age) ? 'cachorro' : 'adulto';
+}
 ---
 
 <BaseLayout
   title="Adoptar | Brigada Galgos"
-  description="Conoce los galgos disponibles para adopción en Chile. Encuentra a tu compañero ideal."
+  description="Conoce a los galgos que hoy están listos para encontrar familia en Chile."
 >
   <Navbar />
   <main>
-
     <PageHero
       eyebrow="ADOPTA"
-      h1="Los galgos que esperan familia."
-      lead="Están en hogares temporales, recuperados y listos para conocerte."
-      ctaText="Ver requisitos ↓"
-      ctaHref="#requisitos"
+      h1="Los galgos que hoy esperan familia."
+      lead="Los conocemos de cerca y te acompañamos en todo el proceso, desde tu primer mensaje hasta los primeros días en casa."
+      ctaText="Ver proceso ↓"
+      ctaHref="#proceso"
       ctaVariant="ghost"
     />
 
-    <!-- Dog grid -->
     <section class="section-padding">
       <div class="container">
+        <div class="adoption-intro">
+          <p class="eyebrow">EN ADOPCIÓN</p>
+          <p class="adoption-intro__lead">
+            Cada galgo llega con una historia y con un ritmo propio. Aquí te mostramos a quienes ya están listos para conocerte.
+          </p>
+        </div>
 
         <div class="filter-chips" role="group" aria-label="Filtrar galgos">
           <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>
@@ -49,20 +76,45 @@ const dogs = Object.values(dogModules).map(m => m.default);
         </div>
 
         <p class="dog-grid__count" aria-live="polite">
-          <span data-count>{dogs.length}</span> galgos disponibles
+          <span data-count>{dogs.length}</span> <span data-count-label>{dogs.length === 1 ? 'galgo disponible' : 'galgos disponibles'}</span>
         </p>
 
         <div class="dog-grid" data-dog-grid>
-          {dogs.map(dog => {
+          {dogs.map((dog) => {
             const waHref = `${SITE.whatsapp}?text=${encodeURIComponent(`Hola, me interesa adoptar a ${dog.name}`)}`;
+            const ageType = getAgeType(dog.age);
+
             return (
-              <DogCard dog={dog} waHref={waHref} data-sex={dog.sex} data-age-type="adulto" />
+              <article class="story-card dog-card adoption-card" data-adoption-card data-sex={dog.sex} data-age-type={ageType}>
+                <SharedPhotoGallery name={dog.name} photos={dog.pictures} />
+
+                <div class="story-card__body dog-card__body">
+                  <div class="dog-card__header">
+                    <h2 class="story-card__name dog-card__name">{dog.name}</h2>
+                    <div class="dog-card__chips">
+                      <span class="chip chip--sex">{dog.sex}</span>
+                      <span class="chip chip--age">{dog.age}</span>
+                      <span class="chip chip--weight">{dog.weight}</span>
+                    </div>
+                  </div>
+                  <p class="dog-card__details">{dog.details}</p>
+                  <p class="dog-card__support">Seguimos acompañándote también después de la adopción, para que el proceso sea bueno para tu familia y para el galgo.</p>
+                  <a
+                    href={waHref}
+                    class="btn btn--primary dog-card__cta"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Me interesa {dog.name}
+                  </a>
+                </div>
+              </article>
             );
           })}
         </div>
 
         <div class="dog-grid__empty" hidden aria-hidden="true">
-          <p>Por ahora no hay galgos en adopción. Postula igual y te avisamos cuando llegue el indicado.</p>
+          <p>Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando llegue un match para tu hogar.</p>
           <a
             href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera adoptar un galgo')}`}
             class="btn btn--primary"
@@ -72,33 +124,30 @@ const dogs = Object.values(dogModules).map(m => m.default);
             Escríbenos por WhatsApp
           </a>
         </div>
-
       </div>
     </section>
 
-    <!-- Requirements -->
-    <section id="requisitos" class="section-padding">
+    <section id="proceso" class="section-padding adoption-process">
       <div class="container container--narrow">
-        <p class="eyebrow">REQUISITOS</p>
-        <h2>Antes de postular.</h2>
-        <p>Estos requisitos no son para juzgarte. Son para que el galgo esté seguro y la adopción resulte.</p>
-        <ul class="requisitos-list">
-          <li>Casa con patio cerrado, o departamento con malla protectora en ventanas y balcones.</li>
-          <li>Compromiso de paseos diarios.</li>
-          <li>Mayoría de edad y autorización de quien arrienda.</li>
-          <li>Visita en casa antes de la entrega.</li>
-          <li>Firma de acuerdo de adopción.</li>
-        </ul>
-        <span class="pendiente">[PENDIENTE: validar lista final con fundación]</span>
-        <p>Seguimos acompañándote después de la adopción. Cualquier duda, escríbenos.</p>
+        <p class="eyebrow">PROCESO</p>
+        <h2>Te guiamos paso a paso.</h2>
+        <p class="adoption-process__lead">
+          “Adoptar es un compromiso para toda la vida”, y por eso buscamos el mejor match para cada galgo y cada hogar.
+        </p>
+        <ol class="adoption-process__list">
+          <li>Nos cuentas de tu hogar y tu rutina por formulario o WhatsApp.</li>
+          <li>El equipo de adopciones te contacta y hacemos una entrevista para conocer mejor tu rutina y resolver dudas.</li>
+          <li>Buscamos el galgo que mejor encaja contigo, según estilo de vida y perfil familiar.</li>
+          <li>Coordinamos un encuentro para conocerse sin presión y, si hay match, puede venir un período de prueba de dos semanas.</li>
+          <li>Si todo funciona bien, firmamos el contrato y seguimos presentes también después de la adopción.</li>
+        </ol>
       </div>
     </section>
 
-    <!-- Tail CTA -->
     <section class="section-padding tail-cta">
       <div class="container container--narrow">
-        <h3>¿Ninguno de nuestros perros te conquistó?</h3>
-        <p>Escríbenos por WhatsApp y conversemos. A veces hay galgos en proceso que aún no aparecen aquí.</p>
+        <h3>¿Quieres hablarlo antes de postular?</h3>
+        <p>Escríbenos sin apuro. Si todavía no sabes qué galgo encaja mejor con tu casa, lo conversamos contigo.</p>
         <a
           href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera saber más sobre adopción')}`}
           class="btn btn--primary"
@@ -109,9 +158,13 @@ const dogs = Object.values(dogModules).map(m => m.default);
         </a>
       </div>
     </section>
-
   </main>
   <Footer />
 </BaseLayout>
 
-<script>import '../scripts/filter-chips';</script>
+<SharedGalleryLightbox ariaLabel="Galería de adopción" />
+
+<script>
+  import '../scripts/filter-chips';
+  import '../scripts/shared-gallery';
+</script>

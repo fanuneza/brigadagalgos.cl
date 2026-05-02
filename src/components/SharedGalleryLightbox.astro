@@ -1,0 +1,26 @@
+---
+interface Props {
+  ariaLabel?: string;
+}
+
+const { ariaLabel = 'Galería de fotos' } = Astro.props;
+---
+
+<div class="stories-lightbox" data-shared-gallery-lightbox hidden>
+  <div class="stories-lightbox__backdrop" data-shared-gallery-lightbox-close></div>
+  <div class="stories-lightbox__dialog" role="dialog" aria-modal="true" aria-label={ariaLabel}>
+    <button type="button" class="stories-lightbox__close" data-shared-gallery-lightbox-close-button aria-label="Cerrar galería">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <button type="button" class="stories-lightbox__nav stories-lightbox__nav--prev" data-shared-gallery-lightbox-prev aria-label="Ver foto anterior">
+      <span aria-hidden="true">&lsaquo;</span>
+    </button>
+    <figure class="stories-lightbox__figure">
+      <img class="stories-lightbox__image" data-shared-gallery-lightbox-image alt="" />
+      <figcaption class="stories-lightbox__caption" data-shared-gallery-lightbox-caption></figcaption>
+    </figure>
+    <button type="button" class="stories-lightbox__nav stories-lightbox__nav--next" data-shared-gallery-lightbox-next aria-label="Ver foto siguiente">
+      <span aria-hidden="true">&rsaquo;</span>
+    </button>
+  </div>
+</div>

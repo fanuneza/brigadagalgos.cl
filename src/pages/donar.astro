@@ -8,30 +8,25 @@ import PageHero from '../components/PageHero.astro';
 
 <BaseLayout
   title="Donar | Brigada Galgos"
-  description="Apoya el rescate de galgos en Chile. Dona mensualmente a través de eSponsor o por transferencia bancaria."
+  description="Apoya el rescate de galgos en Chile. Dona a través de eSponsor o revisa otras formas de aporte."
 >
   <Navbar />
   <main>
-
     <PageHero
       eyebrow="DONAR"
       h1="Apoya el rescate."
-      lead="Tu donación mantiene a los galgos rescatados seguros, alimentados y cuidados mientras esperan un hogar."
-      leadBold="No recibimos financiamiento estatal ni de empresas. Cada peso viene de personas como tú."
+      lead="Tu donación ayuda a sostener rescates, atención veterinaria, acogida y traslados mientras cada galgo espera un hogar."
+      leadBold="Cada aporte suma para que podamos responder mejor a los casos que llegan por redes y WhatsApp."
     />
 
-    <!-- Donation options -->
     <section class="section-padding">
       <div class="container">
         <div class="donation-cards">
-
-          <!-- Card 1: Mensual -->
           <div class="donation-card donation-card--mensual">
             <span class="chip chip--recommended">Recomendado</span>
             <p class="donation-card__heading">DONAR MENSUAL</p>
-            <p>Aporta una cantidad fija cada mes a través de eSponsor. Es la forma más efectiva de apoyarnos: nos permite planificar el rescate con anticipación.</p>
-            <p>Hazte Amigo de los Galgos y recibe fotos y actualizaciones de los animales que tu aporte mantiene seguros.</p>
-            <p class="donation-card__amounts">Sugerencias: $5.000 · $10.000 · $20.000</p>
+            <p>Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y acogidas.</p>
+            <p>Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.</p>
             <a
               href={SITE.esponsor}
               class="btn btn--primary"
@@ -42,109 +37,98 @@ import PageHero from '../components/PageHero.astro';
             </a>
           </div>
 
-          <!-- Card 2: Transferencia -->
           <div class="donation-card donation-card--transferencia" id="datos-transferencia">
             <p class="donation-card__heading">TRANSFERENCIA ÚNICA</p>
-            <dl class="bank-info">
-              <div class="bank-info__row">
-                <dt class="bank-info__label">Banco</dt>
-                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
-              </div>
-              <div class="bank-info__row">
-                <dt class="bank-info__label">Tipo de cuenta</dt>
-                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
-              </div>
-              <div class="bank-info__row">
-                <dt class="bank-info__label">Nº de cuenta</dt>
-                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
-              </div>
-              <div class="bank-info__row">
-                <dt class="bank-info__label">RUT</dt>
-                <dd class="bank-info__value"><span class="pendiente">[PENDIENTE]</span></dd>
-              </div>
-              <div class="bank-info__row">
-                <dt class="bank-info__label">Nombre</dt>
-                <dd class="bank-info__value">Fundación Brigada Galgos</dd>
-              </div>
-              <div class="bank-info__row">
-                <dt class="bank-info__label">Email</dt>
-                <dd class="bank-info__value">{SITE.email}</dd>
-              </div>
-            </dl>
-            <button class="btn btn--ghost" id="copy-bank-data" disabled>
+            <div class="bank-info">
+              <button type="button" class="bank-info__row" data-copy-value="Fundación Brigada Galgos">
+                <span class="bank-info__label">Nombre</span>
+                <span class="bank-info__value">Fundación Brigada Galgos</span>
+              </button>
+              <button type="button" class="bank-info__row" data-copy-value="65.132.425-4">
+                <span class="bank-info__label">RUT</span>
+                <span class="bank-info__value">65.132.425-4</span>
+              </button>
+              <button type="button" class="bank-info__row" data-copy-value="Mercado Pago">
+                <span class="bank-info__label">Banco</span>
+                <span class="bank-info__value">Mercado Pago</span>
+              </button>
+              <button type="button" class="bank-info__row" data-copy-value="Cuenta Vista">
+                <span class="bank-info__label">Tipo de cuenta</span>
+                <span class="bank-info__value">Cuenta Vista</span>
+              </button>
+              <button type="button" class="bank-info__row" data-copy-value="1073480715">
+                <span class="bank-info__label">Número de cuenta</span>
+                <span class="bank-info__value">1073480715</span>
+              </button>
+              <button type="button" class="bank-info__row" data-copy-value="brigadagalgos@gmail.com">
+                <span class="bank-info__label">Email</span>
+                <span class="bank-info__value">brigadagalgos@gmail.com</span>
+              </button>
+            </div>
+            <button class="btn btn--ghost" id="copy-bank-data">
               Copiar datos
             </button>
-            <p class="donation-card__note">
-              <small>Datos bancarios disponibles pronto.</small>
-            </p>
             <p class="donation-card__info">
-              Envíanos el comprobante por WhatsApp para confirmar la recepción.
+              Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una vez.
             </p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Per-amount impact -->
     <section class="section-padding">
       <div class="container container--narrow">
         <p class="eyebrow">QUÉ HACE TU APORTE</p>
-        <h2>Cada peso tiene destino.</h2>
+        <h2>En qué se transforma tu ayuda.</h2>
         <div class="impact-cards">
           <div class="impact-card">
-            <p class="impact-card__amount">$5.000/mes</p>
-            <p class="impact-card__desc">Alimenta a un galgo rescatado durante una semana</p>
+            <p class="impact-card__title">Atención veterinaria</p>
+            <p class="impact-card__desc">Consultas, tratamientos, controles y lo que cada caso necesite para recuperarse.</p>
           </div>
           <div class="impact-card">
-            <p class="impact-card__amount">$10.000/mes</p>
-            <p class="impact-card__desc">Cubre vacunas y antiparasitarios de un recién rescatado</p>
+            <p class="impact-card__title">Alimento y abrigo</p>
+            <p class="impact-card__desc">Comida, camas, mantas e insumos para que cada galgo pase su recuperación seguro.</p>
           </div>
           <div class="impact-card">
-            <p class="impact-card__amount">$20.000/mes</p>
-            <p class="impact-card__desc">Costea una consulta veterinaria de urgencia</p>
+            <p class="impact-card__title">Traslados seguros</p>
+            <p class="impact-card__desc">Movilización para rescates, controles veterinarios y cambios hacia hogares temporales o definitivos.</p>
           </div>
           <div class="impact-card">
-            <p class="impact-card__amount">$50.000/mes</p>
-            <p class="impact-card__desc">Apoya el costo completo de un galgo en rehabilitación por un mes</p>
+            <p class="impact-card__title">Implementos de rescate</p>
+            <p class="impact-card__desc">Correas, arneses, chapitas y apoyo material para hogares temporales cuando hace falta.</p>
           </div>
           <div class="impact-card">
-            <p class="impact-card__amount">Cualquier monto</p>
-            <p class="impact-card__desc">Se usa íntegramente en los galgos. Nadie cobra sueldo.</p>
+            <p class="impact-card__title">Difusión y adopción</p>
+            <p class="impact-card__desc">Publicación de casos, seguimiento y búsqueda activa de la familia adecuada para cada galgo.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Trust stats -->
     <section class="section-padding trust-stats">
       <div class="container">
         <p class="eyebrow">COMPROMISO</p>
-        <h2>En qué se usa cada peso.</h2>
+        <h2>Lo que sostiene tu apoyo.</h2>
         <div class="trust-stats__grid">
           <div class="stat-card">
-            <p class="stat-card__value stat-card__value--cyan">100%</p>
-            <p class="stat-card__label">va a los galgos</p>
-            <p class="stat-card__body">Comida, vacunas, esterilización, traslados, prótesis y rehabilitación.</p>
+            <div class="stat-card__value stat-card__value--cyan" aria-hidden="true"></div>
+            <p class="stat-card__label">Veterinaria integral</p>
+            <p class="stat-card__body">La fundación prioriza atención veterinaria completa, no solo lo básico.</p>
           </div>
           <div class="stat-card">
-            <p class="stat-card__value stat-card__value--magenta">0$</p>
-            <p class="stat-card__label">en sueldos</p>
-            <p class="stat-card__body">Somos un equipo voluntario. Nadie cobra.</p>
+            <div class="stat-card__value stat-card__value--magenta" aria-hidden="true"></div>
+            <p class="stat-card__label">Acompañamiento real</p>
+            <p class="stat-card__body">Acompañamos a adoptantes y hogares temporales para que cada proceso resulte bien.</p>
           </div>
           <div class="stat-card">
-            <p class="stat-card__value stat-card__value--orange">✓</p>
-            <p class="stat-card__label">Cuentas a la vista</p>
-            <p class="stat-card__body">
-              Publicamos un balance trimestral en Instagram con totales de ingresos y egresos.
-              <span class="pendiente">[PENDIENTE: confirmar cadencia y formato]</span>
-            </p>
+            <div class="stat-card__value stat-card__value--orange" aria-hidden="true"></div>
+            <p class="stat-card__label">Match responsable</p>
+            <p class="stat-card__body">Buscamos la mejor familia para cada galgo, sin importar edad, sexo o nivel de energía.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Otras formas -->
     <section class="section-padding tail-cta">
       <div class="container container--narrow">
         <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
@@ -164,7 +148,6 @@ import PageHero from '../components/PageHero.astro';
         </a>
       </div>
     </section>
-
   </main>
   <Footer />
 </BaseLayout>

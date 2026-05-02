@@ -115,6 +115,24 @@
   margin: 0;
 }
 
+.footer__copy p {
+  display: inline;
+  margin: 0;
+}
+
+.footer__copy p + p::before {
+  content: "·";
+  margin: 0 var(--space-2);
+}
+
+.footer__heart-icon {
+  width: 0.95em;
+  height: 0.95em;
+  display: inline-block;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
 /* Override secondary button colors for dark background */
 .footer__esponsor-btn {
   --btn-secondary-fg: var(--color-text-inverse);

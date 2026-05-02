@@ -4,7 +4,6 @@ import { SITE } from '../config/site.ts';
 
 <footer class="footer">
   <div class="container footer__grid">
-
     <div class="footer__brand">
       <a href="/" aria-label="Brigada Galgos — inicio" class="footer__brand-link">
         <img
@@ -15,7 +14,7 @@ import { SITE } from '../config/site.ts';
           height="48"
           loading="lazy"
         />
-        <span class="footer__brand-name">Fundación<br>Brigada Galgos</span>
+        <span class="footer__brand-name">Fundación<br />Brigada Galgos</span>
       </a>
       <p class="footer__tagline">Rescatamos galgos en todo Chile y los acompañamos hasta su hogar definitivo.</p>
     </div>
@@ -37,14 +36,14 @@ import { SITE } from '../config/site.ts';
       <div class="footer__social">
         <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer__social-link">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2" />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
           </svg>
         </a>
         <a href={SITE.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="footer__social-link">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </a>
       </div>
@@ -59,14 +58,19 @@ import { SITE } from '../config/site.ts';
         <li><a href="/contacto" class="footer__link">Contacto</a></li>
       </ul>
     </div>
-
   </div>
 
   <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-      <p class="footer__copy">
-        &copy; 2026 Fundación Brigada Galgos &middot; RUT 65.132.425-4
-      </p>
+      <div class="footer__copy">
+        <p>&copy; 2026 Fundación Brigada Galgos &middot; RUT 65.132.425-4</p>
+        <p>
+          Sitio web desarrollado con
+          <img src="/icons/heart.svg" alt="" aria-hidden="true" class="footer__heart-icon" />
+          por
+          <a href="https://agenciachucao.cl/?utm_source=trxconcept.cl&utm_medium=referral&utm_campaign=credit_footer" target="_blank" rel="noopener noreferrer" aria-label="Abrir el sitio de Agencia Chucao en una pestaña nueva">agencia chucao</a>
+        </p>
+      </div>
       <a
         href={SITE.esponsor}
         target="_blank"

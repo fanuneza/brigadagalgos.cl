@@ -59,6 +59,33 @@
   gap: var(--space-4);
 }
 
+.adoption-intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.adoption-intro__lead,
+.adoption-process__lead {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
+.adoption-process__list {
+  margin: var(--space-5) 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.adoption-card .story-card__slide {
+  cursor: zoom-in;
+}
+
+.adoption-card .story-card__body {
+  gap: var(--space-3);
+}
+
 /* Adoptar page — requirements list */
 .requisitos-list {
   list-style: none;

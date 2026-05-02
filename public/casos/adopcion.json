@@ -1,0 +1,200 @@
+[
+  {
+    "id": "turron",
+    "name": "Turrón",
+    "sex": "Macho",
+    "age": "6 años aprox.",
+    "weight": "29,8 kg",
+    "details": "A Turrón lo arrojaron desde una camioneta en Isla de Maipo y quedó con una fractura que hubo que operar. Hoy está recuperado y listo para encontrar una familia tranquila.",
+    "pictures": [
+      {
+        "source": "/casos/adopcion/turron/turron-01.jpg",
+        "card_mobile": "/casos/adopcion/turron/turron-01-mobile.webp",
+        "card_desktop": "/casos/adopcion/turron/turron-01-desktop.webp",
+        "lightbox": "/casos/adopcion/turron/turron-01-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/turron/turron-02.jpg",
+        "card_mobile": "/casos/adopcion/turron/turron-02-mobile.webp",
+        "card_desktop": "/casos/adopcion/turron/turron-02-desktop.webp",
+        "lightbox": "/casos/adopcion/turron/turron-02-lightbox.webp"
+      }
+    ]
+  },
+  {
+    "id": "nina",
+    "name": "Niña",
+    "sex": "Hembra",
+    "age": "Edad por confirmar",
+    "weight": "Peso por confirmar",
+    "details": "A Niña la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.",
+    "pictures": [
+      {
+        "source": "/casos/adopcion/nina/nina-01.jpg",
+        "card_mobile": "/casos/adopcion/nina/nina-01-mobile.webp",
+        "card_desktop": "/casos/adopcion/nina/nina-01-desktop.webp",
+        "lightbox": "/casos/adopcion/nina/nina-01-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/nina/nina-02.jpg",
+        "card_mobile": "/casos/adopcion/nina/nina-02-mobile.webp",
+        "card_desktop": "/casos/adopcion/nina/nina-02-desktop.webp",
+        "lightbox": "/casos/adopcion/nina/nina-02-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/nina/nina-03.jpg",
+        "card_mobile": "/casos/adopcion/nina/nina-03-mobile.webp",
+        "card_desktop": "/casos/adopcion/nina/nina-03-desktop.webp",
+        "lightbox": "/casos/adopcion/nina/nina-03-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/nina/nina-04.jpg",
+        "card_mobile": "/casos/adopcion/nina/nina-04-mobile.webp",
+        "card_desktop": "/casos/adopcion/nina/nina-04-desktop.webp",
+        "lightbox": "/casos/adopcion/nina/nina-04-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/nina/nina-05.jpg",
+        "card_mobile": "/casos/adopcion/nina/nina-05-mobile.webp",
+        "card_desktop": "/casos/adopcion/nina/nina-05-desktop.webp",
+        "lightbox": "/casos/adopcion/nina/nina-05-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/nina/nina-06.jpg",
+        "card_mobile": "/casos/adopcion/nina/nina-06-mobile.webp",
+        "card_desktop": "/casos/adopcion/nina/nina-06-desktop.webp",
+        "lightbox": "/casos/adopcion/nina/nina-06-lightbox.webp"
+      }
+    ]
+  },
+  {
+    "id": "foxy",
+    "name": "Foxy",
+    "sex": "Hembra",
+    "age": "7 años aprox.",
+    "weight": "Peso por confirmar",
+    "details": "Foxy llegó después de un rescate en el cerro El Carbón y hoy sigue en hogar temporal. Buscamos una familia tranquila para acompañar su recuperación y su tratamiento dental.",
+    "pictures": [
+      {
+        "source": "/casos/adopcion/foxy/foxy-01-lightbox.webp",
+        "card_mobile": "/casos/adopcion/foxy/foxy-01-mobile.webp",
+        "card_desktop": "/casos/adopcion/foxy/foxy-01-desktop.webp",
+        "lightbox": "/casos/adopcion/foxy/foxy-01-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/foxy/foxy-02-lightbox.webp",
+        "card_mobile": "/casos/adopcion/foxy/foxy-02-mobile.webp",
+        "card_desktop": "/casos/adopcion/foxy/foxy-02-desktop.webp",
+        "lightbox": "/casos/adopcion/foxy/foxy-02-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/foxy/foxy-03-lightbox.webp",
+        "card_mobile": "/casos/adopcion/foxy/foxy-03-mobile.webp",
+        "card_desktop": "/casos/adopcion/foxy/foxy-03-desktop.webp",
+        "lightbox": "/casos/adopcion/foxy/foxy-03-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/foxy/foxy-04-lightbox.webp",
+        "card_mobile": "/casos/adopcion/foxy/foxy-04-mobile.webp",
+        "card_desktop": "/casos/adopcion/foxy/foxy-04-desktop.webp",
+        "lightbox": "/casos/adopcion/foxy/foxy-04-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/foxy/foxy-05-lightbox.webp",
+        "card_mobile": "/casos/adopcion/foxy/foxy-05-mobile.webp",
+        "card_desktop": "/casos/adopcion/foxy/foxy-05-desktop.webp",
+        "lightbox": "/casos/adopcion/foxy/foxy-05-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/foxy/foxy-06-lightbox.webp",
+        "card_mobile": "/casos/adopcion/foxy/foxy-06-mobile.webp",
+        "card_desktop": "/casos/adopcion/foxy/foxy-06-desktop.webp",
+        "lightbox": "/casos/adopcion/foxy/foxy-06-lightbox.webp"
+      }
+    ]
+  },
+  {
+    "id": "arepita",
+    "name": "Arepita",
+    "sex": "Hembra",
+    "age": "Menor de 1 año",
+    "weight": "Peso por confirmar",
+    "details": "Arepita fue rescatada en Limache y pasó directo por clínica. Es una galga muy joven que sigue recuperándose mientras espera una familia comprometida.",
+    "pictures": [
+      {
+        "source": "/casos/adopcion/arepita/01.jpg",
+        "card_mobile": "/casos/adopcion/arepita/01-mobile.webp",
+        "card_desktop": "/casos/adopcion/arepita/01-desktop.webp",
+        "lightbox": "/casos/adopcion/arepita/01-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/arepita/02.jpg",
+        "card_mobile": "/casos/adopcion/arepita/02-mobile.webp",
+        "card_desktop": "/casos/adopcion/arepita/02-desktop.webp",
+        "lightbox": "/casos/adopcion/arepita/02-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/arepita/03.jpg",
+        "card_mobile": "/casos/adopcion/arepita/03-mobile.webp",
+        "card_desktop": "/casos/adopcion/arepita/03-desktop.webp",
+        "lightbox": "/casos/adopcion/arepita/03-lightbox.webp"
+      }
+    ]
+  },
+  {
+    "id": "loica",
+    "name": "Loica",
+    "sex": "Hembra",
+    "age": "Edad por confirmar",
+    "weight": "Peso por confirmar",
+    "details": "Loica llegó desde Maipú después de haber sido mamá hace pocos meses. Está en hogar temporal y buscamos una casa paciente para que siga ganando seguridad a su ritmo.",
+    "pictures": [
+      {
+        "source": "/casos/adopcion/loica/01.jpg",
+        "card_mobile": "/casos/adopcion/loica/01-mobile.webp",
+        "card_desktop": "/casos/adopcion/loica/01-desktop.webp",
+        "lightbox": "/casos/adopcion/loica/01-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/loica/02.jpg",
+        "card_mobile": "/casos/adopcion/loica/02-mobile.webp",
+        "card_desktop": "/casos/adopcion/loica/02-desktop.webp",
+        "lightbox": "/casos/adopcion/loica/02-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/loica/03.jpg",
+        "card_mobile": "/casos/adopcion/loica/03-mobile.webp",
+        "card_desktop": "/casos/adopcion/loica/03-desktop.webp",
+        "lightbox": "/casos/adopcion/loica/03-lightbox.webp"
+      }
+    ]
+  },
+  {
+    "id": "olga",
+    "name": "Olga",
+    "sex": "Hembra",
+    "age": "6 años aprox.",
+    "weight": "17 kg",
+    "details": "Olga fue rescatada en Curacaví con una herida grave en una patita y tuvo que pasar por amputación. Buscamos una familia muy tranquila y comprometida con su adaptación.",
+    "pictures": [
+      {
+        "source": "/casos/adopcion/olga/01.jpg",
+        "card_mobile": "/casos/adopcion/olga/01-mobile.webp",
+        "card_desktop": "/casos/adopcion/olga/01-desktop.webp",
+        "lightbox": "/casos/adopcion/olga/01-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/olga/02.jpg",
+        "card_mobile": "/casos/adopcion/olga/02-mobile.webp",
+        "card_desktop": "/casos/adopcion/olga/02-desktop.webp",
+        "lightbox": "/casos/adopcion/olga/02-lightbox.webp"
+      },
+      {
+        "source": "/casos/adopcion/olga/03.jpg",
+        "card_mobile": "/casos/adopcion/olga/03-mobile.webp",
+        "card_desktop": "/casos/adopcion/olga/03-desktop.webp",
+        "lightbox": "/casos/adopcion/olga/03-lightbox.webp"
+      }
+    ]
+  }
+]

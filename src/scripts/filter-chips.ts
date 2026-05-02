@@ -1,33 +1,70 @@
 const chips = document.querySelectorAll<HTMLButtonElement>('.chip-btn');
 const cards = document.querySelectorAll<HTMLElement>('[data-sex]');
 const countEl = document.querySelector<HTMLElement>('[data-count]');
+const countLabelEl = document.querySelector<HTMLElement>('[data-count-label]');
 const emptyEl = document.querySelector<HTMLElement>('.dog-grid__empty');
+const desktopQuery = typeof window !== 'undefined' ? window.matchMedia('(min-width: 1024px)') : null;
+
+let activeFilter = 'all';
+
+function getVisibleLimit() {
+  return desktopQuery?.matches ? 6 : 3;
+}
 
 function filter(value: string) {
-  let visible = 0;
-  cards.forEach(card => {
-    const show =
+  const matchingCards: HTMLElement[] = [];
+
+  cards.forEach((card) => {
+    const matches =
       value === 'all' ||
       card.dataset.sex === value ||
       card.dataset.ageType === value;
-    card.hidden = !show;
-    if (show) visible++;
+
+    if (matches) {
+      matchingCards.push(card);
+    }
   });
-  if (countEl) countEl.textContent = String(visible);
+
+  const visibleLimit = getVisibleLimit();
+
+  cards.forEach((card) => {
+    card.hidden = true;
+  });
+
+  matchingCards.forEach((card, index) => {
+    card.hidden = index >= visibleLimit;
+  });
+
+  if (countEl) {
+    countEl.textContent = String(matchingCards.length);
+  }
+
+  if (countLabelEl) {
+    countLabelEl.textContent = matchingCards.length === 1 ? 'galgo disponible' : 'galgos disponibles';
+  }
+
   if (emptyEl) {
-    emptyEl.hidden = visible > 0;
-    emptyEl.setAttribute('aria-hidden', String(visible > 0));
+    emptyEl.hidden = matchingCards.length > 0;
+    emptyEl.setAttribute('aria-hidden', String(matchingCards.length > 0));
   }
 }
 
-chips.forEach(chip => {
+chips.forEach((chip) => {
   chip.addEventListener('click', () => {
-    chips.forEach(c => {
-      c.classList.remove('chip-btn--active');
-      c.setAttribute('aria-pressed', 'false');
+    chips.forEach((candidate) => {
+      candidate.classList.remove('chip-btn--active');
+      candidate.setAttribute('aria-pressed', 'false');
     });
+
     chip.classList.add('chip-btn--active');
     chip.setAttribute('aria-pressed', 'true');
-    filter(chip.dataset.filter ?? 'all');
+    activeFilter = chip.dataset.filter ?? 'all';
+    filter(activeFilter);
   });
 });
+
+desktopQuery?.addEventListener('change', () => {
+  filter(activeFilter);
+});
+
+filter(activeFilter);

@@ -12,19 +12,16 @@ import PageHero from '../components/PageHero.astro';
 >
   <Navbar />
   <main>
-
     <PageHero
       eyebrow="CONTACTO"
       h1="Conversemos."
       lead="Nos encanta hablar de galgos. No necesitas tener todo claro para escribirnos."
     />
 
-    <!-- Channel cards -->
     <section class="section-padding">
       <div class="container">
         <p class="eyebrow">CANALES DIRECTOS</p>
         <div class="contact-channels">
-
           <div class="channel-card">
             <span class="channel-card__icon" aria-hidden="true">💬</span>
             <p class="channel-card__title">WHATSAPP</p>
@@ -62,12 +59,10 @@ import PageHero from '../components/PageHero.astro';
               <a href={SITE.facebook} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Contact form -->
     <section class="section-padding">
       <div class="container container--narrow">
         <p class="eyebrow">ESCRÍBENOS</p>
@@ -121,21 +116,18 @@ import PageHero from '../components/PageHero.astro';
           <p>Te respondemos pronto a tu email.</p>
           <a href="/" class="btn btn--secondary">Volver al inicio</a>
         </div>
-
       </div>
     </section>
 
-    <!-- Press teaser -->
     <section class="section-padding">
       <div class="container container--narrow">
         <p class="eyebrow">PRENSA Y ALIANZAS</p>
         <p>
-          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa que quiere apoyarnos,
-          visita la página de <a href="/prensa">Prensa &amp; Aliados →</a>
+          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa y quieres apoyarnos,
+          escríbenos por el formulario, por email o por WhatsApp para coordinar la conversación.
         </p>
       </div>
     </section>
-
   </main>
   <Footer />
 </BaseLayout>
