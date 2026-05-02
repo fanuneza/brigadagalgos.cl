@@ -22,23 +22,10 @@ import PageHero from '../components/PageHero.astro';
     <section class="section-padding">
       <div class="container">
         <div class="donation-cards">
-          <div class="donation-card donation-card--mensual">
-            <span class="chip chip--recommended">Recomendado</span>
-            <p class="donation-card__heading">DONAR MENSUAL</p>
-            <p>Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y acogidas.</p>
-            <p>Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.</p>
-            <a
-              href={SITE.esponsor}
-              class="btn btn--primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Quiero donar en eSponsor ↗
-            </a>
-          </div>
-
           <div class="donation-card donation-card--transferencia" id="datos-transferencia">
+            <span class="chip chip--recommended">Recomendado</span>
             <p class="donation-card__heading">TRANSFERENCIA ÚNICA</p>
+            <p class="donation-card__subtitle">O transferencia recurrente, si lo prefieres.</p>
             <div class="bank-info">
               <button type="button" class="bank-info__row" data-copy-value="Fundación Brigada Galgos">
                 <span class="bank-info__label">Nombre</span>
@@ -60,17 +47,31 @@ import PageHero from '../components/PageHero.astro';
                 <span class="bank-info__label">Número de cuenta</span>
                 <span class="bank-info__value">1073480715</span>
               </button>
-              <button type="button" class="bank-info__row" data-copy-value="brigadagalgos@gmail.com">
+              <button type="button" class="bank-info__row" data-copy-value={SITE.email}>
                 <span class="bank-info__label">Email</span>
-                <span class="bank-info__value">brigadagalgos@gmail.com</span>
+                <span class="bank-info__value">{SITE.email}</span>
               </button>
             </div>
-            <button class="btn btn--ghost" id="copy-bank-data">
+            <button class="btn btn--secondary" id="copy-bank-data">
               Copiar datos
             </button>
             <p class="donation-card__info">
               Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una vez.
             </p>
+          </div>
+
+          <div class="donation-card donation-card--mensual">
+            <p class="donation-card__heading">DONAR MENSUAL</p>
+            <p>Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y acogidas.</p>
+            <p>Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.</p>
+            <a
+              href={SITE.esponsor}
+              class="btn btn--primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Quiero donar en eSponsor ↗
+            </a>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ RUT: 65.132.425-4
 Banco: Mercado Pago
 Tipo de cuenta: Cuenta Vista
 Número de cuenta: 1073480715
-Email: brigadagalgos@gmail.com`;
+Email: contacto@brigadagalgos.cl`;
 
 async function copyText(value: string, successMessage: string) {
   try {

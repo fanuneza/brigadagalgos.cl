@@ -1,23 +1,26 @@
 ---
-import { SITE } from '../config/site.ts';
+import { SITE } from "../config/site.ts";
 ---
 
 <section class="donation-banner">
   <div class="container donation-banner__grid">
     <div class="donation-banner__text">
       <h2>Tu aporte mantiene a los galgos seguros mientras esperan familia.</h2>
-      <p>Nos ayuda a cubrir comida, atención veterinaria, traslados e implementos para rescates y hogares temporales.</p>
+      <p>
+        Nos ayuda a cubrir comida, atención veterinaria, traslados e implementos
+        para rescates y hogares temporales.
+      </p>
     </div>
     <div class="donation-banner__cta">
-      <a
-        href={SITE.esponsor}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn--primary"
-      >Quiero donar</a>
+      <a href="/donar" class="btn btn--primary">Quiero donar</a>
       <p class="donation-banner__transfer">
-        También recibimos transferencia.
-        <a href="/donar#datos-transferencia">Ver datos &rarr;</a>
+        También puedes donar en <a
+          href="{SITE.esponsor}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          eSponsor ↗
+        </a>
       </p>
     </div>
   </div>

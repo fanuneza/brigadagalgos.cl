@@ -1,10 +1,9 @@
 ---
-import { SITE } from '../config/site.ts';
+import { SITE } from "../config/site.ts";
 ---
 
 <header class="navbar" data-navbar>
   <div class="navbar__inner container">
-
     <a href="/" class="navbar__brand" aria-label="Brigada Galgos — inicio">
       <img
         src="/images/brigada-galgos-mark.png"
@@ -21,16 +20,10 @@ import { SITE } from '../config/site.ts';
     <nav class="navbar__nav" aria-label="Navegación principal">
       <a href="/adoptar" class="navbar__link">Adoptar</a>
       <a href="/hogar-temporal" class="navbar__link">Hogar temporal</a>
-      <a href="/donar" class="navbar__link">Donar</a>
       <a href="/contacto" class="navbar__link">Contacto</a>
     </nav>
 
-    <a
-      href={SITE.esponsor}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn--primary navbar__cta"
-    >Quiero donar</a>
+    <a href="/donar" class="btn btn--primary navbar__cta">Quiero donar</a>
 
     <button
       class="navbar__hamburger"
@@ -43,16 +36,35 @@ import { SITE } from '../config/site.ts';
       <span class="hamburger__bar"></span>
       <span class="hamburger__bar"></span>
     </button>
-
   </div>
 
   <div class="navbar__backdrop" data-backdrop aria-hidden="true"></div>
 
   <div class="navbar__drawer" id="navbar-drawer" data-drawer aria-hidden="true">
     <button class="drawer__close" data-close aria-label="Cerrar menú">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <line
+          x1="18"
+          y1="6"
+          x2="6"
+          y2="18"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"></line>
+        <line
+          x1="6"
+          y1="6"
+          x2="18"
+          y2="18"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"></line>
       </svg>
     </button>
 
@@ -65,25 +77,58 @@ import { SITE } from '../config/site.ts';
 
     <hr class="drawer__separator" />
 
-    <a
-      href={SITE.esponsor}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn--primary drawer__cta"
-    >Quiero donar</a>
+    <a href="/donar" class="btn btn--primary drawer__cta">Quiero donar</a>
 
     <div class="drawer__social">
-      <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
-          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-          <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+      <a
+        href={SITE.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <rect
+            x="2"
+            y="2"
+            width="20"
+            height="20"
+            rx="5"
+            stroke="currentColor"
+            stroke-width="2"></rect>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"
+          ></circle>
+          <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"></circle>
         </svg>
       </a>
-      <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.66 1.438 5.168L2 22l4.962-1.418A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M8.5 9.5c.5 1 1.5 3 3.5 4s3-1 3-1-.5-1.5-1-1.5-1 .5-1 .5-2-1-3-3 .5-1 .5-1.5S9 8 8.5 9.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <a
+        href={SITE.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.66 1.438 5.168L2 22l4.962-1.418A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"></path>
+          <path
+            d="M8.5 9.5c.5 1 1.5 3 3.5 4s3-1 3-1-.5-1.5-1-1.5-1 .5-1 .5-2-1-3-3 .5-1 .5-1.5S9 8 8.5 9.5z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"></path>
         </svg>
       </a>
     </div>
@@ -91,5 +136,5 @@ import { SITE } from '../config/site.ts';
 </header>
 
 <script>
-  import '../scripts/navbar';
+  import "../scripts/navbar";
 </script>

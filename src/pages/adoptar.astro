@@ -1,13 +1,13 @@
 ---
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { SITE } from '../config/site.ts';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import PageHero from '../components/PageHero.astro';
-import SharedPhotoGallery from '../components/SharedPhotoGallery.astro';
-import SharedGalleryLightbox from '../components/SharedGalleryLightbox.astro';
+import fs from "node:fs/promises";
+import path from "node:path";
+import { SITE } from "../config/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
+import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 
 interface AdoptionPicture {
   source: string;
@@ -19,14 +19,19 @@ interface AdoptionPicture {
 interface AdoptionDog {
   id: string;
   name: string;
-  sex: 'Macho' | 'Hembra';
+  sex: "Macho" | "Hembra";
   age: string;
   weight: string;
   details: string;
   pictures: AdoptionPicture[];
 }
 
-const adoptionFeedPath = path.join(process.cwd(), 'public', 'casos', 'adopcion.json');
+const adoptionFeedPath = path.join(
+  process.cwd(),
+  "public",
+  "casos",
+  "adopcion.json",
+);
 function shuffle<T>(items: T[]) {
   const copy = [...items];
   for (let index = copy.length - 1; index > 0; index -= 1) {
@@ -36,10 +41,12 @@ function shuffle<T>(items: T[]) {
   return copy;
 }
 
-const dogs = shuffle(JSON.parse(await fs.readFile(adoptionFeedPath, 'utf8')) as AdoptionDog[]);
+const dogs = shuffle(
+  JSON.parse(await fs.readFile(adoptionFeedPath, "utf8")) as AdoptionDog[],
+);
 
 function getAgeType(age: string) {
-  return /cachor/i.test(age) ? 'cachorro' : 'adulto';
+  return /cachor/i.test(age) ? "cachorro" : "adulto";
 }
 ---
 
@@ -53,9 +60,6 @@ function getAgeType(age: string) {
       eyebrow="ADOPTA"
       h1="Los galgos que hoy esperan familia."
       lead="Los conocemos de cerca y te acompañamos en todo el proceso, desde tu primer mensaje hasta los primeros días en casa."
-      ctaText="Ver proceso ↓"
-      ctaHref="#proceso"
-      ctaVariant="ghost"
     />
 
     <section class="section-padding">
@@ -63,60 +67,94 @@ function getAgeType(age: string) {
         <div class="adoption-intro">
           <p class="eyebrow">EN ADOPCIÓN</p>
           <p class="adoption-intro__lead">
-            Cada galgo llega con una historia y con un ritmo propio. Aquí te mostramos a quienes ya están listos para conocerte.
+            Cada galgo llega con una historia y con un ritmo propio. Aquí te
+            mostramos a quienes ya están listos para conocerte.
           </p>
         </div>
 
         <div class="filter-chips" role="group" aria-label="Filtrar galgos">
-          <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>
-          <button class="chip-btn" data-filter="Macho" aria-pressed="false">Macho</button>
-          <button class="chip-btn" data-filter="Hembra" aria-pressed="false">Hembra</button>
-          <button class="chip-btn" data-filter="adulto" aria-pressed="false">Adultos</button>
-          <button class="chip-btn" data-filter="cachorro" aria-pressed="false">Cachorros</button>
+          <button
+            class="chip-btn chip-btn--active"
+            data-filter="all"
+            aria-pressed="true">Todos</button
+          >
+          <button class="chip-btn" data-filter="Macho" aria-pressed="false"
+            >Macho</button
+          >
+          <button class="chip-btn" data-filter="Hembra" aria-pressed="false"
+            >Hembra</button
+          >
+          <button class="chip-btn" data-filter="adulto" aria-pressed="false"
+            >Adultos</button
+          >
+          <button class="chip-btn" data-filter="cachorro" aria-pressed="false"
+            >Cachorros</button
+          >
         </div>
 
         <p class="dog-grid__count" aria-live="polite">
-          <span data-count>{dogs.length}</span> <span data-count-label>{dogs.length === 1 ? 'galgo disponible' : 'galgos disponibles'}</span>
+          <span data-count>{dogs.length}</span>
+          <span data-count-label
+            >{
+              dogs.length === 1 ? "galgo disponible" : "galgos disponibles"
+            }</span
+          >
         </p>
 
         <div class="dog-grid" data-dog-grid>
-          {dogs.map((dog) => {
-            const waHref = `${SITE.whatsapp}?text=${encodeURIComponent(`Hola, me interesa adoptar a ${dog.name}`)}`;
-            const ageType = getAgeType(dog.age);
+          {
+            dogs.map((dog) => {
+              const waHref = `${SITE.whatsapp}?text=${encodeURIComponent(`Hola, me interesa adoptar a ${dog.name}`)}`;
+              const ageType = getAgeType(dog.age);
 
-            return (
-              <article class="story-card dog-card adoption-card" data-adoption-card data-sex={dog.sex} data-age-type={ageType}>
-                <SharedPhotoGallery name={dog.name} photos={dog.pictures} />
+              return (
+                <article
+                  class="story-card dog-card adoption-card"
+                  data-adoption-card
+                  data-sex={dog.sex}
+                  data-age-type={ageType}
+                >
+                  <SharedPhotoGallery name={dog.name} photos={dog.pictures} />
 
-                <div class="story-card__body dog-card__body">
-                  <div class="dog-card__header">
-                    <h2 class="story-card__name dog-card__name">{dog.name}</h2>
-                    <div class="dog-card__chips">
-                      <span class="chip chip--sex">{dog.sex}</span>
-                      <span class="chip chip--age">{dog.age}</span>
-                      <span class="chip chip--weight">{dog.weight}</span>
+                  <div class="story-card__body dog-card__body">
+                    <div class="dog-card__header">
+                      <h2 class="story-card__name dog-card__name">
+                        {dog.name}
+                      </h2>
+                      <div class="dog-card__chips">
+                        <span class="chip chip--sex">{dog.sex}</span>
+                        <span class="chip chip--age">{dog.age}</span>
+                        <span class="chip chip--weight">{dog.weight}</span>
+                      </div>
                     </div>
+                    <p class="dog-card__details">{dog.details}</p>
+                    <p class="dog-card__support">
+                      Seguimos acompañándote también después de la adopción,
+                      para que el proceso sea bueno para tu familia y para el
+                      galgo.
+                    </p>
+                    <a
+                      href={waHref}
+                      class="btn btn--primary dog-card__cta"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Me interesa {dog.name}
+                    </a>
                   </div>
-                  <p class="dog-card__details">{dog.details}</p>
-                  <p class="dog-card__support">Seguimos acompañándote también después de la adopción, para que el proceso sea bueno para tu familia y para el galgo.</p>
-                  <a
-                    href={waHref}
-                    class="btn btn--primary dog-card__cta"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Me interesa {dog.name}
-                  </a>
-                </div>
-              </article>
-            );
-          })}
+                </article>
+              );
+            })
+          }
         </div>
 
         <div class="dog-grid__empty" hidden aria-hidden="true">
-          <p>Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando llegue un match para tu hogar.</p>
+          <p>
+            Por ahora no hay galgos publicados en adopción. Escríbenos igual y
+            te avisamos cuando llegue un match para tu hogar.
+          </p>
           <a
-            href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera adoptar un galgo')}`}
+            href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera adoptar un galgo")}`}
             class="btn btn--primary"
             target="_blank"
             rel="noopener noreferrer"
@@ -132,14 +170,29 @@ function getAgeType(age: string) {
         <p class="eyebrow">PROCESO</p>
         <h2>Te guiamos paso a paso.</h2>
         <p class="adoption-process__lead">
-          “Adoptar es un compromiso para toda la vida”, y por eso buscamos el mejor match para cada galgo y cada hogar.
+          “Adoptar es un compromiso para toda la vida”, y por eso buscamos el
+          mejor match para cada galgo y cada hogar.
         </p>
         <ol class="adoption-process__list">
-          <li>Nos cuentas de tu hogar y tu rutina por formulario o WhatsApp.</li>
-          <li>El equipo de adopciones te contacta y hacemos una entrevista para conocer mejor tu rutina y resolver dudas.</li>
-          <li>Buscamos el galgo que mejor encaja contigo, según estilo de vida y perfil familiar.</li>
-          <li>Coordinamos un encuentro para conocerse sin presión y, si hay match, puede venir un período de prueba de dos semanas.</li>
-          <li>Si todo funciona bien, firmamos el contrato y seguimos presentes también después de la adopción.</li>
+          <li>
+            Nos cuentas de tu hogar y tu rutina por formulario o WhatsApp.
+          </li>
+          <li>
+            El equipo de adopciones te contacta y hacemos una entrevista para
+            conocer mejor tu rutina y resolver dudas.
+          </li>
+          <li>
+            Buscamos el galgo que mejor encaja contigo, según estilo de vida y
+            perfil familiar.
+          </li>
+          <li>
+            Coordinamos un encuentro para conocerse sin presión y, si hay match,
+            puede venir un período de prueba de dos semanas.
+          </li>
+          <li>
+            Si todo funciona bien, firmamos el contrato y seguimos presentes
+            también después de la adopción.
+          </li>
         </ol>
       </div>
     </section>
@@ -147,9 +200,12 @@ function getAgeType(age: string) {
     <section class="section-padding tail-cta">
       <div class="container container--narrow">
         <h3>¿Quieres hablarlo antes de postular?</h3>
-        <p>Escríbenos sin apuro. Si todavía no sabes qué galgo encaja mejor con tu casa, lo conversamos contigo.</p>
+        <p>
+          Escríbenos sin apuro. Si todavía no sabes qué galgo encaja mejor con
+          tu casa, lo conversamos contigo.
+        </p>
         <a
-          href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera saber más sobre adopción')}`}
+          href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera saber más sobre adopción")}`}
           class="btn btn--primary"
           target="_blank"
           rel="noopener noreferrer"
@@ -165,6 +221,6 @@ function getAgeType(age: string) {
 <SharedGalleryLightbox ariaLabel="Galería de adopción" />
 
 <script>
-  import '../scripts/filter-chips';
-  import '../scripts/shared-gallery';
+  import "../scripts/filter-chips";
+  import "../scripts/shared-gallery";
 </script>

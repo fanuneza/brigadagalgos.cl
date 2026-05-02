@@ -46,6 +46,12 @@
   margin: 0;
 }
 
+.donation-card__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: calc(-1 * var(--space-2)) 0 0;
+}
+
 .donation-card__info {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
