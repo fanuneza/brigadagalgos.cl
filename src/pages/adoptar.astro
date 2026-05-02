@@ -3,9 +3,9 @@ import '../styles/components/page-hero.css';
 import '../styles/components/stories.css';
 import '../styles/components/dog-card.css';
 import '../styles/components/filter-chips.css';
-import fs from "node:fs/promises";
-import path from "node:path";
-import { getImage, type ImageMetadata } from "astro:assets";
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import type { SharedGalleryPhoto } from '../scripts/shared-gallery';
 import { SITE } from "../config/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
@@ -14,69 +14,38 @@ import PageHero from "../components/PageHero.astro";
 import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 
-interface AdoptionPicture {
-  source: string;
-  card_mobile: string;
-  card_desktop: string;
-  lightbox: string;
-}
-
-interface AdoptionDog {
-  id: string;
-  name: string;
-  sex: "Macho" | "Hembra";
-  age: string;
-  weight: string;
-  details: string;
-  pictures: AdoptionPicture[];
-}
-
-const adoptionFeedPath = path.join(
-  process.cwd(),
-  "public",
-  "casos",
-  "adopcion.json",
-);
 function shuffle<T>(items: T[]) {
   const copy = [...items];
-  for (let index = copy.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
 }
 
-const imageGlob = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/casos/adopcion/**/*.{webp,jpg,jpeg,png}',
-);
-
-async function processPath(urlPath: string, width: number): Promise<string> {
-  const key = `/src/assets${urlPath}`;
-  const mod = await imageGlob[key]?.();
-  if (!mod?.default) return urlPath;
-  const result = await getImage({ src: mod.default, format: 'avif', width });
-  return result.src;
+function getAgeType(age: string) {
+  return /cachor/i.test(age) ? 'cachorro' : 'adulto';
 }
+
+const rawDogs = await getCollection('adoption-dogs');
 
 const dogs = await Promise.all(
-  shuffle(
-    JSON.parse(await fs.readFile(adoptionFeedPath, "utf8")) as AdoptionDog[],
-  ).map(async (dog) => ({
-    ...dog,
+  shuffle(rawDogs).map(async (entry) => ({
+    id: entry.id,
+    name: entry.data.name,
+    sex: entry.data.sex,
+    age: entry.data.age,
+    weight: entry.data.weight,
+    details: entry.data.details,
     pictures: await Promise.all(
-      dog.pictures.map(async (pic) => ({
-        ...pic,
-        card_mobile:  await processPath(pic.card_mobile,  400),
-        card_desktop: await processPath(pic.card_desktop, 700),
-        lightbox:     await processPath(pic.lightbox,    1200),
-      })),
+      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => ({
+        card_mobile:  (await getImage({ src: img, width: 400,  format: 'avif' })).src,
+        card_desktop: (await getImage({ src: img, width: 700,  format: 'avif' })).src,
+        lightbox:     (await getImage({ src: img, width: 1200, format: 'avif' })).src,
+      }))
     ),
-  })),
+  }))
 );
-
-function getAgeType(age: string) {
-  return /cachor/i.test(age) ? "cachorro" : "adulto";
-}
 ---
 
 <BaseLayout
