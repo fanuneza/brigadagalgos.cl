@@ -3,14 +3,17 @@ interface Props {
   icon: string;
   title: string;
   body: string;
+  tone?: 'primary' | 'secondary' | 'warm';
   pendiente?: string;
 }
 
-const { icon, title, body, pendiente } = Astro.props;
+const { icon, title, body, tone = 'primary', pendiente } = Astro.props;
 ---
 
 <article class="req-card">
-  <span class="req-card__icon" aria-hidden="true">{icon}</span>
+  <span class={`req-card__icon req-card__icon--${tone}`} aria-hidden="true">
+    <img src={icon} alt="" aria-hidden="true" class="req-card__icon-image" />
+  </span>
   <p class="req-card__title">{title}</p>
   <p class="req-card__body">
     {body}

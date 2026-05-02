@@ -64,6 +64,12 @@
 .card__icon--secondary { background: var(--color-secondary); }
 .card__icon--warm      { background: var(--color-accent-warm); }
 
+.card__icon-image {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .card__title {
   font-family: var(--font-display);
   font-size: var(--font-size-lg);

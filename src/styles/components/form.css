@@ -185,7 +185,31 @@
 }
 
 .req-card__icon {
-  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.req-card__icon--primary {
+  background: var(--color-primary);
+}
+
+.req-card__icon--secondary {
+  background: var(--color-secondary);
+}
+
+.req-card__icon--warm {
+  background: var(--color-accent-warm);
+}
+
+.req-card__icon-image {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .req-card__title {

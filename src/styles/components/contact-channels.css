@@ -18,8 +18,31 @@
 }
 
 .channel-card__icon {
-  font-size: 2rem;
-  line-height: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.channel-card__icon--warm {
+  background: var(--color-accent-warm);
+}
+
+.channel-card__icon--green {
+  background: var(--color-rainbow-green);
+}
+
+.channel-card__icon--purple {
+  background: var(--color-rainbow-purple);
+}
+
+.channel-card__icon-image {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .channel-card__title {
@@ -56,4 +79,14 @@
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-top: auto;
+}
+
+.channel-card__social-link {
+  gap: var(--space-2);
+}
+
+.channel-card__social-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }

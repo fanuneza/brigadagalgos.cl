@@ -47,6 +47,7 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   min-height: var(--btn-min-height);
   padding: var(--btn-padding-y) var(--btn-padding-x);
   border-radius: var(--btn-radius);
@@ -60,6 +61,36 @@ h1, h2, h3 {
               box-shadow var(--duration-fast) var(--ease-out);
 }
 .btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+.btn__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.btn__icon img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.card__icon,
+.req-card__icon,
+.channel-card__icon {
+  --icon-filter: none;
+}
+
+.card__icon--secondary,
+.req-card__icon--secondary,
+.channel-card__icon--green,
+.channel-card__icon--purple {
+  --icon-filter: brightness(0) invert(1);
+}
+
+.card__icon-image,
+.req-card__icon-image,
+.channel-card__icon-image {
+  filter: var(--icon-filter);
+}
 
 .btn--primary {
   background: var(--btn-primary-bg);
