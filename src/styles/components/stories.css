@@ -353,3 +353,9 @@
     animation: none;
   }
 }
+
+.stories__ver-mas-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
