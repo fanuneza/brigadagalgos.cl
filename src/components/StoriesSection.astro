@@ -1,5 +1,20 @@
 ---
+import SharedPhotoGallery from './SharedPhotoGallery.astro';
 import SharedGalleryLightbox from './SharedGalleryLightbox.astro';
+import type { SharedGalleryPhoto } from '../scripts/shared-gallery';
+
+interface StoryDog {
+  id: string;
+  name: string;
+  story: string;
+  photos: SharedGalleryPhoto[];
+}
+
+interface Props {
+  dogs: StoryDog[];
+}
+
+const { dogs } = Astro.props;
 ---
 
 <section class="section-padding stories" data-stories-root>
@@ -7,143 +22,60 @@ import SharedGalleryLightbox from './SharedGalleryLightbox.astro';
     <p class="stories__eyebrow">Historias</p>
     <h2 class="stories__heading">Nuestros casos de éxito.</h2>
 
-    <div class="stories__grid" data-stories-skeleton aria-hidden="true">
-      <article class="story-card story-card--skeleton">
-        <div class="story-card__photo"><div class="story-card__viewport"></div></div>
-        <div class="story-card__body">
-          <div class="skeleton-line skeleton-line--name"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line skeleton-line--short"></div>
-        </div>
-      </article>
-      <article class="story-card story-card--skeleton">
-        <div class="story-card__photo"><div class="story-card__viewport"></div></div>
-        <div class="story-card__body">
-          <div class="skeleton-line skeleton-line--name"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line skeleton-line--short"></div>
-        </div>
-      </article>
-      <article class="story-card story-card--skeleton">
-        <div class="story-card__photo"><div class="story-card__viewport"></div></div>
-        <div class="story-card__body">
-          <div class="skeleton-line skeleton-line--name"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line skeleton-line--short"></div>
-        </div>
-      </article>
+    <div class="stories__grid" data-stories-list>
+      {dogs.map((dog) => (
+        <article class="story-card" data-story-card>
+          <SharedPhotoGallery name={dog.name} photos={dog.photos} />
+          <div class="story-card__body">
+            <p class="story-card__name">{dog.name}</p>
+            <p class="story-card__quote">{dog.story}</p>
+          </div>
+        </article>
+      ))}
     </div>
 
-    <p class="stories__status" data-stories-status hidden></p>
-
-    <div class="stories__grid" data-stories-list hidden></div>
+    {dogs.length > 6 && (
+      <div class="stories__ver-mas-wrap">
+        <button type="button" class="btn btn--secondary" data-stories-ver-mas>
+          Ver más historias
+        </button>
+      </div>
+    )}
   </div>
 </section>
 
 <SharedGalleryLightbox ariaLabel="Galería de historias" />
 
 <script>
-  import { buildSharedGalleryMarkup, initSharedGalleries, initSharedGalleryLightbox } from '../scripts/shared-gallery';
+  import { initSharedGalleries, initSharedGalleryLightbox } from '../scripts/shared-gallery';
 
-  const root = document.querySelector('[data-stories-root]');
-  const list = root?.querySelector('[data-stories-list]');
-  const status = root?.querySelector('[data-stories-status]');
-  const skeleton = root?.querySelector('[data-stories-skeleton]');
+  const PAGE_SIZE = 6;
+  const grid = document.querySelector<HTMLElement>('[data-stories-list]');
+  const button = document.querySelector<HTMLButtonElement>('[data-stories-ver-mas]');
 
-  const STORY_COUNT = 6;
-  const VALID_STATES = new Set(['Adoptado', 'Adoptada']);
-
-  function shuffle(items) {
-    const copy = [...items];
-    for (let index = copy.length - 1; index > 0; index -= 1) {
-      const randomIndex = Math.floor(Math.random() * (index + 1));
-      [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+  if (grid) {
+    const cards = [...grid.querySelectorAll<HTMLElement>('[data-story-card]')];
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
     }
-    return copy;
-  }
+    cards.forEach(card => grid.appendChild(card));
 
-  function normalizeCase(entry) {
-    if (!entry || !VALID_STATES.has(entry.estado)) {
-      return null;
+    let shown = Math.min(PAGE_SIZE, cards.length);
+
+    function applyVisibility() {
+      cards.forEach((card, i) => { card.hidden = i >= shown; });
+      if (button) button.hidden = shown >= cards.length;
     }
 
-    const story = typeof entry.historia_breve_site === 'string' ? entry.historia_breve_site.trim() : '';
-    const photos = Array.isArray(entry.site_photos)
-      ? entry.site_photos.filter((photo) => photo?.card_mobile && photo?.card_desktop && photo?.lightbox)
-      : [];
+    button?.addEventListener('click', () => {
+      shown = Math.min(shown + PAGE_SIZE, cards.length);
+      applyVisibility();
+    });
 
-    if (!entry.nombre_publico || !story || photos.length === 0) {
-      return null;
-    }
-
-    return {
-      id: entry.id,
-      name: entry.nombre_publico,
-      story,
-      photos,
-    };
+    applyVisibility();
+    initSharedGalleries(grid);
   }
 
-  function escapeHtml(value) {
-    return value
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;');
-  }
-
-  function createCard(story) {
-    const card = document.createElement('article');
-    card.className = 'story-card';
-    card.innerHTML = `
-      ${buildSharedGalleryMarkup({ name: story.name, photos: story.photos })}
-      <div class="story-card__body">
-        <p class="story-card__name">${escapeHtml(story.name)}</p>
-        <p class="story-card__quote">${escapeHtml(story.story)}</p>
-      </div>
-    `;
-    return card;
-  }
-
-  async function loadStories() {
-    if (!root || !list || !status) {
-      return;
-    }
-
-    try {
-      const response = await fetch('/casos/exito.json', { headers: { accept: 'application/json' } });
-      if (!response.ok) {
-        throw new Error(`Unexpected status ${response.status}`);
-      }
-
-      const payload = await response.json();
-      const stories = Array.isArray(payload)
-        ? shuffle(payload.map(normalizeCase).filter(Boolean)).slice(0, STORY_COUNT)
-        : [];
-
-      if (stories.length === 0) {
-        throw new Error('No valid stories available');
-      }
-
-      const fragment = document.createDocumentFragment();
-      stories.forEach((story) => {
-        fragment.appendChild(createCard(story));
-      });
-
-      list.replaceChildren(fragment);
-      initSharedGalleryLightbox();
-      initSharedGalleries(list);
-      skeleton.hidden = true;
-      list.hidden = false;
-    } catch (error) {
-      console.error('Failed to load homepage stories', error);
-      skeleton.hidden = true;
-      status.textContent = 'No pudimos cargar las historias en este momento.';
-      status.hidden = false;
-    }
-  }
-
-  loadStories();
+  initSharedGalleryLightbox();
 </script>
