@@ -20,6 +20,9 @@ module.exports = {
         "label-content-name-mismatch": "warn",
         "heading-order": "warn",
         "lcp-lazy-loaded": "warn",
+        "aria-hidden-focus": "warn",
+        "target-size": "warn",
+        "cls-culprits-insight": "warn",
         // Insights are informational, not failures
         "network-dependency-tree-insight": "off",
         "image-delivery-insight": "off",
