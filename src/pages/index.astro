@@ -15,6 +15,9 @@ import ProcessStepper from '../components/ProcessStepper.astro';
 import StoriesSection from '../components/StoriesSection.astro';
 import DonationBanner from '../components/DonationBanner.astro';
 import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import type { SharedGalleryPhoto } from '../scripts/shared-gallery';
 
 const rescueSteps = [
   { label: 'Recibimos el aviso', subLabel: 'Los casos suelen llegar por WhatsApp o redes sociales.', colorClass: 'primary' },
@@ -23,6 +26,23 @@ const rescueSteps = [
   { label: 'Acogida temporal', subLabel: 'Una familia lo recibe mientras se estabiliza y conocemos mejor su ritmo.', colorClass: 'green' },
   { label: 'Match y adopción responsable', subLabel: 'Buscamos la familia correcta y acompañamos también después.', colorClass: 'purple' },
 ];
+
+const rawStoryDogs = await getCollection('success-dogs');
+
+const storyDogs = await Promise.all(
+  rawStoryDogs.map(async (entry) => ({
+    id: entry.id,
+    name: entry.data.name,
+    story: entry.data.story,
+    photos: await Promise.all(
+      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => ({
+        card_mobile:  (await getImage({ src: img, width: 400,  format: 'avif' })).src,
+        card_desktop: (await getImage({ src: img, width: 700,  format: 'avif' })).src,
+        lightbox:     (await getImage({ src: img, width: 1200, format: 'avif' })).src,
+      }))
+    ),
+  }))
+);
 ---
 
 <BaseLayout
@@ -49,7 +69,7 @@ const rescueSteps = [
     </section>
     <HelpCards />
     <ProcessStepper steps={rescueSteps} />
-    <StoriesSection />
+    <StoriesSection dogs={storyDogs} />
     <DonationBanner />
   </main>
   <Footer />
