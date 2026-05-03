@@ -30,10 +30,6 @@
   margin-top: var(--space-6);
 }
 
-.stories__grid > .story-card:nth-child(n + 4) {
-  display: none;
-}
-
 .story-card {
   display: flex;
   flex-direction: column;
@@ -270,9 +266,6 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .stories__grid > .story-card:nth-child(n + 4) {
-    display: flex;
-  }
 }
 
 @media (max-width: 767px) {
@@ -357,5 +350,5 @@
 .stories__ver-mas-wrap {
   display: flex;
   justify-content: center;
-  margin-top: var(--space-lg);
+  margin-top: var(--space-8);
 }

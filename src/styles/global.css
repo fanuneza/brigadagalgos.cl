@@ -1,6 +1,5 @@
 @import "./tokens.css";
 @import "./components/navbar.css";
-@import "./components/hero.css";
 @import "./components/footer.css";
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -120,26 +119,6 @@ h1, h2, h3 {
   letter-spacing: var(--tracking-eyebrow);
   color: var(--color-primary-700);
   margin: 0;
-}
-
-.pendiente {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  background: var(--color-surface-2);
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
-}
-
-.photo-placeholder {
-  background: var(--color-surface-2);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
 }
 
 a:not([class]) {

@@ -12,6 +12,7 @@
     "prepare:casos": "node scripts/prepare-casos-site.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.9"
   }
 }

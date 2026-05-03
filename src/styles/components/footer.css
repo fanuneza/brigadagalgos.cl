@@ -156,8 +156,4 @@
   --btn-secondary-bg-hover: rgba(255,255,255,0.1);
 }
 
-/* pendiente on dark bg */
-.footer .pendiente {
-  background: rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.5);
-}
+
