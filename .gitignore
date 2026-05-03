@@ -155,3 +155,13 @@ iterate-*.png
 .playwright-mcp/
 
 design-system/
+
+# Test artifacts
+.cache/
+.lighthouseci/
+lhci-reports/
+test-results/
+playwright-report/
+
+# Local dev documentation
+PLAYWRIGHT_VISUAL_CAPTURE.md

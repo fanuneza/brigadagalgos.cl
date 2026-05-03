@@ -3,7 +3,9 @@
 }
 
 @media (min-width: 1024px) {
-  .hero__text h1 { font-size: var(--font-size-4xl); }
+  .hero__text h1 {
+    font-size: var(--font-size-4xl);
+  }
 }
 
 .hero__grid {
@@ -51,8 +53,7 @@
   }
 
   .hero__ctas {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
   }
 
   .hero__ctas .btn--primary,
@@ -66,5 +67,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__img { transition: none; }
+  .hero__img {
+    transition: none;
+  }
 }

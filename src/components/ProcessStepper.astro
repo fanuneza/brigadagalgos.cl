@@ -11,11 +11,7 @@ interface Props {
   heading?: string;
 }
 
-const {
-  steps,
-  eyebrow = 'EL PROCESO',
-  heading = 'Así rescatamos un galgo.',
-} = Astro.props;
+const { steps, eyebrow = "EL PROCESO", heading = "Así rescatamos un galgo." } = Astro.props;
 ---
 
 <section class="section-padding stepper-section">
@@ -23,20 +19,19 @@ const {
     <p class="stepper__eyebrow">{eyebrow}</p>
     <h2 class="stepper__heading">{heading}</h2>
     <ol class="stepper" role="list">
-      {steps.map((step, i) => (
-        <li class="step">
-          <div
-            class={`step__badge step__badge--${step.colorClass}`}
-            aria-hidden="true"
-          >
-            {i + 1}
-          </div>
-          <div class="step__body">
-            <p class="step__label">{step.label}</p>
-            <p class="step__sub">{step.subLabel}</p>
-          </div>
-        </li>
-      ))}
+      {
+        steps.map((step, i) => (
+          <li class="step">
+            <div class={`step__badge step__badge--${step.colorClass}`} aria-hidden="true">
+              {i + 1}
+            </div>
+            <div class="step__body">
+              <p class="step__label">{step.label}</p>
+              <p class="step__sub">{step.subLabel}</p>
+            </div>
+          </li>
+        ))
+      }
     </ol>
   </div>
 </section>

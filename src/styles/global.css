@@ -1,12 +1,22 @@
-@import "./tokens.css";
-@import "./components/navbar.css";
-@import "./components/footer.css";
+@import url("./tokens.css");
+@import url("./components/navbar.css");
+@import url("./components/footer.css");
 
-*, *::before, *::after { box-sizing: border-box; }
-[hidden] { display: none !important; }
-p { margin: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+p {
+  margin: 0;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
@@ -16,7 +26,9 @@ body {
   margin: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-display);
   text-transform: uppercase;
   line-height: var(--line-tight);
@@ -30,16 +42,22 @@ h1, h2, h3 {
   padding-inline: var(--gutter);
 }
 @media (min-width: 1024px) {
-  .container { padding-inline: var(--gutter-lg); }
+  .container {
+    padding-inline: var(--gutter-lg);
+  }
 }
 
-.container--narrow { max-width: var(--content-narrow); }
+.container--narrow {
+  max-width: var(--content-narrow);
+}
 
 .section-padding {
   padding-block: var(--space-8);
 }
 @media (min-width: 1024px) {
-  .section-padding { padding-block: var(--space-10); }
+  .section-padding {
+    padding-block: var(--space-10);
+  }
 }
 
 .btn {
@@ -56,10 +74,14 @@ h1, h2, h3 {
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: background var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
-.btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
 
 .btn__icon {
   display: inline-flex;
@@ -96,20 +118,26 @@ h1, h2, h3 {
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
-.btn--primary:hover { background: var(--btn-primary-bg-hover); }
+.btn--primary:hover {
+  background: var(--btn-primary-bg-hover);
+}
 
 .btn--secondary {
   background: var(--btn-secondary-bg);
   color: var(--btn-secondary-fg);
   border-color: var(--btn-secondary-border);
 }
-.btn--secondary:hover { background: var(--btn-secondary-bg-hover); }
+.btn--secondary:hover {
+  background: var(--btn-secondary-bg-hover);
+}
 
 .btn--ghost {
   background: var(--btn-ghost-bg);
   color: var(--btn-ghost-fg);
 }
-.btn--ghost:hover { background: var(--btn-ghost-bg-hover); }
+.btn--ghost:hover {
+  background: var(--btn-ghost-bg-hover);
+}
 
 .eyebrow {
   font-family: var(--font-body);

@@ -4,7 +4,9 @@
 }
 
 @media (min-width: 1024px) {
-  .donation-cards { grid-template-columns: repeat(2, 1fr); }
+  .donation-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .donation-card {
@@ -149,7 +151,9 @@
 }
 
 @media (min-width: 1024px) {
-  .trust-stats__grid { grid-template-columns: repeat(3, 1fr); }
+  .trust-stats__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .stat-card {
@@ -174,20 +178,20 @@
 
 .stat-card__value--cyan {
   color: var(--color-primary);
-  -webkit-mask-image: url('/icons/plus.svg');
-  mask-image: url('/icons/plus.svg');
+  -webkit-mask-image: url("/icons/plus.svg");
+  mask-image: url("/icons/plus.svg");
 }
 
 .stat-card__value--magenta {
   color: var(--color-secondary);
-  -webkit-mask-image: url('/icons/check.svg');
-  mask-image: url('/icons/check.svg');
+  -webkit-mask-image: url("/icons/check.svg");
+  mask-image: url("/icons/check.svg");
 }
 
 .stat-card__value--orange {
   color: var(--color-accent-warm);
-  -webkit-mask-image: url('/icons/heart.svg');
-  mask-image: url('/icons/heart.svg');
+  -webkit-mask-image: url("/icons/heart.svg");
+  mask-image: url("/icons/heart.svg");
 }
 
 .stat-card__label {

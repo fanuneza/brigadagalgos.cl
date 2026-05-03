@@ -1,93 +1,143 @@
-# Brigada Galgos — Sitio web
+# Brigada Galgos
 
-Sitio estático construido con **Astro 6**. Target: PageSpeed Insights ≥ 95 en mobile y desktop.
+Sitio estático desarrollado con Astro para Brigada Galgos, organización dedicada al rescate, rehabilitación y adopción de galgos en Chile.
 
-## Desarrollo
+## Stack
 
-```bash
-npm install
-npm run dev       # servidor local en http://localhost:4321
-npm run build     # build de producción en dist/
-npm run preview   # previsualizar el build
-```
+- `Astro 6` con output estático
+- `TypeScript`
+- `@astrojs/sitemap` para generación de sitemap
+- `astro:assets` con `sharp` para optimización de imágenes
+- `Playwright` + `@axe-core/playwright` para testing de accesibilidad
+- `@lhci/cli` para Lighthouse CI
 
-## Cómo agregar un galgo en adopción
+## Requisitos
 
-1. **Agrega las fotos** a `src/assets/casos/adopcion/[dog-id]/`
-   - Nombra los archivos en orden: `01.jpg`, `02.jpg`, etc.
-   - La primera imagen será la portada de la tarjeta.
-   - Astro genera automáticamente variantes optimizadas (mobile, desktop, lightbox) a partir de estos archivos.
+- `Node.js` >= 20
+- `npm`
 
-2. **Crea el archivo Markdown** en `src/content/adoption-dogs/[dog-id].md`:
+## Comandos
 
-   ```markdown
-   ---
-   name: Nombre del galgo
-   sex: Hembra        # o Macho
-   age: "3 años aprox."
-   weight: "22 kg"
-   details: "Historia breve del galgo (máx. ~210 caracteres)."
-   order: 7           # número entero para controlar el orden antes del shuffle
-   gallery:
-     - ../../assets/casos/adopcion/[dog-id]/01.jpg
-     - ../../assets/casos/adopcion/[dog-id]/02.jpg
-     - ../../assets/casos/adopcion/[dog-id]/03.jpg
-   ---
-   ```
+| Comando                   | Descripción                                           |
+| ------------------------- | ----------------------------------------------------- |
+| `npm install`             | Instala las dependencias del proyecto.                |
+| `npm run dev`             | Levanta el entorno local de desarrollo.               |
+| `npm run build`           | Genera la versión de producción en `dist/`.           |
+| `npm run preview`         | Sirve localmente la compilación de producción.        |
+| `npm run prepare:casos`   | Ejecuta el script de preparación de casos.            |
+| `npm run test:lighthouse` | Ejecuta Lighthouse CI sobre `dist/`.                  |
+| `npm run capture:local`   | Ejecuta capturas visuales con Playwright.             |
+| `npm run capture:home`    | Ejecuta capturas visuales de la página de inicio.     |
+| `npm run capture:adoptar` | Ejecuta capturas visuales de la página de adopción.   |
+| `npm run capture:donar`   | Ejecuta capturas visuales de la página de donaciones. |
 
-3. **Corre `npm run build`** y verifica que compile sin errores.
-
-### Para retirar un galgo
-
-Elimina o mueve su archivo `.md` de `src/content/adoption-dogs/`. Las imágenes en `src/assets/` pueden eliminarse después.
-
-## Cómo agregar una historia de éxito
-
-1. **Agrega las fotos** a `src/assets/casos/exito/[dog-id]/`
-   - Usa `.jpg` o `.png`. Nombra los archivos en orden: `01.jpg`, `02.jpg`, etc.
-   - Astro genera automáticamente variantes optimizadas a partir de estos archivos.
-
-2. **Crea el archivo Markdown** en `src/content/success-dogs/[dog-id].md`:
-
-   ```markdown
-   ---
-   name: Nombre del galgo
-   story: "Historia breve del caso adoptado (máx. ~240 caracteres)."
-   gallery:
-     - ../../assets/casos/exito/[dog-id]/01.jpg
-     - ../../assets/casos/exito/[dog-id]/02.jpg
-   ---
-   ```
-
-3. **Corre `npm run build`** y verifica que compile sin errores.
-
-### Para retirar una historia de éxito
-
-Elimina o mueve su archivo `.md` de `src/content/success-dogs/`. Las imágenes en `src/assets/` pueden eliminarse después.
-
-## Estructura relevante
+## Estructura del proyecto
 
 ```
 src/
-  assets/casos/adopcion/   # imágenes fuente de galgos en adopción
-  content/
-    adoption-dogs/         # un .md por galgo en adopción (fuente de verdad)
-    success-dogs/          # un .md por historia de éxito (fuente de verdad)
-    dogs/                  # registros legacy (sistema separado)
-  pages/
-    adoptar.astro          # página /adoptar — lee desde adoption-dogs collection
-  components/
-    SharedPhotoGallery.astro
+  pages/                    # Rutas del sitio
+    adoptar.astro           # Página de adopción
+    contacto.astro          # Página de contacto
+    donar.astro             # Página de donaciones
+    hogar-temporal.astro    # Página de hogar temporal
+    index.astro             # Página de inicio
+  layouts/                  # Layouts compartidos
+    BaseLayout.astro        # Layout base del sitio
+  components/               # Componentes reutilizables de interfaz
+    DonationBanner.astro
+    Footer.astro
+    HelpCards.astro
+    Hero.astro
+    MissionSection.astro
+    Navbar.astro
+    PageHero.astro
+    ProcessStepper.astro
+    RainbowDivider.astro
+    RequirementCard.astro
     SharedGalleryLightbox.astro
-
-public/
-  casos/
-    exito.json             # OBSOLETO — ver public/casos/exito-OBSOLETE.txt
-    adopcion.json          # OBSOLETO — ver public/casos/adopcion-OBSOLETE.txt
+    SharedPhotoGallery.astro
+    StoriesSection.astro
+  content/                  # Colecciones de contenido
+    adoption-dogs/*.md      # Perfiles de galgos en adopción
+    success-dogs/*.md       # Historias de éxito
+  content.config.ts         # Esquema de las colecciones de contenido
+  config/
+    site.ts                 # Configuración del sitio (contacto, redes)
+  scripts/                  # Scripts de cliente
+    copy-data.ts
+    filter-chips.ts
+    form.ts
+    navbar.ts
+    shared-gallery.ts
+  styles/                   # Estilos del sitio
+    global.css              # Punto de entrada de estilos
+    tokens.css              # Tokens de diseño
+    components/*.css        # Estilos por componente
+  assets/                   # Imágenes procesadas por Astro
+    images/                 # Imágenes generales
+    casos/                  # Fotos de casos de adopción y éxito
+public/                     # Archivos estáticos publicados sin procesamiento
 ```
 
-## Scripts
+## Modelo de contenido
 
-| Comando | Uso |
-|---------|-----|
-| `npm run prepare:casos` | Regenera `public/casos/exito.json` desde fuente externa. Requiere acceso al directorio de fotos en el escritorio del desarrollador. |
+### Galgos en adopción (`src/content/adoption-dogs/`)
+
+Cada perfil se define como un archivo Markdown con frontmatter:
+
+- `name` — Nombre del galgo
+- `sex` — Sexo (`Macho` | `Hembra`)
+- `age` — Edad (string descriptiva)
+- `weight` — Peso (string descriptiva)
+- `details` — Descripción del perfil
+- `order` — Orden de aparición (número, opcional)
+- `gallery` — Array de imágenes (procesadas por `astro:assets`)
+
+### Historias de éxito (`src/content/success-dogs/`)
+
+Cada historia se define como un archivo Markdown con frontmatter:
+
+- `name` — Nombre del galgo
+- `story` — Texto de la historia
+- `gallery` — Array de imágenes (procesadas por `astro:assets`)
+
+## Testing
+
+El proyecto incluye tres capas de testing automatizado:
+
+1. **Accesibilidad** — `tests/visual/a11y.spec.ts` escanea todas las páginas con axe-core buscando violaciones WCAG 2.1 AA.
+2. **Capturas visuales** — `tests/visual/capture.spec.ts` genera screenshots full-page en 4 viewports (1440, 1200, 810, 390) para validación visual.
+3. **Lighthouse CI** — `.lighthouserc.cjs` audita performance, accesibilidad, best practices y SEO contra umbrales definidos.
+
+### Requisitos para tests
+
+```powershell
+npm install
+npx playwright install chromium
+```
+
+### Ejecutar tests
+
+```powershell
+# Accesibilidad y capturas visuales (requiere build previo)
+npm run build
+npm run capture:local
+
+# Lighthouse CI (requiere build previo)
+npm run build
+npm run test:lighthouse
+```
+
+## Flujo de trabajo recomendado
+
+1. Instala dependencias con `npm install`.
+2. Trabaja localmente con `npm run dev`.
+3. Si cambias rutas, contenido o estilos, valida el resultado en navegador.
+4. Antes de cerrar tu cambio, ejecuta `npm run build`.
+5. Para cambios visibles, considera correr `npm run capture:local` y `npm run test:lighthouse`.
+
+## Notas
+
+- `dist/`, caches, logs, resultados de pruebas y otros archivos generados no forman parte de la fuente de verdad del proyecto.
+- No subas secretos ni archivos `.env` reales al repositorio.
+- El sitio está configurado en español.

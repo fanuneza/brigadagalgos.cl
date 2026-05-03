@@ -12,40 +12,40 @@
      --------------------------------------------------------------------- */
 
   /* Brand */
-  --color-primary:        #00BCD4;   /* cyan — sampled from logo neck */
-  --color-primary-700:    #0097A7;   /* hover / pressed */
-  --color-primary-100:    #CFF4F8;   /* tinted surface */
+  --color-primary: #00bcd4; /* cyan — sampled from logo neck */
+  --color-primary-700: #0097a7; /* hover / pressed */
+  --color-primary-100: #cff4f8; /* tinted surface */
 
-  --color-secondary:      #E91E8C;   /* magenta — sampled from logo cheek */
-  --color-secondary-700:  #B8156D;
-  --color-secondary-100:  #FCDCEC;
+  --color-secondary: #e91e8c; /* magenta — sampled from logo cheek */
+  --color-secondary-700: #b8156d;
+  --color-secondary-100: #fcdcec;
 
   /* Action / CTA */
-  --color-accent-warm:    #FFA726;   /* orange — sampled from logo jaw */
-  --color-accent-warm-700:#E08600;
-  --color-accent-warm-100:#FFE7C2;
+  --color-accent-warm: #ffa726; /* orange — sampled from logo jaw */
+  --color-accent-warm-700: #e08600;
+  --color-accent-warm-100: #ffe7c2;
 
   /* Tertiary palette (rainbow set — for illustration accents, dividers,
      dog-card chips, never for body text or large fills) */
-  --color-rainbow-red:    #E53935;
-  --color-rainbow-yellow: #FDD835;
-  --color-rainbow-green:  #43A047;
-  --color-rainbow-purple: #8E24AA;
+  --color-rainbow-red: #e53935;
+  --color-rainbow-yellow: #fdd835;
+  --color-rainbow-green: #43a047;
+  --color-rainbow-purple: #8e24aa;
 
   /* Neutrals */
-  --color-bg:             #FFFFFF;   /* page background */
-  --color-surface:        #F5F6F8;   /* card / section surface */
-  --color-surface-2:      #ECEEF2;   /* nested surface */
-  --color-border:         #DADDE3;   /* hairline borders */
-  --color-text:           #1F2328;   /* charcoal — NOT pure black */
-  --color-text-muted:     #5B636E;   /* secondary text */
-  --color-text-inverse:   #FFFFFF;   /* on dark / saturated bg */
+  --color-bg: #fff; /* page background */
+  --color-surface: #f5f6f8; /* card / section surface */
+  --color-surface-2: #eceef2; /* nested surface */
+  --color-border: #dadde3; /* hairline borders */
+  --color-text: #1f2328; /* charcoal — NOT pure black */
+  --color-text-muted: #5b636e; /* secondary text */
+  --color-text-inverse: #fff; /* on dark / saturated bg */
 
   /* Semantic */
-  --color-success:        #2E7D32;
-  --color-warning:        #ED8936;
-  --color-danger:         #C62828;
-  --color-info:           var(--color-primary);
+  --color-success: #2e7d32;
+  --color-warning: #ed8936;
+  --color-danger: #c62828;
+  --color-info: var(--color-primary);
 
   /* ---------------------------------------------------------------------
      TYPOGRAPHY
@@ -56,51 +56,51 @@
      --------------------------------------------------------------------- */
 
   --font-display: "Barlow Condensed", "Oswald", "Arial Narrow", sans-serif;
-  --font-body:    "Inter", "DM Sans", system-ui, -apple-system, sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-body: "Inter", "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", menlo, monospace;
 
   /* Scale — modular, ratio ~1.250 (major third) */
-  --font-size-xs:   0.75rem;   /* 12 — meta, chip text */
-  --font-size-sm:   0.875rem;  /* 14 — captions, helper */
-  --font-size-base: 1rem;      /* 16 — body */
-  --font-size-md:   1.125rem;  /* 18 — lead */
-  --font-size-lg:   1.375rem;  /* 22 — card titles */
-  --font-size-xl:   1.75rem;   /* 28 — section h3 */
-  --font-size-2xl:  2.25rem;   /* 36 — page h2 */
-  --font-size-3xl:  3rem;      /* 48 — hero h1 (mobile) */
-  --font-size-4xl:  4.25rem;   /* 68 — hero h1 (desktop) */
+  --font-size-xs: 0.75rem; /* 12 — meta, chip text */
+  --font-size-sm: 0.875rem; /* 14 — captions, helper */
+  --font-size-base: 1rem; /* 16 — body */
+  --font-size-md: 1.125rem; /* 18 — lead */
+  --font-size-lg: 1.375rem; /* 22 — card titles */
+  --font-size-xl: 1.75rem; /* 28 — section h3 */
+  --font-size-2xl: 2.25rem; /* 36 — page h2 */
+  --font-size-3xl: 3rem; /* 48 — hero h1 (mobile) */
+  --font-size-4xl: 4.25rem; /* 68 — hero h1 (desktop) */
 
   /* Line heights */
-  --line-tight:    1.05;       /* display */
-  --line-snug:     1.25;       /* headings */
-  --line-base:     1.55;       /* body */
-  --line-loose:    1.75;       /* long-form */
+  --line-tight: 1.05; /* display */
+  --line-snug: 1.25; /* headings */
+  --line-base: 1.55; /* body */
+  --line-loose: 1.75; /* long-form */
 
   /* Weights */
   --weight-regular: 400;
-  --weight-medium:  500;
-  --weight-semi:    600;
-  --weight-bold:    700;
-  --weight-black:   900;
+  --weight-medium: 500;
+  --weight-semi: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
 
   /* Letter spacing */
-  --tracking-tight:   -0.02em;
-  --tracking-normal:   0em;
-  --tracking-wide:     0.04em;
-  --tracking-eyebrow:  0.12em;  /* uppercase eyebrows */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-eyebrow: 0.12em; /* uppercase eyebrows */
 
   /* ---------------------------------------------------------------------
      SPACING — 8px base grid (with a 4px half-step for tight UI)
      --------------------------------------------------------------------- */
-  --space-1:   4px;
-  --space-2:   8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-5:  24px;
-  --space-6:  32px;
-  --space-7:  40px;
-  --space-8:  48px;
-  --space-9:  64px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
   --space-10: 80px;
   --space-12: 96px;
   --space-16: 128px;
@@ -108,10 +108,10 @@
   /* ---------------------------------------------------------------------
      LAYOUT
      --------------------------------------------------------------------- */
-  --content-max:  1200px;
-  --content-narrow: 760px;   /* long-form prose */
-  --gutter:       24px;
-  --gutter-lg:    48px;
+  --content-max: 1200px;
+  --content-narrow: 760px; /* long-form prose */
+  --gutter: 24px;
+  --gutter-lg: 48px;
 
   /* Breakpoints (informational — use in @media) */
   --bp-sm: 640px;
@@ -121,27 +121,24 @@
   /* ---------------------------------------------------------------------
      RADIUS
      --------------------------------------------------------------------- */
-  --radius-sm:   6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
-  --radius-xl:  28px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 9999px;
 
   /* ---------------------------------------------------------------------
      SHADOW
      --------------------------------------------------------------------- */
-  --shadow-sm:  0 1px 2px rgba(15, 23, 42, 0.06),
-                0 1px 1px rgba(15, 23, 42, 0.04);
-  --shadow-md:  0 4px 12px rgba(15, 23, 42, 0.08),
-                0 2px 4px rgba(15, 23, 42, 0.04);
-  --shadow-lg:  0 16px 32px rgba(15, 23, 42, 0.12),
-                0 4px 8px rgba(15, 23, 42, 0.06);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 16px 32px rgba(15, 23, 42, 0.12), 0 4px 8px rgba(15, 23, 42, 0.06);
   --shadow-focus: 0 0 0 3px rgba(0, 188, 212, 0.35);
 
   /* ---------------------------------------------------------------------
      MOTION
      --------------------------------------------------------------------- */
-  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --duration-fast: 150ms;
   --duration-base: 240ms;
@@ -150,11 +147,11 @@
   /* ---------------------------------------------------------------------
      Z-INDEX
      --------------------------------------------------------------------- */
-  --z-base:    1;
-  --z-sticky:  100;
+  --z-base: 1;
+  --z-sticky: 100;
   --z-overlay: 500;
-  --z-modal:   1000;
-  --z-toast:   1500;
+  --z-modal: 1000;
+  --z-toast: 1500;
 }
 
 /* =========================================================================
@@ -164,27 +161,27 @@
 
 :root {
   /* Primary — solid warm orange. The "do something" button. */
-  --btn-primary-bg:        var(--color-accent-warm);
-  --btn-primary-bg-hover:  var(--color-accent-warm-700);
-  --btn-primary-fg:        #1F2328;
-  --btn-primary-border:    transparent;
+  --btn-primary-bg: var(--color-accent-warm);
+  --btn-primary-bg-hover: var(--color-accent-warm-700);
+  --btn-primary-fg: #1f2328;
+  --btn-primary-border: transparent;
 
   /* Secondary — outlined cyan. The "learn more" button. */
-  --btn-secondary-bg:        transparent;
-  --btn-secondary-bg-hover:  var(--color-primary-100);
-  --btn-secondary-fg:        var(--color-primary-700);
-  --btn-secondary-border:    var(--color-primary);
+  --btn-secondary-bg: transparent;
+  --btn-secondary-bg-hover: var(--color-primary-100);
+  --btn-secondary-fg: var(--color-primary-700);
+  --btn-secondary-border: var(--color-primary);
 
   /* Ghost — text only. */
-  --btn-ghost-bg:        transparent;
-  --btn-ghost-bg-hover:  var(--color-surface);
-  --btn-ghost-fg:        var(--color-text);
-  --btn-ghost-border:    transparent;
+  --btn-ghost-bg: transparent;
+  --btn-ghost-bg-hover: var(--color-surface);
+  --btn-ghost-fg: var(--color-text);
+  --btn-ghost-border: transparent;
 
   /* Sizing */
   --btn-padding-y: 12px;
   --btn-padding-x: 24px;
-  --btn-radius:    var(--radius-full);
+  --btn-radius: var(--radius-full);
   --btn-font-weight: var(--weight-bold);
-  --btn-min-height: 48px;        /* a11y hit target */
+  --btn-min-height: 48px; /* a11y hit target */
 }

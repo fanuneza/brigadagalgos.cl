@@ -1,11 +1,11 @@
 ---
-import '../styles/components/page-hero.css';
-import '../styles/components/donar.css';
-import { SITE } from '../config/site.ts';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import PageHero from '../components/PageHero.astro';
+import "../styles/components/page-hero.css";
+import "../styles/components/donar.css";
+import { SITE } from "../config/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 ---
 
 <BaseLayout
@@ -54,24 +54,23 @@ import PageHero from '../components/PageHero.astro';
                 <span class="bank-info__value">{SITE.email}</span>
               </button>
             </div>
-            <button class="btn btn--secondary" id="copy-bank-data">
-              Copiar datos
-            </button>
+            <button class="btn btn--secondary" id="copy-bank-data"> Copiar datos </button>
             <p class="donation-card__info">
-              Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una vez.
+              Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una
+              vez.
             </p>
           </div>
 
           <div class="donation-card donation-card--mensual">
             <p class="donation-card__heading">DONAR MENSUAL</p>
-            <p>Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y acogidas.</p>
-            <p>Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.</p>
-            <a
-              href={SITE.esponsor}
-              class="btn btn--primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <p>
+              Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y
+              acogidas.
+            </p>
+            <p>
+              Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.
+            </p>
+            <a href={SITE.esponsor} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
               Quiero donar en eSponsor ↗
             </a>
           </div>
@@ -86,23 +85,33 @@ import PageHero from '../components/PageHero.astro';
         <div class="impact-cards">
           <div class="impact-card">
             <p class="impact-card__title">Atención veterinaria</p>
-            <p class="impact-card__desc">Consultas, tratamientos, controles y lo que cada caso necesite para recuperarse.</p>
+            <p class="impact-card__desc">
+              Consultas, tratamientos, controles y lo que cada caso necesite para recuperarse.
+            </p>
           </div>
           <div class="impact-card">
             <p class="impact-card__title">Alimento y abrigo</p>
-            <p class="impact-card__desc">Comida, camas, mantas e insumos para que cada galgo pase su recuperación seguro.</p>
+            <p class="impact-card__desc">
+              Comida, camas, mantas e insumos para que cada galgo pase su recuperación seguro.
+            </p>
           </div>
           <div class="impact-card">
             <p class="impact-card__title">Traslados seguros</p>
-            <p class="impact-card__desc">Movilización para rescates, controles veterinarios y cambios hacia hogares temporales o definitivos.</p>
+            <p class="impact-card__desc">
+              Movilización para rescates, controles veterinarios y cambios hacia hogares temporales o definitivos.
+            </p>
           </div>
           <div class="impact-card">
             <p class="impact-card__title">Implementos de rescate</p>
-            <p class="impact-card__desc">Correas, arneses, chapitas y apoyo material para hogares temporales cuando hace falta.</p>
+            <p class="impact-card__desc">
+              Correas, arneses, chapitas y apoyo material para hogares temporales cuando hace falta.
+            </p>
           </div>
           <div class="impact-card">
             <p class="impact-card__title">Difusión y adopción</p>
-            <p class="impact-card__desc">Publicación de casos, seguimiento y búsqueda activa de la familia adecuada para cada galgo.</p>
+            <p class="impact-card__desc">
+              Publicación de casos, seguimiento y búsqueda activa de la familia adecuada para cada galgo.
+            </p>
           </div>
         </div>
       </div>
@@ -121,12 +130,16 @@ import PageHero from '../components/PageHero.astro';
           <div class="stat-card">
             <div class="stat-card__value stat-card__value--magenta" aria-hidden="true"></div>
             <p class="stat-card__label">Acompañamiento real</p>
-            <p class="stat-card__body">Acompañamos a adoptantes y hogares temporales para que cada proceso resulte bien.</p>
+            <p class="stat-card__body">
+              Acompañamos a adoptantes y hogares temporales para que cada proceso resulte bien.
+            </p>
           </div>
           <div class="stat-card">
             <div class="stat-card__value stat-card__value--orange" aria-hidden="true"></div>
             <p class="stat-card__label">Match responsable</p>
-            <p class="stat-card__body">Buscamos la mejor familia para cada galgo, sin importar edad, sexo o nivel de energía.</p>
+            <p class="stat-card__body">
+              Buscamos la mejor familia para cada galgo, sin importar edad, sexo o nivel de energía.
+            </p>
           </div>
         </div>
       </div>
@@ -142,7 +155,7 @@ import PageHero from '../components/PageHero.astro';
           <li>Comparte las adopciones en tus redes sociales.</li>
         </ul>
         <a
-          href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quiero ayudar de otra forma')}`}
+          href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
           class="btn btn--secondary"
           target="_blank"
           rel="noopener noreferrer"
@@ -155,4 +168,6 @@ import PageHero from '../components/PageHero.astro';
   <Footer />
 </BaseLayout>
 
-<script>import '../scripts/copy-data';</script>
+<script>
+  import "../scripts/copy-data";
+</script>

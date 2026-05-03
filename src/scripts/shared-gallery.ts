@@ -12,7 +12,7 @@ export interface SharedGalleryItem {
 }
 
 const SWIPE_THRESHOLD = 42;
-const LIGHTBOX_ROOT_SELECTOR = '[data-shared-gallery-lightbox]';
+const LIGHTBOX_ROOT_SELECTOR = "[data-shared-gallery-lightbox]";
 
 let lightboxState: { item: SharedGalleryItem; index: number } | null = null;
 let lightboxInitialized = false;
@@ -23,11 +23,11 @@ function wrapIndex(index: number, total: number) {
 
 function escapeAttribute(value: string) {
   return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;');
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 function getPhotoAlt(item: SharedGalleryItem, index: number) {
@@ -46,7 +46,7 @@ function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, index: numbe
         src="${photo.card_desktop}"
         alt="${escapeAttribute(alt)}"
         class="story-card__img"
-        loading="${index === 0 ? 'eager' : 'lazy'}"
+        loading="${index === 0 ? "eager" : "lazy"}"
         decoding="async"
         width="350"
         height="350"
@@ -56,10 +56,10 @@ function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, index: numbe
 }
 
 function createSlide(item: SharedGalleryItem, photo: SharedGalleryPhoto, index: number, total: number) {
-  const slide = document.createElement('button');
-  slide.type = 'button';
-  slide.className = 'story-card__slide';
-  slide.setAttribute('aria-label', `Abrir foto ${index + 1} de ${total} de ${item.name}`);
+  const slide = document.createElement("button");
+  slide.type = "button";
+  slide.className = "story-card__slide";
+  slide.setAttribute("aria-label", `Abrir foto ${index + 1} de ${total} de ${item.name}`);
   slide.dataset.photoIndex = String(index);
   slide.innerHTML = buildPictureMarkup(photo, getPhotoAlt(item, index), index);
   return slide;
@@ -69,11 +69,11 @@ function buildDots(container: HTMLElement, item: SharedGalleryItem, onSelect: (i
   const fragment = document.createDocumentFragment();
 
   item.photos.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'story-card__dot';
-    dot.setAttribute('aria-label', `Ver foto ${index + 1} de ${item.photos.length} de ${item.name}`);
-    dot.addEventListener('click', () => onSelect(index));
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "story-card__dot";
+    dot.setAttribute("aria-label", `Ver foto ${index + 1} de ${item.photos.length} de ${item.name}`);
+    dot.addEventListener("click", () => onSelect(index));
     fragment.appendChild(dot);
   });
 
@@ -88,11 +88,15 @@ function getLightboxElements() {
 
   return {
     root,
-    image: root.querySelector<HTMLImageElement>('[data-shared-gallery-lightbox-image]'),
-    caption: root.querySelector<HTMLElement>('[data-shared-gallery-lightbox-caption]'),
-    previous: root.querySelector<HTMLElement>('[data-shared-gallery-lightbox-prev]'),
-    next: root.querySelector<HTMLElement>('[data-shared-gallery-lightbox-next]'),
-    closeButtons: [...root.querySelectorAll<HTMLElement>('[data-shared-gallery-lightbox-close], [data-shared-gallery-lightbox-close-button]')],
+    image: root.querySelector<HTMLImageElement>("[data-shared-gallery-lightbox-image]"),
+    caption: root.querySelector<HTMLElement>("[data-shared-gallery-lightbox-caption]"),
+    previous: root.querySelector<HTMLElement>("[data-shared-gallery-lightbox-prev]"),
+    next: root.querySelector<HTMLElement>("[data-shared-gallery-lightbox-next]"),
+    closeButtons: [
+      ...root.querySelectorAll<HTMLElement>(
+        "[data-shared-gallery-lightbox-close], [data-shared-gallery-lightbox-close-button]"
+      ),
+    ],
   };
 }
 
@@ -109,8 +113,8 @@ function openLightbox(item: SharedGalleryItem, index: number) {
   elements.image.alt = getPhotoAlt(item, safeIndex);
   elements.caption.textContent = getPhotoCaption(item, safeIndex);
   elements.root.hidden = false;
-  document.documentElement.classList.add('has-lightbox-open');
-  elements.root.querySelector<HTMLElement>('[data-shared-gallery-lightbox-close-button]')?.focus();
+  document.documentElement.classList.add("has-lightbox-open");
+  elements.root.querySelector<HTMLElement>("[data-shared-gallery-lightbox-close-button]")?.focus();
 }
 
 function closeLightbox() {
@@ -121,7 +125,7 @@ function closeLightbox() {
 
   elements.root.hidden = true;
   lightboxState = null;
-  document.documentElement.classList.remove('has-lightbox-open');
+  document.documentElement.classList.remove("has-lightbox-open");
 }
 
 function stepLightbox(delta: number) {
@@ -179,20 +183,20 @@ export function initSharedGalleryLightbox() {
     return;
   }
 
-  elements.previous?.addEventListener('click', () => stepLightbox(-1));
-  elements.next?.addEventListener('click', () => stepLightbox(1));
-  elements.closeButtons.forEach((button) => button.addEventListener('click', closeLightbox));
+  elements.previous?.addEventListener("click", () => stepLightbox(-1));
+  elements.next?.addEventListener("click", () => stepLightbox(1));
+  elements.closeButtons.forEach((button) => button.addEventListener("click", closeLightbox));
 
-  document.addEventListener('keydown', (event) => {
+  document.addEventListener("keydown", (event) => {
     if (!lightboxState) {
       return;
     }
 
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       closeLightbox();
-    } else if (event.key === 'ArrowLeft') {
+    } else if (event.key === "ArrowLeft") {
       stepLightbox(-1);
-    } else if (event.key === 'ArrowRight') {
+    } else if (event.key === "ArrowRight") {
       stepLightbox(1);
     }
   });
@@ -209,17 +213,17 @@ export function initSharedGalleries(scope: ParentNode = document) {
       return;
     }
 
-    const viewport = gallery.querySelector<HTMLElement>('.story-card__viewport');
-    const track = gallery.querySelector<HTMLElement>('[data-gallery-track]');
-    const dots = gallery.querySelector<HTMLElement>('[data-gallery-dots]');
-    const previousButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]');
-    const nextButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+    const viewport = gallery.querySelector<HTMLElement>(".story-card__viewport");
+    const track = gallery.querySelector<HTMLElement>("[data-gallery-track]");
+    const dots = gallery.querySelector<HTMLElement>("[data-gallery-dots]");
+    const previousButton = gallery.querySelector<HTMLButtonElement>("[data-gallery-prev]");
+    const nextButton = gallery.querySelector<HTMLButtonElement>("[data-gallery-next]");
 
     if (!viewport || !track || !dots || !previousButton || !nextButton) {
       return;
     }
 
-    gallery.dataset.galleryBound = 'true';
+    gallery.dataset.galleryBound = "true";
 
     const total = item.photos.length;
     const hasGallery = total > 1;
@@ -230,9 +234,7 @@ export function initSharedGalleries(scope: ParentNode = document) {
     let isDragging = false;
     let isAnimating = false;
 
-    const renderedPhotos = hasGallery
-      ? [item.photos[total - 1], ...item.photos, item.photos[0]]
-      : item.photos;
+    const renderedPhotos = hasGallery ? [item.photos[total - 1], ...item.photos, item.photos[0]] : item.photos;
 
     const slides = renderedPhotos.map((photo, renderIndex) => {
       const realIndex = hasGallery
@@ -250,17 +252,17 @@ export function initSharedGalleries(scope: ParentNode = document) {
 
     function syncDots() {
       const currentIndex = wrapIndex(activeIndex, total);
-      [...dots.children].forEach((dot, dotIndex) => {
+      [...dots!.children].forEach((dot, dotIndex) => {
         const isActive = dotIndex === currentIndex;
-        dot.setAttribute('data-active', String(isActive));
-        dot.setAttribute('aria-pressed', String(isActive));
+        dot.setAttribute("data-active", String(isActive));
+        dot.setAttribute("aria-pressed", String(isActive));
       });
     }
 
     function setTrackPosition(animate: boolean) {
       const offsetIndex = hasGallery ? activeIndex + 1 : activeIndex;
-      track.style.transition = animate ? 'transform var(--duration-base) var(--ease-in-out)' : 'none';
-      track.style.transform = `translateX(-${offsetIndex * 100}%)`;
+      track!.style.transition = animate ? "transform var(--duration-base) var(--ease-in-out)" : "none";
+      track!.style.transform = `translateX(-${offsetIndex * 100}%)`;
       syncDots();
     }
 
@@ -311,33 +313,45 @@ export function initSharedGalleries(scope: ParentNode = document) {
         isAnimating = true;
       });
 
-      previousButton.addEventListener('click', () => step(-1));
-      nextButton.addEventListener('click', () => step(1));
-      track.addEventListener('transitionend', settleAfterLoop);
+      previousButton.addEventListener("click", () => step(-1));
+      nextButton.addEventListener("click", () => step(1));
+      track.addEventListener("transitionend", settleAfterLoop);
 
-      viewport.addEventListener('touchstart', (event) => {
-        touchStartX = event.changedTouches[0].clientX;
-        touchDeltaX = 0;
-        isDragging = false;
-      }, { passive: true });
-
-      viewport.addEventListener('touchmove', (event) => {
-        touchDeltaX = event.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(touchDeltaX) > 10) {
-          isDragging = true;
-        }
-      }, { passive: true });
-
-      viewport.addEventListener('touchend', () => {
-        if (Math.abs(touchDeltaX) >= SWIPE_THRESHOLD) {
-          step(touchDeltaX < 0 ? 1 : -1);
-        }
-
-        window.setTimeout(() => {
-          isDragging = false;
+      viewport.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartX = event.changedTouches[0].clientX;
           touchDeltaX = 0;
-        }, 0);
-      }, { passive: true });
+          isDragging = false;
+        },
+        { passive: true }
+      );
+
+      viewport.addEventListener(
+        "touchmove",
+        (event) => {
+          touchDeltaX = event.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(touchDeltaX) > 10) {
+            isDragging = true;
+          }
+        },
+        { passive: true }
+      );
+
+      viewport.addEventListener(
+        "touchend",
+        () => {
+          if (Math.abs(touchDeltaX) >= SWIPE_THRESHOLD) {
+            step(touchDeltaX < 0 ? 1 : -1);
+          }
+
+          window.setTimeout(() => {
+            isDragging = false;
+            touchDeltaX = 0;
+          }, 0);
+        },
+        { passive: true }
+      );
     } else {
       previousButton.hidden = true;
       nextButton.hidden = true;
@@ -345,7 +359,7 @@ export function initSharedGalleries(scope: ParentNode = document) {
     }
 
     slides.forEach((slide) => {
-      slide.addEventListener('click', (event) => {
+      slide.addEventListener("click", (event) => {
         if (isDragging) {
           event.preventDefault();
           event.stopImmediatePropagation();
@@ -360,14 +374,14 @@ export function initSharedGalleries(scope: ParentNode = document) {
   });
 }
 
-if (typeof document !== 'undefined') {
+if (typeof document !== "undefined") {
   const boot = () => {
     initSharedGalleryLightbox();
     initSharedGalleries();
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
     boot();
   }

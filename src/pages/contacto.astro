@@ -1,12 +1,12 @@
 ---
-import '../styles/components/page-hero.css';
-import '../styles/components/contact-channels.css';
-import '../styles/components/form.css';
-import { SITE } from '../config/site.ts';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import PageHero from '../components/PageHero.astro';
+import "../styles/components/page-hero.css";
+import "../styles/components/contact-channels.css";
+import "../styles/components/form.css";
+import { SITE } from "../config/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 ---
 
 <BaseLayout
@@ -31,15 +31,8 @@ import PageHero from '../components/PageHero.astro';
             </span>
             <p class="channel-card__title">WHATSAPP</p>
             <p class="channel-card__detail">{SITE.whatsappPhone}</p>
-            <p class="channel-card__hours">
-              Lun a Vie · 10:00 – 19:00
-            </p>
-            <a
-              href={SITE.whatsapp}
-              class="btn btn--primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <p class="channel-card__hours">Lun a Vie · 10:00 – 19:00</p>
+            <a href={SITE.whatsapp} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
               Abrir WhatsApp ↗
             </a>
           </div>
@@ -51,9 +44,7 @@ import PageHero from '../components/PageHero.astro';
             <p class="channel-card__title">EMAIL</p>
             <p class="channel-card__detail">{SITE.email}</p>
             <p class="channel-card__hours">Respondemos en 48h hábiles.</p>
-            <a href={`mailto:${SITE.email}`} class="btn btn--secondary">
-              Escribir email
-            </a>
+            <a href={`mailto:${SITE.email}`} class="btn btn--secondary"> Escribir email </a>
           </div>
 
           <div class="channel-card">
@@ -63,13 +54,23 @@ import PageHero from '../components/PageHero.astro';
             <p class="channel-card__title">REDES</p>
             <p class="channel-card__body">Las novedades de los galgos viven en Instagram.</p>
             <div class="channel-card__social">
-              <a href={SITE.instagram} class="btn btn--ghost channel-card__social-link" target="_blank" rel="noopener noreferrer">
+              <a
+                href={SITE.instagram}
+                class="btn btn--ghost channel-card__social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <span class="btn__icon" aria-hidden="true">
                   <img src="/icons/instagram.svg" alt="" aria-hidden="true" class="channel-card__social-icon" />
                 </span>
                 <span>Instagram</span>
               </a>
-              <a href={SITE.facebook} class="btn btn--ghost channel-card__social-link" target="_blank" rel="noopener noreferrer">
+              <a
+                href={SITE.facebook}
+                class="btn btn--ghost channel-card__social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <span class="btn__icon" aria-hidden="true">
                   <img src="/icons/facebook.svg" alt="" aria-hidden="true" class="channel-card__social-icon" />
                 </span>
@@ -141,8 +142,8 @@ import PageHero from '../components/PageHero.astro';
       <div class="container container--narrow">
         <p class="eyebrow">PRENSA Y ALIANZAS</p>
         <p>
-          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa y quieres apoyarnos,
-          escríbenos por el formulario, por email o por WhatsApp para coordinar la conversación.
+          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa y quieres apoyarnos, escríbenos
+          por el formulario, por email o por WhatsApp para coordinar la conversación.
         </p>
       </div>
     </section>
@@ -150,4 +151,6 @@ import PageHero from '../components/PageHero.astro';
   <Footer />
 </BaseLayout>
 
-<script>import '../scripts/form';</script>
+<script>
+  import "../scripts/form";
+</script>

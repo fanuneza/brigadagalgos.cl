@@ -70,7 +70,8 @@
   height: 2px;
   background: var(--color-text);
   border-radius: 2px;
-  transition: transform var(--duration-fast) var(--ease-out),
+  transition:
+    transform var(--duration-fast) var(--ease-out),
     opacity var(--duration-fast) var(--ease-out);
 }
 
@@ -108,7 +109,9 @@
   color: var(--color-text-muted);
   margin-bottom: var(--space-5);
   border-radius: var(--radius-md);
-  transition: background var(--duration-fast), color var(--duration-fast);
+  transition:
+    background var(--duration-fast),
+    color var(--duration-fast);
 }
 
 .drawer__close:hover {
@@ -194,7 +197,8 @@
   z-index: calc(var(--z-overlay) - 1);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--duration-base) var(--ease-out),
+  transition:
+    opacity var(--duration-base) var(--ease-out),
     visibility var(--duration-base) var(--ease-out);
 }
 
@@ -229,7 +233,9 @@
     text-decoration: none;
     padding-bottom: 2px;
     border-bottom: 2px solid transparent;
-    transition: border-color var(--duration-fast), color var(--duration-fast);
+    transition:
+      border-color var(--duration-fast),
+      color var(--duration-fast);
   }
 
   .navbar__link:hover {

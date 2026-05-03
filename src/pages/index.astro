@@ -1,34 +1,54 @@
 ---
-import '../styles/components/hero.css';
-import '../styles/components/mission.css';
-import '../styles/components/help-cards.css';
-import '../styles/components/stepper.css';
-import '../styles/components/stories.css';
-import '../styles/components/donation-banner.css';
-import '../styles/components/rainbow-divider.css';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import RainbowDivider from '../components/RainbowDivider.astro';
-import MissionSection from '../components/MissionSection.astro';
-import HelpCards from '../components/HelpCards.astro';
-import ProcessStepper from '../components/ProcessStepper.astro';
-import StoriesSection from '../components/StoriesSection.astro';
-import DonationBanner from '../components/DonationBanner.astro';
-import Footer from '../components/Footer.astro';
-import { getCollection } from 'astro:content';
-import { getImage } from 'astro:assets';
-import type { SharedGalleryPhoto } from '../scripts/shared-gallery';
+import "../styles/components/hero.css";
+import "../styles/components/mission.css";
+import "../styles/components/help-cards.css";
+import "../styles/components/stepper.css";
+import "../styles/components/stories.css";
+import "../styles/components/donation-banner.css";
+import "../styles/components/rainbow-divider.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import RainbowDivider from "../components/RainbowDivider.astro";
+import MissionSection from "../components/MissionSection.astro";
+import HelpCards from "../components/HelpCards.astro";
+import ProcessStepper from "../components/ProcessStepper.astro";
+import StoriesSection from "../components/StoriesSection.astro";
+import DonationBanner from "../components/DonationBanner.astro";
+import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 
 const rescueSteps = [
-  { label: 'Recibimos el aviso', subLabel: 'Los casos suelen llegar por WhatsApp o redes sociales.', colorClass: 'primary' },
-  { label: 'Rescate y traslado', subLabel: 'Evaluamos la urgencia y movemos al galgo a un lugar seguro.', colorClass: 'secondary' },
-  { label: 'Atención veterinaria integral', subLabel: 'No solo lo básico: hacemos la evaluación y tratamiento que cada caso necesita.', colorClass: 'warm' },
-  { label: 'Acogida temporal', subLabel: 'Una familia lo recibe mientras se estabiliza y conocemos mejor su ritmo.', colorClass: 'green' },
-  { label: 'Match y adopción responsable', subLabel: 'Buscamos la familia correcta y acompañamos también después.', colorClass: 'purple' },
+  {
+    label: "Recibimos el aviso",
+    subLabel: "Los casos suelen llegar por WhatsApp o redes sociales.",
+    colorClass: "primary",
+  },
+  {
+    label: "Rescate y traslado",
+    subLabel: "Evaluamos la urgencia y movemos al galgo a un lugar seguro.",
+    colorClass: "secondary",
+  },
+  {
+    label: "Atención veterinaria integral",
+    subLabel: "No solo lo básico: hacemos la evaluación y tratamiento que cada caso necesita.",
+    colorClass: "warm",
+  },
+  {
+    label: "Acogida temporal",
+    subLabel: "Una familia lo recibe mientras se estabiliza y conocemos mejor su ritmo.",
+    colorClass: "green",
+  },
+  {
+    label: "Match y adopción responsable",
+    subLabel: "Buscamos la familia correcta y acompañamos también después.",
+    colorClass: "purple",
+  },
 ];
 
-const rawStoryDogs = await getCollection('success-dogs');
+const rawStoryDogs = await getCollection("success-dogs");
 
 const storyDogs = await Promise.all(
   rawStoryDogs.map(async (entry) => ({
@@ -36,11 +56,13 @@ const storyDogs = await Promise.all(
     name: entry.data.name,
     story: entry.data.story,
     photos: await Promise.all(
-      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => ({
-        card_mobile:  (await getImage({ src: img, width: 400,  format: 'avif' })).src,
-        card_desktop: (await getImage({ src: img, width: 700,  format: 'avif' })).src,
-        lightbox:     (await getImage({ src: img, width: 1200, format: 'avif' })).src,
-      }))
+      entry.data.gallery.map(
+        async (img): Promise<SharedGalleryPhoto> => ({
+          card_mobile: (await getImage({ src: img, width: 400, format: "avif" })).src,
+          card_desktop: (await getImage({ src: img, width: 700, format: "avif" })).src,
+          lightbox: (await getImage({ src: img, width: 1200, format: "avif" })).src,
+        })
+      )
     ),
   }))
 );

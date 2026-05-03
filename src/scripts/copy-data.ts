@@ -1,7 +1,7 @@
-import { showToast } from './form';
+import { showToast } from "./form";
 
-const btn = document.getElementById('copy-bank-data') as HTMLButtonElement | null;
-const lineButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-copy-value]')];
+const btn = document.getElementById("copy-bank-data") as HTMLButtonElement | null;
+const lineButtons = [...document.querySelectorAll<HTMLButtonElement>("[data-copy-value]")];
 
 const BANK_DATA = `Nombre: Fundación Brigada Galgos
 RUT: 65.132.425-4
@@ -14,7 +14,7 @@ async function copyText(value: string, successMessage: string) {
   try {
     await navigator.clipboard.writeText(value);
   } catch {
-    window.prompt('Copiá estos datos:', value);
+    window.prompt("Copiá estos datos:", value);
   }
 
   showToast(successMessage, 3000);
@@ -26,13 +26,13 @@ lineButtons.forEach((button) => {
     return;
   }
 
-  button.addEventListener('click', async () => {
-    await copyText(value, 'Línea copiada ✓');
+  button.addEventListener("click", async () => {
+    await copyText(value, "Línea copiada ✓");
   });
 });
 
 if (btn) {
-  btn.addEventListener('click', async () => {
-    await copyText(BANK_DATA, 'Datos copiados ✓');
+  btn.addEventListener("click", async () => {
+    await copyText(BANK_DATA, "Datos copiados ✓");
   });
 }

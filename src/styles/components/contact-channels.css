@@ -5,7 +5,9 @@
 }
 
 @media (min-width: 1024px) {
-  .contact-channels { grid-template-columns: repeat(3, 1fr); }
+  .contact-channels {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .channel-card {

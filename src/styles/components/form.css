@@ -94,7 +94,9 @@
   gap: var(--space-4);
 }
 
-.form__success[hidden] { display: none; }
+.form__success[hidden] {
+  display: none;
+}
 
 .form__success-title {
   font-family: var(--font-display);
@@ -171,7 +173,9 @@
 }
 
 @media (min-width: 1024px) {
-  .req-cards { grid-template-columns: repeat(3, 1fr); }
+  .req-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .req-card {
@@ -255,11 +259,15 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .toast {
-    transition: opacity var(--duration-fast) var(--ease-out),
-                transform var(--duration-fast) var(--ease-out);
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .toast, .toast--visible { transition: none; }
+  .toast,
+  .toast--visible {
+    transition: none;
+  }
 }

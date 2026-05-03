@@ -1,19 +1,22 @@
 ---
-import { getImage } from 'astro:assets';
-import portraitSrc from '../assets/images/hero-portrait.webp';
-import landscapeSrc from '../assets/images/hero-landscape.webp';
+import { getImage } from "astro:assets";
+import portraitSrc from "../assets/images/hero-portrait.webp";
+import landscapeSrc from "../assets/images/hero-landscape.webp";
 
-const pAvif = await getImage({ src: portraitSrc,  format: 'avif', width: 800 });
-const pWebp = await getImage({ src: portraitSrc,  format: 'webp', width: 800 });
-const lAvif = await getImage({ src: landscapeSrc, format: 'avif', width: 1600 });
-const lWebp = await getImage({ src: landscapeSrc, format: 'webp', width: 1600 });
+const pAvif = await getImage({ src: portraitSrc, format: "avif", width: 800 });
+const pWebp = await getImage({ src: portraitSrc, format: "webp", width: 800 });
+const lAvif = await getImage({ src: landscapeSrc, format: "avif", width: 1600 });
+const lWebp = await getImage({ src: landscapeSrc, format: "webp", width: 1600 });
 ---
 
 <section class="hero section-padding">
   <div class="container hero__grid">
     <div class="hero__text">
       <h1>Rescatamos, rehabilitamos y reubicamos galgos en Chile.</h1>
-      <p class="hero__lead">Son tranquilos en casa, se adaptan a departamentos y agradecen profundamente. Son el corazón silencioso de la familia.</p>
+      <p class="hero__lead">
+        Son tranquilos en casa, se adaptan a departamentos y agradecen profundamente. Son el corazón silencioso de la
+        familia.
+      </p>
       <div class="hero__ctas">
         <a href="/adoptar" class="btn btn--primary">Quiero adoptar</a>
         <a href="/hogar-temporal" class="btn btn--secondary">Puedo ser hogar temporal</a>

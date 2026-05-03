@@ -6,7 +6,9 @@
   --link-decoration-color: rgba(255, 255, 255, 0.35);
 }
 @media (min-width: 1024px) {
-  .donation-banner { padding-block: var(--space-12); }
+  .donation-banner {
+    padding-block: var(--space-12);
+  }
 }
 
 .donation-banner__grid {
@@ -26,7 +28,9 @@
   margin-bottom: var(--space-3);
 }
 @media (min-width: 1024px) {
-  .donation-banner h2 { font-size: var(--font-size-3xl); }
+  .donation-banner h2 {
+    font-size: var(--font-size-3xl);
+  }
 }
 
 /* 18px + weight 500 — minimum for AA on magenta background */
@@ -43,7 +47,9 @@
   align-items: flex-start;
 }
 @media (min-width: 1024px) {
-  .donation-banner__cta { align-items: flex-end; }
+  .donation-banner__cta {
+    align-items: flex-end;
+  }
 }
 
 .donation-banner__transfer {

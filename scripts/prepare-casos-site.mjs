@@ -1,13 +1,13 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import sharp from 'sharp';
+import fs from "node:fs/promises";
+import path from "node:path";
+import sharp from "sharp";
 
 const repoRoot = process.cwd();
-const publicCasosRoot = path.join(repoRoot, 'public', 'casos');
-const successFeedPath = path.join(publicCasosRoot, 'exito.json');
-const adoptionFeedPath = path.join(publicCasosRoot, 'adopcion.json');
-const legacyFeedPath = path.join(publicCasosRoot, 'index.json');
-const externalFeedPath = path.join('C:', 'Users', 'fanun', 'Desktop', 'Fotos casos - Brigada', 'output', 'index.json');
+const publicCasosRoot = path.join(repoRoot, "public", "casos");
+const successFeedPath = path.join(publicCasosRoot, "exito.json");
+const adoptionFeedPath = path.join(publicCasosRoot, "adopcion.json");
+const legacyFeedPath = path.join(publicCasosRoot, "index.json");
+const externalFeedPath = path.join("C:", "Users", "fanun", "Desktop", "Fotos casos - Brigada", "output", "index.json");
 
 const CARD_SIZES = {
   mobile: 318,
@@ -15,19 +15,19 @@ const CARD_SIZES = {
 };
 
 const LIGHTBOX_SIZE = 1600;
-const SUCCESS_STATES = new Set(['Adoptado', 'Adoptada']);
-const ADOPTION_IDS = ['turron', 'nina', 'foxy', 'arepita', 'loica', 'olga'];
-const MOVED_TO_ADOPTION = new Set(['nina']);
+const SUCCESS_STATES = new Set(["Adoptado", "Adoptada"]);
+const ADOPTION_IDS = ["turron", "nina", "foxy", "arepita", "loica", "olga"];
+const MOVED_TO_ADOPTION = new Set(["nina"]);
 
 const SUCCESS_OVERRIDES = {
   fermin: {
-    id: 'fermin',
-    nombre_publico: 'Fermín',
-    aliases: ['Fermín'],
-    source_folders: ['docs/EXTRA-INFO.md'],
+    id: "fermin",
+    nombre_publico: "Fermín",
+    aliases: ["Fermín"],
+    source_folders: ["docs/EXTRA-INFO.md"],
     spreadsheet_match: null,
-    estado: 'Adoptado',
-    sexo: 'Macho',
+    estado: "Adoptado",
+    sexo: "Macho",
     fecha_rescate: null,
     edad: null,
     tamano: null,
@@ -37,31 +37,31 @@ const SUCCESS_OVERRIDES = {
     compatibilidad_perros: null,
     compatibilidad_gatos: null,
     tutor: null,
-    descripcion_fisica: 'Galgo macho de pelaje claro y mirada suave.',
-    descripcion_confianza: 'alta',
+    descripcion_fisica: "Galgo macho de pelaje claro y mirada suave.",
+    descripcion_confianza: "alta",
     historia_breve:
-      'Lo abandonaron fracturado y muy herido en El Melón. Vecinos del sector le armaron una casita en la vereda hasta que pudimos rescatarlo.',
+      "Lo abandonaron fracturado y muy herido en El Melón. Vecinos del sector le armaron una casita en la vereda hasta que pudimos rescatarlo.",
     historia_breve_site:
-      'A Fermín lo dejaron fracturado y muy herido en El Melón. Vecinos le armaron una casita en la vereda para que aguantara hasta que llegáramos; hoy está adoptado y ya no tiene esa mirada triste.',
+      "A Fermín lo dejaron fracturado y muy herido en El Melón. Vecinos le armaron una casita en la vereda para que aguantara hasta que llegáramos; hoy está adoptado y ya no tiene esa mirada triste.",
     medical_summary:
-      'Llegó con lesiones graves y una fractura, luego pasó por recuperación y finalmente encontró familia.',
+      "Llegó con lesiones graves y una fractura, luego pasó por recuperación y finalmente encontró familia.",
     medical_files: [],
     selected_photos: [
-      '/casos/exito/fermin/fermin-01.jpg',
-      '/casos/exito/fermin/fermin-02.jpg',
-      '/casos/exito/fermin/fermin-03.jpg',
+      "/casos/exito/fermin/fermin-01.jpg",
+      "/casos/exito/fermin/fermin-02.jpg",
+      "/casos/exito/fermin/fermin-03.jpg",
     ],
     other_media_counts: {},
-    confidence_notes: ['Historia y fotos agregadas desde docs/EXTRA-INFO.md.'],
+    confidence_notes: ["Historia y fotos agregadas desde docs/EXTRA-INFO.md."],
   },
   leo: {
-    id: 'leo',
-    nombre_publico: 'Leo',
-    aliases: ['Leo'],
-    source_folders: ['docs/EXTRA-INFO.md'],
+    id: "leo",
+    nombre_publico: "Leo",
+    aliases: ["Leo"],
+    source_folders: ["docs/EXTRA-INFO.md"],
     spreadsheet_match: null,
-    estado: 'Adoptado',
-    sexo: 'Macho',
+    estado: "Adoptado",
+    sexo: "Macho",
     fecha_rescate: null,
     edad: null,
     tamano: null,
@@ -71,64 +71,64 @@ const SUCCESS_OVERRIDES = {
     compatibilidad_perros: null,
     compatibilidad_gatos: null,
     tutor: null,
-    descripcion_fisica: 'Galgo macho de pelaje claro con expresion atenta.',
-    descripcion_confianza: 'alta',
+    descripcion_fisica: "Galgo macho de pelaje claro con expresion atenta.",
+    descripcion_confianza: "alta",
     historia_breve:
-      'Lo atropellaron en Lampa y quisieron eutanasiarlo por falta de recursos. Pasó por dos cirugías por una fractura en la espalda y hoy vive adoptado.',
+      "Lo atropellaron en Lampa y quisieron eutanasiarlo por falta de recursos. Pasó por dos cirugías por una fractura en la espalda y hoy vive adoptado.",
     historia_breve_site:
-      'Leo fue atropellado en Lampa y lo rescatamos cuando querían eutanasiarlo por falta de recursos. Pasó por dos cirugías por su fractura de espalda y hoy está adoptado; no camina, pero eso no le ha quitado las ganas de vivir bonito.',
+      "Leo fue atropellado en Lampa y lo rescatamos cuando querían eutanasiarlo por falta de recursos. Pasó por dos cirugías por su fractura de espalda y hoy está adoptado; no camina, pero eso no le ha quitado las ganas de vivir bonito.",
     medical_summary:
-      'Pasó por dos cirugías por una fractura en la espalda. No recuperó la marcha, pero sí estabilidad y una vida segura en familia.',
+      "Pasó por dos cirugías por una fractura en la espalda. No recuperó la marcha, pero sí estabilidad y una vida segura en familia.",
     medical_files: [],
     selected_photos: [
-      '/casos/exito/leo/leo-01.jpg',
-      '/casos/exito/leo/leo-02.jpg',
-      '/casos/exito/leo/leo-03.jpg',
-      '/casos/exito/leo/leo-04.jpg',
+      "/casos/exito/leo/leo-01.jpg",
+      "/casos/exito/leo/leo-02.jpg",
+      "/casos/exito/leo/leo-03.jpg",
+      "/casos/exito/leo/leo-04.jpg",
     ],
     other_media_counts: {},
-    confidence_notes: ['Historia y fotos agregadas desde docs/EXTRA-INFO.md.'],
+    confidence_notes: ["Historia y fotos agregadas desde docs/EXTRA-INFO.md."],
   },
 };
 
 const ADOPTION_OVERRIDES = {
   turron: {
-    name: 'Turrón',
-    age: '6 años aprox.',
-    weight: '29,8 kg',
+    name: "Turrón",
+    age: "6 años aprox.",
+    weight: "29,8 kg",
     details:
-      'A Turrón lo arrojaron desde una camioneta en Isla de Maipo y quedó con una fractura que hubo que operar. Hoy está recuperado y listo para encontrar una familia tranquila.',
+      "A Turrón lo arrojaron desde una camioneta en Isla de Maipo y quedó con una fractura que hubo que operar. Hoy está recuperado y listo para encontrar una familia tranquila.",
   },
   nina: {
-    name: 'Niña',
-    age: 'Edad por confirmar',
-    weight: 'Peso por confirmar',
+    name: "Niña",
+    age: "Edad por confirmar",
+    weight: "Peso por confirmar",
     details:
-      'A Niña la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.',
+      "A Niña la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.",
   },
   foxy: {
-    age: '7 años aprox.',
-    weight: 'Peso por confirmar',
+    age: "7 años aprox.",
+    weight: "Peso por confirmar",
     details:
-      'Foxy llegó después de un rescate en el cerro El Carbón y hoy sigue en hogar temporal. Buscamos una familia tranquila para acompañar su recuperación y su tratamiento dental.',
+      "Foxy llegó después de un rescate en el cerro El Carbón y hoy sigue en hogar temporal. Buscamos una familia tranquila para acompañar su recuperación y su tratamiento dental.",
   },
   arepita: {
-    age: 'Menor de 1 año',
-    weight: 'Peso por confirmar',
+    age: "Menor de 1 año",
+    weight: "Peso por confirmar",
     details:
-      'Arepita fue rescatada en Limache y pasó directo por clínica. Es una galga muy joven que sigue recuperándose mientras espera una familia comprometida.',
+      "Arepita fue rescatada en Limache y pasó directo por clínica. Es una galga muy joven que sigue recuperándose mientras espera una familia comprometida.",
   },
   loica: {
-    age: 'Edad por confirmar',
-    weight: 'Peso por confirmar',
+    age: "Edad por confirmar",
+    weight: "Peso por confirmar",
     details:
-      'Loica llegó desde Maipú después de haber sido mamá hace pocos meses. Está en hogar temporal y buscamos una casa paciente para que siga ganando seguridad a su ritmo.',
+      "Loica llegó desde Maipú después de haber sido mamá hace pocos meses. Está en hogar temporal y buscamos una casa paciente para que siga ganando seguridad a su ritmo.",
   },
   olga: {
-    age: '6 años aprox.',
-    weight: '17 kg',
+    age: "6 años aprox.",
+    weight: "17 kg",
     details:
-      'Olga fue rescatada en Curacaví con una herida grave en una patita y tuvo que pasar por amputación. Buscamos una familia muy tranquila y comprometida con su adaptación.',
+      "Olga fue rescatada en Curacaví con una herida grave en una patita y tuvo que pasar por amputación. Buscamos una familia muy tranquila y comprometida con su adaptación.",
   },
 };
 
@@ -137,11 +137,14 @@ function isTransformablePhoto(filePath) {
 }
 
 function sanitizeBaseName(filePath) {
-  return path.parse(filePath).name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  return path
+    .parse(filePath)
+    .name.toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-");
 }
 
 function toPublicPath(filePath) {
-  return `/${path.relative(path.join(repoRoot, 'public'), filePath).replace(/\\/g, '/')}`;
+  return `/${path.relative(path.join(repoRoot, "public"), filePath).replace(/\\/g, "/")}`;
 }
 
 async function ensureDir(dirPath) {
@@ -158,7 +161,7 @@ async function exists(filePath) {
 }
 
 async function readJson(filePath) {
-  const raw = await fs.readFile(filePath, 'utf8');
+  const raw = await fs.readFile(filePath, "utf8");
   return JSON.parse(raw);
 }
 
@@ -166,7 +169,7 @@ async function writeSquareVariant(sourcePath, destinationPath, size) {
   await sharp(sourcePath)
     .rotate()
     .resize(size, size, {
-      fit: 'cover',
+      fit: "cover",
       position: sharp.strategy.attention,
       withoutEnlargement: true,
     })
@@ -180,7 +183,7 @@ async function writeLightboxVariant(sourcePath, destinationPath) {
     .resize({
       width: LIGHTBOX_SIZE,
       height: LIGHTBOX_SIZE,
-      fit: 'inside',
+      fit: "inside",
       withoutEnlargement: true,
     })
     .webp({ quality: 86 })
@@ -188,7 +191,7 @@ async function writeLightboxVariant(sourcePath, destinationPath) {
 }
 
 async function migratePhotoToFolder(sourceRelativePath, destinationDir) {
-  const sourceAbsolutePath = path.join(publicCasosRoot, sourceRelativePath.replace(/^\/?casos\//, ''));
+  const sourceAbsolutePath = path.join(publicCasosRoot, sourceRelativePath.replace(/^\/?casos\//, ""));
   const fileName = path.basename(sourceRelativePath);
   const destinationAbsolutePath = path.join(destinationDir, fileName);
 
@@ -233,16 +236,16 @@ async function generateVariantsForPhoto(photoAbsolutePath) {
 
 function validateStoryLengths(entries) {
   const tooLong = entries
-    .filter((entry) => typeof entry.historia_breve_site === 'string' && entry.historia_breve_site.length > 240)
+    .filter((entry) => typeof entry.historia_breve_site === "string" && entry.historia_breve_site.length > 240)
     .map((entry) => `${entry.id}:${entry.historia_breve_site.length}`);
 
   if (tooLong.length > 0) {
-    throw new Error(`historia_breve_site exceeds 240 characters: ${tooLong.join(', ')}`);
+    throw new Error(`historia_breve_site exceeds 240 characters: ${tooLong.join(", ")}`);
   }
 }
 
 function sortById(items) {
-  return [...items].sort((a, b) => a.id.localeCompare(b.id, 'es'));
+  return [...items].sort((a, b) => a.id.localeCompare(b.id, "es"));
 }
 
 function normalizeAge(rawAge, overrideAge) {
@@ -250,22 +253,22 @@ function normalizeAge(rawAge, overrideAge) {
     return overrideAge;
   }
 
-  if (typeof rawAge !== 'string') {
-    return 'Edad por confirmar';
+  if (typeof rawAge !== "string") {
+    return "Edad por confirmar";
   }
 
   const trimmed = rawAge.trim();
   if (!trimmed) {
-    return 'Edad por confirmar';
+    return "Edad por confirmar";
   }
 
-  if (trimmed === '-1.0') {
-    return 'Menor de 1 año';
+  if (trimmed === "-1.0") {
+    return "Menor de 1 año";
   }
 
-  const numericAge = Number(trimmed.replace(',', '.'));
+  const numericAge = Number(trimmed.replace(",", "."));
   if (Number.isFinite(numericAge) && numericAge > 0) {
-    const wholeAge = Number.isInteger(numericAge) ? String(numericAge) : trimmed.replace('.0', '');
+    const wholeAge = Number.isInteger(numericAge) ? String(numericAge) : trimmed.replace(".0", "");
     return `${wholeAge} años aprox.`;
   }
 
@@ -278,11 +281,11 @@ function normalizeWeight(entry, overrideWeight) {
   }
 
   const summary = [entry.medical_summary, entry.historia_breve_site, entry.historia_breve]
-    .filter((value) => typeof value === 'string')
-    .join(' ');
+    .filter((value) => typeof value === "string")
+    .join(" ");
 
   const match = summary.match(/(\d+(?:[.,]\d+)?)\s*kg/i);
-  return match ? `${match[1].replace('.', ',')} kg` : 'Peso por confirmar';
+  return match ? `${match[1].replace(".", ",")} kg` : "Peso por confirmar";
 }
 
 function normalizeDetails(entry, overrideDetails) {
@@ -290,25 +293,26 @@ function normalizeDetails(entry, overrideDetails) {
     return overrideDetails;
   }
 
-  const sourceText = [entry.historia_breve_site, entry.historia_breve, entry.medical_summary]
-    .find((value) => typeof value === 'string' && value.trim().length > 0);
+  const sourceText = [entry.historia_breve_site, entry.historia_breve, entry.medical_summary].find(
+    (value) => typeof value === "string" && value.trim().length > 0
+  );
 
   if (!sourceText) {
-    return 'Estamos preparando mejor su historia para presentarlo con más contexto.';
+    return "Estamos preparando mejor su historia para presentarlo con más contexto.";
   }
 
-  const compact = sourceText.trim().replace(/\s+/g, ' ');
+  const compact = sourceText.trim().replace(/\s+/g, " ");
   if (compact.length <= 210) {
     return compact;
   }
 
   const slice = compact.slice(0, 207);
-  const lastSentence = slice.lastIndexOf('. ');
+  const lastSentence = slice.lastIndexOf(". ");
   if (lastSentence >= 120) {
     return slice.slice(0, lastSentence + 1).trim();
   }
 
-  const lastSpace = slice.lastIndexOf(' ');
+  const lastSpace = slice.lastIndexOf(" ");
   return `${slice.slice(0, lastSpace).trim()}...`;
 }
 
@@ -317,7 +321,7 @@ function adoptionNameFor(entry) {
 }
 
 async function buildSuccessEntry(entry) {
-  const targetDir = path.join(publicCasosRoot, 'exito', entry.id);
+  const targetDir = path.join(publicCasosRoot, "exito", entry.id);
   const legacySelected = Array.isArray(entry.selected_photos) ? entry.selected_photos : [];
   const sourcePhotos = legacySelected.filter((photoPath) => isTransformablePhoto(photoPath));
 
@@ -347,12 +351,12 @@ async function buildSuccessOverrides() {
   const entries = [];
 
   for (const entry of Object.values(SUCCESS_OVERRIDES)) {
-    const targetDir = path.join(publicCasosRoot, 'exito', entry.id);
+    const targetDir = path.join(publicCasosRoot, "exito", entry.id);
     const selectedPhotos = [];
     const sitePhotos = [];
 
     for (const photoUrl of entry.selected_photos) {
-      const photoAbsolutePath = path.join(repoRoot, 'public', photoUrl.replace(/^\//, ''));
+      const photoAbsolutePath = path.join(repoRoot, "public", photoUrl.replace(/^\//, ""));
       if (!(await exists(photoAbsolutePath))) {
         throw new Error(`Missing override success photo: ${photoUrl}`);
       }
@@ -399,10 +403,10 @@ async function buildSuccessFeed() {
 }
 
 async function buildGeneratedAdoptionPictures(id) {
-  const targetDir = path.join(publicCasosRoot, 'adopcion', id);
+  const targetDir = path.join(publicCasosRoot, "adopcion", id);
   const files = (await fs.readdir(targetDir))
     .filter((fileName) => isTransformablePhoto(fileName))
-    .sort((a, b) => a.localeCompare(b, 'es'));
+    .sort((a, b) => a.localeCompare(b, "es"));
 
   if (files.length === 0) {
     throw new Error(`No adoption photos found in ${targetDir}`);
@@ -430,19 +434,19 @@ async function findExistingPhotoName(directory, baseName) {
 }
 
 async function buildCopiedPictureSetFromExistingVariants(id, sourceDir) {
-  const destinationDir = path.join(publicCasosRoot, 'adopcion', id);
+  const destinationDir = path.join(publicCasosRoot, "adopcion", id);
   const pictures = [];
 
   const desktopFiles = (await fs.readdir(sourceDir))
-    .filter((fileName) => fileName.endsWith('-desktop.webp'))
-    .sort((a, b) => a.localeCompare(b, 'es'));
+    .filter((fileName) => fileName.endsWith("-desktop.webp"))
+    .sort((a, b) => a.localeCompare(b, "es"));
 
   if (desktopFiles.length === 0) {
     throw new Error(`No prepared adoption assets found in ${sourceDir}`);
   }
 
   for (const desktopFile of desktopFiles) {
-    const baseName = desktopFile.replace(/-desktop\.webp$/, '');
+    const baseName = desktopFile.replace(/-desktop\.webp$/, "");
     const mobileFile = `${baseName}-mobile.webp`;
     const lightboxFile = `${baseName}-lightbox.webp`;
     const sourcePhotoName = await findExistingPhotoName(sourceDir, baseName);
@@ -452,14 +456,24 @@ async function buildCopiedPictureSetFromExistingVariants(id, sourceDir) {
     if (sourcePhotoPath && destinationPhotoPath) {
       await copyFileIfMissing(sourcePhotoPath, destinationPhotoPath);
     }
-    await copyFileIfMissing(path.join(sourceDir, `${baseName}-mobile.webp`), path.join(destinationDir, `${baseName}-mobile.webp`));
-    await copyFileIfMissing(path.join(sourceDir, `${baseName}-desktop.webp`), path.join(destinationDir, `${baseName}-desktop.webp`));
-    await copyFileIfMissing(path.join(sourceDir, `${baseName}-lightbox.webp`), path.join(destinationDir, `${baseName}-lightbox.webp`));
+    await copyFileIfMissing(
+      path.join(sourceDir, `${baseName}-mobile.webp`),
+      path.join(destinationDir, `${baseName}-mobile.webp`)
+    );
+    await copyFileIfMissing(
+      path.join(sourceDir, `${baseName}-desktop.webp`),
+      path.join(destinationDir, `${baseName}-desktop.webp`)
+    );
+    await copyFileIfMissing(
+      path.join(sourceDir, `${baseName}-lightbox.webp`),
+      path.join(destinationDir, `${baseName}-lightbox.webp`)
+    );
 
     pictures.push({
-      source: sourcePhotoPath && destinationPhotoPath
-        ? toPublicPath(destinationPhotoPath)
-        : toPublicPath(path.join(destinationDir, `${baseName}-lightbox.webp`)),
+      source:
+        sourcePhotoPath && destinationPhotoPath
+          ? toPublicPath(destinationPhotoPath)
+          : toPublicPath(path.join(destinationDir, `${baseName}-lightbox.webp`)),
       card_mobile: toPublicPath(path.join(destinationDir, `${baseName}-mobile.webp`)),
       card_desktop: toPublicPath(path.join(destinationDir, `${baseName}-desktop.webp`)),
       lightbox: toPublicPath(path.join(destinationDir, `${baseName}-lightbox.webp`)),
@@ -470,10 +484,10 @@ async function buildCopiedPictureSetFromExistingVariants(id, sourceDir) {
 }
 
 async function buildCopiedPictureSetFromPreparedWebp(id, sourceDir) {
-  const destinationDir = path.join(publicCasosRoot, 'adopcion', id);
+  const destinationDir = path.join(publicCasosRoot, "adopcion", id);
   const webpFiles = (await fs.readdir(sourceDir))
-    .filter((fileName) => fileName.endsWith('-desktop.webp'))
-    .sort((a, b) => a.localeCompare(b, 'es'));
+    .filter((fileName) => fileName.endsWith("-desktop.webp"))
+    .sort((a, b) => a.localeCompare(b, "es"));
 
   if (webpFiles.length === 0) {
     throw new Error(`No prepared adoption webp files found in ${sourceDir}`);
@@ -481,7 +495,7 @@ async function buildCopiedPictureSetFromPreparedWebp(id, sourceDir) {
 
   const pictures = [];
   for (const desktopFile of webpFiles) {
-    const baseName = desktopFile.replace(/-desktop\.webp$/, '');
+    const baseName = desktopFile.replace(/-desktop\.webp$/, "");
     const mobileFile = `${baseName}-mobile.webp`;
     const lightboxFile = `${baseName}-lightbox.webp`;
 
@@ -506,7 +520,7 @@ function normalizeAdoptionEntry(entry, pictures) {
   return {
     id: entry.id,
     name: adoptionNameFor(entry),
-    sex: entry.sexo === 'Hembra' ? 'Hembra' : 'Macho',
+    sex: entry.sexo === "Hembra" ? "Hembra" : "Macho",
     age: normalizeAge(entry.edad, override.age),
     weight: normalizeWeight(entry, override.weight),
     details: normalizeDetails(entry, override.details),
@@ -529,13 +543,10 @@ async function buildAdoptionFeed() {
     }
 
     let pictures;
-    if (id === 'nina') {
-      pictures = await buildCopiedPictureSetFromExistingVariants(
-        id,
-        path.join(publicCasosRoot, 'exito', id),
-      );
-    } else if (id === 'foxy') {
-      pictures = await buildCopiedPictureSetFromPreparedWebp(id, path.join(publicCasosRoot, 'site', id));
+    if (id === "nina") {
+      pictures = await buildCopiedPictureSetFromExistingVariants(id, path.join(publicCasosRoot, "exito", id));
+    } else if (id === "foxy") {
+      pictures = await buildCopiedPictureSetFromPreparedWebp(id, path.join(publicCasosRoot, "site", id));
     } else {
       pictures = await buildGeneratedAdoptionPictures(id);
     }
@@ -547,10 +558,7 @@ async function buildAdoptionFeed() {
 }
 
 async function removeLegacyTurronAssets() {
-  const legacyPaths = [
-    path.join(publicCasosRoot, 'photos', 'turron'),
-    path.join(publicCasosRoot, 'site', 'turron'),
-  ];
+  const legacyPaths = [path.join(publicCasosRoot, "photos", "turron"), path.join(publicCasosRoot, "site", "turron")];
 
   for (const legacyPath of legacyPaths) {
     if (await exists(legacyPath)) {
@@ -561,10 +569,10 @@ async function removeLegacyTurronAssets() {
 
 async function main() {
   const successFeed = await buildSuccessFeed();
-  await fs.writeFile(successFeedPath, `${JSON.stringify(successFeed, null, 2)}\n`, 'utf8');
+  await fs.writeFile(successFeedPath, `${JSON.stringify(successFeed, null, 2)}\n`, "utf8");
 
   const adoptionFeed = await buildAdoptionFeed();
-  await fs.writeFile(adoptionFeedPath, `${JSON.stringify(adoptionFeed, null, 2)}\n`, 'utf8');
+  await fs.writeFile(adoptionFeedPath, `${JSON.stringify(adoptionFeed, null, 2)}\n`, "utf8");
 
   await removeLegacyTurronAssets();
 }

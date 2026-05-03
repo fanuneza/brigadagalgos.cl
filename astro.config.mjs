@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  output: 'static',
-  site: 'https://brigadagalgos.cl',
+  output: "static",
+  site: "https://brigadagalgos.cl",
   integrations: [sitemap()],
 });

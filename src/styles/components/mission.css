@@ -22,5 +22,7 @@
 }
 
 @media (min-width: 1024px) {
-  .mission__heading { font-size: var(--font-size-3xl); }
+  .mission__heading {
+    font-size: var(--font-size-3xl);
+  }
 }

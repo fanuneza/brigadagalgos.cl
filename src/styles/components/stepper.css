@@ -14,7 +14,9 @@
 }
 
 @media (min-width: 1024px) {
-  .stepper__heading { font-size: var(--font-size-3xl); }
+  .stepper__heading {
+    font-size: var(--font-size-3xl);
+  }
 }
 
 .stepper {
@@ -36,7 +38,7 @@
 
 /* Vertical connector on mobile */
 .step:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 23px;
   top: 48px;
@@ -60,11 +62,26 @@
   z-index: 1;
 }
 
-.step__badge--primary   { background: var(--color-primary);       color: var(--color-text); }
-.step__badge--secondary { background: var(--color-secondary);      color: var(--color-text-inverse); }
-.step__badge--warm      { background: var(--color-accent-warm);    color: var(--color-text); }
-.step__badge--green     { background: var(--color-rainbow-green);  color: var(--color-text-inverse); }
-.step__badge--purple    { background: var(--color-rainbow-purple); color: var(--color-text-inverse); }
+.step__badge--primary {
+  background: var(--color-primary);
+  color: var(--color-text);
+}
+.step__badge--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text-inverse);
+}
+.step__badge--warm {
+  background: var(--color-accent-warm);
+  color: var(--color-text);
+}
+.step__badge--green {
+  background: var(--color-rainbow-green);
+  color: var(--color-text-inverse);
+}
+.step__badge--purple {
+  background: var(--color-rainbow-purple);
+  color: var(--color-text-inverse);
+}
 
 .step__body {
   display: flex;

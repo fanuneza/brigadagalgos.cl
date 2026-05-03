@@ -3,10 +3,10 @@ interface Props {
   icon: string;
   title: string;
   body: string;
-  tone?: 'primary' | 'secondary' | 'warm';
+  tone?: "primary" | "secondary" | "warm";
 }
 
-const { icon, title, body, tone = 'primary' } = Astro.props;
+const { icon, title, body, tone = "primary" } = Astro.props;
 ---
 
 <article class="req-card">

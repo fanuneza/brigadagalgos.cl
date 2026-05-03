@@ -3,16 +3,40 @@
   "type": "module",
   "version": "0.1.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
-    "prepare:casos": "node scripts/prepare-casos-site.mjs"
+    "prepare:casos": "node scripts/prepare-casos-site.mjs",
+    "lint": "eslint . && stylelint \"src/**/*.css\"",
+    "lint:fix": "eslint . --fix && stylelint \"src/**/*.css\" --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:lighthouse": "lhci autorun",
+    "capture:local": "playwright test --config playwright.config.ts",
+    "capture:home": "playwright test --config playwright.config.ts --grep @home",
+    "capture:adoptar": "playwright test --config playwright.config.ts --grep @adoptar",
+    "capture:donar": "playwright test --config playwright.config.ts --grep @donar"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.2",
-    "astro": "^6.1.9"
+    "astro": "^6.1.9",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.59.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "stylelint": "^17.9.1",
+    "stylelint-config-standard": "^40.0.0"
   }
 }

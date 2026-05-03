@@ -1,7 +1,7 @@
 ---
-import SharedPhotoGallery from './SharedPhotoGallery.astro';
-import SharedGalleryLightbox from './SharedGalleryLightbox.astro';
-import type { SharedGalleryPhoto } from '../scripts/shared-gallery';
+import SharedPhotoGallery from "./SharedPhotoGallery.astro";
+import SharedGalleryLightbox from "./SharedGalleryLightbox.astro";
+import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 
 interface StoryDog {
   id: string;
@@ -23,52 +23,58 @@ const { dogs } = Astro.props;
     <h2 class="stories__heading">Nuestros casos de éxito.</h2>
 
     <div class="stories__grid" data-stories-list>
-      {dogs.map((dog) => (
-        <article class="story-card" data-story-card>
-          <SharedPhotoGallery name={dog.name} photos={dog.photos} />
-          <div class="story-card__body">
-            <p class="story-card__name">{dog.name}</p>
-            <p class="story-card__quote">{dog.story}</p>
-          </div>
-        </article>
-      ))}
+      {
+        dogs.map((dog) => (
+          <article class="story-card" data-story-card>
+            <SharedPhotoGallery name={dog.name} photos={dog.photos} />
+            <div class="story-card__body">
+              <p class="story-card__name">{dog.name}</p>
+              <p class="story-card__quote">{dog.story}</p>
+            </div>
+          </article>
+        ))
+      }
     </div>
 
-    {dogs.length > 6 && (
-      <div class="stories__ver-mas-wrap">
-        <button type="button" class="btn btn--secondary" data-stories-ver-mas>
-          Ver más historias
-        </button>
-      </div>
-    )}
+    {
+      dogs.length > 6 && (
+        <div class="stories__ver-mas-wrap">
+          <button type="button" class="btn btn--secondary" data-stories-ver-mas>
+            Ver más historias
+          </button>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <SharedGalleryLightbox ariaLabel="Galería de historias" />
 
 <script>
-  import { initSharedGalleries, initSharedGalleryLightbox } from '../scripts/shared-gallery';
+  import { initSharedGalleries, initSharedGalleryLightbox } from "../scripts/shared-gallery";
 
   const PAGE_SIZE = 6;
-  const grid = document.querySelector<HTMLElement>('[data-stories-list]');
-  const button = document.querySelector<HTMLButtonElement>('[data-stories-ver-mas]');
+  const grid = document.querySelector<HTMLElement>("[data-stories-list]");
+  const button = document.querySelector<HTMLButtonElement>("[data-stories-ver-mas]");
 
   if (grid) {
-    const cards = [...grid.querySelectorAll<HTMLElement>('[data-story-card]')];
+    const cards = [...grid.querySelectorAll<HTMLElement>("[data-story-card]")];
     for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
-    cards.forEach(card => grid.appendChild(card));
+    cards.forEach((card) => grid.appendChild(card));
 
     let shown = Math.min(PAGE_SIZE, cards.length);
 
     function applyVisibility() {
-      cards.forEach((card, i) => { card.hidden = i >= shown; });
+      cards.forEach((card, i) => {
+        card.hidden = i >= shown;
+      });
       if (button) button.hidden = shown >= cards.length;
     }
 
-    button?.addEventListener('click', () => {
+    button?.addEventListener("click", () => {
       shown = Math.min(shown + PAGE_SIZE, cards.length);
       applyVisibility();
     });

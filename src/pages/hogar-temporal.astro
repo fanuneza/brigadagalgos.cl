@@ -1,20 +1,36 @@
 ---
-import '../styles/components/page-hero.css';
-import '../styles/components/stepper.css';
-import '../styles/components/form.css';
-import { SITE } from '../config/site.ts';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import PageHero from '../components/PageHero.astro';
-import RequirementCard from '../components/RequirementCard.astro';
-import ProcessStepper from '../components/ProcessStepper.astro';
+import "../styles/components/page-hero.css";
+import "../styles/components/stepper.css";
+import "../styles/components/form.css";
+import { SITE } from "../config/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import RequirementCard from "../components/RequirementCard.astro";
+import ProcessStepper from "../components/ProcessStepper.astro";
 
 const fosterSteps = [
-  { label: 'Postulas desde la web', subLabel: 'Nos cuentas tu disponibilidad, tu casa y quiénes viven contigo.', colorClass: 'primary' },
-  { label: 'Te contacta el equipo', subLabel: 'Conversamos sobre tiempos, implementos y tipo de convivencia.', colorClass: 'secondary' },
-  { label: 'Entrevista y revisión', subLabel: 'Revisamos requisitos de seguridad y el contexto del hogar.', colorClass: 'warm' },
-  { label: 'Llega el galgo', subLabel: 'Coordinamos la acogida y te acompañamos durante el proceso.', colorClass: 'green' },
+  {
+    label: "Postulas desde la web",
+    subLabel: "Nos cuentas tu disponibilidad, tu casa y quiénes viven contigo.",
+    colorClass: "primary",
+  },
+  {
+    label: "Te contacta el equipo",
+    subLabel: "Conversamos sobre tiempos, implementos y tipo de convivencia.",
+    colorClass: "secondary",
+  },
+  {
+    label: "Entrevista y revisión",
+    subLabel: "Revisamos requisitos de seguridad y el contexto del hogar.",
+    colorClass: "warm",
+  },
+  {
+    label: "Llega el galgo",
+    subLabel: "Coordinamos la acogida y te acompañamos durante el proceso.",
+    colorClass: "green",
+  },
 ];
 ---
 
@@ -58,139 +74,160 @@ const fosterSteps = [
             body="Vemos si tienes correa, arnés, camas o mantas, y cómo conviven perros o gatos en casa. Si falta algo, la fundación puede proveer implementos."
           />
         </div>
-        <p class="requirements__note">Si ya viven otros animales contigo, revisamos vacunas al día, esterilización o castración, edades, carácter y convivencia con machos o hembras.</p>
-        <p class="requirements__note">Si hay gatos, necesitamos que tengan un espacio seguro en altura y saber cómo conviven con perros.</p>
-        <p class="requirements__note"><p><strong>Nunca se debe soltar al galgo.</strong> Los paseos siempre deben ser con arnés, correa y chapita con número de teléfono, porque pueden asustarse fácilmente y correr muy rápido.</p>
-      </div>
-    </section>
-
-    <ProcessStepper
-      steps={fosterSteps}
-      eyebrow="EL PROCESO"
-      heading="Así funciona el acogimiento."
-    />
-
-    <section id="form" class="section-padding">
-      <div class="container container--narrow">
-        <p class="eyebrow">POSTULAR</p>
-        <h2>Postulación a hogar temporal.</h2>
-
-        <form class="form" data-form id="foster-form" novalidate>
-          <input type="hidden" name="access_key" value="dac0fa1e-eef6-42af-bdaa-e6292646a3f7" />
-          <input type="hidden" name="form_id" value="dac0fa1e-eef6-42af-bdaa-e6292646a3f7" />
-          <input type="hidden" name="subject" value="Nueva postulación a hogar temporal" />
-
-          <div class="field">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name" required />
-          </div>
-
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required />
-          </div>
-
-          <div class="field">
-            <label for="whatsapp">WhatsApp</label>
-            <div class="phone-input">
-              <span class="phone-prefix" aria-hidden="true">+56</span>
-              <input
-                type="tel"
-                id="whatsapp"
-                name="whatsapp"
-                placeholder="9 1234 5678"
-                pattern="[0-9]{8,9}"
-                inputmode="numeric"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="region">Región</label>
-            <select id="region" name="region" required>
-              <option value="">Selecciona tu región</option>
-              <option value="Arica y Parinacota">Arica y Parinacota</option>
-              <option value="Tarapacá">Tarapacá</option>
-              <option value="Antofagasta">Antofagasta</option>
-              <option value="Atacama">Atacama</option>
-              <option value="Coquimbo">Coquimbo</option>
-              <option value="Valparaíso">Valparaíso</option>
-              <option value="Metropolitana">Metropolitana</option>
-              <option value="O'Higgins">O'Higgins</option>
-              <option value="Maule">Maule</option>
-              <option value="Ñuble">Ñuble</option>
-              <option value="Biobío">Biobío</option>
-              <option value="La Araucanía">La Araucanía</option>
-              <option value="Los Ríos">Los Ríos</option>
-              <option value="Los Lagos">Los Lagos</option>
-              <option value="Aysén">Aysén</option>
-              <option value="Magallanes">Magallanes</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <span id="vivienda-label">Tipo de vivienda</span>
-            <div class="radio-group" role="group" aria-labelledby="vivienda-label">
-              <label class="radio-option">
-                <input type="radio" id="vivienda-patio" name="vivienda" value="Casa con patio" required />
-                Casa con patio
-              </label>
-              <label class="radio-option">
-                <input type="radio" id="vivienda-malla" name="vivienda" value="Departamento con malla protectora" />
-                Departamento con malla protectora
-              </label>
-              <label class="radio-option">
-                <input type="radio" id="vivienda-sin-malla" name="vivienda" value="Departamento sin malla aún" />
-                Departamento sin malla aún
-              </label>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="mascotas">¿Tienes otras mascotas?</label>
-            <textarea id="mascotas" name="mascotas" rows="3" placeholder="Cuéntanos qué mascotas tienes (si ninguna, escribe 'Ninguna')" required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="motivacion">¿Por qué quieres ser hogar temporal?</label>
-            <textarea id="motivacion" name="motivacion" rows="5" placeholder="Cuéntanos un poco sobre ti y tu motivación" required></textarea>
-          </div>
-
-          <div class="field field--checkbox">
-            <input type="checkbox" id="consent" name="consent" required />
-            <label for="consent">Acepto que me contacten por WhatsApp para coordinar la visita.</label>
-          </div>
-
-          <button type="submit" class="btn btn--primary form__submit">
-            <span class="form__submit-label">Enviar postulación</span>
-            <span class="form__submit-spinner" hidden aria-hidden="true">Enviando…</span>
-          </button>
-        </form>
-
-        <div class="form__success" hidden data-form-success id="foster-success">
-          <p class="form__success-title">¡Recibimos tu postulación!</p>
-          <p>Te contactamos por WhatsApp.</p>
-          <a href="/" class="btn btn--secondary">Volver al inicio</a>
-        </div>
-
-        <p class="form__whatsapp-fallback">
-          ¿Prefieres hablar primero?
-          <a href={`${SITE.whatsapp}?text=${encodeURIComponent('Hola, quisiera ser hogar temporal')}`} target="_blank" rel="noopener noreferrer">
-            Escríbenos directo por WhatsApp →
-          </a>
+        <p class="requirements__note">
+          Si ya viven otros animales contigo, revisamos vacunas al día, esterilización o castración, edades, carácter y
+          convivencia con machos o hembras.
+        </p>
+        <p class="requirements__note">
+          Si hay gatos, necesitamos que tengan un espacio seguro en altura y saber cómo conviven con perros.
+        </p>
+        <p class="requirements__note">
+          <p>
+            <strong>Nunca se debe soltar al galgo.</strong> Los paseos siempre deben ser con arnés, correa y chapita con número
+            de teléfono, porque pueden asustarse fácilmente y correr muy rápido.
+          </p>
         </p>
       </div>
+
+      <ProcessStepper steps={fosterSteps} eyebrow="EL PROCESO" heading="Así funciona el acogimiento." />
+
+      <section id="form" class="section-padding">
+        <div class="container container--narrow">
+          <p class="eyebrow">POSTULAR</p>
+          <h2>Postulación a hogar temporal.</h2>
+
+          <form class="form" data-form id="foster-form" novalidate>
+            <input type="hidden" name="access_key" value="dac0fa1e-eef6-42af-bdaa-e6292646a3f7" />
+            <input type="hidden" name="form_id" value="dac0fa1e-eef6-42af-bdaa-e6292646a3f7" />
+            <input type="hidden" name="subject" value="Nueva postulación a hogar temporal" />
+
+            <div class="field">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="whatsapp">WhatsApp</label>
+              <div class="phone-input">
+                <span class="phone-prefix" aria-hidden="true">+56</span>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  placeholder="9 1234 5678"
+                  pattern="[0-9]{8,9}"
+                  inputmode="numeric"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="region">Región</label>
+              <select id="region" name="region" required>
+                <option value="">Selecciona tu región</option>
+                <option value="Arica y Parinacota">Arica y Parinacota</option>
+                <option value="Tarapacá">Tarapacá</option>
+                <option value="Antofagasta">Antofagasta</option>
+                <option value="Atacama">Atacama</option>
+                <option value="Coquimbo">Coquimbo</option>
+                <option value="Valparaíso">Valparaíso</option>
+                <option value="Metropolitana">Metropolitana</option>
+                <option value="O'Higgins">O'Higgins</option>
+                <option value="Maule">Maule</option>
+                <option value="Ñuble">Ñuble</option>
+                <option value="Biobío">Biobío</option>
+                <option value="La Araucanía">La Araucanía</option>
+                <option value="Los Ríos">Los Ríos</option>
+                <option value="Los Lagos">Los Lagos</option>
+                <option value="Aysén">Aysén</option>
+                <option value="Magallanes">Magallanes</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span id="vivienda-label">Tipo de vivienda</span>
+              <div class="radio-group" role="group" aria-labelledby="vivienda-label">
+                <label class="radio-option">
+                  <input type="radio" id="vivienda-patio" name="vivienda" value="Casa con patio" required />
+                  Casa con patio
+                </label>
+                <label class="radio-option">
+                  <input type="radio" id="vivienda-malla" name="vivienda" value="Departamento con malla protectora" />
+                  Departamento con malla protectora
+                </label>
+                <label class="radio-option">
+                  <input type="radio" id="vivienda-sin-malla" name="vivienda" value="Departamento sin malla aún" />
+                  Departamento sin malla aún
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="mascotas">¿Tienes otras mascotas?</label>
+              <textarea
+                id="mascotas"
+                name="mascotas"
+                rows="3"
+                placeholder="Cuéntanos qué mascotas tienes (si ninguna, escribe 'Ninguna')"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="motivacion">¿Por qué quieres ser hogar temporal?</label>
+              <textarea
+                id="motivacion"
+                name="motivacion"
+                rows="5"
+                placeholder="Cuéntanos un poco sobre ti y tu motivación"
+                required></textarea>
+            </div>
+
+            <div class="field field--checkbox">
+              <input type="checkbox" id="consent" name="consent" required />
+              <label for="consent">Acepto que me contacten por WhatsApp para coordinar la visita.</label>
+            </div>
+
+            <button type="submit" class="btn btn--primary form__submit">
+              <span class="form__submit-label">Enviar postulación</span>
+              <span class="form__submit-spinner" hidden aria-hidden="true">Enviando…</span>
+            </button>
+          </form>
+
+          <div class="form__success" hidden data-form-success id="foster-success">
+            <p class="form__success-title">¡Recibimos tu postulación!</p>
+            <p>Te contactamos por WhatsApp.</p>
+            <a href="/" class="btn btn--secondary">Volver al inicio</a>
+          </div>
+
+          <p class="form__whatsapp-fallback">
+            ¿Prefieres hablar primero?
+            <a
+              href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera ser hogar temporal")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Escríbenos directo por WhatsApp →
+            </a>
+          </p>
+        </div>
+      </section>
     </section>
+    <Footer />
   </main>
-  <Footer />
+
+  <style>
+    .requirements__note {
+      margin-top: var(--space-3);
+    }
+  </style>
+
+  <script>
+    import "../scripts/form";
+  </script>
 </BaseLayout>
-
-<style>
-  .requirements__note {
-    margin-top: var(--space-3);
-  }
-
-</style>
-
-<script>import '../scripts/form';</script>

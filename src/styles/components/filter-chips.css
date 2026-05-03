@@ -26,8 +26,9 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .chip-btn {
-    transition: background var(--duration-fast) var(--ease-out),
-                color var(--duration-fast) var(--ease-out);
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
   }
 }
 
@@ -37,11 +38,15 @@
 }
 
 @media (min-width: 768px) {
-  .dog-grid { grid-template-columns: repeat(2, 1fr); }
+  .dog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1024px) {
-  .dog-grid { grid-template-columns: repeat(3, 1fr); }
+  .dog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .dog-grid__count {
@@ -102,7 +107,7 @@
 }
 
 .requisitos-list li::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   left: 0;
   color: var(--color-primary);

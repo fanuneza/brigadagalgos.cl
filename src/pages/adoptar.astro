@@ -1,11 +1,11 @@
 ---
-import '../styles/components/page-hero.css';
-import '../styles/components/stories.css';
-import '../styles/components/dog-card.css';
-import '../styles/components/filter-chips.css';
-import { getCollection } from 'astro:content';
-import { getImage } from 'astro:assets';
-import type { SharedGalleryPhoto } from '../scripts/shared-gallery';
+import "../styles/components/page-hero.css";
+import "../styles/components/stories.css";
+import "../styles/components/dog-card.css";
+import "../styles/components/filter-chips.css";
+import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 import { SITE } from "../config/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
@@ -24,10 +24,10 @@ function shuffle<T>(items: T[]) {
 }
 
 function getAgeType(age: string) {
-  return /cachor/i.test(age) ? 'cachorro' : 'adulto';
+  return /cachor/i.test(age) ? "cachorro" : "adulto";
 }
 
-const rawDogs = await getCollection('adoption-dogs');
+const rawDogs = await getCollection("adoption-dogs");
 
 const dogs = await Promise.all(
   shuffle(rawDogs).map(async (entry) => ({
@@ -38,11 +38,13 @@ const dogs = await Promise.all(
     weight: entry.data.weight,
     details: entry.data.details,
     pictures: await Promise.all(
-      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => ({
-        card_mobile:  (await getImage({ src: img, width: 400,  format: 'avif' })).src,
-        card_desktop: (await getImage({ src: img, width: 700,  format: 'avif' })).src,
-        lightbox:     (await getImage({ src: img, width: 1200, format: 'avif' })).src,
-      }))
+      entry.data.gallery.map(
+        async (img): Promise<SharedGalleryPhoto> => ({
+          card_mobile: (await getImage({ src: img, width: 400, format: "avif" })).src,
+          card_desktop: (await getImage({ src: img, width: 700, format: "avif" })).src,
+          lightbox: (await getImage({ src: img, width: 1200, format: "avif" })).src,
+        })
+      )
     ),
   }))
 );
@@ -65,38 +67,22 @@ const dogs = await Promise.all(
         <div class="adoption-intro">
           <p class="eyebrow">EN ADOPCIÓN</p>
           <p class="adoption-intro__lead">
-            Cada galgo llega con una historia y con un ritmo propio. Aquí te
-            mostramos a quienes ya están listos para conocerte.
+            Cada galgo llega con una historia y con un ritmo propio. Aquí te mostramos a quienes ya están listos para
+            conocerte.
           </p>
         </div>
 
         <div class="filter-chips" role="group" aria-label="Filtrar galgos">
-          <button
-            class="chip-btn chip-btn--active"
-            data-filter="all"
-            aria-pressed="true">Todos</button
-          >
-          <button class="chip-btn" data-filter="Macho" aria-pressed="false"
-            >Macho</button
-          >
-          <button class="chip-btn" data-filter="Hembra" aria-pressed="false"
-            >Hembra</button
-          >
-          <button class="chip-btn" data-filter="adulto" aria-pressed="false"
-            >Adultos</button
-          >
-          <button class="chip-btn" data-filter="cachorro" aria-pressed="false"
-            >Cachorros</button
-          >
+          <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>
+          <button class="chip-btn" data-filter="Macho" aria-pressed="false">Macho</button>
+          <button class="chip-btn" data-filter="Hembra" aria-pressed="false">Hembra</button>
+          <button class="chip-btn" data-filter="adulto" aria-pressed="false">Adultos</button>
+          <button class="chip-btn" data-filter="cachorro" aria-pressed="false">Cachorros</button>
         </div>
 
         <p class="dog-grid__count" aria-live="polite">
           <span data-count>{dogs.length}</span>
-          <span data-count-label
-            >{
-              dogs.length === 1 ? "galgo disponible" : "galgos disponibles"
-            }</span
-          >
+          <span data-count-label>{dogs.length === 1 ? "galgo disponible" : "galgos disponibles"}</span>
         </p>
 
         <div class="dog-grid" data-dog-grid>
@@ -116,9 +102,7 @@ const dogs = await Promise.all(
 
                   <div class="story-card__body dog-card__body">
                     <div class="dog-card__header">
-                      <h2 class="story-card__name dog-card__name">
-                        {dog.name}
-                      </h2>
+                      <h2 class="story-card__name dog-card__name">{dog.name}</h2>
                       <div class="dog-card__chips">
                         <span class="chip chip--sex">{dog.sex}</span>
                         <span class="chip chip--age">{dog.age}</span>
@@ -126,12 +110,7 @@ const dogs = await Promise.all(
                       </div>
                     </div>
                     <p class="dog-card__details">{dog.details}</p>
-                    <a
-                      href={waHref}
-                      class="btn btn--primary dog-card__cta"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={waHref} class="btn btn--primary dog-card__cta" target="_blank" rel="noopener noreferrer">
                       Me interesa {dog.name}
                     </a>
                   </div>
@@ -142,13 +121,14 @@ const dogs = await Promise.all(
         </div>
 
         <p class="dog-grid__support-note">
-          Seguimos acompañándote también después de la adopción, para que el proceso sea bueno para tu familia y para el galgo.
+          Seguimos acompañándote también después de la adopción, para que el proceso sea bueno para tu familia y para el
+          galgo.
         </p>
 
         <div class="dog-grid__empty" hidden aria-hidden="true">
           <p>
-            Por ahora no hay galgos publicados en adopción. Escríbenos igual y
-            te avisamos cuando llegue un match para tu hogar.
+            Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando llegue un match para
+            tu hogar.
           </p>
           <a
             href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera adoptar un galgo")}`}
@@ -167,29 +147,19 @@ const dogs = await Promise.all(
         <p class="eyebrow">PROCESO</p>
         <h2>Te guiamos paso a paso.</h2>
         <p class="adoption-process__lead">
-          “Adoptar es un compromiso para toda la vida”, y por eso buscamos el
-          mejor match para cada galgo y cada hogar.
+          “Adoptar es un compromiso para toda la vida”, y por eso buscamos el mejor match para cada galgo y cada hogar.
         </p>
         <ol class="adoption-process__list">
+          <li>Nos cuentas de tu hogar y tu rutina por formulario o WhatsApp.</li>
           <li>
-            Nos cuentas de tu hogar y tu rutina por formulario o WhatsApp.
+            El equipo de adopciones te contacta y hacemos una entrevista para conocer mejor tu rutina y resolver dudas.
           </li>
+          <li>Buscamos el galgo que mejor encaja contigo, según estilo de vida y perfil familiar.</li>
           <li>
-            El equipo de adopciones te contacta y hacemos una entrevista para
-            conocer mejor tu rutina y resolver dudas.
+            Coordinamos un encuentro para conocerse sin presión y, si hay match, puede venir un período de prueba de dos
+            semanas.
           </li>
-          <li>
-            Buscamos el galgo que mejor encaja contigo, según estilo de vida y
-            perfil familiar.
-          </li>
-          <li>
-            Coordinamos un encuentro para conocerse sin presión y, si hay match,
-            puede venir un período de prueba de dos semanas.
-          </li>
-          <li>
-            Si todo funciona bien, firmamos el contrato y seguimos presentes
-            también después de la adopción.
-          </li>
+          <li>Si todo funciona bien, firmamos el contrato y seguimos presentes también después de la adopción.</li>
         </ol>
       </div>
     </section>
@@ -197,10 +167,7 @@ const dogs = await Promise.all(
     <section class="section-padding tail-cta">
       <div class="container container--narrow">
         <h3>¿Quieres hablarlo antes de postular?</h3>
-        <p>
-          Escríbenos sin apuro. Si todavía no sabes qué galgo encaja mejor con
-          tu casa, lo conversamos contigo.
-        </p>
+        <p>Escríbenos sin apuro. Si todavía no sabes qué galgo encaja mejor con tu casa, lo conversamos contigo.</p>
         <a
           href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera saber más sobre adopción")}`}
           class="btn btn--primary"

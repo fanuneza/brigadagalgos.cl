@@ -5,8 +5,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 @media (hover: hover) {
@@ -64,9 +65,18 @@
   border-radius: var(--radius-sm);
 }
 
-.chip--sex    { background: var(--color-primary);       color: var(--color-text); }
-.chip--age    { background: var(--color-secondary-100); color: var(--color-text); }
-.chip--weight { background: var(--color-accent-warm);   color: var(--color-text); }
+.chip--sex {
+  background: var(--color-primary);
+  color: var(--color-text);
+}
+.chip--age {
+  background: var(--color-secondary-100);
+  color: var(--color-text);
+}
+.chip--weight {
+  background: var(--color-accent-warm);
+  color: var(--color-text);
+}
 
 .dog-card__personality {
   font-size: var(--font-size-sm);
