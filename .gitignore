@@ -164,4 +164,7 @@ test-results/
 playwright-report/
 
 # Local dev documentation
+Astro.md
+CI.md
+Cloudflare.md
 PLAYWRIGHT_VISUAL_CAPTURE.md
