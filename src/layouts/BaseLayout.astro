@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 
 interface Props {
@@ -24,6 +25,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.ico" />
+    <ClientRouter />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

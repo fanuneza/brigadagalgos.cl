@@ -12,9 +12,11 @@ export function showToast(message: string, duration = 4000): void {
   }, duration);
 }
 
-const form = document.querySelector<HTMLFormElement>("[data-form]");
+function initForm() {
+  const form = document.querySelector<HTMLFormElement>("[data-form]");
 
-if (form) {
+  if (!form) return;
+
   const submitBtn = form.querySelector<HTMLButtonElement>('[type="submit"]');
   const submitLabel = form.querySelector<HTMLElement>(".form__submit-label");
   const submitSpinner = form.querySelector<HTMLElement>(".form__submit-spinner");
@@ -99,4 +101,8 @@ if (form) {
       setSubmitting(false);
     }
   });
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("astro:page-load", initForm);
 }

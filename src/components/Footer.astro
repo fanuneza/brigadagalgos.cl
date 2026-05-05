@@ -5,7 +5,7 @@ import { SITE } from "../config/site.ts";
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a href="/" aria-label="Brigada Galgos — inicio" class="footer__brand-link">
+      <a href="/" aria-label="Brigada Galgos — inicio" class="footer__brand-link" data-astro-prefetch>
         <img
           src="/images/brigada-galgos-logo.png"
           alt="Brigada Galgos"
@@ -58,10 +58,10 @@ import { SITE } from "../config/site.ts";
     <div class="footer__nav">
       <h3 class="footer__section-title">Navegar</h3>
       <ul class="footer__list">
-        <li><a href="/adoptar" class="footer__link">Adoptar</a></li>
-        <li><a href="/hogar-temporal" class="footer__link">Hogar temporal</a></li>
-        <li><a href="/donar" class="footer__link">Donar</a></li>
-        <li><a href="/contacto" class="footer__link">Contacto</a></li>
+        <li><a href="/adoptar/" class="footer__link" data-astro-prefetch>Adoptar</a></li>
+        <li><a href="/hogar-temporal/" class="footer__link" data-astro-prefetch>Hogar temporal</a></li>
+        <li><a href="/donar/" class="footer__link" data-astro-prefetch>Donar</a></li>
+        <li><a href="/contacto/" class="footer__link" data-astro-prefetch>Contacto</a></li>
       </ul>
     </div>
   </div>

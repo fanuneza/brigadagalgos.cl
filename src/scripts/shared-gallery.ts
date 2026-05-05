@@ -15,7 +15,7 @@ const SWIPE_THRESHOLD = 42;
 const LIGHTBOX_ROOT_SELECTOR = "[data-shared-gallery-lightbox]";
 
 let lightboxState: { item: SharedGalleryItem; index: number } | null = null;
-let lightboxInitialized = false;
+let documentKeydownAttached = false;
 
 function wrapIndex(index: number, total: number) {
   return ((index % total) + total) % total;
@@ -174,10 +174,6 @@ export function buildSharedGalleryMarkup(item: SharedGalleryItem) {
 }
 
 export function initSharedGalleryLightbox() {
-  if (lightboxInitialized) {
-    return;
-  }
-
   const elements = getLightboxElements();
   if (!elements) {
     return;
@@ -187,21 +183,22 @@ export function initSharedGalleryLightbox() {
   elements.next?.addEventListener("click", () => stepLightbox(1));
   elements.closeButtons.forEach((button) => button.addEventListener("click", closeLightbox));
 
-  document.addEventListener("keydown", (event) => {
-    if (!lightboxState) {
-      return;
-    }
+  if (!documentKeydownAttached) {
+    document.addEventListener("keydown", (event) => {
+      if (!lightboxState) {
+        return;
+      }
 
-    if (event.key === "Escape") {
-      closeLightbox();
-    } else if (event.key === "ArrowLeft") {
-      stepLightbox(-1);
-    } else if (event.key === "ArrowRight") {
-      stepLightbox(1);
-    }
-  });
-
-  lightboxInitialized = true;
+      if (event.key === "Escape") {
+        closeLightbox();
+      } else if (event.key === "ArrowLeft") {
+        stepLightbox(-1);
+      } else if (event.key === "ArrowRight") {
+        stepLightbox(1);
+      }
+    });
+    documentKeydownAttached = true;
+  }
 }
 
 export function initSharedGalleries(scope: ParentNode = document) {
@@ -380,9 +377,5 @@ if (typeof document !== "undefined") {
     initSharedGalleries();
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
+  document.addEventListener("astro:page-load", boot);
 }
