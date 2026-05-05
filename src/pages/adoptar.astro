@@ -88,7 +88,7 @@ const dogs = await Promise.all(
         <div class="dog-grid" data-dog-grid>
           {
             dogs.map((dog) => {
-              const waHref = `${SITE.whatsapp}?text=${encodeURIComponent(`Hola, me interesa adoptar a ${dog.name}`)}`;
+              const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
               const ageType = getAgeType(dog.age);
 
               return (
@@ -110,7 +110,7 @@ const dogs = await Promise.all(
                       </div>
                     </div>
                     <p class="dog-card__details">{dog.details}</p>
-                    <a href={waHref} class="btn btn--primary dog-card__cta" target="_blank" rel="noopener noreferrer">
+                    <a href={formHref} class="btn btn--primary dog-card__cta" target="_blank" rel="noopener noreferrer">
                       Me interesa {dog.name}
                     </a>
                   </div>

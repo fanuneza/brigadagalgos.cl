@@ -1,0 +1,18 @@
+.foster-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 640px;
+  margin-inline: auto;
+  margin-top: var(--space-6);
+}
+
+.foster-cta .btn {
+  align-self: center;
+}
+
+.foster-cta__fallback {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
