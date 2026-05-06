@@ -1,5 +1,3 @@
-import { showToast } from "./form";
-
 const BANK_DATA = `Nombre: Fundación Brigada Galgos
 RUT: 65.132.425-4
 Banco: Mercado Pago
@@ -7,14 +5,29 @@ Tipo de cuenta: Cuenta Vista
 Número de cuenta: 1073480715
 Email: contacto@brigadagalgos.cl`;
 
-async function copyText(value: string, successMessage: string) {
+async function copyText(value: string) {
   try {
     await navigator.clipboard.writeText(value);
   } catch {
     window.prompt("Copiá estos datos:", value);
   }
+}
 
-  showToast(successMessage, 3000);
+function showCopiedTooltip(target: HTMLElement) {
+  const existing = target.querySelector(".copy-tooltip");
+  if (existing) return;
+
+  const tooltip = document.createElement("span");
+  tooltip.className = "copy-tooltip";
+  tooltip.textContent = "Copiado";
+  target.appendChild(tooltip);
+
+  requestAnimationFrame(() => tooltip.classList.add("copy-tooltip--visible"));
+
+  setTimeout(() => {
+    tooltip.classList.remove("copy-tooltip--visible");
+    tooltip.addEventListener("transitionend", () => tooltip.remove(), { once: true });
+  }, 1500);
 }
 
 function initCopyData() {
@@ -28,13 +41,15 @@ function initCopyData() {
     }
 
     button.addEventListener("click", async () => {
-      await copyText(value, "Línea copiada ✓");
+      await copyText(value);
+      showCopiedTooltip(button);
     });
   });
 
   if (btn) {
     btn.addEventListener("click", async () => {
-      await copyText(BANK_DATA, "Datos copiados ✓");
+      await copyText(BANK_DATA);
+      showCopiedTooltip(btn);
     });
   }
 }

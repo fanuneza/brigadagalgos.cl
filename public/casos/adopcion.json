@@ -22,48 +22,48 @@
     ]
   },
   {
-    "id": "nina",
-    "name": "Niña",
+    "id": "huayca",
+    "name": "Huayca",
     "sex": "Hembra",
     "age": "Edad por confirmar",
     "weight": "Peso por confirmar",
-    "details": "A Niña la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.",
+    "details": "A Huayca la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.",
     "pictures": [
       {
-        "source": "/casos/adopcion/nina/nina-01.jpg",
-        "card_mobile": "/casos/adopcion/nina/nina-01-mobile.webp",
-        "card_desktop": "/casos/adopcion/nina/nina-01-desktop.webp",
-        "lightbox": "/casos/adopcion/nina/nina-01-lightbox.webp"
+        "source": "/casos/adopcion/huayca/huayca-01.jpg",
+        "card_mobile": "/casos/adopcion/huayca/huayca-01-mobile.webp",
+        "card_desktop": "/casos/adopcion/huayca/huayca-01-desktop.webp",
+        "lightbox": "/casos/adopcion/huayca/huayca-01-lightbox.webp"
       },
       {
-        "source": "/casos/adopcion/nina/nina-02.jpg",
-        "card_mobile": "/casos/adopcion/nina/nina-02-mobile.webp",
-        "card_desktop": "/casos/adopcion/nina/nina-02-desktop.webp",
-        "lightbox": "/casos/adopcion/nina/nina-02-lightbox.webp"
+        "source": "/casos/adopcion/huayca/huayca-02.jpg",
+        "card_mobile": "/casos/adopcion/huayca/huayca-02-mobile.webp",
+        "card_desktop": "/casos/adopcion/huayca/huayca-02-desktop.webp",
+        "lightbox": "/casos/adopcion/huayca/huayca-02-lightbox.webp"
       },
       {
-        "source": "/casos/adopcion/nina/nina-03.jpg",
-        "card_mobile": "/casos/adopcion/nina/nina-03-mobile.webp",
-        "card_desktop": "/casos/adopcion/nina/nina-03-desktop.webp",
-        "lightbox": "/casos/adopcion/nina/nina-03-lightbox.webp"
+        "source": "/casos/adopcion/huayca/huayca-03.jpg",
+        "card_mobile": "/casos/adopcion/huayca/huayca-03-mobile.webp",
+        "card_desktop": "/casos/adopcion/huayca/huayca-03-desktop.webp",
+        "lightbox": "/casos/adopcion/huayca/huayca-03-lightbox.webp"
       },
       {
-        "source": "/casos/adopcion/nina/nina-04.jpg",
-        "card_mobile": "/casos/adopcion/nina/nina-04-mobile.webp",
-        "card_desktop": "/casos/adopcion/nina/nina-04-desktop.webp",
-        "lightbox": "/casos/adopcion/nina/nina-04-lightbox.webp"
+        "source": "/casos/adopcion/huayca/huayca-04.jpg",
+        "card_mobile": "/casos/adopcion/huayca/huayca-04-mobile.webp",
+        "card_desktop": "/casos/adopcion/huayca/huayca-04-desktop.webp",
+        "lightbox": "/casos/adopcion/huayca/huayca-04-lightbox.webp"
       },
       {
-        "source": "/casos/adopcion/nina/nina-05.jpg",
-        "card_mobile": "/casos/adopcion/nina/nina-05-mobile.webp",
-        "card_desktop": "/casos/adopcion/nina/nina-05-desktop.webp",
-        "lightbox": "/casos/adopcion/nina/nina-05-lightbox.webp"
+        "source": "/casos/adopcion/huayca/huayca-05.jpg",
+        "card_mobile": "/casos/adopcion/huayca/huayca-05-mobile.webp",
+        "card_desktop": "/casos/adopcion/huayca/huayca-05-desktop.webp",
+        "lightbox": "/casos/adopcion/huayca/huayca-05-lightbox.webp"
       },
       {
-        "source": "/casos/adopcion/nina/nina-06.jpg",
-        "card_mobile": "/casos/adopcion/nina/nina-06-mobile.webp",
-        "card_desktop": "/casos/adopcion/nina/nina-06-desktop.webp",
-        "lightbox": "/casos/adopcion/nina/nina-06-lightbox.webp"
+        "source": "/casos/adopcion/huayca/huayca-06.jpg",
+        "card_mobile": "/casos/adopcion/huayca/huayca-06-mobile.webp",
+        "card_desktop": "/casos/adopcion/huayca/huayca-06-desktop.webp",
+        "lightbox": "/casos/adopcion/huayca/huayca-06-lightbox.webp"
       }
     ]
   },

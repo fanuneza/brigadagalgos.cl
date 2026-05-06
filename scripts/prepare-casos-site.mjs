@@ -16,8 +16,8 @@ const CARD_SIZES = {
 
 const LIGHTBOX_SIZE = 1600;
 const SUCCESS_STATES = new Set(["Adoptado", "Adoptada"]);
-const ADOPTION_IDS = ["turron", "nina", "foxy", "arepita", "loica", "olga"];
-const MOVED_TO_ADOPTION = new Set(["nina"]);
+const ADOPTION_IDS = ["turron", "huayca", "foxy", "arepita", "loica", "olga"];
+const MOVED_TO_ADOPTION = new Set(["huayca"]);
 
 const SUCCESS_OVERRIDES = {
   fermin: {
@@ -99,12 +99,12 @@ const ADOPTION_OVERRIDES = {
     details:
       "A Turrón lo arrojaron desde una camioneta en Isla de Maipo y quedó con una fractura que hubo que operar. Hoy está recuperado y listo para encontrar una familia tranquila.",
   },
-  nina: {
-    name: "Niña",
+  huayca: {
+    name: "Huayca",
     age: "Edad por confirmar",
     weight: "Peso por confirmar",
     details:
-      "A Niña la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.",
+      "A Huayca la rescatamos con apoyo de la PDI en Paine. Pasó por cirugía por piometra y varios exámenes, y ahora queremos encontrarle una familia paciente que respete su ritmo.",
   },
   foxy: {
     age: "7 años aprox.",
@@ -543,7 +543,7 @@ async function buildAdoptionFeed() {
     }
 
     let pictures;
-    if (id === "nina") {
+    if (id === "huayca") {
       pictures = await buildCopiedPictureSetFromExistingVariants(id, path.join(publicCasosRoot, "exito", id));
     } else if (id === "foxy") {
       pictures = await buildCopiedPictureSetFromPreparedWebp(id, path.join(publicCasosRoot, "site", id));
