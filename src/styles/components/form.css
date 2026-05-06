@@ -1,4 +1,4 @@
-@import "./toast.css";
+@import url("./toast.css");
 
 .form {
   display: flex;

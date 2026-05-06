@@ -26,7 +26,22 @@ const successDogs = defineCollection({
     }),
 });
 
+const supporters = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/supporters" }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      description: z.string(),
+      website: z.url(),
+      kind: z.enum(["Institucion", "Empresa", "Persona", "Fundacion", "Colectivo"]),
+      order: z.number().int().optional(),
+      logo: image(),
+      logoAlt: z.string(),
+    }),
+});
+
 export const collections = {
   "adoption-dogs": adoptionDogs,
   "success-dogs": successDogs,
+  supporters,
 };

@@ -1,0 +1,98 @@
+---
+import "../styles/components/page-hero.css";
+import "../styles/components/colaboradores.css";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { SITE } from "../config/site.ts";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import PageHero from "../components/PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const supporters = (await getCollection("supporters")).sort((a, b) => {
+  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+
+  if (orderA !== orderB) {
+    return orderA - orderB;
+  }
+
+  return a.data.name.localeCompare(b.data.name, "es");
+});
+
+const supportersGridClass =
+  supporters.length === 1 ? "supporters-grid supporters-grid--single" : "supporters-grid";
+---
+
+<BaseLayout
+  title="Colaboradores | Brigada Galgos"
+  description="Conoce a las personas e instituciones que apoyan a Brigada Galgos y ayudan a sostener rescates, recuperación y adopciones responsables."
+>
+  <Navbar />
+  <main>
+    <PageHero
+      eyebrow="COLABORADORES"
+      h1="Quiénes sostienen esta red de ayuda."
+      lead="Detrás de cada rescate hay instituciones, marcas y personas que ayudan a que los galgos reciban cuidado, tiempo y nuevas oportunidades."
+    />
+
+    <section class="section-padding">
+      <div class="container">
+        <div class="supporters-intro">
+          <p class="eyebrow">RED DE APOYO</p>
+          <p class="supporters-intro__lead">
+            Este espacio reúne a quienes apoyan el trabajo de Brigada Galgos y hacen posible acompañar mejor cada
+            rescate, recuperación y proceso de adopción.
+          </p>
+        </div>
+
+        <div class={supportersGridClass}>
+          {
+            supporters.map((supporter) => (
+              <article class="supporter-card">
+                <div class="supporter-card__logo-stage">
+                  <Image
+                    src={supporter.data.logo}
+                    alt={supporter.data.logoAlt}
+                    class="supporter-card__logo"
+                    widths={[240, 360, 480]}
+                    sizes="(min-width: 1024px) 360px, 80vw"
+                  />
+                </div>
+
+                <div class="supporter-card__body">
+                  <span class="supporter-card__kind">{supporter.data.kind}</span>
+                  <h2 class="supporter-card__name">{supporter.data.name}</h2>
+                  <p class="supporter-card__description">{supporter.data.description}</p>
+                  <a href={supporter.data.website} class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
+                    Visitar sitio
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding supporters-cta">
+      <div class="container container--narrow">
+        <p class="eyebrow">SUMAR APOYO</p>
+        <h2>Si quieres colaborar, conversemos.</h2>
+        <p class="supporters-cta__lead">
+          Si representas a una institución, marca o equipo profesional y quieres apoyar a Brigada Galgos, estaremos
+          felices de explorar una forma de trabajo en conjunto.
+        </p>
+        <a
+          href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, me interesa colaborar con Brigada Galgos")}`}
+          class="btn btn--primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hablar por WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
