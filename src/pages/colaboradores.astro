@@ -20,8 +20,7 @@ const supporters = (await getCollection("supporters")).sort((a, b) => {
   return a.data.name.localeCompare(b.data.name, "es");
 });
 
-const supportersGridClass =
-  supporters.length === 1 ? "supporters-grid supporters-grid--single" : "supporters-grid";
+const supportersGridClass = supporters.length === 1 ? "supporters-grid supporters-grid--single" : "supporters-grid";
 ---
 
 <BaseLayout
