@@ -108,6 +108,12 @@
   margin: 0;
 }
 
+.supporter-card__description-link {
+  color: var(--color-primary-700);
+  font-weight: var(--weight-semi);
+  text-underline-offset: 0.15em;
+}
+
 .supporter-card .btn {
   width: 100%;
   margin-top: auto;

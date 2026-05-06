@@ -32,6 +32,8 @@ const supporters = defineCollection({
     z.object({
       name: z.string(),
       description: z.string(),
+      thanksLabel: z.string().optional(),
+      thanksUrl: z.url().optional(),
       website: z.url(),
       kind: z.enum(["Institucion", "Empresa", "Persona", "Fundacion", "Colectivo"]),
       order: z.number().int().optional(),

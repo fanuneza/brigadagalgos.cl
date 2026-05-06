@@ -165,3 +165,12 @@ a:not([class]):focus-visible {
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-focus);
 }
+
+a[target="_blank"]:not([data-external-indicator="off"])::after {
+  content: "↗";
+  display: inline-block;
+  margin-inline-start: 0.3em;
+  font-size: 0.85em;
+  line-height: 1;
+  vertical-align: baseline;
+}

@@ -61,13 +61,31 @@ import { SITE } from "../config/site.ts";
     <a href="/donar/" class="btn btn--primary drawer__cta" data-astro-prefetch>Quiero donar</a>
 
     <div class="drawer__social">
-      <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <a
+        href={SITE.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp"
+        data-external-indicator="off"
+      >
         <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" class="drawer__social-icon" width="24" height="24" />
       </a>
-      <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <a
+        href={SITE.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        data-external-indicator="off"
+      >
         <img src="/icons/instagram.svg" alt="" aria-hidden="true" class="drawer__social-icon" width="24" height="24" />
       </a>
-      <a href={SITE.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <a
+        href={SITE.facebook}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+        data-external-indicator="off"
+      >
         <img src="/icons/facebook.svg" alt="" aria-hidden="true" class="drawer__social-icon" width="24" height="24" />
       </a>
     </div>
