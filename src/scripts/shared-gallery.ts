@@ -1,6 +1,8 @@
 export interface SharedGalleryPhoto {
-  card_mobile: string;
-  card_desktop: string;
+  cardAvifSrcSet: string;
+  cardWebpSrcSet: string;
+  cardSizes: string;
+  cardFallbackSrc: string;
   lightbox: string;
   alt?: string;
   caption?: string;
@@ -41,9 +43,12 @@ function getPhotoCaption(item: SharedGalleryItem, index: number) {
 function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, index: number) {
   return `
     <picture>
-      <source media="(max-width: 1023px)" srcset="${photo.card_mobile}" />
+      <source srcset="${photo.cardAvifSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/avif" />
+      <source srcset="${photo.cardWebpSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/webp" />
       <img
-        src="${photo.card_desktop}"
+        src="${photo.cardFallbackSrc}"
+        srcset="${photo.cardWebpSrcSet}"
+        sizes="${escapeAttribute(photo.cardSizes)}"
         alt="${escapeAttribute(alt)}"
         class="story-card__img"
         loading="${index === 0 ? "eager" : "lazy"}"

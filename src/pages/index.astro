@@ -17,8 +17,8 @@ import StoriesSection from "../components/StoriesSection.astro";
 import DonationBanner from "../components/DonationBanner.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
-import { getImage } from "astro:assets";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
+import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
 
 const rescueSteps = [
   {
@@ -56,13 +56,7 @@ const storyDogs = await Promise.all(
     name: entry.data.name,
     story: entry.data.story,
     photos: await Promise.all(
-      entry.data.gallery.map(
-        async (img): Promise<SharedGalleryPhoto> => ({
-          card_mobile: (await getImage({ src: img, width: 400, format: "avif" })).src,
-          card_desktop: (await getImage({ src: img, width: 700, format: "avif" })).src,
-          lightbox: (await getImage({ src: img, width: 1200, format: "avif" })).src,
-        })
-      )
+      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
     ),
   }))
 );

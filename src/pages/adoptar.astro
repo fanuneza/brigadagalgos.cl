@@ -4,7 +4,6 @@ import "../styles/components/stories.css";
 import "../styles/components/dog-card.css";
 import "../styles/components/filter-chips.css";
 import { getCollection } from "astro:content";
-import { getImage } from "astro:assets";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 import { SITE } from "../config/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -13,6 +12,7 @@ import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
 import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
+import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
 
 function shuffle<T>(items: T[]) {
   const copy = [...items];
@@ -38,13 +38,7 @@ const dogs = await Promise.all(
     weight: entry.data.weight,
     details: entry.data.details,
     pictures: await Promise.all(
-      entry.data.gallery.map(
-        async (img): Promise<SharedGalleryPhoto> => ({
-          card_mobile: (await getImage({ src: img, width: 400, format: "avif" })).src,
-          card_desktop: (await getImage({ src: img, width: 700, format: "avif" })).src,
-          lightbox: (await getImage({ src: img, width: 1200, format: "avif" })).src,
-        })
-      )
+      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
     ),
   }))
 );
