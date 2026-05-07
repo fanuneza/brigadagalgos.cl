@@ -9,6 +9,16 @@ import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+const PARTNER_UTM_SOURCE = "brigadagalgos.cl";
+const PARTNER_UTM_MEDIUM = "referral";
+
+function withPartnerUtm(url: string) {
+  const trackedUrl = new URL(url);
+  trackedUrl.searchParams.set("utm_source", PARTNER_UTM_SOURCE);
+  trackedUrl.searchParams.set("utm_medium", PARTNER_UTM_MEDIUM);
+  return trackedUrl.toString();
+}
+
 const supporters = (await getCollection("supporters")).sort((a, b) => {
   const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
   const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
@@ -67,7 +77,7 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
                     {supporter.data.thanksLabel && supporter.data.thanksUrl && (
                       <>
                         <a
-                          href={supporter.data.thanksUrl}
+                          href={withPartnerUtm(supporter.data.thanksUrl)}
                           class="supporter-card__description-link"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -77,7 +87,12 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
                       </>
                     )}
                   </p>
-                  <a href={supporter.data.website} class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={withPartnerUtm(supporter.data.website)}
+                    class="btn btn--secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Visitar sitio
                   </a>
                 </div>
