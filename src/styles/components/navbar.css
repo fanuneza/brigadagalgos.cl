@@ -48,6 +48,7 @@
 
 .navbar__inner .navbar__cta {
   display: none;
+  white-space: nowrap;
 }
 
 .navbar__hamburger {
