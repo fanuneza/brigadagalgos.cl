@@ -1,6 +1,6 @@
 ---
 name: Cannae
-description: "Cannae apoya a Brigada Galgos como parte de una red que hace posible mejores cuidados, recuperación y bienestar para los perros que acompañamos."
+description: "Nos proveen productos de bienestar y cuidado que usamos en la recuperación diaria de nuestros galgos."
 thanksLabel: "Gracias, Cannae"
 thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://cannaemascotas.cl/"

@@ -1,6 +1,6 @@
 ---
 name: Centro Veterinario San Ignacio
-description: "Nos acompañan en cirugías y en casos complejos de nuestros galgos rescatados en la Región de Valparaíso."
+description: "Nos acompañan en cirugías y casos complejos en la Región de Valparaíso."
 # thanksLabel: "Gracias, Cannae"
 # thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://www.instagram.com/cv_sanignacio"

@@ -1,6 +1,6 @@
 ---
 name: Pet Family Care
-description: "Nos apoyan con atencion veterinaria especializada para nuestros rescatados en la Región Metropolitana."
+description: "Nos apoyan con atención veterinaria especializada en la Región Metropolitana."
 # thanksLabel: "Gracias, Cannae"
 # thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://petfamilycare.cl/"

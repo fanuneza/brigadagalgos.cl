@@ -1,9 +1,11 @@
 [
   {
-    "id": "alfonsina",
-    "nombre_publico": "Alfonsina",
+    "id": "antonia",
+    "nombre_publico": "Antonia",
     "aliases": [],
-    "source_folders": ["21-Alfonsina"],
+    "source_folders": [
+      "21-Antonia"
+    ],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": null,
@@ -19,53 +21,53 @@
     "descripcion_fisica": "Perro o perra con sexo no confirmado con tamaño no confirmado y descripción física preliminar. Esta expansión automática no revisó visualmente cada imagen individual, por lo que color, patrón de pelaje y rasgos finos quedan pendientes de validación editorial.",
     "descripcion_confianza": "baja",
     "historia_breve": "No hay una cronología administrativa clara en planilla; este borrador se basa en la estructura de carpetas y archivos disponibles.",
-    "historia_breve_site": "De Alfonsina no tenemos una cronología completa, pero sí fotos y 7 archivos médicos y de imagen. Sabemos que pasó por atención veterinaria y después fue adoptada.",
+    "historia_breve_site": "De Antonia no tenemos una cronología completa, pero sí fotos y 7 archivos médicos y de imagen. Sabemos que pasó por atención veterinaria y después fue adoptada.",
     "medical_summary": "Además, la carpeta contiene 7 archivos médicos o administrativos clasificados en: exam, imaging.",
     "medical_files": [
       {
-        "path": "21-Alfonsina/Alfonsina - Petfamily Care Rx - 23-01-2024.pdf",
+        "path": "21-Antonia/Antonia - Petfamily Care Rx - 23-01-2024.pdf",
         "kind": "imaging",
         "date": "2024-01-23",
         "summary": "Radiografía o informe clínico",
         "confidence": "media"
       },
       {
-        "path": "21-Alfonsina/Alfonsina 185 5526.pdf",
+        "path": "21-Antonia/Antonia 185 5526.pdf",
         "kind": "exam",
         "date": null,
-        "summary": "Archivo médico o administrativo: Alfonsina 185 5526.pdf",
+        "summary": "Archivo médico o administrativo: Antonia 185 5526.pdf",
         "confidence": "alta"
       },
       {
-        "path": "21-Alfonsina/Alfonsina 2612.pdf",
+        "path": "21-Antonia/Antonia 2612.pdf",
         "kind": "exam",
         "date": null,
-        "summary": "Archivo médico o administrativo: Alfonsina 2612.pdf",
+        "summary": "Archivo médico o administrativo: Antonia 2612.pdf",
         "confidence": "alta"
       },
       {
-        "path": "21-Alfonsina/Alfonsina 7-2-24 (PetFamily Care) (3).pdf",
+        "path": "21-Antonia/Antonia 7-2-24 (PetFamily Care) (3).pdf",
         "kind": "exam",
         "date": null,
-        "summary": "Archivo médico o administrativo: Alfonsina 7-2-24 (PetFamily Care) (3).pdf",
+        "summary": "Archivo médico o administrativo: Antonia 7-2-24 (PetFamily Care) (3).pdf",
         "confidence": "alta"
       },
       {
-        "path": "21-Alfonsina/Antonia - Alejandra Sanchez - PFC - 884 (1).pdf",
+        "path": "21-Antonia/Antonia - Alejandra Sanchez - PFC - 884 (1).pdf",
         "kind": "exam",
         "date": null,
         "summary": "Archivo médico o administrativo: Antonia - Alejandra Sanchez - PFC - 884 (1).pdf",
         "confidence": "alta"
       },
       {
-        "path": "21-Alfonsina/Antonia - Petfamily Care Rx - 26-11-2024.pdf",
+        "path": "21-Antonia/Antonia - Petfamily Care Rx - 26-11-2024.pdf",
         "kind": "imaging",
         "date": "2024-11-26",
         "summary": "Radiografía o informe clínico",
         "confidence": "media"
       },
       {
-        "path": "21-Alfonsina/Antonia 884 1731.pdf",
+        "path": "21-Antonia/Antonia 884 1731.pdf",
         "kind": "exam",
         "date": null,
         "summary": "Archivo médico o administrativo: Antonia 884 1731.pdf",
@@ -73,49 +75,49 @@
       }
     ],
     "selected_photos": [
-      "/casos/exito/alfonsina/alfonsina-01.jpg",
-      "/casos/exito/alfonsina/alfonsina-02.png",
-      "/casos/exito/alfonsina/alfonsina-03.png",
-      "/casos/exito/alfonsina/alfonsina-04.png",
-      "/casos/exito/alfonsina/alfonsina-05.jpg",
-      "/casos/exito/alfonsina/alfonsina-06.jpg"
+      "/casos/exito/antonia/antonia-01.jpg",
+      "/casos/exito/antonia/antonia-02.png",
+      "/casos/exito/antonia/antonia-03.png",
+      "/casos/exito/antonia/antonia-04.png",
+      "/casos/exito/antonia/antonia-05.jpg",
+      "/casos/exito/antonia/antonia-06.jpg"
     ],
     "site_photos": [
       {
-        "source": "/casos/exito/alfonsina/alfonsina-01.jpg",
-        "card_mobile": "/casos/exito/alfonsina/alfonsina-01-mobile.webp",
-        "card_desktop": "/casos/exito/alfonsina/alfonsina-01-desktop.webp",
-        "lightbox": "/casos/exito/alfonsina/alfonsina-01-lightbox.webp"
+        "source": "/casos/exito/antonia/antonia-01.jpg",
+        "card_mobile": "/casos/exito/antonia/antonia-01-mobile.webp",
+        "card_desktop": "/casos/exito/antonia/antonia-01-desktop.webp",
+        "lightbox": "/casos/exito/antonia/antonia-01-lightbox.webp"
       },
       {
-        "source": "/casos/exito/alfonsina/alfonsina-02.png",
-        "card_mobile": "/casos/exito/alfonsina/alfonsina-02-mobile.webp",
-        "card_desktop": "/casos/exito/alfonsina/alfonsina-02-desktop.webp",
-        "lightbox": "/casos/exito/alfonsina/alfonsina-02-lightbox.webp"
+        "source": "/casos/exito/antonia/antonia-02.png",
+        "card_mobile": "/casos/exito/antonia/antonia-02-mobile.webp",
+        "card_desktop": "/casos/exito/antonia/antonia-02-desktop.webp",
+        "lightbox": "/casos/exito/antonia/antonia-02-lightbox.webp"
       },
       {
-        "source": "/casos/exito/alfonsina/alfonsina-03.png",
-        "card_mobile": "/casos/exito/alfonsina/alfonsina-03-mobile.webp",
-        "card_desktop": "/casos/exito/alfonsina/alfonsina-03-desktop.webp",
-        "lightbox": "/casos/exito/alfonsina/alfonsina-03-lightbox.webp"
+        "source": "/casos/exito/antonia/antonia-03.png",
+        "card_mobile": "/casos/exito/antonia/antonia-03-mobile.webp",
+        "card_desktop": "/casos/exito/antonia/antonia-03-desktop.webp",
+        "lightbox": "/casos/exito/antonia/antonia-03-lightbox.webp"
       },
       {
-        "source": "/casos/exito/alfonsina/alfonsina-04.png",
-        "card_mobile": "/casos/exito/alfonsina/alfonsina-04-mobile.webp",
-        "card_desktop": "/casos/exito/alfonsina/alfonsina-04-desktop.webp",
-        "lightbox": "/casos/exito/alfonsina/alfonsina-04-lightbox.webp"
+        "source": "/casos/exito/antonia/antonia-04.png",
+        "card_mobile": "/casos/exito/antonia/antonia-04-mobile.webp",
+        "card_desktop": "/casos/exito/antonia/antonia-04-desktop.webp",
+        "lightbox": "/casos/exito/antonia/antonia-04-lightbox.webp"
       },
       {
-        "source": "/casos/exito/alfonsina/alfonsina-05.jpg",
-        "card_mobile": "/casos/exito/alfonsina/alfonsina-05-mobile.webp",
-        "card_desktop": "/casos/exito/alfonsina/alfonsina-05-desktop.webp",
-        "lightbox": "/casos/exito/alfonsina/alfonsina-05-lightbox.webp"
+        "source": "/casos/exito/antonia/antonia-05.jpg",
+        "card_mobile": "/casos/exito/antonia/antonia-05-mobile.webp",
+        "card_desktop": "/casos/exito/antonia/antonia-05-desktop.webp",
+        "lightbox": "/casos/exito/antonia/antonia-05-lightbox.webp"
       },
       {
-        "source": "/casos/exito/alfonsina/alfonsina-06.jpg",
-        "card_mobile": "/casos/exito/alfonsina/alfonsina-06-mobile.webp",
-        "card_desktop": "/casos/exito/alfonsina/alfonsina-06-desktop.webp",
-        "lightbox": "/casos/exito/alfonsina/alfonsina-06-lightbox.webp"
+        "source": "/casos/exito/antonia/antonia-06.jpg",
+        "card_mobile": "/casos/exito/antonia/antonia-06-mobile.webp",
+        "card_desktop": "/casos/exito/antonia/antonia-06-desktop.webp",
+        "lightbox": "/casos/exito/antonia/antonia-06-lightbox.webp"
       }
     ],
     "other_media_counts": {
@@ -134,8 +136,12 @@
   {
     "id": "avena",
     "nombre_publico": "Avena",
-    "aliases": ["Bianca"],
-    "source_folders": ["105. Avena"],
+    "aliases": [
+      "Bianca"
+    ],
+    "source_folders": [
+      "105. Avena"
+    ],
     "spreadsheet_match": "Avena - Bianca",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -214,7 +220,9 @@
     "id": "bolt",
     "nombre_publico": "Bolt",
     "aliases": [],
-    "source_folders": ["108. Bolt"],
+    "source_folders": [
+      "108. Bolt"
+    ],
     "spreadsheet_match": "Bolt",
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -255,7 +263,10 @@
         "confidence": "media"
       }
     ],
-    "selected_photos": ["/casos/exito/bolt/bolt-1.jpg", "/casos/exito/bolt/bolt-03.jpg"],
+    "selected_photos": [
+      "/casos/exito/bolt/bolt-1.jpg",
+      "/casos/exito/bolt/bolt-03.jpg"
+    ],
     "site_photos": [
       {
         "source": "/casos/exito/bolt/bolt-1.jpg",
@@ -284,7 +295,9 @@
     "id": "bruno",
     "nombre_publico": "Bruno",
     "aliases": [],
-    "source_folders": ["84- Bruno"],
+    "source_folders": [
+      "84- Bruno"
+    ],
     "spreadsheet_match": "Bruno",
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -364,7 +377,9 @@
     "id": "canela",
     "nombre_publico": "Canela",
     "aliases": [],
-    "source_folders": ["103. Canela"],
+    "source_folders": [
+      "103. Canela"
+    ],
     "spreadsheet_match": "Canela",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -451,8 +466,12 @@
   {
     "id": "fermin",
     "nombre_publico": "Fermín",
-    "aliases": ["Fermín"],
-    "source_folders": ["docs/EXTRA-INFO.md"],
+    "aliases": [
+      "Fermín"
+    ],
+    "source_folders": [
+      "docs/EXTRA-INFO.md"
+    ],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -477,7 +496,9 @@
       "/casos/exito/fermin/fermin-03.jpg"
     ],
     "other_media_counts": {},
-    "confidence_notes": ["Historia y fotos agregadas desde docs/EXTRA-INFO.md."],
+    "confidence_notes": [
+      "Historia y fotos agregadas desde docs/EXTRA-INFO.md."
+    ],
     "site_photos": [
       {
         "source": "/casos/exito/fermin/fermin-01.jpg",
@@ -643,8 +664,12 @@
   {
     "id": "leo",
     "nombre_publico": "Leo",
-    "aliases": ["Leo"],
-    "source_folders": ["docs/EXTRA-INFO.md"],
+    "aliases": [
+      "Leo"
+    ],
+    "source_folders": [
+      "docs/EXTRA-INFO.md"
+    ],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -670,7 +695,9 @@
       "/casos/exito/leo/leo-04.jpg"
     ],
     "other_media_counts": {},
-    "confidence_notes": ["Historia y fotos agregadas desde docs/EXTRA-INFO.md."],
+    "confidence_notes": [
+      "Historia y fotos agregadas desde docs/EXTRA-INFO.md."
+    ],
     "site_photos": [
       {
         "source": "/casos/exito/leo/leo-01.jpg",
@@ -701,7 +728,9 @@
   {
     "id": "lille",
     "nombre_publico": "Lille",
-    "aliases": ["Rosita"],
+    "aliases": [
+      "Rosita"
+    ],
     "source_folders": [
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon",
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon/Lille - Rosita"
@@ -784,8 +813,12 @@
   {
     "id": "lisboa",
     "nombre_publico": "Lisboa",
-    "aliases": ["Lisbeth"],
-    "source_folders": ["92- Lisboa"],
+    "aliases": [
+      "Lisbeth"
+    ],
+    "source_folders": [
+      "92- Lisboa"
+    ],
     "spreadsheet_match": "Lisboa - Lisbeth",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -873,7 +906,9 @@
     "id": "malta",
     "nombre_publico": "Malta",
     "aliases": [],
-    "source_folders": ["1-Malta"],
+    "source_folders": [
+      "1-Malta"
+    ],
     "spreadsheet_match": null,
     "estado": "Adoptada",
     "sexo": "Hembra",
@@ -1038,7 +1073,9 @@
   {
     "id": "marsella",
     "nombre_publico": "Marsella",
-    "aliases": ["Soffi"],
+    "aliases": [
+      "Soffi"
+    ],
     "source_folders": [
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon",
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon/Marsella - Soffi"
@@ -1122,7 +1159,9 @@
     "id": "mora",
     "nombre_publico": "Mora",
     "aliases": [],
-    "source_folders": ["109. Mora"],
+    "source_folders": [
+      "109. Mora"
+    ],
     "spreadsheet_match": "Mora",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -1245,7 +1284,9 @@
     "id": "mozzarella",
     "nombre_publico": "Mozzarella",
     "aliases": [],
-    "source_folders": ["100. Mozzarella"],
+    "source_folders": [
+      "100. Mozzarella"
+    ],
     "spreadsheet_match": "Mozzarella",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -1473,7 +1514,9 @@
     "id": "parmesana",
     "nombre_publico": "Parmesana",
     "aliases": [],
-    "source_folders": ["101. Parmesana"],
+    "source_folders": [
+      "101. Parmesana"
+    ],
     "spreadsheet_match": "Parmesana",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -1596,7 +1639,9 @@
     "id": "praga",
     "nombre_publico": "Praga",
     "aliases": [],
-    "source_folders": ["15-Praga"],
+    "source_folders": [
+      "15-Praga"
+    ],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": null,
@@ -1825,8 +1870,12 @@
   {
     "id": "trigo",
     "nombre_publico": "Trigo",
-    "aliases": ["Browny"],
-    "source_folders": ["106. Trigo"],
+    "aliases": [
+      "Browny"
+    ],
+    "source_folders": [
+      "106. Trigo"
+    ],
     "spreadsheet_match": "Trigo - Browny",
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -2005,7 +2054,9 @@
     "id": "trufa",
     "nombre_publico": "Trufa",
     "aliases": [],
-    "source_folders": ["110. Trufa"],
+    "source_folders": [
+      "110. Trufa"
+    ],
     "spreadsheet_match": "Trufa",
     "estado": "Adoptado",
     "sexo": "Hembra",

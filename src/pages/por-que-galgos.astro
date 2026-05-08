@@ -5,7 +5,7 @@ import "../styles/components/por-que-galgos.css";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
-import alfonsinaImage from "../assets/casos/exito/alfonsina/alfonsina-01.jpg";
+import antoniaImage from "../assets/casos/exito/antonia/antonia-01.jpg";
 import leoImage from "../assets/casos/exito/leo/leo-01.jpg";
 import pragaImage from "../assets/casos/exito/praga/praga-02.jpg";
 import Footer from "../components/Footer.astro";
@@ -52,7 +52,7 @@ const cases = await Promise.all(
         <div class="why-galgos__image-shell">
           <Image
             src={pragaImage}
-            alt=""
+            alt="Praga, una galga rescatada por Brigada Galgos"
             class="why-galgos__image"
             widths={[400, 600, 800]}
             sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
@@ -84,7 +84,7 @@ const cases = await Promise.all(
         <div class="why-galgos__image-shell">
           <Image
             src={leoImage}
-            alt=""
+            alt="Leo, un galgo rescatado por Brigada Galgos"
             class="why-galgos__image"
             widths={[400, 600, 800]}
             sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
@@ -121,8 +121,8 @@ const cases = await Promise.all(
         <div class="why-galgos__image-shell why-galgos__image-shell--rotated">
           <div class="why-galgos__image-stage why-galgos__image-stage--rotated">
             <Image
-              src={alfonsinaImage}
-              alt=""
+              src={antoniaImage}
+              alt="Antonia, una galga rescatada por Brigada Galgos"
               class="why-galgos__image why-galgos__image--rotated"
               widths={[400, 600, 800]}
               sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"

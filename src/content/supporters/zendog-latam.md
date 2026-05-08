@@ -1,6 +1,6 @@
 ---
 name: Zendog Latam
-description: "Nos ayudan con educación canina para nuestros galgos rescatados y acompañan a sus tutores en el proceso."
+description: "Nos ayudan con educación canina y acompañan a los tutores en el proceso de adaptación."
 # thanksLabel: "Gracias, Cannae"
 # thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://zendoglatam.com/"
