@@ -7,6 +7,7 @@ const pages = [
   { name: "contacto", path: "/contacto/" },
   { name: "donar", path: "/donar/" },
   { name: "hogar-temporal", path: "/hogar-temporal/" },
+  { name: "por-que-galgos", path: "/por-que-galgos/" },
   { name: "404", path: "/404" },
 ];
 

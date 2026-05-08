@@ -1,3 +1,5 @@
+@import url("@fontsource/barlow-condensed/700.css");
+@import url("@fontsource/barlow-condensed/900.css");
 @import url("./tokens.css");
 @import url("./components/navbar.css");
 

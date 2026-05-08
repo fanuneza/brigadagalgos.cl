@@ -9,6 +9,7 @@ const pages = [
   { name: "contacto", path: "/contacto/", tag: "@contacto" },
   { name: "donar", path: "/donar/", tag: "@donar" },
   { name: "hogar-temporal", path: "/hogar-temporal/", tag: "@hogar-temporal" },
+  { name: "por-que-galgos", path: "/por-que-galgos/", tag: "@por-que-galgos" },
   { name: "404", path: "/404", tag: "@404" },
 ] as const;
 

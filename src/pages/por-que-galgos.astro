@@ -1,0 +1,213 @@
+---
+import "../styles/components/page-hero.css";
+import "../styles/components/stories.css";
+import "../styles/components/por-que-galgos.css";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
+import alfonsinaImage from "../assets/casos/exito/alfonsina/alfonsina-01.jpg";
+import leoImage from "../assets/casos/exito/leo/leo-01.jpg";
+import pragaImage from "../assets/casos/exito/praga/praga-02.jpg";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import PageHero from "../components/PageHero.astro";
+import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
+import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
+
+const selectedStoryIds = ["fermin", "mora", "malta"];
+const successDogs = await getCollection("success-dogs");
+
+const cases = await Promise.all(
+  selectedStoryIds
+    .map((id) => successDogs.find((entry) => entry.id === id))
+    .filter((entry): entry is NonNullable<(typeof successDogs)[number]> => Boolean(entry))
+    .map(async (entry) => ({
+      id: entry.id,
+      name: entry.data.name,
+      story: entry.data.story,
+      photos: await Promise.all(
+        entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
+      ),
+    }))
+);
+---
+
+<BaseLayout
+  title="Por qué galgos | Brigada Galgos"
+  description="Por qué Brigada Galgos rescata, rehabilita y reubica específicamente galgos en Chile."
+>
+  <Navbar />
+  <main>
+    <PageHero
+      eyebrow="POR QUÉ GALGOS"
+      h1="Por qué galgos"
+      lead="No elegimos rescatar galgos por una preferencia de raza. Los elegimos porque vemos de cerca un abandono y una explotación que se repiten demasiado."
+      leadBold="Rescatamos, rehabilitamos y reubicamos galgos en Chile para que puedan vivir, por fin, como los perros de familia que siempre merecieron ser."
+    />
+
+    <section class="why-galgos__image-section">
+      <div class="container container--narrow">
+        <div class="why-galgos__image-shell">
+          <Image
+            src={pragaImage}
+            alt=""
+            class="why-galgos__image"
+            widths={[720, 960, 1280]}
+            sizes="(min-width: 1200px) 48rem, (min-width: 768px) 78vw, calc(100vw - 2rem)"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container container--narrow why-galgos__flow">
+        <div class="why-galgos__block">
+          <p class="eyebrow">POR QUÉ ELLOS</p>
+          <h2>No es casualidad que tantos lleguen maltratados.</h2>
+          <div class="why-galgos__prose">
+            <p>
+              Muchos de los galgos que recibimos vienen de abandono, abuso y explotación para carreras o cacería. A
+              veces aparecen fracturados. A veces llegan famélicos. A veces solo vemos en ellos ese miedo tan particular
+              de los perros que han aprendido a sobrevivir sin poder bajar la guardia.
+            </p>
+            <p>
+              Por eso esta fundación trabaja específicamente con galgos. Porque no basta con sacarlos de peligro. Hay
+              que entender sus tiempos, leer su sensibilidad y acompañarlos hasta que vuelvan a sentirse seguros en una
+              casa. Cuando decimos que rescatamos, rehabilitamos y reubicamos, hablamos de sostener casos difíciles
+              hasta encontrar el hogar correcto.
+            </p>
+          </div>
+        </div>
+
+        <div class="why-galgos__image-shell">
+          <Image
+            src={leoImage}
+            alt=""
+            class="why-galgos__image"
+            widths={[720, 960, 1280]}
+            sizes="(min-width: 1200px) 48rem, (min-width: 768px) 78vw, calc(100vw - 2rem)"
+          />
+        </div>
+
+        <div class="why-galgos__block">
+          <h2>No son perros difíciles.</h2>
+          <div class="why-galgos__prose">
+            <p>
+              En la vida diaria suelen ser perros tranquilos, incluso en espacios más acotados de lo que mucha gente
+              imagina. Lo importante no es tener una casa enorme, sino ofrecer una rutina clara, salidas seguras y una
+              familia dispuesta a leer su ritmo sin apurarlos.
+            </p>
+            <p>
+              Muchos llegan asustados, no “malos” ni “incontrolables”. Con paciencia y estructura, suelen mostrar muy
+              rápido lo que son de verdad: perros serenos, sensibles, leales y profundamente agradecidos cuando al fin
+              entienden que ya no tienen que defenderse de todo.
+            </p>
+          </div>
+
+          <ul class="why-galgos__editorial-list">
+            <li>Rescatamos cuando un galgo ya no puede seguir sobreviviendo en su situación actual.</li>
+            <li>Estabilizamos con atención veterinaria, descanso y tiempo real de recuperación.</li>
+            <li>Acogemos en hogares temporales para conocer sus miedos, su energía y su convivencia.</li>
+            <li>Buscamos el match correcto para que la adopción sea buena para el galgo y para su familia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-galgos__between-sections">
+      <div class="container container--narrow">
+        <div class="why-galgos__image-shell why-galgos__image-shell--rotated">
+          <div class="why-galgos__image-stage why-galgos__image-stage--rotated">
+            <Image
+              src={alfonsinaImage}
+              alt=""
+              class="why-galgos__image why-galgos__image--rotated"
+              widths={[720, 960, 1280]}
+              sizes="(min-width: 1200px) 48rem, (min-width: 768px) 78vw, calc(100vw - 2rem)"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding why-galgos__section-top-tight">
+      <div class="container container--narrow why-galgos__flow">
+        <div class="why-galgos__block">
+          <p class="eyebrow">CÓMO ES VIVIR CON UNO</p>
+          <h2>La vida con un galgo tiene algo muy especial.</h2>
+          <div class="why-galgos__prose">
+            <p>
+              Cuando el entorno es seguro, muchos aprenden rápido lo que es una cama, una caminata y una vida sin miedo.
+              Descansan mucho, observan más de lo que aparentan y suelen convertirse en una presencia tranquila dentro
+              de la casa.
+            </p>
+            <p>
+              También hay cosas concretas que importan: nunca se sueltan en paseo, necesitan una adaptación cuidada y
+              agradecen vínculos pacientes. Pero justamente ahí está buena parte de lo que hace valiosa la experiencia:
+              ver cómo un perro que llegó en alerta empieza a descansar de verdad y a confiar.
+            </p>
+          </div>
+
+          <ul class="why-galgos__inline-points">
+            <li>Se adaptan mejor de lo que su fama sugiere.</li>
+            <li>En casa suelen ser más serenos que ruidosos.</li>
+            <li>Su recuperación cambia también a la familia que los recibe.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding why-galgos__cases-band">
+      <div class="container why-galgos__cases-shell">
+        <div class="why-galgos__cases-intro">
+          <p class="eyebrow">CASOS REALES</p>
+          <h2>Por eso insistimos con ellos.</h2>
+          <p class="why-galgos__cases-lead">
+            No hablamos en abstracto. Cada recuperación vuelve más concreta la razón de esta brigada.
+          </p>
+        </div>
+
+        <div class="stories__grid why-galgos__stories-grid">
+          {
+            cases.map((dog) => (
+              <article class="story-card story-card--compact" data-story-card>
+                <SharedPhotoGallery name={dog.name} photos={dog.photos} />
+                <div class="story-card__body">
+                  <p class="story-card__name">{dog.name}</p>
+                  <p class="story-card__quote">{dog.story}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container container--narrow why-galgos__flow">
+        <div class="why-galgos__block why-galgos__cta">
+          <p class="eyebrow">SIGUIENTE PASO</p>
+          <h2>Si un galgo te hace sentido, conversemos.</h2>
+          <p>
+            Si crees que tu casa podría ser un buen lugar para uno de ellos, te acompañamos desde el primer mensaje. Y
+            si todavía no es el momento de adoptar, un hogar temporal también puede cambiar por completo la historia de
+            un rescate.
+          </p>
+          <div class="why-galgos__cta-actions">
+            <a href="/adoptar/" class="btn btn--primary">Quiero adoptar</a>
+            <a href="/hogar-temporal/" class="btn btn--secondary">Puedo ser hogar temporal</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<SharedGalleryLightbox ariaLabel="Galería de casos reales" />
+
+<script>
+  import "../scripts/shared-gallery";
+</script>

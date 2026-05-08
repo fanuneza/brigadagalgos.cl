@@ -55,15 +55,8 @@
      Mono:     JetBrains Mono (rare; for placeholder badges in wireframes).
      --------------------------------------------------------------------- */
 
-  --font-display: "Impact", "Haettenschweiler", "Arial Narrow Bold", "Arial Narrow", sans-serif;
-  --font-body:
-    "Aptos",
-    "Segoe UI Variable",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  --font-display: "Barlow Condensed", "Impact", "Haettenschweiler", "Arial Narrow Bold", "Arial Narrow", sans-serif;
+  --font-body: "Aptos", "Segoe UI Variable", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", menlo, monospace;
 
   /* Scale — modular, ratio ~1.250 (major third) */

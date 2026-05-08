@@ -456,27 +456,18 @@ async function buildCopiedPictureSetFromExistingVariants(id, sourceDir) {
     if (sourcePhotoPath && destinationPhotoPath) {
       await copyFileIfMissing(sourcePhotoPath, destinationPhotoPath);
     }
-    await copyFileIfMissing(
-      path.join(sourceDir, `${baseName}-mobile.webp`),
-      path.join(destinationDir, `${baseName}-mobile.webp`)
-    );
-    await copyFileIfMissing(
-      path.join(sourceDir, `${baseName}-desktop.webp`),
-      path.join(destinationDir, `${baseName}-desktop.webp`)
-    );
-    await copyFileIfMissing(
-      path.join(sourceDir, `${baseName}-lightbox.webp`),
-      path.join(destinationDir, `${baseName}-lightbox.webp`)
-    );
+    await copyFileIfMissing(path.join(sourceDir, mobileFile), path.join(destinationDir, mobileFile));
+    await copyFileIfMissing(path.join(sourceDir, desktopFile), path.join(destinationDir, desktopFile));
+    await copyFileIfMissing(path.join(sourceDir, lightboxFile), path.join(destinationDir, lightboxFile));
 
     pictures.push({
       source:
         sourcePhotoPath && destinationPhotoPath
           ? toPublicPath(destinationPhotoPath)
-          : toPublicPath(path.join(destinationDir, `${baseName}-lightbox.webp`)),
-      card_mobile: toPublicPath(path.join(destinationDir, `${baseName}-mobile.webp`)),
-      card_desktop: toPublicPath(path.join(destinationDir, `${baseName}-desktop.webp`)),
-      lightbox: toPublicPath(path.join(destinationDir, `${baseName}-lightbox.webp`)),
+          : toPublicPath(path.join(destinationDir, lightboxFile)),
+      card_mobile: toPublicPath(path.join(destinationDir, mobileFile)),
+      card_desktop: toPublicPath(path.join(destinationDir, desktopFile)),
+      lightbox: toPublicPath(path.join(destinationDir, lightboxFile)),
     });
   }
 

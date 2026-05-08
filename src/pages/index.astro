@@ -76,6 +76,11 @@ const storyDogs = await Promise.all(
           <li>La mayoría se lleva bien con niños y otros animales con una presentación adecuada.</li>
           <li>Rompen muchos mitos: pueden ser compañeros serenos, sensibles y muy nobles.</li>
         </ul>
+        <p class="home-why-galgo__note">
+          También los elegimos porque vemos de cerca el abandono, el abuso y la explotación que viven demasiados galgos
+          en Chile.
+        </p>
+        <a href="/por-que-galgos/" class="btn btn--secondary home-why-galgo__cta">Leer por qué galgos</a>
       </div>
     </section>
     <HelpCards />
@@ -85,3 +90,14 @@ const storyDogs = await Promise.all(
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .home-why-galgo__note {
+    margin-top: var(--space-4);
+    color: var(--color-text-muted);
+  }
+
+  .home-why-galgo__cta {
+    margin-top: var(--space-5);
+  }
+</style>

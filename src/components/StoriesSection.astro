@@ -46,13 +46,15 @@ const { dogs, totalCount, endpoint } = Astro.props;
       }
     </div>
 
-    {totalCount > dogs.length && (
-      <div class="stories__ver-mas-wrap">
-        <button type="button" class="btn btn--secondary" data-stories-ver-mas>
-          Ver mas historias
-        </button>
-      </div>
-    )}
+    {
+      totalCount > dogs.length && (
+        <div class="stories__ver-mas-wrap">
+          <button type="button" class="btn btn--secondary" data-stories-ver-mas>
+            Ver mas historias
+          </button>
+        </div>
+      )
+    }
   </div>
 </section>
 
