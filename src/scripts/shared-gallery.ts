@@ -1,5 +1,5 @@
 export interface SharedGalleryPhoto {
-  cardAvifSrcSet: string;
+  cardAvifSrcSet?: string;
   cardWebpSrcSet: string;
   cardSizes: string;
   cardFallbackSrc: string;
@@ -41,9 +41,13 @@ function getPhotoCaption(item: SharedGalleryItem, index: number) {
 }
 
 function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string) {
+  const avifSource = photo.cardAvifSrcSet
+    ? `<source srcset="${photo.cardAvifSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/avif" />`
+    : "";
+
   return `
     <picture>
-      <source srcset="${photo.cardAvifSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/avif" />
+      ${avifSource}
       <source srcset="${photo.cardWebpSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/webp" />
       <img
         src="${photo.cardFallbackSrc}"

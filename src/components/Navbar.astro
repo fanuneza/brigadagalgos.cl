@@ -18,13 +18,13 @@ import { SITE } from "../config/site.ts";
     </a>
 
     <nav class="navbar__nav" aria-label="Navegación principal">
-      <a href="/adoptar/" class="navbar__link" data-astro-prefetch>Adoptar</a>
-      <a href="/hogar-temporal/" class="navbar__link" data-astro-prefetch>Hogar temporal</a>
-      <a href="/colaboradores/" class="navbar__link" data-astro-prefetch>Colaboradores</a>
-      <a href="/contacto/" class="navbar__link" data-astro-prefetch>Contacto</a>
+      <a href="/adoptar/" class="navbar__link">Adoptar</a>
+      <a href="/hogar-temporal/" class="navbar__link">Hogar temporal</a>
+      <a href="/colaboradores/" class="navbar__link">Colaboradores</a>
+      <a href="/contacto/" class="navbar__link">Contacto</a>
     </nav>
 
-    <a href="/donar/" class="btn btn--primary navbar__cta" data-astro-prefetch>Quiero donar</a>
+    <a href="/donar/" class="btn btn--primary navbar__cta">Quiero donar</a>
 
     <button
       class="navbar__hamburger"
@@ -41,7 +41,7 @@ import { SITE } from "../config/site.ts";
 
   <div class="navbar__backdrop" data-backdrop aria-hidden="true"></div>
 
-  <div class="navbar__drawer" id="navbar-drawer" data-drawer aria-hidden="true">
+  <div class="navbar__drawer" id="navbar-drawer" data-drawer hidden inert>
     <button class="drawer__close" data-close aria-label="Cerrar menú">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
@@ -50,15 +50,15 @@ import { SITE } from "../config/site.ts";
     </button>
 
     <nav aria-label="Menú móvil">
-      <a href="/adoptar/" class="drawer__link" data-astro-prefetch>Adoptar</a>
-      <a href="/hogar-temporal/" class="drawer__link" data-astro-prefetch>Hogar temporal</a>
-      <a href="/colaboradores/" class="drawer__link" data-astro-prefetch>Colaboradores</a>
-      <a href="/contacto/" class="drawer__link" data-astro-prefetch>Contacto</a>
+      <a href="/adoptar/" class="drawer__link">Adoptar</a>
+      <a href="/hogar-temporal/" class="drawer__link">Hogar temporal</a>
+      <a href="/colaboradores/" class="drawer__link">Colaboradores</a>
+      <a href="/contacto/" class="drawer__link">Contacto</a>
     </nav>
 
     <hr class="drawer__separator" />
 
-    <a href="/donar/" class="btn btn--primary drawer__cta" data-astro-prefetch>Quiero donar</a>
+    <a href="/donar/" class="btn btn--primary drawer__cta">Quiero donar</a>
 
     <div class="drawer__social">
       <a

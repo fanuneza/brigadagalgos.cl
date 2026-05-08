@@ -1,11 +1,14 @@
 ---
 import { SITE } from "../config/site.ts";
+import footerCss from "../styles/components/footer.css?raw";
 ---
+
+<style is:inline set:html={footerCss}></style>
 
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a href="/" aria-label="Brigada Galgos — inicio" class="footer__brand-link" data-astro-prefetch>
+      <a href="/" class="footer__brand-link">
         <img
           src="/images/brigada-galgos-logo.png"
           alt="Brigada Galgos"
@@ -14,9 +17,9 @@ import { SITE } from "../config/site.ts";
           height="48"
           loading="lazy"
         />
-        <span class="footer__brand-name">Fundación<br />Brigada Galgos</span>
+        <span class="footer__brand-name">Fundacion<br />Brigada Galgos</span>
       </a>
-      <p class="footer__tagline">Rescatamos galgos en todo Chile y los acompañamos hasta su hogar definitivo.</p>
+      <p class="footer__tagline">Rescatamos galgos en todo Chile y los acompanamos hasta su hogar definitivo.</p>
     </div>
 
     <div class="footer__contact">
@@ -60,11 +63,11 @@ import { SITE } from "../config/site.ts";
     <div class="footer__nav">
       <h3 class="footer__section-title">Navegar</h3>
       <ul class="footer__list">
-        <li><a href="/adoptar/" class="footer__link" data-astro-prefetch>Adoptar</a></li>
-        <li><a href="/hogar-temporal/" class="footer__link" data-astro-prefetch>Hogar temporal</a></li>
-        <li><a href="/colaboradores/" class="footer__link" data-astro-prefetch>Colaboradores</a></li>
-        <li><a href="/donar/" class="footer__link" data-astro-prefetch>Donar</a></li>
-        <li><a href="/contacto/" class="footer__link" data-astro-prefetch>Contacto</a></li>
+        <li><a href="/adoptar/" class="footer__link">Adoptar</a></li>
+        <li><a href="/hogar-temporal/" class="footer__link">Hogar temporal</a></li>
+        <li><a href="/colaboradores/" class="footer__link">Colaboradores</a></li>
+        <li><a href="/donar/" class="footer__link">Donar</a></li>
+        <li><a href="/contacto/" class="footer__link">Contacto</a></li>
       </ul>
     </div>
   </div>
@@ -72,7 +75,7 @@ import { SITE } from "../config/site.ts";
   <div class="footer__bottom">
     <div class="container footer__bottom-inner">
       <div class="footer__copy">
-        <p>&copy; 2026 Fundación Brigada Galgos &middot; RUT 65.132.425-4</p>
+        <p>&copy; 2026 Fundacion Brigada Galgos &middot; RUT 65.132.425-4</p>
         <p>
           Sitio web desarrollado con
           <img src="/icons/heart.svg" alt="" aria-hidden="true" class="footer__heart-icon" />
@@ -81,7 +84,7 @@ import { SITE } from "../config/site.ts";
             href="https://agenciachucao.cl/?utm_source=brigadagalgos.cl&utm_medium=referral&utm_campaign=credit_footer"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Abrir el sitio de Agencia Chucao en una pestaña nueva">agencia chucao</a
+            aria-label="Abrir el sitio de Agencia Chucao en una pestana nueva">agencia chucao</a
           >
         </p>
       </div>

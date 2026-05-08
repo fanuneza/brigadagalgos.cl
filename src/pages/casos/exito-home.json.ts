@@ -1,0 +1,23 @@
+import { getCollection } from "astro:content";
+import { createResponsiveGalleryPhoto } from "../../utils/responsive-gallery-images";
+
+export const prerender = true;
+
+export async function GET() {
+  const storyDogs = await getCollection("success-dogs");
+  const payload = await Promise.all(
+    storyDogs.map(async (entry) => ({
+      id: entry.id,
+      name: entry.data.name,
+      story: entry.data.story,
+      photos: await Promise.all(entry.data.gallery.map((img) => createResponsiveGalleryPhoto(img))),
+    }))
+  );
+
+  return new Response(JSON.stringify(payload), {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "public, max-age=604800",
+    },
+  });
+}

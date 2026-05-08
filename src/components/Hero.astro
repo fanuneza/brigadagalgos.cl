@@ -3,9 +3,10 @@ import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import portraitSrc from "../assets/images/hero-portrait.webp";
 import landscapeSrc from "../assets/images/hero-landscape.webp";
+import heroCss from "../styles/components/hero.css?raw";
 
-const portraitWidths = [480, 720, 960];
-const landscapeWidths = [640, 960, 1280];
+const portraitWidths = [360, 540, 720];
+const landscapeWidths = [560, 840, 1120];
 
 async function buildSrcSet(src: ImageMetadata, format: "avif" | "webp", widths: number[]) {
   const variants = await Promise.all(widths.map((width) => getImage({ src, format, width })));
@@ -16,8 +17,10 @@ const pAvifSrcSet = await buildSrcSet(portraitSrc, "avif", portraitWidths);
 const pWebpSrcSet = await buildSrcSet(portraitSrc, "webp", portraitWidths);
 const lAvifSrcSet = await buildSrcSet(landscapeSrc, "avif", landscapeWidths);
 const lWebpSrcSet = await buildSrcSet(landscapeSrc, "webp", landscapeWidths);
-const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 720 });
+const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540 });
 ---
+
+<style is:inline set:html={heroCss}></style>
 
 <section class="hero section-padding">
   <div class="container hero__grid">
@@ -28,9 +31,9 @@ const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 720 
         familia.
       </p>
       <div class="hero__ctas">
-        <a href="/adoptar/" class="btn btn--primary" data-astro-prefetch>Quiero adoptar</a>
-        <a href="/hogar-temporal/" class="btn btn--secondary" data-astro-prefetch>Puedo ser hogar temporal</a>
-        <a href="/donar/" class="btn btn--secondary" data-astro-prefetch>Voy a apoyar</a>
+        <a href="/adoptar/" class="btn btn--primary">Quiero adoptar</a>
+        <a href="/hogar-temporal/" class="btn btn--secondary">Puedo ser hogar temporal</a>
+        <a href="/donar/" class="btn btn--secondary">Voy a apoyar</a>
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 .donation-banner {
-  background: var(--color-secondary);
+  background: var(--color-secondary-700);
   color: var(--color-text-inverse);
   padding-block: var(--space-9);
   --link-color: var(--color-text-inverse);

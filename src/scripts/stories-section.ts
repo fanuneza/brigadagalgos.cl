@@ -1,35 +1,102 @@
-import { initSharedGalleries } from "./shared-gallery";
+import { buildSharedGalleryMarkup, initSharedGalleries, type SharedGalleryPhoto } from "./shared-gallery";
 
 const PAGE_SIZE = 6;
 
+interface StoryApiRecord {
+  id: string;
+  name: string;
+  story: string;
+  photos: SharedGalleryPhoto[];
+}
+
 function initStoriesSection() {
+  const root = document.querySelector<HTMLElement>("[data-stories-root]");
   const grid = document.querySelector<HTMLElement>("[data-stories-list]");
   const button = document.querySelector<HTMLButtonElement>("[data-stories-ver-mas]");
 
-  if (!grid) return;
+  if (!root || !grid) return;
 
-  const cards = [...grid.querySelectorAll<HTMLElement>("[data-story-card]")];
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[j]] = [cards[j], cards[i]];
+  const endpoint = root.dataset.storiesEndpoint;
+  let loaded = Number(root.dataset.storiesLoaded ?? "0");
+  let allStories: StoryApiRecord[] | null = null;
+  let loading = false;
+
+  function createStoryCard(story: StoryApiRecord) {
+    const article = document.createElement("article");
+    article.className = "story-card";
+    article.dataset.storyCard = "";
+    article.innerHTML = `
+      ${buildSharedGalleryMarkup({ name: story.name, photos: story.photos })}
+      <div class="story-card__body">
+        <p class="story-card__name"></p>
+        <p class="story-card__quote"></p>
+      </div>
+    `;
+
+    article.querySelector<HTMLElement>(".story-card__name")!.textContent = story.name;
+    article.querySelector<HTMLElement>(".story-card__quote")!.textContent = story.story;
+
+    return article;
   }
-  cards.forEach((card) => grid.appendChild(card));
 
-  let shown = Math.min(PAGE_SIZE, cards.length);
+  function updateButtonVisibility() {
+    if (!button || !allStories) {
+      return;
+    }
 
-  function applyVisibility() {
-    cards.forEach((card, i) => {
-      card.hidden = i >= shown;
-    });
-    if (button) button.hidden = shown >= cards.length;
+    button.hidden = loaded >= allStories.length;
+  }
+
+  async function loadStories() {
+    if (allStories || loading || !endpoint) {
+      return;
+    }
+
+    loading = true;
+
+    try {
+      const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
+      if (!response.ok) {
+        throw new Error(`Unable to load stories: ${response.status}`);
+      }
+
+      allStories = (await response.json()) as StoryApiRecord[];
+      updateButtonVisibility();
+    } catch (error) {
+      console.error(error);
+      if (button) {
+        button.disabled = true;
+      }
+    } finally {
+      loading = false;
+    }
   }
 
   button?.addEventListener("click", () => {
-    shown = Math.min(shown + PAGE_SIZE, cards.length);
-    applyVisibility();
+    void (async () => {
+      await loadStories();
+
+      if (!allStories) {
+        return;
+      }
+
+      const nextStories = allStories.slice(loaded, loaded + PAGE_SIZE);
+      if (!nextStories.length) {
+        updateButtonVisibility();
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      nextStories.forEach((story) => {
+        fragment.appendChild(createStoryCard(story));
+      });
+      grid.appendChild(fragment);
+      initSharedGalleries(grid);
+      loaded += nextStories.length;
+      updateButtonVisibility();
+    })();
   });
 
-  applyVisibility();
   initSharedGalleries(grid);
 }
 

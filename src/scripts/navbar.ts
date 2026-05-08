@@ -13,32 +13,52 @@ function initNavbar() {
   const close = closeBtn;
   const back = backdrop;
   const navbar = nav;
+  let isDrawerOpen = false;
 
   function getFocusable(): HTMLElement[] {
     return Array.from(drw.querySelectorAll<HTMLElement>(FOCUSABLE));
   }
 
   function openDrawer() {
-    drw.classList.add("drawer--open");
-    back.classList.add("backdrop--visible");
+    if (isDrawerOpen) return;
+
+    isDrawerOpen = true;
+    drw.hidden = false;
+    drw.inert = false;
+
+    requestAnimationFrame(() => {
+      drw.classList.add("drawer--open");
+      back.classList.add("backdrop--visible");
+    });
+
     ham.setAttribute("aria-expanded", "true");
-    ham.setAttribute("aria-label", "Cerrar menú");
-    drw.setAttribute("aria-hidden", "false");
+    ham.setAttribute("aria-label", "Cerrar menu");
     const focusable = getFocusable();
     if (focusable.length) focusable[0].focus();
   }
 
   function closeDrawer() {
+    if (!isDrawerOpen) return;
+
+    isDrawerOpen = false;
     drw.classList.remove("drawer--open");
     back.classList.remove("backdrop--visible");
+    drw.inert = true;
     ham.setAttribute("aria-expanded", "false");
-    ham.setAttribute("aria-label", "Abrir menú");
-    drw.setAttribute("aria-hidden", "true");
+    ham.setAttribute("aria-label", "Abrir menu");
     ham.focus();
   }
 
+  drw.addEventListener("transitionend", (event) => {
+    if (event.propertyName !== "transform" || isDrawerOpen) {
+      return;
+    }
+
+    drw.hidden = true;
+  });
+
   ham.addEventListener("click", () => {
-    if (drw.classList.contains("drawer--open")) {
+    if (isDrawerOpen) {
       closeDrawer();
     } else {
       openDrawer();
@@ -49,7 +69,7 @@ function initNavbar() {
   back.addEventListener("click", closeDrawer);
 
   document.addEventListener("keydown", (e) => {
-    if (!drw.classList.contains("drawer--open")) return;
+    if (!isDrawerOpen) return;
 
     if (e.key === "Escape") {
       closeDrawer();
@@ -66,11 +86,9 @@ function initNavbar() {
           e.preventDefault();
           last.focus();
         }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     }
   });

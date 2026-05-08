@@ -128,16 +128,27 @@
 }
 
 .story-card__dot {
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
   border: 0;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.45);
+  background: transparent;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.story-card__dot[data-active="true"] {
+.story-card__dot::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.story-card__dot[data-active="true"]::after {
   background: var(--color-text-inverse);
 }
 

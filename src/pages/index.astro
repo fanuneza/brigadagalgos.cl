@@ -1,11 +1,4 @@
 ---
-import "../styles/components/hero.css";
-import "../styles/components/mission.css";
-import "../styles/components/help-cards.css";
-import "../styles/components/stepper.css";
-import "../styles/components/stories.css";
-import "../styles/components/donation-banner.css";
-import "../styles/components/rainbow-divider.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
@@ -49,9 +42,10 @@ const rescueSteps = [
 ];
 
 const rawStoryDogs = await getCollection("success-dogs");
+const initialStoryDogs = rawStoryDogs.slice(0, 6);
 
 const storyDogs = await Promise.all(
-  rawStoryDogs.map(async (entry) => ({
+  initialStoryDogs.map(async (entry) => ({
     id: entry.id,
     name: entry.data.name,
     story: entry.data.story,
@@ -86,7 +80,7 @@ const storyDogs = await Promise.all(
     </section>
     <HelpCards />
     <ProcessStepper steps={rescueSteps} />
-    <StoriesSection dogs={storyDogs} />
+    <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
     <DonationBanner />
   </main>
   <Footer />

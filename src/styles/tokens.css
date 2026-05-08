@@ -13,7 +13,7 @@
 
   /* Brand */
   --color-primary: #00bcd4; /* cyan — sampled from logo neck */
-  --color-primary-700: #0097a7; /* hover / pressed */
+  --color-primary-700: #006d78; /* hover / pressed */
   --color-primary-100: #cff4f8; /* tinted surface */
 
   --color-secondary: #e91e8c; /* magenta — sampled from logo cheek */
@@ -38,7 +38,7 @@
   --color-surface-2: #eceef2; /* nested surface */
   --color-border: #dadde3; /* hairline borders */
   --color-text: #1f2328; /* charcoal — NOT pure black */
-  --color-text-muted: #5b636e; /* secondary text */
+  --color-text-muted: #424a54; /* secondary text */
   --color-text-inverse: #fff; /* on dark / saturated bg */
 
   /* Semantic */
@@ -55,8 +55,15 @@
      Mono:     JetBrains Mono (rare; for placeholder badges in wireframes).
      --------------------------------------------------------------------- */
 
-  --font-display: "Barlow Condensed", "Oswald", "Arial Narrow", sans-serif;
-  --font-body: "Inter", "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", sans-serif;
+  --font-body:
+    "Aptos",
+    "Segoe UI Variable",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", menlo, monospace;
 
   /* Scale — modular, ratio ~1.250 (major third) */
@@ -167,10 +174,10 @@
   --btn-primary-border: transparent;
 
   /* Secondary — outlined cyan. The "learn more" button. */
-  --btn-secondary-bg: transparent;
-  --btn-secondary-bg-hover: var(--color-primary-100);
-  --btn-secondary-fg: var(--color-primary-700);
-  --btn-secondary-border: var(--color-primary);
+  --btn-secondary-bg: var(--color-primary-100);
+  --btn-secondary-bg-hover: #b6e8ee;
+  --btn-secondary-fg: #0f3940;
+  --btn-secondary-border: var(--color-primary-700);
 
   /* Ghost — text only. */
   --btn-ghost-bg: transparent;

@@ -6,7 +6,7 @@ export default defineConfig({
   site: "https://brigadagalgos.cl",
   trailingSlash: "always",
   prefetch: {
-    prefetchAll: true,
+    prefetchAll: false,
     defaultStrategy: "hover",
   },
   integrations: [

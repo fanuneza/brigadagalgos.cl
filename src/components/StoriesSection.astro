@@ -2,6 +2,7 @@
 import SharedPhotoGallery from "./SharedPhotoGallery.astro";
 import SharedGalleryLightbox from "./SharedGalleryLightbox.astro";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
+import storiesCss from "../styles/components/stories.css?raw";
 
 interface StoryDog {
   id: string;
@@ -12,15 +13,24 @@ interface StoryDog {
 
 interface Props {
   dogs: StoryDog[];
+  totalCount: number;
+  endpoint: string;
 }
 
-const { dogs } = Astro.props;
+const { dogs, totalCount, endpoint } = Astro.props;
 ---
 
-<section class="section-padding stories" data-stories-root>
+<style is:inline set:html={storiesCss}></style>
+
+<section
+  class="section-padding stories"
+  data-stories-root
+  data-stories-endpoint={endpoint}
+  data-stories-loaded={String(dogs.length)}
+>
   <div class="container">
     <p class="stories__eyebrow">Historias</p>
-    <h2 class="stories__heading">Nuestros casos de éxito.</h2>
+    <h2 class="stories__heading">Nuestros casos de exito.</h2>
 
     <div class="stories__grid" data-stories-list>
       {
@@ -36,19 +46,17 @@ const { dogs } = Astro.props;
       }
     </div>
 
-    {
-      dogs.length > 6 && (
-        <div class="stories__ver-mas-wrap">
-          <button type="button" class="btn btn--secondary" data-stories-ver-mas>
-            Ver más historias
-          </button>
-        </div>
-      )
-    }
+    {totalCount > dogs.length && (
+      <div class="stories__ver-mas-wrap">
+        <button type="button" class="btn btn--secondary" data-stories-ver-mas>
+          Ver mas historias
+        </button>
+      </div>
+    )}
   </div>
 </section>
 
-<SharedGalleryLightbox ariaLabel="Galería de historias" />
+<SharedGalleryLightbox ariaLabel="Galeria de historias" />
 
 <script>
   import "../scripts/stories-section";
