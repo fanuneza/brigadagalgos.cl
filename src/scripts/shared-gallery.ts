@@ -40,7 +40,7 @@ function getPhotoCaption(item: SharedGalleryItem, index: number) {
   return item.photos[index]?.caption ?? `${item.name} · Foto ${index + 1} de ${item.photos.length}`;
 }
 
-function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, index: number) {
+function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string) {
   return `
     <picture>
       <source srcset="${photo.cardAvifSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/avif" />
@@ -66,7 +66,7 @@ function createSlide(item: SharedGalleryItem, photo: SharedGalleryPhoto, index: 
   slide.className = "story-card__slide";
   slide.setAttribute("aria-label", `Abrir foto ${index + 1} de ${total} de ${item.name}`);
   slide.dataset.photoIndex = String(index);
-  slide.innerHTML = buildPictureMarkup(photo, getPhotoAlt(item, index), index);
+  slide.innerHTML = buildPictureMarkup(photo, getPhotoAlt(item, index));
   return slide;
 }
 

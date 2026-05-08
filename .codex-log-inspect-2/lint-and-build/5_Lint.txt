@@ -1,0 +1,15 @@
+﻿2026-05-08T00:41:32.5273816Z ##[group]Run npm run lint
+2026-05-08T00:41:32.5274363Z [36;1mnpm run lint[0m
+2026-05-08T00:41:32.5300715Z shell: /usr/bin/bash -e {0}
+2026-05-08T00:41:32.5301017Z ##[endgroup]
+2026-05-08T00:41:32.6272815Z 
+2026-05-08T00:41:32.6273602Z > brigadagalgos-cl@0.1.0 lint
+2026-05-08T00:41:32.6274546Z > eslint . && stylelint "src/**/*.css"
+2026-05-08T00:41:32.6274904Z 
+2026-05-08T00:41:36.3941390Z 
+2026-05-08T00:41:36.3942961Z /home/runner/work/brigadagalgos.cl/brigadagalgos.cl/src/scripts/shared-gallery.ts
+2026-05-08T00:41:36.3968948Z ##[error]  43:69  error  'index' is defined but never used  @typescript-eslint/no-unused-vars
+2026-05-08T00:41:36.3977217Z 
+2026-05-08T00:41:36.3978263Z ✖ 1 problem (1 error, 0 warnings)
+2026-05-08T00:41:36.3978515Z 
+2026-05-08T00:41:36.5228543Z ##[error]Process completed with exit code 1.

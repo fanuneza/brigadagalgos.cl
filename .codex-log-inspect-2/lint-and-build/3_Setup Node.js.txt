@@ -1,0 +1,23 @@
+﻿2026-05-08T00:41:20.9881940Z ##[group]Run actions/setup-node@v4
+2026-05-08T00:41:20.9883140Z with:
+2026-05-08T00:41:20.9883976Z   node-version-file: .nvmrc
+2026-05-08T00:41:20.9885008Z   cache: npm
+2026-05-08T00:41:20.9885858Z   always-auth: false
+2026-05-08T00:41:20.9886781Z   check-latest: false
+2026-05-08T00:41:20.9888285Z   token: ***
+2026-05-08T00:41:20.9889123Z ##[endgroup]
+2026-05-08T00:41:21.1632698Z Resolved .nvmrc as 22
+2026-05-08T00:41:21.1699719Z Found in cache @ /opt/hostedtoolcache/node/22.22.2/x64
+2026-05-08T00:41:21.1706162Z ##[group]Environment details
+2026-05-08T00:41:21.5088725Z node: v22.22.2
+2026-05-08T00:41:21.5089410Z npm: 10.9.7
+2026-05-08T00:41:21.5089796Z yarn: 1.22.22
+2026-05-08T00:41:21.5090928Z ##[endgroup]
+2026-05-08T00:41:21.5113879Z [command]/opt/hostedtoolcache/node/22.22.2/x64/bin/npm config get cache
+2026-05-08T00:41:21.7293102Z /home/runner/.npm
+2026-05-08T00:41:21.8354327Z Cache hit for: node-cache-Linux-x64-npm-c45df572639a5a45879064ed6a461c4990e692b047cf95868e488e37f7086a98
+2026-05-08T00:41:22.3788801Z Received 85681326 of 85681326 (100.0%), 166.8 MBs/sec
+2026-05-08T00:41:22.3790198Z Cache Size: ~82 MB (85681326 B)
+2026-05-08T00:41:22.3821574Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b31ba41b-c549-48c9-9657-0aea86237e07/cache.tzst -P -C /home/runner/work/brigadagalgos.cl/brigadagalgos.cl --use-compress-program unzstd
+2026-05-08T00:41:22.8364905Z Cache restored successfully
+2026-05-08T00:41:22.8411319Z Cache restored from key: node-cache-Linux-x64-npm-c45df572639a5a45879064ed6a461c4990e692b047cf95868e488e37f7086a98
