@@ -145,6 +145,7 @@ vite.config.ts.timestamp-*
 # Claude / dev artifacts
 Claude*
 .claude/
+.codex-log-inspect*/
 docs/
 handoffs/
 AGENTS.md
