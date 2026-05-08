@@ -55,7 +55,7 @@
      Mono:     JetBrains Mono (rare; for placeholder badges in wireframes).
      --------------------------------------------------------------------- */
 
-  --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", sans-serif;
+  --font-display: "Impact", "Haettenschweiler", "Arial Narrow Bold", "Arial Narrow", sans-serif;
   --font-body:
     "Aptos",
     "Segoe UI Variable",
