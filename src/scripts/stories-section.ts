@@ -34,5 +34,9 @@ function initStoriesSection() {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", initStoriesSection);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStoriesSection, { once: true });
+  } else {
+    initStoriesSection();
+  }
 }

@@ -5,7 +5,7 @@ description: "Nos acompañan en cirugías y en casos complejos de nuestros galgo
 # thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://www.instagram.com/cv_sanignacio"
 kind: Veterinaria
-order: 3
+order: 2
 logo: ../../assets/images/supporters/centro-veterinario-san-ignacio-logo.webp
 logoAlt: "Logo del Centro Veterinario San Ignacio"
 ---

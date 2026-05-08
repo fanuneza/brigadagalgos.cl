@@ -5,7 +5,7 @@ description: "Nos ayudan con educación canina para nuestros galgos rescatados y
 # thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://zendoglatam.com/"
 kind: Empresa
-order: 2
+order: 4
 logo: ../../assets/images/supporters/zendog-latam-logo.webp
 logoAlt: "Logo de Zendog Latam"
 ---

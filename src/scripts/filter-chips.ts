@@ -79,5 +79,9 @@ function initFilterChips() {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", initFilterChips);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFilterChips, { once: true });
+  } else {
+    initFilterChips();
+  }
 }

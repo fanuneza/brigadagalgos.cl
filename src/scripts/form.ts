@@ -104,5 +104,9 @@ function initForm() {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", initForm);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initForm, { once: true });
+  } else {
+    initForm();
+  }
 }

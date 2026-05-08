@@ -17,6 +17,9 @@ module.exports = {
         // Donar currently peaks around 0.139 in CI.
         "cumulative-layout-shift": ["warn", { maxNumericValue: 0.15 }],
         "total-blocking-time": ["warn", { maxNumericValue: 200 }],
+        // Lighthouse reports the current home-page bfcache miss as "Not actionable"
+        // because Chrome evicts the page after too much buffered network data.
+        "bf-cache": "off",
         // Existing issues should remain visible in reports, but not block CI.
         "color-contrast": "off",
         "label-content-name-mismatch": "off",

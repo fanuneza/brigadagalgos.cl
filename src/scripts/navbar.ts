@@ -85,5 +85,9 @@ function initNavbar() {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", initNavbar);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNavbar, { once: true });
+  } else {
+    initNavbar();
+  }
 }

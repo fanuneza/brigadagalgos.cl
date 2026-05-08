@@ -51,7 +51,7 @@ function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, index: numbe
         sizes="${escapeAttribute(photo.cardSizes)}"
         alt="${escapeAttribute(alt)}"
         class="story-card__img"
-        loading="${index === 0 ? "eager" : "lazy"}"
+        loading="lazy"
         decoding="async"
         width="350"
         height="350"
@@ -382,5 +382,9 @@ if (typeof document !== "undefined") {
     initSharedGalleries();
   };
 
-  document.addEventListener("astro:page-load", boot);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
 }

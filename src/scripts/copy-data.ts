@@ -55,5 +55,9 @@ function initCopyData() {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", initCopyData);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCopyData, { once: true });
+  } else {
+    initCopyData();
+  }
 }
