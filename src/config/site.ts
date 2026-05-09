@@ -1,6 +1,7 @@
 export const SITE = {
   siteUrl: "https://brigadagalgos.cl",
   consentCookie: "brigadagalgos_consent",
+  gtmContainerId: "GTM-M2RN5B38",
   gaMeasurementId: "G-97CD3EJYML",
   whatsapp: "https://wa.me/56987076101",
   whatsappPhone: "+56 9 8707 6101",

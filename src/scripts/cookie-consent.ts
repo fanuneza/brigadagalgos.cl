@@ -1,14 +1,13 @@
 const CONSENT_COOKIE = document.documentElement.dataset.consentCookie ?? "site_consent";
-const GA_MEASUREMENT_ID = document.documentElement.dataset.gaId ?? "";
+const GTM_CONTAINER_ID = document.documentElement.dataset.gtmId ?? "";
 const CONSENT_ACCEPTED = "accepted";
 const CONSENT_REJECTED = "rejected";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
-const GA_SCRIPT_ID = "ga4-script";
+const GTM_SCRIPT_ID = "gtm-script";
 
 type TrackingWindow = Window & {
   dataLayer: unknown[];
-  gtag?: (...args: unknown[]) => void;
-  __gaInitPromise?: Promise<void>;
+  __gtmInitPromise?: Promise<void>;
 };
 
 function getTrackingWindow() {
@@ -41,36 +40,24 @@ function showBanner() {
 function bootstrapAnalytics() {
   const trackingWindow = getTrackingWindow();
   trackingWindow.dataLayer = trackingWindow.dataLayer || [];
-  trackingWindow.gtag =
-    trackingWindow.gtag ||
-    ((...args: unknown[]) => {
-      trackingWindow.dataLayer.push(args);
-    });
 }
 
 function initializeAnalytics() {
-  if (!GA_MEASUREMENT_ID) {
+  if (!GTM_CONTAINER_ID) {
     return Promise.resolve();
   }
 
   const trackingWindow = getTrackingWindow();
 
-  if (trackingWindow.__gaInitPromise) {
-    return trackingWindow.__gaInitPromise;
+  if (trackingWindow.__gtmInitPromise) {
+    return trackingWindow.__gtmInitPromise;
   }
 
-  trackingWindow.__gaInitPromise = new Promise<void>((resolve, reject) => {
+  trackingWindow.__gtmInitPromise = new Promise<void>((resolve, reject) => {
     bootstrapAnalytics();
 
-    const existingScript = document.getElementById(GA_SCRIPT_ID) as HTMLScriptElement | null;
+    const existingScript = document.getElementById(GTM_SCRIPT_ID) as HTMLScriptElement | null;
     const finishInitialization = () => {
-      bootstrapAnalytics();
-      trackingWindow.gtag?.("js", new Date());
-      trackingWindow.gtag?.("config", GA_MEASUREMENT_ID, {
-        anonymize_ip: true,
-        allow_google_signals: false,
-        allow_ad_personalization_signals: false,
-      });
       resolve();
     };
 
@@ -80,22 +67,22 @@ function initializeAnalytics() {
     }
 
     const script = document.createElement("script");
-    script.id = GA_SCRIPT_ID;
+    script.id = GTM_SCRIPT_ID;
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(GTM_CONTAINER_ID)}`;
     script.addEventListener("load", finishInitialization, { once: true });
     script.addEventListener(
       "error",
       () => {
-        trackingWindow.__gaInitPromise = undefined;
-        reject(new Error("Failed to load Google Analytics"));
+        trackingWindow.__gtmInitPromise = undefined;
+        reject(new Error("Failed to load Google Tag Manager"));
       },
       { once: true },
     );
     document.head.append(script);
   });
 
-  return trackingWindow.__gaInitPromise;
+  return trackingWindow.__gtmInitPromise;
 }
 
 function applyConsentState() {

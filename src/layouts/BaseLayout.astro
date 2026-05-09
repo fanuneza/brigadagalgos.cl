@@ -9,13 +9,13 @@ interface Props {
 }
 
 const { title, description, ogImage = "/images/brigada-galgos-og-image.webp" } = Astro.props;
-const { siteUrl, gaMeasurementId, consentCookie } = SITE;
+const { siteUrl, gtmContainerId, consentCookie } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
 ---
 
 <!doctype html>
-<html lang="es" data-ga-id={gaMeasurementId} data-consent-cookie={consentCookie}>
+<html lang="es" data-gtm-id={gtmContainerId} data-consent-cookie={consentCookie}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
