@@ -11,9 +11,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      lastmod: new Date(),
-      changefreq: "weekly",
-      priority: 0.7,
+      filter: (page) => !page.endsWith(".json"),
+      serialize: (item) => ({ url: item.url }),
     }),
   ],
 });

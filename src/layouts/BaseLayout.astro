@@ -12,6 +12,20 @@ const { title, description, ogImage = "/images/brigada-galgos-og-image.webp" } =
 const { siteUrl, gtmId, consentCookie } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
+const gtmScriptUrl = gtmId ? `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}` : "";
+const consentDefaultsScript = `
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+window.gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  functionality_storage: 'granted',
+  personalization_storage: 'denied',
+  security_storage: 'granted'
+});
+`;
 ---
 
 <!doctype html>
@@ -24,7 +38,6 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.ico" />
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CL" />
     <meta property="og:url" content={canonicalUrl} />
@@ -32,12 +45,18 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:site_name" content="Brigada Galgos" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    {
+      gtmId && (
+        <>
+          <script is:inline set:html={consentDefaultsScript}></script>
+          <script is:inline async src={gtmScriptUrl}></script>
+        </>
+      )
+    }
     <slot name="head" />
   </head>
   <body>

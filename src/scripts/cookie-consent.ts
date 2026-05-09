@@ -1,14 +1,25 @@
-const GTM_ID = document.documentElement.dataset.gtmId ?? "";
 const CONSENT_COOKIE = document.documentElement.dataset.consentCookie ?? "site_consent";
 const CONSENT_ACCEPTED = "accepted";
 const CONSENT_REJECTED = "rejected";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
-function getWindowWithDataLayer() {
-  return window as unknown as Window & { dataLayer: Array<Record<string, unknown>> };
-}
+type ConsentStorageState = "granted" | "denied";
+type TrackingWindow = Window & {
+  dataLayer: unknown[];
+  gtag?: (...args: unknown[]) => void;
+};
 
-let gtmLoaded = false;
+function getTrackingWindow() {
+  const trackingWindow = window as unknown as TrackingWindow;
+  trackingWindow.dataLayer = trackingWindow.dataLayer || [];
+  trackingWindow.gtag =
+    trackingWindow.gtag ||
+    ((...args: unknown[]) => {
+      trackingWindow.dataLayer.push(args);
+    });
+
+  return trackingWindow;
+}
 
 function getCookie(name: string) {
   return document.cookie
@@ -33,35 +44,29 @@ function showBanner() {
   document.getElementById("cookie-banner")?.removeAttribute("hidden");
 }
 
-function loadGtm() {
-  if (!GTM_ID || gtmLoaded || document.querySelector(`script[data-gtm-id="${GTM_ID}"]`)) {
-    gtmLoaded = true;
-    return;
-  }
-
-  const windowWithDataLayer = getWindowWithDataLayer();
-  windowWithDataLayer.dataLayer = windowWithDataLayer.dataLayer || [];
-  windowWithDataLayer.dataLayer.push({
-    "gtm.start": Date.now(),
-    event: "gtm.js",
+function updateConsent(storage: ConsentStorageState) {
+  const trackingWindow = getTrackingWindow();
+  trackingWindow.gtag?.("consent", "update", {
+    analytics_storage: storage,
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    functionality_storage: "granted",
+    personalization_storage: "denied",
+    security_storage: "granted",
   });
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(GTM_ID)}`;
-  script.dataset.gtmId = GTM_ID;
-  document.head.appendChild(script);
-  gtmLoaded = true;
 }
 
 function applyConsentState() {
   const consent = getCookie(CONSENT_COOKIE);
 
   if (consent === CONSENT_ACCEPTED) {
-    loadGtm();
+    updateConsent("granted");
     hideBanner();
     return;
   }
+
+  updateConsent("denied");
 
   if (consent === CONSENT_REJECTED) {
     hideBanner();
@@ -76,12 +81,13 @@ function initCookieConsent() {
 
   document.getElementById("cookie-accept")?.addEventListener("click", () => {
     setCookie(CONSENT_COOKIE, CONSENT_ACCEPTED);
-    loadGtm();
+    updateConsent("granted");
     hideBanner();
   });
 
   document.getElementById("cookie-reject")?.addEventListener("click", () => {
     setCookie(CONSENT_COOKIE, CONSENT_REJECTED);
+    updateConsent("denied");
     hideBanner();
   });
 

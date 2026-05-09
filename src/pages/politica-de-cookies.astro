@@ -65,7 +65,10 @@ import { SITE } from "../config/site.ts";
                       </tr>
                       <tr>
                         <td><code>_ga</code>, <code>_ga_*</code>, <code>_gid</code></td>
-                        <td>Cookies de Google Tag Manager y Google Analytics para análisis agregado del tráfico. Solo se activan si aceptas.</td>
+                        <td>
+                          Cookies de Google Tag Manager y Google Analytics para análisis agregado del tráfico. Solo se
+                          activan si aceptas.
+                        </td>
                         <td>Hasta 2 años</td>
                         <td>Analítica (opcional)</td>
                       </tr>
@@ -84,8 +87,9 @@ import { SITE } from "../config/site.ts";
                   <strong>Rechazar</strong> para denegarlas.
                 </p>
                 <p>
-                  Tu decisión se guarda en la cookie <code>{SITE.consentCookie}</code> durante 12 meses. Si rechazas,
-                  Google Tag Manager no se carga y el sitio sigue funcionando normalmente.
+                  Tu decisión se guarda en la cookie <code>{SITE.consentCookie}</code> durante 12 meses. Google Tag
+                  Manager puede cargarse con el consentimiento denegado por defecto para permitir la gestión técnica de
+                  etiquetas y la verificación del sitio, pero las cookies analíticas solo se activan si aceptas.
                 </p>
               </div>
             </section>
