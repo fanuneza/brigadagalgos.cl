@@ -4,30 +4,59 @@ import { expect, test, type Page } from "@playwright/test";
 const GTM_CONTAINER_ID = "GTM-M2RN5B38";
 const CONSENT_COOKIE = "brigadagalgos_consent";
 const GTM_SCRIPT_SELECTOR = `script[src*="googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}"]`;
+const DIRECT_GA4_SELECTOR = 'script[src*="googletagmanager.com/gtag/js"], script[src*="google-analytics.com/gtag/js"]';
 
 async function stubGtm(page: Page) {
   let gtmRequestCount = 0;
+  let gaCollectRequestCount = 0;
+  const consoleMessages: string[] = [];
+
+  page.on("console", (message) => {
+    consoleMessages.push(message.text());
+  });
 
   await page.route(`https://www.googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}*`, async (route) => {
     gtmRequestCount += 1;
     await route.fulfill({
       status: 200,
       contentType: "application/javascript",
-      body: "window.__gtmMockLoaded = (window.__gtmMockLoaded || 0) + 1;",
+      body: `
+        window.__gtmMockLoaded = (window.__gtmMockLoaded || 0) + 1;
+        fetch("https://www.google-analytics.com/g/collect?v=2&tid=G-97CD3EJYML&gtm=${GTM_CONTAINER_ID}&en=page_view", {
+          mode: "no-cors",
+          keepalive: true
+        }).catch(() => {
+          window.__gaCollectFailed = true;
+        });
+      `,
     });
   });
 
-  return () => gtmRequestCount;
+  await page.route("https://www.google-analytics.com/g/collect?*", async (route) => {
+    gaCollectRequestCount += 1;
+    await route.fulfill({
+      status: 204,
+      body: "",
+    });
+  });
+
+  return {
+    getGtmRequestCount: () => gtmRequestCount,
+    getGaCollectRequestCount: () => gaCollectRequestCount,
+    getConsoleMessages: () => consoleMessages,
+  };
 }
 
 test("no consent shows banner and does not load GTM", async ({ page }) => {
-  const getGtmRequestCount = await stubGtm(page);
+  const tracking = await stubGtm(page);
 
   await page.goto("/", { waitUntil: "networkidle" });
 
   await expect(page.locator("#cookie-banner")).toBeVisible();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
-  expect(getGtmRequestCount()).toBe(0);
+  await expect(page.locator(DIRECT_GA4_SELECTOR)).toHaveCount(0);
+  expect(tracking.getGtmRequestCount()).toBe(0);
+  expect(tracking.getGaCollectRequestCount()).toBe(0);
 
   await page.locator('a[data-track-location="hero"][data-track-category="adoption"]').evaluate((element) => {
     element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
@@ -74,30 +103,41 @@ test("accepted consent hides banner, loads GTM once, and pushes granted consent 
     },
   ]);
 
-  const getGtmRequestCount = await stubGtm(page);
+  const tracking = await stubGtm(page);
 
   await page.goto("/", { waitUntil: "networkidle" });
 
   await expect(page.locator("#cookie-banner")).toBeHidden();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(1);
-  expect(getGtmRequestCount()).toBe(1);
+  await expect(page.locator(DIRECT_GA4_SELECTOR)).toHaveCount(0);
+  expect(tracking.getGtmRequestCount()).toBe(1);
+  expect(tracking.getGaCollectRequestCount()).toBeGreaterThan(0);
+  expect(tracking.getConsoleMessages()).not.toEqual(
+    expect.arrayContaining([expect.stringMatching(/Content Security Policy|CSP|googletagmanager\.com/i)])
+  );
 
   const consentState = await page.evaluate(() => {
     const trackingWindow = window as Window & {
       __cookieConsentState?: string;
+      __gtmBootstrapPushed?: boolean;
       __gtmMockLoaded?: number;
-      dataLayer?: unknown[];
+      __gaCollectFailed?: boolean;
+      dataLayer?: Array<Record<string, unknown>>;
     };
 
     return {
       consentState: trackingWindow.__cookieConsentState,
+      gtmBootstrapPushed: trackingWindow.__gtmBootstrapPushed ?? false,
       gtmMockLoaded: trackingWindow.__gtmMockLoaded ?? 0,
+      gaCollectFailed: trackingWindow.__gaCollectFailed ?? false,
       dataLayer: trackingWindow.dataLayer ?? [],
     };
   });
 
   expect(consentState.consentState).toBe("granted");
+  expect(consentState.gtmBootstrapPushed).toBe(true);
   expect(consentState.gtmMockLoaded).toBe(1);
+  expect(consentState.gaCollectFailed).toBe(false);
   expect(consentState.dataLayer).toContainEqual(
     expect.objectContaining({
       event: "cookie_consent_update",
@@ -107,6 +147,12 @@ test("accepted consent hides banner, loads GTM once, and pushes granted consent 
       ad_personalization: "denied",
     })
   );
+  expect(consentState.dataLayer).toContainEqual(
+    expect.objectContaining({
+      event: "gtm.js",
+    })
+  );
+  expect(consentState.dataLayer.filter((entry) => entry.event === "gtm.js")).toHaveLength(1);
 });
 
 test("rejected consent hides banner, does not load GTM, and pushes denied consent state", async ({ context, page }) => {
@@ -119,18 +165,20 @@ test("rejected consent hides banner, does not load GTM, and pushes denied consen
     },
   ]);
 
-  const getGtmRequestCount = await stubGtm(page);
+  const tracking = await stubGtm(page);
 
   await page.goto("/", { waitUntil: "networkidle" });
 
   await expect(page.locator("#cookie-banner")).toBeHidden();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
-  expect(getGtmRequestCount()).toBe(0);
+  await expect(page.locator(DIRECT_GA4_SELECTOR)).toHaveCount(0);
+  expect(tracking.getGtmRequestCount()).toBe(0);
+  expect(tracking.getGaCollectRequestCount()).toBe(0);
 
   const consentState = await page.evaluate(() => {
     const trackingWindow = window as Window & {
       __cookieConsentState?: string;
-      dataLayer?: unknown[];
+      dataLayer?: Array<Record<string, unknown>>;
     };
 
     return {
@@ -163,27 +211,40 @@ test("rejected consent hides banner, does not load GTM, and pushes denied consen
 });
 
 test("clicking accept sets the cookie, loads GTM once, and hides the banner", async ({ page }) => {
-  const getGtmRequestCount = await stubGtm(page);
+  const tracking = await stubGtm(page);
 
   await page.goto("/", { waitUntil: "networkidle" });
   await page.locator("#cookie-accept").click();
 
   await expect(page.locator("#cookie-banner")).toBeHidden();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(1);
-  expect(getGtmRequestCount()).toBe(1);
+  await expect(page.locator(DIRECT_GA4_SELECTOR)).toHaveCount(0);
+  expect(tracking.getGtmRequestCount()).toBe(1);
+  expect(tracking.getGaCollectRequestCount()).toBeGreaterThan(0);
+  expect(tracking.getConsoleMessages()).not.toEqual(
+    expect.arrayContaining([expect.stringMatching(/Content Security Policy|CSP|googletagmanager\.com/i)])
+  );
 
   const trackingState = await page.evaluate(() => {
     const trackingWindow = window as Window & {
-      dataLayer?: unknown[];
+      __gtmBootstrapPushed?: boolean;
+      dataLayer?: Array<Record<string, unknown>>;
     };
 
     return {
       dataLayerExists: Array.isArray(trackingWindow.dataLayer),
+      gtmBootstrapPushed: trackingWindow.__gtmBootstrapPushed ?? false,
+      eventNames: (trackingWindow.dataLayer ?? [])
+        .map((entry) => (entry && typeof entry === "object" && "event" in entry ? entry.event : undefined))
+        .filter(Boolean),
       scriptCount: document.querySelectorAll('script[src*="googletagmanager.com/gtm.js?id=GTM-M2RN5B38"]').length,
     };
   });
 
   expect(trackingState.dataLayerExists).toBe(true);
+  expect(trackingState.gtmBootstrapPushed).toBe(true);
+  expect(trackingState.eventNames).toContain("cookie_consent_update");
+  expect(trackingState.eventNames).toContain("gtm.js");
   expect(trackingState.scriptCount).toBe(1);
 
   await expect
@@ -192,14 +253,16 @@ test("clicking accept sets the cookie, loads GTM once, and hides the banner", as
 });
 
 test("clicking reject sets the cookie, does not load GTM, and hides the banner", async ({ page }) => {
-  const getGtmRequestCount = await stubGtm(page);
+  const tracking = await stubGtm(page);
 
   await page.goto("/", { waitUntil: "networkidle" });
   await page.locator("#cookie-reject").click();
 
   await expect(page.locator("#cookie-banner")).toBeHidden();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
-  expect(getGtmRequestCount()).toBe(0);
+  await expect(page.locator(DIRECT_GA4_SELECTOR)).toHaveCount(0);
+  expect(tracking.getGtmRequestCount()).toBe(0);
+  expect(tracking.getGaCollectRequestCount()).toBe(0);
 
   await expect
     .poll(async () => page.evaluate((cookieName) => document.cookie.includes(`${cookieName}=rejected`), CONSENT_COOKIE))

@@ -11,6 +11,7 @@ type TrackingWindow = Window & {
   dataLayer: unknown[];
   __cookieConsentState?: "granted" | "denied";
   __gtmInitPromise?: Promise<void>;
+  __gtmBootstrapPushed?: boolean;
 };
 
 function getTrackingWindow() {
@@ -67,6 +68,21 @@ function pushConsentState(state: "granted" | "denied") {
   });
 }
 
+function pushGtmBootstrapEvent() {
+  const trackingWindow = getTrackingWindow();
+  bootstrapAnalytics();
+
+  if (trackingWindow.__gtmBootstrapPushed) {
+    return;
+  }
+
+  trackingWindow.__gtmBootstrapPushed = true;
+  trackingWindow.dataLayer.push({
+    "gtm.start": new Date().getTime(),
+    event: "gtm.js",
+  });
+}
+
 function getExistingGtmScript() {
   return document.getElementById(GTM_SCRIPT_ID) as HTMLScriptElement | null;
 }
@@ -79,6 +95,7 @@ function initializeAnalytics() {
   const trackingWindow = getTrackingWindow();
   bootstrapAnalytics();
   pushConsentState("granted");
+  pushGtmBootstrapEvent();
 
   if (trackingWindow.__gtmInitPromise) {
     return trackingWindow.__gtmInitPromise;
