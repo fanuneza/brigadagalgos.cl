@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { SITE } from "../config/site.ts";
 
 interface Props {
   title: string;
@@ -8,14 +9,13 @@ interface Props {
 }
 
 const { title, description, ogImage = "/images/brigada-galgos-og-image.webp" } = Astro.props;
-
-const siteUrl = "https://brigadagalgos.cl";
+const { siteUrl, gtmId, consentCookie } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-gtm-id={gtmId} data-consent-cookie={consentCookie}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,5 +42,21 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
   </head>
   <body>
     <slot />
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
+      <div class="cookie-banner__inner container">
+        <p class="cookie-banner__text">
+          Usamos cookies de analítica para entender cómo se usa el sitio y mejorarlo. Puedes aceptar o rechazar su
+          uso. <a href="/politica-de-cookies/" class="cookie-banner__link">Política de cookies</a>
+        </p>
+        <div class="cookie-banner__actions">
+          <button class="btn btn--primary cookie-banner__button" id="cookie-accept" type="button">Aceptar</button>
+          <button class="btn btn--ghost cookie-banner__button" id="cookie-reject" type="button">Rechazar</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
+
+<script>
+  import "../scripts/cookie-consent";
+</script>

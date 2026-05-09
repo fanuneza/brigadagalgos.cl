@@ -1,4 +1,7 @@
 export const SITE = {
+  siteUrl: "https://brigadagalgos.cl",
+  consentCookie: "brigadagalgos_consent",
+  gtmId: "GTM-M2RN5B38",
   whatsapp: "https://wa.me/56987076101",
   whatsappPhone: "+56 9 8707 6101",
   email: "contacto@brigadagalgos.cl",

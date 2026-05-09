@@ -1,0 +1,127 @@
+---
+import "../styles/components/cookie-policy.css";
+import "../styles/components/page-hero.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import { SITE } from "../config/site.ts";
+---
+
+<BaseLayout
+  title="Política de cookies | Brigada Galgos"
+  description="Información sobre las cookies que usa Brigada Galgos y cómo puedes gestionar tus preferencias."
+>
+  <Navbar />
+  <main>
+    <PageHero
+      eyebrow="LEGAL"
+      h1="Política de cookies"
+      lead="Información sobre las cookies que usamos, para qué sirven y cómo puedes gestionar tu consentimiento."
+    />
+
+    <section class="section-padding">
+      <div class="container">
+        <article class="cookie-policy">
+          <div class="container container--narrow cookie-policy__inner">
+            <section class="cookie-policy__section" aria-labelledby="cookies-definicion">
+              <h2 id="cookies-definicion">Qué son las cookies</h2>
+              <div class="cookie-policy__prose">
+                <p>
+                  Las cookies son pequeños archivos de texto que un sitio web guarda en tu navegador cuando lo visitas.
+                  Sirven para recordar información entre visitas, por ejemplo tus preferencias o datos técnicos de
+                  navegación.
+                </p>
+                <p>
+                  No contienen código ejecutable ni acceden por sí mismas a información de tu dispositivo fuera de lo
+                  que el navegador permite.
+                </p>
+              </div>
+            </section>
+
+            <section class="cookie-policy__section" aria-labelledby="cookies-usadas">
+              <h2 id="cookies-usadas">Cookies que usamos</h2>
+              <div class="cookie-policy__prose">
+                <p>Brigada Galgos usa exclusivamente las siguientes cookies:</p>
+              </div>
+
+              <div class="cookie-policy__table-shell">
+                <div class="cookie-policy__table-wrap">
+                  <table class="cookie-policy__table">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Propósito</th>
+                        <th>Duración</th>
+                        <th>Tipo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>{SITE.consentCookie}</code></td>
+                        <td>Almacena tu preferencia de cookies, ya sea aceptar o rechazar.</td>
+                        <td>12 meses</td>
+                        <td>Necesaria / preferencias</td>
+                      </tr>
+                      <tr>
+                        <td><code>_ga</code>, <code>_ga_*</code>, <code>_gid</code></td>
+                        <td>Cookies de Google Tag Manager y Google Analytics para análisis agregado del tráfico. Solo se activan si aceptas.</td>
+                        <td>Hasta 2 años</td>
+                        <td>Analítica (opcional)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="cookie-policy__section" aria-labelledby="cookies-consentimiento">
+              <h2 id="cookies-consentimiento">Cómo gestionamos el consentimiento</h2>
+              <div class="cookie-policy__prose">
+                <p>
+                  Al visitar brigadagalgos.cl por primera vez verás un aviso en la parte inferior de la pantalla.
+                  Puedes hacer clic en <strong>Aceptar</strong> para autorizar cookies analíticas, o en
+                  <strong>Rechazar</strong> para denegarlas.
+                </p>
+                <p>
+                  Tu decisión se guarda en la cookie <code>{SITE.consentCookie}</code> durante 12 meses. Si rechazas,
+                  Google Tag Manager no se carga y el sitio sigue funcionando normalmente.
+                </p>
+              </div>
+            </section>
+
+            <section class="cookie-policy__section" aria-labelledby="cookies-retiro">
+              <h2 id="cookies-retiro">Cómo retirar el consentimiento</h2>
+              <div class="cookie-policy__prose">
+                <p>
+                  Puedes cambiar tu preferencia en cualquier momento haciendo clic en
+                  <strong>Gestionar preferencias de cookies</strong>, disponible al pie de todas las páginas del sitio.
+                </p>
+                <p>
+                  Ese botón elimina la cookie de consentimiento y recarga la página para mostrar de nuevo el aviso.
+                  También puedes borrar cookies directamente desde la configuración de tu navegador.
+                </p>
+              </div>
+            </section>
+
+            <section class="cookie-policy__section" aria-labelledby="cookies-base-legal">
+              <h2 id="cookies-base-legal">Base legal</h2>
+              <div class="cookie-policy__prose">
+                <p>
+                  Este sitio opera en Chile y se rige por la
+                  <strong>Ley N. 19.628 sobre Protección de la Vida Privada</strong>. El uso de cookies analíticas se
+                  realiza sobre la base de tu consentimiento previo y explícito.
+                </p>
+                <p>
+                  La cookie de preferencias <code>{SITE.consentCookie}</code> es necesaria para recordar tu elección y
+                  no se usa con fines publicitarios ni de perfilamiento.
+                </p>
+              </div>
+            </section>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

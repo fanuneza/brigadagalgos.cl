@@ -1,0 +1,114 @@
+.cookie-policy {
+  display: grid;
+  min-width: 0;
+}
+
+.cookie-policy__inner {
+  display: grid;
+  gap: clamp(var(--space-7), 6vw, var(--space-9));
+  min-width: 0;
+}
+
+.cookie-policy__section {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.cookie-policy__section h2 {
+  font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+}
+
+.cookie-policy__prose {
+  display: grid;
+  gap: var(--space-4);
+  padding-bottom: var(--space-6);
+}
+
+.cookie-policy__prose p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+  line-height: var(--line-loose);
+}
+
+.cookie-policy__prose strong {
+  color: var(--color-text);
+}
+
+.cookie-policy__table-shell {
+  background: linear-gradient(180deg, rgba(207, 244, 248, 0.42), rgba(245, 246, 248, 0.9));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-3);
+  min-width: 0;
+}
+
+.cookie-policy__table-wrap {
+  overflow-x: auto;
+  border-radius: calc(var(--radius-lg) - var(--space-1));
+  min-width: 0;
+}
+
+.cookie-policy__table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  background: var(--color-bg);
+}
+
+.cookie-policy__table th,
+.cookie-policy__table td {
+  padding: var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cookie-policy__table th {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-primary-100);
+}
+
+.cookie-policy__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cookie-policy__table td {
+  color: var(--color-text-muted);
+  line-height: var(--line-base);
+}
+
+.cookie-policy__table code,
+.cookie-policy__prose code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-surface-2) 85%, white);
+  border-radius: var(--radius-sm);
+  padding: 0.12rem 0.35rem;
+}
+
+@media (max-width: 767px) {
+  .cookie-policy__section h2 {
+    max-width: 12ch;
+  }
+
+  .cookie-policy__prose p {
+    font-size: var(--font-size-base);
+  }
+
+  .cookie-policy__table-shell {
+    padding: var(--space-2);
+  }
+
+  .cookie-policy__table th,
+  .cookie-policy__table td {
+    padding: var(--space-3);
+  }
+}

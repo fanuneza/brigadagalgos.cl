@@ -1,6 +1,8 @@
 ---
 import { SITE } from "../config/site.ts";
 import footerCss from "../styles/components/footer.css?raw";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <style is:inline set:html={footerCss}></style>
@@ -17,9 +19,13 @@ import footerCss from "../styles/components/footer.css?raw";
           height="48"
           loading="lazy"
         />
-        <span class="footer__brand-name">Fundacion<br />Brigada Galgos</span>
+        <span class="footer__brand-name">Fundación<br />Brigada Galgos</span>
       </a>
-      <p class="footer__tagline">Rescatamos galgos en todo Chile y los acompanamos hasta su hogar definitivo.</p>
+      <div class="footer__tagline">
+        <p>Rescatamos galgos en todo Chile y los acompañamos hasta su hogar definitivo.</p>
+        <p class="footer__brand-legal">&copy; {currentYear} Fundación Brigada Galgos</p>
+        <p class="footer__brand-legal">RUT 65.132.425-4</p>
+      </div>
     </div>
 
     <div class="footer__contact">
@@ -76,7 +82,6 @@ import footerCss from "../styles/components/footer.css?raw";
   <div class="footer__bottom">
     <div class="container footer__bottom-inner">
       <div class="footer__copy">
-        <p>&copy; 2026 Fundacion Brigada Galgos &middot; RUT 65.132.425-4</p>
         <p>
           Sitio web desarrollado con
           <img src="/icons/heart.svg" alt="" aria-hidden="true" class="footer__heart-icon" />
@@ -85,9 +90,13 @@ import footerCss from "../styles/components/footer.css?raw";
             href="https://agenciachucao.cl/?utm_source=brigadagalgos.cl&utm_medium=referral&utm_campaign=credit_footer"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Abrir el sitio de Agencia Chucao en una pestana nueva">agencia chucao</a
+            aria-label="Abrir el sitio de Agencia Chucao en una pestaña nueva">agencia chucao</a
           >
         </p>
+      </div>
+      <div class="footer__legal">
+        <a href="/politica-de-cookies/" class="footer__legal-link">Política de cookies</a>
+        <button type="button" class="footer__legal-button" id="cookie-manage-btn">Gestionar preferencias de cookies</button>
       </div>
       <a href={SITE.esponsor} target="_blank" rel="noopener noreferrer" class="btn btn--secondary footer__esponsor-btn"
         >Quiero donar en eSponsor</a
