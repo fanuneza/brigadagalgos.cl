@@ -12,7 +12,9 @@ const { title, description, ogImage = "/images/brigada-galgos-og-image.webp" } =
 const { siteUrl, gtmId, consentCookie } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
-const gtmScriptUrl = gtmId ? `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}` : "";
+const gtmNoscriptUrl = gtmId
+  ? `https://www.googletagmanager.com/ns.html?id=${encodeURIComponent(gtmId)}`
+  : "";
 const consentDefaultsScript = `
 window.dataLayer = window.dataLayer || [];
 window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
@@ -26,6 +28,15 @@ window.gtag('consent', 'default', {
   security_storage: 'granted'
 });
 `;
+const gtmBootstrapScript = gtmId
+  ? `
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');
+`
+  : "";
 ---
 
 <!doctype html>
@@ -53,13 +64,26 @@ window.gtag('consent', 'default', {
       gtmId && (
         <>
           <script is:inline set:html={consentDefaultsScript}></script>
-          <script is:inline async src={gtmScriptUrl}></script>
+          <script is:inline set:html={gtmBootstrapScript}></script>
         </>
       )
     }
     <slot name="head" />
   </head>
   <body>
+    {
+      gtmId && (
+        <noscript>
+          <iframe
+            src={gtmNoscriptUrl}
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+            title="Google Tag Manager"
+          ></iframe>
+        </noscript>
+      )
+    }
     <slot />
     <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
       <div class="cookie-banner__inner container">
