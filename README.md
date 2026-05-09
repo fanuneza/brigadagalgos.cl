@@ -30,6 +30,8 @@ Sitio estático desarrollado con Astro para Brigada Galgos, organización dedica
 | `npm run capture:home`    | Ejecuta capturas visuales de la página de inicio.     |
 | `npm run capture:adoptar` | Ejecuta capturas visuales de la página de adopción.   |
 | `npm run capture:donar`   | Ejecuta capturas visuales de la página de donaciones. |
+| `npm run lint:fix`        | Corrige automáticamente errores de lint.              |
+| `npm run format`          | Formatea todos los archivos con Prettier.             |
 
 ## Estructura del proyecto
 
@@ -37,10 +39,12 @@ Sitio estático desarrollado con Astro para Brigada Galgos, organización dedica
 src/
   pages/                    # Rutas del sitio
     adoptar.astro           # Página de adopción
+    colaboradores.astro     # Página de colaboradores y auspiciadores
     contacto.astro          # Página de contacto
     donar.astro             # Página de donaciones
     hogar-temporal.astro    # Página de hogar temporal
     index.astro             # Página de inicio
+    por-que-galgos.astro    # Por qué adoptar un galgo
   layouts/                  # Layouts compartidos
     BaseLayout.astro        # Layout base del sitio
   components/               # Componentes reutilizables de interfaz
@@ -60,6 +64,7 @@ src/
   content/                  # Colecciones de contenido
     adoption-dogs/*.md      # Perfiles de galgos en adopción
     success-dogs/*.md       # Historias de éxito
+    supporters/*.md         # Colaboradores y auspiciadores
   content.config.ts         # Esquema de las colecciones de contenido
   config/
     site.ts                 # Configuración del sitio (contacto, redes)
@@ -69,6 +74,7 @@ src/
     form.ts
     navbar.ts
     shared-gallery.ts
+    stories-section.ts
   styles/                   # Estilos del sitio
     global.css              # Punto de entrada de estilos
     tokens.css              # Tokens de diseño
@@ -100,6 +106,20 @@ Cada historia se define como un archivo Markdown con frontmatter:
 - `name` — Nombre del galgo
 - `story` — Texto de la historia
 - `gallery` — Array de imágenes (procesadas por `astro:assets`)
+
+### Colaboradores (`src/content/supporters/`)
+
+Cada colaborador se define como un archivo Markdown con frontmatter:
+
+- `name` — Nombre de la organización
+- `description` — Descripción del aporte
+- `thanksLabel` — Texto del enlace de agradecimiento
+- `thanksUrl` — URL del enlace de agradecimiento
+- `website` — Sitio web del colaborador
+- `kind` — Tipo (`Empresa` | `Clínica` | etc.)
+- `order` — Orden de aparición (número)
+- `logo` — Logo (procesado por `astro:assets`)
+- `logoAlt` — Texto alternativo del logo
 
 ## Testing
 

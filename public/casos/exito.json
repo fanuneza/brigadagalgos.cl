@@ -3,9 +3,7 @@
     "id": "antonia",
     "nombre_publico": "Antonia",
     "aliases": [],
-    "source_folders": [
-      "21-Antonia"
-    ],
+    "source_folders": ["21-Antonia"],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": null,
@@ -136,12 +134,8 @@
   {
     "id": "avena",
     "nombre_publico": "Avena",
-    "aliases": [
-      "Bianca"
-    ],
-    "source_folders": [
-      "105. Avena"
-    ],
+    "aliases": ["Bianca"],
+    "source_folders": ["105. Avena"],
     "spreadsheet_match": "Avena - Bianca",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -220,9 +214,7 @@
     "id": "bolt",
     "nombre_publico": "Bolt",
     "aliases": [],
-    "source_folders": [
-      "108. Bolt"
-    ],
+    "source_folders": ["108. Bolt"],
     "spreadsheet_match": "Bolt",
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -263,10 +255,7 @@
         "confidence": "media"
       }
     ],
-    "selected_photos": [
-      "/casos/exito/bolt/bolt-1.jpg",
-      "/casos/exito/bolt/bolt-03.jpg"
-    ],
+    "selected_photos": ["/casos/exito/bolt/bolt-1.jpg", "/casos/exito/bolt/bolt-03.jpg"],
     "site_photos": [
       {
         "source": "/casos/exito/bolt/bolt-1.jpg",
@@ -295,9 +284,7 @@
     "id": "bruno",
     "nombre_publico": "Bruno",
     "aliases": [],
-    "source_folders": [
-      "84- Bruno"
-    ],
+    "source_folders": ["84- Bruno"],
     "spreadsheet_match": "Bruno",
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -377,9 +364,7 @@
     "id": "canela",
     "nombre_publico": "Canela",
     "aliases": [],
-    "source_folders": [
-      "103. Canela"
-    ],
+    "source_folders": ["103. Canela"],
     "spreadsheet_match": "Canela",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -466,12 +451,8 @@
   {
     "id": "fermin",
     "nombre_publico": "Fermín",
-    "aliases": [
-      "Fermín"
-    ],
-    "source_folders": [
-      "docs/EXTRA-INFO.md"
-    ],
+    "aliases": ["Fermín"],
+    "source_folders": ["docs/EXTRA-INFO.md"],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -496,9 +477,7 @@
       "/casos/exito/fermin/fermin-03.jpg"
     ],
     "other_media_counts": {},
-    "confidence_notes": [
-      "Historia y fotos agregadas desde docs/EXTRA-INFO.md."
-    ],
+    "confidence_notes": ["Historia y fotos agregadas desde docs/EXTRA-INFO.md."],
     "site_photos": [
       {
         "source": "/casos/exito/fermin/fermin-01.jpg",
@@ -664,12 +643,8 @@
   {
     "id": "leo",
     "nombre_publico": "Leo",
-    "aliases": [
-      "Leo"
-    ],
-    "source_folders": [
-      "docs/EXTRA-INFO.md"
-    ],
+    "aliases": ["Leo"],
+    "source_folders": ["docs/EXTRA-INFO.md"],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -695,9 +670,7 @@
       "/casos/exito/leo/leo-04.jpg"
     ],
     "other_media_counts": {},
-    "confidence_notes": [
-      "Historia y fotos agregadas desde docs/EXTRA-INFO.md."
-    ],
+    "confidence_notes": ["Historia y fotos agregadas desde docs/EXTRA-INFO.md."],
     "site_photos": [
       {
         "source": "/casos/exito/leo/leo-01.jpg",
@@ -728,9 +701,7 @@
   {
     "id": "lille",
     "nombre_publico": "Lille",
-    "aliases": [
-      "Rosita"
-    ],
+    "aliases": ["Rosita"],
     "source_folders": [
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon",
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon/Lille - Rosita"
@@ -813,12 +784,8 @@
   {
     "id": "lisboa",
     "nombre_publico": "Lisboa",
-    "aliases": [
-      "Lisbeth"
-    ],
-    "source_folders": [
-      "92- Lisboa"
-    ],
+    "aliases": ["Lisbeth"],
+    "source_folders": ["92- Lisboa"],
     "spreadsheet_match": "Lisboa - Lisbeth",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -906,9 +873,7 @@
     "id": "malta",
     "nombre_publico": "Malta",
     "aliases": [],
-    "source_folders": [
-      "1-Malta"
-    ],
+    "source_folders": ["1-Malta"],
     "spreadsheet_match": null,
     "estado": "Adoptada",
     "sexo": "Hembra",
@@ -1073,9 +1038,7 @@
   {
     "id": "marsella",
     "nombre_publico": "Marsella",
-    "aliases": [
-      "Soffi"
-    ],
+    "aliases": ["Soffi"],
     "source_folders": [
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon",
       "97. Francia y cachorros Paris, Marsella, Lille y Lyon/Marsella - Soffi"
@@ -1159,9 +1122,7 @@
     "id": "mora",
     "nombre_publico": "Mora",
     "aliases": [],
-    "source_folders": [
-      "109. Mora"
-    ],
+    "source_folders": ["109. Mora"],
     "spreadsheet_match": "Mora",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -1284,9 +1245,7 @@
     "id": "mozzarella",
     "nombre_publico": "Mozzarella",
     "aliases": [],
-    "source_folders": [
-      "100. Mozzarella"
-    ],
+    "source_folders": ["100. Mozzarella"],
     "spreadsheet_match": "Mozzarella",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -1514,9 +1473,7 @@
     "id": "parmesana",
     "nombre_publico": "Parmesana",
     "aliases": [],
-    "source_folders": [
-      "101. Parmesana"
-    ],
+    "source_folders": ["101. Parmesana"],
     "spreadsheet_match": "Parmesana",
     "estado": "Adoptado",
     "sexo": "Hembra",
@@ -1639,9 +1596,7 @@
     "id": "praga",
     "nombre_publico": "Praga",
     "aliases": [],
-    "source_folders": [
-      "15-Praga"
-    ],
+    "source_folders": ["15-Praga"],
     "spreadsheet_match": null,
     "estado": "Adoptado",
     "sexo": null,
@@ -1870,12 +1825,8 @@
   {
     "id": "trigo",
     "nombre_publico": "Trigo",
-    "aliases": [
-      "Browny"
-    ],
-    "source_folders": [
-      "106. Trigo"
-    ],
+    "aliases": ["Browny"],
+    "source_folders": ["106. Trigo"],
     "spreadsheet_match": "Trigo - Browny",
     "estado": "Adoptado",
     "sexo": "Macho",
@@ -2054,9 +2005,7 @@
     "id": "trufa",
     "nombre_publico": "Trufa",
     "aliases": [],
-    "source_folders": [
-      "110. Trufa"
-    ],
+    "source_folders": ["110. Trufa"],
     "spreadsheet_match": "Trufa",
     "estado": "Adoptado",
     "sexo": "Hembra",
