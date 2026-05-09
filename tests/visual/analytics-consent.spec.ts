@@ -272,7 +272,10 @@ test("clicking reject sets the cookie, does not load GTM, and hides the banner",
     .toBe(true);
 });
 
-test("accepted consent allows CTA, section visibility, and scroll analytics once per milestone", async ({ context, page }) => {
+test("accepted consent allows CTA, section visibility, and scroll analytics once per milestone", async ({
+  context,
+  page,
+}) => {
   await context.addCookies([
     {
       name: CONSENT_COOKIE,
