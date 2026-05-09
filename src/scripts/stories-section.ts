@@ -1,3 +1,5 @@
+export {};
+
 import { buildSharedGalleryMarkup, initSharedGalleries, type SharedGalleryPhoto } from "./shared-gallery";
 
 const PAGE_SIZE = 6;
@@ -25,9 +27,19 @@ function initStoriesSection() {
     const article = document.createElement("article");
     article.className = "story-card";
     article.dataset.storyCard = "";
+    article.dataset.storyId = story.id;
+    article.dataset.storyName = story.name;
+    article.dataset.storyLocation = "success_stories";
     article.innerHTML = `
-      ${buildSharedGalleryMarkup({ name: story.name, photos: story.photos })}
-      <div class="story-card__body">
+      ${buildSharedGalleryMarkup({ id: story.id, name: story.name, photos: story.photos })}
+      <div
+        class="story-card__body"
+        data-track-event="story_click"
+        data-track-label="${story.name}"
+        data-track-location="success_stories"
+        data-story-id="${story.id}"
+        data-story-name="${story.name}"
+      >
         <p class="story-card__name"></p>
         <p class="story-card__quote"></p>
       </div>
@@ -74,6 +86,15 @@ function initStoriesSection() {
 
   button?.addEventListener("click", () => {
     void (async () => {
+      document.dispatchEvent(
+        new CustomEvent("brigada:analytics", {
+          detail: {
+            event: "stories_load_more",
+            location: "success_stories",
+          },
+        })
+      );
+
       await loadStories();
 
       if (!allStories) {

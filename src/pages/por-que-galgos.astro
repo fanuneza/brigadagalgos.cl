@@ -100,7 +100,7 @@ const cases = await Promise.all(
               familia dispuesta a leer su ritmo sin apurarlos.
             </p>
             <p>
-              Muchos llegan asustados, no “malos” ni “incontrolables”. Con paciencia y estructura, suelen mostrar muy
+              Muchos llegan asustados, no "malos" ni "incontrolables". Con paciencia y estructura, suelen mostrar muy
               rápido lo que son de verdad: perros serenos, sensibles, leales y profundamente agradecidos cuando al fin
               entienden que ya no tienen que defenderse de todo.
             </p>
@@ -172,9 +172,22 @@ const cases = await Promise.all(
         <div class="stories__grid why-galgos__stories-grid">
           {
             cases.map((dog) => (
-              <article class="story-card story-card--compact" data-story-card>
-                <SharedPhotoGallery name={dog.name} photos={dog.photos} />
-                <div class="story-card__body">
+              <article
+                class="story-card story-card--compact"
+                data-story-card
+                data-story-id={dog.id}
+                data-story-name={dog.name}
+                data-story-location="why_galgos"
+              >
+                <SharedPhotoGallery name={dog.name} photos={dog.photos} id={dog.id} />
+                <div
+                  class="story-card__body"
+                  data-track-event="story_click"
+                  data-track-label={dog.name}
+                  data-track-location="why_galgos"
+                  data-story-id={dog.id}
+                  data-story-name={dog.name}
+                >
                   <p class="story-card__name">{dog.name}</p>
                   <p class="story-card__quote">{dog.story}</p>
                 </div>
@@ -196,8 +209,28 @@ const cases = await Promise.all(
             un rescate.
           </p>
           <div class="why-galgos__cta-actions">
-            <a href="/adoptar/" class="btn btn--primary">Quiero adoptar</a>
-            <a href="/hogar-temporal/" class="btn btn--secondary">Puedo ser hogar temporal</a>
+            <a
+              href="/adoptar/"
+              class="btn btn--primary"
+              data-track-event="cta_click"
+              data-track-label="Quiero adoptar"
+              data-track-location="why_galgos"
+              data-track-destination="/adoptar/"
+              data-track-category="adoption"
+            >
+              Quiero adoptar
+            </a>
+            <a
+              href="/hogar-temporal/"
+              class="btn btn--secondary"
+              data-track-event="cta_click"
+              data-track-label="Puedo ser hogar temporal"
+              data-track-location="why_galgos"
+              data-track-destination="/hogar-temporal/"
+              data-track-category="foster"
+            >
+              Puedo ser hogar temporal
+            </a>
           </div>
         </div>
       </div>

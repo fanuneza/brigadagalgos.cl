@@ -1,3 +1,5 @@
+export {};
+
 const CONSENT_COOKIE = document.documentElement.dataset.consentCookie ?? "site_consent";
 const GTM_CONTAINER_ID = document.documentElement.dataset.gtmId ?? "";
 const CONSENT_ACCEPTED = "accepted";
@@ -36,6 +38,10 @@ function hideBanner() {
 
 function showBanner() {
   document.getElementById("cookie-banner")?.removeAttribute("hidden");
+}
+
+function dispatchConsentChanged(status: "accepted" | "rejected" | "unknown") {
+  document.dispatchEvent(new CustomEvent("brigada:consent-changed", { detail: { status } }));
 }
 
 function bootstrapAnalytics() {
@@ -110,12 +116,14 @@ function initializeAnalytics() {
 
 function applyAcceptedConsent() {
   setCookie(CONSENT_COOKIE, CONSENT_ACCEPTED);
+  dispatchConsentChanged("accepted");
   void initializeAnalytics();
   hideBanner();
 }
 
 function applyRejectedConsent() {
   setCookie(CONSENT_COOKIE, CONSENT_REJECTED);
+  dispatchConsentChanged("rejected");
   bootstrapAnalytics();
   pushConsentState("denied");
   hideBanner();
@@ -125,6 +133,7 @@ function applyConsentState() {
   const consent = getCookie(CONSENT_COOKIE);
 
   if (consent === CONSENT_ACCEPTED) {
+    dispatchConsentChanged("accepted");
     bootstrapAnalytics();
     void initializeAnalytics();
     hideBanner();
@@ -132,12 +141,14 @@ function applyConsentState() {
   }
 
   if (consent === CONSENT_REJECTED) {
+    dispatchConsentChanged("rejected");
     bootstrapAnalytics();
     pushConsentState("denied");
     hideBanner();
     return;
   }
 
+  dispatchConsentChanged("unknown");
   showBanner();
 }
 

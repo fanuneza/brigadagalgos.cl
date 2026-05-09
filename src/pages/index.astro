@@ -65,7 +65,7 @@ const storyDogs = await Promise.all(
     <Hero />
     <RainbowDivider />
     <MissionSection />
-    <section class="section-padding">
+    <section class="section-padding" data-track-section="why_galgos">
       <div class="container container--narrow">
         <p class="eyebrow">POR QUÉ UN GALGO</p>
         <h2>Razones que te van a conquistar.</h2>
@@ -80,7 +80,17 @@ const storyDogs = await Promise.all(
           También los elegimos porque vemos de cerca el abandono, el abuso y la explotación que viven demasiados galgos
           en Chile.
         </p>
-        <a href="/por-que-galgos/" class="btn btn--secondary home-why-galgo__cta">Leer por qué galgos</a>
+        <a
+          href="/por-que-galgos/"
+          class="btn btn--secondary home-why-galgo__cta"
+          data-track-event="cta_click"
+          data-track-label="Leer por qué galgos"
+          data-track-location="why_galgos"
+          data-track-destination="/por-que-galgos/"
+          data-track-category="education"
+        >
+          Leer por qué galgos
+        </a>
       </div>
     </section>
     <HelpCards />

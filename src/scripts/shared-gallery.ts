@@ -1,3 +1,5 @@
+export {};
+
 export interface SharedGalleryPhoto {
   cardAvifSrcSet?: string;
   cardWebpSrcSet: string;
@@ -9,6 +11,7 @@ export interface SharedGalleryPhoto {
 }
 
 export interface SharedGalleryItem {
+  id?: string;
   name: string;
   photos: SharedGalleryPhoto[];
 }
@@ -16,8 +19,25 @@ export interface SharedGalleryItem {
 const SWIPE_THRESHOLD = 42;
 const LIGHTBOX_ROOT_SELECTOR = "[data-shared-gallery-lightbox]";
 
-let lightboxState: { item: SharedGalleryItem; index: number } | null = null;
+let lightboxState: { item: SharedGalleryItem; index: number; location: string } | null = null;
 let documentKeydownAttached = false;
+
+function dispatchAnalytics(detail: Record<string, string>) {
+  document.dispatchEvent(new CustomEvent("brigada:analytics", { detail }));
+}
+
+function getStoryContext(element: HTMLElement, fallbackItem: SharedGalleryItem) {
+  const storyCard = element.closest<HTMLElement>("[data-story-card]");
+  if (!storyCard) {
+    return null;
+  }
+
+  return {
+    location: storyCard.dataset.storyLocation ?? "success_stories",
+    story_id: storyCard.dataset.storyId ?? fallbackItem.id ?? "",
+    story_name: storyCard.dataset.storyName ?? fallbackItem.name,
+  };
+}
 
 function wrapIndex(index: number, total: number) {
   return ((index % total) + total) % total;
@@ -109,14 +129,14 @@ function getLightboxElements() {
   };
 }
 
-function openLightbox(item: SharedGalleryItem, index: number) {
+function openLightbox(item: SharedGalleryItem, index: number, location = "success_stories") {
   const elements = getLightboxElements();
   if (!elements?.image || !elements.caption) {
     return;
   }
 
   const safeIndex = wrapIndex(index, item.photos.length);
-  lightboxState = { item, index: safeIndex };
+  lightboxState = { item, index: safeIndex, location };
 
   elements.image.src = item.photos[safeIndex].lightbox;
   elements.image.alt = getPhotoAlt(item, safeIndex);
@@ -142,7 +162,13 @@ function stepLightbox(delta: number) {
     return;
   }
 
-  openLightbox(lightboxState.item, lightboxState.index + delta);
+  dispatchAnalytics({
+    event: delta > 0 ? "gallery_next" : "gallery_previous",
+    location: lightboxState.location,
+    story_id: lightboxState.item.id ?? "",
+    story_name: lightboxState.item.name,
+  });
+  openLightbox(lightboxState.item, lightboxState.index + delta, lightboxState.location);
 }
 
 function parsePayload(element: HTMLElement) {
@@ -218,6 +244,7 @@ export function initSharedGalleries(scope: ParentNode = document) {
     if (!item) {
       return;
     }
+    const galleryItem = item;
 
     const viewport = gallery.querySelector<HTMLElement>(".story-card__viewport");
     const track = gallery.querySelector<HTMLElement>("[data-gallery-track]");
@@ -305,6 +332,14 @@ export function initSharedGalleries(scope: ParentNode = document) {
         return;
       }
 
+      const storyContext = getStoryContext(gallery, galleryItem);
+      if (storyContext) {
+        dispatchAnalytics({
+          event: delta > 0 ? "gallery_next" : "gallery_previous",
+          ...storyContext,
+        });
+      }
+
       goTo(activeIndex + delta, true);
     }
 
@@ -372,7 +407,15 @@ export function initSharedGalleries(scope: ParentNode = document) {
           return;
         }
 
-        openLightbox(item, Number(slide.dataset.photoIndex));
+        const storyContext = getStoryContext(gallery, galleryItem);
+        if (storyContext) {
+          dispatchAnalytics({
+            event: "gallery_open",
+            ...storyContext,
+          });
+        }
+
+        openLightbox(galleryItem, Number(slide.dataset.photoIndex), storyContext?.location ?? "success_stories");
       });
     });
 

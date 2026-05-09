@@ -2,11 +2,12 @@
 import { buildSharedGalleryMarkup, type SharedGalleryPhoto } from "../scripts/shared-gallery";
 
 interface Props {
+  id?: string;
   name: string;
   photos: SharedGalleryPhoto[];
 }
 
-const { name, photos } = Astro.props;
+const { id, name, photos } = Astro.props;
 ---
 
-<Fragment set:html={buildSharedGalleryMarkup({ name, photos })} />
+<Fragment set:html={buildSharedGalleryMarkup({ id, name, photos })} />

@@ -28,9 +28,20 @@ test("no consent shows banner and does not load GTM", async ({ page }) => {
   await expect(page.locator("#cookie-banner")).toBeVisible();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
   expect(getGtmRequestCount()).toBe(0);
+
+  await page.locator('a[data-track-location="hero"][data-track-category="adoption"]').evaluate((element) => {
+    element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+  });
+
+  const trackingState = await page.evaluate(() => {
+    const trackingWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+    return trackingWindow.dataLayer ?? [];
+  });
+
+  expect(trackingState).not.toContainEqual(expect.objectContaining({ event: "cta_click" }));
 });
 
-test("response includes a strict CSP with only the required GTM and GA4 allowances", async ({ page }) => {
+test("response includes a strict CSP with only the required GTM and GA4 allowances", async () => {
   const headersFile = await readFile("public/_headers", "utf8");
   const cspMatch = headersFile.match(/Content-Security-Policy:\s*(.+)/);
   const csp = cspMatch?.[1] ?? "";
@@ -50,6 +61,7 @@ test("rendered HTML includes the GTM noscript iframe", async ({ page }) => {
   const html = await response.text();
 
   expect(html).toContain(`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}"`);
+  expect(html).not.toContain("https://www.googletagmanager.com/gtag/js?id=G-97CD3EJYML");
 });
 
 test("accepted consent hides banner, loads GTM once, and pushes granted consent state", async ({ context, page }) => {
@@ -137,6 +149,17 @@ test("rejected consent hides banner, does not load GTM, and pushes denied consen
       ad_personalization: "denied",
     })
   );
+
+  await page.locator('a[data-track-location="hero"][data-track-category="adoption"]').evaluate((element) => {
+    element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+  });
+
+  const deniedBehavioralEvents = await page.evaluate(() => {
+    const trackingWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+    return (trackingWindow.dataLayer ?? []).filter((entry) => entry.event !== "cookie_consent_update");
+  });
+
+  expect(deniedBehavioralEvents).toEqual([]);
 });
 
 test("clicking accept sets the cookie, loads GTM once, and hides the banner", async ({ page }) => {
@@ -181,6 +204,53 @@ test("clicking reject sets the cookie, does not load GTM, and hides the banner",
   await expect
     .poll(async () => page.evaluate((cookieName) => document.cookie.includes(`${cookieName}=rejected`), CONSENT_COOKIE))
     .toBe(true);
+});
+
+test("accepted consent allows CTA, section visibility, and scroll analytics once per milestone", async ({ context, page }) => {
+  await context.addCookies([
+    {
+      name: CONSENT_COOKIE,
+      value: "accepted",
+      domain: "127.0.0.1",
+      path: "/",
+    },
+  ]);
+
+  await stubGtm(page);
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await page.locator('a[data-track-location="hero"][data-track-category="adoption"]').evaluate((element) => {
+    element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+  });
+
+  await page.locator('[data-track-section="help_cards"]').scrollIntoViewIfNeeded();
+  await page.locator('[data-track-section="donation_banner"]').scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForTimeout(200);
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForTimeout(200);
+
+  const dataLayer = await page.evaluate(() => {
+    const trackingWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+    return trackingWindow.dataLayer ?? [];
+  });
+
+  expect(dataLayer).toContainEqual(
+    expect.objectContaining({
+      event: "cta_click",
+      event_category: "adoption",
+      event_label: "Quiero adoptar",
+      event_location: "hero",
+      destination_url: "/adoptar/",
+      page_path: "/",
+    })
+  );
+  expect(dataLayer.filter((entry) => entry.event === "section_view" && entry.section_name === "hero")).toHaveLength(1);
+  expect(
+    dataLayer.filter((entry) => entry.event === "section_view" && entry.section_name === "help_cards")
+  ).toHaveLength(1);
+  expect(dataLayer.filter((entry) => entry.event === "scroll_depth" && entry.percent === 25)).toHaveLength(1);
+  expect(dataLayer.filter((entry) => entry.event === "scroll_depth" && entry.percent === 50)).toHaveLength(1);
 });
 
 test("manage consent clears the cookie and restores the banner on reload", async ({ context, page }) => {

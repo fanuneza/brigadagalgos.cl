@@ -5,7 +5,7 @@ import donationBannerCss from "../styles/components/donation-banner.css?raw";
 
 <style is:inline set:html={donationBannerCss}></style>
 
-<section class="donation-banner">
+<section class="donation-banner" data-track-section="donation_banner">
   <div class="container donation-banner__grid">
     <div class="donation-banner__text">
       <h2>Tu aporte mantiene a los galgos seguros mientras esperan familia.</h2>
@@ -14,9 +14,29 @@ import donationBannerCss from "../styles/components/donation-banner.css?raw";
       </p>
     </div>
     <div class="donation-banner__cta">
-      <a href="/donar/" class="btn btn--primary">Quiero donar</a>
+      <a
+        href="/donar/"
+        class="btn btn--primary"
+        data-track-event="cta_click"
+        data-track-label="Quiero donar"
+        data-track-location="donation_banner"
+        data-track-destination="/donar/"
+        data-track-category="donation"
+      >
+        Quiero donar
+      </a>
       <p class="donation-banner__transfer">
-        También puedes donar en <a href={SITE.esponsor} target="_blank" rel="noopener noreferrer">eSponsor</a>
+        También puedes donar en <a
+          href={SITE.esponsor}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track-event="cta_click"
+          data-track-label="eSponsor"
+          data-track-location="donation_banner"
+          data-track-destination={SITE.esponsor}
+          data-track-category="donation"
+          data-track-outbound="true"
+        >eSponsor</a>
       </p>
     </div>
   </div>

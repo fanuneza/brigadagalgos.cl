@@ -5,7 +5,7 @@ import helpCardsCss from "../styles/components/help-cards.css?raw";
 
 <style is:inline set:html={helpCardsCss}></style>
 
-<section class="section-padding help-cards">
+<section class="section-padding help-cards" data-track-section="help_cards">
   <div class="container">
     <div class="help-cards__header">
       <p class="help-cards__eyebrow">C&oacute;mo ayudar</p>
@@ -21,7 +21,17 @@ import helpCardsCss from "../styles/components/help-cards.css?raw";
         <p class="card__desc">
           Conoce los galgos disponibles y empieza el proceso. Te acompa&ntilde;amos en cada paso.
         </p>
-        <a href="/adoptar/" class="card__cta">Ver galgos &rarr;</a>
+        <a
+          href="/adoptar/"
+          class="card__cta"
+          data-track-event="cta_click"
+          data-track-label="Ver galgos"
+          data-track-location="help_cards"
+          data-track-destination="/adoptar/"
+          data-track-category="adoption"
+        >
+          Ver galgos &rarr;
+        </a>
       </article>
 
       <article class="card">
@@ -33,7 +43,17 @@ import helpCardsCss from "../styles/components/help-cards.css?raw";
           Recibe un galgo en tu casa mientras encuentra hogar definitivo. Evaluamos contigo tiempos, seguridad y
           convivencia.
         </p>
-        <a href="/hogar-temporal/" class="card__cta">Quiero postular &rarr;</a>
+        <a
+          href="/hogar-temporal/"
+          class="card__cta"
+          data-track-event="cta_click"
+          data-track-label="Quiero postular"
+          data-track-location="help_cards"
+          data-track-destination="/hogar-temporal/"
+          data-track-category="foster"
+        >
+          Quiero postular &rarr;
+        </a>
       </article>
 
       <article class="card">
@@ -44,7 +64,20 @@ import helpCardsCss from "../styles/components/help-cards.css?raw";
         <p class="card__desc">
           Tu aporte ayuda a sostener comida, atenci&oacute;n veterinaria, traslados y acogida mientras esperan familia.
         </p>
-        <a href={SITE.esponsor} target="_blank" rel="noopener noreferrer" class="card__cta">Quiero donar &rarr;</a>
+        <a
+          href={SITE.esponsor}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="card__cta"
+          data-track-event="cta_click"
+          data-track-label="Quiero donar"
+          data-track-location="help_cards"
+          data-track-destination={SITE.esponsor}
+          data-track-category="donation"
+          data-track-outbound="true"
+        >
+          Quiero donar &rarr;
+        </a>
       </article>
     </div>
   </div>
