@@ -9,47 +9,14 @@ interface Props {
 }
 
 const { title, description, ogImage = "/images/brigada-galgos-og-image.webp" } = Astro.props;
-const { siteUrl, gtmId, consentCookie } = SITE;
+const { siteUrl, gaMeasurementId, consentCookie } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
-const gtmNoscriptUrl = gtmId
-  ? `https://www.googletagmanager.com/ns.html?id=${encodeURIComponent(gtmId)}`
-  : "";
-const consentDefaultsScript = `
-window.dataLayer = window.dataLayer || [];
-window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-window.gtag('consent', 'default', {
-  analytics_storage: 'denied',
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  functionality_storage: 'granted',
-  personalization_storage: 'denied',
-  security_storage: 'granted'
-});
-`;
-const gtmBootstrapScript = gtmId
-  ? `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${gtmId}');`
-  : "";
 ---
 
 <!doctype html>
-<html lang="es" data-gtm-id={gtmId} data-consent-cookie={consentCookie}>
+<html lang="es" data-ga-id={gaMeasurementId} data-consent-cookie={consentCookie}>
   <head>
-    {
-      gtmId && (
-        <>
-          <!-- Google Tag Manager -->
-          <script is:inline set:html={consentDefaultsScript}></script>
-          <script is:inline set:html={gtmBootstrapScript}></script>
-          <!-- End Google Tag Manager -->
-        </>
-      )
-    }
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
@@ -71,23 +38,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <slot name="head" />
   </head>
   <body>
-    {
-      gtmId && (
-        <>
-          <!-- Google Tag Manager (noscript) -->
-          <noscript>
-            <iframe
-              src={gtmNoscriptUrl}
-              height="0"
-              width="0"
-              style="display:none;visibility:hidden"
-              title="Google Tag Manager"
-            ></iframe>
-          </noscript>
-          <!-- End Google Tag Manager (noscript) -->
-        </>
-      )
-    }
     <slot />
     <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
       <div class="cookie-banner__inner container">
