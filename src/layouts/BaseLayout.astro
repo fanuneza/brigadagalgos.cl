@@ -29,19 +29,27 @@ window.gtag('consent', 'default', {
 });
 `;
 const gtmBootstrapScript = gtmId
-  ? `
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  ? `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${gtmId}');
-`
+})(window,document,'script','dataLayer','${gtmId}');`
   : "";
 ---
 
 <!doctype html>
 <html lang="es" data-gtm-id={gtmId} data-consent-cookie={consentCookie}>
   <head>
+    {
+      gtmId && (
+        <>
+          <!-- Google Tag Manager -->
+          <script is:inline set:html={consentDefaultsScript}></script>
+          <script is:inline set:html={gtmBootstrapScript}></script>
+          <!-- End Google Tag Manager -->
+        </>
+      )
+    }
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
@@ -60,28 +68,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    {
-      gtmId && (
-        <>
-          <script is:inline set:html={consentDefaultsScript}></script>
-          <script is:inline set:html={gtmBootstrapScript}></script>
-        </>
-      )
-    }
     <slot name="head" />
   </head>
   <body>
     {
       gtmId && (
-        <noscript>
-          <iframe
-            src={gtmNoscriptUrl}
-            height="0"
-            width="0"
-            style="display:none;visibility:hidden"
-            title="Google Tag Manager"
-          ></iframe>
-        </noscript>
+        <>
+          <!-- Google Tag Manager (noscript) -->
+          <noscript>
+            <iframe
+              src={gtmNoscriptUrl}
+              height="0"
+              width="0"
+              style="display:none;visibility:hidden"
+              title="Google Tag Manager"
+            ></iframe>
+          </noscript>
+          <!-- End Google Tag Manager (noscript) -->
+        </>
       )
     }
     <slot />
