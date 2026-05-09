@@ -69,7 +69,9 @@ src/
   config/
     site.ts                 # Configuración del sitio (contacto, redes)
   scripts/                  # Scripts de cliente
+    analytics-events.ts     # Capa liviana de eventos para GTM/GA4 via dataLayer
     copy-data.ts
+    cookie-consent.ts       # Controla consentimiento y carga diferida de GTM
     filter-chips.ts
     form.ts
     navbar.ts
@@ -140,20 +142,56 @@ npx playwright install chromium
 
 ```powershell
 # Accesibilidad y capturas visuales (requiere build previo)
-npm run build
+$env:ASTRO_TELEMETRY_DISABLED='1'; npm run build
 npm run capture:local
 
 # Lighthouse CI (requiere build previo)
-npm run build
+$env:ASTRO_TELEMETRY_DISABLED='1'; npm run build
 npm run test:lighthouse
 ```
+
+## Analitica
+
+- GTM ya esta instalado y se carga solo despues de consentimiento aceptado.
+- Contenedor GTM: `GTM-M2RN5B38`
+- GA4 vive dentro de GTM: `G-97CD3EJYML`
+- No se debe cargar `gtag.js` directo desde el sitio.
+- Los eventos del sitio se empujan a `window.dataLayer` desde `src/scripts/analytics-events.ts`.
+- La capa de eventos es privacy-safe: no envia nombres, emails, telefonos ni texto libre ingresado por usuarios.
+
+### Eventos custom actuales
+
+- `cta_click`
+- `navigation_click`
+- `social_click`
+- `outbound_click`
+- `section_view`
+- `scroll_depth`
+- `story_click`
+- `gallery_open`
+- `gallery_next`
+- `gallery_previous`
+- `stories_load_more`
+
+### Como extender tracking
+
+1. Agrega atributos `data-track-*` al link, boton o bloque relevante.
+2. Si necesitas visibilidad de una seccion, agrega `data-track-section="nombre_estable"`.
+3. Si la interaccion vive en un script mas complejo, emite un `CustomEvent("brigada:analytics", { detail: ... })`.
+4. Mantén nombres de evento en `snake_case` y evita datos personales o sensibles.
+
+### Nota GTM
+
+- En GTM conviene crear variables de Data Layer para `event_category`, `event_label`, `event_location`, `destination_url`, `section_name`, `percent`, `story_id`, `story_name`, `link_domain` y `link_url`.
+- Luego puedes mapear cada `event` custom a una etiqueta GA4 Event, o usar una estrategia generica basada en el nombre del evento.
+- Evita doble conteo de scroll si GA4 Enhanced Measurement ya esta registrando scroll.
 
 ## Flujo de trabajo recomendado
 
 1. Instala dependencias con `npm install`.
 2. Trabaja localmente con `npm run dev`.
 3. Si cambias rutas, contenido o estilos, valida el resultado en navegador.
-4. Antes de cerrar tu cambio, ejecuta `npm run build`.
+4. Antes de cerrar tu cambio, ejecuta `$env:ASTRO_TELEMETRY_DISABLED='1'; npm run build`.
 5. Para cambios visibles, considera correr `npm run capture:local` y `npm run test:lighthouse`.
 
 ## Notas
