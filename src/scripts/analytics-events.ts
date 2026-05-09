@@ -173,6 +173,11 @@ function handleTrackedClick(event: MouseEvent) {
     return;
   }
 
+  const clickedAnchor = target.closest<HTMLAnchorElement>("a[href]");
+  if (clickedAnchor && !event.isTrusted) {
+    event.preventDefault();
+  }
+
   const trackedElement = target.closest<HTMLElement>(TRACKED_CLICK_SELECTOR);
   if (trackedElement) {
     pushAnalyticsEvent(buildTrackedClickPayload(trackedElement));
