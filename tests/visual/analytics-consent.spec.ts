@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { expect, test, type Page } from "@playwright/test";
 
 const GTM_CONTAINER_ID = "GTM-M2RN5B38";
@@ -27,6 +28,28 @@ test("no consent shows banner and does not load GTM", async ({ page }) => {
   await expect(page.locator("#cookie-banner")).toBeVisible();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
   expect(getGtmRequestCount()).toBe(0);
+});
+
+test("response includes a strict CSP with only the required GTM and GA4 allowances", async ({ page }) => {
+  const headersFile = await readFile("public/_headers", "utf8");
+  const cspMatch = headersFile.match(/Content-Security-Policy:\s*(.+)/);
+  const csp = cspMatch?.[1] ?? "";
+
+  expect(csp).toContain("default-src 'self'");
+  expect(csp).toContain("script-src 'self' 'unsafe-inline' https://www.googletagmanager.com");
+  expect(csp).toContain(
+    "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com"
+  );
+  expect(csp).toContain("img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com");
+  expect(csp).toContain("frame-src https://www.googletagmanager.com");
+  expect(csp).not.toContain("*");
+});
+
+test("rendered HTML includes the GTM noscript iframe", async ({ page }) => {
+  const response = await page.request.get("/");
+  const html = await response.text();
+
+  expect(html).toContain(`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}"`);
 });
 
 test("accepted consent hides banner, loads GTM once, and pushes granted consent state", async ({ context, page }) => {
@@ -125,6 +148,20 @@ test("clicking accept sets the cookie, loads GTM once, and hides the banner", as
   await expect(page.locator("#cookie-banner")).toBeHidden();
   await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(1);
   expect(getGtmRequestCount()).toBe(1);
+
+  const trackingState = await page.evaluate(() => {
+    const trackingWindow = window as Window & {
+      dataLayer?: unknown[];
+    };
+
+    return {
+      dataLayerExists: Array.isArray(trackingWindow.dataLayer),
+      scriptCount: document.querySelectorAll('script[src*="googletagmanager.com/gtm.js?id=GTM-M2RN5B38"]').length,
+    };
+  });
+
+  expect(trackingState.dataLayerExists).toBe(true);
+  expect(trackingState.scriptCount).toBe(1);
 
   await expect
     .poll(async () => page.evaluate((cookieName) => document.cookie.includes(`${cookieName}=accepted`), CONSENT_COOKIE))

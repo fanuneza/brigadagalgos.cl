@@ -61,12 +61,17 @@ function pushConsentState(state: "granted" | "denied") {
   });
 }
 
+function getExistingGtmScript() {
+  return document.getElementById(GTM_SCRIPT_ID) as HTMLScriptElement | null;
+}
+
 function initializeAnalytics() {
   if (!GTM_CONTAINER_ID) {
     return Promise.resolve();
   }
 
   const trackingWindow = getTrackingWindow();
+  bootstrapAnalytics();
   pushConsentState("granted");
 
   if (trackingWindow.__gtmInitPromise) {
@@ -74,9 +79,7 @@ function initializeAnalytics() {
   }
 
   trackingWindow.__gtmInitPromise = new Promise<void>((resolve, reject) => {
-    bootstrapAnalytics();
-
-    const existingScript = document.getElementById(GTM_SCRIPT_ID) as HTMLScriptElement | null;
+    const existingScript = getExistingGtmScript();
     const finishInitialization = () => {
       resolve();
     };
@@ -105,16 +108,31 @@ function initializeAnalytics() {
   return trackingWindow.__gtmInitPromise;
 }
 
+function applyAcceptedConsent() {
+  setCookie(CONSENT_COOKIE, CONSENT_ACCEPTED);
+  void initializeAnalytics();
+  hideBanner();
+}
+
+function applyRejectedConsent() {
+  setCookie(CONSENT_COOKIE, CONSENT_REJECTED);
+  bootstrapAnalytics();
+  pushConsentState("denied");
+  hideBanner();
+}
+
 function applyConsentState() {
   const consent = getCookie(CONSENT_COOKIE);
 
   if (consent === CONSENT_ACCEPTED) {
+    bootstrapAnalytics();
     void initializeAnalytics();
     hideBanner();
     return;
   }
 
   if (consent === CONSENT_REJECTED) {
+    bootstrapAnalytics();
     pushConsentState("denied");
     hideBanner();
     return;
@@ -127,15 +145,11 @@ function initCookieConsent() {
   applyConsentState();
 
   document.getElementById("cookie-accept")?.addEventListener("click", () => {
-    setCookie(CONSENT_COOKIE, CONSENT_ACCEPTED);
-    void initializeAnalytics();
-    hideBanner();
+    applyAcceptedConsent();
   });
 
   document.getElementById("cookie-reject")?.addEventListener("click", () => {
-    setCookie(CONSENT_COOKIE, CONSENT_REJECTED);
-    pushConsentState("denied");
-    hideBanner();
+    applyRejectedConsent();
   });
 
   document.getElementById("cookie-manage-btn")?.addEventListener("click", () => {

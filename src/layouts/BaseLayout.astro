@@ -38,6 +38,19 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <slot name="head" />
   </head>
   <body>
+    {
+      gtmContainerId && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtmContainerId}`}
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+            title="Google Tag Manager"
+          />
+        </noscript>
+      )
+    }
     <slot />
     <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
       <div class="cookie-banner__inner container">
