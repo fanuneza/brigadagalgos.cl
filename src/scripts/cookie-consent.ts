@@ -7,6 +7,7 @@ const GTM_SCRIPT_ID = "gtm-script";
 
 type TrackingWindow = Window & {
   dataLayer: unknown[];
+  __cookieConsentState?: "granted" | "denied";
   __gtmInitPromise?: Promise<void>;
 };
 
@@ -42,12 +43,31 @@ function bootstrapAnalytics() {
   trackingWindow.dataLayer = trackingWindow.dataLayer || [];
 }
 
+function pushConsentState(state: "granted" | "denied") {
+  const trackingWindow = getTrackingWindow();
+  bootstrapAnalytics();
+
+  if (trackingWindow.__cookieConsentState === state) {
+    return;
+  }
+
+  trackingWindow.__cookieConsentState = state;
+  trackingWindow.dataLayer.push({
+    event: "cookie_consent_update",
+    analytics_storage: state,
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+}
+
 function initializeAnalytics() {
   if (!GTM_CONTAINER_ID) {
     return Promise.resolve();
   }
 
   const trackingWindow = getTrackingWindow();
+  pushConsentState("granted");
 
   if (trackingWindow.__gtmInitPromise) {
     return trackingWindow.__gtmInitPromise;
@@ -77,7 +97,7 @@ function initializeAnalytics() {
         trackingWindow.__gtmInitPromise = undefined;
         reject(new Error("Failed to load Google Tag Manager"));
       },
-      { once: true },
+      { once: true }
     );
     document.head.append(script);
   });
@@ -95,6 +115,7 @@ function applyConsentState() {
   }
 
   if (consent === CONSENT_REJECTED) {
+    pushConsentState("denied");
     hideBanner();
     return;
   }
@@ -113,6 +134,7 @@ function initCookieConsent() {
 
   document.getElementById("cookie-reject")?.addEventListener("click", () => {
     setCookie(CONSENT_COOKIE, CONSENT_REJECTED);
+    pushConsentState("denied");
     hideBanner();
   });
 

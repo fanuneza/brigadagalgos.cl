@@ -1,0 +1,168 @@
+import { expect, test, type Page } from "@playwright/test";
+
+const GTM_CONTAINER_ID = "GTM-M2RN5B38";
+const CONSENT_COOKIE = "brigadagalgos_consent";
+const GTM_SCRIPT_SELECTOR = `script[src*="googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}"]`;
+
+async function stubGtm(page: Page) {
+  let gtmRequestCount = 0;
+
+  await page.route(`https://www.googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}*`, async (route) => {
+    gtmRequestCount += 1;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body: "window.__gtmMockLoaded = (window.__gtmMockLoaded || 0) + 1;",
+    });
+  });
+
+  return () => gtmRequestCount;
+}
+
+test("no consent shows banner and does not load GTM", async ({ page }) => {
+  const getGtmRequestCount = await stubGtm(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator("#cookie-banner")).toBeVisible();
+  await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
+  expect(getGtmRequestCount()).toBe(0);
+});
+
+test("accepted consent hides banner, loads GTM once, and pushes granted consent state", async ({ context, page }) => {
+  await context.addCookies([
+    {
+      name: CONSENT_COOKIE,
+      value: "accepted",
+      domain: "127.0.0.1",
+      path: "/",
+    },
+  ]);
+
+  const getGtmRequestCount = await stubGtm(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator("#cookie-banner")).toBeHidden();
+  await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(1);
+  expect(getGtmRequestCount()).toBe(1);
+
+  const consentState = await page.evaluate(() => {
+    const trackingWindow = window as Window & {
+      __cookieConsentState?: string;
+      __gtmMockLoaded?: number;
+      dataLayer?: unknown[];
+    };
+
+    return {
+      consentState: trackingWindow.__cookieConsentState,
+      gtmMockLoaded: trackingWindow.__gtmMockLoaded ?? 0,
+      dataLayer: trackingWindow.dataLayer ?? [],
+    };
+  });
+
+  expect(consentState.consentState).toBe("granted");
+  expect(consentState.gtmMockLoaded).toBe(1);
+  expect(consentState.dataLayer).toContainEqual(
+    expect.objectContaining({
+      event: "cookie_consent_update",
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    })
+  );
+});
+
+test("rejected consent hides banner, does not load GTM, and pushes denied consent state", async ({ context, page }) => {
+  await context.addCookies([
+    {
+      name: CONSENT_COOKIE,
+      value: "rejected",
+      domain: "127.0.0.1",
+      path: "/",
+    },
+  ]);
+
+  const getGtmRequestCount = await stubGtm(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator("#cookie-banner")).toBeHidden();
+  await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
+  expect(getGtmRequestCount()).toBe(0);
+
+  const consentState = await page.evaluate(() => {
+    const trackingWindow = window as Window & {
+      __cookieConsentState?: string;
+      dataLayer?: unknown[];
+    };
+
+    return {
+      consentState: trackingWindow.__cookieConsentState,
+      dataLayer: trackingWindow.dataLayer ?? [],
+    };
+  });
+
+  expect(consentState.consentState).toBe("denied");
+  expect(consentState.dataLayer).toContainEqual(
+    expect.objectContaining({
+      event: "cookie_consent_update",
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    })
+  );
+});
+
+test("clicking accept sets the cookie, loads GTM once, and hides the banner", async ({ page }) => {
+  const getGtmRequestCount = await stubGtm(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.locator("#cookie-accept").click();
+
+  await expect(page.locator("#cookie-banner")).toBeHidden();
+  await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(1);
+  expect(getGtmRequestCount()).toBe(1);
+
+  await expect
+    .poll(async () => page.evaluate((cookieName) => document.cookie.includes(`${cookieName}=accepted`), CONSENT_COOKIE))
+    .toBe(true);
+});
+
+test("clicking reject sets the cookie, does not load GTM, and hides the banner", async ({ page }) => {
+  const getGtmRequestCount = await stubGtm(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.locator("#cookie-reject").click();
+
+  await expect(page.locator("#cookie-banner")).toBeHidden();
+  await expect(page.locator(GTM_SCRIPT_SELECTOR)).toHaveCount(0);
+  expect(getGtmRequestCount()).toBe(0);
+
+  await expect
+    .poll(async () => page.evaluate((cookieName) => document.cookie.includes(`${cookieName}=rejected`), CONSENT_COOKIE))
+    .toBe(true);
+});
+
+test("manage consent clears the cookie and restores the banner on reload", async ({ context, page }) => {
+  await context.addCookies([
+    {
+      name: CONSENT_COOKIE,
+      value: "accepted",
+      domain: "127.0.0.1",
+      path: "/",
+    },
+  ]);
+
+  await stubGtm(page);
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await Promise.all([page.waitForLoadState("load"), page.locator("#cookie-manage-btn").click()]);
+
+  await expect(page.locator("#cookie-banner")).toBeVisible();
+  await expect
+    .poll(async () => page.evaluate((cookieName) => document.cookie.includes(`${cookieName}=`), CONSENT_COOKIE))
+    .toBe(false);
+});
