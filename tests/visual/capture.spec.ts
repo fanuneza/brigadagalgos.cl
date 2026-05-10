@@ -6,6 +6,7 @@ const outputDir = path.resolve(".cache", "parity");
 const pages = [
   { name: "home", path: "/", tag: "@home" },
   { name: "adoptar", path: "/adoptar/", tag: "@adoptar" },
+  { name: "colaboradores", path: "/colaboradores/", tag: "@colaboradores" },
   { name: "contacto", path: "/contacto/", tag: "@contacto" },
   { name: "donar", path: "/donar/", tag: "@donar" },
   { name: "hogar-temporal", path: "/hogar-temporal/", tag: "@hogar-temporal" },
