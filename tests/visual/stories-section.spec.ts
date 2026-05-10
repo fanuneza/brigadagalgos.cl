@@ -25,9 +25,9 @@ test("Ver mas loads additional stories without duplicates", async ({ page }) => 
   const afterFirstCount = await grid.locator("[data-story-card]").count();
 
   // Verify no duplicate story IDs (query card-level ids only)
-  const idsAfterFirst = await grid.locator("[data-story-card]").evaluateAll((els) =>
-    els.map((el) => el.getAttribute("data-story-id"))
-  );
+  const idsAfterFirst = await grid
+    .locator("[data-story-card]")
+    .evaluateAll((els) => els.map((el) => el.getAttribute("data-story-id")));
   expect(new Set(idsAfterFirst).size).toBe(idsAfterFirst.length);
 
   // Click "Ver mas" again if button is still visible
@@ -39,9 +39,9 @@ test("Ver mas loads additional stories without duplicates", async ({ page }) => 
     const afterSecondCount = await grid.locator("[data-story-card]").count();
 
     // Verify no duplicate story IDs after second load
-    const idsAfterSecond = await grid.locator("[data-story-card]").evaluateAll((els) =>
-      els.map((el) => el.getAttribute("data-story-id"))
-    );
+    const idsAfterSecond = await grid
+      .locator("[data-story-card]")
+      .evaluateAll((els) => els.map((el) => el.getAttribute("data-story-id")));
     expect(new Set(idsAfterSecond).size).toBe(idsAfterSecond.length);
     expect(afterSecondCount).toBeGreaterThan(afterFirstCount);
   }
