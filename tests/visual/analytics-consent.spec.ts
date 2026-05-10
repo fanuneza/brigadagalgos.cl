@@ -335,7 +335,7 @@ test("manage consent clears the cookie and restores the banner on reload", async
   await stubGtm(page);
   await page.goto("/", { waitUntil: "networkidle" });
 
-  await Promise.all([page.waitForLoadState("load"), page.locator("#cookie-manage-btn").click()]);
+  await Promise.all([page.waitForEvent("load"), page.locator("#cookie-manage-btn").click()]);
 
   await expect(page.locator("#cookie-banner")).toBeVisible();
   await expect
