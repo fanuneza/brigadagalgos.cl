@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import { SITE } from "../config/site.ts";
+import barlow700 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url";
+import barlow900 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-900-normal.woff2?url";
 
 interface Props {
   title: string;
@@ -19,6 +21,12 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://static.cloudflareinsights.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
+    <link rel="preload" href={barlow700} as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href={barlow900} as="font" type="font/woff2" crossorigin="anonymous" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />

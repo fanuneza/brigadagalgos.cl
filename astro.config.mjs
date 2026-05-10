@@ -9,6 +9,9 @@ export default defineConfig({
     prefetchAll: false,
     defaultStrategy: "hover",
   },
+  build: {
+    inlineStylesheets: "always",
+  },
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith(".json"),
