@@ -101,7 +101,14 @@ function initStoriesSection() {
         return;
       }
 
-      const nextStories = allStories.slice(loaded, loaded + PAGE_SIZE);
+      const loadedIds = new Set(
+        [...grid.querySelectorAll<HTMLElement>("[data-story-id]")].map(
+          (el) => el.dataset.storyId
+        )
+      );
+      const nextStories = allStories
+        .filter((story) => !loadedIds.has(story.id))
+        .slice(0, PAGE_SIZE);
       if (!nextStories.length) {
         updateButtonVisibility();
         return;

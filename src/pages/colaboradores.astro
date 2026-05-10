@@ -19,16 +19,9 @@ function withPartnerUtm(url: string) {
   return trackedUrl.toString();
 }
 
-const supporters = (await getCollection("supporters")).sort((a, b) => {
-  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
-  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+import { shuffle } from "../utils/shuffle";
 
-  if (orderA !== orderB) {
-    return orderA - orderB;
-  }
-
-  return a.data.name.localeCompare(b.data.name, "es");
-});
+const supporters = shuffle(await getCollection("supporters"));
 
 const supportersGridClass = supporters.length === 1 ? "supporters-grid supporters-grid--single" : "supporters-grid";
 ---

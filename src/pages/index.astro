@@ -12,6 +12,7 @@ import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
+import { shuffle } from "../utils/shuffle";
 
 const rescueSteps = [
   {
@@ -41,7 +42,7 @@ const rescueSteps = [
   },
 ];
 
-const rawStoryDogs = await getCollection("success-dogs");
+const rawStoryDogs = shuffle(await getCollection("success-dogs"));
 const initialStoryDogs = rawStoryDogs.slice(0, 6);
 
 const storyDogs = await Promise.all(

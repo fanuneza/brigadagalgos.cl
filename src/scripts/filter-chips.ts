@@ -1,14 +1,4 @@
 function initFilterChips() {
-  const grid = document.querySelector<HTMLElement>("[data-dog-grid]");
-  if (grid) {
-    const items = [...grid.children];
-    for (let i = items.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [items[i], items[j]] = [items[j], items[i]];
-    }
-    items.forEach((item) => grid.appendChild(item));
-  }
-
   const chips = document.querySelectorAll<HTMLButtonElement>(".chip-btn");
   const cards = document.querySelectorAll<HTMLElement>("[data-sex]");
   const countEl = document.querySelector<HTMLElement>("[data-count]");
