@@ -64,23 +64,23 @@
 
 .step__badge--primary {
   background: var(--color-primary);
-  color: var(--color-text);
+  color: var(--on-primary);
 }
 .step__badge--secondary {
   background: var(--color-secondary);
-  color: var(--color-text-inverse);
+  color: var(--on-secondary);
 }
 .step__badge--warm {
   background: var(--color-accent-warm);
-  color: var(--color-text);
+  color: var(--on-accent-warm);
 }
 .step__badge--green {
   background: var(--color-rainbow-green);
-  color: var(--color-text-inverse);
+  color: var(--on-rainbow-green);
 }
 .step__badge--purple {
   background: var(--color-rainbow-purple);
-  color: var(--color-text-inverse);
+  color: var(--on-rainbow-purple);
 }
 
 .step__body {

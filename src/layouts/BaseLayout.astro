@@ -46,6 +46,14 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta name="twitter:image" content={ogImageUrl} />
     <slot name="head" />
     <ClientRouter />
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("brigada-galgos-theme");
+          if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     {
@@ -82,4 +90,5 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
 <script>
   import "../scripts/cookie-consent";
   import "../scripts/analytics-events";
+  import "../scripts/theme";
 </script>

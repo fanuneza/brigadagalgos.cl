@@ -92,3 +92,13 @@
   height: 18px;
   display: block;
 }
+
+:root[data-theme="dark"] .channel-card__social-icon {
+  filter: brightness(0) invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .channel-card__social-icon {
+    filter: brightness(0) invert(1);
+  }
+}

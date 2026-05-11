@@ -67,7 +67,7 @@
 
 .chip--sex {
   background: var(--color-primary);
-  color: var(--color-text);
+  color: var(--on-primary);
 }
 .chip--age {
   background: var(--color-secondary-100);
@@ -75,7 +75,7 @@
 }
 .chip--weight {
   background: var(--color-accent-warm);
-  color: var(--color-text);
+  color: var(--on-accent-warm);
 }
 
 .dog-card__personality {

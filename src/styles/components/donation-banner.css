@@ -1,8 +1,8 @@
 .donation-banner {
-  background: var(--color-secondary-700);
-  color: var(--color-text-inverse);
+  background: var(--color-cta-band-bg);
+  color: var(--color-text-on-dark);
   padding-block: var(--space-9);
-  --link-color: var(--color-text-inverse);
+  --link-color: var(--color-text-on-dark);
   --link-decoration-color: rgba(255, 255, 255, 0.35);
 }
 @media (min-width: 1024px) {
@@ -24,7 +24,7 @@
 
 .donation-banner h2 {
   font-size: var(--font-size-2xl);
-  color: var(--color-text-inverse);
+  color: var(--color-text-on-dark);
   margin-bottom: var(--space-3);
 }
 @media (min-width: 1024px) {

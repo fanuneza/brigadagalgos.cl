@@ -4,6 +4,8 @@
    ========================================================================= */
 
 :root {
+  color-scheme: light;
+
   /* ---------------------------------------------------------------------
      COLOR — derived from the logo's joyful pop-art palette.
      The cyan + magenta are the main brand voices. Warm orange/yellow are
@@ -40,6 +42,23 @@
   --color-text: #1f2328; /* charcoal — NOT pure black */
   --color-text-muted: #424a54; /* secondary text */
   --color-text-inverse: #fff; /* on dark / saturated bg */
+
+  /* Semantic — always-dark surfaces that must not flip with --color-text */
+  --color-footer-bg: #1f2328;
+  --color-cta-band-bg: #b8156d;
+  --color-cookie-bg: #1d2126;
+
+  /* Fixed neutral endpoints — defined here, never overridden in dark mode.
+     Use these for surfaces whose contrast relationship is constant. */
+  --color-text-on-dark: #f4f7fb; /* light text on always-dark backgrounds */
+  --color-text-on-brand: #1f2328; /* dark text on brand-colored surfaces */
+
+  /* Foreground on brand colors */
+  --on-primary: var(--color-text-on-dark); /* light on cyan */
+  --on-accent-warm: var(--color-text-on-dark); /* light on orange */
+  --on-secondary: var(--color-text-on-brand); /* dark on magenta */
+  --on-rainbow-green: var(--color-text-on-brand); /* dark on green */
+  --on-rainbow-purple: var(--color-text-on-brand); /* dark on purple */
 
   /* Semantic */
   --color-success: #2e7d32;
@@ -184,4 +203,98 @@
   --btn-radius: var(--radius-full);
   --btn-font-weight: var(--weight-bold);
   --btn-min-height: 48px; /* a11y hit target */
+}
+
+/* =========================================================================
+   DARK MODE
+   Applied via [data-theme="dark"] (explicit) or system preference (media query).
+   The rule blocks are intentionally duplicated so each selector is self-contained.
+   ========================================================================= */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Neutrals */
+  --color-bg: #101217;
+  --color-surface: #171b22;
+  --color-surface-2: #222833;
+  --color-border: #343b48;
+  --color-text: #f4f7fb;
+  --color-text-muted: #c7d0dc;
+  --color-text-inverse: #101217;
+
+  /* Brand */
+  --color-primary: #24d7ea;
+  --color-primary-700: #7eeaf4;
+  --color-primary-100: #123940;
+
+  --color-secondary: #ff4ead;
+  --color-secondary-700: #ff8fcb;
+  --color-secondary-100: #42152d;
+
+  --color-accent-warm: #ffb547;
+  --color-accent-warm-700: #ffd08a;
+  --color-accent-warm-100: #442b10;
+
+  /* Semantic surfaces — kept intentionally dark in dark mode */
+  --color-footer-bg: #0d0f14;
+  --color-cta-band-bg: #b8156d;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-focus: 0 0 0 3px rgba(36, 215, 234, 0.45);
+
+  /* Button tokens */
+  --btn-secondary-bg: rgba(36, 215, 234, 0.1);
+  --btn-secondary-bg-hover: rgba(36, 215, 234, 0.18);
+  --btn-secondary-fg: #7eeaf4;
+  --btn-secondary-border: rgba(36, 215, 234, 0.5);
+  --btn-ghost-bg-hover: #222833;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    /* Neutrals */
+    --color-bg: #101217;
+    --color-surface: #171b22;
+    --color-surface-2: #222833;
+    --color-border: #343b48;
+    --color-text: #f4f7fb;
+    --color-text-muted: #c7d0dc;
+    --color-text-inverse: #101217;
+
+    /* Brand */
+    --color-primary: #24d7ea;
+    --color-primary-700: #7eeaf4;
+    --color-primary-100: #123940;
+
+    --color-secondary: #ff4ead;
+    --color-secondary-700: #ff8fcb;
+    --color-secondary-100: #42152d;
+
+    --color-accent-warm: #ffb547;
+    --color-accent-warm-700: #ffd08a;
+    --color-accent-warm-100: #442b10;
+
+    /* Semantic surfaces */
+    --color-footer-bg: #0d0f14;
+    --color-cta-band-bg: #b8156d;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.28);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-focus: 0 0 0 3px rgba(36, 215, 234, 0.45);
+
+    /* Button tokens */
+    --btn-secondary-bg: rgba(36, 215, 234, 0.1);
+    --btn-secondary-bg-hover: rgba(36, 215, 234, 0.18);
+    --btn-secondary-fg: #7eeaf4;
+    --btn-secondary-border: rgba(36, 215, 234, 0.5);
+    --btn-ghost-bg-hover: #222833;
+  }
 }

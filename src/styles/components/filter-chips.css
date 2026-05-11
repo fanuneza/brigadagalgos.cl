@@ -21,7 +21,7 @@
 
 .chip-btn--active {
   background: var(--color-primary);
-  color: var(--color-text);
+  color: var(--on-primary);
 }
 
 @media (prefers-reduced-motion: no-preference) {

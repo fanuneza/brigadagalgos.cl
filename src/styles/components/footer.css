@@ -1,6 +1,6 @@
 .footer {
-  background: var(--color-text);
-  color: var(--color-text-inverse);
+  background: var(--color-footer-bg);
+  color: var(--color-text-on-dark);
   padding-top: var(--space-10);
   --link-color: rgba(255, 255, 255, 0.88);
   --link-decoration-color: rgba(255, 255, 255, 0.35);
@@ -41,7 +41,7 @@
   font-weight: var(--weight-bold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-tight);
-  color: var(--color-text-inverse);
+  color: var(--color-text-on-dark);
   line-height: 1.15;
 }
 
@@ -88,7 +88,7 @@
   transition: color var(--duration-fast);
 }
 .footer__link:hover {
-  color: var(--color-text-inverse);
+  color: var(--color-text-on-dark);
 }
 
 .footer__social {
@@ -105,7 +105,7 @@
   transition: color var(--duration-fast);
 }
 .footer__social-link:hover {
-  color: var(--color-text-inverse);
+  color: var(--color-text-on-dark);
 }
 
 .footer__social-icon {
@@ -163,10 +163,10 @@
   fill: currentColor;
 }
 
-/* Override secondary button colors for dark background */
+/* Override secondary button colors for always-dark footer background */
 .footer__esponsor-btn {
   --btn-secondary-bg: rgba(255, 255, 255, 0.06);
-  --btn-secondary-fg: var(--color-text-inverse);
+  --btn-secondary-fg: #fff;
   --btn-secondary-border: rgba(255, 255, 255, 0.5);
   --btn-secondary-bg-hover: rgba(255, 255, 255, 0.14);
 }
@@ -202,7 +202,7 @@
 
 .footer__legal-link:hover,
 .footer__legal-button:hover {
-  color: var(--color-text-inverse);
+  color: var(--color-text-on-dark);
 }
 
 .footer__legal-link:hover {

@@ -4,46 +4,29 @@ function initFilterChips() {
   const countEl = document.querySelector<HTMLElement>("[data-count]");
   const countLabelEl = document.querySelector<HTMLElement>("[data-count-label]");
   const emptyEl = document.querySelector<HTMLElement>(".dog-grid__empty");
-  const desktopQuery = typeof window !== "undefined" ? window.matchMedia("(min-width: 1024px)") : null;
 
   let activeFilter = "all";
 
-  function getVisibleLimit() {
-    return desktopQuery?.matches ? 6 : 3;
-  }
-
   function filter(value: string) {
-    const matchingCards: HTMLElement[] = [];
+    let visibleCount = 0;
 
     cards.forEach((card) => {
       const matches = value === "all" || card.dataset.sex === value || card.dataset.ageType === value;
-
-      if (matches) {
-        matchingCards.push(card);
-      }
-    });
-
-    const visibleLimit = getVisibleLimit();
-
-    cards.forEach((card) => {
-      card.hidden = true;
-    });
-
-    matchingCards.forEach((card, index) => {
-      card.hidden = index >= visibleLimit;
+      card.hidden = !matches;
+      if (matches) visibleCount++;
     });
 
     if (countEl) {
-      countEl.textContent = String(matchingCards.length);
+      countEl.textContent = String(visibleCount);
     }
 
     if (countLabelEl) {
-      countLabelEl.textContent = matchingCards.length === 1 ? "galgo disponible" : "galgos disponibles";
+      countLabelEl.textContent = visibleCount === 1 ? "galgo disponible" : "galgos disponibles";
     }
 
     if (emptyEl) {
-      emptyEl.hidden = matchingCards.length > 0;
-      emptyEl.setAttribute("aria-hidden", String(matchingCards.length > 0));
+      emptyEl.hidden = visibleCount > 0;
+      emptyEl.setAttribute("aria-hidden", String(visibleCount > 0));
     }
   }
 
@@ -59,10 +42,6 @@ function initFilterChips() {
       activeFilter = chip.dataset.filter ?? "all";
       filter(activeFilter);
     });
-  });
-
-  desktopQuery?.addEventListener("change", () => {
-    filter(activeFilter);
   });
 
   filter(activeFilter);

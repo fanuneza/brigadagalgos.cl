@@ -52,7 +52,6 @@
 }
 
 .navbar__hamburger {
-  margin-left: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,7 +136,8 @@
   border-bottom: none;
 }
 
-.drawer__link:hover {
+.drawer__link:hover,
+.drawer__link[aria-current="page"] {
   color: var(--color-primary-700);
 }
 
@@ -179,6 +179,16 @@
   opacity: 1;
 }
 
+:root[data-theme="dark"] .drawer__social-icon {
+  filter: brightness(0) invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .drawer__social-icon {
+    filter: brightness(0) invert(1);
+  }
+}
+
 .drawer__close:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
@@ -208,6 +218,69 @@
   visibility: visible;
 }
 
+/* ── Theme toggle ───────────────────────────────────────────────────── */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--weight-medium);
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.theme-toggle:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: currentColor;
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Light mode default: show moon icon (click → go dark) */
+.theme-toggle__sun {
+  display: none;
+}
+.theme-toggle__moon {
+  display: inline-block;
+}
+
+/* Dark mode: show sun icon (click → go light) */
+:root[data-theme="dark"] .theme-toggle__sun {
+  display: inline-block;
+}
+:root[data-theme="dark"] .theme-toggle__moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .theme-toggle__sun {
+    display: inline-block;
+  }
+  :root:not([data-theme]) .theme-toggle__moon {
+    display: none;
+  }
+}
+
+/* On mobile: push the toggle (and the hamburger after it) to the right */
+.navbar__theme-toggle {
+  margin-left: auto;
+}
+
 @media (min-width: 640px) {
   .navbar__inner .navbar__cta {
     display: inline-flex;
@@ -227,6 +300,11 @@
     margin-left: auto;
   }
 
+  /* On desktop the nav already handles the margin; reset toggle's */
+  .navbar__theme-toggle {
+    margin-left: 0;
+  }
+
   .navbar__link {
     font-size: var(--font-size-base);
     font-weight: var(--weight-medium);
@@ -240,7 +318,8 @@
       color var(--duration-fast);
   }
 
-  .navbar__link:hover {
+  .navbar__link:hover,
+  .navbar__link[aria-current="page"] {
     border-bottom-color: var(--color-primary);
     color: var(--color-primary-700);
   }
