@@ -8,6 +8,8 @@ function initNavbar() {
   const nav = document.querySelector("[data-navbar]") as HTMLElement | null;
 
   if (!hamburger || !drawer || !closeBtn || !backdrop || !nav) return;
+  if (nav.dataset.initialized) return;
+  nav.dataset.initialized = "true";
   const ham = hamburger;
   const drw = drawer;
   const close = closeBtn;
@@ -102,10 +104,4 @@ function initNavbar() {
   );
 }
 
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initNavbar, { once: true });
-  } else {
-    initNavbar();
-  }
-}
+document.addEventListener("astro:page-load", initNavbar);

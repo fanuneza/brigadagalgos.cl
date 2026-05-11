@@ -1,11 +1,17 @@
 export {};
 
-const CONSENT_COOKIE = document.documentElement.dataset.consentCookie ?? "site_consent";
-const GTM_CONTAINER_ID = document.documentElement.dataset.gtmId ?? "";
 const CONSENT_ACCEPTED = "accepted";
 const CONSENT_REJECTED = "rejected";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 const GTM_SCRIPT_ID = "gtm-script";
+
+function getConsentCookie() {
+  return document.documentElement.dataset.consentCookie ?? "site_consent";
+}
+
+function getGtmContainerId() {
+  return document.documentElement.dataset.gtmId ?? "";
+}
 
 type TrackingWindow = Window & {
   dataLayer: unknown[];
@@ -88,6 +94,8 @@ function getExistingGtmScript() {
 }
 
 function initializeAnalytics() {
+  const GTM_CONTAINER_ID = getGtmContainerId();
+
   if (!GTM_CONTAINER_ID) {
     return Promise.resolve();
   }
@@ -132,14 +140,14 @@ function initializeAnalytics() {
 }
 
 function applyAcceptedConsent() {
-  setCookie(CONSENT_COOKIE, CONSENT_ACCEPTED);
+  setCookie(getConsentCookie(), CONSENT_ACCEPTED);
   dispatchConsentChanged("accepted");
   void initializeAnalytics();
   hideBanner();
 }
 
 function applyRejectedConsent() {
-  setCookie(CONSENT_COOKIE, CONSENT_REJECTED);
+  setCookie(getConsentCookie(), CONSENT_REJECTED);
   dispatchConsentChanged("rejected");
   bootstrapAnalytics();
   pushConsentState("denied");
@@ -147,7 +155,7 @@ function applyRejectedConsent() {
 }
 
 function applyConsentState() {
-  const consent = getCookie(CONSENT_COOKIE);
+  const consent = getCookie(getConsentCookie());
 
   if (consent === CONSENT_ACCEPTED) {
     dispatchConsentChanged("accepted");
@@ -181,15 +189,9 @@ function initCookieConsent() {
   });
 
   document.getElementById("cookie-manage-btn")?.addEventListener("click", () => {
-    clearCookie(CONSENT_COOKIE);
+    clearCookie(getConsentCookie());
     window.location.reload();
   });
 }
 
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCookieConsent, { once: true });
-  } else {
-    initCookieConsent();
-  }
-}
+document.addEventListener("astro:page-load", initCookieConsent);

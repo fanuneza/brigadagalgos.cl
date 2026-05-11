@@ -1,7 +1,11 @@
 export {};
 
-const CONSENT_COOKIE = document.documentElement.dataset.consentCookie ?? "site_consent";
 const CONSENT_ACCEPTED = "accepted";
+
+function getConsentCookieName() {
+  return document.documentElement.dataset.consentCookie ?? "site_consent";
+}
+
 const SECTION_SELECTOR = "[data-track-section]";
 const TRACKED_CLICK_SELECTOR = "[data-track-event]";
 const SCROLL_MILESTONES = [25, 50, 75, 90] as const;
@@ -56,7 +60,7 @@ function getCookie(name: string) {
 }
 
 function getConsentStatus(): ConsentStatus {
-  const consent = getCookie(CONSENT_COOKIE);
+  const consent = getCookie(getConsentCookieName());
 
   if (consent === CONSENT_ACCEPTED) {
     return "accepted";
@@ -346,10 +350,10 @@ function bindAnalytics() {
   activateConsentAwareTracking();
 }
 
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindAnalytics, { once: true });
-  } else {
-    bindAnalytics();
-  }
-}
+document.addEventListener("astro:page-load", () => {
+  // Reset per-page tracking state on each navigation so section views and
+  // scroll milestones fire fresh on every page.
+  seenSections.clear();
+  seenScrollMilestones.clear();
+  bindAnalytics();
+});

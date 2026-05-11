@@ -68,10 +68,4 @@ function initFilterChips() {
   filter(activeFilter);
 }
 
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initFilterChips, { once: true });
-  } else {
-    initFilterChips();
-  }
-}
+document.addEventListener("astro:page-load", initFilterChips);

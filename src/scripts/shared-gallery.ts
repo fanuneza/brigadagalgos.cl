@@ -214,9 +214,12 @@ export function initSharedGalleryLightbox() {
     return;
   }
 
-  elements.previous?.addEventListener("click", () => stepLightbox(-1));
-  elements.next?.addEventListener("click", () => stepLightbox(1));
-  elements.closeButtons.forEach((button) => button.addEventListener("click", closeLightbox));
+  if (!elements.root.dataset.lightboxBound) {
+    elements.root.dataset.lightboxBound = "true";
+    elements.previous?.addEventListener("click", () => stepLightbox(-1));
+    elements.next?.addEventListener("click", () => stepLightbox(1));
+    elements.closeButtons.forEach((button) => button.addEventListener("click", closeLightbox));
+  }
 
   if (!documentKeydownAttached) {
     document.addEventListener("keydown", (event) => {
@@ -423,15 +426,3 @@ export function initSharedGalleries(scope: ParentNode = document) {
   });
 }
 
-if (typeof document !== "undefined") {
-  const boot = () => {
-    initSharedGalleryLightbox();
-    initSharedGalleries();
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
-}

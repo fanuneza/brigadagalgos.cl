@@ -1,6 +1,6 @@
 export {};
 
-import { buildSharedGalleryMarkup, initSharedGalleries, type SharedGalleryPhoto } from "./shared-gallery";
+import { buildSharedGalleryMarkup, initSharedGalleries, initSharedGalleryLightbox, type SharedGalleryPhoto } from "./shared-gallery";
 
 const PAGE_SIZE = 6;
 
@@ -124,10 +124,7 @@ function initStoriesSection() {
   initSharedGalleries(grid);
 }
 
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initStoriesSection, { once: true });
-  } else {
-    initStoriesSection();
-  }
-}
+document.addEventListener("astro:page-load", () => {
+  initSharedGalleryLightbox();
+  initStoriesSection();
+});
