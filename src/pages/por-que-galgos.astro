@@ -15,14 +15,12 @@ import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
+import { shuffle } from "../utils/shuffle";
 
-const selectedStoryIds = ["fermin", "mora", "malta"];
 const successDogs = await getCollection("success-dogs");
 
 const cases = await Promise.all(
-  selectedStoryIds
-    .map((id) => successDogs.find((entry) => entry.id === id))
-    .filter((entry): entry is NonNullable<(typeof successDogs)[number]> => Boolean(entry))
+  shuffle(successDogs).slice(0, 3)
     .map(async (entry) => ({
       id: entry.id,
       name: entry.data.name,
