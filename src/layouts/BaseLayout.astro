@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { SITE } from "../config/site.ts";
+import { ClientRouter } from "astro:transitions";
 import barlow700 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url";
 import barlow900 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-900-normal.woff2?url";
 
@@ -44,6 +45,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <slot name="head" />
+    <ClientRouter />
   </head>
   <body>
     {
