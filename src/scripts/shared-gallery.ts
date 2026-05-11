@@ -425,4 +425,3 @@ export function initSharedGalleries(scope: ParentNode = document) {
     setTrackPosition(false);
   });
 }
-

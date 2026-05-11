@@ -1,6 +1,11 @@
 export {};
 
-import { buildSharedGalleryMarkup, initSharedGalleries, initSharedGalleryLightbox, type SharedGalleryPhoto } from "./shared-gallery";
+import {
+  buildSharedGalleryMarkup,
+  initSharedGalleries,
+  initSharedGalleryLightbox,
+  type SharedGalleryPhoto,
+} from "./shared-gallery";
 
 const PAGE_SIZE = 6;
 

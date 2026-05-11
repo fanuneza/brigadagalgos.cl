@@ -11,7 +11,16 @@ const { icon, title, body, tone = "primary" } = Astro.props;
 
 <article class="req-card">
   <span class={`req-card__icon req-card__icon--${tone}`} aria-hidden="true">
-    <img src={icon} alt="" aria-hidden="true" class="req-card__icon-image" width="24" height="24" loading="lazy" decoding="async" />
+    <img
+      src={icon}
+      alt=""
+      aria-hidden="true"
+      class="req-card__icon-image"
+      width="24"
+      height="24"
+      loading="lazy"
+      decoding="async"
+    />
   </span>
   <p class="req-card__title">{title}</p>
   <p class="req-card__body">{body}</p>
