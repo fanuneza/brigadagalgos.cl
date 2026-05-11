@@ -288,20 +288,31 @@ test("accepted consent allows CTA, section visibility, and scroll analytics once
   await stubGtm(page);
   await page.goto("/", { waitUntil: "networkidle" });
 
-  // ClientRouter intercepts anchor clicks and swaps the DOM. Stub the navigation target
-  // with the current home page HTML so tracked elements remain in the DOM after the swap.
+  // IntersectionObserver callbacks are async (next rendering frame). In CI, networkidle
+  // resolves before IO fires for hero. Polling dataLayer guarantees the callback has run
+  // and hero is unobserved before we proceed — preventing the subsequent navigation's
+  // sectionObserver.disconnect() from cancelling the still-pending callback.
+  await page.waitForFunction(() => {
+    const win = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+    return (win.dataLayer ?? []).some(
+      (e) => e != null && e["event"] === "section_view" && e["section_name"] === "hero"
+    );
+  });
+
+  // Strip the hero tracking attribute from the stub so IO B (created on astro:page-load
+  // after the navigation) does not observe hero and push a duplicate section_view event.
   const homeHtml = await page.content();
+  const stubHtml = homeHtml.replace(/ data-track-section="hero"/g, "");
   await page.route("**/adoptar/**", async (route) => {
-    await route.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: homeHtml });
+    await route.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: stubHtml });
   });
 
   await page.locator('a[data-track-location="hero"][data-track-category="adoption"]').evaluate((element) => {
     element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
   });
 
-  // Wait for ClientRouter to settle the navigation before interacting with the DOM.
+  // Stub responds synchronously so networkidle is not needed — just wait for URL change.
   await page.waitForURL("**/adoptar/**");
-  await page.waitForLoadState("networkidle");
 
   await page.locator('[data-track-section="help_cards"]').scrollIntoViewIfNeeded();
   await page.locator('[data-track-section="donation_banner"]').scrollIntoViewIfNeeded();
