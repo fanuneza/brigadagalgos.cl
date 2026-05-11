@@ -54,11 +54,11 @@
   --color-text-on-brand: #1f2328; /* dark text on brand-colored surfaces */
 
   /* Foreground on brand colors */
-  --on-primary: var(--color-text-on-dark); /* light on cyan */
-  --on-accent-warm: var(--color-text-on-dark); /* light on orange */
-  --on-secondary: var(--color-text-on-brand); /* dark on magenta */
-  --on-rainbow-green: var(--color-text-on-brand); /* dark on green */
-  --on-rainbow-purple: var(--color-text-on-brand); /* dark on purple */
+  --on-primary: var(--color-text-on-brand); /* dark on cyan */
+  --on-accent-warm: var(--color-text-on-brand); /* dark on orange */
+  --on-secondary: var(--color-text-on-dark); /* light on magenta */
+  --on-rainbow-green: var(--color-text-on-dark); /* light on green */
+  --on-rainbow-purple: var(--color-text-on-dark); /* light on purple */
 
   /* Semantic */
   --color-success: #2e7d32;
