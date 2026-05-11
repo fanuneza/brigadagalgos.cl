@@ -76,9 +76,9 @@ test("response includes a strict CSP with the required GTM, GA4, and Cloudflare 
   const csp = cspMatch?.[1] ?? "";
 
   expect(csp).toContain("default-src 'self'");
-  expect(csp).toContain("script-src 'self' 'unsafe-inline' https://www.googletagmanager.com");
+  expect(csp).toContain("script-src 'self' 'unsafe-inline' data: https://www.googletagmanager.com");
   expect(csp).toContain(
-    "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com"
+    "script-src-elem 'self' 'unsafe-inline' data: https://www.googletagmanager.com https://static.cloudflareinsights.com"
   );
   expect(csp).toContain(
     "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://cloudflareinsights.com"
@@ -288,9 +288,20 @@ test("accepted consent allows CTA, section visibility, and scroll analytics once
   await stubGtm(page);
   await page.goto("/", { waitUntil: "networkidle" });
 
+  // ClientRouter intercepts anchor clicks and swaps the DOM. Stub the navigation target
+  // with the current home page HTML so tracked elements remain in the DOM after the swap.
+  const homeHtml = await page.content();
+  await page.route("**/adoptar/**", async (route) => {
+    await route.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: homeHtml });
+  });
+
   await page.locator('a[data-track-location="hero"][data-track-category="adoption"]').evaluate((element) => {
     element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
   });
+
+  // Wait for ClientRouter to settle the navigation before interacting with the DOM.
+  await page.waitForURL("**/adoptar/**");
+  await page.waitForLoadState("networkidle");
 
   await page.locator('[data-track-section="help_cards"]').scrollIntoViewIfNeeded();
   await page.locator('[data-track-section="donation_banner"]').scrollIntoViewIfNeeded();
