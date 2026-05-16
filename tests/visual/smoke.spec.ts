@@ -16,5 +16,5 @@ test("smoke navigation is visible on home", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   await expect(page.locator("header")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Adoptar" })).toBeVisible();
+  await expect(page.getByLabel("Navegación principal").getByRole("link", { name: "Adoptar" })).toBeVisible();
 });
