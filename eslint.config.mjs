@@ -9,6 +9,7 @@ export default [
       "node_modules/**",
       ".astro/**",
       ".cache/**",
+      "test-results/**",
       "playwright.config.ts",
       "tests/**",
       "src/pages/hogar-temporal.astro",
