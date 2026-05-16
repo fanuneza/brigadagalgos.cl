@@ -15,6 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test:lighthouse": "lhci autorun",
+    "test:e2e": "playwright test",
+    "test:smoke": "playwright test tests/visual/smoke.spec.ts",
     "capture:local": "playwright test --config playwright.config.ts",
     "capture:home": "playwright test --config playwright.config.ts --grep @home",
     "capture:adoptar": "playwright test --config playwright.config.ts --grep @adoptar",
