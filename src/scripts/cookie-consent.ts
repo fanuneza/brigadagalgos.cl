@@ -93,6 +93,30 @@ function getExistingGtmScript() {
   return document.getElementById(GTM_SCRIPT_ID) as HTMLScriptElement | null;
 }
 
+const PRECONNECT_ID = "consent-preconnects";
+const PRECONNECT_HOSTS: { href: string; rel: "preconnect" | "dns-prefetch" }[] = [
+  { href: "https://www.googletagmanager.com", rel: "preconnect" },
+  { href: "https://static.cloudflareinsights.com", rel: "preconnect" },
+  { href: "https://www.google-analytics.com", rel: "preconnect" },
+  { href: "https://region1.google-analytics.com", rel: "dns-prefetch" },
+];
+
+function injectPreconnects() {
+  if (document.getElementById(PRECONNECT_ID)) return;
+  const fragment = document.createDocumentFragment();
+  const marker = document.createElement("meta");
+  marker.id = PRECONNECT_ID;
+  marker.setAttribute("data-consent", "preconnects");
+  fragment.appendChild(marker);
+  PRECONNECT_HOSTS.forEach(({ href, rel }) => {
+    const link = document.createElement("link");
+    link.rel = rel;
+    link.href = href;
+    fragment.appendChild(link);
+  });
+  document.head.appendChild(fragment);
+}
+
 function initializeAnalytics() {
   const GTM_CONTAINER_ID = getGtmContainerId();
 
@@ -102,6 +126,7 @@ function initializeAnalytics() {
 
   const trackingWindow = getTrackingWindow();
   bootstrapAnalytics();
+  injectPreconnects();
   pushConsentState("granted");
   pushGtmBootstrapEvent();
 

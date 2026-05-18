@@ -1,0 +1,33 @@
+---
+import "../styles/components/page-hero.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+---
+
+<BaseLayout
+  title="Página no encontrada | Brigada Galgos"
+  description="No encontramos la página que buscas. Vuelve al inicio o explora los galgos disponibles para adopción."
+>
+  <Navbar />
+  <main id="main-content">
+    <PageHero
+      eyebrow="ERROR 404"
+      h1="No encontramos esta página."
+      lead="Puede que el enlace esté roto o que el contenido se haya movido. Te dejamos algunas rutas para seguir."
+    />
+    <section class="section-padding">
+      <div class="container container--narrow">
+        <ul class="requisitos-list">
+          <li><a href="/">Volver al inicio</a></li>
+          <li><a href="/adoptar/">Ver galgos en adopción</a></li>
+          <li><a href="/hogar-temporal/">Postular a hogar temporal</a></li>
+          <li><a href="/donar/">Apoyar el rescate</a></li>
+          <li><a href="/contacto/">Escribirnos</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

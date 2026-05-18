@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /casos/
 
 Sitemap: https://brigadagalgos.cl/sitemap-index.xml

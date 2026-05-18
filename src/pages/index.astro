@@ -1,4 +1,5 @@
 ---
+import "../styles/components/home.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
@@ -62,7 +63,7 @@ const storyDogs = await Promise.all(
   description="Fundación chilena que rescata, rehabilita y reubica galgos abandonados."
 >
   <Navbar />
-  <main>
+  <main id="main-content">
     <Hero />
     <RainbowDivider />
     <MissionSection />
@@ -101,14 +102,3 @@ const storyDogs = await Promise.all(
   </main>
   <Footer />
 </BaseLayout>
-
-<style>
-  .home-why-galgo__note {
-    margin-top: var(--space-4);
-    color: var(--color-text-muted);
-  }
-
-  .home-why-galgo__cta {
-    margin-top: var(--space-5);
-  }
-</style>

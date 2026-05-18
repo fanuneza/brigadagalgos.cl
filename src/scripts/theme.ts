@@ -34,9 +34,11 @@ function applyTheme(theme: "light" | "dark"): void {
 }
 
 function syncToggleAria(effective: "light" | "dark"): void {
-  const ariaLabel = effective === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
+  const isDark = effective === "dark";
+  const ariaLabel = isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
   document.querySelectorAll<HTMLElement>("[data-theme-toggle]").forEach((btn) => {
     btn.setAttribute("aria-label", ariaLabel);
+    btn.setAttribute("aria-pressed", String(isDark));
   });
 }
 

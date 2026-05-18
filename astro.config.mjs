@@ -15,7 +15,6 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith(".json"),
-      serialize: (item) => ({ url: item.url }),
     }),
   ],
 });

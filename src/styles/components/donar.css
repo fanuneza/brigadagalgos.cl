@@ -3,6 +3,18 @@
   gap: var(--space-6);
 }
 
+.bank-info__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
 @media (min-width: 1024px) {
   .donation-cards {
     grid-template-columns: repeat(2, 1fr);

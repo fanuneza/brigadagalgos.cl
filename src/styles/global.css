@@ -2,6 +2,7 @@
 @import url("@fontsource/barlow-condensed/900.css");
 @import url("./tokens.css");
 @import url("./components/navbar.css");
+@import url("./components/skip-to-content.css");
 
 *,
 *::before,

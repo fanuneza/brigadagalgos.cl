@@ -13,6 +13,16 @@ async function copyText(value: string) {
   }
 }
 
+function announceCopied(message: string) {
+  const live = document.querySelector<HTMLElement>("[data-copy-live]");
+  if (!live) return;
+  live.textContent = "";
+  // re-set on next frame so SR re-announces if the same text is set
+  requestAnimationFrame(() => {
+    live.textContent = message;
+  });
+}
+
 function showCopiedTooltip(target: HTMLElement) {
   const existing = target.querySelector(".copy-tooltip");
   if (existing) return;
@@ -43,6 +53,7 @@ function initCopyData() {
     button.addEventListener("click", async () => {
       await copyText(value);
       showCopiedTooltip(button);
+      announceCopied(`Copiado: ${value}`);
     });
   });
 
@@ -50,6 +61,7 @@ function initCopyData() {
     btn.addEventListener("click", async () => {
       await copyText(BANK_DATA);
       showCopiedTooltip(btn);
+      announceCopied("Datos bancarios copiados");
     });
   }
 }
