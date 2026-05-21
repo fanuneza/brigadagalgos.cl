@@ -190,7 +190,6 @@ function buildTrackedClickPayload(element: HTMLElement): AnalyticsDetail {
   return payload;
 }
 
-
 function handleTrackedClick(event: MouseEvent) {
   const target = event.target;
   if (!(target instanceof Element)) {
