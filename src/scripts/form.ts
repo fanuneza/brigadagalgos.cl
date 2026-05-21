@@ -79,7 +79,42 @@ function initForm() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+
+    document.dispatchEvent(
+      new CustomEvent("brigada:analytics", {
+        detail: {
+          event: "contact_form_submit",
+          form_id: form.id || "contact-form",
+        },
+      })
+    );
+
+    if (!validate()) {
+      const invalidFields = getRequiredFields()
+        .filter((field) => {
+          const input = field as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+          if (input.type === "checkbox") {
+            return !(input as HTMLInputElement).checked;
+          } else if (input.type === "radio") {
+            return !form.querySelector<HTMLInputElement>(`[name="${input.name}"]:checked`);
+          } else {
+            return input.value.trim() === "";
+          }
+        })
+        .map((field) => field.id || field.getAttribute("name") || "unknown")
+        .join(",");
+
+      document.dispatchEvent(
+        new CustomEvent("brigada:analytics", {
+          detail: {
+            event: "contact_form_invalid",
+            form_id: form.id || "contact-form",
+            invalid_fields: invalidFields,
+          },
+        })
+      );
+      return;
+    }
 
     const formData = new FormData(form!);
     setSubmitting(true);
@@ -90,13 +125,39 @@ function initForm() {
       });
       const data = (await res.json()) as { success: boolean; message?: string };
       if (data.success) {
+        document.dispatchEvent(
+          new CustomEvent("brigada:analytics", {
+            detail: {
+              event: "contact_form_success",
+              form_id: form.id || "contact-form",
+            },
+          })
+        );
         form!.hidden = true;
         if (successPanel) successPanel.hidden = false;
       } else {
+        document.dispatchEvent(
+          new CustomEvent("brigada:analytics", {
+            detail: {
+              event: "contact_form_error",
+              form_id: form.id || "contact-form",
+              error_message: data.message ?? "API Error",
+            },
+          })
+        );
         showToast(data.message ?? "No pudimos enviar el formulario. Intentá de nuevo.");
         setSubmitting(false);
       }
     } catch {
+      document.dispatchEvent(
+        new CustomEvent("brigada:analytics", {
+          detail: {
+            event: "contact_form_error",
+            form_id: form.id || "contact-form",
+            error_message: "Network Error",
+          },
+        })
+      );
       showToast("Error de red. Revisá tu conexión e intentá de nuevo.");
       setSubmitting(false);
     }

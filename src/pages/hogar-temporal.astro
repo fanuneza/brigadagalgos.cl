@@ -111,6 +111,10 @@ const fosterSteps = [
               class="btn btn--primary"
               target="_blank"
               rel="noopener noreferrer"
+              data-track-event="foster_apply_click"
+              data-track-label="Postula aquí - Foster Application"
+              data-track-location="foster_cta"
+              data-application-form-url="https://forms.gle/3YHPo8KKnCiySbCo6"
             >
               Postula aquí
             </a>
@@ -120,6 +124,11 @@ const fosterSteps = [
                 href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera ser hogar temporal")}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track-event="whatsapp_click"
+                data-track-label="Escríbenos directo por WhatsApp - Foster Fallback"
+                data-track-location="foster_cta"
+                data-whatsapp-location="foster_cta"
+                data-whatsapp-text="Hola, quisiera ser hogar temporal"
               >
                 Escríbenos directo por WhatsApp
               </a>

@@ -168,8 +168,28 @@ function buildTrackedClickPayload(element: HTMLElement): AnalyticsDetail {
     payload.outbound = true;
   }
 
+  // Parse custom parameters dynamically from dataset (e.g. data-dog-name -> dogName -> dog_name)
+  const customParams = [
+    "dogName",
+    "applicationFormUrl",
+    "copiedField",
+    "whatsappLocation",
+    "whatsappText",
+    "donationLocation",
+    "socialPlatform",
+    "filterCategory",
+  ];
+  customParams.forEach((param) => {
+    const value = element.dataset[param];
+    if (value !== undefined) {
+      const snakeKey = param.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
+      payload[snakeKey] = normalizeText(value) || undefined;
+    }
+  });
+
   return payload;
 }
+
 
 function handleTrackedClick(event: MouseEvent) {
   const target = event.target;

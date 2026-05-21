@@ -128,9 +128,18 @@ const currentYear = new Date().getFullYear();
           >Gestionar preferencias de cookies</button
         >
       </div>
-      <a href={SITE.esponsor} target="_blank" rel="noopener noreferrer" class="btn btn--secondary footer__esponsor-btn"
-        >Quiero donar en eSponsor</a
+      <a
+        href={SITE.esponsor}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--secondary footer__esponsor-btn"
+        data-track-event="donation_esponsor_click"
+        data-track-label="Quiero donar en eSponsor"
+        data-track-location="footer"
+        data-donation-location="footer"
       >
+        Quiero donar en eSponsor
+      </a>
     </div>
   </div>
 </footer>

@@ -206,14 +206,38 @@ function initCookieConsent() {
   applyConsentState();
 
   document.getElementById("cookie-accept")?.addEventListener("click", () => {
+    document.dispatchEvent(
+      new CustomEvent("brigada:analytics", {
+        detail: {
+          event: "cookie_consent_action",
+          action: "accept",
+        },
+      })
+    );
     applyAcceptedConsent();
   });
 
   document.getElementById("cookie-reject")?.addEventListener("click", () => {
+    document.dispatchEvent(
+      new CustomEvent("brigada:analytics", {
+        detail: {
+          event: "cookie_consent_action",
+          action: "reject",
+        },
+      })
+    );
     applyRejectedConsent();
   });
 
   document.getElementById("cookie-manage-btn")?.addEventListener("click", () => {
+    document.dispatchEvent(
+      new CustomEvent("brigada:analytics", {
+        detail: {
+          event: "cookie_consent_action",
+          action: "manage",
+        },
+      })
+    );
     clearCookie(getConsentCookie());
     window.location.reload();
   });

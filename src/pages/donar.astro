@@ -109,7 +109,16 @@ import PageHero from "../components/PageHero.astro";
             <p>
               Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.
             </p>
-            <a href={SITE.esponsor} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+            <a
+              href={SITE.esponsor}
+              class="btn btn--primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-event="donation_esponsor_click"
+              data-track-label="Quiero donar en eSponsor"
+              data-track-location="donation_card"
+              data-donation-location="donation_card"
+            >
               Quiero donar en eSponsor
             </a>
           </div>

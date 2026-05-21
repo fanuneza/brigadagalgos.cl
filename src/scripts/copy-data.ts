@@ -54,6 +54,16 @@ function initCopyData() {
       await copyText(value);
       showCopiedTooltip(button);
       announceCopied(`Copiado: ${value}`);
+
+      const label = button.getAttribute("aria-label")?.replace("Copiar ", "").split(":")[0] ?? "unknown";
+      document.dispatchEvent(
+        new CustomEvent("brigada:analytics", {
+          detail: {
+            event: "bank_data_copy",
+            copied_field: label,
+          },
+        })
+      );
     });
   });
 
@@ -62,6 +72,15 @@ function initCopyData() {
       await copyText(BANK_DATA);
       showCopiedTooltip(btn);
       announceCopied("Datos bancarios copiados");
+
+      document.dispatchEvent(
+        new CustomEvent("brigada:analytics", {
+          detail: {
+            event: "bank_data_copy",
+            copied_field: "all",
+          },
+        })
+      );
     });
   }
 }

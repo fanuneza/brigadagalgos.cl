@@ -96,9 +96,20 @@ const dogs = await Promise.all(
                       </div>
                     </div>
                     <p class="dog-card__details">{dog.details}</p>
-                    <a href={formHref} class="btn btn--primary dog-card__cta" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={formHref}
+                      class="btn btn--primary dog-card__cta"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-track-event="dog_interest_click"
+                      data-track-label={`Me interesa ${dog.name}`}
+                      data-track-location="dog_card"
+                      data-dog-name={dog.name}
+                      data-application-form-url={formHref}
+                    >
                       Me interesa {dog.name}
                     </a>
+
                   </div>
                 </article>
               );
@@ -121,6 +132,11 @@ const dogs = await Promise.all(
             class="btn btn--primary"
             target="_blank"
             rel="noopener noreferrer"
+            data-track-event="whatsapp_click"
+            data-track-label="Escríbenos por WhatsApp - Adoption Empty Grid"
+            data-track-location="dog_grid_empty"
+            data-whatsapp-location="dog_grid_empty"
+            data-whatsapp-text="Hola, quisiera adoptar un galgo"
           >
             Escríbenos por WhatsApp
           </a>
@@ -159,6 +175,11 @@ const dogs = await Promise.all(
           class="btn btn--primary"
           target="_blank"
           rel="noopener noreferrer"
+          data-track-event="whatsapp_click"
+          data-track-label="Escríbenos por WhatsApp - Adoption Tail CTA"
+          data-track-location="tail_cta"
+          data-whatsapp-location="tail_cta"
+          data-whatsapp-text="Hola, quisiera saber más sobre adopción"
         >
           Escríbenos por WhatsApp
         </a>

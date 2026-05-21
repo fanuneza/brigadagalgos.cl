@@ -41,6 +41,15 @@ function initFilterChips() {
       chip.setAttribute("aria-pressed", "true");
       activeFilter = chip.dataset.filter ?? "all";
       filter(activeFilter);
+
+      document.dispatchEvent(
+        new CustomEvent("brigada:analytics", {
+          detail: {
+            event: "dog_filter_click",
+            filter_category: activeFilter,
+          },
+        })
+      );
     });
   });
 
