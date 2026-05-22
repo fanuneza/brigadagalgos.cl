@@ -74,17 +74,34 @@ test("response includes a strict CSP with the required GTM, GA4, and Cloudflare 
   const headersFile = await readFile("public/_headers", "utf8");
   const cspMatch = headersFile.match(/Content-Security-Policy:\s*(.+)/);
   const csp = cspMatch?.[1] ?? "";
+  const directives = Object.fromEntries(
+    csp
+      .split(";")
+      .map((directive) => directive.trim())
+      .filter(Boolean)
+      .map((directive) => {
+        const [name, ...values] = directive.split(/\s+/);
+        return [name, values];
+      })
+  );
 
   expect(csp).toContain("default-src 'self'");
-  expect(csp).toContain("script-src 'self' 'unsafe-inline' https://www.googletagmanager.com");
+  expect(directives["script-src"]).toEqual([
+    "'self'",
+    "https://www.googletagmanager.com",
+    "https://static.cloudflareinsights.com",
+  ]);
+  expect(directives["script-src"]).not.toContain("'unsafe-inline'");
   expect(csp).toContain(
     "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com"
   );
+  expect(csp).toContain("script-src-attr 'none'");
   expect(csp).toContain(
     "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://cloudflareinsights.com"
   );
   expect(csp).toContain("img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com");
   expect(csp).toContain("frame-src https://www.googletagmanager.com");
+  expect(csp).toContain("object-src 'none'");
   expect(csp).not.toContain("*");
 });
 
