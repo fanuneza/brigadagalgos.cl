@@ -213,6 +213,16 @@
   flex: 0 0 auto;
 }
 
+:root[data-theme="dark"] .dog-social-link img {
+  filter: brightness(0) invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .dog-social-link img {
+    filter: brightness(0) invert(1);
+  }
+}
+
 .story-card__slide:focus-visible,
 .story-card__control:focus-visible,
 .story-card__dot:focus-visible,
