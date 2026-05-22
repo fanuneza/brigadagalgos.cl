@@ -1,6 +1,6 @@
 ---
 name: Mozzarella
-story: "A Mozzarella la rescatamos en Buin. Pasó por anemia, controles tiroideos y cardiología antes de encontrar un hogar; después de todo ese cuidado, fue adoptada."
+story: "Mozzarella fue rescatada en Buin durante un operativo junto a Carabineros. Llegó con 16 kilos, anemia y una infección dental severa. Su hogar temporal la acompañó en exámenes, esterilización y extracción dental, y después la adoptó. Hoy vive cuidada, con hermanos gatunos."
 gallery:
   - ../../assets/casos/exito/mozzarella/mozzarella-01.jpg
   - ../../assets/casos/exito/mozzarella/mozzarella-02.jpg

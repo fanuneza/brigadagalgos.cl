@@ -1,6 +1,6 @@
 ---
 name: Parmesana
-story: "Parmesana salió del operativo de Buin. Pasó por peritonitis, exámenes, radiografías y cirugía antes de estabilizarse; después fue adoptada."
+story: "Parmesana fue rescatada en el operativo de Buin junto a Carabineros. Llegó con peritonitis, pasó por exámenes, radiografías, esterilización y luego una cirugía de cadera. Su familia no la soltó en ningún momento; hoy disfruta playa, sofá y descanso."
 gallery:
   - ../../assets/casos/exito/parmesana/parmesana-01.jpg
   - ../../assets/casos/exito/parmesana/parmesana-02.jpg

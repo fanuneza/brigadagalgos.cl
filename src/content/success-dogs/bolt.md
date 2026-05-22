@@ -1,6 +1,6 @@
 ---
-name: Bolt
-story: "A Bolt lo rescatamos con dardo y al día siguiente hubo que salir a buscarlo después de que se escapó de su hogar temporal. Luego siguió con hemogramas por neutropenia leve y más tarde fue adoptado."
+name: Benito
+story: "A Bolt hubo que rescatarlo con dardo porque el miedo no dejaba que nadie se acercara. En hogar temporal avanzó pasito a pasito, hasta entender que las manos también podían cuidar. Hoy se llama Benito, vive con una hermana gatuna y una familia que lo ama profundamente."
 gallery:
   - ../../assets/casos/exito/bolt/bolt-1.jpg
   - ../../assets/casos/exito/bolt/bolt-03.jpg

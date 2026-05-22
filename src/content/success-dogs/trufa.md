@@ -1,6 +1,6 @@
 ---
-name: Trufa
-story: "A Trufa la rescatamos en la Quinta Región. Fue esterilizada, estuvo hospitalizada y recibió tratamiento antes de pasar por hogar temporal; después fue adoptada."
+name: Capri
+story: "Trufa fue rescatada en la Quinta Región. Estuvo hospitalizada, recibió tratamiento y luego fue esterilizada. En hogar temporal empezó a confiar en los humanos, aunque otros perros todavía le daban miedo. Hoy se llama Capri y vive con una hermana que también respeta su espacio."
 gallery:
   - ../../assets/casos/exito/trufa/trufa-01.jpg
   - ../../assets/casos/exito/trufa/trufa-02.jpg

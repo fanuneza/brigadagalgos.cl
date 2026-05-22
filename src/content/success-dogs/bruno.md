@@ -1,6 +1,6 @@
 ---
 name: Bruno
-story: "Bruno fue rescatado en Catemu. No tenemos un expediente clínico largo, pero sí evidencia de esterilización y señales de ceguera en fotos posteriores; después fue adoptado."
+story: "Bruno fue rescatado en La Serena y trasladado a Santiago para evaluación veterinaria. Los exámenes confirmaron que es ciego, pero eso no le quitó curiosidad ni ganas de vivir. Hoy disfruta cada día con una familia que lo acompaña y lo quiere tal como es."
 gallery:
   - ../../assets/casos/exito/bruno/bruno-01.jpg
   - ../../assets/casos/exito/bruno/bruno-02.jpg

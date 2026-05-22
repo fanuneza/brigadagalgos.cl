@@ -1,6 +1,6 @@
 ---
 name: Antonia
-story: "De Antonia no tenemos una cronología completa, pero sí fotos y 7 archivos médicos y de imagen. Sabemos que pasó por atención veterinaria y después fue adoptada."
+story: "Antonia fue rescatada en diciembre de 2023 y a los dos días entró a cirugía por tumores mamarios. Su hogar temporal terminó siendo su familia: la eligieron, la cuidaron durante su diagnóstico más difícil y la amaron hasta que cruzó el arcoíris en febrero de 2025."
 gallery:
   - ../../assets/casos/exito/antonia/antonia-01.jpg
   - ../../assets/casos/exito/antonia/antonia-02.png

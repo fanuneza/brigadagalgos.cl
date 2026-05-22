@@ -2,8 +2,8 @@
 name: Arepita
 sex: Hembra
 age: "Menor de 1 año"
-weight: "Peso por confirmar"
-details: "Arepita fue rescatada en Limache y pasó directo por clínica. Es una galga muy joven que sigue recuperándose mientras espera una familia comprometida."
+weight: "20.2 kg"
+details: "Arepita llegó desde Limache y pasó directo por clínica. Es muy joven, ya está esterilizada y se lleva bien con otros perros. Puede vivir en casa o departamento, pero necesita una familia con otro perro en casa para acompañar su adaptación."
 order: 4
 gallery:
   - ../../assets/casos/adopcion/arepita/01.jpg
