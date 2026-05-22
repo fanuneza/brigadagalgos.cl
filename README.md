@@ -8,33 +8,38 @@ Sitio estático desarrollado con Astro para Brigada Galgos, organización dedica
 - `TypeScript`
 - `@astrojs/sitemap` para generación de sitemap
 - `astro:assets` con `sharp` para optimización de imágenes
+- `@fontsource/barlow-condensed` para tipografía display
 - `Playwright` para testing funcional e integración
 - `@axe-core/playwright` para testing de accesibilidad
 - `@lhci/cli` para Lighthouse CI
 
 ## Requisitos
 
-- `Node.js` >= 20
+- `Node.js` >= 22
 - `npm`
 
 ## Comandos
 
-| Comando                   | Descripción                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| `npm install`             | Instala las dependencias del proyecto.                           |
-| `npm run dev`             | Levanta el entorno local de desarrollo.                          |
-| `npm run build`           | Verifica tipos con `astro check` y genera producción en `dist/`. |
-| `npm run preview`         | Sirve localmente la compilación de producción.                   |
-| `npm run prepare:casos`   | Ejecuta el script de preparación de casos.                       |
-| `npm run lint`            | Ejecuta ESLint y Stylelint.                                      |
-| `npm run lint:fix`        | Corrige automáticamente errores de lint.                         |
-| `npm run format`          | Formatea todos los archivos con Prettier.                        |
-| `npm run format:check`    | Verifica el formato sin modificar archivos.                      |
-| `npm run test:lighthouse` | Ejecuta Lighthouse CI sobre `dist/`.                             |
-| `npm run capture:local`   | Ejecuta todos los tests de Playwright en local.                  |
-| `npm run capture:home`    | Ejecuta tests marcados con `@home`.                              |
-| `npm run capture:adoptar` | Ejecuta tests marcados con `@adoptar`.                           |
-| `npm run capture:donar`   | Ejecuta tests marcados con `@donar`.                             |
+| Comando                    | Descripción                                                      |
+| -------------------------- | ---------------------------------------------------------------- |
+| `npm install`              | Instala las dependencias del proyecto.                           |
+| `npm run dev`              | Levanta el entorno local de desarrollo.                          |
+| `npm run build`            | Verifica tipos con `astro check` y genera producción en `dist/`. |
+| `npm run preview`          | Sirve localmente la compilación de producción.                   |
+| `npm run prepare:casos`    | Ejecuta el script de preparación de casos.                       |
+| `npm run dog-images:check` | Valida la normalización de nombres de imágenes de galgos.        |
+| `npm run dog-images:write` | Normaliza los nombres de archivo de imágenes de galgos.          |
+| `npm run lint`             | Ejecuta ESLint y Stylelint.                                      |
+| `npm run lint:fix`         | Corrige automáticamente errores de lint.                         |
+| `npm run format`           | Formatea todos los archivos con Prettier.                        |
+| `npm run format:check`     | Verifica el formato sin modificar archivos.                      |
+| `npm run test:lighthouse`  | Ejecuta Lighthouse CI sobre `dist/`.                             |
+| `npm run test:e2e`         | Ejecuta todos los tests de Playwright.                           |
+| `npm run test:smoke`       | Ejecuta los smoke tests de rutas críticas.                       |
+| `npm run capture:local`    | Ejecuta todos los tests de Playwright en local.                  |
+| `npm run capture:home`     | Ejecuta tests marcados con `@home`.                              |
+| `npm run capture:adoptar`  | Ejecuta tests marcados con `@adoptar`.                           |
+| `npm run capture:donar`    | Ejecuta tests marcados con `@donar`.                             |
 
 ## Estructura del proyecto
 
@@ -48,6 +53,10 @@ src/
     hogar-temporal.astro    # Página de hogar temporal
     index.astro             # Página de inicio
     por-que-galgos.astro    # Por qué adoptar un galgo
+    politica-de-cookies.astro # Página de política de cookies
+    404.astro               # Página de error 404
+    casos/
+      exito-home.json.ts    # Endpoint JSON para historias de éxito
   layouts/
     BaseLayout.astro        # Layout base: head, cookie banner, scripts globales
   components/               # Componentes reutilizables de interfaz
@@ -64,6 +73,7 @@ src/
     SharedGalleryLightbox.astro
     SharedPhotoGallery.astro
     StoriesSection.astro
+    StructuredData.astro    # Schema.org JSON-LD para SEO
   content/                  # Colecciones de contenido
     adoption-dogs/*.md      # Perfiles de galgos en adopción
     success-dogs/*.md       # Historias de éxito
@@ -89,10 +99,16 @@ src/
     images/                 # Imágenes generales
     casos/                  # Fotos de casos de adopción y éxito
   utils/
+    instagram.ts            # Extracción de handle de Instagram desde URL
     responsive-gallery-images.ts
     shuffle.ts
+scripts/                    # Scripts de build y utilidades (root)
+  normalize-dog-images.mjs  # Normalización de nombres de imágenes de galgos
+  prepare-casos-site.mjs    # Preparación de casos
 public/                     # Archivos estáticos publicados sin procesamiento
   _headers                  # Headers HTTP (CSP, cache control)
+  site.webmanifest          # Manifest para PWA
+  images/                   # Logos, favicons e imagen OG
 ```
 
 ## Modelo de contenido
@@ -106,6 +122,7 @@ Cada perfil se define como un archivo Markdown con frontmatter:
 - `age` — Edad (string descriptiva)
 - `weight` — Peso (string descriptiva)
 - `details` — Descripción del perfil
+- `instagramUrl` — URL de Instagram del perfil (opcional)
 - `order` — Orden de aparición (número, opcional)
 - `gallery` — Array de imágenes (procesadas por `astro:assets`)
 
@@ -115,6 +132,7 @@ Cada historia se define como un archivo Markdown con frontmatter:
 
 - `name` — Nombre del galgo
 - `story` — Texto de la historia
+- `instagramUrl` — URL de Instagram de la historia (opcional)
 - `gallery` — Array de imágenes (procesadas por `astro:assets`)
 
 En `/por-que-galgos`, se seleccionan 3 historias al azar de esta colección en cada build.
@@ -128,7 +146,7 @@ Cada colaborador se define como un archivo Markdown con frontmatter:
 - `thanksLabel` — Texto del enlace de agradecimiento
 - `thanksUrl` — URL del enlace de agradecimiento
 - `website` — Sitio web del colaborador
-- `kind` — Tipo (`Empresa` | `Clínica` | etc.)
+- `kind` — Tipo (`Institución` | `Empresa` | `Persona` | `Fundación` | `Colectivo` | `Veterinaria`)
 - `order` — Orden de aparición (número)
 - `logo` — Logo (procesado por `astro:assets`)
 - `logoAlt` — Texto alternativo del logo
@@ -170,6 +188,24 @@ Tokens clave para superficies de contraste fijo (no cambian con el tema):
 
 Toggle initialization is idempotent via a `data-theme-toggle-initialized` guard on each button element, preventing duplicate click handlers across repeated navigations.
 
+## Accesibilidad
+
+- **Skip-to-content:** Un link invisible hasta recibir foco (`skip-to-content.css`) permite a usuarios de teclado saltar directamente al contenido principal.
+- **Contraste:** Los tokens `--color-text-on-dark` y `--color-text-on-brand` garantizan contraste WCAG 2.1 AA sobre superficies de color fijo.
+- **Focus management:** El navbar móvil, lightbox y formularios gestionan foco y trampa de foco para usuarios de teclado y lectores de pantalla.
+
+## SEO y datos estructurados
+
+Cada página incluye `StructuredData.astro`, que inyecta JSON-LD con Schema.org:
+
+- **Organization** (`NGO`) — datos de la fundación, redes, taxID.
+- **WebSite** — información del sitio en español chileno (`es-CL`).
+- **WebPage** — metadatos de la página actual e imagen principal.
+- **BreadcrumbList** — migas de pan en páginas internas.
+- **FAQPage** — preguntas frecuentes en `/por-que-galgos/`.
+
+Además, el sitio cuenta con `site.webmanifest`, favicons en múltiples tamaños e imagen OG (`og:image`) para compartir en redes sociales.
+
 ## Testing
 
 El proyecto tiene las siguientes suites de tests bajo `tests/visual/`, todas ejecutadas con Playwright sobre la build de producción servida localmente:
@@ -182,6 +218,7 @@ El proyecto tiene las siguientes suites de tests bajo `tests/visual/`, todas eje
 | `stories-section.spec.ts`   | Verifica la carga y paginación de historias de éxito.                                             |
 | `a11y.spec.ts`              | Escanea todas las páginas con axe-core buscando violaciones WCAG 2.1 AA.                          |
 | `capture.spec.ts`           | Genera screenshots full-page en 4 viewports (1440, 1200, 810, 390). Se omite en CI.               |
+| `smoke.spec.ts`             | Smoke tests de rutas críticas (`/`, `/adoptar/`, `/contacto/`, `/donar/`).                        |
 
 ### Requisitos para tests
 
@@ -195,6 +232,12 @@ npx playwright install chromium
 ```powershell
 # Requiere build previa
 npm run build
+npm run test:e2e
+
+# O solo smoke tests
+npm run test:smoke
+
+# Screenshots visuales
 npm run capture:local
 
 # Lighthouse CI
@@ -202,9 +245,16 @@ npm run build
 npm run test:lighthouse
 ```
 
+### Variables de entorno para Playwright
+
+| Variable              | Descripción                                          | Default            |
+| --------------------- | ---------------------------------------------------- | ------------------ |
+| `PLAYWRIGHT_BASE_URL` | URL base externa para correr tests contra un deploy. | `http://127.0.0.1` |
+| `PLAYWRIGHT_PORT`     | Puerto para el servidor de preview local.            | `4325`             |
+
 ### CI
 
-Los tests corren en GitHub Actions en el job `test`, que depende del job `lint-and-build`. El artifact `dist/` generado en el primer job se descarga en el segundo, evitando reconstruir las imágenes de Astro.
+Los tests corren en GitHub Actions en el job `validate`, que ejecuta en secuencia: lint → format-check → build → lighthouse → e2e. Playwright browsers se cachean entre runs.
 
 ## Analítica
 
@@ -228,6 +278,7 @@ Los tests corren en GitHub Actions en el job `test`, que depende del job `lint-a
 - `gallery_next`
 - `gallery_previous`
 - `stories_load_more`
+- `bank_data_copy`
 
 ### Cómo extender el tracking
 
@@ -248,7 +299,7 @@ Los tests corren en GitHub Actions en el job `test`, que depende del job `lint-a
 2. Trabaja localmente con `npm run dev`.
 3. Si cambias rutas, contenido o estilos, valida el resultado en navegador en ambos temas (claro y oscuro).
 4. Antes de cerrar tu cambio, ejecuta `npm run build` (incluye verificación de tipos).
-5. Para cambios visibles, considera correr `npm run capture:local` y `npm run test:lighthouse`.
+5. Para cambios visibles, considera correr `npm run test:e2e`, `npm run capture:local` y `npm run test:lighthouse`.
 
 ## Notas
 

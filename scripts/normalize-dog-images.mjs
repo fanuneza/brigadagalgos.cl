@@ -217,7 +217,12 @@ async function processEntry(entry) {
   const targetPaths = [];
   for (let index = 0; index < entry.gallery.length; index += 1) {
     const sourcePath = resolveGalleryPath(entry, entry.gallery[index]);
-    const targetPath = path.join(assetsRoot, entry.kind, entry.canonicalSlug, `${entry.canonicalSlug}-${String(index + 1).padStart(2, "0")}.jpg`);
+    const targetPath = path.join(
+      assetsRoot,
+      entry.kind,
+      entry.canonicalSlug,
+      `${entry.canonicalSlug}-${String(index + 1).padStart(2, "0")}.jpg`
+    );
     targetPaths.push(targetPath);
 
     if (!(await exists(sourcePath))) {
