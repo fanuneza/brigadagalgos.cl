@@ -5,26 +5,56 @@ interface Props {
   canonicalUrl: string;
   title: string;
   description: string;
+  imageUrl: string;
+  logoUrl: string;
 }
 
-const { canonicalUrl, title, description } = Astro.props;
-const { siteUrl, email, whatsappPhone, instagram, facebook } = SITE;
+const { canonicalUrl, title, description, imageUrl, logoUrl } = Astro.props;
+const { siteUrl, email, whatsappPhone, instagram, facebook, name, legalName } = SITE;
+
+const logoImage = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "@id": `${siteUrl}/#logo`,
+  url: logoUrl,
+  contentUrl: logoUrl,
+  width: 512,
+  height: 512,
+  caption: `${name} logo`,
+};
+
+const primaryImage = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "@id": `${siteUrl}/#primaryimage`,
+  url: imageUrl,
+  contentUrl: imageUrl,
+  width: 1200,
+  height: 630,
+  caption: "Brigada Galgos rescata, rehabilita y reubica galgos en Chile",
+};
 
 const organization = {
   "@context": "https://schema.org",
   "@type": "NGO",
   "@id": `${siteUrl}/#organization`,
-  name: "Fundación Brigada Galgos",
-  alternateName: "Brigada Galgos",
+  name,
+  legalName,
+  alternateName: [legalName, "Fundación Brigada Galgos Chile"],
   url: siteUrl,
-  logo: `${siteUrl}/images/brigada-galgos-logo.webp`,
-  image: `${siteUrl}/images/brigada-galgos-og-image.webp`,
-  description: "Fundación chilena que rescata, rehabilita y reubica galgos abandonados.",
+  logo: { "@id": `${siteUrl}/#logo` },
+  image: { "@id": `${siteUrl}/#primaryimage` },
+  description: SITE.description,
   email,
   telephone: whatsappPhone,
   taxID: "65.132.425-4",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "CL",
+  },
   areaServed: { "@type": "Country", name: "Chile" },
   sameAs: [instagram, facebook],
+  knowsAbout: ["Rescate de galgos", "Adopción responsable", "Bienestar animal", "Rehabilitación de perros"],
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -42,8 +72,9 @@ const website = {
   "@type": "WebSite",
   "@id": `${siteUrl}/#website`,
   url: siteUrl,
-  name: "Brigada Galgos",
-  description: "Fundación chilena que rescata, rehabilita y reubica galgos abandonados.",
+  name,
+  alternateName: legalName,
+  description: SITE.description,
   inLanguage: "es-CL",
   publisher: { "@id": `${siteUrl}/#organization` },
 };
@@ -56,6 +87,10 @@ const webpage = {
   description,
   inLanguage: "es-CL",
   isPartOf: { "@id": `${siteUrl}/#website` },
+  about: { "@id": `${siteUrl}/#organization` },
+  publisher: { "@id": `${siteUrl}/#organization` },
+  primaryImageOfPage: { "@id": `${siteUrl}/#primaryimage` },
+  image: { "@id": `${siteUrl}/#primaryimage` },
 };
 
 const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
@@ -83,7 +118,7 @@ const breadcrumb = {
   ],
 };
 
-const graph: Record<string, unknown>[] = [organization, website, webpage];
+const graph: Record<string, unknown>[] = [logoImage, primaryImage, organization, website, webpage];
 if (pathSegments.length > 0) graph.push(breadcrumb);
 
 if (Astro.url.pathname === "/por-que-galgos/") {

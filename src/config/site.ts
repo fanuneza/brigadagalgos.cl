@@ -1,5 +1,10 @@
 export const SITE = {
+  name: "Brigada Galgos",
+  legalName: "Fundación Brigada Galgos",
+  description: "Fundación chilena que rescata, rehabilita y reubica galgos abandonados.",
   siteUrl: "https://brigadagalgos.cl",
+  logoPath: "/images/brigada-galgos-logo.png",
+  ogImagePath: "/images/brigada-galgos-og-image.jpg",
   consentCookie: "brigadagalgos_consent",
   gtmContainerId: "GTM-M2RN5B38",
   gaMeasurementId: "G-97CD3EJYML",

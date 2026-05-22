@@ -3,12 +3,16 @@
 
 /images/*
   Cache-Control: public, max-age=31536000, immutable
+  Cross-Origin-Resource-Policy: cross-origin
 
 /casos/*
   Cache-Control: public, max-age=604800
 
 /icons/*
   Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cross-Origin-Resource-Policy: cross-origin
 
 /*
   Cache-Control: public, max-age=0, must-revalidate

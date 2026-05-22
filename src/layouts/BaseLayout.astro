@@ -12,10 +12,11 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, ogImage = "/images/brigada-galgos-og-image.webp" } = Astro.props;
-const { siteUrl, gtmContainerId, consentCookie } = SITE;
+const { title, description, ogImage = SITE.ogImagePath } = Astro.props;
+const { siteUrl, gtmContainerId, consentCookie, name } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
+const logoUrl = new URL(SITE.logoPath, siteUrl).href;
 ---
 
 <!doctype html>
@@ -31,24 +32,38 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/images/brigada-galgos-logo.webp" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/brigada-galgos-logo-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/brigada-galgos-logo-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/brigada-galgos-logo-180.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="application-name" content={name} />
+    <meta name="apple-mobile-web-app-title" content={name} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CL" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="Brigada Galgos — fundación chilena de rescate de galgos" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Brigada Galgos" />
+    <meta property="og:site_name" content={name} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="Brigada Galgos — fundación chilena de rescate de galgos" />
-    <StructuredData canonicalUrl={canonicalUrl} title={title} description={description} />
+    <meta name="thumbnail" content={ogImageUrl} />
+    <StructuredData
+      canonicalUrl={canonicalUrl}
+      title={title}
+      description={description}
+      imageUrl={ogImageUrl}
+      logoUrl={logoUrl}
+    />
     <slot name="head" />
     <ClientRouter />
     <script is:inline>
