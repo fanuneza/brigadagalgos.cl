@@ -3,11 +3,13 @@ import SharedPhotoGallery from "./SharedPhotoGallery.astro";
 import SharedGalleryLightbox from "./SharedGalleryLightbox.astro";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 import storiesCss from "../styles/components/stories.css?raw";
+import { getInstagramHandleLabel } from "../utils/instagram";
 
 interface StoryDog {
   id: string;
   name: string;
   story: string;
+  instagramUrl?: string;
   photos: SharedGalleryPhoto[];
 }
 
@@ -54,6 +56,26 @@ const { dogs, totalCount, endpoint } = Astro.props;
             >
               <p class="story-card__name">{dog.name}</p>
               <p class="story-card__quote">{dog.story}</p>
+              {dog.instagramUrl && (
+                <a
+                  href={dog.instagramUrl}
+                  class="story-card__social dog-social-link"
+                  aria-label={`Seguir a ${dog.name} en Instagram`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-external-indicator="off"
+                  data-track-event="social_click"
+                  data-track-category="instagram"
+                  data-track-outbound="true"
+                  data-social-platform="instagram"
+                  data-dog-name={dog.name}
+                  data-track-location="success_stories"
+                  data-track-destination={dog.instagramUrl}
+                >
+                  <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                  <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+                </a>
+              )}
             </div>
           </article>
         ))

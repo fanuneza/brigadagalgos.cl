@@ -13,6 +13,7 @@ import PageHero from "../components/PageHero.astro";
 import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
+import { getInstagramHandleLabel } from "../utils/instagram";
 import { shuffle } from "../utils/shuffle";
 
 function getAgeType(age: string) {
@@ -29,6 +30,7 @@ const dogs = await Promise.all(
     age: entry.data.age,
     weight: entry.data.weight,
     details: entry.data.details,
+    instagramUrl: entry.data.instagramUrl,
     pictures: await Promise.all(
       entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
     ),
@@ -96,6 +98,26 @@ const dogs = await Promise.all(
                       </div>
                     </div>
                     <p class="dog-card__details">{dog.details}</p>
+                    {dog.instagramUrl && (
+                      <a
+                        href={dog.instagramUrl}
+                        class="dog-social-link"
+                        aria-label={`Seguir a ${dog.name} en Instagram`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-external-indicator="off"
+                        data-track-event="social_click"
+                        data-track-category="instagram"
+                        data-track-outbound="true"
+                        data-social-platform="instagram"
+                        data-dog-name={dog.name}
+                        data-track-location="dog_card"
+                        data-track-destination={dog.instagramUrl}
+                      >
+                        <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                        <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+                      </a>
+                    )}
                     <a
                       href={formHref}
                       class="btn btn--primary dog-card__cta"

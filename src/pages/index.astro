@@ -51,6 +51,7 @@ const storyDogs = await Promise.all(
     id: entry.id,
     name: entry.data.name,
     story: entry.data.story,
+    instagramUrl: entry.data.instagramUrl,
     photos: await Promise.all(
       entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
     ),

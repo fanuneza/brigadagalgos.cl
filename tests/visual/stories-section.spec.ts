@@ -47,6 +47,71 @@ test("Ver mas loads additional stories without duplicates", async ({ page }) => 
   }
 });
 
+test("Ver mas preserves Instagram links from the stories endpoint", async ({ page }) => {
+  await page.route("**/casos/exito-home.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json; charset=utf-8",
+      body: JSON.stringify([
+        {
+          id: "instagram-fixture",
+          name: "Roma",
+          story: "Roma comparte su nueva vida en familia.",
+          instagramUrl: "https://www.instagram.com/roma_galga/",
+          photos: [
+            {
+              cardWebpSrcSet: "/favicon.svg 350w",
+              cardSizes: "(min-width: 1024px) 350px, calc(100vw - 3rem)",
+              cardFallbackSrc: "/favicon.svg",
+              lightbox: "/favicon.svg",
+              alt: "Roma",
+              caption: "Roma",
+            },
+          ],
+        },
+      ]),
+    });
+  });
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  const grid = page.locator("[data-stories-list]");
+  const initialCount = await grid.locator("[data-story-card]").count();
+
+  await page.locator("[data-stories-ver-mas]").click();
+  await expect.poll(async () => await grid.locator("[data-story-card]").count()).toBeGreaterThan(initialCount);
+
+  const instagramLink = grid.locator("[data-story-id='instagram-fixture'] .dog-social-link");
+  await expect(instagramLink).toHaveAttribute("href", "https://www.instagram.com/roma_galga/");
+  await expect(instagramLink).toHaveAttribute("aria-label", "Seguir a Roma en Instagram");
+  await expect(instagramLink).toContainText("@roma_galga");
+  await expect(instagramLink).toHaveAttribute("data-track-event", "social_click");
+  await expect(instagramLink).toHaveAttribute("data-track-location", "success_stories");
+  await expect(instagramLink).toHaveAttribute("data-dog-name", "Roma");
+});
+
+test("success story Instagram labels use handles from content URLs", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  const grid = page.locator("[data-stories-list]");
+  const button = page.locator("[data-stories-ver-mas]");
+  const leoInstagramLink = grid.locator("[data-story-id='leo'] .dog-social-link");
+
+  for (let i = 0; i < 10 && (await leoInstagramLink.count()) === 0; i++) {
+    if (!(await button.isVisible().catch(() => false))) {
+      break;
+    }
+
+    const countBefore = await grid.locator("[data-story-card]").count();
+    await button.click();
+    await expect.poll(async () => await grid.locator("[data-story-card]").count()).toBeGreaterThan(countBefore);
+  }
+
+  await expect(leoInstagramLink).toHaveAttribute("href", "https://instagram.com/leitogalgo");
+  await expect(leoInstagramLink).toHaveAttribute("aria-label", "Seguir a Leo en Instagram");
+  await expect(leoInstagramLink).toContainText("@leitogalgo");
+});
+
 test("Ver mas button hides when all stories are loaded", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
 

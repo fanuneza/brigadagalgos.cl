@@ -11,6 +11,7 @@ const adoptionDogs = defineCollection({
       age: z.string(),
       weight: z.string(),
       details: z.string(),
+      instagramUrl: z.url().optional(),
       order: z.number().int().optional(),
       gallery: z.array(image()),
     }),
@@ -22,6 +23,7 @@ const successDogs = defineCollection({
     z.object({
       name: z.string(),
       story: z.string(),
+      instagramUrl: z.url().optional(),
       gallery: z.array(image()),
     }),
 });

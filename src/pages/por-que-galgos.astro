@@ -15,6 +15,7 @@ import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import SharedPhotoGallery from "../components/SharedPhotoGallery.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
+import { getInstagramHandleLabel } from "../utils/instagram";
 import { shuffle } from "../utils/shuffle";
 
 const successDogs = await getCollection("success-dogs");
@@ -26,6 +27,7 @@ const cases = await Promise.all(
       id: entry.id,
       name: entry.data.name,
       story: entry.data.story,
+      instagramUrl: entry.data.instagramUrl,
       photos: await Promise.all(
         entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
       ),
@@ -189,6 +191,26 @@ const cases = await Promise.all(
                 >
                   <p class="story-card__name">{dog.name}</p>
                   <p class="story-card__quote">{dog.story}</p>
+                  {dog.instagramUrl && (
+                    <a
+                      href={dog.instagramUrl}
+                      class="story-card__social dog-social-link"
+                      aria-label={`Seguir a ${dog.name} en Instagram`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-external-indicator="off"
+                      data-track-event="social_click"
+                      data-track-category="instagram"
+                      data-track-outbound="true"
+                      data-social-platform="instagram"
+                      data-dog-name={dog.name}
+                      data-track-location="why_galgos"
+                      data-track-destination={dog.instagramUrl}
+                    >
+                      <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                      <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+                    </a>
+                  )}
                 </div>
               </article>
             ))

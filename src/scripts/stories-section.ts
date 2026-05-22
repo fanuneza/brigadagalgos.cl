@@ -6,6 +6,7 @@ import {
   initSharedGalleryLightbox,
   type SharedGalleryPhoto,
 } from "./shared-gallery";
+import { getInstagramHandleLabel } from "../utils/instagram";
 
 const PAGE_SIZE = 6;
 
@@ -13,7 +14,21 @@ interface StoryApiRecord {
   id: string;
   name: string;
   story: string;
+  instagramUrl?: string;
   photos: SharedGalleryPhoto[];
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (char) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[char];
+  });
 }
 
 function initStoriesSection() {
@@ -29,6 +44,31 @@ function initStoriesSection() {
   let loading = false;
 
   function createStoryCard(story: StoryApiRecord) {
+    const safeId = escapeHtml(story.id);
+    const safeName = escapeHtml(story.name);
+    const safeInstagramLabel = escapeHtml(getInstagramHandleLabel(story.instagramUrl));
+    const instagramLink = story.instagramUrl
+      ? `
+        <a
+          href="${escapeHtml(story.instagramUrl)}"
+          class="story-card__social dog-social-link"
+          aria-label="Seguir a ${safeName} en Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-external-indicator="off"
+          data-track-event="social_click"
+          data-track-category="instagram"
+          data-track-outbound="true"
+          data-social-platform="instagram"
+          data-dog-name="${safeName}"
+          data-track-location="success_stories"
+          data-track-destination="${escapeHtml(story.instagramUrl)}"
+        >
+          <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+          <span>${safeInstagramLabel}</span>
+        </a>
+      `
+      : "";
     const article = document.createElement("article");
     article.className = "story-card";
     article.dataset.storyCard = "";
@@ -40,13 +80,14 @@ function initStoriesSection() {
       <div
         class="story-card__body"
         data-track-event="story_click"
-        data-track-label="${story.name}"
+        data-track-label="${safeName}"
         data-track-location="success_stories"
-        data-story-id="${story.id}"
-        data-story-name="${story.name}"
+        data-story-id="${safeId}"
+        data-story-name="${safeName}"
       >
         <p class="story-card__name"></p>
         <p class="story-card__quote"></p>
+        ${instagramLink}
       </div>
     `;
 

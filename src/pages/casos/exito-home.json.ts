@@ -11,6 +11,7 @@ export async function GET() {
       id: entry.id,
       name: entry.data.name,
       story: entry.data.story,
+      instagramUrl: entry.data.instagramUrl,
       photos: await Promise.all(entry.data.gallery.map((img) => createResponsiveGalleryPhoto(img))),
     }))
   );

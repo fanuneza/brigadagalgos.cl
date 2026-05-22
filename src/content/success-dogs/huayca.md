@@ -1,6 +1,6 @@
 ---
-name: Niña
-story: "A Niña la rescatamos como Huayca, con apoyo de la PDI en Paine. Pasó por cirugía por piometra, exámenes y una recuperación que pidió paciencia. Hoy está felizmente adoptada: encontró una familia que la acompaña a su ritmo y le dio el lugar seguro que necesitaba."
+name: Huayca
+story: "Huayca fue rescatada en Paine con apoyo de la PDI. Llegó a nosotras y la llevamos de inmediato a clínica, donde descubrimos que tenía piometra. Necesitó cirugía de urgencia y después pasó por un hogar temporal que acompañó su recuperación con mucho cuidado y cariño. Hoy está felizmente adoptada."
 gallery:
   - ../../assets/casos/adopcion/huayca/huayca-01.jpg
   - ../../assets/casos/adopcion/huayca/huayca-02.jpg
