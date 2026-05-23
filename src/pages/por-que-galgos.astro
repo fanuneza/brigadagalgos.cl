@@ -18,7 +18,7 @@ import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images
 import { getInstagramHandleLabel } from "../utils/instagram";
 import { shuffle } from "../utils/shuffle";
 
-const successDogs = await getCollection("success-dogs");
+const successDogs = (await getCollection("success-dogs")).filter((entry) => entry.data.gallery.length > 0);
 
 const cases = await Promise.all(
   shuffle(successDogs)

@@ -24,7 +24,7 @@ const successDogs = defineCollection({
       name: z.string(),
       story: z.string(),
       instagramUrl: z.url().optional(),
-      gallery: z.array(image()),
+      gallery: z.array(image()).default([]),
     }),
 });
 

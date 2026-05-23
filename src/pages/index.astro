@@ -43,7 +43,7 @@ const rescueSteps = [
   },
 ];
 
-const rawStoryDogs = shuffle(await getCollection("success-dogs"));
+const rawStoryDogs = shuffle(await getCollection("success-dogs")).filter((entry) => entry.data.gallery.length > 0);
 const initialStoryDogs = rawStoryDogs.slice(0, 6);
 
 const storyDogs = await Promise.all(

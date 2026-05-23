@@ -5,7 +5,7 @@ import { shuffle } from "../../utils/shuffle";
 export const prerender = true;
 
 export async function GET() {
-  const storyDogs = shuffle(await getCollection("success-dogs"));
+  const storyDogs = shuffle(await getCollection("success-dogs")).filter((entry) => entry.data.gallery.length > 0);
   const payload = await Promise.all(
     storyDogs.map(async (entry) => ({
       id: entry.id,
