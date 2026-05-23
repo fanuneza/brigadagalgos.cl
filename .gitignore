@@ -169,3 +169,42 @@ Astro.md
 CI.md
 Cloudflare.md
 PLAYWRIGHT_VISUAL_CAPTURE.md
+
+# OS metadata files (macOS & Windows)
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# IDEs & Editor configurations
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Astro & Vite additions
+dist/
+_site/
+astro.config.mjs.timestamp-*
+astro.config.js.timestamp-*
+astro.config.ts.timestamp-*
+astro.config.cjs.timestamp-*
+
+# Deployment & CI environments
+.vercel/
+.netlify/
+.turbo/
+
+# Playwright & test reports/artifacts
+smoke-report.json
