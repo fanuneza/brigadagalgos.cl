@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import pragaImage from "../../assets/casos/exito/praga/praga-02.jpg";
 import leoImage from "../../assets/casos/exito/leo/leo-01.jpg";
 import antoniaImage from "../../assets/casos/exito/antonia/antonia-01.jpg";
@@ -8,11 +8,13 @@ import antoniaImage from "../../assets/casos/exito/antonia/antonia-01.jpg";
 <section class="why-galgos__image-section">
   <div class="container container--narrow">
     <div class="why-galgos__image-shell">
-      <Image
+      <Picture
         src={pragaImage}
         alt="Praga, una galga rescatada por Brigada Galgos"
         class="why-galgos__image"
-        widths={[400, 600, 800]}
+        widths={[400, 455, 600, 728]}
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
         sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
         loading="eager"
         fetchpriority="high"
@@ -42,11 +44,13 @@ import antoniaImage from "../../assets/casos/exito/antonia/antonia-01.jpg";
     </div>
 
     <div class="why-galgos__image-shell">
-      <Image
+      <Picture
         src={leoImage}
         alt="Leo, un galgo rescatado por Brigada Galgos"
         class="why-galgos__image"
-        widths={[400, 600, 800]}
+        widths={[400, 455, 600, 728]}
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
         sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
       />
     </div>
@@ -79,11 +83,13 @@ import antoniaImage from "../../assets/casos/exito/antonia/antonia-01.jpg";
 <section class="why-galgos__between-sections">
   <div class="container container--narrow">
     <div class="why-galgos__image-shell">
-      <Image
+      <Picture
         src={antoniaImage}
         alt="Antonia, una galga rescatada por Brigada Galgos"
         class="why-galgos__image"
-        widths={[400, 600, 800]}
+        widths={[400, 455, 600, 728]}
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
         sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
       />
     </div>
