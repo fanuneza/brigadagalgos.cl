@@ -19,33 +19,11 @@
   margin: 0;
 }
 
-.why-galgos__image-stage {
-  position: relative;
-  border-radius: var(--radius-md);
-}
-
-.why-galgos__image-stage--rotated {
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-}
-
 .why-galgos__image {
   display: block;
   width: 100%;
   height: auto;
   border-radius: var(--radius-md);
-}
-
-.why-galgos__image--rotated {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 56.3%;
-  height: auto;
-  border-radius: 0;
-  max-width: none;
-  transform: translate(-50%, -50%) rotate(90deg);
-  transform-origin: center;
 }
 
 .why-galgos__block {
@@ -182,10 +160,6 @@
 
   .why-galgos__between-sections {
     padding-bottom: var(--space-6);
-  }
-
-  .why-galgos__image-stage--rotated {
-    aspect-ratio: 4000 / 2252;
   }
 
   .why-galgos__stories-grid {
