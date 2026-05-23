@@ -2,16 +2,6 @@
   background: var(--color-surface);
 }
 
-.stories__eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--font-size-xs);
-  font-weight: var(--weight-semi);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-eyebrow);
-  color: var(--color-primary-700);
-  margin: 0 0 var(--space-3);
-}
-
 .stories__heading {
   margin-bottom: var(--space-4);
   font-size: var(--font-size-2xl);
@@ -97,7 +87,8 @@
 }
 
 .story-card__control:hover,
-.story-card__control:focus-visible {
+.story-card__control:focus-visible,
+.story-card__control:active {
   background: rgba(31, 35, 40, 0.94);
 }
 
@@ -146,6 +137,11 @@
   height: 0.55rem;
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.45);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.story-card__dot:active::after {
+  background: rgba(255, 255, 255, 0.75);
 }
 
 .story-card__dot[data-active="true"]::after {
@@ -228,7 +224,7 @@
 .story-card__dot:focus-visible,
 .stories-lightbox__close:focus-visible,
 .stories-lightbox__nav:focus-visible {
-  outline: 2px solid var(--color-primary-600, var(--color-primary-700));
+  outline: 2px solid var(--color-primary-700);
   outline-offset: 2px;
 }
 

@@ -16,7 +16,11 @@
   font-size: var(--font-size-sm);
   font-weight: var(--weight-medium);
   cursor: pointer;
-  min-height: 36px;
+  min-height: 44px;
+}
+.chip-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
 }
 
 .chip-btn--active {
