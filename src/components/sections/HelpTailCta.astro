@@ -1,0 +1,23 @@
+---
+import { SITE } from "../../config/site.ts";
+---
+
+<section class="section-padding tail-cta">
+  <div class="container container--narrow">
+    <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
+    <h2>Más formas de colaborar</h2>
+    <ul class="requisitos-list">
+      <li>Dona comida, mantas o medicamentos.</li>
+      <li>Ofrece servicios: veterinario, transporte, fotografía.</li>
+      <li>Comparte las adopciones en tus redes sociales.</li>
+    </ul>
+    <a
+      href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
+      class="btn btn--secondary"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Coordina por WhatsApp
+    </a>
+  </div>
+</section>

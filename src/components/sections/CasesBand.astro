@@ -1,0 +1,78 @@
+---
+import SharedPhotoGallery from "../SharedPhotoGallery.astro";
+import type { SharedGalleryPhoto } from "../../scripts/shared-gallery";
+import { getInstagramHandleLabel } from "../../utils/instagram";
+
+interface Case {
+  id: string;
+  name: string;
+  story: string;
+  instagramUrl?: string;
+  photos: SharedGalleryPhoto[];
+}
+
+interface Props {
+  cases: Case[];
+}
+
+const { cases } = Astro.props;
+---
+
+<section class="section-padding why-galgos__cases-band">
+  <div class="container why-galgos__cases-shell">
+    <div class="why-galgos__cases-intro">
+      <p class="eyebrow">CASOS REALES</p>
+      <h2>Por eso insistimos con ellos</h2>
+      <p class="why-galgos__cases-lead">
+        No hablamos en abstracto. Cada recuperación vuelve más concreta la razón de esta brigada.
+      </p>
+    </div>
+
+    <div class="stories__grid why-galgos__stories-grid">
+      {
+        cases.map((dog) => (
+          <article
+            class="story-card story-card--compact"
+            data-story-card
+            data-story-id={dog.id}
+            data-story-name={dog.name}
+            data-story-location="why_galgos"
+          >
+            <SharedPhotoGallery name={dog.name} photos={dog.photos} id={dog.id} />
+            <div
+              class="story-card__body"
+              data-track-event="story_click"
+              data-track-label={dog.name}
+              data-track-location="why_galgos"
+              data-story-id={dog.id}
+              data-story-name={dog.name}
+            >
+              <p class="story-card__name">{dog.name}</p>
+              <p class="story-card__quote">{dog.story}</p>
+              {dog.instagramUrl && (
+                <a
+                  href={dog.instagramUrl}
+                  class="story-card__social dog-social-link"
+                  aria-label={`Seguir a ${dog.name} en Instagram`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-external-indicator="off"
+                  data-track-event="social_click"
+                  data-track-category="instagram"
+                  data-track-outbound="true"
+                  data-social-platform="instagram"
+                  data-dog-name={dog.name}
+                  data-track-location="why_galgos"
+                  data-track-destination={dog.instagramUrl}
+                >
+                  <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                  <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

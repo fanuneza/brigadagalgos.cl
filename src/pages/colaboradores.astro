@@ -3,11 +3,12 @@ import "../styles/components/page-hero.css";
 import "../styles/components/colaboradores.css";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { SITE } from "../config/site.ts";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SupportersIntro from "../components/sections/SupportersIntro.astro";
+import SupportersCtaSection from "../components/sections/SupportersCtaSection.astro";
 
 const PARTNER_UTM_SOURCE = "brigadagalgos.cl";
 const PARTNER_UTM_MEDIUM = "referral";
@@ -40,13 +41,7 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
 
     <section class="section-padding">
       <div class="container">
-        <div class="supporters-intro">
-          <p class="eyebrow">RED DE APOYO</p>
-          <p class="supporters-intro__lead">
-            Este espacio reúne a quienes apoyan el trabajo de Brigada Galgos y hacen posible acompañar mejor cada
-            rescate, recuperación y proceso de adopción.
-          </p>
-        </div>
+        <SupportersIntro />
 
         <div class={supportersGridClass}>
           {
@@ -96,24 +91,7 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
       </div>
     </section>
 
-    <section class="section-padding supporters-cta">
-      <div class="container container--narrow">
-        <p class="eyebrow">SUMAR APOYO</p>
-        <h2>Si quieres colaborar, conversemos</h2>
-        <p class="supporters-cta__lead">
-          Si representas a una institución, marca o equipo profesional y quieres apoyar a Brigada Galgos, estaremos
-          felices de explorar una forma de trabajo en conjunto.
-        </p>
-        <a
-          href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, me interesa colaborar con Brigada Galgos")}`}
-          class="btn btn--primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hablar por WhatsApp
-        </a>
-      </div>
-    </section>
+    <SupportersCtaSection />
   </main>
   <Footer />
 </BaseLayout>

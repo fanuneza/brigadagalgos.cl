@@ -1,0 +1,111 @@
+---
+import { SITE } from "../../config/site.ts";
+import donationCardsCss from "../../styles/components/donation-cards.css?raw";
+---
+
+<style is:inline set:html={donationCardsCss}></style>
+
+<section class="section-padding">
+  <div class="container">
+    <div class="donation-cards">
+      <div class="donation-card donation-card--transferencia" id="datos-transferencia">
+        <span class="chip chip--recommended">Recomendado</span>
+        <p class="donation-card__heading">TRANSFERENCIA ÚNICA</p>
+        <p class="donation-card__subtitle">O transferencia recurrente, si lo prefieres.</p>
+        <div class="bank-info">
+          <button
+            type="button"
+            class="bank-info__row"
+            data-copy-value="Fundación Brigada Galgos"
+            aria-label="Copiar nombre: Fundación Brigada Galgos"
+          >
+            <span class="bank-info__label">Nombre</span>
+            <span class="bank-info__value">Fundación Brigada Galgos</span>
+          </button>
+          <button
+            type="button"
+            class="bank-info__row"
+            data-copy-value="65.132.425-4"
+            aria-label="Copiar RUT: 65.132.425-4"
+          >
+            <span class="bank-info__label">RUT</span>
+            <span class="bank-info__value">65.132.425-4</span>
+          </button>
+          <button
+            type="button"
+            class="bank-info__row"
+            data-copy-value="Mercado Pago"
+            aria-label="Copiar banco: Mercado Pago"
+          >
+            <span class="bank-info__label">Banco</span>
+            <span class="bank-info__value">Mercado Pago</span>
+          </button>
+          <button
+            type="button"
+            class="bank-info__row"
+            data-copy-value="Cuenta Vista"
+            aria-label="Copiar tipo de cuenta: Cuenta Vista"
+          >
+            <span class="bank-info__label">Tipo de cuenta</span>
+            <span class="bank-info__value">Cuenta Vista</span>
+          </button>
+          <button
+            type="button"
+            class="bank-info__row"
+            data-copy-value="1073480715"
+            aria-label="Copiar número de cuenta: 1073480715"
+          >
+            <span class="bank-info__label">Número de cuenta</span>
+            <span class="bank-info__value">1073480715</span>
+          </button>
+          <button
+            type="button"
+            class="bank-info__row"
+            data-copy-value={SITE.email}
+            aria-label={`Copiar email: ${SITE.email}`}
+          >
+            <span class="bank-info__label">Email</span>
+            <span class="bank-info__value">{SITE.email}</span>
+          </button>
+        </div>
+        <button
+          type="button"
+          class="btn btn--secondary"
+          id="copy-bank-data"
+          aria-label="Copiar todos los datos bancarios"
+        >
+          Copiar datos
+        </button>
+        <div class="bank-info__live" data-copy-live aria-live="polite" aria-atomic="true"></div>
+        <p class="donation-card__info">
+          Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una vez.
+        </p>
+      </div>
+
+      <div class="donation-card donation-card--mensual">
+        <p class="donation-card__heading">DONAR MENSUAL</p>
+        <p>
+          Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y
+          acogidas.
+        </p>
+        <p>Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.</p>
+        <a
+          href={SITE.esponsor}
+          class="btn btn--primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track-event="donation_esponsor_click"
+          data-track-label="Quiero donar en eSponsor"
+          data-track-location="donation_card"
+          data-donation-location="donation_card"
+        >
+          Quiero donar en eSponsor
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "../../scripts/copy-data";
+</script>

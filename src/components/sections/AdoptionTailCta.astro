@@ -1,0 +1,23 @@
+---
+import { SITE } from "../../config/site.ts";
+---
+
+<section class="section-padding tail-cta">
+  <div class="container container--narrow">
+    <h3>¿Quieres hablarlo antes de postular?</h3>
+    <p>Escríbenos sin apuro. Si todavía no sabes qué galgo encaja mejor con tu casa, lo conversamos contigo.</p>
+    <a
+      href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera saber más sobre adopción")}`}
+      class="btn btn--primary"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-track-event="whatsapp_click"
+      data-track-label="Escríbenos por WhatsApp - Adoption Tail CTA"
+      data-track-location="tail_cta"
+      data-whatsapp-location="tail_cta"
+      data-whatsapp-text="Hola, quisiera saber más sobre adopción"
+    >
+      Escríbenos por WhatsApp
+    </a>
+  </div>
+</section>

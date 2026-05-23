@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
+import NotFoundLinks from "../components/sections/NotFoundLinks.astro";
 ---
 
 <BaseLayout
@@ -17,17 +18,7 @@ import PageHero from "../components/PageHero.astro";
       h1="No encontramos esta página"
       lead="Puede que el enlace esté roto o que el contenido se haya movido. Te dejamos algunas rutas para seguir."
     />
-    <section class="section-padding">
-      <div class="container container--narrow">
-        <ul class="requisitos-list">
-          <li><a href="/">Volver al inicio</a></li>
-          <li><a href="/adoptar/">Ver galgos en adopción</a></li>
-          <li><a href="/hogar-temporal/">Postular a hogar temporal</a></li>
-          <li><a href="/donar/">Apoyar el rescate</a></li>
-          <li><a href="/contacto/">Escribirnos</a></li>
-        </ul>
-      </div>
-    </section>
+    <NotFoundLinks />
   </main>
   <Footer />
 </BaseLayout>

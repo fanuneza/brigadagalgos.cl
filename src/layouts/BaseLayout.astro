@@ -5,6 +5,7 @@ import { ClientRouter } from "astro:transitions";
 import barlow700 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url";
 import barlow900 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-900-normal.woff2?url";
 import StructuredData from "../components/StructuredData.astro";
+import CookieBanner from "../components/sections/CookieBanner.astro";
 
 interface Props {
   title: string;
@@ -91,20 +92,7 @@ const logoUrl = new URL(SITE.logoPath, siteUrl).href;
     }
     <a href="#main-content" class="skip-to-content">Saltar al contenido</a>
     <slot />
-    <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
-      <div class="cookie-banner__inner container">
-        <p class="cookie-banner__text">
-          Usamos cookies de analítica para entender cómo se usa el sitio y mejorarlo. Puedes aceptar o rechazar su uso. <a
-            href="/politica-de-cookies/"
-            class="cookie-banner__link">Política de cookies</a
-          >
-        </p>
-        <div class="cookie-banner__actions">
-          <button class="btn btn--primary cookie-banner__button" id="cookie-accept" type="button">Aceptar</button>
-          <button class="btn btn--ghost cookie-banner__button" id="cookie-reject" type="button">Rechazar</button>
-        </div>
-      </div>
-    </div>
+    <CookieBanner />
   </body>
 </html>
 

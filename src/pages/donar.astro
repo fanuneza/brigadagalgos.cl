@@ -1,12 +1,13 @@
 ---
 import "../styles/components/page-hero.css";
-import "../styles/components/donar.css";
-import "../styles/components/toast.css";
-import { SITE } from "../config/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
+import DonationCards from "../components/sections/DonationCards.astro";
+import ImpactSection from "../components/sections/ImpactSection.astro";
+import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
+import HelpTailCta from "../components/sections/HelpTailCta.astro";
 ---
 
 <BaseLayout
@@ -22,200 +23,10 @@ import PageHero from "../components/PageHero.astro";
       leadBold="Cada aporte suma para que podamos responder mejor a los casos que llegan por redes y WhatsApp."
     />
 
-    <section class="section-padding">
-      <div class="container">
-        <div class="donation-cards">
-          <div class="donation-card donation-card--transferencia" id="datos-transferencia">
-            <span class="chip chip--recommended">Recomendado</span>
-            <p class="donation-card__heading">TRANSFERENCIA ÚNICA</p>
-            <p class="donation-card__subtitle">O transferencia recurrente, si lo prefieres.</p>
-            <div class="bank-info">
-              <button
-                type="button"
-                class="bank-info__row"
-                data-copy-value="Fundación Brigada Galgos"
-                aria-label="Copiar nombre: Fundación Brigada Galgos"
-              >
-                <span class="bank-info__label">Nombre</span>
-                <span class="bank-info__value">Fundación Brigada Galgos</span>
-              </button>
-              <button
-                type="button"
-                class="bank-info__row"
-                data-copy-value="65.132.425-4"
-                aria-label="Copiar RUT: 65.132.425-4"
-              >
-                <span class="bank-info__label">RUT</span>
-                <span class="bank-info__value">65.132.425-4</span>
-              </button>
-              <button
-                type="button"
-                class="bank-info__row"
-                data-copy-value="Mercado Pago"
-                aria-label="Copiar banco: Mercado Pago"
-              >
-                <span class="bank-info__label">Banco</span>
-                <span class="bank-info__value">Mercado Pago</span>
-              </button>
-              <button
-                type="button"
-                class="bank-info__row"
-                data-copy-value="Cuenta Vista"
-                aria-label="Copiar tipo de cuenta: Cuenta Vista"
-              >
-                <span class="bank-info__label">Tipo de cuenta</span>
-                <span class="bank-info__value">Cuenta Vista</span>
-              </button>
-              <button
-                type="button"
-                class="bank-info__row"
-                data-copy-value="1073480715"
-                aria-label="Copiar número de cuenta: 1073480715"
-              >
-                <span class="bank-info__label">Número de cuenta</span>
-                <span class="bank-info__value">1073480715</span>
-              </button>
-              <button
-                type="button"
-                class="bank-info__row"
-                data-copy-value={SITE.email}
-                aria-label={`Copiar email: ${SITE.email}`}
-              >
-                <span class="bank-info__label">Email</span>
-                <span class="bank-info__value">{SITE.email}</span>
-              </button>
-            </div>
-            <button
-              type="button"
-              class="btn btn--secondary"
-              id="copy-bank-data"
-              aria-label="Copiar todos los datos bancarios"
-            >
-              Copiar datos
-            </button>
-            <div class="bank-info__live" data-copy-live aria-live="polite" aria-atomic="true"></div>
-            <p class="donation-card__info">
-              Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una
-              vez.
-            </p>
-          </div>
-
-          <div class="donation-card donation-card--mensual">
-            <p class="donation-card__heading">DONAR MENSUAL</p>
-            <p>
-              Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y
-              acogidas.
-            </p>
-            <p>
-              Es una forma simple de acompañar el trabajo continuo de la fundación y dar más estabilidad a cada caso.
-            </p>
-            <a
-              href={SITE.esponsor}
-              class="btn btn--primary"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track-event="donation_esponsor_click"
-              data-track-label="Quiero donar en eSponsor"
-              data-track-location="donation_card"
-              data-donation-location="donation_card"
-            >
-              Quiero donar en eSponsor
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding">
-      <div class="container container--narrow">
-        <p class="eyebrow">QUÉ HACE TU APORTE</p>
-        <h2>En qué se transforma tu ayuda</h2>
-        <div class="impact-cards">
-          <div class="impact-card">
-            <p class="impact-card__title">Atención veterinaria</p>
-            <p class="impact-card__desc">
-              Consultas, tratamientos, controles y lo que cada caso necesite para recuperarse.
-            </p>
-          </div>
-          <div class="impact-card">
-            <p class="impact-card__title">Alimento y abrigo</p>
-            <p class="impact-card__desc">
-              Comida, camas, mantas e insumos para que cada galgo pase su recuperación seguro.
-            </p>
-          </div>
-          <div class="impact-card">
-            <p class="impact-card__title">Traslados seguros</p>
-            <p class="impact-card__desc">
-              Movilización para rescates, controles veterinarios y cambios hacia hogares temporales o definitivos.
-            </p>
-          </div>
-          <div class="impact-card">
-            <p class="impact-card__title">Implementos de rescate</p>
-            <p class="impact-card__desc">
-              Correas, arneses, chapitas y apoyo material para hogares temporales cuando hace falta.
-            </p>
-          </div>
-          <div class="impact-card">
-            <p class="impact-card__title">Difusión y adopción</p>
-            <p class="impact-card__desc">
-              Publicación de casos, seguimiento y búsqueda activa de la familia adecuada para cada galgo.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding trust-stats">
-      <div class="container">
-        <p class="eyebrow">COMPROMISO</p>
-        <h2>Lo que sostiene tu apoyo</h2>
-        <div class="trust-stats__grid">
-          <div class="stat-card">
-            <div class="stat-card__value stat-card__value--cyan" aria-hidden="true"></div>
-            <p class="stat-card__label">Veterinaria integral</p>
-            <p class="stat-card__body">La fundación prioriza atención veterinaria completa, no solo lo básico.</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card__value stat-card__value--magenta" aria-hidden="true"></div>
-            <p class="stat-card__label">Acompañamiento real</p>
-            <p class="stat-card__body">
-              Acompañamos a adoptantes y hogares temporales para que cada proceso resulte bien.
-            </p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card__value stat-card__value--orange" aria-hidden="true"></div>
-            <p class="stat-card__label">Match responsable</p>
-            <p class="stat-card__body">
-              Buscamos la mejor familia para cada galgo, sin importar edad, sexo o nivel de energía.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding tail-cta">
-      <div class="container container--narrow">
-        <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
-        <h2>Más formas de colaborar</h2>
-        <ul class="requisitos-list">
-          <li>Dona comida, mantas o medicamentos.</li>
-          <li>Ofrece servicios: veterinario, transporte, fotografía.</li>
-          <li>Comparte las adopciones en tus redes sociales.</li>
-        </ul>
-        <a
-          href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
-          class="btn btn--secondary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Coordina por WhatsApp
-        </a>
-      </div>
-    </section>
+    <DonationCards />
+    <ImpactSection />
+    <TrustStatsSection />
+    <HelpTailCta />
   </main>
   <Footer />
 </BaseLayout>
-
-<script>
-  import "../scripts/copy-data";
-</script>

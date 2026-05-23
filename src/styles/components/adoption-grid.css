@@ -1,0 +1,45 @@
+.dog-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .dog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dog-grid__count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.dog-grid__empty {
+  text-align: center;
+  padding-block: var(--space-9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.adoption-card .story-card__slide {
+  cursor: zoom-in;
+}
+
+.adoption-card .story-card__body {
+  gap: var(--space-3);
+}
+
+.dog-grid__support-note {
+  margin-top: var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

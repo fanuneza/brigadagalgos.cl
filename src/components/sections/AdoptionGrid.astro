@@ -1,0 +1,139 @@
+---
+import { SITE } from "../../config/site.ts";
+import type { SharedGalleryPhoto } from "../../scripts/shared-gallery";
+import SharedPhotoGallery from "../SharedPhotoGallery.astro";
+import { getInstagramHandleLabel } from "../../utils/instagram";
+import filterChipsCss from "../../styles/components/filter-chips.css?raw";
+import adoptionGridCss from "../../styles/components/adoption-grid.css?raw";
+
+interface Dog {
+  id: string;
+  name: string;
+  sex: string;
+  age: string;
+  weight: string;
+  details: string;
+  instagramUrl?: string;
+  pictures: SharedGalleryPhoto[];
+}
+
+interface Props {
+  dogs: Dog[];
+}
+
+const { dogs } = Astro.props;
+
+function getAgeType(age: string) {
+  return /cachor/i.test(age) ? "cachorro" : "adulto";
+}
+
+const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
+---
+
+<style is:inline set:html={filterChipsCss}></style>
+<style is:inline set:html={adoptionGridCss}></style>
+
+<div class="filter-chips" role="group" aria-label="Filtrar galgos">
+  <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>
+  <button class="chip-btn" data-filter="Macho" aria-pressed="false">Macho</button>
+  <button class="chip-btn" data-filter="Hembra" aria-pressed="false">Hembra</button>
+  <button class="chip-btn" data-filter="adulto" aria-pressed="false">Adultos</button>
+  <button class="chip-btn" data-filter="cachorro" aria-pressed="false">Cachorros</button>
+</div>
+
+<p class="dog-grid__count" aria-live="polite">
+  <span data-count>{dogs.length}</span>
+  <span data-count-label>{dogs.length === 1 ? "galgo disponible" : "galgos disponibles"}</span>
+</p>
+
+<div class="dog-grid" data-dog-grid>
+  {
+    dogs.map((dog) => {
+      const ageType = getAgeType(dog.age);
+
+      return (
+        <article
+          class="story-card dog-card adoption-card"
+          data-adoption-card
+          data-sex={dog.sex}
+          data-age-type={ageType}
+        >
+          <SharedPhotoGallery name={dog.name} photos={dog.pictures} />
+
+          <div class="story-card__body dog-card__body">
+            <div class="dog-card__header">
+              <h2 class="story-card__name dog-card__name">{dog.name}</h2>
+              <div class="dog-card__chips">
+                <span class="chip chip--sex">{dog.sex}</span>
+                <span class="chip chip--age">{dog.age}</span>
+                <span class="chip chip--weight">{dog.weight}</span>
+              </div>
+            </div>
+            <p class="dog-card__details">{dog.details}</p>
+            {dog.instagramUrl && (
+              <a
+                href={dog.instagramUrl}
+                class="dog-social-link"
+                aria-label={`Seguir a ${dog.name} en Instagram`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-external-indicator="off"
+                data-track-event="social_click"
+                data-track-category="instagram"
+                data-track-outbound="true"
+                data-social-platform="instagram"
+                data-dog-name={dog.name}
+                data-track-location="dog_card"
+                data-track-destination={dog.instagramUrl}
+              >
+                <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+              </a>
+            )}
+            <a
+              href={formHref}
+              class="btn btn--primary dog-card__cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-event="dog_interest_click"
+              data-track-label={`Me interesa ${dog.name}`}
+              data-track-location="dog_card"
+              data-dog-name={dog.name}
+              data-application-form-url={formHref}
+            >
+              Me interesa {dog.name}
+            </a>
+          </div>
+        </article>
+      );
+    })
+  }
+</div>
+
+<p class="dog-grid__support-note">
+  Seguimos acompañándote también después de la adopción, para que el proceso sea bueno para tu familia y para el galgo.
+</p>
+
+<div class="dog-grid__empty" hidden aria-hidden="true">
+  <p>
+    Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando llegue un match para tu hogar.
+  </p>
+  <a
+    href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera adoptar un galgo")}`}
+    class="btn btn--primary"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-track-event="whatsapp_click"
+    data-track-label="Escríbenos por WhatsApp - Adoption Empty Grid"
+    data-track-location="dog_grid_empty"
+    data-whatsapp-location="dog_grid_empty"
+    data-whatsapp-text="Hola, quisiera adoptar un galgo"
+  >
+    Escríbenos por WhatsApp
+  </a>
+</div>
+
+<script>
+  import "../../scripts/filter-chips";
+  import "../../scripts/init-shared-gallery";
+</script>

@@ -1,0 +1,11 @@
+.adoption-process__lead {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
+.adoption-process__list {
+  margin: var(--space-5) 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: var(--space-3);
+}

@@ -1,0 +1,39 @@
+.impact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.impact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  gap: var(--space-5);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+}
+
+.impact-card__title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--font-size-lg);
+  color: var(--color-primary-700);
+  white-space: normal;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.impact-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: var(--line-base);
+}
+
+@media (max-width: 767px) {
+  .impact-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}

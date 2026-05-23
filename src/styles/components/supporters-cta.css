@@ -1,0 +1,15 @@
+.supporters-cta {
+  text-align: center;
+}
+
+.supporters-cta .container--narrow {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+}
+
+.supporters-cta__lead {
+  max-width: 62ch;
+  color: var(--color-text-muted);
+  margin: 0;
+}

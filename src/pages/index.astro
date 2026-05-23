@@ -9,6 +9,7 @@ import HelpCards from "../components/HelpCards.astro";
 import ProcessStepper from "../components/ProcessStepper.astro";
 import StoriesSection from "../components/StoriesSection.astro";
 import DonationBanner from "../components/DonationBanner.astro";
+import WhyGalgosSection from "../components/sections/WhyGalgosSection.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
@@ -69,36 +70,9 @@ const storyDogs = await Promise.all(
     <RainbowDivider />
     <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
     <MissionSection />
-    <section class="section-padding" data-track-section="why_galgos">
-      <div class="container container--narrow">
-        <p class="eyebrow">POR QUÉ UN GALGO</p>
-        <h2 class="section-heading">Razones que te van a conquistar</h2>
-        <ul class="requisitos-list">
-          <li>Son tranquilos en casa y se adaptan bien a departamentos.</li>
-          <li>Con dos caminatas al día están felices.</li>
-          <li>Agradecen profundamente y se convierten en el corazón silencioso de la familia.</li>
-          <li>La mayoría se lleva bien con niños y otros animales con una presentación adecuada.</li>
-          <li>Rompen muchos mitos: pueden ser compañeros serenos, sensibles y muy nobles.</li>
-        </ul>
-        <p class="section-body">
-          También los elegimos porque vemos de cerca el abandono, el abuso y la explotación que viven demasiados galgos
-          en Chile.
-        </p>
-        <a
-          href="/por-que-galgos/"
-          class="btn btn--secondary home-why-galgo__cta"
-          data-track-event="cta_click"
-          data-track-label="Leer por qué galgos"
-          data-track-location="why_galgos"
-          data-track-destination="/por-que-galgos/"
-          data-track-category="education"
-        >
-          Leer por qué galgos
-        </a>
-      </div>
-    </section>
-    <HelpCards />
+    <WhyGalgosSection />
     <ProcessStepper steps={rescueSteps} />
+    <HelpCards />
     <DonationBanner />
   </main>
   <Footer />

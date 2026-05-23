@@ -1,4 +1,6 @@
 ---
+import requirementCardCss from "../styles/components/requirement-card.css?raw";
+
 interface Props {
   icon: string;
   title: string;
@@ -8,6 +10,8 @@ interface Props {
 
 const { icon, title, body, tone = "primary" } = Astro.props;
 ---
+
+<style is:inline set:html={requirementCardCss}></style>
 
 <article class="req-card">
   <span class={`req-card__icon req-card__icon--${tone}`} aria-hidden="true">

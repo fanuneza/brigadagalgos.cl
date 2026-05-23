@@ -1,15 +1,13 @@
 ---
 import "../styles/components/page-hero.css";
 import "../styles/components/stepper.css";
-import "../styles/components/form.css";
-import "../styles/components/hogar-temporal.css";
-import { SITE } from "../config/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
-import RequirementCard from "../components/RequirementCard.astro";
 import ProcessStepper from "../components/ProcessStepper.astro";
+import FosterRequirements from "../components/sections/FosterRequirements.astro";
+import FosterPostular from "../components/sections/FosterPostular.astro";
 
 const fosterSteps = [
   {
@@ -51,96 +49,9 @@ const fosterSteps = [
       ctaVariant="primary"
     />
 
-    <section class="section-padding">
-      <div class="container">
-        <p class="eyebrow">QUÉ SE EVALÚA</p>
-        <h2>Lo revisamos contigo antes de asignar un galgo</h2>
-        <div class="req-cards">
-          <RequirementCard
-            icon="/icons/seguridad.svg"
-            title="SEGURIDAD"
-            tone="primary"
-            body="En departamentos debe haber malla en balcones y ventanas. También revisamos cómo será cada salida y cada espacio de descanso."
-          />
-          <RequirementCard
-            icon="/icons/tiempo.svg"
-            title="TIEMPO"
-            tone="secondary"
-            body="Tu disponibilidad puede ser desde un día hasta semanas o meses. Lo importante es saber con qué tiempo real cuentas para acompañarlo."
-          />
-          <RequirementCard
-            icon="/icons/convivencia.svg"
-            title="CONVIVENCIA E IMPLEMENTOS"
-            tone="warm"
-            body="Vemos si tienes correa, arnés, camas o mantas, y cómo conviven perros o gatos en casa. Si falta algo, la fundación puede proveer implementos."
-          />
-        </div>
-        <p class="requirements__note">
-          Si ya viven otros animales contigo, revisamos vacunas al día, esterilización o castración, edades, carácter y
-          convivencia con machos o hembras.
-        </p>
-        <p class="requirements__note">
-          Si hay gatos, necesitamos que tengan un espacio seguro en altura y saber cómo conviven con perros.
-        </p>
-        <p class="requirements__note">
-          <strong>Nunca se debe soltar al galgo.</strong> Los paseos siempre deben ser con arnés, correa y chapita con número
-          de teléfono, porque pueden asustarse fácilmente y correr muy rápido.
-        </p>
-      </div>
-
-      <ProcessStepper steps={fosterSteps} eyebrow="EL PROCESO" heading="Así funciona el acogimiento" />
-
-      <section id="form" class="section-padding">
-        <div class="container container--narrow">
-          <p class="eyebrow">POSTULAR</p>
-          <h2>Completa tu postulación</h2>
-
-          <div class="foster-cta">
-            <p>
-              Usamos un formulario de Google donde nos cuentas tu disponibilidad, tu casa, quiénes viven contigo y tu
-              experiencia con perros. Con eso revisamos tu postulación y te contactamos por WhatsApp en poco tiempo.
-            </p>
-            <p>
-              Brigada cubre la atención veterinaria, vacunas, antiparasitarios y alimentación. Tú aportas un espacio
-              seguro, caminatas diarias y paciencia.
-            </p>
-            <a
-              href="https://forms.gle/3YHPo8KKnCiySbCo6"
-              class="btn btn--primary"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track-event="foster_apply_click"
-              data-track-label="Postula aquí - Foster Application"
-              data-track-location="foster_cta"
-              data-application-form-url="https://forms.gle/3YHPo8KKnCiySbCo6"
-            >
-              Postula aquí
-            </a>
-            <p class="foster-cta__fallback">
-              ¿Prefieres hablar primero?
-              <a
-                href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera ser hogar temporal")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-track-event="whatsapp_click"
-                data-track-label="Escríbenos directo por WhatsApp - Foster Fallback"
-                data-track-location="foster_cta"
-                data-whatsapp-location="foster_cta"
-                data-whatsapp-text="Hola, quisiera ser hogar temporal"
-              >
-                Escríbenos directo por WhatsApp
-              </a>
-            </p>
-          </div>
-        </div>
-      </section>
-    </section>
+    <FosterRequirements />
+    <ProcessStepper steps={fosterSteps} eyebrow="EL PROCESO" heading="Así funciona el acogimiento" />
+    <FosterPostular />
     <Footer />
   </main>
-
-  <style>
-    .requirements__note {
-      margin-top: var(--space-3);
-    }
-  </style>
 </BaseLayout>

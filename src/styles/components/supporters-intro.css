@@ -1,0 +1,11 @@
+.supporters-intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.supporters-intro__lead {
+  max-width: 62ch;
+  color: var(--color-text-muted);
+  margin: 0;
+}

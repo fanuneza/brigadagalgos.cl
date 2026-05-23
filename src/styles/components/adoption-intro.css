@@ -1,0 +1,10 @@
+.adoption-intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.adoption-intro__lead {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}

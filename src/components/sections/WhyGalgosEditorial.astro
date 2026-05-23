@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import pragaImage from "../../assets/casos/exito/praga/praga-02.jpg";
+import leoImage from "../../assets/casos/exito/leo/leo-01.jpg";
+import antoniaImage from "../../assets/casos/exito/antonia/antonia-01.jpg";
+---
+
+<section class="why-galgos__image-section">
+  <div class="container container--narrow">
+    <div class="why-galgos__image-shell">
+      <Image
+        src={pragaImage}
+        alt="Praga, una galga rescatada por Brigada Galgos"
+        class="why-galgos__image"
+        widths={[400, 600, 800]}
+        sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container container--narrow why-galgos__flow">
+    <div class="why-galgos__block">
+      <p class="eyebrow">POR QUÉ ELLOS</p>
+      <h2>No es casualidad que tantos lleguen maltratados</h2>
+      <div class="why-galgos__prose">
+        <p>
+          Muchos de los galgos que recibimos vienen de abandono, abuso y explotación para carreras o cacería. A veces
+          aparecen fracturados. A veces llegan famélicos. A veces solo vemos en ellos ese miedo tan particular de los
+          perros que han aprendido a sobrevivir sin poder bajar la guardia.
+        </p>
+        <p>
+          Por eso esta fundación trabaja específicamente con galgos. Porque no basta con sacarlos de peligro. Hay que
+          entender sus tiempos, leer su sensibilidad y acompañarlos hasta que vuelvan a sentirse seguros en una casa.
+          Cuando decimos que rescatamos, rehabilitamos y reubicamos, hablamos de sostener casos difíciles hasta
+          encontrar el hogar correcto.
+        </p>
+      </div>
+    </div>
+
+    <div class="why-galgos__image-shell">
+      <Image
+        src={leoImage}
+        alt="Leo, un galgo rescatado por Brigada Galgos"
+        class="why-galgos__image"
+        widths={[400, 600, 800]}
+        sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
+      />
+    </div>
+
+    <div class="why-galgos__block">
+      <h2>No son perros difíciles</h2>
+      <div class="why-galgos__prose">
+        <p>
+          En la vida diaria suelen ser perros tranquilos, incluso en espacios más acotados de lo que mucha gente
+          imagina. Lo importante no es tener una casa enorme, sino ofrecer una rutina clara, salidas seguras y una
+          familia dispuesta a leer su ritmo sin apurarlos.
+        </p>
+        <p>
+          Muchos llegan asustados, no "malos" ni "incontrolables". Con paciencia y estructura, suelen mostrar muy rápido
+          lo que son de verdad: perros serenos, sensibles, leales y profundamente agradecidos cuando al fin entienden
+          que ya no tienen que defenderse de todo.
+        </p>
+      </div>
+
+      <ul class="why-galgos__editorial-list">
+        <li>Rescatamos cuando un galgo ya no puede seguir sobreviviendo en su situación actual.</li>
+        <li>Estabilizamos con atención veterinaria, descanso y tiempo real de recuperación.</li>
+        <li>Acogemos en hogares temporales para conocer sus miedos, su energía y su convivencia.</li>
+        <li>Buscamos el match correcto para que la adopción sea buena para el galgo y para su familia.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="why-galgos__between-sections">
+  <div class="container container--narrow">
+    <div class="why-galgos__image-shell why-galgos__image-shell--rotated">
+      <div class="why-galgos__image-stage why-galgos__image-stage--rotated">
+        <Image
+          src={antoniaImage}
+          alt="Antonia, una galga rescatada por Brigada Galgos"
+          class="why-galgos__image why-galgos__image--rotated"
+          widths={[400, 600, 800]}
+          sizes="(min-width: 1024px) 664px, calc(100vw - 3rem)"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding why-galgos__section-top-tight">
+  <div class="container container--narrow why-galgos__flow">
+    <div class="why-galgos__block">
+      <p class="eyebrow">CÓMO ES VIVIR CON UNO</p>
+      <h2>La vida con un galgo tiene algo muy especial</h2>
+      <div class="why-galgos__prose">
+        <p>
+          Cuando el entorno es seguro, muchos aprenden rápido lo que es una cama, una caminata y una vida sin miedo.
+          Descansan mucho, observan más de lo que aparentan y suelen convertirse en una presencia tranquila dentro de la
+          casa.
+        </p>
+        <p>
+          También hay cosas concretas que importan: nunca se sueltan en paseo, necesitan una adaptación cuidada y
+          agradecen vínculos pacientes. Pero justamente ahí está buena parte de lo que hace valiosa la experiencia: ver
+          cómo un perro que llegó en alerta empieza a descansar de verdad y a confiar.
+        </p>
+      </div>
+
+      <ul class="why-galgos__inline-points">
+        <li>Se adaptan mejor de lo que su fama sugiere.</li>
+        <li>En casa suelen ser más serenos que ruidosos.</li>
+        <li>Su recuperación cambia también a la familia que los recibe.</li>
+      </ul>
+    </div>
+  </div>
+</section>

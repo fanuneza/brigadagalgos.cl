@@ -1,0 +1,73 @@
+---
+import formCss from "../../styles/components/form.css?raw";
+---
+
+<style is:inline set:html={formCss}></style>
+
+<section class="section-padding">
+  <div class="container container--narrow">
+    <p class="eyebrow">ESCRÍBENOS</p>
+    <h2>O mándanos un mensaje</h2>
+
+    <form class="form" data-form id="contact-form" novalidate>
+      <input type="hidden" name="access_key" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
+      <input type="hidden" name="form_id" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
+      <input type="hidden" name="subject" value="Nuevo mensaje desde brigadagalgos.cl" />
+      <input
+        type="checkbox"
+        name="botcheck"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+        class="form__honeypot"
+      />
+
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
+      </div>
+
+      <div class="field">
+        <label for="asunto">Asunto</label>
+        <select id="asunto" name="asunto" required>
+          <option value="">Selecciona el asunto</option>
+          <option value="Adopción">Adopción</option>
+          <option value="Hogar temporal">Hogar temporal</option>
+          <option value="Donar">Donar</option>
+          <option value="Prensa">Prensa</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+      </div>
+
+      <div class="field field--checkbox">
+        <input type="checkbox" id="consent" name="consent" required />
+        <label for="consent">Acepto que respondan a este email.</label>
+      </div>
+
+      <button type="submit" class="btn btn--primary form__submit">
+        <span class="form__submit-label">Enviar mensaje</span>
+        <span class="form__submit-spinner" hidden aria-hidden="true">Enviando…</span>
+      </button>
+    </form>
+
+    <div class="form__success" hidden data-form-success id="contact-success">
+      <p class="form__success-title">¡Recibimos tu mensaje!</p>
+      <p>Te respondemos pronto a tu email.</p>
+      <a href="/" class="btn btn--secondary" data-astro-prefetch>Volver al inicio</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "../../scripts/form";
+</script>
