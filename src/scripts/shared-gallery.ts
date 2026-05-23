@@ -84,14 +84,38 @@ function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string) {
   `;
 }
 
-function createSlide(item: SharedGalleryItem, photo: SharedGalleryPhoto, index: number, total: number) {
+function createSlide(
+  item: SharedGalleryItem,
+  photo: SharedGalleryPhoto,
+  index: number,
+  total: number,
+  renderImage: boolean
+) {
   const slide = document.createElement("button");
   slide.type = "button";
   slide.className = "story-card__slide";
   slide.setAttribute("aria-label", `Abrir foto ${index + 1} de ${total} de ${item.name}`);
   slide.dataset.photoIndex = String(index);
-  slide.innerHTML = buildPictureMarkup(photo, getPhotoAlt(item, index));
+  if (renderImage) {
+    slide.innerHTML = buildPictureMarkup(photo, getPhotoAlt(item, index));
+    slide.dataset.imageLoaded = "true";
+  }
   return slide;
+}
+
+function ensureSlideImage(slide: HTMLElement, item: SharedGalleryItem) {
+  if (slide.dataset.imageLoaded === "true") {
+    return;
+  }
+
+  const index = Number(slide.dataset.photoIndex);
+  const photo = item.photos[index];
+  if (!photo) {
+    return;
+  }
+
+  slide.innerHTML = buildPictureMarkup(photo, getPhotoAlt(item, index));
+  slide.dataset.imageLoaded = "true";
 }
 
 function buildDots(container: HTMLElement, item: SharedGalleryItem, onSelect: (index: number) => void) {
@@ -281,7 +305,8 @@ export function initSharedGalleries(scope: ParentNode = document) {
             : renderIndex - 1
         : renderIndex;
 
-      return createSlide(item, photo, realIndex, total);
+      const isInitialSlide = hasGallery ? renderIndex === 1 : renderIndex === 0;
+      return createSlide(item, photo, realIndex, total, isInitialSlide);
     });
 
     track.replaceChildren(...slides);
@@ -297,6 +322,7 @@ export function initSharedGalleries(scope: ParentNode = document) {
 
     function setTrackPosition(animate: boolean) {
       const offsetIndex = hasGallery ? activeIndex + 1 : activeIndex;
+      ensureSlideImage(slides[offsetIndex], galleryItem);
       track!.style.transition = animate ? "transform var(--duration-base) var(--ease-in-out)" : "none";
       track!.style.transform = `translateX(-${offsetIndex * 100}%)`;
       syncDots();
