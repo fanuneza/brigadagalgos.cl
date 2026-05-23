@@ -67,6 +67,7 @@ const storyDogs = await Promise.all(
   <main id="main-content">
     <Hero />
     <RainbowDivider />
+    <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
     <MissionSection />
     <section class="section-padding" data-track-section="why_galgos">
       <div class="container container--narrow">
@@ -98,7 +99,6 @@ const storyDogs = await Promise.all(
     </section>
     <HelpCards />
     <ProcessStepper steps={rescueSteps} />
-    <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
     <DonationBanner />
   </main>
   <Footer />
