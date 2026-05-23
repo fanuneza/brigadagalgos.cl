@@ -23,20 +23,15 @@
 }
 
 .donation-banner h2 {
-  font-size: var(--font-size-2xl);
   color: var(--color-text-on-dark);
   margin-bottom: var(--space-3);
-}
-@media (min-width: 1024px) {
-  .donation-banner h2 {
-    font-size: var(--font-size-3xl);
-  }
 }
 
 /* 18px + weight 500 — minimum for AA on magenta background */
 .donation-banner p {
-  font-size: var(--font-size-md);
+  font-size: var(--type-lead);
   font-weight: var(--weight-medium);
+  line-height: var(--line-base);
   margin: 0;
 }
 
@@ -53,7 +48,7 @@
 }
 
 .donation-banner__transfer {
-  font-size: var(--font-size-md);
+  font-size: var(--type-lead);
   font-weight: var(--weight-medium);
 }
 .donation-banner__transfer a {

@@ -62,9 +62,6 @@
 .why-galgos__cases-lead,
 .why-galgos__cta p {
   margin: 0;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-md);
-  line-height: var(--line-loose);
 }
 
 .why-galgos__editorial-list,
@@ -80,9 +77,6 @@
 .why-galgos__inline-points li {
   position: relative;
   padding-left: calc(var(--space-4) + 0.35rem);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-md);
-  line-height: var(--line-loose);
 }
 
 .why-galgos__editorial-list li::before,

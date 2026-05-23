@@ -50,16 +50,12 @@
 
 .req-card__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-md);
   font-weight: var(--weight-black);
   text-transform: uppercase;
   margin: 0;
 }
 
 .req-card__body {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  line-height: var(--line-base);
   margin: 0;
 }
 

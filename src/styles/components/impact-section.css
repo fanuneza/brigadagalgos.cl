@@ -17,18 +17,14 @@
 .impact-card__title {
   font-family: var(--font-display);
   font-weight: var(--weight-black);
-  font-size: var(--font-size-lg);
   color: var(--color-primary-700);
   white-space: normal;
   margin: 0;
-  line-height: 1.2;
+  line-height: var(--line-snug);
 }
 
 .impact-card__desc {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
   margin: 0;
-  line-height: var(--line-base);
 }
 
 @media (max-width: 767px) {

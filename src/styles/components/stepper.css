@@ -1,12 +1,5 @@
 .stepper__heading {
-  font-size: var(--font-size-2xl);
   margin-bottom: var(--space-9);
-}
-
-@media (min-width: 1024px) {
-  .stepper__heading {
-    font-size: var(--font-size-3xl);
-  }
 }
 
 .stepper {
@@ -82,7 +75,6 @@
 
 .step__label {
   font-family: var(--font-display);
-  font-size: var(--font-size-md);
   font-weight: var(--weight-semi);
   text-transform: uppercase;
   line-height: var(--line-tight);
@@ -91,9 +83,6 @@
 }
 
 .step__sub {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  line-height: var(--line-base);
   margin: 0;
 }
 

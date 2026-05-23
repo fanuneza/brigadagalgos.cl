@@ -16,7 +16,7 @@
 }
 
 .cookie-policy__section h2 {
-  font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+  font-size: var(--type-subsection-title);
 }
 
 .cookie-policy__prose {
@@ -27,7 +27,7 @@
 
 .cookie-policy__prose p {
   color: var(--color-text-muted);
-  font-size: var(--font-size-md);
+  font-size: var(--type-lead);
   line-height: var(--line-loose);
 }
 
@@ -97,10 +97,6 @@
 @media (max-width: 767px) {
   .cookie-policy__section h2 {
     max-width: 12ch;
-  }
-
-  .cookie-policy__prose p {
-    font-size: var(--font-size-base);
   }
 
   .cookie-policy__table-shell {

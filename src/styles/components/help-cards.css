@@ -7,14 +7,7 @@
 }
 
 .help-cards__heading {
-  font-size: var(--font-size-2xl);
   margin: 0;
-}
-
-@media (min-width: 1024px) {
-  .help-cards__heading {
-    font-size: var(--font-size-3xl);
-  }
 }
 
 .help-cards__grid {
@@ -66,7 +59,6 @@
 
 .card__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-lg);
   font-weight: var(--weight-black);
   text-transform: uppercase;
   color: var(--color-text);
@@ -74,9 +66,6 @@
 }
 
 .card__desc {
-  font-size: var(--font-size-base);
-  color: var(--color-text-muted);
-  line-height: var(--line-base);
   margin: 0;
   flex: 1;
 }

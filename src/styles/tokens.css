@@ -89,6 +89,18 @@
   --font-size-3xl: 3rem; /* 48 — hero h1 (mobile) */
   --font-size-4xl: 4.25rem; /* 68 — hero h1 (desktop) */
 
+  /* Semantic type roles */
+  --type-page-title: clamp(var(--font-size-3xl), 8vw, var(--font-size-4xl));
+  --type-section-title: clamp(var(--font-size-2xl), 5vw, var(--font-size-3xl));
+  --type-subsection-title: var(--font-size-2xl);
+  --type-card-title: var(--font-size-lg);
+  --type-ui-title: var(--font-size-md);
+  --type-lead: var(--font-size-md);
+  --type-lead-strong: var(--font-size-lg);
+  --type-body: var(--font-size-base);
+  --type-body-small: var(--font-size-sm);
+  --type-meta: var(--font-size-xs);
+
   /* Line heights */
   --line-tight: 1.05; /* display */
   --line-snug: 1.25; /* headings */

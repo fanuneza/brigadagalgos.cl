@@ -40,6 +40,7 @@ h3 {
   text-transform: uppercase;
   line-height: var(--line-tight);
   font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-normal);
   margin: 0;
 }
 
@@ -60,6 +61,83 @@ h3 {
 
 .section-padding {
   padding-block: var(--space-9);
+}
+
+.hero__text h1,
+.page-hero h1 {
+  font-size: var(--type-page-title);
+}
+
+.section-heading,
+.stories__heading,
+.help-cards__heading,
+.stepper__heading,
+.donation-banner h2 {
+  font-size: var(--type-section-title);
+}
+
+.page-hero__lead,
+.hero__lead,
+.section-body,
+.adoption-intro__lead,
+.adoption-process__lead,
+.supporters-intro__lead,
+.supporters-cta__lead,
+.why-galgos__prose p,
+.why-galgos__cases-lead,
+.why-galgos__cta p,
+.why-galgos__editorial-list li,
+.why-galgos__inline-points li {
+  font-size: var(--type-lead);
+  line-height: var(--line-loose);
+  color: var(--color-text-muted);
+}
+
+.page-hero__lead--bold {
+  font-size: var(--type-lead-strong);
+  line-height: var(--line-snug);
+  color: var(--color-text);
+}
+
+.card__desc,
+.supporter-card__description,
+.donation-card__amounts,
+.donation-card__info,
+.req-card__body,
+.channel-card__body {
+  font-size: var(--type-body);
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
+}
+
+.card__title,
+.dog-card__name,
+.story-card__name,
+.supporter-card__name,
+.donation-card__heading,
+.impact-card__title,
+.form__success-title {
+  font-size: var(--type-card-title);
+}
+
+.req-card__title,
+.channel-card__title,
+.step__label,
+.stat-card__label {
+  font-size: var(--type-ui-title);
+}
+
+.dog-card__personality,
+.dog-card__details,
+.story-card__quote,
+.donation-card__subtitle,
+.impact-card__desc,
+.stat-card__body,
+.channel-card__hours,
+.step__sub {
+  font-size: var(--type-body-small);
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
 }
 
 .btn {

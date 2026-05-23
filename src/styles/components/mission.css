@@ -1,18 +1,8 @@
 .section-heading {
-  font-size: var(--font-size-2xl);
   margin-bottom: var(--space-5);
   color: var(--color-text);
 }
 
 .section-body {
-  font-size: var(--font-size-md);
-  line-height: var(--line-loose);
-  color: var(--color-text-muted);
   margin: 0;
-}
-
-@media (min-width: 1024px) {
-  .section-heading {
-    font-size: var(--font-size-3xl);
-  }
 }
