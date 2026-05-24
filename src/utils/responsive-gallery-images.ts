@@ -6,7 +6,7 @@ const CARD_WIDTHS = [320, 480, 640];
 const CARD_SIZES = "(min-width: 1024px) 350px, (min-width: 768px) calc(50vw - 48px), calc(100vw - 48px)";
 const LIGHTBOX_WIDTH = 1200;
 
-async function buildSrcSet(src: ImageMetadata, format: "avif" | "webp", widths: number[]) {
+export async function buildSrcSet(src: ImageMetadata, format: "avif" | "webp", widths: number[]) {
   const variants = await Promise.all(widths.map((width) => getImage({ src, format, width })));
   return variants.map((variant) => `${variant.src} ${variant.options.width}w`).join(", ");
 }

@@ -1,6 +1,4 @@
-export {};
-
-const CONSENT_ACCEPTED = "accepted";
+import { CONSENT_ACCEPTED, getCookie, ensureDataLayer } from "../utils/analytics";
 
 function getConsentCookieName() {
   return document.documentElement.dataset.consentCookie ?? "site_consent";
@@ -29,16 +27,8 @@ type TrackingWindow = Window & {
   __brigadaAnalyticsBound?: boolean;
 };
 
-declare global {
-  interface Window {
-    dataLayer?: DataLayerEvent[];
-    __brigadaAnalyticsBound?: boolean;
-  }
-
-  interface DocumentEventMap {
-    "brigada:analytics": CustomEvent<AnalyticsDetail>;
-    "brigada:consent-changed": CustomEvent<{ status: ConsentStatus }>;
-  }
+function getTrackingWindow() {
+  return window as unknown as TrackingWindow;
 }
 
 let sectionObserver: IntersectionObserver | null = null;
@@ -47,17 +37,6 @@ let resizeListenerAttached = false;
 let scrollTicking = false;
 const seenSections = new Set<string>();
 const seenScrollMilestones = new Set<number>();
-
-function getTrackingWindow() {
-  return window as unknown as TrackingWindow;
-}
-
-function getCookie(name: string) {
-  return document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(`${name}=`))
-    ?.split("=")[1];
-}
 
 function getConsentStatus(): ConsentStatus {
   const consent = getCookie(getConsentCookieName());
@@ -75,12 +54,6 @@ function getConsentStatus(): ConsentStatus {
 
 function hasAcceptedConsent() {
   return getConsentStatus() === "accepted";
-}
-
-function ensureDataLayer() {
-  const trackingWindow = getTrackingWindow();
-  trackingWindow.dataLayer = trackingWindow.dataLayer ?? [];
-  return trackingWindow.dataLayer;
 }
 
 function getPagePath() {

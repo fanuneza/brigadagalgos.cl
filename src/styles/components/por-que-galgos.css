@@ -116,6 +116,11 @@
   -webkit-line-clamp: 5;
 }
 
+.why-galgos__stories-grid .story-card__quote {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
 .story-card--compact .story-card__control {
   width: 2.1rem;
   height: 2.1rem;

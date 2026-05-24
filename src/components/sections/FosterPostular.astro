@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../../config/site.ts";
+import WhatsAppLink from "../../components/WhatsAppLink.astro";
 import fosterCtaCss from "../../styles/components/hogar-temporal.css?raw";
 ---
 
@@ -33,18 +33,13 @@ import fosterCtaCss from "../../styles/components/hogar-temporal.css?raw";
       </a>
       <p class="foster-cta__fallback">
         ¿Prefieres hablar primero?
-        <a
-          href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera ser hogar temporal")}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-track-event="whatsapp_click"
-          data-track-label="Escríbenos directo por WhatsApp - Foster Fallback"
-          data-track-location="foster_cta"
-          data-whatsapp-location="foster_cta"
-          data-whatsapp-text="Hola, quisiera ser hogar temporal"
+        <WhatsAppLink
+          text="Hola, quisiera ser hogar temporal"
+          location="foster_cta"
+          label="Escríbenos directo por WhatsApp - Foster Fallback"
         >
           Escríbenos directo por WhatsApp
-        </a>
+        </WhatsAppLink>
       </p>
     </div>
   </div>

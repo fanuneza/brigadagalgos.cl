@@ -7,7 +7,6 @@ export const SITE = {
   ogImagePath: "/images/brigada-galgos-og-image.jpg",
   consentCookie: "brigadagalgos_consent",
   gtmContainerId: "GTM-M2RN5B38",
-  gaMeasurementId: "G-97CD3EJYML",
   whatsapp: "https://wa.me/56987076101",
   whatsappPhone: "+56 9 8707 6101",
   email: "contacto@brigadagalgos.cl",

@@ -1,6 +1,5 @@
-export {};
+import { CONSENT_ACCEPTED, getCookie, ensureDataLayer } from "../utils/analytics";
 
-const CONSENT_ACCEPTED = "accepted";
 const CONSENT_REJECTED = "rejected";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 const GTM_SCRIPT_ID = "gtm-script";
@@ -22,13 +21,6 @@ type TrackingWindow = Window & {
 
 function getTrackingWindow() {
   return window as unknown as TrackingWindow;
-}
-
-function getCookie(name: string) {
-  return document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(`${name}=`))
-    ?.split("=")[1];
 }
 
 function setCookie(name: string, value: string) {

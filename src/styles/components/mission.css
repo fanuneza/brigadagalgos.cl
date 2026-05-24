@@ -1,8 +1,8 @@
+.mission__eyebrow {
+  margin-bottom: var(--space-3);
+}
+
 .section-heading {
   margin-bottom: var(--space-5);
   color: var(--color-text);
-}
-
-.section-body {
-  margin: 0;
 }

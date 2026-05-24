@@ -29,8 +29,6 @@
 
   /* Tertiary palette (rainbow set — for illustration accents, dividers,
      dog-card chips, never for body text or large fills) */
-  --color-rainbow-red: #e53935;
-  --color-rainbow-yellow: #fdd835;
   --color-rainbow-green: #43a047;
   --color-rainbow-purple: #8e24aa;
 
@@ -64,7 +62,6 @@
   --color-success: #2e7d32;
   --color-warning: #ed8936;
   --color-danger: #c62828;
-  --color-info: var(--color-primary);
 
   /* ---------------------------------------------------------------------
      TYPOGRAPHY

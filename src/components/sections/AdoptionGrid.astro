@@ -2,9 +2,12 @@
 import { SITE } from "../../config/site.ts";
 import type { SharedGalleryPhoto } from "../../scripts/shared-gallery";
 import SharedPhotoGallery from "../SharedPhotoGallery.astro";
+import InstagramLink from "../InstagramLink.astro";
+import WhatsAppLink from "../WhatsAppLink.astro";
 import { getInstagramHandleLabel } from "../../utils/instagram";
 import filterChipsCss from "../../styles/components/filter-chips.css?raw";
 import adoptionGridCss from "../../styles/components/adoption-grid.css?raw";
+import "../../styles/components/dog-card.css";
 
 interface Dog {
   id: string;
@@ -71,24 +74,10 @@ const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
             </div>
             <p class="dog-card__details">{dog.details}</p>
             {dog.instagramUrl && (
-              <a
-                href={dog.instagramUrl}
-                class="dog-social-link"
-                aria-label={`Seguir a ${dog.name} en Instagram`}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-external-indicator="off"
-                data-track-event="social_click"
-                data-track-category="instagram"
-                data-track-outbound="true"
-                data-social-platform="instagram"
-                data-dog-name={dog.name}
-                data-track-location="dog_card"
-                data-track-destination={dog.instagramUrl}
-              >
+              <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link">
                 <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
                 <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
-              </a>
+              </InstagramLink>
             )}
             <a
               href={formHref}
@@ -118,19 +107,14 @@ const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
   <p>
     Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando llegue un match para tu hogar.
   </p>
-  <a
-    href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quisiera adoptar un galgo")}`}
+  <WhatsAppLink
+    text="Hola, quisiera adoptar un galgo"
+    location="dog_grid_empty"
+    label="Escríbenos por WhatsApp - Adoption Empty Grid"
     class="btn btn--primary"
-    target="_blank"
-    rel="noopener noreferrer"
-    data-track-event="whatsapp_click"
-    data-track-label="Escríbenos por WhatsApp - Adoption Empty Grid"
-    data-track-location="dog_grid_empty"
-    data-whatsapp-location="dog_grid_empty"
-    data-whatsapp-text="Hola, quisiera adoptar un galgo"
   >
     Escríbenos por WhatsApp
-  </a>
+  </WhatsAppLink>
 </div>
 
 <script>

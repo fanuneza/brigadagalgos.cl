@@ -1,5 +1,8 @@
 export {};
 
+import { dispatchAnalytics } from "../utils/analytics";
+import { escapeAttribute } from "../utils/html-escape";
+
 export interface SharedGalleryPhoto {
   cardAvifSrcSet?: string;
   cardWebpSrcSet: string;
@@ -22,10 +25,6 @@ const LIGHTBOX_ROOT_SELECTOR = "[data-shared-gallery-lightbox]";
 let lightboxState: { item: SharedGalleryItem; index: number; location: string } | null = null;
 let documentKeydownAttached = false;
 
-function dispatchAnalytics(detail: Record<string, string>) {
-  document.dispatchEvent(new CustomEvent("brigada:analytics", { detail }));
-}
-
 function getStoryContext(element: HTMLElement, fallbackItem: SharedGalleryItem) {
   const storyCard = element.closest<HTMLElement>("[data-story-card]");
   if (!storyCard) {
@@ -41,15 +40,6 @@ function getStoryContext(element: HTMLElement, fallbackItem: SharedGalleryItem) 
 
 function wrapIndex(index: number, total: number) {
   return ((index % total) + total) % total;
-}
-
-function escapeAttribute(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
 }
 
 function getPhotoAlt(item: SharedGalleryItem, index: number) {

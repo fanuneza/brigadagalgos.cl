@@ -1,0 +1,28 @@
+---
+import { SITE } from "../config/site.ts";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  text: string;
+  location: string;
+  label?: string;
+}
+
+const { text, location, label, class: className, ...anchorProps } = Astro.props;
+const href = `${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
+---
+
+<a
+  {...anchorProps}
+  href={href}
+  class={className}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-track-event="whatsapp_click"
+  data-track-label={label ?? "Escríbenos por WhatsApp"}
+  data-track-location={location}
+  data-whatsapp-location={location}
+  data-whatsapp-text={text}
+>
+  <slot />
+</a>

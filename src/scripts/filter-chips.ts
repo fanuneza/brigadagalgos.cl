@@ -1,3 +1,5 @@
+import { dispatchAnalytics } from "../utils/analytics";
+
 function initFilterChips() {
   const chips = document.querySelectorAll<HTMLButtonElement>(".chip-btn");
   const cards = document.querySelectorAll<HTMLElement>("[data-sex]");
@@ -42,14 +44,10 @@ function initFilterChips() {
       activeFilter = chip.dataset.filter ?? "all";
       filter(activeFilter);
 
-      document.dispatchEvent(
-        new CustomEvent("brigada:analytics", {
-          detail: {
-            event: "dog_filter_click",
-            filter_category: activeFilter,
-          },
-        })
-      );
+      dispatchAnalytics({
+        event: "dog_filter_click",
+        filter_category: activeFilter,
+      });
     });
   });
 }

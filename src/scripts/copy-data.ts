@@ -5,6 +5,8 @@ Tipo de cuenta: Cuenta Vista
 Número de cuenta: 1073480715
 Email: contacto@brigadagalgos.cl`;
 
+import { dispatchAnalytics } from "../utils/analytics";
+
 async function copyText(value: string) {
   try {
     await navigator.clipboard.writeText(value);
@@ -70,14 +72,10 @@ function initCopyData() {
       announceCopied(`Copiado: ${value}`);
 
       const label = button.getAttribute("aria-label")?.replace("Copiar ", "").split(":")[0] ?? "unknown";
-      document.dispatchEvent(
-        new CustomEvent("brigada:analytics", {
-          detail: {
-            event: "bank_data_copy",
-            copied_field: label,
-          },
-        })
-      );
+      dispatchAnalytics({
+        event: "bank_data_copy",
+        copied_field: label,
+      });
     });
   });
 
@@ -87,14 +85,10 @@ function initCopyData() {
       showCopiedTooltip(btn);
       announceCopied("Datos bancarios copiados");
 
-      document.dispatchEvent(
-        new CustomEvent("brigada:analytics", {
-          detail: {
-            event: "bank_data_copy",
-            copied_field: "all",
-          },
-        })
-      );
+      dispatchAnalytics({
+        event: "bank_data_copy",
+        copied_field: "all",
+      });
     });
   }
 }

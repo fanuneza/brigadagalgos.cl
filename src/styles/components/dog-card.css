@@ -7,18 +7,6 @@
   height: 100%;
 }
 
-.dog-card__photo-wrapper {
-  overflow: hidden;
-}
-
-.dog-card__photo {
-  aspect-ratio: 1;
-  object-fit: cover;
-  width: 100%;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  display: block;
-}
-
 .dog-card__body {
   padding: var(--space-5);
   display: flex;
@@ -67,23 +55,8 @@
   color: var(--on-accent-warm);
 }
 
-.dog-card__personality {
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 .dog-card__details {
   margin: 0;
-}
-
-.dog-grid__support-note {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  text-align: center;
-  margin-top: var(--space-6);
 }
 
 .dog-card__cta {

@@ -7,6 +7,8 @@ import {
   type SharedGalleryPhoto,
 } from "./shared-gallery";
 import { getInstagramHandleLabel } from "../utils/instagram";
+import { dispatchAnalytics } from "../utils/analytics";
+import { escapeHtml } from "../utils/html-escape";
 
 const PAGE_SIZE = 6;
 
@@ -16,19 +18,6 @@ interface StoryApiRecord {
   story: string;
   instagramUrl?: string;
   photos: SharedGalleryPhoto[];
-}
-
-function escapeHtml(value: string) {
-  return value.replace(/[&<>"']/g, (char) => {
-    const entities: Record<string, string> = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-    };
-    return entities[char];
-  });
 }
 
 function initStoriesSection() {
@@ -132,14 +121,10 @@ function initStoriesSection() {
 
   button?.addEventListener("click", () => {
     void (async () => {
-      document.dispatchEvent(
-        new CustomEvent("brigada:analytics", {
-          detail: {
-            event: "stories_load_more",
-            location: "success_stories",
-          },
-        })
-      );
+      dispatchAnalytics({
+        event: "stories_load_more",
+        location: "success_stories",
+      });
 
       await loadStories();
 

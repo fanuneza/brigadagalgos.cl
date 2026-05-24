@@ -31,32 +31,6 @@
   gap: var(--space-3);
 }
 
-.card__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.card__icon--primary {
-  background: var(--color-primary);
-}
-.card__icon--secondary {
-  background: var(--color-secondary);
-}
-.card__icon--warm {
-  background: var(--color-accent-warm);
-}
-
-.card__icon-image {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
 .card__title {
   font-family: var(--font-display);
   font-weight: var(--weight-black);

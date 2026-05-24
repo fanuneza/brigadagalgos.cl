@@ -19,34 +19,6 @@
   gap: var(--space-3);
 }
 
-.channel-card__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.channel-card__icon--warm {
-  background: var(--color-accent-warm);
-}
-
-.channel-card__icon--green {
-  background: var(--color-rainbow-green);
-}
-
-.channel-card__icon--purple {
-  background: var(--color-rainbow-purple);
-}
-
-.channel-card__icon-image {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
 .channel-card__title {
   font-family: var(--font-display);
   font-weight: var(--weight-black);

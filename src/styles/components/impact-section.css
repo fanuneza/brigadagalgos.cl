@@ -12,6 +12,7 @@
   background: var(--color-surface);
   border-radius: var(--radius-md);
   padding: var(--space-4) var(--space-5);
+  align-items: center;
 }
 
 .impact-card__title {

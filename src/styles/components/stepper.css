@@ -51,7 +51,7 @@
 }
 .step__badge--secondary {
   background: var(--color-secondary);
-  color: var(--on-secondary);
+  color: var(--color-text-on-dark);
 }
 .step__badge--warm {
   background: var(--color-accent-warm);

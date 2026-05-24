@@ -1,4 +1,6 @@
-export function showToast(message: string, duration = 4000): void {
+import { dispatchAnalytics } from "../utils/analytics";
+
+function showToast(message: string, duration = 4000): void {
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = message;
@@ -80,14 +82,10 @@ function initForm() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    document.dispatchEvent(
-      new CustomEvent("brigada:analytics", {
-        detail: {
-          event: "contact_form_submit",
-          form_id: form.id || "contact-form",
-        },
-      })
-    );
+    dispatchAnalytics({
+      event: "contact_form_submit",
+      form_id: form.id || "contact-form",
+    });
 
     if (!validate()) {
       const invalidFields = getRequiredFields()
@@ -104,15 +102,11 @@ function initForm() {
         .map((field) => field.id || field.getAttribute("name") || "unknown")
         .join(",");
 
-      document.dispatchEvent(
-        new CustomEvent("brigada:analytics", {
-          detail: {
-            event: "contact_form_invalid",
-            form_id: form.id || "contact-form",
-            invalid_fields: invalidFields,
-          },
-        })
-      );
+      dispatchAnalytics({
+        event: "contact_form_invalid",
+        form_id: form.id || "contact-form",
+        invalid_fields: invalidFields,
+      });
       return;
     }
 
@@ -125,39 +119,27 @@ function initForm() {
       });
       const data = (await res.json()) as { success: boolean; message?: string };
       if (data.success) {
-        document.dispatchEvent(
-          new CustomEvent("brigada:analytics", {
-            detail: {
-              event: "contact_form_success",
-              form_id: form.id || "contact-form",
-            },
-          })
-        );
+        dispatchAnalytics({
+          event: "contact_form_success",
+          form_id: form.id || "contact-form",
+        });
         form!.hidden = true;
         if (successPanel) successPanel.hidden = false;
       } else {
-        document.dispatchEvent(
-          new CustomEvent("brigada:analytics", {
-            detail: {
-              event: "contact_form_error",
-              form_id: form.id || "contact-form",
-              error_message: data.message ?? "API Error",
-            },
-          })
-        );
+        dispatchAnalytics({
+          event: "contact_form_error",
+          form_id: form.id || "contact-form",
+          error_message: data.message ?? "API Error",
+        });
         showToast(data.message ?? "No pudimos enviar el formulario. Intentá de nuevo.");
         setSubmitting(false);
       }
     } catch {
-      document.dispatchEvent(
-        new CustomEvent("brigada:analytics", {
-          detail: {
-            event: "contact_form_error",
-            form_id: form.id || "contact-form",
-            error_message: "Network Error",
-          },
-        })
-      );
+      dispatchAnalytics({
+        event: "contact_form_error",
+        form_id: form.id || "contact-form",
+        error_message: "Network Error",
+      });
       showToast("Error de red. Revisá tu conexión e intentá de nuevo.");
       setSubmitting(false);
     }

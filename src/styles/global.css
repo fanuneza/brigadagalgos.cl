@@ -110,6 +110,51 @@ h3 {
   color: var(--color-text-muted);
 }
 
+/* ── Icon circle utility ───────────────────────────────────────────── */
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-circle--primary {
+  background: var(--color-primary);
+  color: var(--color-text-on-brand);
+}
+.icon-circle--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text-on-dark);
+}
+.icon-circle--warm {
+  background: var(--color-accent-warm);
+  color: var(--color-text-on-brand);
+}
+.icon-circle--green {
+  background: var(--color-rainbow-green);
+  color: var(--color-text-on-dark);
+}
+.icon-circle--purple {
+  background: var(--color-rainbow-purple);
+  color: var(--color-text-on-dark);
+}
+
+/* Invert dark SVGs to light on dark-background circles */
+.icon-circle--secondary .icon-circle__image,
+.icon-circle--green .icon-circle__image,
+.icon-circle--purple .icon-circle__image {
+  filter: brightness(0) invert(1);
+}
+
+.icon-circle__image {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .card__title,
 .dog-card__name,
 .story-card__name,
@@ -177,25 +222,6 @@ h3 {
   width: 32px;
   height: 32px;
   display: block;
-}
-
-.card__icon,
-.req-card__icon,
-.channel-card__icon {
-  --icon-filter: none;
-}
-
-.card__icon--secondary,
-.req-card__icon--secondary,
-.channel-card__icon--green,
-.channel-card__icon--purple {
-  --icon-filter: brightness(0) invert(1);
-}
-
-.card__icon-image,
-.req-card__icon-image,
-.channel-card__icon-image {
-  filter: var(--icon-filter);
 }
 
 .btn--primary {
@@ -271,62 +297,6 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   vertical-align: baseline;
 }
 
-.cookie-banner {
-  position: fixed;
-  inset-inline: 0;
-  bottom: 0;
-  z-index: var(--z-modal);
-  background: var(--color-cookie-bg);
-  color: var(--color-text-on-dark);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding-block: var(--space-4);
-}
-
-.cookie-banner__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-
-.cookie-banner__text {
-  max-width: 64ch;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: var(--font-size-sm);
-}
-
-.cookie-banner__link {
-  color: #bae0ff;
-  text-decoration-color: rgba(186, 224, 255, 0.4);
-}
-
-.cookie-banner__link:hover {
-  color: var(--color-text-on-dark);
-}
-
-.cookie-banner__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.cookie-banner__button {
-  min-width: 128px;
-}
-
-.cookie-banner__button.btn--ghost {
-  border-color: rgba(255, 255, 255, 0.28);
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.cookie-banner__button.btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
 .requisitos-list {
   list-style: none;
   padding: 0;
@@ -369,13 +339,6 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
 
 .tail-cta .btn {
   margin-top: var(--space-6);
-}
-
-@media (max-width: 767px) {
-  .cookie-banner__actions,
-  .cookie-banner__button {
-    width: 100%;
-  }
 }
 
 /* =========================================================================
