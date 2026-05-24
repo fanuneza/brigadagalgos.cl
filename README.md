@@ -64,6 +64,7 @@ src/
     Footer.astro
     HelpCards.astro
     Hero.astro
+    InstagramLink.astro     # Link a Instagram con tracking y label accesible
     MissionSection.astro
     Navbar.astro            # Incluye el toggle de tema claro/oscuro
     PageHero.astro
@@ -72,8 +73,11 @@ src/
     RequirementCard.astro
     SharedGalleryLightbox.astro
     SharedPhotoGallery.astro
+    TrackedLink.astro       # Wrapper genérico para links instrumentados
     StoriesSection.astro
     StructuredData.astro    # Schema.org JSON-LD para SEO
+    WhatsAppLink.astro      # Link a WhatsApp con mensaje prellenado y tracking
+    sections/*.astro        # Bloques reutilizables que componen las páginas internas
   content/                  # Colecciones de contenido
     adoption-dogs/*.md      # Perfiles de galgos en adopción
     success-dogs/*.md       # Historias de éxito
@@ -99,6 +103,8 @@ src/
     images/                 # Imágenes generales
     casos/                  # Fotos de casos de adopción y éxito
   utils/
+    analytics.ts            # Helpers compartidos para consentimiento y dataLayer
+    html-escape.ts          # Escape seguro para HTML generado en cliente
     instagram.ts            # Extracción de handle de Instagram desde URL
     responsive-gallery-images.ts
     shuffle.ts
@@ -136,6 +142,7 @@ Cada historia se define como un archivo Markdown con frontmatter:
 - `gallery` — Array de imágenes (procesadas por `astro:assets`)
 
 En `/por-que-galgos`, se seleccionan 3 historias al azar de esta colección en cada build.
+En home, `StoriesSection.astro` renderiza una tanda inicial y completa el resto vía `/casos/exito-home.json` con paginación client-side.
 
 ### Colaboradores (`src/content/supporters/`)
 
@@ -187,6 +194,16 @@ Tokens clave para superficies de contraste fijo (no cambian con el tema):
 - `astro:page-load` — reapplies the stored theme and reinitializes toggle buttons after each navigation.
 
 Toggle initialization is idempotent via a `data-theme-toggle-initialized` guard on each button element, preventing duplicate click handlers across repeated navigations.
+
+## Arquitectura de páginas
+
+- Las páginas internas (`/adoptar`, `/donar`, `/contacto`, `/hogar-temporal`, `/por-que-galgos`, `/colaboradores`) se ensamblan con bloques en `src/components/sections/`, lo que separa copy, layout y comportamiento por tramo.
+- `PageHero.astro` concentra el patrón de héroe interior; `Hero.astro` queda reservado para la portada.
+- Las CTAs y enlaces instrumentados usan wrappers dedicados:
+  - `TrackedLink.astro` para links internos o externos con atributos `data-track-*`.
+  - `WhatsAppLink.astro` para abrir WhatsApp con texto prellenado y metadatos analíticos consistentes.
+  - `InstagramLink.astro` para perfiles de casos con label accesible derivado del handle.
+- La experiencia de historias y fichas usa una galería compartida (`SharedPhotoGallery.astro` + `src/scripts/shared-gallery.ts`) con lightbox, navegación por teclado, swipe y tracking.
 
 ## Accesibilidad
 
@@ -263,6 +280,8 @@ Los tests corren en GitHub Actions en el job `validate`, que ejecuta en secuenci
 - GA4 vive dentro de GTM: `G-97CD3EJYML`
 - No se debe cargar `gtag.js` directo desde el sitio.
 - Los eventos se empujan a `window.dataLayer` desde `src/scripts/analytics-events.ts`.
+- `src/scripts/cookie-consent.ts` administra el banner, persiste la preferencia, emite `cookie_consent_update` y solo entonces inicializa GTM.
+- `src/utils/analytics.ts` centraliza helpers de consentimiento, `dataLayer` y dispatch de eventos personalizados (`brigada:analytics`).
 - La capa de eventos es privacy-safe: no envía nombres, emails, teléfonos ni texto libre ingresado por usuarios.
 
 ### Eventos custom actuales
@@ -270,6 +289,7 @@ Los tests corren en GitHub Actions en el job `validate`, que ejecuta en secuenci
 - `cta_click`
 - `navigation_click`
 - `social_click`
+- `whatsapp_click`
 - `outbound_click`
 - `section_view`
 - `scroll_depth`
@@ -278,7 +298,17 @@ Los tests corren en GitHub Actions en el job `validate`, que ejecuta en secuenci
 - `gallery_next`
 - `gallery_previous`
 - `stories_load_more`
+- `dog_filter_click`
+- `dog_interest_click`
+- `foster_apply_click`
+- `donation_esponsor_click`
 - `bank_data_copy`
+- `contact_form_submit`
+- `contact_form_invalid`
+- `contact_form_success`
+- `contact_form_error`
+- `cookie_consent_action`
+- `cookie_consent_update`
 
 ### Cómo extender el tracking
 
