@@ -48,7 +48,7 @@ const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
 
 <div class="dog-grid" data-dog-grid>
   {
-    dogs.map((dog) => {
+    dogs.map((dog, dogIndex) => {
       const ageType = getAgeType(dog.age);
 
       return (
@@ -58,7 +58,11 @@ const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
           data-sex={dog.sex}
           data-age-type={ageType}
         >
-          <SharedPhotoGallery name={dog.name} photos={dog.pictures} />
+          <SharedPhotoGallery
+            name={dog.name}
+            photos={dog.pictures}
+            loadingPriority={dogIndex < 2 ? "eager" : "lazy"}
+          />
 
           <div class="story-card__body dog-card__body">
             <div class="dog-card__header">

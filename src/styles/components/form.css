@@ -97,6 +97,12 @@
   accent-color: var(--color-primary);
 }
 
+.field--checkbox input[type="checkbox"]:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
 .field--checkbox label {
   font-size: var(--font-size-sm);
   line-height: var(--line-base);
@@ -179,6 +185,12 @@
   accent-color: var(--color-primary);
   flex-shrink: 0;
   cursor: pointer;
+}
+
+.radio-option input[type="radio"]:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
 }
 
 .form__whatsapp-fallback {

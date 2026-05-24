@@ -37,7 +37,7 @@ const { dogs, totalCount, endpoint } = Astro.props;
 
     <div class="stories__grid" data-stories-list>
       {
-        dogs.map((dog) => (
+        dogs.map((dog, dogIndex) => (
           <article
             class="story-card"
             data-story-card
@@ -45,7 +45,12 @@ const { dogs, totalCount, endpoint } = Astro.props;
             data-story-name={dog.name}
             data-story-location="success_stories"
           >
-            <SharedPhotoGallery name={dog.name} photos={dog.photos} id={dog.id} />
+            <SharedPhotoGallery
+              name={dog.name}
+              photos={dog.photos}
+              id={dog.id}
+              loadingPriority={dogIndex < 2 ? "eager" : "lazy"}
+            />
             <div
               class="story-card__body"
               data-track-event="story_click"
@@ -60,7 +65,7 @@ const { dogs, totalCount, endpoint } = Astro.props;
                 <a
                   href={dog.instagramUrl}
                   class="story-card__social dog-social-link"
-                  aria-label={`Seguir a ${dog.name} en Instagram`}
+                  aria-label={`Seguir a ${dog.name} en Instagram: ${getInstagramHandleLabel(dog.instagramUrl)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-external-indicator="off"

@@ -30,7 +30,7 @@ const { cases } = Astro.props;
 
     <div class="stories__grid why-galgos__stories-grid">
       {
-        cases.map((dog) => (
+        cases.map((dog, caseIndex) => (
           <article
             class="story-card story-card--compact"
             data-story-card
@@ -38,7 +38,12 @@ const { cases } = Astro.props;
             data-story-name={dog.name}
             data-story-location="why_galgos"
           >
-            <SharedPhotoGallery name={dog.name} photos={dog.photos} id={dog.id} />
+            <SharedPhotoGallery
+              name={dog.name}
+              photos={dog.photos}
+              id={dog.id}
+              loadingPriority={caseIndex < 2 ? "eager" : "lazy"}
+            />
             <div
               class="story-card__body"
               data-track-event="story_click"

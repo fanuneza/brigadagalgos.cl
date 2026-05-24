@@ -30,6 +30,11 @@
   gap: var(--space-4);
 }
 
+.adoption-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
 .adoption-card .story-card__slide {
   cursor: zoom-in;
 }

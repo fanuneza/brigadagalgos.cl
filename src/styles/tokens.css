@@ -258,6 +258,9 @@
   --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4);
   --shadow-focus: 0 0 0 3px rgba(36, 215, 234, 0.45);
 
+  /* Foreground on secondary — bright pink needs dark text in dark mode for WCAG AA */
+  --on-secondary: #101217;
+
   /* Button tokens */
   --btn-secondary-bg: rgba(36, 215, 234, 0.1);
   --btn-secondary-bg-hover: rgba(36, 215, 234, 0.18);
@@ -301,6 +304,9 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4);
     --shadow-focus: 0 0 0 3px rgba(36, 215, 234, 0.45);
+
+    /* Foreground on secondary — bright pink needs dark text in dark mode for WCAG AA */
+    --on-secondary: #101217;
 
     /* Button tokens */
     --btn-secondary-bg: rgba(36, 215, 234, 0.1);

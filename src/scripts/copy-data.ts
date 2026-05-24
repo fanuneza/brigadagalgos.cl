@@ -9,7 +9,21 @@ async function copyText(value: string) {
   try {
     await navigator.clipboard.writeText(value);
   } catch {
-    window.prompt("Copiá estos datos:", value);
+    // Fallback: create an off-screen textarea, select its text and attempt execCommand.
+    // This avoids the jarring native window.prompt dialog.
+    const ta = document.createElement("textarea");
+    ta.value = value;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:-9999px;left:-9999px;opacity:0;pointer-events:none;";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand("copy");
+    } catch {
+      // execCommand also failed — nothing more we can do silently
+    }
+    document.body.removeChild(ta);
   }
 }
 

@@ -27,6 +27,8 @@
   border-radius: var(--radius-lg);
   background: var(--color-bg);
   box-shadow: var(--shadow-sm);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .story-card__photo {

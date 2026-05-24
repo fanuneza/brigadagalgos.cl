@@ -52,8 +52,6 @@ function initFilterChips() {
       );
     });
   });
-
-  filter(activeFilter);
 }
 
 document.addEventListener("astro:page-load", initFilterChips);

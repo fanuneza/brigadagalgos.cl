@@ -5,9 +5,10 @@ interface Props {
   id?: string;
   name: string;
   photos: SharedGalleryPhoto[];
+  loadingPriority?: "lazy" | "eager";
 }
 
-const { id, name, photos } = Astro.props;
+const { id, name, photos, loadingPriority = "lazy" } = Astro.props;
 ---
 
-<Fragment set:html={buildSharedGalleryMarkup({ id, name, photos })} />
+<Fragment set:html={buildSharedGalleryMarkup({ id, name, photos }, loadingPriority)} />
