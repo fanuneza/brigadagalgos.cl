@@ -4,7 +4,7 @@
 }
 
 .why-galgos__image-section {
-  padding: 0 0 var(--space-5);
+  padding: var(--space-9) 0 var(--space-5);
 }
 
 .why-galgos__between-sections {
@@ -160,7 +160,7 @@
 
 @media (min-width: 768px) {
   .why-galgos__image-section {
-    padding-bottom: var(--space-6);
+    padding: var(--space-9) 0 var(--space-6);
   }
 
   .why-galgos__between-sections {
