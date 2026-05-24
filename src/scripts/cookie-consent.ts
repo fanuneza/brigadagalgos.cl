@@ -1,4 +1,4 @@
-import { CONSENT_ACCEPTED, getCookie, ensureDataLayer } from "../utils/analytics";
+import { CONSENT_ACCEPTED, getCookie } from "../utils/analytics";
 
 const CONSENT_REJECTED = "rejected";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;

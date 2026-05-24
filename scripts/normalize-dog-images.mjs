@@ -301,15 +301,15 @@ async function main() {
   }
 
   if (shouldWrite) {
-    console.log(`Dog image normalization complete (${actions.length} action(s)).`);
+    console.warn(`Dog image normalization complete (${actions.length} action(s)).`);
     for (const action of actions) {
-      console.log(`- ${action}`);
+      console.warn(`- ${action}`);
     }
     for (const warning of warnings) {
       console.warn(`- Warning: ${warning}`);
     }
   } else {
-    console.log("Dog image check passed.");
+    console.warn("Dog image check passed.");
   }
 }
 
