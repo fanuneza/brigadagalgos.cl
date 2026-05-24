@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
+import RainbowDivider from "../components/RainbowDivider.astro";
 import ProcessStepper from "../components/ProcessStepper.astro";
 import FosterRequirements from "../components/sections/FosterRequirements.astro";
 import FosterPostular from "../components/sections/FosterPostular.astro";
@@ -48,6 +49,7 @@ const fosterSteps = [
       ctaHref="#form"
       ctaVariant="primary"
     />
+    <RainbowDivider />
 
     <FosterRequirements />
     <ProcessStepper steps={fosterSteps} eyebrow="EL PROCESO" heading="Así funciona el acogimiento" />

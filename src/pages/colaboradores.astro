@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
+import RainbowDivider from "../components/RainbowDivider.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SupportersIntro from "../components/sections/SupportersIntro.astro";
 import SupportersCtaSection from "../components/sections/SupportersCtaSection.astro";
@@ -38,6 +39,7 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
       h1="Quiénes sostienen esta red de ayuda"
       lead="Detrás de cada rescate hay instituciones, marcas y personas que ayudan a que los galgos reciban cuidado, tiempo y nuevas oportunidades."
     />
+    <RainbowDivider />
 
     <section class="section-padding">
       <div class="container">

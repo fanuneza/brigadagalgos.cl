@@ -7,6 +7,7 @@ import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
+import RainbowDivider from "../components/RainbowDivider.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WhyGalgosEditorial from "../components/sections/WhyGalgosEditorial.astro";
@@ -44,6 +45,7 @@ const cases = await Promise.all(
       lead="No elegimos rescatar galgos por una preferencia de raza. Los elegimos porque vemos de cerca un abandono y una explotación que se repiten demasiado."
       leadBold="Rescatamos, rehabilitamos y reubicamos galgos en Chile para que puedan vivir, por fin, como los perros de familia que siempre merecieron ser."
     />
+    <RainbowDivider />
 
     <WhyGalgosEditorial />
     <CasesBand cases={cases} />
