@@ -264,7 +264,9 @@ export function initSharedGalleryLightbox() {
 }
 
 export function initSharedGalleries(scope: ParentNode = document, eagerCount?: number) {
-  const allGalleries = [...scope.querySelectorAll<HTMLElement>('[data-shared-gallery]:not([data-gallery-bound="true"])')];
+  const allGalleries = [
+    ...scope.querySelectorAll<HTMLElement>('[data-shared-gallery]:not([data-gallery-bound="true"])'),
+  ];
 
   function initGalleryList(galleries: HTMLElement[]) {
     galleries.forEach((gallery) => {
