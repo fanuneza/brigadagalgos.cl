@@ -2,8 +2,7 @@
 import { getCollection } from "astro:content";
 import trustStatsCss from "../../styles/components/trust-stats.css?raw";
 
-const successDogs = await getCollection("success-dogs");
-const adoptionDogs = await getCollection("adoption-dogs");
+const adoptionDogCount = (await getCollection("adoption-dogs")).length;
 const yearsActive = Math.max(new Date().getFullYear() - 2023, 1);
 ---
 
@@ -34,7 +33,7 @@ const yearsActive = Math.max(new Date().getFullYear() - 2023, 1);
         </p>
       </div>
       <div class="stat-card">
-        <p class="stat-card__value stat-card__value--green">{adoptionDogs.length}</p>
+        <p class="stat-card__value stat-card__value--green">{adoptionDogCount}</p>
         <p class="stat-card__label">galgos visibles para adoptar</p>
         <p class="stat-card__body">
           Presentamos nombres, fotos y detalles para que cada postulación parta con información real.

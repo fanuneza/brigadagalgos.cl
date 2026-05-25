@@ -50,7 +50,6 @@ const { dogs } = Astro.props;
                 <span class="chip chip--sex">{dog.sex}</span>
                 <span class="chip chip--age">{dog.age}</span>
                 <span class="chip chip--weight">{dog.weight}</span>
-                {dog.location && <span class="chip chip--location">{dog.location}</span>}
                 <span class="chip chip--need">{dog.currentNeed}</span>
               </div>
             </div>
@@ -84,8 +83,8 @@ const { dogs } = Astro.props;
 
 <div class="dog-grid__empty" hidden aria-hidden="true">
   <p>
-    Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando aparezca un galgo que encaje
-    con tu hogar.
+    Por ahora no hay galgos publicados en adopción. Escríbenos igual y te avisamos cuando haya un galgo que pueda estar
+    bien en tu hogar.
   </p>
   <WhatsAppLink
     text="Hola, quisiera adoptar un galgo"

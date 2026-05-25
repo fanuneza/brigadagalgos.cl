@@ -6,6 +6,11 @@
   margin-bottom: var(--space-4);
 }
 
+.stories__lead {
+  max-width: 68ch;
+  margin: 0;
+}
+
 .stories__grid {
   display: grid;
   grid-template-columns: 1fr;

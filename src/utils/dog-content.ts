@@ -10,7 +10,6 @@ export interface AdoptionDogCard {
   ageType: "adulto" | "cachorro";
   weight: string;
   details: string;
-  location?: string;
   currentNeed: "Adopción" | "Hogar temporal" | "Adopción u hogar temporal";
   characterSketch: string;
   instagramUrl?: string;
@@ -43,7 +42,6 @@ export async function buildAdoptionDogCards(entries: CollectionEntry<"adoption-d
       ageType: getAgeType(entry.data.age),
       weight: entry.data.weight,
       details: entry.data.details,
-      location: entry.data.location,
       currentNeed: entry.data.currentNeed,
       characterSketch: entry.data.characterSketch,
       instagramUrl: entry.data.instagramUrl,

@@ -1,30 +1,6 @@
 ---
 import { SITE } from "../../config/site.ts";
-import WhatsAppLink from "../../components/WhatsAppLink.astro";
 import contactChannelsCss from "../../styles/components/contact-channels.css?raw";
-
-const intentLinks = [
-  {
-    text: "Adopción",
-    message: "Hola, quiero consultar por adopción de un galgo",
-    category: "adoption",
-  },
-  {
-    text: "Hogar temporal",
-    message: "Hola, puedo ser hogar temporal y quisiera saber cómo empezar",
-    category: "foster",
-  },
-  {
-    text: "Donación",
-    message: "Hola, quiero apoyar a un galgo y tengo una duda sobre donaciones",
-    category: "donation",
-  },
-  {
-    text: "Consulta general",
-    message: "Hola, tengo una consulta para Brigada Galgos",
-    category: "contact",
-  },
-];
 ---
 
 <style is:inline set:html={contactChannelsCss}></style>
@@ -48,22 +24,8 @@ const intentLinks = [
         </span>
         <p class="channel-card__title">WHATSAPP</p>
         <p class="channel-card__detail">{SITE.whatsappPhone}</p>
-        <p class="channel-card__hours">Elige el motivo y te dejamos el mensaje listo para enviar.</p>
-        <div class="channel-card__intents">
-          {
-            intentLinks.map((intent) => (
-              <WhatsAppLink
-                text={intent.message}
-                location="contact_whatsapp_intents"
-                label={`WhatsApp ${intent.text}`}
-                class="btn btn--secondary channel-card__intent"
-                data-track-category={intent.category}
-              >
-                {intent.text}
-              </WhatsAppLink>
-            ))
-          }
-        </div>
+        <p class="channel-card__hours">Lun a Vie · 10:00 – 19:00</p>
+        <a href={SITE.whatsapp} class="btn btn--primary" target="_blank" rel="noopener noreferrer"> Abrir WhatsApp </a>
       </div>
 
       <div class="channel-card">
@@ -81,7 +43,7 @@ const intentLinks = [
         </span>
         <p class="channel-card__title">EMAIL</p>
         <p class="channel-card__detail">{SITE.email}</p>
-        <p class="channel-card__hours">También sirve si prefieres explicar tu caso con más detalle.</p>
+        <p class="channel-card__hours">Respondemos lo antes posible.</p>
         <a href={`mailto:${SITE.email}`} class="btn btn--secondary"> Escribir por correo </a>
       </div>
 

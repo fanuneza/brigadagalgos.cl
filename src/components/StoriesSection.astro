@@ -18,6 +18,7 @@ const { dogs, totalCount, endpoint } = Astro.props;
 <style is:inline set:html={storiesCss}></style>
 
 <section
+  id="historias"
   class="section-padding stories"
   data-stories-root
   data-stories-endpoint={endpoint}
@@ -26,7 +27,12 @@ const { dogs, totalCount, endpoint } = Astro.props;
 >
   <div class="container">
     <p class="stories__eyebrow">Historias</p>
-    <h2 class="stories__heading">Nuestros casos de éxito</h2>
+    <h2 class="stories__heading">Historias con final de hogar</h2>
+    <p class="stories__lead">
+      Cada historia tiene un nombre, una espera y una red detrás: rescate, atención veterinaria, hogar temporal,
+      adopción y seguimiento. Verlos en casa también muestra lo que una adopción, un hogar temporal o una donación
+      pueden cambiar.
+    </p>
 
     <div class="stories__grid" data-stories-list>
       {

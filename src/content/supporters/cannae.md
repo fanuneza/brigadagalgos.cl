@@ -1,7 +1,7 @@
 ---
 name: Cannae
 description: "Nos proveen productos de bienestar y cuidado que usamos en la recuperación diaria de nuestros galgos."
-thanksLabel: "Gracias, Cannae"
+thanksLabel: "Ver historia"
 thanksUrl: "https://www.instagram.com/p/DVwp8pHEcOA/"
 website: "https://cannaemascotas.cl/"
 kind: Empresa

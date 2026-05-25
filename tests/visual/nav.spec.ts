@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const expectedOrder = ["Inicio", "Adoptar", "Hogar temporal", "Por qué galgos", "Colaboradores", "Contacto"];
+const expectedOrder = ["Adoptar", "Hogar temporal", "Por qué galgos", "Colaboradores", "Contacto"];
 
 test("desktop nav still fits at the desktop breakpoint", async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 900 });

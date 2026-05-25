@@ -300,7 +300,7 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
 .requisitos-list {
   list-style: none;
   padding: 0;
-  margin: var(--space-4) 0 0;
+  margin: var(--space-4) 0 var(--space-5);
 }
 
 .requisitos-list li {
