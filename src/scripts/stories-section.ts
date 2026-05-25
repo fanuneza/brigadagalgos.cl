@@ -41,7 +41,7 @@ function initStoriesSection() {
         <a
           href="${escapeHtml(story.instagramUrl)}"
           class="story-card__social dog-social-link"
-          aria-label="Seguir a ${safeName} en Instagram"
+          aria-label="Seguir a ${safeName} en Instagram: ${safeInstagramLabel}"
           target="_blank"
           rel="noopener noreferrer"
           data-external-indicator="off"

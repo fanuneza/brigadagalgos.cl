@@ -83,7 +83,7 @@ test("Ver mas preserves Instagram links from the stories endpoint", async ({ pag
 
   const instagramLink = grid.locator("[data-story-id='instagram-fixture'] .dog-social-link");
   await expect(instagramLink).toHaveAttribute("href", "https://www.instagram.com/roma_galga/");
-  await expect(instagramLink).toHaveAttribute("aria-label", "Seguir a Roma en Instagram");
+  await expect(instagramLink).toHaveAttribute("aria-label", "Seguir a Roma en Instagram: @roma_galga");
   await expect(instagramLink).toContainText("@roma_galga");
   await expect(instagramLink).toHaveAttribute("data-track-event", "social_click");
   await expect(instagramLink).toHaveAttribute("data-track-location", "success_stories");
@@ -108,7 +108,7 @@ test("success story Instagram labels use handles from content URLs", async ({ pa
   }
 
   await expect(leoInstagramLink).toHaveAttribute("href", "https://instagram.com/leitogalgo");
-  await expect(leoInstagramLink).toHaveAttribute("aria-label", "Seguir a Leo en Instagram");
+  await expect(leoInstagramLink).toHaveAttribute("aria-label", "Seguir a Leo en Instagram: @leitogalgo");
   await expect(leoInstagramLink).toContainText("@leitogalgo");
 });
 
