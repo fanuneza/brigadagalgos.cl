@@ -6,7 +6,7 @@
 
 @media (min-width: 1024px) {
   .trust-stats__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -17,35 +17,28 @@
 }
 
 .stat-card__value {
-  width: 3.75rem;
-  height: 3.75rem;
-  display: block;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--weight-black);
+  line-height: var(--line-tight);
   margin: 0;
-  background-color: currentColor;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
 }
 
 .stat-card__value--cyan {
   color: var(--color-primary);
-  -webkit-mask-image: url("/icons/plus.svg");
-  mask-image: url("/icons/plus.svg");
 }
 
 .stat-card__value--magenta {
   color: var(--color-secondary);
-  -webkit-mask-image: url("/icons/check.svg");
-  mask-image: url("/icons/check.svg");
 }
 
 .stat-card__value--orange {
   color: var(--color-accent-warm);
-  -webkit-mask-image: url("/icons/heart.svg");
-  mask-image: url("/icons/heart.svg");
+}
+
+.stat-card__value--green {
+  color: var(--color-rainbow-green);
 }
 
 .stat-card__label {

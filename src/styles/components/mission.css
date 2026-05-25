@@ -6,3 +6,19 @@
   margin-bottom: var(--space-5);
   color: var(--color-text);
 }
+
+.mission-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-5) 0 0;
+}
+
+.mission-values li {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-weight: var(--weight-semi);
+}

@@ -1,5 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import trustStatsCss from "../../styles/components/trust-stats.css?raw";
+
+const successDogs = await getCollection("success-dogs");
+const adoptionDogs = await getCollection("adoption-dogs");
+const yearsActive = Math.max(new Date().getFullYear() - 2023, 1);
 ---
 
 <style is:inline set:html={trustStatsCss}></style>
@@ -7,23 +12,32 @@ import trustStatsCss from "../../styles/components/trust-stats.css?raw";
 <section class="section-padding trust-stats">
   <div class="container">
     <p class="eyebrow">COMPROMISO</p>
-    <h2>Lo que sostiene tu apoyo</h2>
+    <h2>Evidencia que puedes revisar</h2>
     <div class="trust-stats__grid">
       <div class="stat-card">
-        <div class="stat-card__value stat-card__value--cyan" aria-hidden="true"></div>
-        <p class="stat-card__label">Veterinaria integral</p>
-        <p class="stat-card__body">La fundación prioriza atención veterinaria completa, no solo lo básico.</p>
+        <p class="stat-card__value stat-card__value--cyan">{yearsActive}+</p>
+        <p class="stat-card__label">años activas</p>
+        <p class="stat-card__body">Nos formamos en 2023 desde experiencia previa rescatando y adoptando galgos.</p>
       </div>
       <div class="stat-card">
-        <div class="stat-card__value stat-card__value--magenta" aria-hidden="true"></div>
-        <p class="stat-card__label">Acompañamiento real</p>
-        <p class="stat-card__body">Acompañamos a adoptantes y hogares temporales para que cada proceso resulte bien.</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__value stat-card__value--orange" aria-hidden="true"></div>
-        <p class="stat-card__label">Match responsable</p>
+        <p class="stat-card__value stat-card__value--magenta">6</p>
+        <p class="stat-card__label">mujeres coordinando</p>
         <p class="stat-card__body">
-          Buscamos la mejor familia para cada galgo, sin importar edad, sexo o nivel de energía.
+          Sostenemos rescates, hogares temporales, adopciones y seguimiento con una red de apoyo.
+        </p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card__value stat-card__value--orange">100+</p>
+        <p class="stat-card__label">rescates</p>
+        <p class="stat-card__body">
+          Cada historia muestra un galgo que tuvo acompañamiento hasta llegar a una nueva vida.
+        </p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card__value stat-card__value--green">{adoptionDogs.length}</p>
+        <p class="stat-card__label">galgos visibles para adoptar</p>
+        <p class="stat-card__body">
+          Presentamos nombres, fotos y detalles para que cada postulación parta con información real.
         </p>
       </div>
     </div>

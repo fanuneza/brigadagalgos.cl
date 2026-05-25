@@ -3,6 +3,44 @@
   gap: var(--space-6);
 }
 
+.donation-intro {
+  max-width: 68ch;
+  margin-bottom: var(--space-5);
+}
+
+.donation-intro p,
+.donation-transparency {
+  margin: 0;
+}
+
+.donation-amounts {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.donation-amount {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.donation-amount__value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--weight-black);
+  margin: 0;
+}
+
+.donation-amount__label {
+  font-weight: var(--weight-semi);
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.donation-amount p:last-child {
+  margin: 0;
+}
+
 .bank-info__live {
   position: absolute;
   width: 1px;
@@ -18,6 +56,10 @@
 @media (min-width: 1024px) {
   .donation-cards {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .donation-amounts {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -53,6 +95,12 @@
 
 .donation-card__info {
   margin: 0;
+}
+
+.donation-transparency {
+  max-width: 72ch;
+  margin-top: var(--space-5);
+  color: var(--color-text-muted);
 }
 
 .bank-info {

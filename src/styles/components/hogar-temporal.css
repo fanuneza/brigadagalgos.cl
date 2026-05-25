@@ -16,3 +16,19 @@
   color: var(--color-text-muted);
   text-align: center;
 }
+
+.foster-support {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.foster-support h3 {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .foster-support {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

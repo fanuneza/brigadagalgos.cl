@@ -10,6 +10,7 @@ import ProcessStepper from "../components/ProcessStepper.astro";
 import StoriesSection from "../components/StoriesSection.astro";
 import DonationBanner from "../components/DonationBanner.astro";
 import WhyGalgosSection from "../components/sections/WhyGalgosSection.astro";
+import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
@@ -57,6 +58,7 @@ const storyDogs = await buildStoryDogSummaries(rawStoryDogs, 6);
     <RainbowDivider />
     <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
     <MissionSection />
+    <TrustStatsSection />
     <WhyGalgosSection />
     <ProcessStepper steps={rescueSteps} />
     <HelpCards />

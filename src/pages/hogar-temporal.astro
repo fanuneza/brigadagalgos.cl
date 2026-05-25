@@ -12,23 +12,23 @@ import FosterPostular from "../components/sections/FosterPostular.astro";
 
 const fosterSteps = [
   {
-    label: "Postulas desde la web",
-    subLabel: "Nos cuentas tu disponibilidad, tu casa y quiénes viven contigo.",
+    label: "Nos escribes",
+    subLabel: "Nos mandas un mensaje o completas el formulario con tu disponibilidad y dudas.",
     colorClass: "primary",
   },
   {
-    label: "Te contacta el equipo",
-    subLabel: "Conversamos sobre tiempos, implementos y tipo de convivencia.",
+    label: "Conversamos y revisamos",
+    subLabel: "Miramos seguridad, rutina, tiempos y convivencia para preparar una acogida responsable.",
     colorClass: "secondary",
   },
   {
-    label: "Entrevista y revisión",
-    subLabel: "Revisamos requisitos de seguridad y el contexto del hogar.",
+    label: "Hacemos el match",
+    subLabel: "Buscamos un galgo que pueda adaptarse a tu casa y a la etapa que está viviendo.",
     colorClass: "warm",
   },
   {
-    label: "Llega el galgo",
-    subLabel: "Coordinamos la acogida y te acompañamos durante el proceso.",
+    label: "Acompañamos el proceso",
+    subLabel: "Te apoyamos durante el hogar temporal y coordinamos la transición cuando aparece su familia.",
     colorClass: "green",
   },
 ];
@@ -43,11 +43,13 @@ const fosterSteps = [
     <PageHero
       eyebrow="HOGAR TEMPORAL"
       h1="¿No puedes adoptar todavía?"
-      lead="Abrir tu casa por un tiempo le da al galgo un lugar seguro mientras se recupera y esperamos la familia correcta."
-      leadBold="Evaluamos contigo tiempos, seguridad e implementos. Si falta algo, la fundación puede apoyar con lo necesario."
+      lead="Ser hogar temporal es abrir tu casa por un tiempo para que un galgo esté seguro, acompañado y mejor preparado para encontrar familia."
+      leadBold="No necesitas tener todo resuelto antes de escribirnos. Conversamos contigo qué puedes aportar y qué apoyo necesita cada caso."
       ctaText="Puedo ser hogar temporal"
       ctaHref="#form"
       ctaVariant="primary"
+      ctaTrackLocation="foster_hero"
+      ctaTrackCategory="foster"
     />
     <RainbowDivider />
 
