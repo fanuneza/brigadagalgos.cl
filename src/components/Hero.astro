@@ -1,20 +1,19 @@
 ---
 import { getImage } from "astro:assets";
-import type { ImageMetadata } from "astro";
 import portraitSrc from "../assets/images/hero-portrait.webp";
 import landscapeSrc from "../assets/images/hero-landscape.webp";
 import heroCss from "../styles/components/hero.css?raw";
 import { buildSrcSet } from "../utils/responsive-gallery-images";
 import TrackedLink from "./TrackedLink.astro";
 
-const portraitWidths = [360, 540, 720];
-const landscapeWidths = [560, 840, 1120];
+const portraitWidths = [360, 420, 540, 640, 720];
+const landscapeWidths = [560, 640, 768, 840, 960, 1120];
 
-const pAvifSrcSet = await buildSrcSet(portraitSrc, "avif", portraitWidths);
-const pWebpSrcSet = await buildSrcSet(portraitSrc, "webp", portraitWidths);
-const lAvifSrcSet = await buildSrcSet(landscapeSrc, "avif", landscapeWidths);
-const lWebpSrcSet = await buildSrcSet(landscapeSrc, "webp", landscapeWidths);
-const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540 });
+const pAvifSrcSet = await buildSrcSet(portraitSrc, "avif", portraitWidths, 60);
+const pWebpSrcSet = await buildSrcSet(portraitSrc, "webp", portraitWidths, 72);
+const lAvifSrcSet = await buildSrcSet(landscapeSrc, "avif", landscapeWidths, 60);
+const lWebpSrcSet = await buildSrcSet(landscapeSrc, "webp", landscapeWidths, 72);
+const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540, quality: 72 });
 ---
 
 <style is:inline set:html={heroCss}></style>
@@ -77,10 +76,10 @@ const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540 
         sizes="(min-width: 1200px) 528px, calc(50vw - 72px)"
         type="image/webp"
       />
-      <source srcset={pAvifSrcSet} sizes="calc(100vw - 48px)" type="image/avif" />
+      <source srcset={pAvifSrcSet} sizes="calc((100vw - 48px) / 1.75)" type="image/avif" />
       <img
         srcset={pWebpSrcSet}
-        sizes="calc(100vw - 48px)"
+        sizes="calc((100vw - 48px) / 1.75)"
         src={pFallback.src}
         alt="Galgo rescatado mirando hacia adelante"
         class="hero__img"

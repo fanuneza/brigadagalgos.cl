@@ -54,8 +54,9 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
                     src={supporter.data.logo}
                     alt={supporter.data.logoAlt}
                     class="supporter-card__logo"
-                    widths={[240, 360, 480]}
-                    sizes="(min-width: 1024px) 360px, (min-width: 768px) 40vw, 80vw"
+                    widths={[240, 320, 360, 420, 480]}
+                    sizes="(min-width: 1024px) calc((min(100vw, 1200px) - 96px - 64px) / 3), (min-width: 768px) calc((100vw - 48px - 32px) / 2), calc(100vw - 48px)"
+                    quality={72}
                   />
                 </div>
 
