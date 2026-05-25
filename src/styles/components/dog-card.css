@@ -54,9 +54,24 @@
   background: var(--color-accent-warm);
   color: var(--on-accent-warm);
 }
+.chip--location {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.chip--need {
+  background: var(--color-secondary);
+  color: var(--on-secondary);
+}
 
 .dog-card__details {
   margin: 0;
+}
+
+.dog-card__sketch {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: var(--line-base);
 }
 
 .dog-card__cta {

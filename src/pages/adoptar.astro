@@ -12,6 +12,7 @@ import AdoptionIntro from "../components/sections/AdoptionIntro.astro";
 import AdoptionGrid from "../components/sections/AdoptionGrid.astro";
 import AdoptionProcess from "../components/sections/AdoptionProcess.astro";
 import AdoptionTailCta from "../components/sections/AdoptionTailCta.astro";
+import { SITE } from "../config/site.ts";
 import { buildAdoptionDogCards } from "../utils/dog-content";
 import { shuffle } from "../utils/shuffle";
 
@@ -29,10 +30,15 @@ const dogs = await buildAdoptionDogCards(shuffle(rawDogs));
       eyebrow="ADOPTA"
       h1="Los galgos que hoy esperan familia"
       lead="Los conocemos de cerca y te acompañamos en todo el proceso, desde tu primer mensaje hasta los primeros días en casa."
+      ctaText="Quiero adoptar"
+      ctaHref={SITE.adoptionForm}
+      ctaVariant="primary"
+      ctaTrackLocation="adoption_hero"
+      ctaTrackCategory="adoption"
     />
     <RainbowDivider />
 
-    <section class="section-padding">
+    <section id="galgos" class="section-padding">
       <div class="container">
         <AdoptionIntro />
         <AdoptionGrid dogs={dogs} />

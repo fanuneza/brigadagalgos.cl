@@ -7,9 +7,23 @@ interface Props {
   ctaText?: string;
   ctaHref?: string;
   ctaVariant?: "primary" | "secondary" | "ghost";
+  ctaTrackLabel?: string;
+  ctaTrackLocation?: string;
+  ctaTrackCategory?: string;
 }
 
-const { eyebrow, h1, lead, leadBold, ctaText, ctaHref, ctaVariant = "ghost" } = Astro.props;
+const {
+  eyebrow,
+  h1,
+  lead,
+  leadBold,
+  ctaText,
+  ctaHref,
+  ctaVariant = "ghost",
+  ctaTrackLabel,
+  ctaTrackLocation,
+  ctaTrackCategory,
+} = Astro.props;
 ---
 
 <section class="page-hero section-padding">
@@ -20,7 +34,15 @@ const { eyebrow, h1, lead, leadBold, ctaText, ctaHref, ctaVariant = "ghost" } = 
     {leadBold && <p class="page-hero__lead page-hero__lead--bold">{leadBold}</p>}
     {
       ctaText && (
-        <a href={ctaHref} class={`btn btn--${ctaVariant}`}>
+        <a
+          href={ctaHref}
+          class={`btn btn--${ctaVariant}`}
+          data-track-event="cta_click"
+          data-track-label={ctaTrackLabel ?? ctaText}
+          data-track-location={ctaTrackLocation}
+          data-track-destination={ctaHref}
+          data-track-category={ctaTrackCategory}
+        >
           {ctaText}
         </a>
       )

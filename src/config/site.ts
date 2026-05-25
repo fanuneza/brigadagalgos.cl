@@ -9,6 +9,7 @@ export const SITE = {
   gtmContainerId: "GTM-M2RN5B38",
   whatsapp: "https://wa.me/56987076101",
   whatsappPhone: "+56 9 8707 6101",
+  adoptionForm: "https://forms.gle/4P7SnC229PHzXuRG6",
   email: "contacto@brigadagalgos.cl",
   esponsor: "https://esponsor.com/brigadagalgos",
   instagram: "https://www.instagram.com/brigadagalgos/",

@@ -8,3 +8,14 @@
   display: grid;
   gap: var(--space-3);
 }
+
+.adoption-process__reassurance {
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+  max-width: 68ch;
+}
+
+.adoption-process__reassurance p {
+  margin: 0;
+}

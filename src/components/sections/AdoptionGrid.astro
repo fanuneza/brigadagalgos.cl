@@ -13,8 +13,6 @@ interface Props {
 }
 
 const { dogs } = Astro.props;
-
-const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
 ---
 
 <style is:inline set:html={filterChipsCss}></style>
@@ -52,28 +50,27 @@ const formHref = "https://forms.gle/4P7SnC229PHzXuRG6";
                 <span class="chip chip--sex">{dog.sex}</span>
                 <span class="chip chip--age">{dog.age}</span>
                 <span class="chip chip--weight">{dog.weight}</span>
+                {dog.location && <span class="chip chip--location">{dog.location}</span>}
+                <span class="chip chip--need">{dog.currentNeed}</span>
               </div>
             </div>
             <p class="dog-card__details">{dog.details}</p>
+            <p class="dog-card__sketch">{dog.characterSketch}</p>
             {dog.instagramUrl && (
               <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link">
                 <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
                 <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
               </InstagramLink>
             )}
-            <a
-              href={formHref}
+            <WhatsAppLink
+              text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
+              location="dog_card"
+              label={`Me interesa ${dog.name}`}
               class="btn btn--primary dog-card__cta"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track-event="dog_interest_click"
-              data-track-label={`Me interesa ${dog.name}`}
-              data-track-location="dog_card"
               data-dog-name={dog.name}
-              data-application-form-url={formHref}
             >
               Me interesa {dog.name}
-            </a>
+            </WhatsAppLink>
           </div>
         </article>
       );
