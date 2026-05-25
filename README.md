@@ -331,6 +331,18 @@ Los tests corren en GitHub Actions en el job `validate`, que ejecuta en secuenci
 4. Antes de cerrar tu cambio, ejecuta `npm run build` (incluye verificación de tipos).
 5. Para cambios visibles, considera correr `npm run test:e2e`, `npm run capture:local` y `npm run test:lighthouse`.
 
+## Indexación con jCodemunch
+
+Este repo está preparado para navegarse con `jcodemunch-mcp >= 1.108.23`, versión que incluye soporte para archivos Astro (`.astro`).
+
+Configuración recomendada al indexar la carpeta local:
+
+- Indexar desde la raíz del repo: `C:\Users\fanun\Code\brigadagalgos.cl`.
+- Excluir rutas generadas o de caché: `dist`, `.astro`, `.cache`, `.lighthouseci`, `test-results`, `node_modules`.
+- Validar la sesión con `resolve_repo`, `plan_turn`, `get_repo_outline`, `get_file_tree`, `get_file_outline`, `search_symbols` y `search_text`.
+
+La lógica reusable de datos estructurados, imágenes responsivas del hero y transformación de galgos vive en `src/utils/*.ts` para que aparezca como símbolos TypeScript nombrados. Los archivos `.astro` se mantienen enfocados en composición y markup.
+
 ## Notas
 
 - `dist/`, caches, logs, resultados de pruebas y otros archivos generados no forman parte de la fuente de verdad del proyecto.

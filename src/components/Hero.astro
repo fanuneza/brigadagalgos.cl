@@ -1,19 +1,11 @@
 ---
-import { getImage } from "astro:assets";
 import portraitSrc from "../assets/images/hero-portrait.webp";
 import landscapeSrc from "../assets/images/hero-landscape.webp";
 import heroCss from "../styles/components/hero.css?raw";
-import { buildSrcSet } from "../utils/responsive-gallery-images";
+import { buildHeroImageSources } from "../utils/hero-images";
 import TrackedLink from "./TrackedLink.astro";
 
-const portraitWidths = [360, 420, 540, 640, 720];
-const landscapeWidths = [560, 640, 768, 840, 960, 1120];
-
-const pAvifSrcSet = await buildSrcSet(portraitSrc, "avif", portraitWidths, 60);
-const pWebpSrcSet = await buildSrcSet(portraitSrc, "webp", portraitWidths, 72);
-const lAvifSrcSet = await buildSrcSet(landscapeSrc, "avif", landscapeWidths, 60);
-const lWebpSrcSet = await buildSrcSet(landscapeSrc, "webp", landscapeWidths, 72);
-const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540, quality: 72 });
+const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
 ---
 
 <style is:inline set:html={heroCss}></style>
@@ -23,7 +15,7 @@ const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540,
     <div class="hero__text">
       <h1>Rescatamos, rehabilitamos y reubicamos galgos en Chile</h1>
       <p class="hero__lead">
-        Son tranquilos en casa, se adaptan a departamentos y agradecen profundamente. Son el corazón silencioso de la
+        Son tranquilos en casa, se adaptan a departamentos y agradecen profundamente. Son el corazÃ³n silencioso de la
         familia.
       </p>
       <div class="hero__ctas">
@@ -66,21 +58,21 @@ const pFallback = await getImage({ src: portraitSrc, format: "webp", width: 540,
     <picture class="hero__photo">
       <source
         media="(min-width: 1024px)"
-        srcset={lAvifSrcSet}
+        srcset={heroSources.landscapeAvifSrcSet}
         sizes="(min-width: 1200px) 528px, calc(50vw - 72px)"
         type="image/avif"
       />
       <source
         media="(min-width: 1024px)"
-        srcset={lWebpSrcSet}
+        srcset={heroSources.landscapeWebpSrcSet}
         sizes="(min-width: 1200px) 528px, calc(50vw - 72px)"
         type="image/webp"
       />
-      <source srcset={pAvifSrcSet} sizes="calc((100vw - 48px) / 1.75)" type="image/avif" />
+      <source srcset={heroSources.portraitAvifSrcSet} sizes="calc((100vw - 48px) / 1.75)" type="image/avif" />
       <img
-        srcset={pWebpSrcSet}
+        srcset={heroSources.portraitWebpSrcSet}
         sizes="calc((100vw - 48px) / 1.75)"
-        src={pFallback.src}
+        src={heroSources.portraitFallbackSrc}
         alt="Galgo rescatado mirando hacia adelante"
         class="hero__img"
         loading="eager"

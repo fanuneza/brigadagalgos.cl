@@ -1,21 +1,13 @@
 ---
 import SharedPhotoGallery from "./SharedPhotoGallery.astro";
 import SharedGalleryLightbox from "./SharedGalleryLightbox.astro";
-import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
+import type { StoryDogSummary } from "../utils/dog-content";
 import storiesCss from "../styles/components/stories.css?raw";
 import InstagramLink from "./InstagramLink.astro";
 import { getInstagramHandleLabel } from "../utils/instagram";
 
-interface StoryDog {
-  id: string;
-  name: string;
-  story: string;
-  instagramUrl?: string;
-  photos: SharedGalleryPhoto[];
-}
-
 interface Props {
-  dogs: StoryDog[];
+  dogs: StoryDogSummary[];
   totalCount: number;
   endpoint: string;
 }

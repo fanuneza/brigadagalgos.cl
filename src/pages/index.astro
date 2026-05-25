@@ -12,8 +12,7 @@ import DonationBanner from "../components/DonationBanner.astro";
 import WhyGalgosSection from "../components/sections/WhyGalgosSection.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
-import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
-import { createResponsiveGalleryPhoto } from "../utils/responsive-gallery-images";
+import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
 import { shuffle } from "../utils/shuffle";
 
 const rescueSteps = [
@@ -28,8 +27,8 @@ const rescueSteps = [
     colorClass: "secondary",
   },
   {
-    label: "Atención veterinaria integral",
-    subLabel: "No solo lo básico: hacemos la evaluación y tratamiento que cada caso necesita.",
+    label: "AtenciÃ³n veterinaria integral",
+    subLabel: "No solo lo bÃ¡sico: hacemos la evaluaciÃ³n y tratamiento que cada caso necesita.",
     colorClass: "warm",
   },
   {
@@ -38,31 +37,19 @@ const rescueSteps = [
     colorClass: "green",
   },
   {
-    label: "Match y adopción responsable",
-    subLabel: "Buscamos la familia correcta y acompañamos también después.",
+    label: "Match y adopciÃ³n responsable",
+    subLabel: "Buscamos la familia correcta y acompaÃ±amos tambiÃ©n despuÃ©s.",
     colorClass: "purple",
   },
 ];
 
-const rawStoryDogs = shuffle(await getCollection("success-dogs")).filter((entry) => entry.data.gallery.length > 0);
-const initialStoryDogs = rawStoryDogs.slice(0, 6);
-
-const storyDogs = await Promise.all(
-  initialStoryDogs.map(async (entry) => ({
-    id: entry.id,
-    name: entry.data.name,
-    story: entry.data.story,
-    instagramUrl: entry.data.instagramUrl,
-    photos: await Promise.all(
-      entry.data.gallery.map(async (img): Promise<SharedGalleryPhoto> => createResponsiveGalleryPhoto(img))
-    ),
-  }))
-);
+const rawStoryDogs = shuffle(getEntriesWithGallery(await getCollection("success-dogs")));
+const storyDogs = await buildStoryDogSummaries(rawStoryDogs, 6);
 ---
 
 <BaseLayout
   title="Brigada Galgos | Rescatamos galgos en todo Chile"
-  description="Fundación chilena que rescata, rehabilita y reubica galgos abandonados."
+  description="FundaciÃ³n chilena que rescata, rehabilita y reubica galgos abandonados."
 >
   <Navbar />
   <main id="main-content">

@@ -1,19 +1,11 @@
 ---
 import SharedPhotoGallery from "../SharedPhotoGallery.astro";
-import type { SharedGalleryPhoto } from "../../scripts/shared-gallery";
+import type { StoryDogSummary } from "../../utils/dog-content";
 import InstagramLink from "../InstagramLink.astro";
 import { getInstagramHandleLabel } from "../../utils/instagram";
 
-interface Case {
-  id: string;
-  name: string;
-  story: string;
-  instagramUrl?: string;
-  photos: SharedGalleryPhoto[];
-}
-
 interface Props {
-  cases: Case[];
+  cases: StoryDogSummary[];
 }
 
 const { cases } = Astro.props;
