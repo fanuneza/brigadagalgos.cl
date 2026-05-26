@@ -1,11 +1,10 @@
 ---
 import { SITE } from "../config/site.ts";
-import footerCss from "../styles/components/footer.css?raw";
+import "../styles/components/footer.css";
 
 const currentYear = new Date().getFullYear();
 ---
 
-<style is:inline set:html={footerCss}></style>
 
 <footer class="footer">
   <div class="container footer__grid">

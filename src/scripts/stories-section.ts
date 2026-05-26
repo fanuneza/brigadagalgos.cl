@@ -1,11 +1,9 @@
 export {};
 
-import {
-  buildSharedGalleryMarkup,
-  initSharedGalleries,
-  initSharedGalleryLightbox,
-  type SharedGalleryPhoto,
-} from "./shared-gallery";
+import { buildSharedGalleryMarkup } from "./gallery/markup";
+import { initSharedGalleries } from "./gallery/carousel";
+import { initSharedGalleryLightbox } from "./gallery/lightbox";
+import type { SharedGalleryPhoto } from "./gallery/types";
 import { getInstagramHandleLabel } from "../utils/instagram";
 import { dispatchAnalytics } from "../utils/analytics";
 import { escapeHtml } from "../utils/html-escape";

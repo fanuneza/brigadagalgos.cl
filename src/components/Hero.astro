@@ -1,14 +1,13 @@
 ---
 import portraitSrc from "../assets/images/hero-portrait.webp";
 import landscapeSrc from "../assets/images/hero-landscape.webp";
-import heroCss from "../styles/components/hero.css?raw";
+import "../styles/components/hero.css";
 import { buildHeroImageSources } from "../utils/hero-images";
 import TrackedLink from "./TrackedLink.astro";
 
 const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
 ---
 
-<style is:inline set:html={heroCss}></style>
 
 <section class="hero section-padding" data-track-section="hero">
   <div class="container hero__grid">

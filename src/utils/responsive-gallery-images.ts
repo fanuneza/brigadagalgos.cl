@@ -1,6 +1,6 @@
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
+import type { SharedGalleryPhoto } from "../scripts/gallery/types";
 
 const CARD_WIDTHS = [360, 480, 640];
 const CARD_SIZES =

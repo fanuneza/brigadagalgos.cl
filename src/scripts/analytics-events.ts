@@ -1,4 +1,4 @@
-import { CONSENT_ACCEPTED, getCookie, ensureDataLayer } from "../utils/analytics";
+import { CONSENT_ACCEPTED, getCookie, ensureDataLayer, getTrackingWindow } from "../utils/analytics";
 
 function getConsentCookieName() {
   return document.documentElement.dataset.consentCookie ?? "site_consent";
@@ -21,15 +21,6 @@ type AnalyticsDetail = Omit<DataLayerEvent, "page_path"> & {
 };
 
 type ConsentStatus = "accepted" | "rejected" | "unknown";
-
-type TrackingWindow = Window & {
-  dataLayer?: DataLayerEvent[];
-  __brigadaAnalyticsBound?: boolean;
-};
-
-function getTrackingWindow() {
-  return window as unknown as TrackingWindow;
-}
 
 let sectionObserver: IntersectionObserver | null = null;
 let scrollListenerAttached = false;

@@ -4,8 +4,8 @@ import SharedPhotoGallery from "../SharedPhotoGallery.astro";
 import InstagramLink from "../InstagramLink.astro";
 import WhatsAppLink from "../WhatsAppLink.astro";
 import { getInstagramHandleLabel } from "../../utils/instagram";
-import filterChipsCss from "../../styles/components/filter-chips.css?raw";
-import adoptionGridCss from "../../styles/components/adoption-grid.css?raw";
+import "../../styles/components/filter-chips.css";
+import "../../styles/components/adoption-grid.css";
 import "../../styles/components/dog-card.css";
 
 interface Props {
@@ -15,8 +15,6 @@ interface Props {
 const { dogs } = Astro.props;
 ---
 
-<style is:inline set:html={filterChipsCss}></style>
-<style is:inline set:html={adoptionGridCss}></style>
 
 <div class="filter-chips" role="group" aria-label="Filtrar galgos">
   <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>

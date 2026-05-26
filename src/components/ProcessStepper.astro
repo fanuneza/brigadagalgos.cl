@@ -1,5 +1,5 @@
 ---
-import stepperCss from "../styles/components/stepper.css?raw";
+import "../styles/components/stepper.css";
 
 interface Step {
   label: string;
@@ -16,7 +16,6 @@ interface Props {
 const { steps, eyebrow = "EL PROCESO", heading = "Así rescatamos un galgo" } = Astro.props;
 ---
 
-<style is:inline set:html={stepperCss}></style>
 
 <section class="section-padding stepper-section" data-track-section="rescue_process">
   <div class="container">

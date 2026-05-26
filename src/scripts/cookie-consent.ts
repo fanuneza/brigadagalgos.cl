@@ -1,4 +1,4 @@
-import { CONSENT_ACCEPTED, getCookie } from "../utils/analytics";
+import { CONSENT_ACCEPTED, getCookie, getTrackingWindow } from "../utils/analytics";
 
 const CONSENT_REJECTED = "rejected";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
@@ -10,17 +10,6 @@ function getConsentCookie() {
 
 function getGtmContainerId() {
   return document.documentElement.dataset.gtmId ?? "";
-}
-
-type TrackingWindow = Window & {
-  dataLayer: unknown[];
-  __cookieConsentState?: "granted" | "denied";
-  __gtmInitPromise?: Promise<void>;
-  __gtmBootstrapPushed?: boolean;
-};
-
-function getTrackingWindow() {
-  return window as unknown as TrackingWindow;
 }
 
 function setCookie(name: string, value: string) {

@@ -1,8 +1,8 @@
 ---
-import homeWhyGalgoCss from "../../styles/components/home.css?raw";
+import "../../styles/components/home.css";
+import TrackedLink from "../../components/TrackedLink.astro";
 ---
 
-<style is:inline set:html={homeWhyGalgoCss}></style>
 
 <section class="section-padding" data-track-section="why_galgos">
   <div class="container container--narrow">
@@ -23,16 +23,16 @@ import homeWhyGalgoCss from "../../styles/components/home.css?raw";
       Una frase se repite mucho entre adoptantes: llegan en silencio, encuentran su lugar y terminan siendo parte de la
       casa.
     </p>
-    <a
+    <TrackedLink
       href="/adoptar/"
       class="btn btn--primary home-why-galgo__cta"
-      data-track-event="cta_click"
-      data-track-label="Quiero adoptar"
-      data-track-location="why_galgos"
-      data-track-destination="/adoptar/"
-      data-track-category="adoption"
+      trackEvent="cta_click"
+      trackLabel="Quiero adoptar"
+      trackLocation="why_galgos"
+      trackDestination="/adoptar/"
+      trackCategory="adoption"
     >
       Quiero adoptar
-    </a>
+    </TrackedLink>
   </div>
 </section>

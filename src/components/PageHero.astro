@@ -1,4 +1,6 @@
 ---
+import TrackedLink from "./TrackedLink.astro";
+
 interface Props {
   eyebrow: string;
   h1: string;
@@ -33,18 +35,18 @@ const {
     {lead && <p class="page-hero__lead">{lead}</p>}
     {leadBold && <p class="page-hero__lead page-hero__lead--bold">{leadBold}</p>}
     {
-      ctaText && (
-        <a
+      ctaText && ctaHref && (
+        <TrackedLink
           href={ctaHref}
           class={`btn btn--${ctaVariant}`}
-          data-track-event="cta_click"
-          data-track-label={ctaTrackLabel ?? ctaText}
-          data-track-location={ctaTrackLocation}
-          data-track-destination={ctaHref}
-          data-track-category={ctaTrackCategory}
+          trackEvent="cta_click"
+          trackLabel={ctaTrackLabel ?? ctaText}
+          trackLocation={ctaTrackLocation ?? ""}
+          trackDestination={ctaHref}
+          trackCategory={ctaTrackCategory}
         >
           {ctaText}
-        </a>
+        </TrackedLink>
       )
     }
   </div>

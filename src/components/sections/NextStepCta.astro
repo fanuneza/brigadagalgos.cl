@@ -1,5 +1,5 @@
 ---
-
+import TrackedLink from "../../components/TrackedLink.astro";
 ---
 
 <section class="section-padding">
@@ -13,28 +13,28 @@
         rescate.
       </p>
       <div class="why-galgos__cta-actions">
-        <a
+        <TrackedLink
           href="/adoptar/"
           class="btn btn--primary"
-          data-track-event="cta_click"
-          data-track-label="Quiero adoptar"
-          data-track-location="why_galgos"
-          data-track-destination="/adoptar/"
-          data-track-category="adoption"
+          trackEvent="cta_click"
+          trackLabel="Quiero adoptar"
+          trackLocation="why_galgos"
+          trackDestination="/adoptar/"
+          trackCategory="adoption"
         >
           Quiero adoptar
-        </a>
-        <a
+        </TrackedLink>
+        <TrackedLink
           href="/hogar-temporal/"
           class="btn btn--secondary"
-          data-track-event="cta_click"
-          data-track-label="Puedo ser hogar temporal"
-          data-track-location="why_galgos"
-          data-track-destination="/hogar-temporal/"
-          data-track-category="foster"
+          trackEvent="cta_click"
+          trackLabel="Puedo ser hogar temporal"
+          trackLocation="why_galgos"
+          trackDestination="/hogar-temporal/"
+          trackCategory="foster"
         >
           Puedo ser hogar temporal
-        </a>
+        </TrackedLink>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ export const CONSENT_ACCEPTED = "accepted";
 
 export function getTrackingWindow() {
   return window as Window & {
-    dataLayer?: unknown[];
+    dataLayer: unknown[];
     __brigadaAnalyticsBound?: boolean;
     __cookieConsentState?: "granted" | "denied";
     __gtmInitPromise?: Promise<void>;

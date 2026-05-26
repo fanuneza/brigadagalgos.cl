@@ -1,4 +1,5 @@
-import { initSharedGalleries, initSharedGalleryLightbox } from "./shared-gallery";
+import { initSharedGalleryLightbox } from "./gallery/lightbox";
+import { initSharedGalleries } from "./gallery/carousel";
 
 document.addEventListener("astro:page-load", () => {
   initSharedGalleryLightbox();

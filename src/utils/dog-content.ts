@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
+import type { SharedGalleryPhoto } from "../scripts/gallery/types";
 import { createResponsiveGalleryPhoto } from "./responsive-gallery-images";
 
 const MAX_DOG_GALLERY_IMAGES = 3;

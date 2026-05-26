@@ -1,12 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import trustStatsCss from "../../styles/components/trust-stats.css?raw";
+import "../../styles/components/trust-stats.css";
 
 const adoptionDogCount = (await getCollection("adoption-dogs")).length;
 const yearsActive = Math.max(new Date().getFullYear() - 2023, 1);
 ---
 
-<style is:inline set:html={trustStatsCss}></style>
 
 <section class="section-padding trust-stats">
   <div class="container">
