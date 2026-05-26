@@ -75,3 +75,27 @@ test("filter chips handle empty results and restore on reset", async ({ page }) 
   await expect(cards).toHaveCount(totalCards);
   await expect(emptyMessage).toBeHidden();
 });
+
+test("adoption galleries expose up to three optimized photos", async ({ page }) => {
+  await page.goto("/adoptar/", { waitUntil: "networkidle" });
+
+  const payloads = await page
+    .locator("[data-shared-gallery]")
+    .evaluateAll((galleries) =>
+      galleries.map((gallery) => JSON.parse(gallery.getAttribute("data-gallery-payload") ?? "{}"))
+    );
+
+  expect(payloads.length).toBeGreaterThan(0);
+
+  for (const payload of payloads) {
+    expect(payload.photos.length).toBeGreaterThan(0);
+    expect(payload.photos.length).toBeLessThanOrEqual(3);
+
+    for (const photo of payload.photos) {
+      expect(photo.cardWebpSrcSet).toBeUndefined();
+      expect(photo.cardAvifSrcSet.split(",")).toHaveLength(3);
+      expect(photo.cardFallbackSrc).toMatch(/\.webp$/);
+      expect(photo.lightbox).toMatch(/\.avif$/);
+    }
+  }
+});

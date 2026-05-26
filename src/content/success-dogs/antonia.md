@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/antonia/antonia-01.jpg
   - ../../assets/casos/exito/antonia/antonia-02.jpg
   - ../../assets/casos/exito/antonia/antonia-03.jpg
-  - ../../assets/casos/exito/antonia/antonia-04.jpg
-  - ../../assets/casos/exito/antonia/antonia-05.jpg
-  - ../../assets/casos/exito/antonia/antonia-06.jpg
 ---

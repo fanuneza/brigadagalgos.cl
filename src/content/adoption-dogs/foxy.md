@@ -12,7 +12,4 @@ gallery:
   - ../../assets/casos/adopcion/foxy/foxy-01.jpg
   - ../../assets/casos/adopcion/foxy/foxy-02.jpg
   - ../../assets/casos/adopcion/foxy/foxy-03.jpg
-  - ../../assets/casos/adopcion/foxy/foxy-04.jpg
-  - ../../assets/casos/adopcion/foxy/foxy-05.jpg
-  - ../../assets/casos/adopcion/foxy/foxy-06.jpg
 ---

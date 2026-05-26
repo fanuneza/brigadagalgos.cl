@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/bruno/bruno-01.jpg
   - ../../assets/casos/exito/bruno/bruno-02.jpg
   - ../../assets/casos/exito/bruno/bruno-03.jpg
-  - ../../assets/casos/exito/bruno/bruno-04.jpg
-  - ../../assets/casos/exito/bruno/bruno-05.jpg
-  - ../../assets/casos/exito/bruno/bruno-06.jpg
 ---

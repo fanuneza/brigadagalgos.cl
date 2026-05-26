@@ -12,8 +12,8 @@ export interface HeroImageSources {
   portraitFallbackSrc: string;
 }
 
-const PORTRAIT_WIDTHS = [360, 420, 540, 640, 720];
-const LANDSCAPE_WIDTHS = [560, 640, 768, 840, 960, 1120];
+const PORTRAIT_WIDTHS = [360, 540, 720];
+const LANDSCAPE_WIDTHS = [640, 960, 1120];
 
 export function buildResponsiveImageSrcSet(
   src: ImageMetadata,

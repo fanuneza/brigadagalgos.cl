@@ -16,7 +16,7 @@ const adoptionDogs = defineCollection({
       characterSketch: z.string(),
       instagramUrl: z.url().optional(),
       order: z.number().int().optional(),
-      gallery: z.array(image()),
+      gallery: z.array(image()).max(3),
     }),
 });
 
@@ -27,7 +27,7 @@ const successDogs = defineCollection({
       name: z.string(),
       story: z.string(),
       instagramUrl: z.url().optional(),
-      gallery: z.array(image()).default([]),
+      gallery: z.array(image()).max(3).default([]),
     }),
 });
 

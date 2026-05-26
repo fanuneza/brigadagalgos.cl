@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/bianca/bianca-01.jpg
   - ../../assets/casos/exito/bianca/bianca-02.jpg
   - ../../assets/casos/exito/bianca/bianca-03.jpg
-  - ../../assets/casos/exito/bianca/bianca-04.jpg
-  - ../../assets/casos/exito/bianca/bianca-05.jpg
-  - ../../assets/casos/exito/bianca/bianca-06.jpg
 ---

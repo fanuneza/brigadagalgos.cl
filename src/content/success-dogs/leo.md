@@ -6,5 +6,4 @@ gallery:
   - ../../assets/casos/exito/leo/leo-01.jpg
   - ../../assets/casos/exito/leo/leo-02.jpg
   - ../../assets/casos/exito/leo/leo-03.jpg
-  - ../../assets/casos/exito/leo/leo-04.jpg
 ---

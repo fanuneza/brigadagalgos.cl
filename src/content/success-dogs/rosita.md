@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/rosita/rosita-01.jpg
   - ../../assets/casos/exito/rosita/rosita-02.jpg
   - ../../assets/casos/exito/rosita/rosita-03.jpg
-  - ../../assets/casos/exito/rosita/rosita-04.jpg
-  - ../../assets/casos/exito/rosita/rosita-05.jpg
-  - ../../assets/casos/exito/rosita/rosita-06.jpg
 ---

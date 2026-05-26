@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/sofia-canela/sofia-canela-01.jpg
   - ../../assets/casos/exito/sofia-canela/sofia-canela-02.jpg
   - ../../assets/casos/exito/sofia-canela/sofia-canela-03.jpg
-  - ../../assets/casos/exito/sofia-canela/sofia-canela-04.jpg
-  - ../../assets/casos/exito/sofia-canela/sofia-canela-05.jpg
-  - ../../assets/casos/exito/sofia-canela/sofia-canela-06.jpg
 ---

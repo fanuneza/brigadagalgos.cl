@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/benito/benito-01.jpg
   - ../../assets/casos/exito/benito/benito-02.jpg
   - ../../assets/casos/exito/benito/benito-03.jpg
-  - ../../assets/casos/exito/benito/benito-04.jpg
-  - ../../assets/casos/exito/benito/benito-05.jpg
-  - ../../assets/casos/exito/benito/benito-06.jpg
 ---

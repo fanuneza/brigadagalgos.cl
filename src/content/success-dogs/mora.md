@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/mora/mora-01.jpg
   - ../../assets/casos/exito/mora/mora-02.jpg
   - ../../assets/casos/exito/mora/mora-03.jpg
-  - ../../assets/casos/exito/mora/mora-04.jpg
-  - ../../assets/casos/exito/mora/mora-05.jpg
-  - ../../assets/casos/exito/mora/mora-06.jpg
 ---

@@ -5,8 +5,4 @@ gallery:
   - ../../assets/casos/exito/francia/francia-01.jpg
   - ../../assets/casos/exito/francia/francia-02.jpg
   - ../../assets/casos/exito/francia/francia-03.jpg
-  - ../../assets/casos/exito/francia/francia-04.jpg
-  - ../../assets/casos/exito/francia/francia-05.jpg
-  - ../../assets/casos/exito/francia/francia-06.jpg
-  - ../../assets/casos/exito/francia/francia-07.jpg
 ---

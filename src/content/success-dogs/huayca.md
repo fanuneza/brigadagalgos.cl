@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/huayca/huayca-01.jpg
   - ../../assets/casos/exito/huayca/huayca-02.jpg
   - ../../assets/casos/exito/huayca/huayca-03.jpg
-  - ../../assets/casos/exito/huayca/huayca-04.jpg
-  - ../../assets/casos/exito/huayca/huayca-05.jpg
-  - ../../assets/casos/exito/huayca/huayca-06.jpg
 ---

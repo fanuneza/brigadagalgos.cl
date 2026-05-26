@@ -5,7 +5,6 @@ import { escapeAttribute } from "../utils/html-escape";
 
 export interface SharedGalleryPhoto {
   cardAvifSrcSet?: string;
-  cardWebpSrcSet: string;
   cardSizes: string;
   cardFallbackSrc: string;
   lightbox: string;
@@ -58,11 +57,8 @@ function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, loading: "la
   return `
     <picture>
       ${avifSource}
-      <source srcset="${photo.cardWebpSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/webp" />
       <img
         src="${photo.cardFallbackSrc}"
-        srcset="${photo.cardWebpSrcSet}"
-        sizes="${escapeAttribute(photo.cardSizes)}"
         alt="${escapeAttribute(alt)}"
         class="story-card__img"
         loading="${loading}"

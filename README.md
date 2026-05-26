@@ -106,7 +106,7 @@ src/
     analytics.ts            # Helpers compartidos para consentimiento y dataLayer
     html-escape.ts          # Escape seguro para HTML generado en cliente
     instagram.ts            # Extracción de handle de Instagram desde URL
-    responsive-gallery-images.ts
+    responsive-gallery-images.ts # Genera variantes AVIF/WebP para galerias compartidas
     shuffle.ts
 scripts/                    # Scripts de build y utilidades (root)
   normalize-dog-images.mjs  # Normalización de nombres de imágenes de galgos
@@ -130,7 +130,7 @@ Cada perfil se define como un archivo Markdown con frontmatter:
 - `details` — Descripción del perfil
 - `instagramUrl` — URL de Instagram del perfil (opcional)
 - `order` — Orden de aparición (número, opcional)
-- `gallery` — Array de imágenes (procesadas por `astro:assets`)
+- `gallery` — Array de imágenes (procesadas por `astro:assets`). Máximo 3 fotos por galgo.
 
 ### Historias de éxito (`src/content/success-dogs/`)
 
@@ -139,10 +139,33 @@ Cada historia se define como un archivo Markdown con frontmatter:
 - `name` — Nombre del galgo
 - `story` — Texto de la historia
 - `instagramUrl` — URL de Instagram de la historia (opcional)
-- `gallery` — Array de imágenes (procesadas por `astro:assets`)
+- `gallery` — Array de imágenes (procesadas por `astro:assets`). Máximo 3 fotos por galgo.
 
 En `/por-que-galgos`, se seleccionan 3 historias al azar de esta colección en cada build.
 En home, `StoriesSection.astro` renderiza una tanda inicial y completa el resto vía `/casos/exito-home.json` con paginación client-side.
+
+## Imagenes y galerias
+
+Las fotos de galgos viven en `src/assets/casos/` y se referencian desde el frontmatter `gallery` de `src/content/adoption-dogs/*.md` y `src/content/success-dogs/*.md`.
+
+Contrato actual:
+
+- Cada galgo debe tener como maximo 3 fotos en `gallery`. El esquema de `src/content.config.ts` lo valida con `.max(3)`.
+- `src/utils/dog-content.ts` tambien limita defensivamente a 3 fotos al construir tarjetas y resumenes de historias.
+- Las galerias compartidas usan `src/utils/responsive-gallery-images.ts`.
+- Para cards, se generan 3 variantes AVIF: `360w`, `480w` y `640w`.
+- Para fallback sin AVIF, se genera una sola imagen WebP media de `480w`.
+- Para lightbox, se genera una imagen AVIF de `1200w`.
+- No se genera `srcset` WebP para cards; PSI en Chrome usa el `srcset` AVIF y navegadores sin AVIF reciben el WebP de fallback.
+
+Otras imagenes responsivas tambien deben mantenerse acotadas:
+
+- Hero portrait: `360w`, `540w`, `720w`.
+- Hero landscape: `640w`, `960w`, `1120w`.
+- Editorial de `/por-que-galgos`: `400w`, `600w`, `728w`.
+- Logos de colaboradores: `240w`, `360w`, `480w`.
+
+Si cambias tamanos, valida el impacto con `npm run build`: Astro reporta el total de imagenes optimizadas en la fase `generating optimized images`.
 
 ### Colaboradores (`src/content/supporters/`)
 
@@ -232,10 +255,12 @@ El proyecto tiene las siguientes suites de tests bajo `tests/visual/`, todas eje
 | `analytics-consent.spec.ts` | Verifica el flujo de consentimiento de cookies, carga de GTM, CSP headers y eventos de dataLayer. |
 | `nav.spec.ts`               | Verifica el comportamiento del navbar (drawer móvil, foco, escape).                               |
 | `filter-chips.spec.ts`      | Verifica el filtrado de galgos en `/adoptar`.                                                     |
-| `stories-section.spec.ts`   | Verifica la carga y paginación de historias de éxito.                                             |
+| `stories-section.spec.ts`   | Verifica la carga, paginación y contrato de galerías optimizadas de historias de éxito.           |
 | `a11y.spec.ts`              | Escanea todas las páginas con axe-core buscando violaciones WCAG 2.1 AA.                          |
 | `capture.spec.ts`           | Genera screenshots full-page en 4 viewports (1440, 1200, 810, 390). Se omite en CI.               |
 | `smoke.spec.ts`             | Smoke tests de rutas críticas (`/`, `/adoptar/`, `/contacto/`, `/donar/`).                        |
+
+`filter-chips.spec.ts` tambien valida que las galerias de adopcion expongan hasta 3 fotos, 3 variantes AVIF de card y un fallback WebP sin `cardWebpSrcSet`.
 
 ### Requisitos para tests
 

@@ -2,6 +2,8 @@ import type { CollectionEntry } from "astro:content";
 import type { SharedGalleryPhoto } from "../scripts/shared-gallery";
 import { createResponsiveGalleryPhoto } from "./responsive-gallery-images";
 
+const MAX_DOG_GALLERY_IMAGES = 3;
+
 export interface AdoptionDogCard {
   id: string;
   name: string;
@@ -45,7 +47,9 @@ export async function buildAdoptionDogCards(entries: CollectionEntry<"adoption-d
       currentNeed: entry.data.currentNeed,
       characterSketch: entry.data.characterSketch,
       instagramUrl: entry.data.instagramUrl,
-      pictures: await Promise.all(entry.data.gallery.map((img) => createResponsiveGalleryPhoto(img))),
+      pictures: await Promise.all(
+        entry.data.gallery.slice(0, MAX_DOG_GALLERY_IMAGES).map((img) => createResponsiveGalleryPhoto(img))
+      ),
     }))
   );
 }
@@ -62,7 +66,9 @@ export async function buildStoryDogSummaries(
       name: entry.data.name,
       story: entry.data.story,
       instagramUrl: entry.data.instagramUrl,
-      photos: await Promise.all(entry.data.gallery.map((img) => createResponsiveGalleryPhoto(img))),
+      photos: await Promise.all(
+        entry.data.gallery.slice(0, MAX_DOG_GALLERY_IMAGES).map((img) => createResponsiveGalleryPhoto(img))
+      ),
     }))
   );
 }

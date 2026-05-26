@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/capri/capri-01.jpg
   - ../../assets/casos/exito/capri/capri-02.jpg
   - ../../assets/casos/exito/capri/capri-03.jpg
-  - ../../assets/casos/exito/capri/capri-04.jpg
-  - ../../assets/casos/exito/capri/capri-05.jpg
-  - ../../assets/casos/exito/capri/capri-06.jpg
 ---

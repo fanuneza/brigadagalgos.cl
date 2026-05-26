@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/parmesana/parmesana-01.jpg
   - ../../assets/casos/exito/parmesana/parmesana-02.jpg
   - ../../assets/casos/exito/parmesana/parmesana-03.jpg
-  - ../../assets/casos/exito/parmesana/parmesana-04.jpg
-  - ../../assets/casos/exito/parmesana/parmesana-05.jpg
-  - ../../assets/casos/exito/parmesana/parmesana-06.jpg
 ---

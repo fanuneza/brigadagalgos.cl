@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/lisbeth/lisbeth-01.jpg
   - ../../assets/casos/exito/lisbeth/lisbeth-02.jpg
   - ../../assets/casos/exito/lisbeth/lisbeth-03.jpg
-  - ../../assets/casos/exito/lisbeth/lisbeth-04.jpg
-  - ../../assets/casos/exito/lisbeth/lisbeth-05.jpg
-  - ../../assets/casos/exito/lisbeth/lisbeth-06.jpg
 ---

@@ -5,7 +5,4 @@ gallery:
   - ../../assets/casos/exito/praga/praga-01.jpg
   - ../../assets/casos/exito/praga/praga-02.jpg
   - ../../assets/casos/exito/praga/praga-03.jpg
-  - ../../assets/casos/exito/praga/praga-04.jpg
-  - ../../assets/casos/exito/praga/praga-05.jpg
-  - ../../assets/casos/exito/praga/praga-06.jpg
 ---

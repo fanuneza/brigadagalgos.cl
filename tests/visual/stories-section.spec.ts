@@ -60,7 +60,6 @@ test("Ver mas preserves Instagram links from the stories endpoint", async ({ pag
           instagramUrl: "https://www.instagram.com/roma_galga/",
           photos: [
             {
-              cardWebpSrcSet: "/favicon.svg 350w",
               cardSizes: "(min-width: 1024px) 350px, calc(100vw - 3rem)",
               cardFallbackSrc: "/favicon.svg",
               lightbox: "/favicon.svg",
@@ -137,4 +136,28 @@ test("Ver mas button hides when all stories are loaded", async ({ page }) => {
   }
 
   await expect(button).toBeHidden();
+});
+
+test("success story galleries expose up to three optimized photos", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  const payloads = await page
+    .locator("[data-shared-gallery]")
+    .evaluateAll((galleries) =>
+      galleries.map((gallery) => JSON.parse(gallery.getAttribute("data-gallery-payload") ?? "{}"))
+    );
+
+  expect(payloads.length).toBeGreaterThan(0);
+
+  for (const payload of payloads) {
+    expect(payload.photos.length).toBeGreaterThan(0);
+    expect(payload.photos.length).toBeLessThanOrEqual(3);
+
+    for (const photo of payload.photos) {
+      expect(photo.cardWebpSrcSet).toBeUndefined();
+      expect(photo.cardAvifSrcSet.split(",")).toHaveLength(3);
+      expect(photo.cardFallbackSrc).toMatch(/\.webp$/);
+      expect(photo.lightbox).toMatch(/\.avif$/);
+    }
+  }
 });
