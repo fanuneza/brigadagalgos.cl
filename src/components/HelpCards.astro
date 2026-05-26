@@ -1,5 +1,4 @@
 ---
-import { SITE } from "../config/site.ts";
 import helpCardsCss from "../styles/components/help-cards.css?raw";
 ---
 
@@ -90,16 +89,13 @@ import helpCardsCss from "../styles/components/help-cards.css?raw";
           Tu aporte ayuda a sostener comida, atenci&oacute;n veterinaria, traslados y acogida mientras esperan familia.
         </p>
         <a
-          href={SITE.esponsor}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/donar/"
           class="card__cta"
           data-track-event="cta_click"
           data-track-label="Voy a apoyar un galgo"
           data-track-location="help_cards"
-          data-track-destination={SITE.esponsor}
+          data-track-destination="/donar/"
           data-track-category="donation"
-          data-track-outbound="true"
         >
           Voy a apoyar un galgo &rarr;
         </a>
