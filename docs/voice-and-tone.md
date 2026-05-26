@@ -1,295 +1,212 @@
-# Brigada Galgos - Voice & Tone Style Guide
+# Brigada Galgos Voice and Tone
 
-## 1. Brand voice in one paragraph
+Use this guide for all site copy. It is the source of truth for voice, tone, rhythm, punctuation, CTAs, adoption copy, foster copy, donation copy, FAQs, dog profiles, and success stories.
 
-Brigada Galgos writes the way a trusted friend speaks from the middle of a hard situation: informal, warm, direct. The register is first-person plural throughout ("rescatamos", "logramos", "necesitamos"), positioning the foundation as an active participant in every story, not a distant narrator. Sentences are short and declarative when stakes are high; facts carry the weight instead of superlatives. The emotional range is wide but disciplined - grief, urgency and joy all appear without feeling theatrical. Every dog is an individual with a name, a history and specific traits; suffering is documented and real, but always the beginning of the story, never the whole of it. The foundation sounds like people who are tired, running on love and debt, and not embarrassed to say either.
+## Brand Voice
 
----
+Brigada Galgos sounds like a trusted friend speaking from the middle of a hard situation. The voice is informal, warm, direct, and honest. We write in first-person plural whenever the foundation is speaking: "rescatamos", "logramos", "necesitamos", "fuimos", "estamos contigo".
 
-## 2. Core tone pillars
+Facts carry the emotion. Use specific names, conditions, costs, timelines, places, and actions whenever they are confirmed. Do not invent details. If a fact is unknown, keep the copy general or ask.
 
-### Warm precision
-Use specific details - names, weights, costs, timelines - not vague emotional appeals. "Está famélica, pesa tan solo 12,6 kilos" builds more trust than "está muy mal". Numbers are credibility. Use them freely.
+Every dog is an individual, not a category. Give each dog a name, a few specific traits, and a sense of what life with that dog feels like. Suffering can be part of the story, but it is never the whole story. The pattern is simple: acknowledge the reality, say what we did, then show what can happen next.
 
-### Honest momentum
-Report hard reality clinically, then pivot to action. Never dwell on suffering for its own sake. The pattern is: *acknowledge → what we did → what you can do now*.
+The tone can hold grief, urgency, exhaustion, debt, care, and joy. Keep it disciplined. Do not guilt-trip, dramatize, or write as if the foundation is a distant institution.
 
-### Portraits, not categories
-Every dog gets a name and a character sketch. "Fermín es dulce, tranquilo y agradecido, de esos que se acomodan en el sillón como si siempre hubieran sido parte de tu casa." That is not a generic description - it is a portrait. Dogs are never interchangeable.
+## Core Rules
 
-### Quiet optimism
-Celebrate adoption and success with restraint. "Es que poner un galgo en nuestras vidas hace que todo sea más bonito." The understatement is intentional - it trusts the reader.
+- Write in warm, direct Spanish with neutral tuteo.
+- Prefer "tú", "te", "hazte", "escríbenos", and "cuéntanos".
+- Avoid voseo, usted, heavy chilenismos, institutional phrasing, and generic rescue cliches.
+- Use first-person plural for the foundation. Say "rescatamos", not "la fundación rescata".
+- Lead with practical reassurance when readers may be worried about space, cost, time, children, other animals, inexperience, or what happens if adoption does not work.
+- Mention post-adoption support anywhere adoption is discussed.
+- Keep cruelty and advocacy secondary on adoption pages. Lead with the new life a galgo can have.
+- Use clear verb-first CTAs: "Quiero adoptar", "Puedo ser hogar temporal", "Voy a apoyar un galgo", "Escríbenos", "Postula aquí".
+- Use emojis only when they add emotional clarity. Never use emoji-only CTAs.
+- For loss or death, address the dog directly, close with gratitude, and do not turn the moment into a fundraising ask.
+- For success stories, use one specific detail and keep the celebration restrained.
+- For social proof, use confirmed stats and real voices. Attribute quotes with first name and city when available.
 
----
+## Punctuation and Rhythm
 
-## 3. Do / Don't matrix
-
-| Dimension | Do | Don't |
-|---|---|---|
-| **Register** | Informal, warm, direct - como un WhatsApp de alguien de confianza | Institutional language ("la fundación se complace en…") |
-| **Address** | Tuteo neutral: "tú", "te", "hazte" | Voseo or heavy chilenismos that exclude non-Chilean readers |
-| **Dog descriptions** | Name + specific traits + short history | Generic labels ("adorable cachorro", "peludo ángel") |
-| **Urgency** | State facts plainly: weight, condition, cost, timeline | Guilt-tripping or exaggerated alarm |
-| **Heavy content** | Report clinically, then pivot to action | Dwell on suffering or use graphic descriptions for shock |
-| **Adoption framing** | Celebratory and specific: "¡Mora adoptada! Su hogar temporal no se pudo resistir." | Desperate pleading ("nadie quiere a estos perritos") |
-| **CTAs** | Verb-first imperatives: "Hazte socio", "Postula aquí", "Escríbenos" | Long asks with excessive justification |
-| **Numbers** | Use freely - they build trust ("$5.000 mensuales", "2 meses", "12,6 kilos") | Round off or omit specifics for the sake of flow |
-| **Sentence length** | Short declaratives for facts; longer only for portraits and grief | Long compound sentences with multiple subordinate clauses |
-| **Loss / death** | Address the dog directly; close with gratitude | Euphemize, avoid it, or turn it into a fundraising moment |
-| **Foundation stance** | First-person plural, actively present: "fuimos", "rescatamos" | Passive constructions that distance the team from action |
-| **Emojis** | Functional: reinforce tone at emotional beats (💔 grief, 🐾 CTAs) | Decorative overuse or word-substituting emoji chains |
-| **Success stories** | One specific, concrete detail: "Ahora estarán juntos recorriendo la vida." | Saccharine closes ("¡felices para siempre!") or over-explained resolutions |
-| **Mission statement** | Short, plain, three-part: "rescatamos, rehabilitamos, reubicamos" | Abstract mission language without concrete verbs |
-| **Advocacy/cruelty** | Keep secondary - lead with adoption, foster and hopeful outcomes | Let racing cruelty dominate; despair blocks action |
-| **Post-adoption support** | Mention explicitly: "Seguimos acompañándote después de la adopción." | Go silent after handoff; it creates fear in hesitant adopters |
-
----
-
-## 4. Punctuation and rhythm
-
-These rules apply to all site copy.
-
-- Never use em dashes.
-- Use semicolons rarely. If a semicolon can become a period, use a period instead.
-- Use colons sparingly. A few are fine when they help clarity, but avoid repeated colon-led sentences on the same screen.
+- Never use em dashes in site copy.
+- Use semicolons rarely. If a semicolon can become a period, use a period.
+- Use colons sparingly. A few are fine when they help clarity, but avoid repeating colon-led sentences on the same screen.
 - Avoid the three-of-a-kind AI cliche. Lists of three can work when they add rhythm or specificity, but do not default to them. If the pattern appears repeatedly, rewrite most of the cases.
+- Use short declarative sentences for facts and stakes.
+- Use longer sentences only when they help a portrait, a transition, or a moment of grief.
+- Avoid exclamation inflation. Use at most one exclamation mark when celebration genuinely needs it.
 
----
+## Words and Patterns to Avoid
 
-## 5. Per-page copy patterns
+Never use the verb "encajar" in site copy, including "encaja", "encajan", "encaje" or "encajaría". Prefer "puede estar bien contigo", "es adecuado para tu hogar", "calza con tu momento" or a plainer sentence.
 
-### Home - hero
-**Goal:** Explain who Brigada is and invite the three primary actions in under five seconds.
+Avoid:
 
-Pattern: mission line + greyhound temperament reassurance + three CTAs.
+- "Nadie quiere a estos perritos"
+- "URGENTE" as a generic opener
+- "Ayúdanos a seguir" without a concrete outcome
+- "La fundación se complace en informar"
+- "Peludo ángel", "adorable cachorro" and generic labels
+- Long adoption criteria written like warnings
+- Saccharine closes like "felices para siempre"
+- Copy that disappears after handoff and does not mention support
 
-> "Rescatamos, rehabilitamos y reubicamos galgos en Chile para que puedan vivir, por fin, como los perros de familia que siempre merecieron ser."
+Prefer:
 
-Follow with 1–2 lines on temperament: calm indoors, short walks, grateful companions.
+- "Estos galgos están listos para encontrar su familia. Faltan los hogares."
+- "No necesitas tener todo resuelto antes de escribirnos."
+- "Te preguntamos por tu rutina y tu casa no para juzgarte, sino para que el galgo esté seguro."
+- "Seguimos acompañándote después de la adopción."
+- "Ahora estarán juntos recorriendo la vida."
 
-Three buttons in hero and sticky header (verb-first, first-person micro-copy):
-- "Quiero adoptar"
-- "Puedo ser hogar temporal"
-- "Voy a apoyar un galgo"
+## Page Patterns
 
-### Home - why a galgo?
-**Goal:** Answer "¿Un galgo podría vivir conmigo?" before the visitor asks.
+### Home
 
-Use 3–5 short bullets. Be concrete about what daily life actually looks like.
+Explain who Brigada is and invite the three main actions fast: adopt, offer a hogar temporal, and donate.
 
-> - Son tranquilos en casa y se adaptan bien a departamentos.
-> - Con dos caminatas cortas al día están felices.
-> - Agradecen profundamente y se convierten en el corazón silencioso de la familia.
-> - La mayoría se lleva bien con niños y otros animales con presentación adecuada.
+Use a mission line plus practical reassurance about galgos. Mention that they are calm indoors, need regular walks, and can become deeply loved family companions. Keep the CTAs clear and active.
 
-### Home - stats / social proof
-**Goal:** Build credibility with numbers and voices.
+Use confirmed stats and short adopter quotes where they help build trust. Do not invent rescue counts, adoption counts, names, cities, or quotes.
 
-Pattern: 2–4 stats + 1–2 adopter quotes.
+Example:
 
-> "Desde 20XX hemos rescatado más de X galgos y encontrado Y hogares seguros en Chile."
+> Rescatamos, rehabilitamos y reubicamos galgos en Chile para que puedan vivir, por fin, como los perros de familia que siempre merecieron ser.
 
-Quotes: first name + city, one sentence, specific detail.
+### Why Galgos
 
-> "'Adoptar a Mora cambió nuestra casa - es el corazón calmo de nuestra familia ahora.' - Claudia, Santiago"
+Answer "¿Un galgo podría vivir conmigo?" before the visitor asks. Be concrete about daily life.
 
-### Adoptar - dog grid
-**Goal:** Connect visitor with an individual dog, not a category.
+Cover:
 
-Each card: photo · name · age · brief character sketch (2–3 lines) · clear CTA.
+- Calm home life and adaptation to departments
+- Walks and routine
+- Children, dogs, cats, and small animals with honest caveats
+- The kind of companionship galgos tend to offer
 
-> "Luna es tímida al principio pero se convierte en payasa en el living - los juguetes y los mimos son su idioma. Necesita una familia paciente con tiempo para ganar su confianza."
->
-> → "Me interesa Luna" (abre WhatsApp prefilled)
+Do not overpromise. Say "muchos", "la mayoría" or "caso a caso" when that is more honest than a universal claim.
 
-Never say "busca hogar urgente" without also naming one trait that makes that dog lovable.
+### Adoption
 
-### Cómo adoptar
-**Goal:** Make the process feel doable and non-bureaucratic.
+Make adoption feel clear, accompanied, and possible. Use no more than four steps.
 
-Numbered steps, no more than four. Answer 1–2 anxieties under each.
+Cover:
 
-1. **Cuéntanos de tu hogar** - formulario corto o WhatsApp. No necesitas experiencia previa.
-2. **Hablamos** - te llamamos para entender tu rutina y espacio.
-3. **Te hacemos el match** - conocemos a cada galgo y buscamos una alternativa buena para tu vida.
-4. **Período de prueba** - lo llevas a casa y estamos contigo paso a paso.
+1. The person writes by WhatsApp or form.
+2. We talk about routine, home, expectations, and current animals.
+3. We suggest a galgo who may be a good fit.
+4. The galgo starts a trial period at home and Brigada stays present.
 
-> "De tu primer mensaje al galgo en tu sillón, estamos contigo en cada paso."
+Always explain that the questions are for safety and matching, not judgment. Always mention what happens if the match does not work.
 
-Close with reassurance about support and returns:
-> "Si el match no funciona, trabajamos juntos para encontrar la mejor solución para ti y para el galgo."
+Example:
 
-### Hogar temporal
-**Goal:** Recruit fosters - especially people who can't commit permanently.
+> De tu primer mensaje al galgo en tu sillón, estamos contigo en cada paso.
 
-Hero line that reframes "temporary" as powerful:
+### Dog Profiles
 
-> "¿No puedes adoptar todavía? Unas semanas en tu casa pueden cambiar la historia completa de un galgo."
+Connect the visitor with an individual dog. Each profile or card should include a photo, name, age when known, and a short character sketch.
 
-Contrast short time commitment with long-term impact:
+Good profile copy names one concrete behavior and what it tells us:
 
-> "El cuidado es temporal para ti, pero es el puente entre el miedo en la calle y una familia para siempre."
+> Bruno todavía se asusta con ruidos fuertes, pero ya aprendió que las manos significan mimos, no daño.
 
-What Brigada covers vs. what the foster provides - short two-column list. Never guilt-trip about commitment. Invite with "un rincón tranquilo y paciencia" as the bar.
+Never say only "busca hogar urgente". If urgency is real, pair it with a trait that helps the reader imagine the dog as family.
 
-Show 2–3 short foster stories. First-person quotes from real fosters about what the goodbye feels like and why it's worth it.
+### Hogar Temporal
 
-### Cómo ser hogar temporal
-**Goal:** Turn curiosity into a sign-up by clarifying what to expect.
+Treat hogar temporal as its own meaningful path, not only a fallback for people who cannot adopt. The core idea is that the commitment is temporary for the person and life-changing for the galgo.
 
-Same 4-step structure as adoption. Add "Lo que Brigada cubre / Lo que tú aportas" clearly:
+Explain what Brigada covers and what the foster provides:
 
-> Brigada cubre: atención veterinaria, vacunas, antiparasitarios, alimentación.
-> Tú aportas: un espacio seguro en casa, caminatas diarias y tu paciencia.
+- Brigada covers veterinary care, vaccines, antiparasitics, and food when that is the confirmed policy.
+- The foster provides a safe space, daily walks, patience, and a calm routine.
 
-Normalize the exit:
-> "No necesitas casa grande. Necesitas un rincón tranquilo, paciencia y ganas de marcar una diferencia."
+Normalize the exit. Do not guilt-trip. Make the bar feel human.
 
-### Donar
-**Goal:** Secure one-time and recurring donations; build trust around transparency.
+Use short real foster stories when available. First-person quotes work well when they explain what goodbye feels like and why the temporary commitment is worth it.
 
-Above the fold: one emotional line + suggested amounts.
+Example:
 
-> "Tu donación mantiene a los galgos rescatados seguros, alimentados y amados mientras esperan un hogar."
+> No necesitas casa grande. Necesitas un rincón tranquilo, paciencia y ganas de marcar una diferencia.
 
-Below: table of concrete per-amount impact in Chilean pesos. 4–6 rows minimum.
+### Donations
 
-| Monto | Qué hace |
-|---|---|
-| $5.000/mes | Alimenta a un galgo rescatado durante una semana |
-| $10.000/mes | Cubre vacunas y antiparasitarios de un recién rescatado |
-| $20.000/mes | Costea una consulta veterinaria de urgencia |
-| $50.000/mes | Apoya el costo completo de un galgo en rehabilitación por un mes |
+Make impact concrete. Connect money to visible outcomes like food, vaccines, antiparasitics, transport, exams, sterilization, medication, emergency care, or rehabilitation.
 
-Recurring giving framed as identity, not obligation:
-> "Hazte Amigo de los Galgos y apoya un rescate cada mes con un aporte pequeño y constante. Como amigo, recibirás fotos y actualizaciones de los galgos que tu apoyo mantiene seguros."
+Use confirmed amounts whenever possible. If amounts are estimates, say so plainly. One-time and recurring donations should both feel useful.
 
-If Brigada receives no government or industry funding, say it plainly:
-> "No recibimos financiamiento estatal ni de la industria - cada peso viene de personas que se preocupan por los galgos como tú."
+Examples:
 
-### Contacto
-**Goal:** Make the first step feel safe and human - for any type of inquiry.
+> Con $5.000 pones comida de calidad en el plato de un galgo rescatado durante una semana.
 
-Warm intro that invites questions, not just decisions:
-> "Escríbenos - nos encanta hablar de galgos. No necesitas tener todo claro para contactarnos."
+> Tu aporte mensual sostiene la parte menos visible del rescate: alimento, controles, traslados y tratamientos mientras llega una familia.
 
-Offer WhatsApp with pre-filled message options. Expected reply time stated plainly.
+If Brigada receives no state funding, say it directly. Do not overstate corporate support or imply funding sources that are not confirmed.
 
----
+### Contact
 
-## 6. Sentence-level patterns
+Make the first message feel safe. Invite questions, not only decisions.
 
-### Opening a story
-Lead with the name and a fact, not with an appeal:
-> "Fermín llegó esta semana desde [lugar]. Tenía [peso], marcas de [condición]."
+Example:
 
-Not: "Necesitamos tu ayuda para este precioso galgo que tanto sufrió."
+> Escríbenos. Nos encanta hablar de galgos. No necesitas tener todo claro para contactarnos.
 
-### Describing a dog's personality
-Name → one concrete behaviour → what it signals:
-> "Bruno todavía se asusta con ruidos fuertes, pero ya aprendió que las manos significan mimos, no daño."
+If reply times are shown, state them plainly and only when they are confirmed.
 
-### Reporting heavy content
-Clinical statement → what the foundation did → call to action:
-> "Su estado era evidente para todos. Fuimos a declarar. El tutor quedó en prisión preventiva. Ahora [nombre] está bajo nuestro cuidado y necesita [X]."
+### FAQs
 
-### Celebrating adoption
-One specific, understated detail. No exclamation inflation:
-> "Ahora estarán juntos recorriendo la vida."
-> "Es que poner un galgo en nuestras vidas hace que todo sea más bonito."
+Answer the question directly first. Then add reassurance, context, or next steps. Keep answers useful and honest. If the answer depends on the dog, the home, or the available resources, say so.
 
-### Making a donation ask
-Amount → concrete outcome → named dog where possible:
-> "Con $5.000 pones comida de calidad en el plato de un galgo rescatado durante una semana."
-> "Un aporte mensual de $10.000 nos ayuda a esterilizar y vacunar a nuevos rescates como Alma."
+Good FAQ copy should reduce anxiety around:
 
-### Closing a section (micro-CTA)
-Verb-first, conversational, pressure-free:
-> "¿Lista/o para hablar sobre adopción? Escríbenos aquí y cuéntanos un poco sobre tu hogar."
-> "¿Crees que el hogar temporal podría ser para ti? Mándanos un mensaje y respondemos todas tus dudas sin apuro."
+- Living in a department
+- Exercise needs
+- Costs
+- Children and other animals
+- Lack of prior experience
+- Foster duration
+- What Brigada covers
+- What happens if adoption does not work
 
-### Foster/volunteer appreciation
-Show gratitude and make readers imagine themselves in the role:
-> "Nuestros hogares temporales son personas comunes: profesoras, estudiantes, parejas, familias - todas abriendo un rincón de su casa a un galgo."
-> "Cada caminata, cada viaje al veterinario, cada noche en un sillón prestado es un pequeño acto de heroísmo."
+## Sentence Patterns
 
-### Gentle urgency
-Present need + doable action. No capitals, no shock:
-> "Ahora mismo tenemos más galgos esperando que camas disponibles - tu hogar temporal o donación puede hacer espacio para uno más."
+Opening a rescue story:
 
----
+> Fermín llegó esta semana desde [lugar]. Tenía [peso], marcas de [condición].
 
-## 7. Anti-patterns to avoid
+Reporting hard content:
 
-Never use the verb "encajar" in site copy, including conjugations like "encaja", "encajan", "encaje" or "encajaria". Prefer plain alternatives such as "puede estar bien contigo", "es adecuado para tu hogar" or "calza con tu momento".
+> Su estado era evidente para todos. Fuimos a declarar. Ahora [nombre] está bajo nuestro cuidado y necesita [X].
 
-| Anti-pattern | Why it fails | Fix |
-|---|---|---|
-| "Nadie quiere a estos perritos" | Frames dogs as unwanted, reinforces stigma | "Estos galgos están listos para encontrar su familia - faltan los hogares." |
-| Generic urgency ("¡URGENTE! ¡COMPARTE!") | Becomes noise; reads as panic, not trust | State the specific fact that creates urgency |
-| Vague donation ask ("ayúdanos a seguir") | Donors can't visualize impact | Name a concrete outcome for each amount |
-| Long adoption criteria checklist with bold warnings | Intimidates capable adopters | Soften and explain the "why" ("no para juzgarte, sino para que el galgo esté seguro") |
-| Advocacy overload on adoption pages | Visitors seeking practical help feel overwhelmed or guilty | Keep racing cruelty secondary; lead with what a galgo's new life can look like |
-| Disappearing after adoption | Creates fear in hesitant adopters ("¿y si algo sale mal?") | Always mention post-adoption support in adoption copy |
-| Saccharine success closes | Feels fake; erodes trust in harder content | One specific, understated detail is more powerful |
-| "La fundación se complace en informar…" | Distances the team from the action | "Les contamos que…" or "Hoy logramos…" |
-| Emoji-only CTAs | Loses clarity; feels informal without substance | Emojis at emotional beats only; always pair with text |
-| Repeated three-item phrasing | Starts to sound generic and machine-written | Use two specific details, one concrete sentence, or a varied list only where it earns its place |
+Celebrating adoption:
 
----
+> Mora fue adoptada. Su hogar temporal no se pudo resistir.
 
-## 8. Quick-reference checklist
+Making a donation ask:
 
-Before publishing any copy:
+> Con $X ayudas a cubrir [resultado concreto] para un galgo recién rescatado.
 
-- [ ] First-person plural ("rescatamos", not "la fundación rescata")
-- [ ] Tuteo neutral - no voseo, no usted
-- [ ] At least one specific detail (name, weight, cost, date)
-- [ ] Verb-first CTA at the end of every section
-- [ ] Heavy content pivots to action within the same block
-- [ ] No superlatives where a number fits ("muy grave" → "12,6 kilos, cardiólogo urgente")
-- [ ] Dog described by traits, not suffering alone
-- [ ] No exclamation-mark inflation (maximum one per post, at genuine celebration)
-- [ ] Post-adoption support mentioned on any adopt/foster page
-- [ ] No em dashes in site copy
-- [ ] Semicolons are rare and only used when a period would make the sentence worse
-- [ ] Colons are not repeated across the same screen
-- [ ] Three-of-a-kind phrasing is intentional, not a default rhythm
+Closing a section:
 
----
+> ¿Crees que el hogar temporal podría ser para ti? Mándanos un mensaje y respondemos tus dudas sin apuro.
 
-## 9. Deep research updates
+## Final Checklist
 
-These additions reflect the greyhound-rescue site research in `docs/deep-research.md` and should guide website copy updates.
+Before publishing site copy, check:
 
-### Conversion priority
-Across the website, the voice should serve the three main visitor actions in this order: adopt, offer a hogar temporal, and donate. Adoption copy should make the path feel clear and accompanied. Foster copy should make a temporary commitment feel possible and deeply meaningful. Donation copy should make impact concrete, ideally with real Chilean peso amounts tied to food, vet care, transport, medication, or rehabilitation.
-
-### Foster framing
-Treat hogar temporal as its own emotionally compelling path, not only as logistics or a fallback for people who cannot adopt. The core message is: temporary for the person, life-changing for the galgo.
-
-Use patterns like:
-> "No necesitas adoptar para cambiar una vida. Unas semanas en tu casa pueden ser el puente entre el miedo y una familia definitiva."
-
-> "Brigada te acompana; tu pones un espacio seguro, paciencia y una rutina tranquila."
-
-### Donation framing
-Donation copy should avoid generic asks like "ayudanos a seguir" unless they are paired with a concrete result. Use confirmed costs whenever possible and connect each amount to a visible outcome: food, vaccines, antiparasitics, transport, exams, sterilization, medication, emergency care or rehabilitation.
-
-Use patterns like:
-> "Con $X ayudas a cubrir [resultado concreto] para un galgo recien rescatado."
-
-> "Tu aporte mensual sostiene la parte menos visible del rescate: alimento, controles, traslados y tratamientos mientras llega una familia."
-
-### Practical reassurance
-Assume readers arrive with doubts: space, cost, time, children, other animals, inexperience, and fear that the match may not work. Answer those doubts before the CTA. Requirements should sound like care and matching, not judgment.
-
-Use patterns like:
-> "Te preguntamos por tu rutina y tu casa no para juzgarte, sino para encontrar un match seguro para ti y para el galgo."
-
-> "No necesitas tener todo resuelto antes de escribirnos. Te ayudamos a entender si adoptar, ser hogar temporal o apoyar con una donacion calza con tu momento."
-
-### Process clarity
-Adoption and foster pages should show 3-4 simple steps before asking for commitment. Visitors should know what happens after they write, who contacts them, how matching works, and that Brigada stays present after the galgo arrives.
-
-Avoid hiding the whole process behind "contactanos". The friendlier pattern is: explain the path, then invite the message.
+- [ ] It follows first-person plural when Brigada is speaking.
+- [ ] It uses neutral tuteo.
+- [ ] It answers the reader's practical doubt.
+- [ ] It uses confirmed specifics and does not invent facts.
+- [ ] It describes dogs by traits, not suffering alone.
+- [ ] It pivots from hard reality to action.
+- [ ] It avoids institutional language and generic rescue cliches.
+- [ ] It avoids the verb "encajar".
+- [ ] It mentions post-adoption support on adoption copy.
+- [ ] It has a clear verb-first CTA when a next step is needed.
+- [ ] It contains no em dashes.
+- [ ] Semicolons are rare and necessary.
+- [ ] Colons are not repeated across the same screen.
+- [ ] Three-of-a-kind phrasing is intentional and not repetitive.

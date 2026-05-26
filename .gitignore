@@ -148,7 +148,6 @@ Claude*
 .codex-log-inspect*/
 docs/
 handoffs/
-AGENTS.md
 process-notes.md
 smoke-*.png
 iterate-*.png
@@ -210,4 +209,4 @@ astro.config.cjs.timestamp-*
 smoke-report.json
 
 # Important artifacts
-!docs\voice-and-tone.md
+!docs/voice-and-tone.md
