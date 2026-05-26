@@ -33,6 +33,12 @@
   aspect-ratio: 4/5;
 }
 
+@media (min-width: 768px) {
+  .hero__img {
+    aspect-ratio: 5/4;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero__grid {
     grid-template-columns: 1fr 1fr;
@@ -46,10 +52,6 @@
   .hero__ctas .btn--primary,
   .hero__ctas .btn--secondary {
     width: auto;
-  }
-
-  .hero__img {
-    aspect-ratio: 5/4;
   }
 }
 

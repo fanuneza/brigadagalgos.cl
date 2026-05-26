@@ -55,15 +55,15 @@ const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
 
     <picture class="hero__photo">
       <source
-        media="(min-width: 1024px)"
+        media="(min-width: 768px)"
         srcset={heroSources.landscapeAvifSrcSet}
-        sizes="(min-width: 1200px) 528px, calc(50vw - 72px)"
+        sizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
         type="image/avif"
       />
       <source
-        media="(min-width: 1024px)"
+        media="(min-width: 768px)"
         srcset={heroSources.landscapeWebpSrcSet}
-        sizes="(min-width: 1200px) 528px, calc(50vw - 72px)"
+        sizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
         type="image/webp"
       />
       <source srcset={heroSources.portraitAvifSrcSet} sizes="calc((100vw - 48px) / 1.75)" type="image/avif" />
