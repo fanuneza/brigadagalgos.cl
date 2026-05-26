@@ -31,7 +31,7 @@ export const faqPairs: FaqPair[] = [
     details: [
       "Nos escribes por WhatsApp o completas el formulario.",
       "Conversamos sobre tu rutina, tu espacio y tus expectativas.",
-      "Te hacemos el match con un galgo que puede estar bien contigo.",
+      "Buscamos un galgo que pueda estar bien contigo.",
       "Empiezas un período de prueba en casa y seguimos acompañándote paso a paso.",
     ],
   },
@@ -69,7 +69,7 @@ export const faqPairs: FaqPair[] = [
     id: "como-donar",
     question: "¿Cómo puedo donar y en qué se usa mi aporte?",
     answer:
-      "La forma principal de apoyarnos es transferir directamente a la cuenta de la fundación. Puedes hacer un aporte único o configurar transferencias recurrentes desde tu banco. Los datos están en nuestra página de donaciones. También puedes suscribirte como apadrinante vía eSponsor. Los montos varían según cada rescate, pero estas referencias muestran lo que tu aporte ayuda a sostener.",
+      "La forma principal de apoyarnos es transferir directamente a la cuenta de Brigada Galgos. Puedes hacer un aporte único o configurar transferencias recurrentes desde tu banco. Los datos están en nuestra página de donaciones. También puedes suscribirte como apadrinante vía eSponsor. Los montos varían según cada rescate, pero estas referencias muestran lo que tu aporte ayuda a sostener.",
     details: [
       "Con $5.000 pones comida de calidad en el plato de un galgo rescatado durante una semana.",
       "Con $10.000 cubres vacunas y antiparasitarios de un recién rescatado.",
@@ -87,7 +87,7 @@ export const faqPairs: FaqPair[] = [
     id: "si-la-adopcion-no-funciona",
     question: "¿Qué pasa si la adopción no funciona?",
     answer:
-      "Si el match no funciona, no te dejamos solo con el problema. Trabajamos juntos para encontrar la mejor solución para ti y para el galgo. Preferimos que nos escribas temprano, aunque sea por una duda pequeña, antes de que la preocupación crezca en silencio.",
+      "Si la adopción no funciona, no te dejamos solo con el problema. Trabajamos juntos para encontrar la mejor solución para ti y para el galgo. Preferimos que nos escribas temprano, aunque sea por una duda pequeña, antes de que la preocupación crezca en silencio.",
   },
 ];
 
