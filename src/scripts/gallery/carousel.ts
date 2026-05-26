@@ -2,7 +2,6 @@ import { dispatchAnalytics } from "../../utils/analytics";
 import { buildDots, createSlide, ensureSlideImage, getStoryContext, parsePayload, wrapIndex } from "./dom";
 import { openLightbox } from "./lightbox";
 
-
 const SWIPE_THRESHOLD = 42;
 
 function initGalleryList(galleries: HTMLElement[]) {

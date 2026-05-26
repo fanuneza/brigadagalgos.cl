@@ -1,36 +1,39 @@
 {
   "$schema": "https://jcodemunch.dev/schema.jsonc",
-  "entry_point_patterns": [
-    "src/pages/**/*.astro",
-    "src/pages/**/*.ts"
-  ],
+  "entry_point_patterns": ["src/pages/**/*.astro", "src/pages/**/*.ts"],
   "architecture": {
     "layers": [
       {
         "name": "pages",
         "paths": ["src/pages/**/*"],
-        "may_not_import": []
+        "may_not_import": [],
       },
       {
         "name": "layouts",
         "paths": ["src/layouts/**/*"],
-        "may_not_import": ["src/pages/**/*"]
+        "may_not_import": ["src/pages/**/*"],
       },
       {
         "name": "components",
         "paths": ["src/components/**/*"],
-        "may_not_import": ["src/pages/**/*", "src/layouts/**/*"]
+        "may_not_import": ["src/pages/**/*", "src/layouts/**/*"],
       },
       {
         "name": "utils",
         "paths": ["src/utils/**/*", "src/config/**/*"],
-        "may_not_import": ["src/pages/**/*", "src/components/**/*", "src/layouts/**/*", "src/scripts/**/*"]
+        "may_not_import": ["src/pages/**/*", "src/components/**/*", "src/layouts/**/*", "src/scripts/**/*"],
       },
       {
         "name": "scripts",
         "paths": ["src/scripts/**/*"],
-        "may_not_import": ["src/pages/**/*", "src/components/**/*", "src/layouts/**/*", "src/utils/**/*", "src/config/**/*"]
-      }
-    ]
-  }
+        "may_not_import": [
+          "src/pages/**/*",
+          "src/components/**/*",
+          "src/layouts/**/*",
+          "src/utils/**/*",
+          "src/config/**/*",
+        ],
+      },
+    ],
+  },
 }
