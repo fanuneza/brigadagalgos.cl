@@ -36,10 +36,7 @@
 .faq-question a {
   text-decoration: none;
   color: inherit;
-}
-
-.faq-question a:hover {
-  color: var(--color-primary-700);
+  cursor: default;
 }
 
 .faq-answer {
