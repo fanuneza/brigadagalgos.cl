@@ -180,7 +180,9 @@ export function buildGreyhoundFaqPage(): JsonLdNode {
   };
 }
 
-export function buildFaqStructuredData(qaPairs: Array<{ question: string; answer: string; details?: string[] }>): JsonLdNode {
+export function buildFaqStructuredData(
+  qaPairs: Array<{ question: string; answer: string; details?: string[] }>
+): JsonLdNode {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

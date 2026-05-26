@@ -27,8 +27,7 @@ export const faqPairs: FaqPair[] = [
   {
     id: "proceso-de-adopcion",
     question: "¿Cómo es el proceso de adopción paso a paso?",
-    answer:
-      "El proceso tiene cuatro pasos. De tu primer mensaje al galgo en tu sillón, te acompañamos en cada etapa.",
+    answer: "El proceso tiene cuatro pasos. De tu primer mensaje al galgo en tu sillón, te acompañamos en cada etapa.",
     details: [
       "Nos escribes por WhatsApp o completas el formulario.",
       "Conversamos sobre tu rutina, espacio y expectativas.",
