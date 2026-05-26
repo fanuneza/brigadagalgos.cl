@@ -208,3 +208,6 @@ astro.config.cjs.timestamp-*
 
 # Playwright & test reports/artifacts
 smoke-report.json
+
+# Important artifacts
+!docs\voice-and-tone.md

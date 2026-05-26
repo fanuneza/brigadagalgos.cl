@@ -13,6 +13,10 @@ Sitio estático desarrollado con Astro para Brigada Galgos, organización dedica
 - `@axe-core/playwright` para testing de accesibilidad
 - `@lhci/cli` para Lighthouse CI
 
+## Copy y tono
+
+Cuando escribas o edites copy del sitio, sigue siempre `docs\voice-and-tone.md`. Esa guía es la fuente de verdad para voz, tono, ritmo, puntuación y patrones de contenido.
+
 ## Requisitos
 
 - `Node.js` >= 22
