@@ -40,13 +40,13 @@ export const faqPairs: FaqPair[] = [
     id: "costo-de-adopcion",
     question: "¿Cuánto cuesta adoptar un galgo y qué incluye?",
     answer:
-      "La adopción tiene un aporte que nos ayuda a cubrir parte de lo que invertimos en cada rescate: esterilización, vacunas, desparasitación, microchip y revisión veterinaria completa. Antes de entregarlo, tu galgo está listo para vivir sano. Te contamos el monto exacto cuando conversamos; no hay cargos ocultos.",
+      "Adoptar un galgo con nosotros no tiene costo. Nunca pedimos un aporte obligatorio: lo que necesitamos es que te comprometas a cuidarlo. Si después quieres donar para ayudar a otros rescates, puedes hacerlo, pero eso es completamente voluntario y nunca condiciona la adopción.",
   },
   {
     id: "convivencia-ninos-animales",
     question: "¿Se llevan bien con niños y otros animales?",
     answer:
-      "La mayoría se lleva bien con niños y otros animales cuando se hace una presentación adecuada. Nosotros conocemos a cada galgo y te ayudamos a evaluar si su temperamento es adecuado para tu familia. Nunca te dejamos solo con una adopción que no esté preparada para convivir.",
+      "Los galgos son excelentes con niños y perros, en especial cuando se hace una presentación adecuada. Con gatos y otros animales pequeños, la situación es más compleja. Los galgos son perros de caza y pueden tener un instinto de presa alto, dependiendo del pasado de cada perro. Algunos conviven perfectamente con gatos, pero otros no lo logran. Si tienes gatos u otras mascotas pequeñas, cuéntanos desde el primer mensaje. Conocemos a cada galgo y te diremos honestamente si hay uno que pueda estar bien en tu hogar.",
   },
   {
     id: "experiencia-previa",
@@ -58,7 +58,7 @@ export const faqPairs: FaqPair[] = [
     id: "que-es-hogar-temporal",
     question: "¿Qué es el hogar temporal y cuánto dura?",
     answer:
-      "El hogar temporal es abrir tu casa por un tiempo para que un galgo esté seguro, acompañado y mejor preparado para encontrar familia. Puede durar desde unas semanas hasta unos pocos meses, dependiendo del galgo y de tu disponibilidad. No necesitas adoptar para cambiar una vida.",
+      "El hogar temporal es abrir tu casa por un tiempo para que un galgo esté seguro, acompañado y mejor preparado para encontrar familia. Puede durar desde unas semanas hasta unos pocos meses, dependiendo del galgo y de tu disponibilidad. Puedes cambiar una vida aunque no puedas adoptar.",
   },
   {
     id: "gastos-hogar-temporal",
@@ -70,7 +70,7 @@ export const faqPairs: FaqPair[] = [
     id: "como-donar",
     question: "¿Cómo puedo donar y en qué se usa mi aporte?",
     answer:
-      "Puedes donar a través de nuestra página de donaciones o contactarnos directamente. Tu aporte cubre alimento, atención veterinaria, medicamentos, traslados y todo lo que un galgo necesita mientras espera familia.",
+      "La forma principal de apoyarnos es transferir directamente a la cuenta de la fundación. Puedes hacer una transferencia de una vez o configurar transferencias recurrentes desde tu banco. Los datos están en nuestra página de donaciones. También puedes suscribirte como apadrinante vía eSponsor. Estos montos son aproximados y varían según cada rescate, pero te dan una idea concreta de lo que tu aporte hace posible:",
     details: [
       "Con $5.000 pones comida de calidad en el plato de un galgo rescatado durante una semana.",
       "Con $10.000 cubres vacunas y antiparasitarios de un recién rescatado.",
@@ -80,9 +80,9 @@ export const faqPairs: FaqPair[] = [
   },
   {
     id: "financiamiento-estatal",
-    question: "¿Reciben financiamiento del Estado o de la industria?",
+    question: "¿Reciben financiamiento del Estado o de empresas?",
     answer:
-      "No recibimos financiamiento estatal ni de la industria. Cada peso viene de personas que se preocupan por los galgos como tú. Tu apoyo es la razón por la que podemos rescatar, tratar y reubicar galgos en Chile.",
+      "No recibimos financiamiento estatal. Algunas empresas nos apoyan puntualmente y las puedes conocer en nuestra página de colaboradores, pero no dependemos de ellas. El grueso de nuestros recursos viene de personas que se preocupan por los galgos como tú. Tu apoyo es la razón por la que podemos rescatar, tratar y reubicar galgos en Chile.",
   },
   {
     id: "si-la-adopcion-no-funciona",
