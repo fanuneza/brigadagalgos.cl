@@ -1,0 +1,40 @@
+---
+import { faqPairs, faqGroups } from "../../config/faq";
+---
+
+<section class="faq-section" aria-label="Preguntas frecuentes">
+  <div class="container container--narrow">
+    {
+      faqGroups.map((group) => (
+        <section class="faq-group" aria-labelledby={`group-${group.ids[0]}`}>
+          <p class="eyebrow faq-group__eyebrow" id={`group-${group.ids[0]}`}>
+            {group.eyebrow}
+          </p>
+
+          {group.ids.map((idx) => {
+            const item = faqPairs[idx];
+            return (
+              <article class="faq-item" id={item.id}>
+                <h2 class="faq-question">
+                  <a href={`#${item.id}`} aria-label={`Enlace directo a: ${item.question}`}>
+                    {item.question}
+                  </a>
+                </h2>
+                <div class="faq-answer">
+                  <p>{item.answer}</p>
+                  {item.details && (
+                    <ol>
+                      {item.details.map((detail) => (
+                        <li>{detail}</li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </section>
+      ))
+    }
+  </div>
+</section>

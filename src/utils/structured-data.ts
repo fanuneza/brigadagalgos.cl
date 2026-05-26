@@ -1,4 +1,5 @@
 import { SITE } from "../config/site.ts";
+import { faqPairs } from "../config/faq";
 
 export interface StructuredDataInput {
   canonicalUrl: string;
@@ -20,6 +21,7 @@ export const breadcrumbLabels: Record<string, string> = {
   adoptar: "Adoptar",
   "hogar-temporal": "Hogar temporal",
   "por-que-galgos": "Por qué galgos",
+  "preguntas-frecuentes": "Preguntas frecuentes",
   colaboradores: "Colaboradores",
   donar: "Donar",
   contacto: "Contacto",
@@ -122,6 +124,10 @@ export function buildStructuredDataGraph(input: StructuredDataInput): JsonLdGrap
     graph.push(buildGreyhoundFaqPage());
   }
 
+  if (pathname === "/preguntas-frecuentes/") {
+    graph.push(buildFaqStructuredData(faqPairs));
+  }
+
   return { "@context": "https://schema.org", "@graph": graph };
 }
 
@@ -171,5 +177,20 @@ export function buildGreyhoundFaqPage(): JsonLdNode {
         },
       },
     ],
+  };
+}
+
+export function buildFaqStructuredData(qaPairs: Array<{ question: string; answer: string; details?: string[] }>): JsonLdNode {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: qaPairs.map((qa) => ({
+      "@type": "Question",
+      name: qa.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: qa.details ? `${qa.answer} ${qa.details.join(" ")}` : qa.answer,
+      },
+    })),
   };
 }
