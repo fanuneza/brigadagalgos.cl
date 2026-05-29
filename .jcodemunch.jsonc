@@ -1,5 +1,29 @@
 {
   "$schema": "https://jcodemunch.dev/schema.jsonc",
+  "include": [
+    "src/**",
+    "tests/**",
+    "scripts/**",
+    "docs/**",
+    "public/_headers",
+    "public/_redirects",
+    "astro.config.*",
+    "package.json",
+    ".env.example",
+    ".gitignore",
+    "tsconfig.json",
+    "AGENTS.md",
+    "README.md",
+  ],
+  "exclude": [
+    "node_modules/**",
+    "dist/**",
+    ".astro/**",
+    ".cache/**",
+    ".lighthouseci/**",
+    "playwright-report/**",
+    "test-results/**",
+  ],
   "entry_point_patterns": ["src/pages/**/*.astro", "src/pages/**/*.ts"],
   "architecture": {
     "layers": [

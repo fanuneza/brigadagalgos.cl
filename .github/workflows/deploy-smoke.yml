@@ -3,9 +3,12 @@ name: Deploy Smoke Tests
 on:
   deployment_status:
 
+permissions:
+  contents: read
+
 jobs:
-  smoke-test:
-    if: github.event.deployment_status.state == 'success'
+  smoke:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment_url != ''
     runs-on: ubuntu-latest
     env:
       PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
@@ -32,7 +35,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
 
-      - name: Run smoke tests against deployed URL
-        run: npm run test:smoke
+      - name: Test deployed URL
+        run: npm test
         env:
           PLAYWRIGHT_BASE_URL: ${{ github.event.deployment_status.environment_url }}

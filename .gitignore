@@ -70,6 +70,10 @@ web_modules/
 .env.*
 !.env.example
 
+# Coverage
+coverage/
+*.lcov
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
@@ -191,6 +195,10 @@ $RECYCLE.BIN/
 *.njsproj
 *.sln
 *.sw?
+
+# Logs
+*.log
+npm-debug.log*
 
 # Astro & Vite additions
 dist/

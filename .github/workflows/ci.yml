@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  ci:
     runs-on: ubuntu-latest
     env:
       PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
@@ -26,6 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         id: playwright-cache
@@ -37,24 +48,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
 
-      - name: Lint
-        run: npm run lint
-
-      - name: Check formatting
-        run: npm run format:check
-
-      - name: Build
-        run: npm run build
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Lighthouse CI
-        run: npm run test:lighthouse
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-
-      - name: Run Playwright tests
-        run: npm run test:e2e
+      - name: Test
+        run: npm test
         env:
           GITHUB_TOKEN: ${{ github.token }}

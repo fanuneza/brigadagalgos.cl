@@ -9,10 +9,9 @@ export default [
       "node_modules/**",
       ".astro/**",
       ".cache/**",
+      ".lighthouseci/**",
+      "playwright-report/**",
       "test-results/**",
-      "playwright.config.ts",
-      "tests/**",
-      "src/pages/hogar-temporal.astro",
     ],
   },
   ...eslintPluginAstro.configs.recommended,
@@ -29,10 +28,6 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
-    },
-  },
-  {
-    rules: {
       "no-console": ["warn", { allow: ["warn", "error"] }],
     },
   },
