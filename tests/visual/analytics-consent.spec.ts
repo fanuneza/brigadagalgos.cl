@@ -97,9 +97,11 @@ test("response includes a strict CSP with the required GTM, GA4, and Cloudflare 
   );
   expect(csp).toContain("script-src-attr 'none'");
   expect(csp).toContain(
-    "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://cloudflareinsights.com"
+    "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com"
   );
-  expect(csp).toContain("img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com");
+  expect(csp).toContain(
+    "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net"
+  );
   expect(csp).toContain("frame-src https://www.googletagmanager.com");
   expect(csp).toContain("object-src 'none'");
   expect(csp).not.toContain("*");
