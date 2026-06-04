@@ -71,10 +71,10 @@ export const faqPairs: FaqPair[] = [
     answer:
       "La forma principal de apoyarnos es transferir directamente a la cuenta de Brigada Galgos. Puedes hacer un aporte único o configurar transferencias recurrentes desde tu banco. Los datos están en nuestra página de donaciones. También puedes suscribirte como apadrinante vía eSponsor. Los montos varían según cada rescate, pero estas referencias muestran lo que tu aporte ayuda a sostener.",
     details: [
-      "Con $5.000 pones comida de calidad en el plato de un galgo rescatado durante una semana.",
-      "Con $10.000 cubres vacunas y antiparasitarios de un recién rescatado.",
-      "Con $20.000 costeas una consulta veterinaria de urgencia.",
-      "Con $50.000 apoyas el costo completo de un galgo en rehabilitación por un mes.",
+      "Con $35.000 aproximados cubres las vacunas del año para mantener a un galgo protegido.",
+      "Con $50.000 al mes aseguras el alimento balanceado de un galgo rescatado por un mes entero.",
+      "Con $60.000 costeas una consulta veterinaria de urgencia ante imprevistos de salud.",
+      "Con $200.000 o más financias exámenes complejos como ecografías, radiografías y análisis de sangre.",
     ],
   },
   {
