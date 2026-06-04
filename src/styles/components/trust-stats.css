@@ -27,19 +27,19 @@
 }
 
 .stat-card__value--cyan {
-  color: var(--color-primary);
+  color: var(--color-primary-700);
 }
 
 .stat-card__value--magenta {
-  color: var(--color-secondary);
+  color: var(--color-secondary-700);
 }
 
 .stat-card__value--orange {
-  color: var(--color-accent-warm);
+  color: var(--color-accent-warm-700);
 }
 
 .stat-card__value--green {
-  color: var(--color-rainbow-green);
+  color: var(--color-rainbow-green-700);
 }
 
 .stat-card__label {

@@ -30,6 +30,7 @@
   /* Tertiary palette (rainbow set — for illustration accents, dividers,
      dog-card chips, never for body text or large fills) */
   --color-rainbow-green: #43a047;
+  --color-rainbow-green-700: #2e7d32;
   --color-rainbow-purple: #8e24aa;
 
   /* Neutrals */
@@ -244,6 +245,7 @@
   --color-accent-warm: #ffb547;
   --color-accent-warm-700: #ffd08a;
   --color-accent-warm-100: #442b10;
+  --color-rainbow-green-700: #a5d6a7;
 
   /* Semantic surfaces — kept intentionally dark in dark mode */
   --color-footer-bg: #0d0f14;
@@ -291,6 +293,7 @@
     --color-accent-warm: #ffb547;
     --color-accent-warm-700: #ffd08a;
     --color-accent-warm-100: #442b10;
+    --color-rainbow-green-700: #a5d6a7;
 
     /* Semantic surfaces */
     --color-footer-bg: #0d0f14;
