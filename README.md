@@ -24,26 +24,27 @@ Cuando escribas o edites copy del sitio, sigue siempre `docs\voice-and-tone.md`.
 
 ## Comandos
 
-| Comando                    | Descripción                                                      |
-| -------------------------- | ---------------------------------------------------------------- |
-| `npm install`              | Instala las dependencias del proyecto.                           |
-| `npm run dev`              | Levanta el entorno local de desarrollo.                          |
-| `npm run build`            | Verifica tipos con `astro check` y genera producción en `dist/`. |
-| `npm run preview`          | Sirve localmente la compilación de producción.                   |
-| `npm run prepare:casos`    | Ejecuta el script de preparación de casos.                       |
-| `npm run dog-images:check` | Valida la normalización de nombres de imágenes de galgos.        |
-| `npm run dog-images:write` | Normaliza los nombres de archivo de imágenes de galgos.          |
-| `npm run lint`             | Ejecuta ESLint y Stylelint.                                      |
-| `npm run lint:fix`         | Corrige automáticamente errores de lint.                         |
-| `npm run format`           | Formatea todos los archivos con Prettier.                        |
-| `npm run format:check`     | Verifica el formato sin modificar archivos.                      |
-| `npm run test:lighthouse`  | Ejecuta Lighthouse CI sobre `dist/`.                             |
-| `npm run test:e2e`         | Ejecuta todos los tests de Playwright.                           |
-| `npm run test:smoke`       | Ejecuta los smoke tests de rutas críticas.                       |
-| `npm run capture:local`    | Ejecuta todos los tests de Playwright en local.                  |
-| `npm run capture:home`     | Ejecuta tests marcados con `@home`.                              |
-| `npm run capture:adoptar`  | Ejecuta tests marcados con `@adoptar`.                           |
-| `npm run capture:donar`    | Ejecuta tests marcados con `@donar`.                             |
+| Comando                    | Descripción                                                                 |
+| -------------------------- | --------------------------------------------------------------------------- |
+| `npm install`              | Instala las dependencias del proyecto.                                      |
+| `npm run dev`              | Levanta el entorno local de desarrollo.                                     |
+| `npm run build`            | Verifica tipos con `astro check` y genera producción en `dist/`.            |
+| `npm run preview`          | Sirve localmente la compilación de producción.                              |
+| `npm run prepare:casos`    | Ejecuta el script de preparación de casos.                                  |
+| `npm run dog-images:check` | Valida la normalización de nombres de imágenes de galgos.                   |
+| `npm run dog-images:write` | Normaliza los nombres de archivo de imágenes de galgos.                     |
+| `npm run lint`             | Ejecuta ESLint y Stylelint.                                                 |
+| `npm run lint:fix`         | Corrige automáticamente errores de lint.                                    |
+| `npm run format`           | Formatea todos los archivos con Prettier.                                   |
+| `npm run format:check`     | Verifica el formato sin modificar archivos.                                 |
+| `npm test`                 | Ejecuta todas las pruebas unitarias y de integración (Vitest + Playwright). |
+| `npm run test:lighthouse`  | Ejecuta Lighthouse CI sobre `dist/`.                                        |
+| `npm run test:e2e`         | Ejecuta todos los tests de Playwright.                                      |
+| `npm run test:smoke`       | Ejecuta los smoke tests de rutas críticas.                                  |
+| `npm run capture:local`    | Ejecuta todos los tests de Playwright en local.                             |
+| `npm run capture:home`     | Ejecuta tests marcados con `@home`.                                         |
+| `npm run capture:adoptar`  | Ejecuta tests marcados con `@adoptar`.                                      |
+| `npm run capture:donar`    | Ejecuta tests marcados con `@donar`.                                        |
 
 ## Estructura del proyecto
 
@@ -252,7 +253,7 @@ Además, el sitio cuenta con `site.webmanifest`, favicons en múltiples tamaños
 
 ## Testing
 
-El proyecto tiene las siguientes suites de tests bajo `tests/visual/`, todas ejecutadas con Playwright sobre la build de producción servida localmente:
+El proyecto tiene las siguientes suites de tests bajo `tests/`, todas ejecutadas con Playwright sobre la build de producción servida localmente:
 
 | Archivo                     | Descripción                                                                                       |
 | --------------------------- | ------------------------------------------------------------------------------------------------- |

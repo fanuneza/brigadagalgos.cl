@@ -139,11 +139,13 @@ Use confirmed amounts whenever possible. If amounts are estimates, say so plainl
 
 Examples:
 
-> Con $5.000 pones comida de calidad en el plato de un galgo rescatado durante una semana.
+> Con $50.000 al mes aseguras el alimento balanceado de un galgo rescatado por un mes entero.
 
 > Tu aporte mensual sostiene la parte menos visible del rescate: alimento, controles, traslados y tratamientos mientras llega una familia.
 
 If Brigada receives no state funding, say it directly. Do not overstate corporate support or imply funding sources that are not confirmed.
+
+Maintain strict transparency about operational expenses. Clearly state that donations are not spent on salaries or remuneration (all volunteers), paid advertising, buying dogs, or physical office rents.
 
 ### Contact
 
