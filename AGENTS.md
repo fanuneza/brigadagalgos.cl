@@ -22,6 +22,7 @@ This repository is a static Astro site deployed to Cloudflare Pages from GitHub.
 - Cloudflare Pages for hosting.
 - GA4 only through GTM and only after analytics consent.
 - Cloudflare Web Analytics enabled as backup telemetry and allowed by CSP.
+- Follow Astro defaults (such as the default `compressHTML: 'jsx'` whitespace compression behavior) unless custom adjustments are specifically requested.
 
 ## Code Standards
 
