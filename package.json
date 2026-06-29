@@ -58,6 +58,9 @@
     "vitest": "4.1.9"
   },
   "overrides": {
+    "@jdevalk/astro-seo-graph": {
+      "astro": "$astro"
+    },
     "brace-expansion": "5.0.6",
     "devalue": "5.8.1",
     "express": "4.22.2",
