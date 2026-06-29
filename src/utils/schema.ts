@@ -20,8 +20,9 @@ export function buildSchemaGraph(options: {
   pieces.push(
     buildWebSite(
       {
-        url: SITE_URL,
+        url: SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`,
         name: SITE.name,
+        alternateName: [SITE.legalName, "brigadagalgos.cl"],
         description: SITE.description,
         publisher: { "@id": ids.organization("brigada-galgos") },
         potentialAction: {
