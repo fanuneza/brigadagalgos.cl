@@ -20,10 +20,7 @@ const rawDogs = await getCollection("adoption-dogs");
 const dogs = await buildAdoptionDogCards(shuffle(rawDogs));
 ---
 
-<BaseLayout
-  title="Adoptar | Brigada Galgos"
-  description="Conoce a los galgos que hoy están listos para encontrar familia en Chile."
->
+<BaseLayout title="Adoptar" description="Conoce a los galgos que hoy están listos para encontrar familia en Chile.">
   <Navbar />
   <main id="main-content">
     <PageHero
