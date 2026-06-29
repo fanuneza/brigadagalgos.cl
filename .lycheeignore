@@ -1,0 +1,8 @@
+# Ignore local development server URLs
+http://localhost:4321/.*
+
+# Ignore Instagram links due to frequent HTTP 429 (rate-limiting) responses on CI
+https://(www\.)?instagram\.com/.*
+
+# Ignore Google Tag Manager URLs containing un-evaluated template literal variables in Astro source code
+https://www\.googletagmanager\.com/ns\.html\?id=\$\{gtmContainerId\}
