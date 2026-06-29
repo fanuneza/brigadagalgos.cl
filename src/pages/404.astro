@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import NotFoundLinks from "../components/sections/NotFoundLinks.astro";
+import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
 ---
 
 <BaseLayout
@@ -19,6 +20,9 @@ import NotFoundLinks from "../components/sections/NotFoundLinks.astro";
       h1="No encontramos esta página"
       lead="Puede que el enlace esté roto o que el contenido se haya movido. Te dejamos algunas rutas para seguir."
     />
+    <div style="text-align: center; margin: 2rem 0; font-weight: bold; font-size: 1.25rem;">
+      <FuzzyRedirect />
+    </div>
     <RainbowDivider />
     <NotFoundLinks />
   </main>

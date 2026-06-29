@@ -47,8 +47,21 @@ const supporters = defineCollection({
     }),
 });
 
+const blog = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.coerce.date(),
+    author: z.string(),
+    description: z.string(),
+    category: z.string().optional(),
+    heroImage: z.string().optional(),
+  }),
+});
+
 export const collections = {
   "adoption-dogs": adoptionDogs,
   "success-dogs": successDogs,
   supporters,
+  blog,
 };

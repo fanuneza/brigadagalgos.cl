@@ -2,7 +2,7 @@
 import "../styles/components/page-hero.css";
 import "../styles/components/colaboradores.css";
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
@@ -23,7 +23,7 @@ function withPartnerUtm(url: string) {
 
 import { shuffle } from "../utils/shuffle";
 
-const supporters = shuffle(await getCollection("supporters"));
+const supporters: CollectionEntry<"supporters">[] = shuffle(await getCollection("supporters"));
 
 const supportersGridClass = supporters.length === 1 ? "supporters-grid supporters-grid--single" : "supporters-grid";
 ---

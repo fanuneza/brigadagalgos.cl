@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://brigadagalgos.cl/sitemap-index.xml
+Schemamap: https://brigadagalgos.cl/schemamap.xml
+
