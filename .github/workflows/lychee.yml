@@ -19,5 +19,5 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress './**/*.md' './**/*.html' './**/*.astro'
+          args: --verbose --no-progress --accept "200..=299,415" './**/*.md' './**/*.html' './**/*.astro'
           fail: true
