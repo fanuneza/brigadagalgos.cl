@@ -105,3 +105,5 @@ function initNavbar() {
 }
 
 document.addEventListener("astro:page-load", initNavbar);
+
+export {};

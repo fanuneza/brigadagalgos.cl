@@ -19,11 +19,11 @@ export async function buildHeroImageSources(
 ): Promise<HeroImageSources> {
   const [portraitAvifSrcSet, portraitWebpSrcSet, landscapeAvifSrcSet, landscapeWebpSrcSet, portraitFallback] =
     await Promise.all([
-      buildSrcSet(portraitSrc, "avif", PORTRAIT_WIDTHS, 60),
-      buildSrcSet(portraitSrc, "webp", PORTRAIT_WIDTHS, 72),
-      buildSrcSet(landscapeSrc, "avif", LANDSCAPE_WIDTHS, 60),
-      buildSrcSet(landscapeSrc, "webp", LANDSCAPE_WIDTHS, 72),
-      getImage({ src: portraitSrc, format: "webp", width: 540, quality: 72 }),
+      buildSrcSet(portraitSrc, "avif", PORTRAIT_WIDTHS, 50),
+      buildSrcSet(portraitSrc, "webp", PORTRAIT_WIDTHS, 65),
+      buildSrcSet(landscapeSrc, "avif", LANDSCAPE_WIDTHS, 50),
+      buildSrcSet(landscapeSrc, "webp", LANDSCAPE_WIDTHS, 65),
+      getImage({ src: portraitSrc, format: "webp", width: 540, quality: 65 }),
     ]);
 
   return {

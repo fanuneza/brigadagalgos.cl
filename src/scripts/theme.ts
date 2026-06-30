@@ -78,3 +78,5 @@ document.addEventListener("astro:page-load", () => {
   applyStoredTheme();
   initThemeToggle();
 });
+
+export {};
