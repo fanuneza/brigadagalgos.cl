@@ -42,12 +42,7 @@ const { dogs, totalCount, endpoint } = Astro.props;
             data-story-name={dog.name}
             data-story-location="success_stories"
           >
-            <SharedPhotoGallery
-              name={dog.name}
-              photos={dog.photos}
-              id={dog.id}
-              loadingPriority={dogIndex < 2 ? "eager" : "lazy"}
-            />
+            <SharedPhotoGallery name={dog.name} photos={dog.photos} id={dog.id} loadingPriority="lazy" />
             <div
               class="story-card__body"
               data-track-event="story_click"
