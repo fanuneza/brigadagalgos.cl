@@ -5,19 +5,27 @@ import { glob } from "astro/loaders";
 const adoptionDogs = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/adoption-dogs" }),
   schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      sex: z.enum(["Macho", "Hembra"]),
-      age: z.string(),
-      weight: z.string(),
-      details: z.string(),
-      location: z.string().optional(),
-      currentNeed: z.enum(["Adopción", "Hogar temporal", "Adopción u hogar temporal"]).default("Adopción"),
-      characterSketch: z.string(),
-      instagramUrl: z.url().optional(),
-      order: z.number().int().optional(),
-      gallery: z.array(image()).max(3),
-    }),
+    z
+      .object({
+        name: z.string(),
+        sex: z.enum(["Macho", "Hembra"]),
+        age: z.string(),
+        weight: z.string(),
+        details: z.string(),
+        location: z.string().optional(),
+        currentNeed: z.enum(["Adopción", "Hogar temporal", "Adopción u hogar temporal"]).default("Adopción"),
+        characterSketch: z.string(),
+        instagramUrl: z.url().optional(),
+        order: z.number().int().optional(),
+        gallery: z.array(image()).max(3),
+        active: z.boolean().default(true),
+        hiddenSince: z.coerce.date().optional(),
+        hiddenReason: z.string().optional(),
+      })
+      .refine((data) => data.active !== false || (data.hiddenSince !== undefined && data.hiddenReason !== undefined), {
+        message: "If active is false, hiddenSince and hiddenReason must be provided to keep the record orderly",
+        path: ["active"],
+      }),
 });
 
 const successDogs = defineCollection({

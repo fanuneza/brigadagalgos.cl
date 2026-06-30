@@ -16,7 +16,7 @@ const CARD_SIZES = {
 
 const LIGHTBOX_SIZE = 1600;
 const SUCCESS_STATES = new Set(["Adoptado", "Adoptada"]);
-const ADOPTION_IDS = ["turron", "huayca", "foxy", "arepita", "loica", "olga"];
+const ADOPTION_IDS = ["turron", "huayca", "foxy", "arepita", "loica"];
 const MOVED_TO_ADOPTION = new Set(["huayca"]);
 
 const SUCCESS_OVERRIDES = {
@@ -123,12 +123,6 @@ const ADOPTION_OVERRIDES = {
     weight: "Peso por confirmar",
     details:
       "Loica llegó desde Maipú después de haber sido mamá hace pocos meses. Está en hogar temporal y buscamos una casa paciente para que siga ganando seguridad a su ritmo.",
-  },
-  olga: {
-    age: "6 años aprox.",
-    weight: "17 kg",
-    details:
-      "Olga fue rescatada en Curacaví con una herida grave en una patita y tuvo que pasar por amputación. Buscamos una familia muy tranquila y comprometida con su adaptación.",
   },
 };
 

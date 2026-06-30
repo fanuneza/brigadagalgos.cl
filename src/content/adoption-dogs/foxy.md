@@ -8,6 +8,9 @@ location: "Hogar temporal"
 currentNeed: "Adopción"
 characterSketch: "Está recuperándose paso a paso y responde mejor a un ambiente calmado. Convive bien con otros perros y necesita una familia que respete sus tiempos."
 order: 3
+active: false
+hiddenSince: 2026-06-30
+hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 gallery:
   - ../../assets/casos/adopcion/foxy/foxy-01.jpg
   - ../../assets/casos/adopcion/foxy/foxy-02.jpg

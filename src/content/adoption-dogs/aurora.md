@@ -8,6 +8,9 @@ location: "Colina"
 currentNeed: "Adopción"
 characterSketch: "Es muy tranquila en los paseos, sociable y de energía media-baja. Se lleva excelente con otros perros, gatos y niños, adaptándose feliz a casa o departamento."
 order: 9
+active: false
+hiddenSince: 2026-06-30
+hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 gallery:
   - ../../assets/casos/adopcion/aurora/aurora-01.jpg
 ---

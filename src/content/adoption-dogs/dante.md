@@ -8,6 +8,9 @@ location: "Hogar temporal"
 currentNeed: "Adopción"
 characterSketch: "Joven y activo de talla grande. Se lleva muy bien con otros perros, pero no es apto para convivir con gatos. Apto para casa o departamento."
 order: 11
+active: false
+hiddenSince: 2026-06-30
+hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 gallery:
   - ../../assets/casos/adopcion/dante/dante-01.jpeg
   - ../../assets/casos/adopcion/dante/dante-02.jpeg

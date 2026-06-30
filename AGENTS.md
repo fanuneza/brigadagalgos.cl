@@ -26,6 +26,7 @@ This repository is a static Astro site deployed to Cloudflare Pages from GitHub.
 
 ## Code Standards
 
+- **Never use absolute file paths** (e.g. `file:///C:/Users/...`) in repository files, markdown files, or codebase documentation. Always use relative paths to ensure portability across environments and machines.
 - Keep code DRY. Extract duplicated metadata, schema, analytics, content mapping, and UI logic into small shared modules.
 - Optimize for jCodeMunch: use clear file names, named exports for reusable logic, stable symbols, typed interfaces, and small purpose-specific modules.
 - Use the `@/*` alias only for imports under `src/`. Astro supports this through `tsconfig.json`; if another tool imports source files directly and does not honor TS paths, configure that tool or use relative imports in the test/tooling file.
@@ -155,6 +156,35 @@ Use the active runner model id:
 - Claude Haiku: use `claude-haiku-4-5`.
 
 If `plan_turn` is not appropriate for a non-code task, call `announce_model(model="...")` once instead.
+
+## Managing Dog Statuses (Adoption, Success, and Hidden)
+
+### 1. Moving a Dog to Success (Adopted)
+
+When a dog is successfully adopted, move their file and assets to the success directory:
+
+1. **Move files:** Use `git mv` to move their markdown file and asset folder:
+   ```bash
+   git mv src/content/adoption-dogs/name.md src/content/success-dogs/name.md
+   git mv src/assets/casos/adopcion/name src/assets/casos/exito/name
+   ```
+2. **Rewrite the markdown file:**
+   - Remove fields specific to adoption (`sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, `order`).
+   - Add a `story` string containing their adoption story (follow `docs/voice-and-tone.md`).
+   - Update `gallery` image references to point to the new folder: `../../assets/casos/exito/name/...`.
+3. **Update scripts:** Remove the dog's ID from `ADOPTION_IDS` and `ADOPTION_OVERRIDES` in `scripts/prepare-casos-site.mjs`.
+
+### 2. Hiding a Dog Temporarily (e.g., Foster Evaluation)
+
+To temporarily hide a dog from the adoption grid while keeping their file in the codebase:
+
+1. **Update their markdown file:** Set `active: false` and provide tracking metadata (`hiddenSince` and `hiddenReason`) in their frontmatter:
+   ```yaml
+   active: false
+   hiddenSince: YYYY-MM-DD
+   hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
+   ```
+2. **Automatic Expiration Rule:** Inactive dogs have an expiration limit of 90 days. `tests/source-hygiene.test.ts` enforces this and will fail the build if a dog has been hidden for too long.
 
 ## Required Verification
 

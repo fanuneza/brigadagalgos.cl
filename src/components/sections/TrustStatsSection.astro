@@ -1,8 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import "../../styles/components/trust-stats.css";
 
-const adoptionDogCount = (await getCollection("adoption-dogs")).length;
+const rawDogsList: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
+const adoptionDogCount = rawDogsList.filter((dog) => dog.data.active !== false).length;
 const yearsActive = Math.max(new Date().getFullYear() - 2023, 1);
 ---
 

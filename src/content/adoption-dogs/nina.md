@@ -8,6 +8,9 @@ location: "Santiago"
 currentNeed: "Adopción"
 characterSketch: "Después de cuidar a sus cachorros, Niña está cerrando su evaluación médica. Necesita una familia tranquila y paciente que la acompañe en una transición definitiva."
 order: 7
+active: false
+hiddenSince: 2026-06-30
+hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 gallery:
   - ../../assets/casos/adopcion/nina/nina-01.jpg
   - ../../assets/casos/adopcion/nina/nina-02.jpg
