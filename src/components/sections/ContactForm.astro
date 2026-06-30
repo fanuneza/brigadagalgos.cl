@@ -11,7 +11,14 @@ import "../../styles/components/form.css";
       información, la revisamos contigo después.
     </p>
 
-    <form class="form" data-form id="contact-form" novalidate>
+    <form
+      class="form"
+      data-form
+      id="contact-form"
+      novalidate
+      toolname="enviar_mensaje_contacto"
+      tooldescription="Envía un mensaje de contacto a la fundación Brigada Galgos para consultas sobre adopción, hogares temporales, donaciones o consultas generales."
+    >
       <input type="hidden" name="access_key" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
       <input type="hidden" name="form_id" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
       <input type="hidden" name="subject" value="Nuevo mensaje desde brigadagalgos.cl" />
@@ -26,17 +33,36 @@ import "../../styles/components/form.css";
 
       <div class="field">
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          autocomplete="name"
+          required
+          toolparamdescription="Nombre completo de la persona que envía el mensaje."
+        />
       </div>
 
       <div class="field">
         <label for="email">Correo</label>
-        <input type="email" id="email" name="email" autocomplete="email" required />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          autocomplete="email"
+          required
+          toolparamdescription="Dirección de correo electrónico del remitente."
+        />
       </div>
 
       <div class="field">
         <label for="asunto">Asunto</label>
-        <select id="asunto" name="asunto" required>
+        <select
+          id="asunto"
+          name="asunto"
+          required
+          toolparamdescription="El tema o motivo de la consulta (Adopción, Hogar temporal, Donación, Prensa o Consulta general)."
+        >
           <option value="">Selecciona el asunto</option>
           <option value="Adopción">Adopción</option>
           <option value="Hogar temporal">Hogar temporal</option>
@@ -48,11 +74,23 @@ import "../../styles/components/form.css";
 
       <div class="field">
         <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+        <textarea
+          id="mensaje"
+          name="mensaje"
+          rows="4"
+          placeholder="¿En qué podemos ayudarte?"
+          required
+          toolparamdescription="Detalle del mensaje, consulta o pregunta."></textarea>
       </div>
 
       <div class="field field--checkbox">
-        <input type="checkbox" id="consent" name="consent" required />
+        <input
+          type="checkbox"
+          id="consent"
+          name="consent"
+          required
+          toolparamdescription="Aceptación explícita para que la fundación responda al correo electrónico proporcionado. Debe marcarse como verdadero para enviar el formulario."
+        />
         <label for="consent">Acepto que respondan a este correo.</label>
       </div>
 

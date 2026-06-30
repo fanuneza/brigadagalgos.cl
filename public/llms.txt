@@ -1,0 +1,14 @@
+# Brigada Galgos
+
+> Brigada Galgos es una fundación chilena dedicada al rescate, rehabilitación y reubicación de galgos en Chile.
+
+## Información Principal
+
+- [Inicio / Portada](https://brigadagalgos.cl/): Página de inicio con la misión, historias de éxito y estadísticas de impacto de la fundación.
+- [Adoptar un Galgo](https://brigadagalgos.cl/adoptar/): Información sobre el proceso de adopción, requisitos, y listado de perros galgos actualmente disponibles para adopción.
+- [Hogar Temporal](https://brigadagalgos.cl/hogar-temporal/): Información y formulario de postulación para ser hogar temporal de galgos en recuperación.
+- [Donaciones y Apoyo](https://brigadagalgos.cl/donar/): Canales oficiales y formas de donar y apoyar económicamente a la fundación.
+- [Por Qué Galgos](https://brigadagalgos.cl/por-que-galgos/): Artículos informativos sobre la raza galgo, su carácter, cuidados y mitos comunes.
+- [Preguntas Frecuentes (FAQ)](https://brigadagalgos.cl/preguntas-frecuentes/): Preguntas comunes sobre el cuidado, el temperamento y la adopción de galgos.
+- [Contacto](https://brigadagalgos.cl/contacto/): Canales de contacto y formulario para comunicarse con el equipo de la fundación.
+- [Colaboradores](https://brigadagalgos.cl/colaboradores/): Alianzas y organizaciones/veterinarias aliadas que apoyan a la fundación.
