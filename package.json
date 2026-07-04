@@ -33,6 +33,7 @@
     "capture:donar": "playwright test --config playwright.config.ts --grep @donar"
   },
   "dependencies": {
+    "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
     "@fontsource/barlow-condensed": "5.2.8",
     "@jdevalk/astro-seo-graph": "2.0.0",

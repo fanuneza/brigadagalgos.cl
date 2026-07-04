@@ -23,7 +23,9 @@ import "../../styles/components/contact-channels.css";
         <p class="channel-card__title">WHATSAPP</p>
         <p class="channel-card__detail">{SITE.whatsappPhone}</p>
         <p class="channel-card__hours">Lun a Vie · 10:00 – 19:00</p>
-        <a href={SITE.whatsapp} class="btn btn--primary" target="_blank" rel="noopener noreferrer"> Abrir WhatsApp </a>
+        <a href={SITE.whatsapp} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+          Abrir WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+        </a>
       </div>
 
       <div class="channel-card">
@@ -79,7 +81,7 @@ import "../../styles/components/contact-channels.css";
                 decoding="async"
               />
             </span>
-            <span>Instagram</span>
+            <span>Instagram <span class="sr-only"> (abre en una nueva pestaña)</span></span>
           </a>
           <a
             href={SITE.facebook}
@@ -99,7 +101,7 @@ import "../../styles/components/contact-channels.css";
                 decoding="async"
               />
             </span>
-            <span>Facebook</span>
+            <span>Facebook <span class="sr-only"> (abre en una nueva pestaña)</span></span>
           </a>
         </div>
       </div>

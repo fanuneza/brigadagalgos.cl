@@ -55,6 +55,12 @@ const defaultSchema = buildStructuredDataGraph({
       locale="es_CL"
       graph={schema || defaultSchema}
       extraLinks={[
+        {
+          rel: "alternate",
+          type: "application/rss+xml",
+          title: `${name} | Blog`,
+          href: new URL("feed.xml", siteUrl).href,
+        },
         { rel: "sitemap", href: "/sitemap-index.xml" },
         { rel: "icon", href: "/favicon.ico", sizes: "any" },
         { rel: "icon", type: "image/png", sizes: "32x32", href: "/images/brigada-galgos-logo-32.png" },
