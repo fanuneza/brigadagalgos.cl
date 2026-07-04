@@ -21,7 +21,10 @@ const rawDogs = rawDogsList.filter((dog) => dog.data.active !== false);
 const dogs = await buildAdoptionDogCards(shuffle(rawDogs));
 ---
 
-<BaseLayout title="Adoptar" description="Conoce a los galgos que hoy están listos para encontrar familia en Chile.">
+<BaseLayout
+  title="Adopta un galgo rescatado en Chile"
+  description="Conoce a los galgos que hoy están listos para encontrar familia en Chile y te acompañamos durante todo el proceso de adopción."
+>
   <Navbar />
   <main id="main-content">
     <PageHero

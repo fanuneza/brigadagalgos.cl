@@ -30,12 +30,15 @@ export default defineConfig({
           href.startsWith("/schemamap.xml") ||
           href.startsWith("/schema/"),
       },
-      indexNow: {
-        key: "591c2b87f0b68c44f260215f5d8e9da3",
-        host: "brigadagalgos.cl",
-        siteUrl: "https://brigadagalgos.cl",
-      },
-      markdownAlternate: true,
+      indexNow:
+        process.env.ENABLE_INDEXNOW === "true"
+          ? {
+              key: "591c2b87f0b68c44f260215f5d8e9da3",
+              host: "brigadagalgos.cl",
+              siteUrl: "https://brigadagalgos.cl",
+            }
+          : undefined,
+      markdownAlternate: false,
     }),
   ],
 });
