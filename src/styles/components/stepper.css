@@ -1,5 +1,10 @@
+.stepper-section {
+  position: relative;
+}
+
 .stepper__heading {
   margin-bottom: var(--space-9);
+  max-width: 12ch;
 }
 
 .stepper {
@@ -69,8 +74,8 @@
 .step__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding-top: 10px;
+  gap: var(--space-2);
+  padding-top: 8px;
 }
 
 .step__label {
@@ -84,6 +89,37 @@
 
 .step__sub {
   margin: 0;
+}
+
+@media (max-width: 767px) {
+  .stepper__heading {
+    margin-bottom: var(--space-7);
+  }
+
+  .step {
+    gap: var(--space-3);
+    padding-bottom: var(--space-5);
+  }
+
+  .step__badge {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+
+  .step:not(:last-child)::after {
+    left: 20px;
+    top: 42px;
+  }
+
+  .step__label {
+    font-size: var(--font-size-base);
+  }
+
+  .step__sub {
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
 }
 
 /* Desktop — horizontal */
@@ -106,6 +142,10 @@
   .step__body {
     padding-top: var(--space-4);
     align-items: center;
+  }
+
+  .step__sub {
+    max-width: 18ch;
   }
 
   /* Horizontal connector */
