@@ -4,12 +4,7 @@
 
 .adoption-process .container--narrow {
   display: grid;
-  gap: var(--space-4);
-  padding: var(--space-7);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  gap: var(--space-5);
 }
 
 .adoption-process__lead {
@@ -18,33 +13,34 @@
 }
 
 .adoption-process__list {
-  margin: var(--space-3) 0 0;
-  padding-left: 0;
+  margin: var(--space-2) 0 0;
+  padding: 0;
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-5);
   list-style: none;
   counter-reset: adoption-steps;
 }
 
-.adoption-process__list li {
-  counter-increment: adoption-steps;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--space-4);
-  align-items: start;
-  padding: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+@media (min-width: 768px) {
+  .adoption-process__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5) var(--space-6);
+  }
 }
 
-.adoption-process__list li::before {
-  content: counter(adoption-steps);
+.adoption-process__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.adoption-process__step-number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
   border-radius: var(--radius-full);
   background: var(--color-primary);
   color: var(--on-primary);
@@ -53,17 +49,41 @@
   line-height: 1;
 }
 
+.adoption-process__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.adoption-process__step-title {
+  font-family: var(--font-display);
+  font-size: var(--type-ui-title);
+  font-weight: var(--weight-semi);
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.adoption-process__step-body p {
+  margin: 0;
+  font-size: var(--type-body);
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
+}
+
 .adoption-process__reassurance {
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-5);
+  border-left: 3px solid var(--color-primary);
+  background: color-mix(in sRGB, var(--color-bg) 86%, var(--color-primary-100));
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   display: grid;
   gap: var(--space-3);
-  max-width: 68ch;
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: color-mix(in sRGB, var(--color-surface) 76%, var(--color-bg));
-  border: 1px solid color-mix(in sRGB, var(--color-border) 82%, transparent);
 }
 
 .adoption-process__reassurance p {
   margin: 0;
+  font-size: var(--type-body);
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
 }

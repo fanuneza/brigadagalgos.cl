@@ -72,19 +72,21 @@
 }
 
 .donation-banner__cta {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
   align-items: flex-start;
-  padding: var(--space-5);
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: var(--shadow-md);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  width: fit-content;
 }
 @media (min-width: 1024px) {
   .donation-banner__cta {
     align-items: flex-end;
+    justify-self: end;
   }
 }
 

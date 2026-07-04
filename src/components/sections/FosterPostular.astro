@@ -1,5 +1,23 @@
 ---
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
+
+const steps = [
+  {
+    number: "1",
+    title: "Completa el formulario",
+    body: "Usamos un formulario de Google donde nos cuentas tu disponibilidad, tu casa, quiénes viven contigo y tu experiencia con perros. Si tienes dudas, escríbenos primero: no esperamos que tengas todo claro desde el primer mensaje.",
+  },
+  {
+    number: "2",
+    title: "Cambia la espera del galgo",
+    body: "El hogar temporal es temporal para ti y cambia por completo la espera del galgo. Nos permite conocer su rutina, cuidarlo mejor y preparar una adopción responsable.",
+  },
+  {
+    number: "3",
+    title: "Coordinamos durante la acogida",
+    body: "Durante la acogida coordinamos contigo por WhatsApp y compartimos novedades cuando hay avances relevantes, sin prometer una frecuencia fija.",
+  },
+];
 ---
 
 <section id="form" class="section-padding">
@@ -7,20 +25,23 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
     <p class="eyebrow">POSTULAR</p>
     <h2>Completa tu postulación</h2>
 
+    <ol class="foster-cta__steps" role="list">
+      {
+        steps.map((step) => (
+          <li class="foster-cta__step">
+            <span class="foster-cta__step-number" aria-hidden="true">
+              {step.number}
+            </span>
+            <div class="foster-cta__step-body">
+              <h3 class="foster-cta__step-title">{step.title}</h3>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
     <div class="foster-cta">
-      <p>
-        Usamos un formulario de Google donde nos cuentas tu disponibilidad, tu casa, quiénes viven contigo y tu
-        experiencia con perros. Si tienes dudas, escríbenos primero: no esperamos que tengas todo claro desde el primer
-        mensaje.
-      </p>
-      <p>
-        El hogar temporal es temporal para ti y cambia por completo la espera del galgo. Nos permite conocer su rutina,
-        cuidarlo mejor y preparar una adopción responsable.
-      </p>
-      <p>
-        Durante la acogida coordinamos contigo por WhatsApp y compartimos novedades cuando hay avances relevantes, sin
-        prometer una frecuencia fija.
-      </p>
       <a
         href="https://forms.gle/3YHPo8KKnCiySbCo6"
         class="btn btn--primary"

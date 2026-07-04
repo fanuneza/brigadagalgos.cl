@@ -4,22 +4,13 @@
 }
 
 .donation-intro {
-  max-width: 68ch;
-  margin-bottom: var(--space-5);
-  padding: var(--space-5);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in sRGB, var(--color-bg) 92%, transparent),
-      color-mix(in sRGB, var(--color-surface) 84%, transparent)
-    ),
-    var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  max-width: 64ch;
+  margin: 0 0 var(--space-5);
+  font-size: var(--type-lead);
+  line-height: var(--line-loose);
+  color: var(--color-text-muted);
 }
 
-.donation-intro p,
 .donation-transparency {
   margin: 0;
 }

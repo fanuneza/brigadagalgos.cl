@@ -4,7 +4,8 @@
 
 .stepper__heading {
   margin-bottom: var(--space-9);
-  max-width: 12ch;
+  max-width: 26ch;
+  text-wrap: balance;
 }
 
 .stepper {

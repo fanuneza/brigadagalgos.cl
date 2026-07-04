@@ -1,16 +1,44 @@
 ---
 import { SITE } from "../../config/site.ts";
+
+const ways = [
+  {
+    title: "Donaciones materiales",
+    body: "Dona comida, mantas o medicamentos.",
+    tone: "primary",
+  },
+  {
+    title: "Servicios profesionales",
+    body: "Ofrece servicios: veterinario, transporte, fotografía.",
+    tone: "secondary",
+  },
+  {
+    title: "Difusión",
+    body: "Comparte las adopciones en tus redes sociales.",
+    tone: "warm",
+  },
+];
 ---
 
 <section class="section-padding tail-cta">
   <div class="container container--narrow">
     <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
     <h2>Más formas de colaborar</h2>
-    <ul class="requisitos-list">
-      <li>Dona comida, mantas o medicamentos.</li>
-      <li>Ofrece servicios: veterinario, transporte, fotografía.</li>
-      <li>Comparte las adopciones en tus redes sociales.</li>
+
+    <ul class="tail-cta__list" role="list">
+      {
+        ways.map((way) => (
+          <li class="tail-cta__item">
+            <span class={`tail-cta__dot tail-cta__dot--${way.tone}`} aria-hidden="true" />
+            <div>
+              <h3 class="tail-cta__item-title">{way.title}</h3>
+              <p>{way.body}</p>
+            </div>
+          </li>
+        ))
+      }
     </ul>
+
     <a
       href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
       class="btn btn--secondary"

@@ -1,10 +1,71 @@
+.foster-cta__steps {
+  display: grid;
+  gap: var(--space-5);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: foster-steps;
+}
+
+.foster-cta__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.foster-cta__step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.foster-cta__step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-secondary);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  line-height: 1;
+}
+
+.foster-cta__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.foster-cta__step-title {
+  font-family: var(--font-display);
+  font-size: var(--type-ui-title);
+  font-weight: var(--weight-semi);
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.foster-cta__step-body p {
+  margin: 0;
+  font-size: var(--type-body);
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
+  max-width: 64ch;
+}
+
 .foster-cta {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
   max-width: 640px;
   margin-inline: auto;
-  margin-top: var(--space-6);
+  margin-top: var(--space-7);
+  text-align: center;
 }
 
 .foster-cta .btn {
@@ -15,6 +76,26 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   text-align: center;
+  margin: 0;
+}
+
+.requirements__notes {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  border-left: 3px solid var(--color-secondary);
+  background: color-mix(in sRGB, var(--color-bg) 86%, var(--color-secondary-100));
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.requirements__note {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.requirements__note strong {
+  color: var(--color-text);
 }
 
 .foster-support {
@@ -23,8 +104,16 @@
   margin-top: var(--space-6);
 }
 
+.foster-support > div {
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+}
+
 .foster-support h3 {
-  margin-top: 0;
+  margin: 0;
+  font-size: var(--type-card-title);
 }
 
 .foster-support__list {

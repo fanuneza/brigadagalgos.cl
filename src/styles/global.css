@@ -384,14 +384,60 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   text-align: center;
 }
 
-.tail-cta .requisitos-list {
+.tail-cta__list {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+  padding: 0;
+  list-style: none;
   text-align: left;
-  width: fit-content;
-  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .tail-cta__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tail-cta__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.tail-cta__dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  margin-top: 0.5rem;
+}
+
+.tail-cta__dot--secondary {
+  background: var(--color-secondary);
+}
+
+.tail-cta__dot--warm {
+  background: var(--color-accent-warm);
+}
+
+.tail-cta__item-title {
+  font-family: var(--font-display);
+  font-size: var(--type-ui-title);
+  font-weight: var(--weight-semi);
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.tail-cta__item p {
+  margin: 0;
+  color: var(--color-text-muted);
 }
 
 .tail-cta .btn {
-  margin-top: var(--space-6);
+  margin-top: var(--space-2);
 }
 
 main {

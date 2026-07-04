@@ -1,3 +1,17 @@
+.home-why-galgo__summary {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border-left: 3px solid var(--color-primary);
+  background: color-mix(in sRGB, var(--color-surface) 72%, var(--color-bg));
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.home-why-galgo__summary p {
+  margin: 0;
+}
+
 .home-why-galgo__cta {
   margin-top: var(--space-5);
 }
