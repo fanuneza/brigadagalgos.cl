@@ -1,8 +1,8 @@
 .help-cards {
   background: linear-gradient(
     180deg,
-    color-mix(in sRGB, var(--color-surface) 76%, white),
-    color-mix(in sRGB, var(--color-primary-100) 18%, white)
+    color-mix(in sRGB, var(--color-surface) 88%, var(--color-bg)),
+    color-mix(in sRGB, var(--color-primary-100) 18%, var(--color-bg))
   );
 }
 

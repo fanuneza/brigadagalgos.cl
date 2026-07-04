@@ -9,7 +9,11 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.72)),
+    linear-gradient(
+      135deg,
+      color-mix(in sRGB, var(--color-bg) 94%, transparent),
+      color-mix(in sRGB, var(--color-surface) 84%, transparent)
+    ),
     linear-gradient(
       115deg,
       color-mix(in sRGB, var(--color-primary-100) 84%, transparent),
@@ -55,7 +59,7 @@
   display: block;
   aspect-ratio: 4/5;
   box-shadow: 0 28px 48px rgba(31, 35, 40, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  border: 1px solid color-mix(in sRGB, var(--color-border) 72%, var(--color-bg));
 }
 
 .hero__photo {

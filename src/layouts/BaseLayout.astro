@@ -36,8 +36,7 @@ const defaultSchema = buildStructuredDataGraph({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0FB0C9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0FB0C9" data-theme-color />
     <link rel="preload" href={barlow700} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={barlow900} as="font" type="font/woff2" crossorigin="anonymous" />
 
@@ -78,6 +77,10 @@ const defaultSchema = buildStructuredDataGraph({
           var t = localStorage.getItem("brigada-galgos-theme");
           if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
         } catch (e) {}
+        var explicit = document.documentElement.dataset.theme;
+        var dark = explicit ? explicit === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var meta = document.querySelector('meta[name="theme-color"][data-theme-color]');
+        if (meta) meta.setAttribute("content", dark ? "#101217" : "#0FB0C9");
       })();
     </script>
   </head>

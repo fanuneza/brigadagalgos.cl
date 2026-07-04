@@ -9,7 +9,13 @@
   display: grid;
   grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
   gap: var(--space-5);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.82)), var(--color-surface);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--color-bg) 90%, transparent),
+      color-mix(in sRGB, var(--color-surface) 86%, transparent)
+    ),
+    var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4) var(--space-5);
@@ -43,7 +49,11 @@
 
 .impact-section__negative .impact-card {
   background:
-    linear-gradient(180deg, color-mix(in sRGB, var(--color-secondary-100) 44%, white), rgba(255, 255, 255, 0.9)),
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--color-secondary-100) 44%, var(--color-bg)),
+      color-mix(in sRGB, var(--color-surface) 92%, var(--color-bg))
+    ),
     var(--color-surface);
 }
 

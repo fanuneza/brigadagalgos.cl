@@ -1,4 +1,6 @@
 const STORAGE_KEY = "brigada-galgos-theme";
+const LIGHT_THEME_COLOR = "#0FB0C9";
+const DARK_THEME_COLOR = "#101217";
 
 function getStoredTheme(): "light" | "dark" | null {
   try {
@@ -16,7 +18,9 @@ function applyStoredTheme(): void {
   } else {
     delete document.documentElement.dataset.theme;
   }
-  syncToggleAria(getEffectiveTheme());
+  const effective = getEffectiveTheme();
+  syncToggleAria(effective);
+  syncThemeColorMeta(effective);
 }
 
 function getEffectiveTheme(): "light" | "dark" {
@@ -31,6 +35,7 @@ function applyTheme(theme: "light" | "dark"): void {
     localStorage.setItem(STORAGE_KEY, theme);
   } catch {}
   syncToggleAria(theme);
+  syncThemeColorMeta(theme);
 }
 
 function syncToggleAria(effective: "light" | "dark"): void {
@@ -40,6 +45,12 @@ function syncToggleAria(effective: "light" | "dark"): void {
     btn.setAttribute("aria-label", ariaLabel);
     btn.setAttribute("aria-pressed", String(isDark));
   });
+}
+
+function syncThemeColorMeta(theme: "light" | "dark"): void {
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"][data-theme-color]');
+  if (!meta) return;
+  meta.content = theme === "dark" ? DARK_THEME_COLOR : LIGHT_THEME_COLOR;
 }
 
 function initThemeToggle(): void {

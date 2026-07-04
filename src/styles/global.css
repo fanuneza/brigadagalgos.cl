@@ -70,7 +70,7 @@ body {
       color-mix(in sRGB, var(--color-secondary-100) 72%, transparent) 0,
       transparent 28rem
     ),
-    linear-gradient(180deg, color-mix(in sRGB, var(--color-surface) 72%, white) 0%, var(--color-bg) 22rem);
+    linear-gradient(180deg, color-mix(in sRGB, var(--color-surface) 88%, var(--color-bg)) 0%, var(--color-bg) 22rem);
   margin: 0;
   min-width: 320px;
   text-wrap: pretty;
@@ -248,7 +248,7 @@ h3 {
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+  box-shadow: 0 1px 0 color-mix(in sRGB, var(--color-text-inverse) 24%, transparent) inset;
   transition:
     background var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out),
@@ -292,7 +292,7 @@ h3 {
 }
 .btn--secondary:hover {
   background: var(--btn-secondary-bg-hover);
-  border-color: color-mix(in sRGB, var(--btn-secondary-border) 72%, white);
+  border-color: color-mix(in sRGB, var(--btn-secondary-border) 72%, var(--color-bg));
 }
 
 .btn--ghost {
