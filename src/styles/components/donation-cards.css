@@ -6,6 +6,17 @@
 .donation-intro {
   max-width: 68ch;
   margin-bottom: var(--space-5);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--color-bg) 92%, transparent),
+      color-mix(in sRGB, var(--color-surface) 84%, transparent)
+    ),
+    var(--color-bg);
+  box-shadow: var(--shadow-sm);
 }
 
 .donation-intro p,
@@ -23,6 +34,18 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
+  background: color-mix(in sRGB, var(--color-bg) 92%, transparent);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-amount::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 0.3rem;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent-warm));
 }
 
 .donation-amount__value {
@@ -76,6 +99,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--color-bg) 94%, transparent),
+      color-mix(in sRGB, var(--color-surface) 84%, transparent)
+    ),
+    var(--color-bg);
+  box-shadow: var(--shadow-md);
 }
 
 .chip--recommended {
@@ -130,6 +161,10 @@
   text-align: left;
   cursor: pointer;
   position: relative;
+}
+
+.bank-info__row:active {
+  transform: translateY(1px);
 }
 
 .bank-info__label {

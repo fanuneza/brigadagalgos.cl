@@ -1,19 +1,67 @@
+.adoption-process {
+  background: color-mix(in sRGB, var(--color-surface) 74%, var(--color-bg));
+}
+
+.adoption-process .container--narrow {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-7);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
 .adoption-process__lead {
   max-width: 60ch;
+  margin: 0;
 }
 
 .adoption-process__list {
-  margin: var(--space-5) 0 0;
-  padding-left: 1.25rem;
+  margin: var(--space-3) 0 0;
+  padding-left: 0;
   display: grid;
   gap: var(--space-3);
+  list-style: none;
+  counter-reset: adoption-steps;
+}
+
+.adoption-process__list li {
+  counter-increment: adoption-steps;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.adoption-process__list li::before {
+  content: counter(adoption-steps);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  line-height: 1;
 }
 
 .adoption-process__reassurance {
-  margin-top: var(--space-5);
+  margin-top: var(--space-3);
   display: grid;
   gap: var(--space-3);
   max-width: 68ch;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: color-mix(in sRGB, var(--color-surface) 76%, var(--color-bg));
+  border: 1px solid color-mix(in sRGB, var(--color-border) 82%, transparent);
 }
 
 .adoption-process__reassurance p {

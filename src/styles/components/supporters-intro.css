@@ -2,6 +2,17 @@
   display: grid;
   gap: var(--space-3);
   margin-bottom: var(--space-6);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--color-bg) 92%, transparent),
+      color-mix(in sRGB, var(--color-surface) 84%, transparent)
+    ),
+    var(--color-bg);
+  box-shadow: var(--shadow-sm);
 }
 
 .supporters-intro__lead {

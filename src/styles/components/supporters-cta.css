@@ -1,11 +1,36 @@
 .supporters-cta {
   text-align: center;
+  position: relative;
+  overflow: clip;
+  background: linear-gradient(
+    180deg,
+    color-mix(in sRGB, var(--color-surface) 88%, var(--color-bg)),
+    color-mix(in sRGB, var(--color-primary-100) 16%, var(--color-bg))
+  );
+}
+
+.supporters-cta::before {
+  content: "";
+  position: absolute;
+  inset: auto auto -4rem -4rem;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 999px;
+  background: color-mix(in sRGB, var(--color-secondary-100) 42%, transparent);
+  filter: blur(20px);
+  pointer-events: none;
 }
 
 .supporters-cta .container--narrow {
   display: grid;
   gap: var(--space-4);
   justify-items: center;
+  position: relative;
+  padding: var(--space-7);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: color-mix(in sRGB, var(--color-bg) 90%, transparent);
+  box-shadow: var(--shadow-md);
 }
 
 .supporters-cta__lead {
