@@ -8,13 +8,11 @@ module.exports = {
     assert: {
       preset: "lighthouse:recommended",
       assertions: {
-        "categories:performance": ["warn", { minScore: 0.8 }],
-        // The current audited routes land at roughly 0.88-0.89 in CI.
-        "categories:accessibility": ["warn", { minScore: 0.88 }],
-        "categories:best-practices": ["warn", { minScore: 0.9 }],
-        "categories:seo": ["warn", { minScore: 0.9 }],
+        "categories:performance": ["error", { minScore: 1 }],
+        "categories:accessibility": ["error", { minScore: 1 }],
+        "categories:best-practices": ["error", { minScore: 1 }],
+        "categories:seo": ["error", { minScore: 1 }],
         "largest-contentful-paint": ["warn", { maxNumericValue: 3500 }],
-        // Donar currently peaks around 0.139 in CI.
         "cumulative-layout-shift": ["warn", { maxNumericValue: 0.15 }],
         "total-blocking-time": ["warn", { maxNumericValue: 200 }],
         // Lighthouse reports the current home-page bfcache miss as "Not actionable"
