@@ -27,8 +27,10 @@
 }
 
 .cookie-banner__link {
-  color: #bae0ff;
-  text-decoration-color: rgba(186, 224, 255, 0.4);
+  color: #fef3c7;
+  text-decoration: underline;
+  text-decoration-color: rgba(254, 243, 199, 0.7);
+  text-underline-offset: 3px;
 }
 
 .cookie-banner__link:hover {

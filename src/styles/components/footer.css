@@ -4,6 +4,16 @@
   padding-top: var(--space-10);
   --link-color: rgba(255, 255, 255, 0.88);
   --link-decoration-color: rgba(255, 255, 255, 0.35);
+  position: relative;
+  overflow: clip;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent-warm));
 }
 
 .footer__grid {

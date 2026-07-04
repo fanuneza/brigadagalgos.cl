@@ -1,9 +1,15 @@
 .donation-banner {
-  background: var(--color-cta-band-bg);
+  background: linear-gradient(
+    135deg,
+    color-mix(in sRGB, var(--color-cta-band-bg) 92%, #10071d),
+    color-mix(in sRGB, var(--color-secondary) 74%, #31102a)
+  );
   color: var(--color-text-on-dark);
   padding-block: var(--space-9);
   --link-color: var(--color-text-on-dark);
   --link-decoration-color: rgba(255, 255, 255, 0.35);
+  position: relative;
+  overflow: clip;
 }
 @media (min-width: 1024px) {
   .donation-banner {
@@ -25,6 +31,7 @@
 .donation-banner h2 {
   color: var(--color-text-on-dark);
   margin-bottom: var(--space-3);
+  max-width: 14ch;
 }
 
 /* 18px + weight 500 — minimum for AA on magenta background */

@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import seoGraph from "@jdevalk/astro-seo-graph/integration";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "static",
@@ -12,6 +13,9 @@ export default defineConfig({
   },
   build: {
     inlineStylesheets: "always",
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   integrations: [
     sitemap({

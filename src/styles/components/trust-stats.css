@@ -14,7 +14,22 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  background-color: var(--color-surface);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.76)), var(--color-surface);
+  position: relative;
+  overflow: clip;
+}
+
+.stat-card::after {
+  content: "";
+  position: absolute;
+  inset: auto auto -2.25rem -1rem;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 999px;
+  background: color-mix(in sRGB, var(--color-primary-100) 72%, transparent);
+  filter: blur(6px);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .stat-card__value {

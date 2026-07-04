@@ -3,6 +3,36 @@
 @import url("./tokens.css");
 @import url("./components/navbar.css");
 @import url("./components/skip-to-content.css");
+@import url("./components/hero.css");
+@import url("./components/mission.css");
+@import url("./components/help-cards.css");
+@import url("./components/stepper.css");
+@import url("./components/stories.css");
+@import url("./components/donation-banner.css");
+@import url("./components/page-hero.css");
+@import url("./components/adoption-intro.css");
+@import url("./components/adoption-grid.css");
+@import url("./components/adoption-process.css");
+@import url("./components/filter-chips.css");
+@import url("./components/dog-card.css");
+@import url("./components/requirement-card.css");
+@import url("./components/contact-channels.css");
+@import url("./components/form.css");
+@import url("./components/footer.css");
+@import url("./components/rainbow-divider.css");
+@import url("./components/impact-section.css");
+@import url("./components/por-que-galgos.css");
+@import url("./components/supporters-intro.css");
+@import url("./components/supporters-cta.css");
+@import url("./components/trust-stats.css");
+@import url("./components/colaboradores.css");
+@import url("./components/faq.css");
+@import url("./components/cookie-banner.css");
+@import url("./components/cookie-policy.css");
+@import url("./components/hogar-temporal.css");
+@import url("./components/home.css");
+@import url("./components/donation-cards.css");
+@import "tailwindcss";
 
 *,
 *::before,
@@ -29,8 +59,21 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-base);
   color: var(--color-text);
-  background: var(--color-bg);
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in sRGB, var(--color-primary-100) 68%, transparent) 0,
+      transparent 26rem
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in sRGB, var(--color-secondary-100) 72%, transparent) 0,
+      transparent 28rem
+    ),
+    linear-gradient(180deg, color-mix(in sRGB, var(--color-surface) 72%, white) 0%, var(--color-bg) 22rem);
   margin: 0;
+  min-width: 320px;
+  text-wrap: pretty;
 }
 
 h1,
@@ -62,10 +105,16 @@ h3 {
 .section-padding {
   padding-block: var(--space-9);
 }
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-block: var(--space-10);
+  }
+}
 
 .hero__text h1,
 .page-hero h1 {
   font-size: var(--type-page-title);
+  text-wrap: balance;
 }
 
 .section-heading,
@@ -199,9 +248,11 @@ h3 {
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
   transition:
     background var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 .btn:active {
@@ -231,6 +282,7 @@ h3 {
 }
 .btn--primary:hover {
   background: var(--btn-primary-bg-hover);
+  border-color: color-mix(in sRGB, var(--btn-primary-bg-hover) 84%, black);
 }
 
 .btn--secondary {
@@ -240,6 +292,7 @@ h3 {
 }
 .btn--secondary:hover {
   background: var(--btn-secondary-bg-hover);
+  border-color: color-mix(in sRGB, var(--btn-secondary-border) 72%, white);
 }
 
 .btn--ghost {
@@ -339,6 +392,21 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
 
 .tail-cta .btn {
   margin-top: var(--space-6);
+}
+
+main {
+  display: block;
+}
+
+.requirements__note {
+  margin-top: var(--space-3);
+}
+
+.not-found-redirect {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.25rem;
+  font-weight: var(--weight-bold);
 }
 
 /* =========================================================================

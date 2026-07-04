@@ -1,12 +1,30 @@
 .page-hero {
   text-align: center;
+  position: relative;
+  overflow: clip;
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.76)),
+    radial-gradient(
+      circle at top center,
+      color-mix(in sRGB, var(--color-secondary-100) 78%, transparent),
+      transparent 62%
+    );
+  pointer-events: none;
 }
 
 .page-hero .container--narrow {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
+  padding-block: var(--space-3);
 }
 
 .page-hero__lead {

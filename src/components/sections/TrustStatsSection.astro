@@ -1,6 +1,5 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import "../../styles/components/trust-stats.css";
 
 const rawDogsList: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
 const adoptionDogCount = rawDogsList.filter((dog) => dog.data.active !== false).length;
