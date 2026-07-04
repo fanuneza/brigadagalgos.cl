@@ -1,194 +1,207 @@
 # Agent Guidance
 
-This repository is a static Astro site deployed to Cloudflare Pages from GitHub.
+This repository is the public Astro site for **Brigada Galgos Chile**. It is a static site deployed to Cloudflare Pages from GitHub, written primarily in Astro, TypeScript, CSS, and Markdown content collections.
+
+The repo mixes product code, structured content, image assets, SEO/analytics rules, and a fairly strict test suite. Agents should treat it as a content-driven site with strong editorial, accessibility, and source-hygiene constraints.
+
+## Primary Goal
+
+- Keep the site correct, fast, accessible, and maintainable.
+- Preserve the organization voice in Chilean Spanish.
+- Respect the content model for dogs, supporters, and story cards.
+- Keep verification green: formatting, linting, build, unit tests, and browser tests.
 
 ## Required Opening Moves
 
 - Use Astro Docs MCP for Astro framework questions, integrations, routing, content collections, image handling, and current best practices.
-- Verify current Astro APIs before implementing features that commonly change or have had experimental phases, especially content collections, actions, sessions, adapters, view transitions, image handling, and integrations.
-- Use jCodeMunch for code navigation when the repo is indexed. Prefer indexed discovery, ranked context, dependency graphs, and impact checks over raw search.
-- If the repo is not indexed, index it before broad code-navigation work.
-- Start new projects from an Astro template or `npm create astro@latest` template flow. Do not build the initial project structure by hand unless the user explicitly asks for a custom scaffold.
-- Use `astro add` for official Astro integrations. For non-Astro packages, install with npm commands and exact pins; do not hand-edit `package.json` dependency entries.
-- Keep Astro client globals in `src/env.d.ts` with `/// <reference types="astro/client" />`; do not narrow `compilerOptions.types` in `tsconfig.json` unless the project explicitly needs a closed ambient type list.
+- Verify current Astro APIs before changing areas that tend to drift across versions: content collections, image handling, integrations, adapters, actions, and view transitions.
+- Use jCodeMunch for code navigation when the repo is indexed. Prefer indexed discovery, outlines, symbol lookups, references, and blast-radius checks over blind searching.
+- If the repo is not indexed, index it before broad code navigation work.
+- Start every code session with:
+  1. `resolve_repo { "path": "." }`
+  2. `plan_turn { "repo": "...", "query": "your task", "model": "<your-model-id>" }`
+- If the repo is unfamiliar, use `suggest_queries` after `resolve_repo`.
 
-## Stack Defaults
+## Project Snapshot
 
-- Astro static output.
-- npm with committed `package-lock.json`.
-- Node 22 or newer, pinned by `.nvmrc`.
-- Exact package versions, installed at the latest available version when the project starts or when dependencies are intentionally updated.
-- GitHub Actions for CI.
-- Cloudflare Pages for hosting.
-- GA4 only through GTM and only after analytics consent.
-- Cloudflare Web Analytics enabled as backup telemetry and allowed by CSP.
-- Follow Astro defaults (such as the default `compressHTML: 'jsx'` whitespace compression behavior) unless custom adjustments are specifically requested.
+- Framework: Astro 7, static output only.
+- Hosting: Cloudflare Pages.
+- Package manager: npm with committed `package-lock.json`.
+- Runtime: Node 22+ via `.nvmrc`.
+- Images: Astro assets with responsive AVIF/WebP generation.
+- Analytics: GTM-delivered GA4 only after consent, plus Cloudflare Web Analytics.
+- SEO: `@astrojs/sitemap` and `@jdevalk/astro-seo-graph`.
+- Tests: Vitest for source/unit tests, Playwright for browser, regression, and build-output checks.
 
-## Code Standards
+## Repo Layout
 
-- **Never use absolute file paths** (e.g. `file:///C:/Users/...`) in repository files, markdown files, or codebase documentation. Always use relative paths to ensure portability across environments and machines.
-- Keep code DRY. Extract duplicated metadata, schema, analytics, content mapping, and UI logic into small shared modules.
-- Optimize for jCodeMunch: use clear file names, named exports for reusable logic, stable symbols, typed interfaces, and small purpose-specific modules.
-- Use the `@/*` alias only for imports under `src/`. Astro supports this through `tsconfig.json`; if another tool imports source files directly and does not honor TS paths, configure that tool or use relative imports in the test/tooling file.
-- Do not create oversized catch-all files. Split by behavior when a file becomes hard to scan.
-- Do not delete Astro framework entrypoints only because generic dead-code analysis marks them unreachable. Treat `src/pages/**`, `src/layouts/**`, `src/components/**`, `src/content.config.*`, `astro.config.*`, and scripts as live unless proven otherwise.
-- Prefer structured data/config objects over repeated literals across pages.
-- Prefer local components and utilities over ad hoc inline script blocks.
-- Add source hygiene tests for project invariants that normal linters cannot see, such as no direct GA4 scripts, no production imports from reference docs, local icon vendoring, and no corrupted text.
+- `src/pages/`: public routes.
+- `src/components/`: shared UI components.
+- `src/components/sections/`: page-specific section components.
+- `src/content/`: Markdown content collections.
+  - `adoption-dogs/`
+  - `success-dogs/`
+  - `supporters/`
+  - `blog/`
+- `src/utils/`: content shaping, analytics helpers, schema builders, image helpers.
+- `src/scripts/`: client scripts such as consent and interactive filters.
+- `src/styles/`: design tokens and modular CSS.
+- `src/assets/`: imported images that Astro processes.
+- `public/`: static assets, headers, redirects, manifest-adjacent files, vendored icons.
+- `scripts/`: maintenance scripts for dog data, text quality, Playwright server bootstrapping, and related workflows.
+- `tests/`: Vitest and Playwright coverage, including source hygiene, accessibility, smoke, content, consent, and capture suites.
+- `docs/`: voice, site brief, and technical reference material.
 
-## SEO, Accessibility, Performance
+## Non-Negotiable Standards
 
-- Every indexable page must have a unique title, meta description, canonical URL, Open Graph tags, Twitter card tags, one `h1`, accessible image alt text, and appropriate JSON-LD when relevant.
-- Shared entities in JSON-LD must come from a typed graph builder, not duplicated page literals.
-- Generate and verify sitemap, robots, manifest, and 404 output.
-- Aim for PSI/Lighthouse 100 in Performance, Accessibility, Best Practices, and SEO.
-- Use responsive, dimensioned, optimized images. The LCP image must not be lazy-loaded.
-- Use Astro image tooling for responsive AVIF/WebP variants when images are imported into source.
-- Avoid unnecessary client JavaScript. Astro islands must be justified by real interaction.
+- Never use absolute filesystem paths in repo files or docs. Use repo-relative paths.
+- Preserve UTF-8 everywhere. Never introduce mojibake, replacement characters, or broken accents.
+- Prefer small, named, typed helpers over duplicated inline logic.
+- Do not hand-edit dependency versions into `package.json`; use npm commands when dependencies change.
+- Do not delete framework entrypoints because a generic dead-code tool labels them unused.
+- Avoid ad hoc client JS. If an interaction can stay server-rendered, keep it server-rendered.
 
-## Analytics and Consent
+## Content and Voice
 
-- GTM is the only delivery path for GA4. Do not add standalone `gtag.js`.
-- Do not load GTM before analytics consent.
-- Push Google Consent Mode v2 denied state before consent and granted state after acceptance.
-- Delete known GA/GTM cookies after rejection.
-- Cloudflare Web Analytics remains enabled as a backup data point. Do not disable it unless the project owner explicitly changes the standard.
-- Map site interactions to GA4-recommended event names when possible.
-- Use reusable tracked-link attributes/components for CTA analytics. Do not hand-roll incompatible event data on each link.
+- Follow `docs/site-brief.md` for audience and language defaults.
+- Follow `docs/voice-and-tone.md` for site voice. This is the source of truth for rhythm, phrasing, tone, and CTA style.
+- Spanish copy must use correct Chilean Spanish spelling, accents, punctuation, and natural phrasing.
+- Avoid generic NGO copy. Keep writing specific, humane, and grounded.
 
-## Security and Deployment
+## Content Collections
 
-- `public/_headers` is required for Cloudflare Pages.
-- Target A+ on securityheaders.com.
-- Keep CSP strict and document each third-party domain.
-- Use HTTPS-only production deployment, HSTS, nosniff, frame protections, referrer policy, permissions policy, COOP, and CORP.
-- Use `public/_redirects` for URL migrations and permanent 301 redirects.
+### Adoption Dogs
 
-## Copy and Encoding
+Defined in `src/content.config.ts`.
 
-- Follow the project language in `docs/site-brief.md`; default is Chilean Spanish when unspecified.
-- Spanish copy must use correct accents and punctuation.
-- All text files must be UTF-8. Never introduce mojibake, replacement characters, or visibly corrupted accent/punctuation sequences.
-- Prefer project voice docs over generic marketing copy.
+Required frontmatter fields:
 
-## Icons and Assets
+- `name`
+- `sex`
+- `age`
+- `weight`
+- `details`
+- `currentNeed`
+- `characterSketch`
+- `gallery`
 
-- Prefer SVGs from `@fortawesome/fontawesome-free` for icons.
-- Do not load FontAwesome from a CDN.
-- Keep decorative SVGs accessible with empty alt text or `aria-hidden` as appropriate.
+Optional fields:
 
-## Code Navigation
+- `location`
+- `instagramUrl`
+- `order`
+- `active`
+- `hiddenSince`
+- `hiddenReason`
 
-Always use jCodemunch-MCP tools for code navigation. Do not use Read, Grep, Glob, or Bash to explore code.
+Rules:
 
-Exception: use Read only when the harness requires it before editing or writing a specific file. Use jCodemunch to find and understand the file first.
+- `gallery` accepts at most 3 images.
+- If `active: false`, both `hiddenSince` and `hiddenReason` are required.
+- Hidden dogs expire after 90 days; `tests/source-hygiene.test.ts` enforces this.
 
-Start every code session:
+### Success Dogs
 
-1. `resolve_repo { "path": "." }` to confirm the project is indexed. If it is not indexed, use `index_folder { "path": "." }`.
-2. `suggest_queries` when the repo is unfamiliar.
-3. `plan_turn { "repo": "...", "query": "your task description", "model": "<your-model-id>" }` as the opening move for code tasks.
+Defined in `src/content.config.ts`.
 
-Use the `plan_turn` confidence result:
+Required frontmatter fields:
 
-- `high`: go directly to the recommended files or symbols. Use at most two supplementary reads.
-- `medium`: inspect recommended files. Use at most five supplementary reads.
-- `low`: report that the feature likely does not exist. Do not keep searching for it.
+- `name`
+- `story`
+- `gallery`
 
-## Finding Code
+Optional fields:
 
-- Symbol by name: `search_symbols`
-- Decorator-aware query: `search_symbols(decorator="X")`
-- String, comment, or config value: `search_text`
-- Database columns: `search_columns`
-- Repo layout: `get_repo_outline` or `get_file_tree`
+- `instagramUrl`
 
-Before opening a file, call `get_file_outline`.
+Rules:
 
-Use:
+- `gallery` accepts at most 3 images.
+- Every success-dog `story` must be **260 characters or fewer**.
+- Every success-dog `story` must explicitly mention the adoption outcome. `tests/source-hygiene.test.ts` enforces this with `/adopt/i`.
+- Keep stories general enough to avoid inventing facts, but specific enough not to sound templated.
+- Card summaries are derived from `story` through `src/utils/story-card-copy.ts`. The helper default is also 260 characters and should stay aligned with the content rule unless the product requirement changes.
 
-- `get_symbol_source` for one or more symbols.
-- `get_context_bundle` for a symbol and its imports.
-- `get_file_content` only when a line range is needed.
+### Supporters
 
-## Relationships and Impact
+- Keep logos local.
+- Include accessible `logoAlt`.
+- Prefer consistent `kind` values already defined in the schema.
 
-Use jCodeMunch tools for impact checks:
+## Managing Dog Statuses
 
-- `find_importers`
-- `find_references`
-- `check_references`
-- `get_dependency_graph`
-- `get_blast_radius`
-- `get_changed_symbols`
-- `find_dead_code`
-- `get_class_hierarchy`
+### Moving a Dog to Success
 
-If `search_symbols` returns `negative_evidence` with `verdict: "no_implementation_found"`, do not re-search with different terms hoping to find it. Report that no existing implementation was found and check only the listed `related_existing` files for nearby context.
+When an adopted dog moves from `adoption-dogs` to `success-dogs`:
 
-If the verdict is `low_confidence_matches`, examine the matches before assuming they implement the feature.
-
-## Copywriting
-
-Always follow `docs\voice-and-tone.md` when writing or editing site copy. Treat it as the source of truth for brand voice, tone, rhythm, punctuation, CTAs, and content patterns.
-
-## After Editing
-
-If PostToolUse hooks are not available, call `register_edit` with edited file paths to invalidate caches. For bulk edits of five or more files, register all edited paths together.
-
-Respect existing user changes. Do not revert unrelated work unless explicitly asked.
-
-## Token Efficiency
-
-- If `_meta` contains `budget_warning`, stop exploring and work with the context already gathered.
-- If `auto_compacted: true` appears, assume the result was compressed and continue from the available context.
-- Use `get_session_context` when available to avoid re-reading the same files.
-
-## Model Parameter
-
-Include `model="<your-model-id>"` in the opening `plan_turn` call.
-
-Use the active runner model id:
-
-- GPT-5, GPT-4o, o1, or Llama: use the model id as printed by the runner.
-- Claude Opus: use `claude-opus-4-7` or the matching `claude-opus-*` id.
-- Claude Sonnet: use `claude-sonnet-4-6`.
-- Claude Haiku: use `claude-haiku-4-5`.
-
-If `plan_turn` is not appropriate for a non-code task, call `announce_model(model="...")` once instead.
-
-## Managing Dog Statuses (Adoption, Success, and Hidden)
-
-### 1. Moving a Dog to Success (Adopted)
-
-When a dog is successfully adopted, move their file and assets to the success directory:
-
-1. **Move files:** Use `git mv` to move their markdown file and asset folder:
+1. Use `git mv` for the markdown file and asset folder:
    ```bash
    git mv src/content/adoption-dogs/name.md src/content/success-dogs/name.md
    git mv src/assets/casos/adopcion/name src/assets/casos/exito/name
    ```
-2. **Rewrite the markdown file:**
-   - Remove fields specific to adoption (`sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, `order`).
-   - Add a `story` string containing their adoption story (follow `docs/voice-and-tone.md`).
-   - Update `gallery` image references to point to the new folder: `../../assets/casos/exito/name/...`.
-3. **Update scripts:** Remove the dog's ID from `ADOPTION_IDS` and `ADOPTION_OVERRIDES` in `scripts/prepare-casos-site.mjs`.
+2. Rewrite the content:
+   - Remove adoption-only fields such as `sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, and `order`.
+   - Add a `story` string in the site voice.
+   - Keep the `story` at 260 characters or fewer.
+   - Mention the adoption outcome explicitly.
+   - Keep `gallery` paths pointed to `../../assets/casos/exito/name/...`.
+3. Update data prep scripts if needed:
+   - Remove the dog ID from `ADOPTION_IDS` and `ADOPTION_OVERRIDES` in `scripts/prepare-casos-site.mjs` when applicable.
 
-### 2. Hiding a Dog Temporarily (e.g., Foster Evaluation)
+### Hiding a Dog Temporarily
 
-To temporarily hide a dog from the adoption grid while keeping their file in the codebase:
+To hide a dog from adoption without deleting the record:
 
-1. **Update their markdown file:** Set `active: false` and provide tracking metadata (`hiddenSince` and `hiddenReason`) in their frontmatter:
-   ```yaml
-   active: false
-   hiddenSince: YYYY-MM-DD
-   hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
-   ```
-2. **Automatic Expiration Rule:** Inactive dogs have an expiration limit of 90 days. `tests/source-hygiene.test.ts` enforces this and will fail the build if a dog has been hidden for too long.
+```yaml
+active: false
+hiddenSince: YYYY-MM-DD
+hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
+```
 
-## Required Verification
+Rules:
 
-Before delivery or commit, run the checks relevant to the change:
+- Hidden entries remain in the collection.
+- `tests/source-hygiene.test.ts` fails if tracking metadata is missing.
+- Hidden entries older than 90 days also fail the test suite.
+
+## Images and Asset Handling
+
+- Prefer imported images inside `src/assets/` so Astro can optimize them.
+- Dog galleries are intentionally capped at 3 images in both schema and UI helpers.
+- When normalizing dog image filenames or extensions, use the provided scripts instead of ad hoc renames:
+  - `npm run dog-images:check`
+  - `npm run dog-images:write`
+- Keep file extensions consistent within a dog’s folder. The repo currently normalizes to `.jpg` where applicable.
+- Do not add remote image dependencies or CDNs for dog photography.
+
+## SEO, Accessibility, and Performance
+
+- Every indexable page must have a unique title and meta description.
+- Keep one meaningful `h1` per page.
+- Maintain canonical and social metadata.
+- Keep JSON-LD generated from shared builders rather than duplicated literals.
+- Preserve accessible image alt text and decorative-image handling.
+- The site targets strong Lighthouse and accessibility results; avoid regressions that add unnecessary JS, layout instability, or weak semantics.
+
+## Analytics and Consent
+
+- GTM is the only allowed delivery path for GA4.
+- Never add standalone `gtag.js`.
+- Do not load GTM before consent.
+- Push denied consent by default and granted consent after acceptance.
+- Rejection should clear known GA/GTM cookies.
+- `tests/analytics-consent.spec.ts` and `tests/source-hygiene.test.ts` protect these rules.
+
+## Security and Deployment
+
+- `public/_headers` is required for Cloudflare Pages.
+- `public/_redirects` handles URL migration and permanent redirects.
+- Keep CSP strict. Document each third-party allowance.
+- Maintain HTTPS-only assumptions and modern browser security headers.
+
+## Testing and Verification
+
+Run these before delivery unless the task clearly does not touch the relevant surface:
 
 ```bash
 npm run format:check
@@ -197,10 +210,65 @@ npm run build
 npm test
 ```
 
-For launch or major visual changes, also run:
+For major UX, SEO, or performance changes, also run:
 
 ```bash
 npm run test:lighthouse
 ```
 
-Document any skipped check and the reason.
+Notes:
+
+- `npm run lint` includes ESLint, Stylelint, and text-quality checks.
+- `npm test` runs Vitest and Playwright.
+- Playwright uses `scripts/run-playwright-server.mjs` to build and start `astro preview` on `127.0.0.1`.
+- In CI, `capture.spec.ts` is ignored by Playwright config.
+- If a required check is skipped, state that explicitly and explain why.
+
+## Key Files Worth Knowing
+
+- `astro.config.mjs`
+  - Static build config, sitemap integration, SEO graph integration.
+  - `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`.
+  - `markdownAlternate` is intentionally disabled.
+- `src/content.config.ts`
+  - Canonical content schemas.
+- `src/utils/dog-content.ts`
+  - Shapes collection entries for cards and galleries.
+- `src/utils/story-card-copy.ts`
+  - Builds success-story card excerpts and carries the 260-character default.
+- `tests/source-hygiene.test.ts`
+  - Enforces repository invariants that linters do not catch.
+- `playwright.config.ts`
+  - Browser test orchestration and preview server behavior.
+
+## Code Navigation Rules
+
+Always prefer jCodeMunch over raw shell exploration for repo understanding.
+
+Use:
+
+- `search_symbols` for named code entities.
+- `search_text` for strings, comments, config values, and frontmatter patterns.
+- `get_repo_outline` or `get_file_tree` for structure.
+- `get_file_outline` before opening a file.
+- `get_symbol_source` and `get_context_bundle` for implementation context.
+- `find_references`, `find_importers`, and `get_blast_radius` before changing reused modules.
+
+If `plan_turn` confidence is:
+
+- `high`: follow the recommended files and use minimal supplementary reads.
+- `medium`: inspect recommended files, then broaden carefully.
+- `low`: report that the feature likely does not exist; do not keep thrashing.
+
+## Editing Behavior
+
+- Respect existing user changes.
+- Do not revert unrelated work.
+- Keep comments sparse and useful.
+- Keep changes small and defensible.
+- If PostToolUse hooks are unavailable and cache invalidation matters, register edited paths.
+
+## Documentation Expectations
+
+- `AGENTS.md` is the operational source for agents. Keep it specific and updated when workflows change.
+- `README.md` is for humans. Keep it illustrative, clear, and lighter on internal implementation detail.

@@ -1,91 +1,59 @@
 # Brigada Galgos
 
-Sitio estático desarrollado con Astro para **Brigada Galgos**, una organización chilena sin fines de lucro dedicada al rescate, rehabilitación y adopción de galgos.
+Sitio web oficial de **Brigada Galgos Chile**, una organización dedicada al rescate, recuperación y adopción de galgos.
 
-El sitio es completamente responsivo, accesible, compatible con temas claro y oscuro, e implementa analítica bajo un flujo de consentimiento estricto.
+El repo contiene el sitio público donde se muestran perros en adopción, casos de éxito, formas de apoyar a la fundación, preguntas frecuentes, contacto y colaboradores. La idea central del proyecto es simple: contar bien cada caso, facilitar la ayuda y hacerlo con una experiencia clara, rápida y accesible.
 
-## Stack Tecnológico
+## Qué hay aquí
 
-- **Astro 7**: Framework principal con generación estática (SSG) y navegación mediante `ClientRouter`.
-- **TypeScript**: Tipado estático para robustez del código.
-- **CSS Moderno**: Diseño modular con tokens personalizados de diseño (colores, tipografía, espaciados).
-- **Astro Assets (Sharp)**: Optimización y generación automática de variantes de imágenes responsivas (AVIF/WebP).
-- **Playwright / Axe-core**: Pruebas de integración, regresión visual y auditoría automatizada de accesibilidad (A11y).
-- **Vitest**: Entorno rápido para pruebas unitarias.
+- Páginas públicas hechas con Astro.
+- Fichas de galgos en adopción y casos de éxito cargados desde archivos Markdown.
+- Imágenes optimizadas para web.
+- Flujo de consentimiento para analítica antes de cargar GTM/GA4.
+- Pruebas que cuidan accesibilidad, contenido, build y comportamiento visual básico.
 
----
+## Cómo se organiza el contenido
 
-## Requisitos Previos
+- `src/content/adoption-dogs/`: perros que buscan adopción o hogar temporal.
+- `src/content/success-dogs/`: historias de galgos adoptados.
+- `src/content/supporters/`: instituciones y personas que apoyan a Brigada Galgos.
+- `src/assets/`: imágenes del sitio y galerías.
 
-- **Node.js** >= 22 (especificado en el archivo [.nvmrc](.nvmrc))
-- **npm** (gestor de paquetes nativo)
+## Levantar el proyecto
 
----
+Requisitos:
 
-## Inicio Rápido
+- Node.js 22 o superior
+- npm
 
-1. **Instalar dependencias:**
+Comandos principales:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+npm run dev
+```
 
-2. **Iniciar servidor de desarrollo:**
+Eso inicia el sitio en desarrollo local.
 
-   ```bash
-   npm run dev
-   ```
+## Antes de publicar cambios
 
-   Abre [http://localhost:4321](http://localhost:4321) en tu navegador.
+Las validaciones principales del repo son:
 
-3. **Compilar para producción:**
+```bash
+npm run format:check
+npm run lint
+npm run build
+npm test
+```
 
-   ```bash
-   npm run build
-   ```
+## Notas útiles
 
-   Valida tipos de TypeScript y compila el sitio de producción en la carpeta `dist/`.
+- La redacción del sitio sigue una voz cercana, clara y en español de Chile.
+- Las historias de casos de éxito tienen reglas editoriales y de longitud para que funcionen bien en las tarjetas del sitio.
+- La analítica está protegida por consentimiento: no se carga antes de que la persona usuaria la acepte.
 
-4. **Visualizar la compilación de producción localmente:**
-   ```bash
-   npm run preview
-   ```
+## Documentación relacionada
 
----
-
-## Comandos Principales
-
-| Comando                    | Descripción                                                                         |
-| :------------------------- | :---------------------------------------------------------------------------------- |
-| `npm run dev`              | Inicia el entorno local de desarrollo en tiempo real.                               |
-| `npm run build`            | Ejecuta verificación de tipos y construye el sitio estático para producción.        |
-| `npm run preview`          | Sirve localmente los archivos compilados de la carpeta `dist/`.                     |
-| `npm run lint`             | Corre ESLint, Stylelint y comprobaciones de calidad de texto.                       |
-| `npm run lint:fix`         | Resuelve automáticamente problemas de linter corregibles.                           |
-| `npm run format`           | Aplica formato Prettier a todo el código.                                           |
-| `npm test`                 | Corre la suite de pruebas unitarias (Vitest) y de integración (Playwright).         |
-| `npm run test:smoke`       | Ejecuta pruebas rápidas de humo sobre las rutas y páginas críticas.                 |
-| `npm run test:lighthouse`  | Ejecuta auditorías locales de rendimiento y accesibilidad de Lighthouse CI.         |
-| `npm run dog-images:write` | Normaliza los nombres de archivos de las imágenes de galgos en `src/assets/casos/`. |
-| `npm run prepare:casos`    | Prepara y actualiza los endpoints e información local de casos de adopción.         |
-
----
-
-## Estructura del Proyecto
-
-Una vista general simplificada del código fuente en `src/`:
-
-- **`src/pages/`**: Rutas y páginas públicas del sitio (Inicio, Adoptar, Donar, Hogar Temporal, Colaboradores, etc.).
-- **`src/components/`**: Componentes interactivos y reutilizables de UI.
-  - **`sections/`**: Secciones modulares específicas que componen cada una de las páginas.
-- **`src/content/`**: Colecciones de datos basadas en Markdown (`adoption-dogs`, `success-dogs`, `supporters`).
-- **`src/scripts/`**: JavaScript de cliente (flujos de consentimiento de cookies, filtros de galgos, formularios de contacto, etc.).
-- **`src/styles/`**: Hojas de estilo modularizadas y tokens de diseño personalizados.
-- **`src/utils/`**: Helpers y funciones auxiliares para analítica, Schema.org/SEO, y galerías de imágenes.
-
----
-
-## Guías y Documentación Relacionada
-
-- **Pautas de Redacción:** Para asegurar la coherencia en la comunicación y los textos del sitio, consulta la [Guía de Voz y Tono](docs/voice-and-tone.md).
-- **Referencia Técnica:** Para conocer los detalles del modelo de datos de las colecciones, optimización de imágenes, analítica web de GTM/GA4 y más especificaciones de desarrollo, lee la [Referencia Técnica para Desarrolladores](docs/developer-reference.md).
+- [Guía de voz y tono](docs/voice-and-tone.md)
+- [Referencia técnica](docs/developer-reference.md)
+- [Instrucciones para agentes](AGENTS.md)
