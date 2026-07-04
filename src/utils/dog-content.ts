@@ -2,6 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 import type { SharedGalleryPhoto } from "../scripts/gallery/types";
 import { createResponsiveGalleryPhoto } from "./responsive-gallery-images";
+import { buildCardStoryExcerpt } from "./story-card-copy";
 
 const MAX_DOG_GALLERY_IMAGES = 3;
 
@@ -23,6 +24,7 @@ export interface StoryDogSummary {
   id: string;
   name: string;
   story: string;
+  cardStory: string;
   instagramUrl?: string;
   photos: SharedGalleryPhoto[];
 }
@@ -68,6 +70,7 @@ export async function buildStoryDogSummaries(
       id: entry.id,
       name: entry.data.name,
       story: entry.data.story,
+      cardStory: buildCardStoryExcerpt(entry.data.story),
       instagramUrl: entry.data.instagramUrl,
       photos: await Promise.all(
         entry.data.gallery

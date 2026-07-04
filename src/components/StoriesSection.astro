@@ -52,7 +52,7 @@ const { dogs, totalCount, endpoint } = Astro.props;
               data-story-name={dog.name}
             >
               <p class="story-card__name">{dog.name}</p>
-              <p class="story-card__quote">{dog.story}</p>
+              <p class="story-card__quote">{dog.cardStory}</p>
               {dog.instagramUrl && (
                 <InstagramLink
                   url={dog.instagramUrl}

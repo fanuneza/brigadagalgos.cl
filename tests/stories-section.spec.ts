@@ -161,3 +161,17 @@ test("success story galleries expose up to three optimized photos", async ({ pag
     }
   }
 });
+
+test("success story card copy stays within the card summary limit", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  const quotes = await page
+    .locator("[data-story-card] .story-card__quote")
+    .evaluateAll((els) => els.map((el) => el.textContent?.trim() ?? ""));
+
+  expect(quotes.length).toBeGreaterThan(0);
+
+  for (const quote of quotes) {
+    expect(quote.length).toBeLessThanOrEqual(260);
+  }
+});

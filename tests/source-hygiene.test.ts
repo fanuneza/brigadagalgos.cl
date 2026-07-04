@@ -93,4 +93,22 @@ describe("source hygiene", () => {
       }
     }
   });
+
+  it("keeps every success dog story at 260 characters or less and explicitly adopted", () => {
+    const successDogsDir = join(root, "src", "content", "success-dogs");
+    const files = readdirSync(successDogsDir).filter((file) => file.endsWith(".md"));
+
+    for (const file of files) {
+      const filePath = join(successDogsDir, file);
+      const content = readFileSync(filePath, "utf8");
+      const storyMatch = content.match(/^story:\s*"([^"]*)"/m);
+
+      expect(storyMatch, `${file} has no story field`).not.toBeNull();
+
+      const story = storyMatch![1];
+
+      expect(story.length, `${file} story exceeds 260 characters`).toBeLessThanOrEqual(260);
+      expect(story, `${file} story must mention the adoption outcome`).toMatch(/adopt/i);
+    }
+  });
 });

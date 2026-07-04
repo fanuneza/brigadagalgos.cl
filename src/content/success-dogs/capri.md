@@ -1,6 +1,6 @@
 ---
 name: Capri
-story: "Trufa fue rescatada en la Quinta Región. Estuvo hospitalizada, recibió tratamiento y luego fue esterilizada. En hogar temporal empezó a confiar en los humanos, aunque otros perros todavía le daban miedo. Hoy se llama Capri y vive con una hermana que también respeta su espacio."
+story: "Capri fue rescatada en la Quinta Región, estuvo hospitalizada y después, ya en hogar temporal, empezó a volver a confiar en las personas. Con otros perros seguía más cauta, pero igual llegó su familia: hoy está adoptada y vive a su ritmo."
 gallery:
   - ../../assets/casos/exito/capri/capri-01.jpg
   - ../../assets/casos/exito/capri/capri-02.jpg

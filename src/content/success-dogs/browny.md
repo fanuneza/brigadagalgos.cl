@@ -1,6 +1,6 @@
 ---
 name: Browny
-story: "Trigo llegó desde Talca y, ya en Santiago, pasó por ecografías, radiografías y controles hasta estar estable para su castración. Luego enfrentó una cirugía por hemangiosarcomas y quimioterapia. Hoy se llama Browny, viaja entre Santiago y Viña, y ama la playa y las siestas."
+story: "Browny llegó desde Talca y en Santiago pasó por ecografías, radiografías, castración, cirugía por hemangiosarcomas y quimioterapia. Después fue adoptado y hoy reparte su vida entre Santiago y Viña, con playa, siestas y una familia encima."
 gallery:
   - ../../assets/casos/exito/browny/browny-01.jpg
   - ../../assets/casos/exito/browny/browny-02.jpg
