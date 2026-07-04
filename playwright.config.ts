@@ -26,7 +26,7 @@ export default defineConfig({
   webServer: useExternalBaseUrl
     ? undefined
     : {
-        command: `npm run preview -- --host 127.0.0.1 --port ${port}`,
+        command: `node scripts/run-playwright-server.mjs --host 127.0.0.1 --port ${port}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 60_000,

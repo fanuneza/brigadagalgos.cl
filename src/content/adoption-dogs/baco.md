@@ -9,7 +9,7 @@ currentNeed: "Adopción"
 characterSketch: "Cachorro activo de talla grande, muy sociable con perros y gatos. Es apto para casa o departamento y necesita paseos y juegos para canalizar su energía."
 order: 10
 gallery:
-  - ../../assets/casos/adopcion/baco/baco-01.jpeg
-  - ../../assets/casos/adopcion/baco/baco-02.jpeg
-  - ../../assets/casos/adopcion/baco/baco-03.jpeg
+  - ../../assets/casos/adopcion/baco/baco-01.jpg
+  - ../../assets/casos/adopcion/baco/baco-02.jpg
+  - ../../assets/casos/adopcion/baco/baco-03.jpg
 ---

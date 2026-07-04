@@ -12,7 +12,7 @@ active: false
 hiddenSince: 2026-06-30
 hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 gallery:
-  - ../../assets/casos/adopcion/dante/dante-01.jpeg
-  - ../../assets/casos/adopcion/dante/dante-02.jpeg
-  - ../../assets/casos/adopcion/dante/dante-03.jpeg
+  - ../../assets/casos/adopcion/dante/dante-01.jpg
+  - ../../assets/casos/adopcion/dante/dante-02.jpg
+  - ../../assets/casos/adopcion/dante/dante-03.jpg
 ---
