@@ -51,7 +51,7 @@
   background:
     linear-gradient(
       180deg,
-      color-mix(in sRGB, var(--color-secondary-100) 44%, var(--color-bg)),
+      color-mix(in sRGB, var(--color-secondary-100) 10%, var(--color-bg)),
       color-mix(in sRGB, var(--color-surface) 92%, var(--color-bg))
     ),
     var(--color-surface);

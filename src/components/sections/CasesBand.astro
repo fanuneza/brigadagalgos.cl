@@ -45,7 +45,7 @@ const { cases } = Astro.props;
               data-story-id={dog.id}
               data-story-name={dog.name}
             >
-              <p class="story-card__name">{dog.name}</p>
+              <h3 class="story-card__name">{dog.name}</h3>
               <p class="story-card__quote">{dog.cardStory}</p>
               {dog.instagramUrl && (
                 <InstagramLink

@@ -89,7 +89,7 @@
 
   /* Semantic type roles */
   --type-page-title: clamp(var(--font-size-3xl), 8vw, var(--font-size-4xl));
-  --type-section-title: clamp(var(--font-size-2xl), 5.5vw, calc(var(--font-size-3xl) * 1.2));
+  --type-section-title: clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl));
   --type-subsection-title: var(--font-size-2xl);
   --type-card-title: var(--font-size-lg);
   --type-ui-title: var(--font-size-md);

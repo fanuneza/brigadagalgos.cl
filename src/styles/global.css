@@ -49,7 +49,6 @@ p {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  overflow-x: hidden;
 }
 
 @view-transition {
@@ -254,7 +253,6 @@ h2:not([hidden]) {
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
-  box-shadow: 0 1px 0 color-mix(in sRGB, var(--color-text-inverse) 24%, transparent) inset;
   transition:
     background var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out),
@@ -282,12 +280,20 @@ h2:not([hidden]) {
 }
 
 .btn--primary {
-  background: var(--btn-primary-bg);
+  background:
+    linear-gradient(180deg, color-mix(in sRGB, var(--btn-primary-bg) 86%, #fff) 0%, var(--btn-primary-bg) 100%),
+    var(--btn-primary-bg);
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
 .btn--primary:hover {
-  background: var(--btn-primary-bg-hover);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--btn-primary-bg-hover) 86%, #fff) 0%,
+      var(--btn-primary-bg-hover) 100%
+    ),
+    var(--btn-primary-bg-hover);
   border-color: color-mix(in sRGB, var(--btn-primary-bg-hover) 84%, black);
 }
 
