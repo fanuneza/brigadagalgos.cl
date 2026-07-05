@@ -6,22 +6,22 @@ This document is the technical specification for the Brigada Galgos website. It 
 
 ## Stack choices
 
-| Layer | Choice | Rationale |
-|---|---|---|
-| Framework | Astro 7 (static output) | Content-driven, static-first, fast builds, excellent image optimization, no server runtime needed |
-| Language | TypeScript | Type safety across components, utilities, and tests |
-| Templating | Astro components (`.astro`) | Server-rendered HTML with scoped JS/TS where needed |
-| Styling | Modular CSS (`src/styles/`) + Tailwind 4 via Vite | Existing CSS patterns are preserved; Tailwind is adopted incrementally where it fits |
-| Content | Markdown + YAML frontmatter in Astro content collections | Easy for non-developers to edit; validated at build time |
-| Images | `astro:assets` + Sharp | Responsive AVIF/WebP generation from local assets |
-| Hosting | Cloudflare Pages | Native static-site hosting, global CDN, security headers via `_headers` |
-| CI/CD | GitHub → Cloudflare Pages | Deploy on push; build and test run on the platform |
-| Analytics | GTM-delivered GA4 after consent + Cloudflare Web Analytics | Privacy-first, consent-gated, no standalone `gtag.js` |
-| SEO | `@astrojs/sitemap`, `@jdevalk/astro-seo-graph` | Sitemap and validated SEO graph / JSON-LD |
-| Feed | `@astrojs/rss` | RSS from blog collection |
-| Testing | Vitest + Playwright + Lighthouse CI | Unit/source hygiene, browser/E2E, accessibility, performance |
-| Package manager | npm with committed `package-lock.json` | Reproducible installs |
-| Runtime | Node 22+ | Matches `.nvmrc` and Astro 7 requirements |
+| Layer           | Choice                                                     | Rationale                                                                                         |
+| --------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Framework       | Astro 7 (static output)                                    | Content-driven, static-first, fast builds, excellent image optimization, no server runtime needed |
+| Language        | TypeScript                                                 | Type safety across components, utilities, and tests                                               |
+| Templating      | Astro components (`.astro`)                                | Server-rendered HTML with scoped JS/TS where needed                                               |
+| Styling         | Modular CSS (`src/styles/`) + Tailwind 4 via Vite          | Existing CSS patterns are preserved; Tailwind is adopted incrementally where it fits              |
+| Content         | Markdown + YAML frontmatter in Astro content collections   | Easy for non-developers to edit; validated at build time                                          |
+| Images          | `astro:assets` + Sharp                                     | Responsive AVIF/WebP generation from local assets                                                 |
+| Hosting         | Cloudflare Pages                                           | Native static-site hosting, global CDN, security headers via `_headers`                           |
+| CI/CD           | GitHub → Cloudflare Pages                                  | Deploy on push; build and test run on the platform                                                |
+| Analytics       | GTM-delivered GA4 after consent + Cloudflare Web Analytics | Privacy-first, consent-gated, no standalone `gtag.js`                                             |
+| SEO             | `@astrojs/sitemap`, `@jdevalk/astro-seo-graph`             | Sitemap and validated SEO graph / JSON-LD                                                         |
+| Feed            | `@astrojs/rss`                                             | RSS from blog collection                                                                          |
+| Testing         | Vitest + Playwright + Lighthouse CI                        | Unit/source hygiene, browser/E2E, accessibility, performance                                      |
+| Package manager | npm with committed `package-lock.json`                     | Reproducible installs                                                                             |
+| Runtime         | Node 22+                                                   | Matches `.nvmrc` and Astro 7 requirements                                                         |
 
 ## Architecture overview
 
@@ -210,12 +210,12 @@ brigadagalgos.cl/
 
 Content is stored as Markdown files with frontmatter in `src/content/`. Astro content collections validate frontmatter at build time through `src/content.config.ts`.
 
-| Collection | Location | Schema source |
-|---|---|---|
+| Collection      | Location                     | Schema source           |
+| --------------- | ---------------------------- | ----------------------- |
 | `adoption-dogs` | `src/content/adoption-dogs/` | `src/content.config.ts` |
-| `success-dogs` | `src/content/success-dogs/` | `src/content.config.ts` |
-| `supporters` | `src/content/supporters/` | `src/content.config.ts` |
-| `blog` | `src/content/blog/` | `src/content.config.ts` |
+| `success-dogs`  | `src/content/success-dogs/`  | `src/content.config.ts` |
+| `supporters`    | `src/content/supporters/`    | `src/content.config.ts` |
+| `blog`          | `src/content/blog/`          | `src/content.config.ts` |
 
 Images referenced by collections live in `src/assets/` and are processed by `astro:assets`.
 
@@ -235,9 +235,9 @@ BaseLayout.astro
 
 ## Component organization
 
-| Directory | Responsibility |
-|---|---|
-| `src/components/` | Shared UI components used across pages |
+| Directory                  | Responsibility                            |
+| -------------------------- | ----------------------------------------- |
+| `src/components/`          | Shared UI components used across pages    |
 | `src/components/sections/` | Page-specific section components (if any) |
 
 Key shared primitives:
@@ -252,18 +252,18 @@ Key shared primitives:
 
 ## Utility modules
 
-| Module | Responsibility |
-|---|---|
-| `src/utils/dog-content.ts` | Shapes adoption-dog and success-dog entries for cards and galleries |
-| `src/utils/story-card-copy.ts` | Builds success-story card excerpts with the 260-character default |
-| `src/utils/structured-data.ts` | Centralized JSON-LD builders, breadcrumbs, FAQ structured data |
-| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images |
-| `src/utils/hero-images.ts` | Hero image resolution helpers |
-| `src/utils/analytics.ts` | Analytics helpers and event typing |
-| `src/utils/schema.ts` | Schema-related helpers |
-| `src/utils/shuffle.ts` | Randomization helpers |
-| `src/utils/html-escape.ts` | HTML escape utilities |
-| `src/utils/instagram.ts` | Instagram URL handling |
+| Module                                   | Responsibility                                                      |
+| ---------------------------------------- | ------------------------------------------------------------------- |
+| `src/utils/dog-content.ts`               | Shapes adoption-dog and success-dog entries for cards and galleries |
+| `src/utils/story-card-copy.ts`           | Builds success-story card excerpts with the 260-character default   |
+| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data      |
+| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images               |
+| `src/utils/hero-images.ts`               | Hero image resolution helpers                                       |
+| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                  |
+| `src/utils/schema.ts`                    | Schema-related helpers                                              |
+| `src/utils/shuffle.ts`                   | Randomization helpers                                               |
+| `src/utils/html-escape.ts`               | HTML escape utilities                                               |
+| `src/utils/instagram.ts`                 | Instagram URL handling                                              |
 
 ## Client scripts
 
@@ -341,12 +341,12 @@ Analytics events are emitted via `dataLayer` from tracked elements, custom event
 
 ### Consent state machine
 
-| State | GTM | GA4 cookies | dataLayer |
-|---|---|---|---|
-| Default | Not loaded | Cleared | Default denied |
-| Accepted | Injected | Allowed | Granted |
-| Rejected | Not loaded | Cleared | Denied |
-| Changed | Re-evaluated | Updated | Updated |
+| State    | GTM          | GA4 cookies | dataLayer      |
+| -------- | ------------ | ----------- | -------------- |
+| Default  | Not loaded   | Cleared     | Default denied |
+| Accepted | Injected     | Allowed     | Granted        |
+| Rejected | Not loaded   | Cleared     | Denied         |
+| Changed  | Re-evaluated | Updated     | Updated        |
 
 ## SEO and structured data
 
@@ -363,45 +363,45 @@ Every page includes:
 
 ### Runtime dependencies
 
-| Package | Purpose |
-|---|---|
-| `astro` | Framework and static build |
-| `@astrojs/rss` | RSS feed generation |
-| `@astrojs/sitemap` | Sitemap generation |
-| `@jdevalk/astro-seo-graph` | SEO graph and JSON-LD integration |
-| `@jdevalk/seo-graph-core` | SEO graph core utilities |
-| `@fontsource/barlow-condensed` | Web font |
+| Package                        | Purpose                           |
+| ------------------------------ | --------------------------------- |
+| `astro`                        | Framework and static build        |
+| `@astrojs/rss`                 | RSS feed generation               |
+| `@astrojs/sitemap`             | Sitemap generation                |
+| `@jdevalk/astro-seo-graph`     | SEO graph and JSON-LD integration |
+| `@jdevalk/seo-graph-core`      | SEO graph core utilities          |
+| `@fontsource/barlow-condensed` | Web font                          |
 
 ### Development dependencies
 
-| Package | Purpose |
-|---|---|
-| `@astrojs/check` | Astro type checking |
-| `@axe-core/playwright` | Accessibility testing |
-| `@lhci/cli` | Lighthouse CI |
-| `@playwright/test` | Browser and E2E testing |
-| `@tailwindcss/vite` | Tailwind Vite integration |
-| `@typescript-eslint/*` | TypeScript ESLint rules |
-| `cross-env` | Cross-platform environment variables |
-| `eslint` + `eslint-plugin-astro` | Linting |
-| `prettier` + `prettier-plugin-astro` | Formatting |
-| `sharp` | Image processing backend |
-| `stylelint` + `stylelint-config-standard` | CSS linting |
-| `tailwindcss` | Incremental utility styling |
-| `typescript` | Type checking |
-| `vitest` | Unit and source-hygiene tests |
+| Package                                   | Purpose                              |
+| ----------------------------------------- | ------------------------------------ |
+| `@astrojs/check`                          | Astro type checking                  |
+| `@axe-core/playwright`                    | Accessibility testing                |
+| `@lhci/cli`                               | Lighthouse CI                        |
+| `@playwright/test`                        | Browser and E2E testing              |
+| `@tailwindcss/vite`                       | Tailwind Vite integration            |
+| `@typescript-eslint/*`                    | TypeScript ESLint rules              |
+| `cross-env`                               | Cross-platform environment variables |
+| `eslint` + `eslint-plugin-astro`          | Linting                              |
+| `prettier` + `prettier-plugin-astro`      | Formatting                           |
+| `sharp`                                   | Image processing backend             |
+| `stylelint` + `stylelint-config-standard` | CSS linting                          |
+| `tailwindcss`                             | Incremental utility styling          |
+| `typescript`                              | Type checking                        |
+| `vitest`                                  | Unit and source-hygiene tests        |
 
 ### Third-party services
 
-| Service | Purpose | Notes |
-|---|---|---|
-| Cloudflare Pages | Hosting and CDN | Static deployment from GitHub |
-| Cloudflare Web Analytics | Privacy-first analytics | No cookie required |
-| GTM / GA4 | Behavioral analytics | Only loads after consent |
-| WhatsApp API (`wa.me`) | Direct messaging | Outbound link |
-| Google Forms | Adoption form | Outbound link |
-| eSponsor | Recurring donations | Outbound link |
-| Instagram / Facebook | Social proof | Outbound links |
+| Service                  | Purpose                 | Notes                         |
+| ------------------------ | ----------------------- | ----------------------------- |
+| Cloudflare Pages         | Hosting and CDN         | Static deployment from GitHub |
+| Cloudflare Web Analytics | Privacy-first analytics | No cookie required            |
+| GTM / GA4                | Behavioral analytics    | Only loads after consent      |
+| WhatsApp API (`wa.me`)   | Direct messaging        | Outbound link                 |
+| Google Forms             | Adoption form           | Outbound link                 |
+| eSponsor                 | Recurring donations     | Outbound link                 |
+| Instagram / Facebook     | Social proof            | Outbound links                |
 
 ## Security and deployment
 

@@ -8,18 +8,18 @@ This document lists the functional requirements of the Brigada Galgos website as
 
 ### Public pages
 
-| Route | Purpose | Key content |
-|---|---|---|
-| `/` | Home | Hero, mission, three main CTAs, featured dogs, success stories, how to help, donation callout, footer |
-| `/adoptar/` | Adoption listing | Filterable dog cards, dog profile lightbox, process explanation, CTAs |
-| `/por-que-galgos/` | Why galgos | Editorial sections, FAQ, selected success stories |
-| `/hogar-temporal/` | Foster program | Requirements, what Brigada covers, CTA |
-| `/donar/` | Donations | Impact amounts, bank details, eSponsor card, transparency notes |
-| `/colaboradores/` | Supporters | Logo grid of institutions, companies, and people |
-| `/contacto/` | Contact | WhatsApp, email, social links, form |
-| `/preguntas-frecuentes/` | FAQ | Full FAQ grouped by topic |
-| `/politica-de-cookies/` | Cookie policy | Plain explanation of cookies and consent |
-| `/404/` | Not found | Helpful redirect to main pages |
+| Route                    | Purpose          | Key content                                                                                           |
+| ------------------------ | ---------------- | ----------------------------------------------------------------------------------------------------- |
+| `/`                      | Home             | Hero, mission, three main CTAs, featured dogs, success stories, how to help, donation callout, footer |
+| `/adoptar/`              | Adoption listing | Filterable dog cards, dog profile lightbox, process explanation, CTAs                                 |
+| `/por-que-galgos/`       | Why galgos       | Editorial sections, FAQ, selected success stories                                                     |
+| `/hogar-temporal/`       | Foster program   | Requirements, what Brigada covers, CTA                                                                |
+| `/donar/`                | Donations        | Impact amounts, bank details, eSponsor card, transparency notes                                       |
+| `/colaboradores/`        | Supporters       | Logo grid of institutions, companies, and people                                                      |
+| `/contacto/`             | Contact          | WhatsApp, email, social links, form                                                                   |
+| `/preguntas-frecuentes/` | FAQ              | Full FAQ grouped by topic                                                                             |
+| `/politica-de-cookies/`  | Cookie policy    | Plain explanation of cookies and consent                                                              |
+| `/404/`                  | Not found        | Helpful redirect to main pages                                                                        |
 
 ### Content-driven routes
 
@@ -27,14 +27,14 @@ There are no individual dog or blog detail pages at the time of writing. Dog pro
 
 ### Utility / feed routes
 
-| Route | Purpose |
-|---|---|
-| `/feed.xml` | RSS feed from the `blog` collection |
-| `/schemamap.xml` | Schema.org sitemap index |
-| `/schema/post.json` | Post schema metadata |
-| `/casos/exito-home.json` | Paginated success-story data for the home page |
-| `/591c2b87f0b68c44f260215f5d8e9da3.txt` | IndexNow verification file |
-| `/.well-known/api-catalog` | API catalog |
+| Route                                   | Purpose                                        |
+| --------------------------------------- | ---------------------------------------------- |
+| `/feed.xml`                             | RSS feed from the `blog` collection            |
+| `/schemamap.xml`                        | Schema.org sitemap index                       |
+| `/schema/post.json`                     | Post schema metadata                           |
+| `/casos/exito-home.json`                | Paginated success-story data for the home page |
+| `/591c2b87f0b68c44f260215f5d8e9da3.txt` | IndexNow verification file                     |
+| `/.well-known/api-catalog`              | API catalog                                    |
 
 ## User stories and acceptance criteria
 

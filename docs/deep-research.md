@@ -40,8 +40,6 @@ You will analyze the following greyhound‑rescue websites (all global, among th
 - [https://greyhoundsaspets.org.nz/](https://greyhoundsaspets.org.nz/)
 - [https://www.greyhoundandlurcherrescue.co.uk/](https://www.greyhoundandlurcherrescue.co.uk/)
 
-
-
 ## 1. Per‑site copy and UX analysis
 
 For each site, summarize in bullet form (keep it compact):
@@ -111,8 +109,6 @@ Within recommendations, prioritize:
 - Clear, simple paths from “I’m interested” → adopt/foster/donate.
 - Tone that feels warm, informal, and trustworthy, in first‑person plural.
 
-
-
 ## 4. Copywriting‑focused best practices for Brigada Galgos
 
 Extract a separate section titled “Copywriting best‑practices for Brigada Galgos”:
@@ -125,33 +121,38 @@ Extract a separate section titled “Copywriting best‑practices for Brigada Ga
   - How they balance hope with realism.
 - For each tip, provide 1–2 short, generic sentence structures you can plug into Brigada Galgos’ copy (e.g., “Copy pattern: ‘Here’s what it really means to adopt a greyhound from us’… + 2 example sentences”).
 
-
-
 ## 5. Output format
 
 Return your analysis in this structure:
 
 1. **Executive summary**
-  - 4–6 bullet points summarizing:
-  - The strongest overall patterns.
-  - Top 3–4 recommendations for Brigada Galgos’ tone and conversion.
+
+- 4–6 bullet points summarizing:
+- The strongest overall patterns.
+- Top 3–4 recommendations for Brigada Galgos’ tone and conversion.
+
 2. **Per‑site analysis table**
-  - A table with:
-  - Site URL.
-  - Core positioning (adoption, advocacy, foster, mixed).
-  - Primary emotional hook.
-  - How clearly “Adopt / Foster / Donate” are surfaced.
-  - Key copy/UX strengths and weaknesses.
+
+- A table with:
+- Site URL.
+- Core positioning (adoption, advocacy, foster, mixed).
+- Primary emotional hook.
+- How clearly “Adopt / Foster / Donate” are surfaced.
+- Key copy/UX strengths and weaknesses.
+
 3. **Cross‑site patterns, best practices, and anti‑patterns**
-  - Common patterns (3–8 items).
-    - 10–15 best practices with brief explanations and example sentence structures.
-    - 5–10 anti‑patterns with brief explanations and constructive fixes.
+
+- Common patterns (3–8 items).
+  - 10–15 best practices with brief explanations and example sentence structures.
+  - 5–10 anti‑patterns with brief explanations and constructive fixes.
+
 4. **Brigada Galgos recommendation matrix (table)**
-  - The table described above, ordered by page/section and prioritized by impact on adoption → foster → donate.
+
+- The table described above, ordered by page/section and prioritized by impact on adoption → foster → donate.
+
 5. **Copywriting best‑practices section**
-  - 10–15 copywriting tips plus 1–2 sentence‑pattern examples for each, tailored to Brigada Galgos’ tone and audience.
 
-
+- 10–15 copywriting tips plus 1–2 sentence‑pattern examples for each, tailored to Brigada Galgos’ tone and audience.
 
 ## 6. Constraints and guardrails
 
@@ -186,12 +187,9 @@ Your final output should be a **practical, site‑building‑ready report**: a d
 
 ---
 
-
-
 ## 2. Per‑site analysis table
 
 **Per‑site analysis (copy and UX)**
-
 
 | Site URL                                                                                               | Core positioning                                                                                                        | Primary emotional hook                                                                                                                                                   | How clearly Adopt / Foster / Donate are surfaced                                                                                                                                                                                   | Key strengths                                                                                                                                                                                                                       | Key weaknesses                                                                                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -214,16 +212,9 @@ Your final output should be a **practical, site‑building‑ready report**: a d
 | [https://greyhoundsaspets.org.nz/](https://greyhoundsaspets.org.nz/)                                   | National “Greyhounds as Pets” programme; adoption‑first.                                                                | “When you adopt a Greyhound you receive much more than just a dog” plus description of greyhounds as affectionate, gentle, intelligent, great for many households.[^28]  | Strong adoption focus with “Our latest dogs”, an explicit “Adoption process” page describing 4 steps (form, chat, “hound hunt”, take your hound home); foster homes are mentioned as part of transition.[^5][^28]                  | Very clear, reassuring 4‑step adoption process with promised support “every step of the way” and long after adoption; emphasizes matching like a “dating agency” and standard health checks and registrations.[^5][^28]             | Foster is described mostly as internal infrastructure (“nationwide network of volunteer foster homes”) rather than as a call‑to‑action for new foster carers; donation/sponsorship is not highlighted in the retrieved content.[^5][^28] |
 | [https://www.greyhoundandlurcherrescue.co.uk/](https://www.greyhoundandlurcherrescue.co.uk/)           | Aggregator and rescuer showcasing greyhounds and lurchers from multiple rescues.                                        | Individual dog stories with detailed personalities, needs, and quirks (e.g., Ted’s anxieties, progress, ideal home).[^4]                                                 | Main “Adopt a dog” area shows many dogs with stories; site directs visitors to contact specific rescues; donate/foster paths exist but are less prominent in the retrieved snippet.[^4]                                            | Excellent dog‑level storytelling (likes, fears, training progress, ideal home); clear that dogs come from various rescues, promoting second chances.[^4]                                                                            | Because it aggregates rescues, overall adopt/foster/donate UX is fragmented; no single clear process and few global CTAs; donation impact not consolidated.[^4]                                                                          |
 
-
-
-
 ---
 
-
-
 ## 3. Cross‑site patterns, best practices, and anti‑patterns
-
-
 
 ### Common cross‑site patterns
 
@@ -247,8 +238,6 @@ Your final output should be a **practical, site‑building‑ready report**: a d
 3. **Mix of recurring support schemes:** Programs like “Help a Hound” or “Friend of… ” are used to encourage ongoing sponsorship rather than one‑off gifts.[^6][^8][^9]
 
 ---
-
-
 
 ### Best practices (with examples and Brigada‑adaptable sentence structures)
 
@@ -393,11 +382,7 @@ For each item:
   - “We’re here to help you find the galgo that fits your life.”
   - “You don’t need to be an expert – we’ll teach you everything you need to know.”
 
-
-
 ---
-
-
 
 ### Anti‑patterns (with fixes and Brigada‑adaptable patterns)
 
@@ -475,12 +460,9 @@ For each item:
 
 ---
 
-
-
 ## 4. Brigada Galgos recommendation matrix
 
 **Brigada Galgos recommendation matrix**
-
 
 | Page/section                       | Conversion goal for Brigada Galgos                                                           | Evidence from other sites                                                                                                                             | Copy and UX recommendation                                                                                                                                                                                                                                                                                                                                 | Priority   |
 | ---------------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
@@ -499,10 +481,7 @@ For each item:
 | Home – events / low‑pressure entry | Capture people not ready to adopt but curious.                                               | Open days, “Greet a Grey” events and walks are common.[^13][^19]                                                                                      | If Brigada has outreach events, add a small “Come meet us” box on Home with upcoming dates, or a generic invite (“Write to visit us at the shelter in [location].”). Let people know there is no pressure to adopt.                                                                                                                                        | Low–Medium |
 | Header / navigation                | Keep primary actions always visible on every page.                                           | Many sites succeed by repeating key CTAs across pages.[^1][^3][^4]                                                                                    | Keep top navigation simple: “Adopt”, “Foster”, “Donate”, “About”, “Stories”, “Contact”. On mobile, use a persistent “Adopt” and “Donate” button.                                                                                                                                                                                                           | High       |
 
-
 ---
-
-
 
 ## 5. Copywriting best‑practices for Brigada Galgos
 

@@ -12,27 +12,27 @@ The site uses Astro content collections. Each collection is a directory of Markd
 
 ### Required fields
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Name of the galgo |
-| `sex` | enum | `Macho` or `Hembra` |
-| `age` | string | Descriptive age (e.g., "3 años") |
-| `weight` | string | Descriptive weight (e.g., "22 kg") |
-| `details` | string | Longer profile description |
-| `currentNeed` | enum | `Adopción`, `Hogar temporal`, or `Adopción u hogar temporal` (default: `Adopción`) |
-| `characterSketch` | string | Short character summary for cards |
-| `gallery` | image[] | Up to 3 local images |
+| Field             | Type    | Description                                                                        |
+| ----------------- | ------- | ---------------------------------------------------------------------------------- |
+| `name`            | string  | Name of the galgo                                                                  |
+| `sex`             | enum    | `Macho` or `Hembra`                                                                |
+| `age`             | string  | Descriptive age (e.g., "3 años")                                                   |
+| `weight`          | string  | Descriptive weight (e.g., "22 kg")                                                 |
+| `details`         | string  | Longer profile description                                                         |
+| `currentNeed`     | enum    | `Adopción`, `Hogar temporal`, or `Adopción u hogar temporal` (default: `Adopción`) |
+| `characterSketch` | string  | Short character summary for cards                                                  |
+| `gallery`         | image[] | Up to 3 local images                                                               |
 
 ### Optional fields
 
-| Field | Type | Description |
-|---|---|---|
-| `location` | string | Where the dog is located |
-| `instagramUrl` | URL | Instagram post/profile for this dog |
-| `order` | integer | Manual sort order |
-| `active` | boolean | Default `true`; set `false` to hide |
-| `hiddenSince` | date | Date the dog was hidden |
-| `hiddenReason` | string | Why the dog is hidden |
+| Field          | Type    | Description                         |
+| -------------- | ------- | ----------------------------------- |
+| `location`     | string  | Where the dog is located            |
+| `instagramUrl` | URL     | Instagram post/profile for this dog |
+| `order`        | integer | Manual sort order                   |
+| `active`       | boolean | Default `true`; set `false` to hide |
+| `hiddenSince`  | date    | Date the dog was hidden             |
+| `hiddenReason` | string  | Why the dog is hidden               |
 
 ### Rules
 
@@ -63,17 +63,17 @@ gallery:
 
 ### Required fields
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Name of the galgo |
-| `story` | string | Adoption success story |
+| Field     | Type    | Description                              |
+| --------- | ------- | ---------------------------------------- |
+| `name`    | string  | Name of the galgo                        |
+| `story`   | string  | Adoption success story                   |
 | `gallery` | image[] | Up to 3 local images (defaults to empty) |
 
 ### Optional fields
 
-| Field | Type | Description |
-|---|---|---|
-| `instagramUrl` | URL | Instagram post/profile for this story |
+| Field          | Type | Description                           |
+| -------------- | ---- | ------------------------------------- |
+| `instagramUrl` | URL  | Instagram post/profile for this story |
 
 ### Rules
 
@@ -98,22 +98,22 @@ gallery:
 
 ### Required fields
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Organization or person name |
-| `description` | string | What they contribute |
-| `website` | URL | Link to the supporter |
-| `kind` | enum | `Institución`, `Empresa`, `Persona`, `Fundación`, `Colectivo`, or `Veterinaria` |
-| `logo` | image | Local logo image |
-| `logoAlt` | string | Accessible alt text for the logo |
+| Field         | Type   | Description                                                                     |
+| ------------- | ------ | ------------------------------------------------------------------------------- |
+| `name`        | string | Organization or person name                                                     |
+| `description` | string | What they contribute                                                            |
+| `website`     | URL    | Link to the supporter                                                           |
+| `kind`        | enum   | `Institución`, `Empresa`, `Persona`, `Fundación`, `Colectivo`, or `Veterinaria` |
+| `logo`        | image  | Local logo image                                                                |
+| `logoAlt`     | string | Accessible alt text for the logo                                                |
 
 ### Optional fields
 
-| Field | Type | Description |
-|---|---|---|
-| `thanksLabel` | string | Text for the thank-you link |
-| `thanksUrl` | URL | Link to a thank-you post or page |
-| `order` | integer | Manual sort order |
+| Field         | Type    | Description                      |
+| ------------- | ------- | -------------------------------- |
+| `thanksLabel` | string  | Text for the thank-you link      |
+| `thanksUrl`   | URL     | Link to a thank-you post or page |
+| `order`       | integer | Manual sort order                |
 
 ### Rules
 
@@ -139,18 +139,18 @@ order: 1
 
 ### Required fields
 
-| Field | Type | Description |
-|---|---|---|
-| `title` | string | Post title |
-| `pubDate` | date | Publication date |
-| `author` | string | Author name |
-| `description` | string | Short summary |
+| Field         | Type   | Description      |
+| ------------- | ------ | ---------------- |
+| `title`       | string | Post title       |
+| `pubDate`     | date   | Publication date |
+| `author`      | string | Author name      |
+| `description` | string | Short summary    |
 
 ### Optional fields
 
-| Field | Type | Description |
-|---|---|---|
-| `category` | string | Post category |
+| Field       | Type   | Description               |
+| ----------- | ------ | ------------------------- |
+| `category`  | string | Post category             |
 | `heroImage` | string | Path or URL to hero image |
 
 ### Rules
