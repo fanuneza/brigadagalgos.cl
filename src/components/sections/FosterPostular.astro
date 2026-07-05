@@ -1,5 +1,6 @@
 ---
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
+import TrackedLink from "../../components/TrackedLink.astro";
 
 const steps = [
   {
@@ -42,18 +43,20 @@ const steps = [
     </ol>
 
     <div class="foster-cta">
-      <a
+      <TrackedLink
         href="https://forms.gle/3YHPo8KKnCiySbCo6"
         class="btn btn--primary"
-        target="_blank"
-        rel="noopener noreferrer"
-        data-track-event="foster_apply_click"
-        data-track-label="Postula aquí - Foster Application"
-        data-track-location="foster_cta"
+        newTab
+        trackEvent="foster_apply_click"
+        trackLabel="Postula aquí - Foster Application"
+        trackLocation="foster_cta"
+        trackDestination="https://forms.gle/3YHPo8KKnCiySbCo6"
+        trackCategory="foster"
+        trackOutbound
         data-application-form-url="https://forms.gle/3YHPo8KKnCiySbCo6"
       >
         Puedo ser hogar temporal <span class="sr-only"> (abre en una nueva pestaña)</span>
-      </a>
+      </TrackedLink>
       <p class="foster-cta__fallback">
         ¿Prefieres hablar primero?
         <WhatsAppLink

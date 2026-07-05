@@ -1,7 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import ContactChannels from "../components/sections/ContactChannels.astro";
@@ -9,22 +7,18 @@ import ContactForm from "../components/sections/ContactForm.astro";
 import PressSection from "../components/sections/PressSection.astro";
 ---
 
-<BaseLayout
+<PageLayout
   title="Contacto para adoptar, donar o ayudar"
   description="Escríbenos por WhatsApp, correo o redes sociales para adoptar, donar o resolver tus dudas sobre Brigada Galgos."
 >
-  <Navbar />
-  <main id="main-content">
-    <PageHero
-      eyebrow="CONTACTO"
-      h1="Conversemos"
-      lead="Puedes escribirnos para adoptar, ser hogar temporal, donar o hacer una pregunta general. No necesitas decidir todo antes de conversar."
-    />
-    <RainbowDivider />
+  <PageHero
+    eyebrow="CONTACTO"
+    h1="Conversemos"
+    lead="Puedes escribirnos para adoptar, ser hogar temporal, donar o hacer una pregunta general. No necesitas decidir todo antes de conversar."
+  />
+  <RainbowDivider />
 
-    <ContactChannels />
-    <ContactForm />
-    <PressSection />
-  </main>
-  <Footer />
-</BaseLayout>
+  <ContactChannels />
+  <ContactForm />
+  <PressSection />
+</PageLayout>

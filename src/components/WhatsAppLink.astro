@@ -1,6 +1,7 @@
 ---
 import { SITE } from "../config/site.ts";
 import type { HTMLAttributes } from "astro/types";
+import TrackedLink from "./TrackedLink.astro";
 
 interface Props extends HTMLAttributes<"a"> {
   text: string;
@@ -12,17 +13,20 @@ const { text, location, label, class: className, ...anchorProps } = Astro.props;
 const href = `${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 ---
 
-<a
+<TrackedLink
   {...anchorProps}
   href={href}
   class={className}
-  target="_blank"
-  rel="noopener noreferrer"
-  data-track-event="whatsapp_click"
-  data-track-label={label ?? "Escríbenos por WhatsApp"}
-  data-track-location={location}
+  newTab
+  hideExternalIndicator
+  trackEvent="whatsapp_click"
+  trackLabel={label ?? "Escríbenos por WhatsApp"}
+  trackLocation={location}
+  trackDestination={href}
+  trackCategory="whatsapp"
+  trackOutbound
   data-whatsapp-location={location}
   data-whatsapp-text={text}
 >
   <slot />
-</a>
+</TrackedLink>

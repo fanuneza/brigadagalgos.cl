@@ -1,6 +1,7 @@
 ---
 import { getInstagramHandleLabel } from "../utils/instagram";
 import type { HTMLAttributes } from "astro/types";
+import TrackedLink from "./TrackedLink.astro";
 
 interface Props extends HTMLAttributes<"a"> {
   url: string;
@@ -12,21 +13,21 @@ const { url, name, location = "success_stories", class: className, ...anchorProp
 const handle = getInstagramHandleLabel(url);
 ---
 
-<a
+<TrackedLink
   {...anchorProps}
   href={url}
   class={className}
   aria-label={`Seguir a ${name} en Instagram: ${handle}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  data-external-indicator="off"
-  data-track-event="social_click"
-  data-track-category="instagram"
-  data-track-outbound="true"
+  newTab
+  hideExternalIndicator
+  trackEvent="social_click"
+  trackLabel="Instagram"
+  trackCategory="instagram"
+  trackOutbound
   data-social-platform="instagram"
   data-dog-name={name}
-  data-track-location={location}
-  data-track-destination={url}
+  trackLocation={location}
+  trackDestination={url}
 >
   <slot />
-</a>
+</TrackedLink>

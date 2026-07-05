@@ -1,5 +1,7 @@
 ---
 import { SITE } from "../config/site.ts";
+import ExternalLink from "./ExternalLink.astro";
+import TrackedLink from "./TrackedLink.astro";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -36,16 +38,14 @@ const currentYear = new Date().getFullYear();
           </a>
         </li>
         <li>
-          <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" class="footer__link">
+          <ExternalLink href={SITE.whatsapp} class="footer__link">
             WhatsApp {SITE.whatsappPhone}<span class="sr-only"> (abre en una nueva pestaña)</span>
-          </a>
+          </ExternalLink>
         </li>
       </ul>
       <div class="footer__social">
-        <a
+        <ExternalLink
           href={SITE.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
           aria-label="Instagram (abre en una nueva pestaña)"
           class="footer__social-link"
           data-external-indicator="off"
@@ -60,11 +60,9 @@ const currentYear = new Date().getFullYear();
             loading="lazy"
             decoding="async"
           />
-        </a>
-        <a
+        </ExternalLink>
+        <ExternalLink
           href={SITE.facebook}
-          target="_blank"
-          rel="noopener noreferrer"
           aria-label="Facebook (abre en una nueva pestaña)"
           class="footer__social-link"
           data-external-indicator="off"
@@ -79,7 +77,7 @@ const currentYear = new Date().getFullYear();
             loading="lazy"
             decoding="async"
           />
-        </a>
+        </ExternalLink>
       </div>
     </div>
 
@@ -112,12 +110,12 @@ const currentYear = new Date().getFullYear();
             decoding="async"
           />{" "}
           por{" "}
-          <a
+          <ExternalLink
             href="https://fnunez.cl/?utm_source=brigadagalgos.cl&utm_medium=referral&utm_campaign=credit_footer"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Abrir el sitio de Fabián Núñez en una pestaña nueva">Fabián Núñez</a
+            aria-label="Abrir el sitio de Fabián Núñez en una pestaña nueva"
           >
+            Fabián Núñez
+          </ExternalLink>
         </p>
       </div>
       <div class="footer__legal">
@@ -126,17 +124,17 @@ const currentYear = new Date().getFullYear();
           >Gestionar preferencias de cookies</button
         >
       </div>
-      <a
+      <TrackedLink
         href="/donar/"
         class="btn btn--secondary footer__esponsor-btn"
-        data-track-event="cta_click"
-        data-track-label="Voy a apoyar un galgo"
-        data-track-location="footer"
-        data-track-destination="/donar/"
-        data-track-category="donation"
+        trackEvent="cta_click"
+        trackLabel="Voy a apoyar un galgo"
+        trackLocation="footer"
+        trackDestination="/donar/"
+        trackCategory="donation"
       >
         Voy a apoyar un galgo
-      </a>
+      </TrackedLink>
     </div>
   </div>
 </footer>

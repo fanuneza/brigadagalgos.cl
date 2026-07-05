@@ -16,7 +16,7 @@ export const faqPairs: FaqPair[] = [
     id: "cuanto-ejercicio",
     question: "¿Cuánto ejercicio necesita un galgo?",
     answer:
-      "Menos de lo que mucha gente imagina. Son atletas de carrera corta, rápidos por momentos y serenos en casa. Para la mayoría, dos caminatas al día y una rutina tranquila son suficientes. No necesitan horas de ejercicio ni un patio enorme. Necesitan paseos seguros, descanso y compañía.",
+      "Menos de lo que mucha gente imagina. Son atletas de carrera corta, rápidos por momentos y tranquilos en casa. Para la mayoría, dos caminatas al día y una rutina clara son suficientes. No necesitan horas de ejercicio ni un patio enorme. Necesitan paseos seguros, descanso y compañía.",
   },
   {
     id: "galgo-en-departamento",

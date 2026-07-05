@@ -1,0 +1,25 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  schema?: Record<string, any>;
+  mainId?: string;
+}
+
+const { title, description, ogImage, schema, mainId = "main-content" } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage} schema={schema}>
+  <Navbar />
+  <main id={mainId}>
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<slot name="afterShell" />

@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../../config/site.ts";
+import WhatsAppLink from "../../components/WhatsAppLink.astro";
 ---
 
 <section class="section-padding supporters-cta">
@@ -10,13 +10,13 @@ import { SITE } from "../../config/site.ts";
       Si representas a una institución, marca o equipo profesional y quieres apoyar a Brigada Galgos, estaremos felices
       de explorar una forma de trabajo en conjunto.
     </p>
-    <a
-      href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, me interesa colaborar con Brigada Galgos")}`}
+    <WhatsAppLink
+      text="Hola, me interesa colaborar con Brigada Galgos"
+      location="supporters_cta"
+      label="Hablar por WhatsApp - Supporters CTA"
       class="btn btn--primary"
-      target="_blank"
-      rel="noopener noreferrer"
     >
       Hablar por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-    </a>
+    </WhatsAppLink>
   </div>
 </section>

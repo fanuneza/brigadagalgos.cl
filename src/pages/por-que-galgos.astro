@@ -1,11 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import Footer from "../components/Footer.astro";
-import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import WhyGalgosEditorial from "../components/sections/WhyGalgosEditorial.astro";
 import CasesBand from "../components/sections/CasesBand.astro";
 import NextStepCta from "../components/sections/NextStepCta.astro";
@@ -16,28 +14,24 @@ const successDogs = getEntriesWithGallery(await getCollection("success-dogs"));
 const cases = await buildStoryDogSummaries(shuffle(successDogs), 3);
 ---
 
-<BaseLayout
+<PageLayout
   title="Por qué galgos"
   description="Por qué Brigada Galgos rescata, rehabilita y reubica específicamente galgos en Chile."
 >
-  <Navbar />
-  <main id="main-content">
-    <PageHero
-      eyebrow="MÁS QUE UNA RAZA"
-      h1="Por qué galgos"
-      lead="No elegimos rescatar galgos por una preferencia de raza. Los elegimos porque vemos de cerca un abandono y una explotación que se repiten demasiado."
-      leadBold="Rescatamos, rehabilitamos y reubicamos galgos en Chile para que puedan vivir, por fin, como los perros de familia que siempre merecieron ser."
-    />
-    <RainbowDivider />
+  <PageHero
+    eyebrow="MÁS QUE UNA RAZA"
+    h1="Por qué galgos"
+    lead="No elegimos rescatar galgos por una preferencia de raza. Los elegimos porque vemos de cerca un abandono y una explotación que se repiten demasiado."
+    leadBold="Rescatamos, rehabilitamos y reubicamos galgos en Chile para que puedan vivir, por fin, como los perros de familia que siempre merecieron ser."
+  />
+  <RainbowDivider />
 
-    <WhyGalgosEditorial />
-    <CasesBand cases={cases} />
-    <NextStepCta />
-  </main>
-  <Footer />
-</BaseLayout>
+  <WhyGalgosEditorial />
+  <CasesBand cases={cases} />
+  <NextStepCta />
 
-<SharedGalleryLightbox ariaLabel="Galería de casos reales" />
+  <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de casos reales" />
+</PageLayout>
 
 <script>
   import "../scripts/init-shared-gallery";

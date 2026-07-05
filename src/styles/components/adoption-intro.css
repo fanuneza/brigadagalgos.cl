@@ -9,6 +9,11 @@
   box-shadow: var(--shadow-sm);
 }
 
+.adoption-intro__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+}
+
 .adoption-intro__lead {
   max-width: 60ch;
   margin: 0;

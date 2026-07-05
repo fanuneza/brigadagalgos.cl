@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  hideExternalIndicator?: boolean;
+  newTab?: boolean;
+}
+
+const { hideExternalIndicator = false, newTab = true, rel, target, ...anchorProps } = Astro.props;
+
+const resolvedTarget = newTab ? "_blank" : target;
+const resolvedRel = newTab ? (rel ? `${rel} noopener noreferrer` : "noopener noreferrer") : rel;
+---
+
+<a
+  {...anchorProps}
+  target={resolvedTarget}
+  rel={resolvedRel}
+  data-external-indicator={hideExternalIndicator ? "off" : undefined}
+>
+  <slot />
+</a>

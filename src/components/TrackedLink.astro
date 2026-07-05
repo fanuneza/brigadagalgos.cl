@@ -7,18 +7,40 @@ interface Props extends HTMLAttributes<"a"> {
   trackLocation: string;
   trackDestination?: string;
   trackCategory?: string;
+  hideExternalIndicator?: boolean;
+  newTab?: boolean;
+  trackOutbound?: boolean;
 }
 
-const { trackEvent, trackLabel, trackLocation, trackDestination, trackCategory, ...anchorProps } = Astro.props;
+const {
+  trackEvent,
+  trackLabel,
+  trackLocation,
+  trackDestination,
+  trackCategory,
+  hideExternalIndicator = false,
+  newTab = false,
+  trackOutbound = false,
+  rel,
+  target,
+  ...anchorProps
+} = Astro.props;
+
+const resolvedTarget = newTab ? "_blank" : target;
+const resolvedRel = newTab ? (rel ? `${rel} noopener noreferrer` : "noopener noreferrer") : rel;
 ---
 
 <a
   {...anchorProps}
+  target={resolvedTarget}
+  rel={resolvedRel}
+  data-external-indicator={newTab && hideExternalIndicator ? "off" : undefined}
   data-track-event={trackEvent}
   data-track-label={trackLabel}
   data-track-location={trackLocation}
   data-track-destination={trackDestination}
   data-track-category={trackCategory}
+  data-track-outbound={trackOutbound ? "true" : undefined}
 >
   <slot />
 </a>

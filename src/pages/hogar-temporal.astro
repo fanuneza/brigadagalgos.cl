@@ -1,7 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import ProcessStepper from "../components/ProcessStepper.astro";
@@ -32,28 +30,24 @@ const fosterSteps = [
 ];
 ---
 
-<BaseLayout
+<PageLayout
   title="Hogar temporal"
   description="Sé hogar temporal de un galgo rescatado. Evaluamos contigo tiempos, seguridad e implementos para una acogida responsable."
 >
-  <Navbar />
-  <main id="main-content">
-    <PageHero
-      eyebrow="HOGAR TEMPORAL"
-      h1="Abre tu casa por un tiempo"
-      lead="Ser hogar temporal es abrir tu casa por un tiempo para que un galgo esté seguro, acompañado y mejor preparado para encontrar familia."
-      leadBold="No necesitas tener todo resuelto antes de escribirnos. Conversamos contigo qué puedes aportar y qué apoyo necesita cada caso."
-      ctaText="Puedo ser hogar temporal"
-      ctaHref="#form"
-      ctaVariant="primary"
-      ctaTrackLocation="foster_hero"
-      ctaTrackCategory="foster"
-    />
-    <RainbowDivider />
+  <PageHero
+    eyebrow="HOGAR TEMPORAL"
+    h1="Abre tu casa por un tiempo"
+    lead="Ser hogar temporal es abrir tu casa por un tiempo para que un galgo esté seguro, acompañado y mejor preparado para encontrar familia."
+    leadBold="No necesitas tener todo resuelto antes de escribirnos. Conversamos contigo qué puedes aportar y qué apoyo necesita cada caso."
+    ctaText="Puedo ser hogar temporal"
+    ctaHref="#form"
+    ctaVariant="primary"
+    ctaTrackLocation="foster_hero"
+    ctaTrackCategory="foster"
+  />
+  <RainbowDivider />
 
-    <FosterRequirements />
-    <ProcessStepper steps={fosterSteps} eyebrow="EL PROCESO" heading="Así funciona la acogida" />
-    <FosterPostular />
-    <Footer />
-  </main>
-</BaseLayout>
+  <FosterRequirements />
+  <ProcessStepper steps={fosterSteps} eyebrow="EL PROCESO" heading="Así funciona la acogida" />
+  <FosterPostular />
+</PageLayout>

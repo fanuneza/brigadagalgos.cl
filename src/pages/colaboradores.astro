@@ -1,11 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection, type CollectionEntry } from "astro:content";
-import Footer from "../components/Footer.astro";
-import Navbar from "../components/Navbar.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ExternalLink from "../components/ExternalLink.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import SupportersIntro from "../components/sections/SupportersIntro.astro";
 import SupportersCtaSection from "../components/sections/SupportersCtaSection.astro";
 
@@ -26,73 +25,60 @@ const supporters: CollectionEntry<"supporters">[] = shuffle(await getCollection(
 const supportersGridClass = supporters.length === 1 ? "supporters-grid supporters-grid--single" : "supporters-grid";
 ---
 
-<BaseLayout
+<PageLayout
   title="Colaboradores"
   description="Conoce a las personas e instituciones que apoyan a Brigada Galgos y ayudan a sostener rescates, recuperación y adopciones responsables."
 >
-  <Navbar />
-  <main id="main-content">
-    <PageHero
-      eyebrow="COLABORADORES"
-      h1="Quiénes sostienen esta red de ayuda"
-      lead="Detrás de cada rescate hay instituciones, marcas y personas que ayudan a que los galgos reciban cuidado, tiempo y nuevas oportunidades."
-    />
-    <RainbowDivider />
+  <PageHero
+    eyebrow="COLABORADORES"
+    h1="Quiénes sostienen esta red de ayuda"
+    lead="Detrás de cada rescate hay instituciones, marcas y personas que ayudan a que los galgos reciban cuidado, tiempo y nuevas oportunidades."
+  />
+  <RainbowDivider />
 
-    <section class="section-padding">
-      <div class="container">
-        <SupportersIntro />
+  <section class="section-padding">
+    <div class="container">
+      <SupportersIntro />
 
-        <div class={supportersGridClass}>
-          {
-            supporters.map((supporter) => (
-              <article class="supporter-card">
-                <div class="supporter-card__logo-stage">
-                  <Image
-                    src={supporter.data.logo}
-                    alt={supporter.data.logoAlt}
-                    class="supporter-card__logo"
-                    widths={[240, 360, 480]}
-                    sizes="(min-width: 1024px) calc((min(100vw, 1200px) - 96px - 64px) / 3), (min-width: 768px) calc((100vw - 48px - 32px) / 2), calc(100vw - 48px)"
-                    quality={72}
-                  />
-                </div>
+      <div class={supportersGridClass}>
+        {
+          supporters.map((supporter) => (
+            <article class="supporter-card">
+              <div class="supporter-card__logo-stage">
+                <Image
+                  src={supporter.data.logo}
+                  alt={supporter.data.logoAlt}
+                  class="supporter-card__logo"
+                  widths={[240, 360, 480]}
+                  sizes="(min-width: 1024px) calc((min(100vw, 1200px) - 96px - 64px) / 3), (min-width: 768px) calc((100vw - 48px - 32px) / 2), calc(100vw - 48px)"
+                  quality={72}
+                />
+              </div>
 
-                <div class="supporter-card__body">
-                  <span class="supporter-card__kind">{supporter.data.kind}</span>
-                  <h3 class="supporter-card__name">{supporter.data.name}</h3>
-                  <p class="supporter-card__description">
-                    {supporter.data.description}{" "}
-                    {supporter.data.thanksLabel && supporter.data.thanksUrl && (
-                      <>
-                        <a
-                          href={withPartnerUtm(supporter.data.thanksUrl)}
-                          class="supporter-card__description-link"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {supporter.data.thanksLabel} <span class="sr-only"> (abre en una nueva pestaña)</span>
-                        </a>
-                      </>
-                    )}
-                  </p>
-                  <a
-                    href={withPartnerUtm(supporter.data.website)}
-                    class="btn btn--secondary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Visitar sitio <span class="sr-only"> (abre en una nueva pestaña)</span>
-                  </a>
-                </div>
-              </article>
-            ))
-          }
-        </div>
+              <div class="supporter-card__body">
+                <span class="supporter-card__kind">{supporter.data.kind}</span>
+                <h3 class="supporter-card__name">{supporter.data.name}</h3>
+                <p class="supporter-card__description">
+                  {supporter.data.description}{" "}
+                  {supporter.data.thanksLabel && supporter.data.thanksUrl && (
+                    <ExternalLink
+                      href={withPartnerUtm(supporter.data.thanksUrl)}
+                      class="supporter-card__description-link"
+                    >
+                      {supporter.data.thanksLabel} <span class="sr-only"> (abre en una nueva pestaña)</span>
+                    </ExternalLink>
+                  )}
+                </p>
+                <ExternalLink href={withPartnerUtm(supporter.data.website)} class="btn btn--secondary">
+                  Visitar sitio <span class="sr-only"> (abre en una nueva pestaña)</span>
+                </ExternalLink>
+              </div>
+            </article>
+          ))
+        }
       </div>
-    </section>
+    </div>
+  </section>
 
-    <SupportersCtaSection />
-  </main>
-  <Footer />
-</BaseLayout>
+  <SupportersCtaSection />
+</PageLayout>

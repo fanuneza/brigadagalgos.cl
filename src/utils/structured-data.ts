@@ -173,7 +173,7 @@ export function buildGreyhoundFaqPage(): JsonLdNode {
         name: "¿Cuánto ejercicio necesita un galgo?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Dos caminatas al día son suficientes. Son atletas de carrera corta: explosivos en pista, pero serenos en casa.",
+          text: "Dos caminatas al día son suficientes. Son atletas de carrera corta: explosivos en pista, pero tranquilos en casa.",
         },
       },
     ],

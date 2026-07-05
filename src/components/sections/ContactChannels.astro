@@ -1,10 +1,13 @@
 ---
 import { SITE } from "../../config/site.ts";
+import ExternalLink from "../../components/ExternalLink.astro";
+import WhatsAppLink from "../../components/WhatsAppLink.astro";
 ---
 
 <section class="section-padding">
   <div class="container">
     <p class="eyebrow">CANALES DIRECTOS</p>
+    <h2 class="sr-only">Elige cómo quieres contactarnos</h2>
     <div class="contact-channels">
       <div class="channel-card">
         <span class="icon-circle icon-circle--green" aria-hidden="true">
@@ -22,9 +25,14 @@ import { SITE } from "../../config/site.ts";
         <h3 class="channel-card__title">WHATSAPP</h3>
         <p class="channel-card__detail">{SITE.whatsappPhone}</p>
         <p class="channel-card__hours">Lun a Vie · 10:00 – 19:00</p>
-        <a href={SITE.whatsapp} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+        <WhatsAppLink
+          text="Hola, quiero hablar con Brigada Galgos"
+          location="contact_channels"
+          label="Abrir WhatsApp - Contact Channels"
+          class="btn btn--primary"
+        >
           Abrir WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-        </a>
+        </WhatsAppLink>
       </div>
 
       <div class="channel-card">
@@ -62,12 +70,7 @@ import { SITE } from "../../config/site.ts";
         <h3 class="channel-card__title">REDES</h3>
         <p class="channel-card__body">Las novedades de los galgos viven en Instagram.</p>
         <div class="channel-card__social">
-          <a
-            href={SITE.instagram}
-            class="btn btn--ghost channel-card__social-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <ExternalLink href={SITE.instagram} class="btn btn--ghost channel-card__social-link">
             <span class="btn__icon" aria-hidden="true">
               <img
                 src="/icons/instagram.svg"
@@ -81,13 +84,8 @@ import { SITE } from "../../config/site.ts";
               />
             </span>
             <span>Instagram <span class="sr-only"> (abre en una nueva pestaña)</span></span>
-          </a>
-          <a
-            href={SITE.facebook}
-            class="btn btn--ghost channel-card__social-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          </ExternalLink>
+          <ExternalLink href={SITE.facebook} class="btn btn--ghost channel-card__social-link">
             <span class="btn__icon" aria-hidden="true">
               <img
                 src="/icons/facebook.svg"
@@ -101,7 +99,7 @@ import { SITE } from "../../config/site.ts";
               />
             </span>
             <span>Facebook <span class="sr-only"> (abre en una nueva pestaña)</span></span>
-          </a>
+          </ExternalLink>
         </div>
       </div>
     </div>

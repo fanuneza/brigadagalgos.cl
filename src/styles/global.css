@@ -139,7 +139,6 @@ h2:not([hidden]) {
 .supporters-cta__lead,
 .why-galgos__prose p,
 .why-galgos__cases-lead,
-.why-galgos__cta p,
 .why-galgos__editorial-list li,
 .why-galgos__inline-points li {
   font-size: var(--type-lead);
@@ -155,7 +154,6 @@ h2:not([hidden]) {
 
 .card__desc,
 .supporter-card__description,
-.donation-card__amounts,
 .donation-card__info,
 .req-card__body,
 .channel-card__body {
@@ -226,7 +224,6 @@ h2:not([hidden]) {
   font-size: var(--type-ui-title);
 }
 
-.dog-card__personality,
 .dog-card__details,
 .story-card__quote,
 .donation-card__subtitle,

@@ -1,5 +1,6 @@
 ---
 import { SITE } from "../../config/site.ts";
+import TrackedLink from "../../components/TrackedLink.astro";
 
 const suggestedAmounts = [
   {
@@ -28,6 +29,7 @@ const suggestedAmounts = [
 
 <section class="section-padding">
   <div class="container">
+    <h2 class="sr-only">Formas de donar</h2>
     <p class="donation-intro">
       No hay un monto único correcto. Elige una cantidad que puedas sostener y nosotros la destinamos a las necesidades
       reales de los galgos: salud, comida, traslados, implementos y acompañamiento.
@@ -53,7 +55,7 @@ const suggestedAmounts = [
             type="button"
             class="bank-info__row"
             data-copy-value="Fundación Brigada Galgos"
-            aria-label="Copiar nombre: Fundación Brigada Galgos"
+            aria-label="Nombre Fundación Brigada Galgos. Copiar dato."
           >
             <span class="bank-info__label">Nombre</span>
             <span class="bank-info__value">Fundación Brigada Galgos</span>
@@ -62,7 +64,7 @@ const suggestedAmounts = [
             type="button"
             class="bank-info__row"
             data-copy-value="65.132.425-4"
-            aria-label="Copiar RUT: 65.132.425-4"
+            aria-label="RUT 65.132.425-4. Copiar dato."
           >
             <span class="bank-info__label">RUT</span>
             <span class="bank-info__value">65.132.425-4</span>
@@ -71,7 +73,7 @@ const suggestedAmounts = [
             type="button"
             class="bank-info__row"
             data-copy-value="Mercado Pago"
-            aria-label="Copiar banco: Mercado Pago"
+            aria-label="Banco Mercado Pago. Copiar dato."
           >
             <span class="bank-info__label">Banco</span>
             <span class="bank-info__value">Mercado Pago</span>
@@ -80,7 +82,7 @@ const suggestedAmounts = [
             type="button"
             class="bank-info__row"
             data-copy-value="Cuenta Vista"
-            aria-label="Copiar tipo de cuenta: Cuenta Vista"
+            aria-label="Tipo de cuenta Cuenta Vista. Copiar dato."
           >
             <span class="bank-info__label">Tipo de cuenta</span>
             <span class="bank-info__value">Cuenta Vista</span>
@@ -89,7 +91,7 @@ const suggestedAmounts = [
             type="button"
             class="bank-info__row"
             data-copy-value="1073480715"
-            aria-label="Copiar número de cuenta: 1073480715"
+            aria-label="Número de cuenta 1073480715. Copiar dato."
           >
             <span class="bank-info__label">Número de cuenta</span>
             <span class="bank-info__value">1073480715</span>
@@ -98,7 +100,7 @@ const suggestedAmounts = [
             type="button"
             class="bank-info__row"
             data-copy-value={SITE.email}
-            aria-label={`Copiar correo: ${SITE.email}`}
+            aria-label={`Correo ${SITE.email}. Copiar dato.`}
           >
             <span class="bank-info__label">Correo</span>
             <span class="bank-info__value">{SITE.email}</span>
@@ -135,18 +137,20 @@ const suggestedAmounts = [
           acogidas.
         </p>
         <p>Es una forma simple de sostener el trabajo continuo y dar más estabilidad a cada caso.</p>
-        <a
+        <TrackedLink
           href={SITE.esponsor}
           class="btn btn--primary"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-track-event="donation_esponsor_click"
-          data-track-label="Voy a apoyar un galgo en eSponsor"
-          data-track-location="donation_card"
+          newTab
+          trackEvent="donation_esponsor_click"
+          trackLabel="Voy a apoyar un galgo en eSponsor"
+          trackLocation="donation_card"
+          trackDestination={SITE.esponsor}
+          trackCategory="donation"
+          trackOutbound
           data-donation-location="donation_card"
         >
           Voy a apoyar un galgo <span class="sr-only"> (abre en una nueva pestaña)</span>
-        </a>
+        </TrackedLink>
       </div>
       <p class="donation-transparency">
         Usamos los aportes para necesidades directas de los galgos rescatados y sus hogares temporales. Si necesitas

@@ -1,8 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
@@ -19,35 +17,31 @@ const rawDogs = rawDogsList.filter((dog) => dog.data.active !== false);
 const dogs = await buildAdoptionDogCards(shuffle(rawDogs));
 ---
 
-<BaseLayout
+<PageLayout
   title="Adopta un galgo rescatado en Chile"
   description="Conoce a los galgos que hoy están listos para encontrar familia en Chile y te acompañamos durante todo el proceso de adopción."
 >
-  <Navbar />
-  <main id="main-content">
-    <PageHero
-      eyebrow="ADOPTA"
-      h1="Los galgos que hoy esperan familia"
-      lead="Los conocemos de cerca y te acompañamos en todo el proceso, desde tu primer mensaje hasta los primeros días en casa."
-      ctaText="Quiero adoptar"
-      ctaHref={SITE.adoptionForm}
-      ctaVariant="primary"
-      ctaTrackLocation="adoption_hero"
-      ctaTrackCategory="adoption"
-    />
-    <RainbowDivider />
+  <PageHero
+    eyebrow="ADOPTA"
+    h1="Los galgos que hoy esperan familia"
+    lead="Los conocemos de cerca y te acompañamos en todo el proceso, desde tu primer mensaje hasta los primeros días en casa."
+    ctaText="Quiero adoptar"
+    ctaHref={SITE.adoptionForm}
+    ctaVariant="primary"
+    ctaTrackLocation="adoption_hero"
+    ctaTrackCategory="adoption"
+  />
+  <RainbowDivider />
 
-    <section id="galgos" class="section-padding">
-      <div class="container">
-        <AdoptionIntro />
-        <AdoptionGrid dogs={dogs} />
-      </div>
-    </section>
+  <section id="galgos" class="section-padding">
+    <div class="container">
+      <AdoptionIntro />
+      <AdoptionGrid dogs={dogs} />
+    </div>
+  </section>
 
-    <AdoptionProcess />
-    <AdoptionTailCta />
-  </main>
-  <Footer />
-</BaseLayout>
+  <AdoptionProcess />
+  <AdoptionTailCta />
 
-<SharedGalleryLightbox ariaLabel="Galería de adopción" />
+  <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de adopción" />
+</PageLayout>

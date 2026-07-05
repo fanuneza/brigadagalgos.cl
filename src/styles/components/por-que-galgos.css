@@ -38,8 +38,7 @@
 }
 
 .why-galgos__prose p,
-.why-galgos__cases-lead,
-.why-galgos__cta p {
+.why-galgos__cases-lead {
   margin: 0;
 }
 
@@ -204,19 +203,6 @@
   height: 0.42rem;
 }
 
-.why-galgos__cta {
-  justify-items: center;
-  text-align: center;
-}
-
-.why-galgos__cta-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-}
-
 @media (min-width: 768px) {
   .why-galgos__image-section {
     padding: var(--space-9) 0 var(--space-6);
@@ -228,10 +214,5 @@
 
   .why-galgos__stories-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .why-galgos__cta-actions {
-    flex-direction: row;
-    justify-content: center;
   }
 }
