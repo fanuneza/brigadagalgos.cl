@@ -1,6 +1,7 @@
 .donation-cards {
   display: grid;
   gap: var(--space-6);
+  align-items: start;
 }
 
 .donation-intro {
@@ -86,6 +87,21 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .donation-card--transferencia {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .donation-card--mensual {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .donation-transparency {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
   .donation-amounts {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -149,7 +165,6 @@
 
 .donation-transparency {
   max-width: 72ch;
-  margin-top: var(--space-5);
   color: var(--color-text-muted);
   padding: var(--space-5);
   border-left: 4px solid color-mix(in sRGB, var(--color-primary) 42%, transparent);

@@ -7,9 +7,7 @@ import { faqPairs, faqGroups } from "../../config/faq";
     {
       faqGroups.map((group) => (
         <section class="faq-group" aria-labelledby={`group-${group.ids[0]}`}>
-          <h2 id={`group-${group.ids[0]}`}>
-            {group.eyebrow}
-          </h2>
+          <h2 id={`group-${group.ids[0]}`}>{group.eyebrow}</h2>
 
           {group.ids.map((idx) => {
             const item = faqPairs[idx];
