@@ -1,22 +1,23 @@
 # Brigada Galgos
 
-Sitio web oficial de **Brigada Galgos Chile**, una organización dedicada al rescate, recuperación y adopción de galgos.
+Sitio web oficial de **Brigada Galgos**, una organización dedicada al rescate, recuperación y adopción responsable de galgos en Chile.
 
-El repo contiene el sitio público donde se muestran perros en adopción, casos de éxito, formas de apoyar a la fundación, preguntas frecuentes, contacto y colaboradores. La idea central del proyecto es simple: contar bien cada caso, facilitar la ayuda y hacerlo con una experiencia clara, rápida y accesible.
+Este repositorio contiene el sitio público donde Brigada Galgos muestra perros en adopción, casos de éxito, formas de ayudar, preguntas frecuentes, contacto, colaboradores y el blog. El foco del proyecto es contar bien cada caso, facilitar el apoyo a la fundación y ofrecer una experiencia clara, rápida y accesible.
 
-## Qué hay aquí
+## Qué se puede hacer en este sitio
 
-- Páginas públicas hechas con Astro.
-- Fichas de galgos en adopción y casos de éxito cargados desde archivos Markdown.
-- Imágenes optimizadas para web.
-- Flujo de consentimiento para analítica antes de cargar GTM/GA4.
-- Pruebas que cuidan accesibilidad, contenido, build y comportamiento visual básico.
+- Conocer galgos que hoy buscan familia.
+- Leer historias de adopción y recuperación.
+- Revisar preguntas frecuentes antes de adoptar o ser hogar temporal.
+- Encontrar formas de donar o colaborar.
+- Contactar al equipo por WhatsApp, correo o redes sociales.
 
-## Cómo se organiza el contenido
+## Dónde vive la información
 
-- `src/content/adoption-dogs/`: perros que buscan adopción o hogar temporal.
-- `src/content/success-dogs/`: historias de galgos adoptados.
-- `src/content/supporters/`: instituciones y personas que apoyan a Brigada Galgos.
+- `src/content/adoption-dogs/`: fichas de galgos en adopción.
+- `src/content/success-dogs/`: historias de galgos ya adoptados.
+- `src/content/supporters/`: instituciones, marcas y personas que apoyan a Brigada Galgos.
+- `src/content/blog/`: publicaciones del blog.
 - `src/assets/`: imágenes del sitio y galerías.
 
 ## Levantar el proyecto
@@ -33,8 +34,6 @@ npm install
 npm run dev
 ```
 
-Eso inicia el sitio en desarrollo local.
-
 ## Antes de publicar cambios
 
 Las validaciones principales del repo son:
@@ -46,11 +45,18 @@ npm run build
 npm test
 ```
 
+Si el cambio afecta rendimiento, accesibilidad o estructura visual de páginas clave, también conviene correr:
+
+```bash
+npm run test:lighthouse
+```
+
 ## Notas útiles
 
 - La redacción del sitio sigue una voz cercana, clara y en español de Chile.
-- Las historias de casos de éxito tienen reglas editoriales y de longitud para que funcionen bien en las tarjetas del sitio.
-- La analítica está protegida por consentimiento: no se carga antes de que la persona usuaria la acepte.
+- La analítica se carga solo después del consentimiento de la persona usuaria.
+- Las historias y fichas tienen reglas editoriales para que el contenido se vea bien en tarjetas, buscadores y datos estructurados.
+- El sitio está pensado para mantenerse rápido, accesible y fácil de navegar tanto en escritorio como en móvil.
 
 ## Documentación relacionada
 

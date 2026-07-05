@@ -2,19 +2,19 @@
 
 This repository is the public Astro site for **Brigada Galgos Chile**. It is a static site deployed to Cloudflare Pages from GitHub, written primarily in Astro, TypeScript, CSS, and Markdown content collections.
 
-The repo mixes product code, structured content, image assets, SEO/analytics rules, and a fairly strict test suite. Agents should treat it as a content-driven site with strong editorial, accessibility, and source-hygiene constraints.
+The repo mixes product code, structured content, image assets, SEO/analytics rules, and a fairly strict test suite. Treat it as a content-driven site with strong editorial, accessibility, and source-hygiene constraints.
 
 ## Primary Goal
 
 - Keep the site correct, fast, accessible, and maintainable.
 - Preserve the organization voice in Chilean Spanish.
 - Respect the content model for dogs, supporters, and story cards.
-- Keep verification green: formatting, linting, build, unit tests, and browser tests.
+- Keep verification green: formatting, linting, build, unit tests, browser tests, and Lighthouse when relevant.
 
 ## Required Opening Moves
 
 - Use Astro Docs MCP for Astro framework questions, integrations, routing, content collections, image handling, and current best practices.
-- Verify current Astro APIs before changing areas that tend to drift across versions: content collections, image handling, integrations, adapters, actions, and view transitions.
+- Verify current Astro APIs before changing areas that drift across versions: content collections, image handling, integrations, adapters, actions, and view transitions.
 - Use jCodeMunch for code navigation when the repo is indexed. Prefer indexed discovery, outlines, symbol lookups, references, and blast-radius checks over blind searching.
 - If the repo is not indexed, index it before broad code navigation work.
 - Start every code session with:
@@ -29,13 +29,16 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - Package manager: npm with committed `package-lock.json`.
 - Runtime: Node 22+ via `.nvmrc`.
 - Images: Astro assets with responsive AVIF/WebP generation.
+- Styling: site CSS remains the main layer; Tailwind is installed and should be adopted incrementally, not ripped out or forced everywhere at once.
 - Analytics: GTM-delivered GA4 only after consent, plus Cloudflare Web Analytics.
 - SEO: `@astrojs/sitemap` and `@jdevalk/astro-seo-graph`.
+- Feed: RSS is generated at `src/pages/feed.xml.ts` from the `blog` collection.
 - Tests: Vitest for source/unit tests, Playwright for browser, regression, and build-output checks.
 
 ## Repo Layout
 
 - `src/pages/`: public routes.
+- `src/layouts/`: page shells and document-level layout code.
 - `src/components/`: shared UI components.
 - `src/components/sections/`: page-specific section components.
 - `src/content/`: Markdown content collections.
@@ -44,13 +47,47 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
   - `supporters/`
   - `blog/`
 - `src/utils/`: content shaping, analytics helpers, schema builders, image helpers.
-- `src/scripts/`: client scripts such as consent and interactive filters.
+- `src/scripts/`: client scripts such as consent, analytics, navbar, theme, and filters.
 - `src/styles/`: design tokens and modular CSS.
 - `src/assets/`: imported images that Astro processes.
-- `public/`: static assets, headers, redirects, manifest-adjacent files, vendored icons.
+- `public/`: static assets, headers, redirects, icons, and manifest-adjacent files.
 - `scripts/`: maintenance scripts for dog data, text quality, Playwright server bootstrapping, and related workflows.
 - `tests/`: Vitest and Playwright coverage, including source hygiene, accessibility, smoke, content, consent, and capture suites.
 - `docs/`: voice, site brief, and technical reference material.
+
+## Architecture Essentials
+
+### Layouts and page shells
+
+- `src/layouts/BaseLayout.astro` owns the document shell: global styles, SEO graph, canonical metadata, GTM noscript fallback, cookie banner, and client bootstrap scripts.
+- `src/layouts/PageLayout.astro` is the standard shell for most top-level pages. It wraps `BaseLayout` with `Navbar`, `main`, and `Footer`.
+- Prefer `PageLayout` for regular site pages instead of repeating `Navbar` and `Footer`.
+- Use the `afterShell` slot in `PageLayout` for page-level UI that must render outside `<main>`, such as `SharedGalleryLightbox`.
+
+### Links and outbound tracking
+
+- Reuse link helpers instead of hand-rolling outbound-link behavior:
+  - `src/components/TrackedLink.astro`
+  - `src/components/ExternalLink.astro`
+  - `src/components/WhatsAppLink.astro`
+  - `src/components/InstagramLink.astro`
+- `TrackedLink` is the shared primitive for outbound analytics metadata and optional new-tab handling.
+- `ExternalLink` is for simple external links that should open in a new tab without analytics metadata.
+- Keep new-tab semantics and external indicators consistent. Do not duplicate `target`, `rel`, or tracking attributes inline unless there is a clear exception.
+
+### Styling strategy
+
+- The site is still primarily styled with `src/styles/global.css` plus modular CSS files in `src/styles/components/`.
+- Tailwind is available through the Vite plugin in `astro.config.mjs`, but the current codebase is not Tailwind-first.
+- Prefer existing patterns in the surrounding code. Use Tailwind only when it fits the local direction and does not create a second competing styling system inside the same component.
+- Preserve the current visual language and avoid “one-off” utility-heavy rewrites when editing established components.
+
+### Content-driven behavior
+
+- Dog cards and galleries are shaped through `src/utils/dog-content.ts`.
+- Success-story card summaries are derived through `src/utils/story-card-copy.ts`.
+- FAQ and structured-data copy are centralized in config and utility files. Prefer updating shared sources over duplicating text inside pages.
+- The blog collection powers the RSS feed. There is no markdown-alternate endpoint for blog posts right now.
 
 ## Non-Negotiable Standards
 
@@ -67,6 +104,7 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - Follow `docs/voice-and-tone.md` for site voice. This is the source of truth for rhythm, phrasing, tone, and CTA style.
 - Spanish copy must use correct Chilean Spanish spelling, accents, punctuation, and natural phrasing.
 - Avoid generic NGO copy. Keep writing specific, humane, and grounded.
+- Keep repetition under control. If a wording update is requested across the site, vary nearby phrasing where needed so the copy still sounds natural.
 
 ## Content Collections
 
@@ -121,6 +159,7 @@ Rules:
 - Every success-dog `story` must explicitly mention the adoption outcome. `tests/source-hygiene.test.ts` enforces this with `/adopt/i`.
 - Keep stories general enough to avoid inventing facts, but specific enough not to sound templated.
 - Card summaries are derived from `story` through `src/utils/story-card-copy.ts`. The helper default is also 260 characters and should stay aligned with the content rule unless the product requirement changes.
+- `tests/stories-section.spec.ts` also guards the summary limit at the UI level.
 
 ### Supporters
 
@@ -181,7 +220,9 @@ Rules:
 - Maintain canonical and social metadata.
 - Keep JSON-LD generated from shared builders rather than duplicated literals.
 - Preserve accessible image alt text and decorative-image handling.
-- The site targets strong Lighthouse and accessibility results; avoid regressions that add unnecessary JS, layout instability, or weak semantics.
+- Respect heading hierarchy. Lighthouse will catch semantic skips that may still “look fine” visually.
+- The site targets 100 in Lighthouse categories for the checked pages; avoid regressions that add unnecessary JS, layout instability, or weak semantics.
+- `astro.config.mjs` currently uses `build.inlineStylesheets = "auto"` to avoid over-inlining CSS into HTML. Do not revert that casually.
 
 ## Analytics and Consent
 
@@ -227,19 +268,37 @@ Notes:
 ## Key Files Worth Knowing
 
 - `astro.config.mjs`
-  - Static build config, sitemap integration, SEO graph integration.
+  - Static build config, Tailwind Vite plugin, sitemap integration, SEO graph integration.
   - `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`.
   - `markdownAlternate` is intentionally disabled.
+- `src/layouts/BaseLayout.astro`
+  - Document shell, metadata, RSS link, cookie banner, and client bootstrap.
+- `src/layouts/PageLayout.astro`
+  - Shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
+- `src/components/TrackedLink.astro`
+  - Shared tracked outbound-link primitive.
+- `src/components/ExternalLink.astro`
+  - Shared simple external-link primitive.
 - `src/content.config.ts`
   - Canonical content schemas.
 - `src/utils/dog-content.ts`
   - Shapes collection entries for cards and galleries.
 - `src/utils/story-card-copy.ts`
   - Builds success-story card excerpts and carries the 260-character default.
+- `src/utils/structured-data.ts`
+  - Centralized JSON-LD builders, breadcrumbs, and FAQ structured data.
 - `tests/source-hygiene.test.ts`
   - Enforces repository invariants that linters do not catch.
 - `playwright.config.ts`
   - Browser test orchestration and preview server behavior.
+
+## Known Gotchas
+
+- Do not recreate blog markdown alternate routes unless the product requirement changes. The site keeps `markdownAlternate: false`, and an old `.md` endpoint was intentionally removed because it became a build breaker on Astro 7.
+- Reuse `PageLayout` for ordinary pages instead of rebuilding the shell page by page.
+- Reuse the shared link components for WhatsApp, Instagram, tracked outbound CTAs, and simple external links.
+- When touching FAQ or “why galgos” copy, remember that similar text may also exist in structured data.
+- A build can pass while Lighthouse still fails on semantics. If you touch headings, buttons, labels, or link names, run Lighthouse.
 
 ## Code Navigation Rules
 
