@@ -57,8 +57,22 @@
 }
 
 @media (max-width: 767px) {
-  .cookie-banner__actions,
+  .cookie-banner {
+    padding-block: var(--space-3);
+  }
+
+  .cookie-banner__inner {
+    gap: var(--space-3);
+  }
+
+  .cookie-banner__actions {
+    flex-wrap: nowrap;
+    width: auto;
+  }
+
   .cookie-banner__button {
-    width: 100%;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
   }
 }

@@ -419,10 +419,6 @@
 }
 
 @media (max-width: 767px) {
-  .stories__heading {
-    max-width: 12ch;
-  }
-
   .stories__grid {
     gap: var(--space-4);
   }

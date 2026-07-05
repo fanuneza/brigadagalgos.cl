@@ -128,7 +128,16 @@ const nav = [
 
   <div class="navbar__backdrop" data-backdrop aria-hidden="true"></div>
 
-  <div class="navbar__drawer" id="navbar-drawer" data-drawer hidden inert>
+  <div
+    class="navbar__drawer"
+    id="navbar-drawer"
+    data-drawer
+    hidden
+    inert
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación"
+  >
     <button class="drawer__close" data-close aria-label="Cerrar menú">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>

@@ -83,13 +83,13 @@
   --font-size-md: 1.125rem; /* 18 — lead */
   --font-size-lg: 1.375rem; /* 22 — card titles */
   --font-size-xl: 1.75rem; /* 28 — section h3 */
-  --font-size-2xl: 2.25rem; /* 36 — page h2 */
+  --font-size-2xl: 2.5rem; /* 40 — page h2 */
   --font-size-3xl: 3rem; /* 48 — hero h1 (mobile) */
   --font-size-4xl: 4.25rem; /* 68 — hero h1 (desktop) */
 
   /* Semantic type roles */
   --type-page-title: clamp(var(--font-size-3xl), 8vw, var(--font-size-4xl));
-  --type-section-title: clamp(var(--font-size-2xl), 5.5vw, calc(var(--font-size-3xl) * 1.15));
+  --type-section-title: clamp(var(--font-size-2xl), 5.5vw, calc(var(--font-size-3xl) * 1.2));
   --type-subsection-title: var(--font-size-2xl);
   --type-card-title: var(--font-size-lg);
   --type-ui-title: var(--font-size-md);

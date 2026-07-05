@@ -49,6 +49,7 @@ p {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 @view-transition {
@@ -59,6 +60,7 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-base);
   color: var(--color-text);
+  overflow-x: hidden;
   background:
     radial-gradient(
       circle at top left,
@@ -85,6 +87,10 @@ h3 {
   font-weight: var(--weight-black);
   letter-spacing: var(--tracking-normal);
   margin: 0;
+}
+
+h2:not([hidden]) {
+  font-size: var(--type-section-title);
 }
 
 .container {

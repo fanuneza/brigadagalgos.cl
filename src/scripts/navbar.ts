@@ -27,6 +27,7 @@ function initNavbar() {
     isDrawerOpen = true;
     drw.hidden = false;
     drw.inert = false;
+    document.body.classList.add("drawer-open");
 
     requestAnimationFrame(() => {
       drw.classList.add("drawer--open");
@@ -36,7 +37,7 @@ function initNavbar() {
     ham.setAttribute("aria-expanded", "true");
     ham.setAttribute("aria-label", "Cerrar menu");
     const focusable = getFocusable();
-    if (focusable.length) focusable[0].focus();
+    if (focusable.length) focusable[0].focus({ preventScroll: true });
   }
 
   function closeDrawer() {
@@ -46,9 +47,10 @@ function initNavbar() {
     drw.classList.remove("drawer--open");
     back.classList.remove("backdrop--visible");
     drw.inert = true;
+    document.body.classList.remove("drawer-open");
     ham.setAttribute("aria-expanded", "false");
     ham.setAttribute("aria-label", "Abrir menu");
-    ham.focus();
+    ham.focus({ preventScroll: true });
   }
 
   drw.addEventListener("transitionend", (event) => {
@@ -86,11 +88,11 @@ function initNavbar() {
       if (e.shiftKey) {
         if (document.activeElement === first) {
           e.preventDefault();
-          last.focus();
+          last.focus({ preventScroll: true });
         }
       } else if (document.activeElement === last) {
         e.preventDefault();
-        first.focus();
+        first.focus({ preventScroll: true });
       }
     }
   });

@@ -75,7 +75,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: var(--space-5);
+  padding: var(--space-3);
 }
 
 .supporter-card__body {

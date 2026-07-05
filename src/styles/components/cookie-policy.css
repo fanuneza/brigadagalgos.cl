@@ -99,10 +99,6 @@
 }
 
 @media (max-width: 767px) {
-  .cookie-policy__section h2 {
-    max-width: 12ch;
-  }
-
   .cookie-policy__table-shell {
     padding: var(--space-2);
   }
