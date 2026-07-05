@@ -53,7 +53,7 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - `public/`: static assets, headers, redirects, icons, and manifest-adjacent files.
 - `scripts/`: maintenance scripts for dog data, text quality, Playwright server bootstrapping, and related workflows.
 - `tests/`: Vitest and Playwright coverage, including source hygiene, accessibility, smoke, content, consent, and capture suites.
-- `docs/`: voice, site brief, and technical reference material.
+- `docs/`: voice, site brief, PRD, technical spec, feature inventory, content model, architecture map, and reference material.
 
 ## Architecture Essentials
 
@@ -331,3 +331,11 @@ If `plan_turn` confidence is:
 
 - `AGENTS.md` is the operational source for agents. Keep it specific and updated when workflows change.
 - `README.md` is for humans. Keep it illustrative, clear, and lighter on internal implementation detail.
+- `docs/site-brief.md` is the product-intent reference for scope decisions.
+- `docs/prd.md` captures the current functional requirements.
+- `docs/spec.md` describes architecture, data flow, integrations, and key implementation decisions.
+- `docs/feature-inventory.md` lists every page, section, and capability.
+- `docs/content-model.md` documents schemas, editorial rules, and content workflows.
+- `docs/architecture-map.md` maps component and content flow.
+- `docs/developer-reference.md` contains the detailed content model, image sizes, analytics events, and SEO/structured-data notes.
+- `docs/voice-and-tone.md` is the source of truth for site copy.

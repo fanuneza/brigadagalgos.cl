@@ -60,6 +60,12 @@ npm run test:lighthouse
 
 ## Documentación relacionada
 
+- [Brief del sitio](docs/site-brief.md)
+- [Requisitos del producto](docs/prd.md)
+- [Especificación técnica](docs/spec.md)
+- [Inventario de funcionalidades](docs/feature-inventory.md)
+- [Modelo de contenido](docs/content-model.md)
+- [Mapa de arquitectura](docs/architecture-map.md)
 - [Guía de voz y tono](docs/voice-and-tone.md)
 - [Referencia técnica](docs/developer-reference.md)
 - [Instrucciones para agentes](AGENTS.md)

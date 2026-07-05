@@ -150,7 +150,6 @@ vite.config.ts.timestamp-*
 Claude*
 .claude/
 .codex-log-inspect*/
-docs/*
 handoffs/
 process-notes.md
 smoke-*.png
@@ -215,7 +214,3 @@ astro.config.cjs.timestamp-*
 
 # Playwright & test reports/artifacts
 smoke-report.json
-
-# Important artifacts
-!docs/voice-and-tone.md
-!docs/developer-reference.md
