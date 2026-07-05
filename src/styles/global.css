@@ -440,6 +440,44 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   margin-top: var(--space-2);
 }
 
+/* =========================================================================
+   TAIL CTA CARD
+   Prominent boxed call-to-action used at the bottom of subpages.
+   ========================================================================= */
+
+.cta-card {
+  padding: var(--space-7);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in sRGB, var(--color-bg) 94%, transparent),
+      color-mix(in sRGB, var(--color-surface) 86%, transparent)
+    ),
+    var(--color-bg);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+  text-align: center;
+}
+
+.cta-card > * {
+  margin: 0;
+}
+
+.cta-card .btn {
+  margin-top: var(--space-1);
+}
+
+.cta-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
 main {
   display: block;
 }

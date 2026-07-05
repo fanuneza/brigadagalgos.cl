@@ -56,6 +56,14 @@
   color: var(--color-text-muted);
 }
 
+.faq-answer ol {
+  list-style-type: decimal;
+}
+
+.faq-answer ul {
+  list-style-type: disc;
+}
+
 .faq-answer li + li {
   margin-top: var(--space-2);
 }

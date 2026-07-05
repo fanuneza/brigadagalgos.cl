@@ -53,11 +53,33 @@
 }
 
 .why-galgos__editorial-list {
-  gap: var(--space-4) var(--space-6);
+  gap: var(--space-5) var(--space-6);
 }
 
-.why-galgos__editorial-list li {
-  display: grid;
+.why-galgos__editorial-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.why-galgos__editorial-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  line-height: 1;
+}
+
+.why-galgos__editorial-body {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-1);
 }
 

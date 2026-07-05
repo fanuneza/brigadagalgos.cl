@@ -3,18 +3,18 @@ import { SITE } from "../../config/site.ts";
 
 const ways = [
   {
-    title: "Donaciones materiales",
-    body: "Dona comida, mantas o medicamentos.",
+    title: "Donación de materiales",
+    body: "Comida, mantas o medicamentos.",
     tone: "primary",
   },
   {
     title: "Servicios profesionales",
-    body: "Ofrece servicios: veterinario, transporte, fotografía.",
+    body: "Veterinarios, transporte, fotografía.",
     tone: "secondary",
   },
   {
-    title: "Difusión",
-    body: "Comparte las adopciones en tus redes sociales.",
+    title: "Difusión de casos",
+    body: "Comparte nuestras publicaciones a traves de tus redes sociales.",
     tone: "warm",
   },
 ];
@@ -22,30 +22,32 @@ const ways = [
 
 <section class="section-padding tail-cta">
   <div class="container container--narrow">
-    <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
-    <h2>Más formas de colaborar</h2>
+    <div class="cta-card">
+      <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
+      <h2>También nos puedes apoyar así</h2>
 
-    <ul class="tail-cta__list" role="list">
-      {
-        ways.map((way) => (
-          <li class="tail-cta__item">
-            <span class={`tail-cta__dot tail-cta__dot--${way.tone}`} aria-hidden="true" />
-            <div>
-              <h3 class="tail-cta__item-title">{way.title}</h3>
-              <p>{way.body}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
+      <ul class="tail-cta__list" role="list">
+        {
+          ways.map((way) => (
+            <li class="tail-cta__item">
+              <span class={`tail-cta__dot tail-cta__dot--${way.tone}`} aria-hidden="true" />
+              <div>
+                <h3 class="tail-cta__item-title">{way.title}</h3>
+                <p>{way.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
 
-    <a
-      href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
-      class="btn btn--secondary"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-    </a>
+      <a
+        href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
+        class="btn btn--secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </a>
+    </div>
   </div>
 </section>

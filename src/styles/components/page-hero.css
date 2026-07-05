@@ -30,10 +30,6 @@
   gap: var(--space-4);
   padding-block: var(--space-3);
   padding-inline: var(--space-5);
-  border: 1px solid color-mix(in sRGB, var(--color-border) 84%, transparent);
-  border-radius: var(--radius-xl);
-  background: color-mix(in sRGB, var(--color-bg) 90%, transparent);
-  box-shadow: var(--shadow-sm);
 }
 
 .page-hero__lead {
