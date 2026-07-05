@@ -7,19 +7,19 @@ import { faqPairs, faqGroups } from "../../config/faq";
     {
       faqGroups.map((group) => (
         <section class="faq-group" aria-labelledby={`group-${group.ids[0]}`}>
-          <p class="eyebrow faq-group__eyebrow" id={`group-${group.ids[0]}`}>
+          <h2 id={`group-${group.ids[0]}`}>
             {group.eyebrow}
-          </p>
+          </h2>
 
           {group.ids.map((idx) => {
             const item = faqPairs[idx];
             return (
               <article class="faq-item" id={item.id}>
-                <h2 class="faq-question">
+                <h3 class="faq-question">
                   <a href={`#${item.id}`} aria-label={`Enlace directo a: ${item.question}`}>
                     {item.question}
                   </a>
-                </h2>
+                </h3>
                 <div class="faq-answer">
                   <p>{item.answer}</p>
                   {item.details && (

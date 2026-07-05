@@ -10,8 +10,9 @@
   margin-bottom: 0;
 }
 
-.faq-group__eyebrow {
-  margin-bottom: var(--space-6);
+.faq-section h2 {
+  padding-bottom: var(--space-4);
+  margin-bottom: 0;
 }
 
 .faq-item {

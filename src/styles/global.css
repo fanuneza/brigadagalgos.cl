@@ -441,6 +441,7 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   text-transform: uppercase;
   color: var(--color-text);
   margin: 0;
+  padding-bottom: var(--space-2);
 }
 
 .tail-cta__item p {
