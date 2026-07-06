@@ -4,6 +4,7 @@ pubDate: 2026-06-28
 author: "Admin"
 description: "This is a placeholder post to ensure content collection builds successfully."
 category: "General"
+draft: true
 ---
 
 # Placeholder Post
