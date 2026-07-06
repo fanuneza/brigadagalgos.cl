@@ -27,6 +27,19 @@ const ignoredDirectories = new Set([
 ]);
 const mojibakePatterns = [/\u00c3/, /\u00c2/, /\u00e2[\u0080-\u009d]/, /\ufffd/];
 
+// Voice rules from docs/voice-and-tone.md: Chilean neutral tuteo, no voseo, never "encajar".
+// Only applied under src/ so docs and tooling can quote counterexamples.
+const voicePatterns = [
+  {
+    pattern: /[Ii]ntent\u00e1|[Rr]evis\u00e1|[Pp]od\u00e9s|[Qq]uer\u00e9s|[Tt]en\u00e9s|[Cc]ontanos|[Ee]scribinos|[Aa]poyanos/,
+    label: "voseo (la voz del sitio usa tuteo chileno)",
+  },
+  {
+    pattern: /\bencaj(?:a|an|e|en|ar|ar\u00eda)\b/i,
+    label: 'verbo "encajar" prohibido por la gu\u00eda de voz',
+  },
+];
+
 const failures = [];
 
 async function walk(directory) {
@@ -51,6 +64,14 @@ async function walk(directory) {
       if (pattern.test(text)) {
         failures.push(path);
         break;
+      }
+    }
+    if (path.startsWith("src")) {
+      for (const { pattern, label } of voicePatterns) {
+        if (pattern.test(text)) {
+          failures.push(`${path} (${label})`);
+          break;
+        }
       }
     }
   }

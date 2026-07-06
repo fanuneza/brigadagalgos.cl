@@ -131,7 +131,7 @@ function initForm() {
           form_id: form.id || "contact-form",
           error_message: data.message ?? "API Error",
         });
-        showToast(data.message ?? "No pudimos enviar el formulario. Intentá de nuevo.");
+        showToast(data.message ?? "No pudimos enviar el formulario. Inténtalo de nuevo.");
         setSubmitting(false);
       }
     } catch {
@@ -140,7 +140,7 @@ function initForm() {
         form_id: form.id || "contact-form",
         error_message: "Network Error",
       });
-      showToast("Error de red. Revisá tu conexión e intentá de nuevo.");
+      showToast("Error de red. Revisa tu conexión e inténtalo de nuevo.");
       setSubmitting(false);
     }
   });
