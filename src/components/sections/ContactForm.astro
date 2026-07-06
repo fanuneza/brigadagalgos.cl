@@ -1,5 +1,5 @@
 ---
-
+import { SITE } from "../../config/site.ts";
 ---
 
 <section class="section-padding">
@@ -19,8 +19,8 @@
       toolname="enviar_mensaje_contacto"
       tooldescription="Envía un mensaje de contacto a la fundación Brigada Galgos para consultas sobre adopción, hogares temporales, donaciones o consultas generales."
     >
-      <input type="hidden" name="access_key" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
-      <input type="hidden" name="form_id" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
+      <input type="hidden" name="access_key" value={SITE.web3forms.accessKey} />
+      <input type="hidden" name="form_id" value={SITE.web3forms.accessKey} />
       <input type="hidden" name="subject" value="Nuevo mensaje desde brigadagalgos.cl" />
       <input
         type="checkbox"

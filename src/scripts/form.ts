@@ -1,3 +1,4 @@
+import { SITE } from "../config/site";
 import { dispatchAnalytics } from "../utils/analytics";
 
 function showToast(message: string, duration = 4000): void {
@@ -113,7 +114,7 @@ function initForm() {
     const formData = new FormData(form!);
     setSubmitting(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(SITE.web3forms.endpoint, {
         method: "POST",
         body: formData,
       });
