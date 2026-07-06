@@ -24,15 +24,27 @@ Este repositorio contiene el sitio público donde Brigada Galgos muestra perros 
 
 Requisitos:
 
-- Node.js 22 o superior
+- Node.js 22 (`.nvmrc` fija la versión mayor esperada)
 - npm
 
-Comandos principales:
+Instalación y desarrollo local:
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
+
+Otros comandos útiles:
+
+```bash
+npm run check
+npm run build
+npm run preview
+```
+
+`npm ci` es la opción preferida para mantener el árbol de dependencias alineado con `package-lock.json`.
+
+El sitio se compila como Astro estático y se despliega en Cloudflare Pages.
 
 ## Antes de publicar cambios
 

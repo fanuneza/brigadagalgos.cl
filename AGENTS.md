@@ -29,7 +29,7 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - Package manager: npm with committed `package-lock.json`.
 - Runtime: Node 22+ via `.nvmrc`.
 - Images: Astro assets with responsive AVIF/WebP generation.
-- Styling: site CSS remains the main layer; Tailwind is installed and should be adopted incrementally, not ripped out or forced everywhere at once.
+- Styling: site CSS remains the main styling layer. Tailwind has been removed from the project and should not be reintroduced casually.
 - Analytics: GTM-delivered GA4 only after consent, plus Cloudflare Web Analytics.
 - SEO: `@astrojs/sitemap` and `@jdevalk/astro-seo-graph`.
 - Feed: RSS is generated at `src/pages/feed.xml.ts` from the `blog` collection.

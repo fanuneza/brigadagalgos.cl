@@ -1,6 +1,46 @@
+# Build Checklist
+
+## Build Preferences
+
+- **Build mode:** Step-by-step
+- **Comprehension checks:** No
+- **Git:** Do not commit automatically during this repro. Make edits only and report them.
+- **Verification:** Yes. Verify each item with the relevant command or artifact check before marking it complete.
+- **Check-in cadence:** Balanced
+
+## Checklist
+
+- [x] **11.1 Finalize README and AGENTS documentation**
+  Spec ref: `spec.md > File structure` + `prd.md > Non-functional requirements`
+  What to build: Review `README.md` and `AGENTS.md`, update any stale setup, command, and documentation references so they match the current Astro 7 project and the docs bundle.
+  Acceptance: `README.md` and `AGENTS.md` accurately describe setup, key commands, and the related docs without stale references.
+  Verify: Run `npm run check` and confirm documentation-related references used during the edits still match the current project structure.
+
+- [ ] **11.2 Clean up docs cross-references**
+  Spec ref: `spec.md > File structure` + `prd.md > Related documents`
+  What to build: Review the `docs/` bundle for stale cross-references, duplicated guidance, or outdated workflow notes and align them with the current project state.
+  Acceptance: The docs set is internally consistent, has no obvious stale cross-references, and reflects the current repo structure.
+  Verify: Open the edited docs and confirm referenced files still exist in the repo.
+
+- [ ] **11.3 Dependency and security review**
+  Spec ref: `spec.md > External dependencies` + `prd.md > Non-functional requirements`
+  What to build: Review dependency/security status for the current repo state, including `npm audit`, secrets exposure, and deployment/security notes relevant to the static Astro site.
+  Acceptance: Findings are documented or remediated as appropriate, with no unreported critical issues introduced by the review.
+  Verify: Run `npm audit` and confirm the result is captured accurately.
+
+- [ ] **11.4 Final verification run**
+  Spec ref: `spec.md > Testing` + `prd.md > Non-functional requirements`
+  What to build: Run the repo verification commands needed for a handoff-ready state and summarize whether the current site is green.
+  Acceptance: `npm run format:check`, `npm run lint`, `npm run build`, and `npm test` are run or explicitly reported if skipped/blocked, with outcomes captured clearly.
+  Verify: Run the listed commands and confirm which passed, failed, or were intentionally deferred.
+
+---
+
 # Brigada Galgos — Build Checklist
 
 ## Scope
+
+This legacy phase/table section remains as planning source material for maintainers. The plugin-compatible header above is the active `/build` execution queue for this repro.
 
 This document turns the technical specification into an ordered build plan. Each item includes its dependencies, acceptance criteria, and rough effort. The audience is future maintainers and AI agents who need to understand the work sequence.
 
