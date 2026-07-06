@@ -11,28 +11,36 @@
 ## Checklist
 
 - [x] **11.1 Finalize README and AGENTS documentation**
-  Spec ref: `spec.md > File structure` + `prd.md > Non-functional requirements`
-  What to build: Review `README.md` and `AGENTS.md`, update any stale setup, command, and documentation references so they match the current Astro 7 project and the docs bundle.
-  Acceptance: `README.md` and `AGENTS.md` accurately describe setup, key commands, and the related docs without stale references.
-  Verify: Run `npm run check` and confirm documentation-related references used during the edits still match the current project structure.
+      Spec ref: `spec.md > File structure` + `prd.md > Non-functional requirements`
+      What to build: Review `README.md` and `AGENTS.md`, update any stale setup, command, and documentation references so they match the current Astro 7 project and the docs bundle.
+      Acceptance: `README.md` and `AGENTS.md` accurately describe setup, key commands, and the related docs without stale references.
+      Verify: Run `npm run check` and confirm documentation-related references used during the edits still match the current project structure.
 
 - [x] **11.2 Clean up docs cross-references**
-  Spec ref: `spec.md > File structure` + `prd.md > Related documents`
-  What to build: Review the `docs/` bundle for stale cross-references, duplicated guidance, or outdated workflow notes and align them with the current project state.
-  Acceptance: The docs set is internally consistent, has no obvious stale cross-references, and reflects the current repo structure.
-  Verify: Open the edited docs and confirm referenced files still exist in the repo.
+      Spec ref: `spec.md > File structure` + `prd.md > Related documents`
+      What to build: Review the `docs/` bundle for stale cross-references, duplicated guidance, or outdated workflow notes and align them with the current project state.
+      Acceptance: The docs set is internally consistent, has no obvious stale cross-references, and reflects the current repo structure.
+      Verify: Open the edited docs and confirm referenced files still exist in the repo.
 
 - [x] **11.3 Dependency and security review**
-  Spec ref: `spec.md > External dependencies` + `prd.md > Non-functional requirements`
-  What to build: Review dependency/security status for the current repo state, including `npm audit`, secrets exposure, and deployment/security notes relevant to the static Astro site.
-  Acceptance: Findings are documented or remediated as appropriate, with no unreported critical issues introduced by the review.
-  Verify: Run `npm audit` and confirm the result is captured accurately.
+      Spec ref: `spec.md > External dependencies` + `prd.md > Non-functional requirements`
+      What to build: Review dependency/security status for the current repo state, including `npm audit`, secrets exposure, and deployment/security notes relevant to the static Astro site.
+      Acceptance: Findings are documented or remediated as appropriate, with no unreported critical issues introduced by the review.
+      Verify: Run `npm audit` and confirm the result is captured accurately.
 
-- [ ] **11.4 Final verification run**
-  Spec ref: `spec.md > Testing` + `prd.md > Non-functional requirements`
-  What to build: Run the repo verification commands needed for a handoff-ready state and summarize whether the current site is green.
-  Acceptance: `npm run format:check`, `npm run lint`, `npm run build`, and `npm test` are run or explicitly reported if skipped/blocked, with outcomes captured clearly.
-  Verify: Run the listed commands and confirm which passed, failed, or were intentionally deferred.
+- [x] **11.4 Final verification run**
+      Spec ref: `spec.md > Testing` + `prd.md > Non-functional requirements`
+      What to build: Run the repo verification commands needed for a handoff-ready state and summarize whether the current site is green.
+      Acceptance: `npm run format:check`, `npm run lint`, `npm run build`, and `npm test` are run or explicitly reported if skipped/blocked, with outcomes captured clearly.
+      Verify: Run the listed commands and confirm which passed, failed, or were intentionally deferred.
+
+## Iteration 1
+
+- [x] **1. Fix devDependency vulnerabilities via `npm audit fix`**
+      Spec ref: New — not in original spec (follow-up to 11.3/11.4 findings)
+      What to build: Run `npm audit fix` to update the vulnerable devDependencies flagged during 11.4 (`@lhci/cli`'s `tmp`/`inquirer` chain, `js-yaml`, `vite`) without pulling in breaking changes (i.e. do not use `--force`). Re-run `npm audit` afterward to confirm what got cleared vs. what still needs a breaking upgrade.
+      Acceptance: `npm audit` shows fewer vulnerabilities (ideally 0 non-breaking-fixable ones remain), any still-open items are documented with why they were deferred, and the full verification suite still passes after the fix.
+      Verify: Run `npm audit`, then `npm run format:check`, `npm run lint`, `npm run build`, and `npm test`, and confirm all still pass.
 
 ---
 
@@ -75,7 +83,7 @@ This document turns the technical specification into an ordered build plan. Each
 | #   | Task                                          | Effort | Dependencies | Acceptance criteria                                                                                      |
 | --- | --------------------------------------------- | ------ | ------------ | -------------------------------------------------------------------------------------------------------- |
 | 2.1 | Initialize Astro 7 project with static output | S      | None         | `astro.config.mjs` uses `output: "static"`, `site`, `trailingSlash: "always"`                            |
-| 2.2 | Configure Astro integrations                  | S      | 2.1          | sitemap, RSS, and SEO graph integrations installed and configured                                         |
+| 2.2 | Configure Astro integrations                  | S      | 2.1          | sitemap, RSS, and SEO graph integrations installed and configured                                        |
 | 2.3 | Create `BaseLayout.astro`                     | M      | 2.1          | Document shell, global styles, SEO graph, GTM noscript fallback, cookie banner, client bootstrap scripts |
 | 2.4 | Create `PageLayout.astro`                     | S      | 2.3          | Wraps `BaseLayout` with `Navbar`, `<main>`, `Footer`, and optional `afterShell` slot                     |
 | 2.5 | Create `Navbar.astro`                         | M      | 2.4          | Navigation links, mobile menu, theme toggle, accessible markup                                           |
@@ -86,13 +94,13 @@ This document turns the technical specification into an ordered build plan. Each
 
 **Goal:** Establish a maintainable, accessible visual system.
 
-| #   | Task                           | Effort | Dependencies | Acceptance criteria                                                                                  |
-| --- | ------------------------------ | ------ | ------------ | ---------------------------------------------------------------------------------------------------- |
-| 3.1 | Create `src/styles/tokens.css` | S      | 2.1          | Design tokens for colors, spacing, typography, radii                                                 |
-| 3.2 | Create `src/styles/global.css` | M      | 3.1          | Global reset, typography, utilities, dark/light theme variables                                      |
-| 3.3 | Create modular component CSS   | M      | 3.2          | One CSS file per major component in `src/styles/components/`                                         |
-| 3.4 | Implement dark/light theme     | M      | 3.1, 2.5     | `prefers-color-scheme` default, `localStorage` persistence, no flash, ClientRouter-safe              |
-| 3.5 | Preserve CSS architecture      | S      | 3.1          | Existing modular CSS patterns are kept consistent without creating a competing styling system         |
+| #   | Task                           | Effort | Dependencies | Acceptance criteria                                                                           |
+| --- | ------------------------------ | ------ | ------------ | --------------------------------------------------------------------------------------------- |
+| 3.1 | Create `src/styles/tokens.css` | S      | 2.1          | Design tokens for colors, spacing, typography, radii                                          |
+| 3.2 | Create `src/styles/global.css` | M      | 3.1          | Global reset, typography, utilities, dark/light theme variables                               |
+| 3.3 | Create modular component CSS   | M      | 3.2          | One CSS file per major component in `src/styles/components/`                                  |
+| 3.4 | Implement dark/light theme     | M      | 3.1, 2.5     | `prefers-color-scheme` default, `localStorage` persistence, no flash, ClientRouter-safe       |
+| 3.5 | Preserve CSS architecture      | S      | 3.1          | Existing modular CSS patterns are kept consistent without creating a competing styling system |
 
 ### 4. Content collections and schemas
 

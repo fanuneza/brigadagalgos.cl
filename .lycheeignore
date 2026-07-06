@@ -6,3 +6,6 @@ https://(www\.)?instagram\.com/.*
 
 # Ignore Google Tag Manager URLs containing un-evaluated template literal variables in Astro source code
 https://www\.googletagmanager\.com/ns\.html\?id=\$\{gtmContainerId\}
+
+# Ignore GAP Queensland; the site blocks lychee with HTTP 403 but the link is valid
+https://gapqld\.com\.au(/.*)?

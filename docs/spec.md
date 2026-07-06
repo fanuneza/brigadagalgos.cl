@@ -11,7 +11,7 @@ This document is the technical specification for the Brigada Galgos website. It 
 | Framework       | Astro 7 (static output)                                    | Content-driven, static-first, fast builds, excellent image optimization, no server runtime needed |
 | Language        | TypeScript                                                 | Type safety across components, utilities, and tests                                               |
 | Templating      | Astro components (`.astro`)                                | Server-rendered HTML with scoped JS/TS where needed                                               |
-| Styling         | Modular CSS (`src/styles/`)                                | Existing CSS patterns are preserved without maintaining a second styling system                    |
+| Styling         | Modular CSS (`src/styles/`)                                | Existing CSS patterns are preserved without maintaining a second styling system                   |
 | Content         | Markdown + YAML frontmatter in Astro content collections   | Easy for non-developers to edit; validated at build time                                          |
 | Images          | `astro:assets` + Sharp                                     | Responsive AVIF/WebP generation from local assets                                                 |
 | Hosting         | Cloudflare Pages                                           | Native static-site hosting, global CDN, security headers via `_headers`                           |
