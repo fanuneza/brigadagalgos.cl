@@ -35,6 +35,7 @@
 @import url("./components/donation-cards.css");
 @import url("./components/blog.css");
 @import url("./components/dog-profile.css");
+@import url("./components/motion.css");
 
 /* Metrics-matched fallback so the swap from system font to Barlow causes no layout shift. */
 @font-face {
