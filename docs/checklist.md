@@ -22,7 +22,7 @@
   Acceptance: The docs set is internally consistent, has no obvious stale cross-references, and reflects the current repo structure.
   Verify: Open the edited docs and confirm referenced files still exist in the repo.
 
-- [ ] **11.3 Dependency and security review**
+- [x] **11.3 Dependency and security review**
   Spec ref: `spec.md > External dependencies` + `prd.md > Non-functional requirements`
   What to build: Review dependency/security status for the current repo state, including `npm audit`, secrets exposure, and deployment/security notes relevant to the static Astro site.
   Acceptance: Findings are documented or remediated as appropriate, with no unreported critical issues introduced by the review.
