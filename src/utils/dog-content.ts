@@ -50,11 +50,16 @@ export async function buildAdoptionDogCards(entries: CollectionEntry<"adoption-d
       currentNeed: entry.data.currentNeed,
       characterSketch: entry.data.characterSketch,
       instagramUrl: entry.data.instagramUrl,
-      pictures: await Promise.all(
-        entry.data.gallery
-          .slice(0, MAX_DOG_GALLERY_IMAGES)
-          .map((img: ImageMetadata) => createResponsiveGalleryPhoto(img))
-      ),
+      pictures: (
+        await Promise.all(
+          entry.data.gallery
+            .slice(0, MAX_DOG_GALLERY_IMAGES)
+            .map((img: ImageMetadata) => createResponsiveGalleryPhoto(img))
+        )
+      ).map((photo, i) => ({
+        ...photo,
+        alt: `${entry.data.name}, galgo en adopción en Chile, foto ${i + 1}`,
+      })),
     }))
   );
 }
