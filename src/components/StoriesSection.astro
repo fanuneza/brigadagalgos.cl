@@ -23,8 +23,8 @@ const { dogs, totalCount, endpoint } = Astro.props;
   data-track-section="success_stories"
 >
   <div class="container">
-    <p class="stories__eyebrow">Historias</p>
-    <h2 class="stories__heading">Historias con final de hogar</h2>
+    <p class="eyebrow">Historias</p>
+    <h2 class="stories__heading t-section-title">Historias con final de hogar</h2>
     <p class="stories__lead">
       Cada historia tiene un nombre, una espera y una red detrás: rescate, atención veterinaria, hogar temporal,
       adopción y seguimiento. Verlos en casa también muestra lo que una adopción, un hogar temporal o una donación
@@ -50,8 +50,8 @@ const { dogs, totalCount, endpoint } = Astro.props;
               data-story-id={dog.id}
               data-story-name={dog.name}
             >
-              <h3 class="story-card__name">{dog.name}</h3>
-              <p class="story-card__quote">{dog.cardStory}</p>
+              <h3 class="story-card__name t-card-title">{dog.name}</h3>
+              <p class="story-card__quote t-small-muted">{dog.cardStory}</p>
               {dog.instagramUrl && (
                 <InstagramLink
                   url={dog.instagramUrl}

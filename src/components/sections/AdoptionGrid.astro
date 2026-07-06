@@ -39,7 +39,7 @@ const { dogs } = Astro.props;
 
           <div class="story-card__body dog-card__body">
             <div class="dog-card__header">
-              <h3 class="story-card__name dog-card__name">
+              <h3 class="story-card__name dog-card__name t-card-title">
                 <a
                   href={`/adoptar/${dog.id}/`}
                   class="dog-card__name-link"
@@ -58,7 +58,7 @@ const { dogs } = Astro.props;
                 <span class="chip chip--need">{dog.currentNeed}</span>
               </div>
             </div>
-            <p class="dog-card__details">{dog.details}</p>
+            <p class="dog-card__details t-small-muted">{dog.details}</p>
             <p class="dog-card__sketch">{dog.characterSketch}</p>
             {dog.instagramUrl && (
               <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link">
