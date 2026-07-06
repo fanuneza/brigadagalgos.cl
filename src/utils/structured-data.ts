@@ -8,6 +8,7 @@ export interface StructuredDataInput {
   imageUrl: string;
   logoUrl: string;
   pathname: string;
+  breadcrumbNames?: Record<string, string>;
 }
 
 export type JsonLdNode = Record<string, unknown>;
@@ -118,7 +119,7 @@ export function buildStructuredDataGraph(input: StructuredDataInput): JsonLdGrap
   const graph: JsonLdNode[] = [logoImage, primaryImage, organization, website, webpage];
 
   if (pathSegments.length > 0) {
-    graph.push(buildBreadcrumbList(siteUrl, pathSegments));
+    graph.push(buildBreadcrumbList(siteUrl, pathSegments, input.breadcrumbNames));
   }
 
   if (pathname === "/por-que-galgos/") {
@@ -132,7 +133,11 @@ export function buildStructuredDataGraph(input: StructuredDataInput): JsonLdGrap
   return { "@context": "https://schema.org", "@graph": graph };
 }
 
-export function buildBreadcrumbList(siteUrl: string, pathSegments: string[]): JsonLdNode {
+export function buildBreadcrumbList(
+  siteUrl: string,
+  pathSegments: string[],
+  nameOverrides?: Record<string, string>
+): JsonLdNode {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -141,7 +146,7 @@ export function buildBreadcrumbList(siteUrl: string, pathSegments: string[]): Js
       ...pathSegments.map((seg, i) => ({
         "@type": "ListItem",
         position: i + 2,
-        name: breadcrumbLabels[seg] ?? seg,
+        name: nameOverrides?.[seg] ?? breadcrumbLabels[seg] ?? seg,
         item: `${siteUrl}/${pathSegments.slice(0, i + 1).join("/")}/`,
       })),
     ],

@@ -13,9 +13,10 @@ interface Props {
   description: string;
   ogImage?: string;
   schema?: Record<string, any>;
+  breadcrumbNames?: Record<string, string>;
 }
 
-const { title, description, ogImage = SITE.ogImagePath, schema } = Astro.props;
+const { title, description, ogImage = SITE.ogImagePath, schema, breadcrumbNames } = Astro.props;
 const { siteUrl, gtmContainerId, consentCookie, name } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
@@ -28,6 +29,7 @@ const defaultSchema = buildStructuredDataGraph({
   imageUrl: ogImageUrl,
   logoUrl,
   pathname: Astro.url.pathname,
+  breadcrumbNames,
 });
 ---
 

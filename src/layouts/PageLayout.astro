@@ -9,12 +9,19 @@ interface Props {
   ogImage?: string;
   schema?: Record<string, any>;
   mainId?: string;
+  breadcrumbNames?: Record<string, string>;
 }
 
-const { title, description, ogImage, schema, mainId = "main-content" } = Astro.props;
+const { title, description, ogImage, schema, mainId = "main-content", breadcrumbNames } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} schema={schema}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  schema={schema}
+  breadcrumbNames={breadcrumbNames}
+>
   <Navbar />
   <main id={mainId}>
     <slot />
