@@ -39,7 +39,18 @@ const { dogs } = Astro.props;
 
           <div class="story-card__body dog-card__body">
             <div class="dog-card__header">
-              <h3 class="story-card__name dog-card__name">{dog.name}</h3>
+              <h3 class="story-card__name dog-card__name">
+                <a
+                  href={`/adoptar/${dog.id}/`}
+                  class="dog-card__name-link"
+                  data-track-event="dog_profile_click"
+                  data-track-label={dog.name}
+                  data-track-location="dog_card"
+                  data-track-destination={`/adoptar/${dog.id}/`}
+                >
+                  {dog.name}
+                </a>
+              </h3>
               <div class="dog-card__chips">
                 <span class="chip chip--sex">{dog.sex}</span>
                 <span class="chip chip--age">{dog.age}</span>
@@ -55,6 +66,9 @@ const { dogs } = Astro.props;
                 <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
               </InstagramLink>
             )}
+            <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
+              Conocer a {dog.name}
+            </a>
             <WhatsAppLink
               text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
               location="dog_card"
