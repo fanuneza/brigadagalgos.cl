@@ -15,10 +15,41 @@ const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
         Acompañamos a galgos rescatados hasta encontrar una familia que entienda su ritmo: suelen ser tranquilos en
         casa, regalones y profundamente agradecidos.
       </p>
+    </div>
+
+    <picture class="hero__photo">
+      <source
+        media="(min-width: 768px)"
+        srcset={heroSources.landscapeAvifSrcSet}
+        sizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
+        type="image/avif"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset={heroSources.landscapeWebpSrcSet}
+        sizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
+        type="image/webp"
+      />
+      <source srcset={heroSources.portraitAvifSrcSet} sizes="calc((100vw - 48px) / 1.75)" type="image/avif" />
+      <img
+        srcset={heroSources.portraitWebpSrcSet}
+        sizes="calc((100vw - 48px) / 1.75)"
+        src={heroSources.portraitFallbackSrc}
+        alt="Galgo rescatado mirando hacia adelante"
+        class="hero__img"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        width={portraitSrc.width}
+        height={portraitSrc.height}
+      />
+    </picture>
+
+    <div class="hero__actions">
       <div class="hero__ctas">
         <TrackedLink
           href="/adoptar/"
-          class="btn btn--primary"
+          class="btn btn--primary hero__cta-primary"
           trackEvent="cta_click"
           trackLabel="Quiero adoptar"
           trackLocation="hero"
@@ -50,34 +81,9 @@ const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
           Voy a apoyar un galgo
         </TrackedLink>
       </div>
+      <p class="hero__support">
+        No necesitas tener todo resuelto antes de escribirnos. Seguimos contigo después de la adopción.
+      </p>
     </div>
-
-    <picture class="hero__photo">
-      <source
-        media="(min-width: 768px)"
-        srcset={heroSources.landscapeAvifSrcSet}
-        sizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
-        type="image/avif"
-      />
-      <source
-        media="(min-width: 768px)"
-        srcset={heroSources.landscapeWebpSrcSet}
-        sizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
-        type="image/webp"
-      />
-      <source srcset={heroSources.portraitAvifSrcSet} sizes="calc((100vw - 48px) / 1.75)" type="image/avif" />
-      <img
-        srcset={heroSources.portraitWebpSrcSet}
-        sizes="calc((100vw - 48px) / 1.75)"
-        src={heroSources.portraitFallbackSrc}
-        alt="Galgo rescatado mirando hacia adelante"
-        class="hero__img"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        width={portraitSrc.width}
-        height={portraitSrc.height}
-      />
-    </picture>
   </div>
 </section>
