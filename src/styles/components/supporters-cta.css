@@ -21,18 +21,6 @@
   pointer-events: none;
 }
 
-.supporters-cta .container--narrow {
-  display: grid;
-  gap: var(--space-4);
-  justify-items: center;
-  position: relative;
-  padding: var(--space-7);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: color-mix(in sRGB, var(--color-bg) 90%, transparent);
-  box-shadow: var(--shadow-md);
-}
-
 .supporters-cta__lead {
   max-width: 62ch;
   margin: 0;

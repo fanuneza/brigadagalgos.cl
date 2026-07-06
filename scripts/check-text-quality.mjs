@@ -31,7 +31,8 @@ const mojibakePatterns = [/\u00c3/, /\u00c2/, /\u00e2[\u0080-\u009d]/, /\ufffd/]
 // Only applied under src/ so docs and tooling can quote counterexamples.
 const voicePatterns = [
   {
-    pattern: /[Ii]ntent\u00e1|[Rr]evis\u00e1|[Pp]od\u00e9s|[Qq]uer\u00e9s|[Tt]en\u00e9s|[Cc]ontanos|[Ee]scribinos|[Aa]poyanos/,
+    pattern:
+      /[Ii]ntent\u00e1|[Rr]evis\u00e1|[Pp]od\u00e9s|[Qq]uer\u00e9s|[Tt]en\u00e9s|[Cc]ontanos|[Ee]scribinos|[Aa]poyanos/,
     label: "voseo (la voz del sitio usa tuteo chileno)",
   },
   {

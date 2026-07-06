@@ -15,13 +15,7 @@ interface Props {
 const { title, description, ogImage, schema, mainId = "main-content", breadcrumbNames } = Astro.props;
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  ogImage={ogImage}
-  schema={schema}
-  breadcrumbNames={breadcrumbNames}
->
+<BaseLayout title={title} description={description} ogImage={ogImage} schema={schema} breadcrumbNames={breadcrumbNames}>
   <Navbar />
   <main id={mainId}>
     <slot />

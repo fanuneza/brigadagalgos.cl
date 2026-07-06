@@ -40,11 +40,7 @@
 /* Metrics-matched fallback so the swap from system font to Barlow causes no layout shift. */
 @font-face {
   font-family: "Barlow Fallback";
-  src:
-    local("Arial"),
-    local("Liberation Sans"),
-    local("Arimo"),
-    local("Helvetica");
+  src: local("Arial"), local("Liberation Sans"), local("Arimo"), local("Helvetica");
   size-adjust: 96.68%;
   ascent-override: 103.43%;
   descent-override: 20.69%;
