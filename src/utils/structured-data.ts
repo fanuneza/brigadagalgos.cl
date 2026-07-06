@@ -23,6 +23,7 @@ export const breadcrumbLabels: Record<string, string> = {
   "por-que-galgos": "Por qué galgos",
   "preguntas-frecuentes": "Preguntas frecuentes",
   colaboradores: "Colaboradores",
+  blog: "Blog",
   donar: "Donar",
   contacto: "Contacto",
   "politica-de-cookies": "Política de cookies",
