@@ -87,7 +87,11 @@ const ogImage = firstImage
             >
               Postular por formulario
             </TrackedLink>
+            <button type="button" class="btn btn--ghost dog-profile__share" data-share-dog={dog.name}>
+              Compartir a {dog.name}
+            </button>
           </div>
+          <p class="dog-profile__share-live" data-share-live aria-live="polite"></p>
           <p class="dog-profile__support">
             Te preguntamos por tu rutina y tu casa para que {dog.name} esté seguro, no para juzgarte. Y seguimos acompañándote
             después de la adopción.
@@ -105,4 +109,5 @@ const ogImage = firstImage
 
 <script>
   import "../../scripts/init-shared-gallery";
+  import "../../scripts/share-dog";
 </script>
