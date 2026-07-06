@@ -16,7 +16,7 @@
   Acceptance: `README.md` and `AGENTS.md` accurately describe setup, key commands, and the related docs without stale references.
   Verify: Run `npm run check` and confirm documentation-related references used during the edits still match the current project structure.
 
-- [ ] **11.2 Clean up docs cross-references**
+- [x] **11.2 Clean up docs cross-references**
   Spec ref: `spec.md > File structure` + `prd.md > Related documents`
   What to build: Review the `docs/` bundle for stale cross-references, duplicated guidance, or outdated workflow notes and align them with the current project state.
   Acceptance: The docs set is internally consistent, has no obvious stale cross-references, and reflects the current repo structure.
@@ -75,7 +75,7 @@ This document turns the technical specification into an ordered build plan. Each
 | #   | Task                                          | Effort | Dependencies | Acceptance criteria                                                                                      |
 | --- | --------------------------------------------- | ------ | ------------ | -------------------------------------------------------------------------------------------------------- |
 | 2.1 | Initialize Astro 7 project with static output | S      | None         | `astro.config.mjs` uses `output: "static"`, `site`, `trailingSlash: "always"`                            |
-| 2.2 | Configure Astro integrations                  | S      | 2.1          | sitemap, RSS, SEO graph, Tailwind Vite plugin installed and configured                                   |
+| 2.2 | Configure Astro integrations                  | S      | 2.1          | sitemap, RSS, and SEO graph integrations installed and configured                                         |
 | 2.3 | Create `BaseLayout.astro`                     | M      | 2.1          | Document shell, global styles, SEO graph, GTM noscript fallback, cookie banner, client bootstrap scripts |
 | 2.4 | Create `PageLayout.astro`                     | S      | 2.3          | Wraps `BaseLayout` with `Navbar`, `<main>`, `Footer`, and optional `afterShell` slot                     |
 | 2.5 | Create `Navbar.astro`                         | M      | 2.4          | Navigation links, mobile menu, theme toggle, accessible markup                                           |
@@ -92,7 +92,7 @@ This document turns the technical specification into an ordered build plan. Each
 | 3.2 | Create `src/styles/global.css` | M      | 3.1          | Global reset, typography, utilities, dark/light theme variables                                      |
 | 3.3 | Create modular component CSS   | M      | 3.2          | One CSS file per major component in `src/styles/components/`                                         |
 | 3.4 | Implement dark/light theme     | M      | 3.1, 2.5     | `prefers-color-scheme` default, `localStorage` persistence, no flash, ClientRouter-safe              |
-| 3.5 | Adopt Tailwind incrementally   | S      | 3.1          | Tailwind utility classes used only where they fit local direction without creating a parallel system |
+| 3.5 | Preserve CSS architecture      | S      | 3.1          | Existing modular CSS patterns are kept consistent without creating a competing styling system         |
 
 ### 4. Content collections and schemas
 

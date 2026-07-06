@@ -254,7 +254,7 @@ Cloudflare edge
 - **Static-only:** No server runtime; everything is generated at build time.
 - **Content-first:** Dog profiles, stories, supporters, and blog posts are Markdown, not database entries.
 - **Consent-first analytics:** GTM/GA4 do not load until the user explicitly consents.
-- **Progressive Tailwind:** Tailwind is available but not forced; existing CSS patterns are preserved.
+- **CSS-first styling:** Existing modular CSS patterns are preserved and remain the primary styling system.
 - **Image cap:** 3 images per dog/story to keep pages light and galleries manageable.
 - **No markdown-alternate blog routes:** Disabled because it was a build breaker on Astro 7.
 

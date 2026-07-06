@@ -37,7 +37,7 @@ metadata:
 - **Framework:** Astro 7, static output only.
 - **Hosting:** Cloudflare Pages from GitHub.
 - **Languages:** TypeScript, Astro, Markdown, CSS.
-- **Styling:** Modular CSS (`src/styles/`) with incremental Tailwind adoption.
+- **Styling:** Modular CSS (`src/styles/`) as the primary styling system.
 - **Images:** Astro assets with responsive AVIF/WebP generation.
 - **Package manager:** npm with committed `package-lock.json`.
 - **Runtime:** Node 22+ via `.nvmrc`.

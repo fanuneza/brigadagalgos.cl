@@ -78,8 +78,8 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 ### Styling strategy
 
 - The site is still primarily styled with `src/styles/global.css` plus modular CSS files in `src/styles/components/`.
-- Tailwind is available through the Vite plugin in `astro.config.mjs`, but the current codebase is not Tailwind-first.
-- Prefer existing patterns in the surrounding code. Use Tailwind only when it fits the local direction and does not create a second competing styling system inside the same component.
+- Tailwind is no longer part of this project.
+- Prefer existing patterns in the surrounding code and keep styling changes within the established CSS architecture instead of introducing a second styling system.
 - Preserve the current visual language and avoid “one-off” utility-heavy rewrites when editing established components.
 
 ### Content-driven behavior
@@ -268,7 +268,7 @@ Notes:
 ## Key Files Worth Knowing
 
 - `astro.config.mjs`
-  - Static build config, Tailwind Vite plugin, sitemap integration, SEO graph integration.
+  - Static build config, sitemap integration, SEO graph integration, and current Astro build behavior.
   - `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`.
   - `markdownAlternate` is intentionally disabled.
 - `src/layouts/BaseLayout.astro`

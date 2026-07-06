@@ -11,7 +11,7 @@ This document is the technical specification for the Brigada Galgos website. It 
 | Framework       | Astro 7 (static output)                                    | Content-driven, static-first, fast builds, excellent image optimization, no server runtime needed |
 | Language        | TypeScript                                                 | Type safety across components, utilities, and tests                                               |
 | Templating      | Astro components (`.astro`)                                | Server-rendered HTML with scoped JS/TS where needed                                               |
-| Styling         | Modular CSS (`src/styles/`) + Tailwind 4 via Vite          | Existing CSS patterns are preserved; Tailwind is adopted incrementally where it fits              |
+| Styling         | Modular CSS (`src/styles/`)                                | Existing CSS patterns are preserved without maintaining a second styling system                    |
 | Content         | Markdown + YAML frontmatter in Astro content collections   | Easy for non-developers to edit; validated at build time                                          |
 | Images          | `astro:assets` + Sharp                                     | Responsive AVIF/WebP generation from local assets                                                 |
 | Hosting         | Cloudflare Pages                                           | Native static-site hosting, global CDN, security headers via `_headers`                           |
@@ -60,7 +60,6 @@ The site is a static Astro 7 site. All pages are generated at build time from Ma
 - `@astrojs/sitemap` — generates `sitemap.xml` and `sitemap-index.xml`.
 - `@astrojs/rss` — generates `feed.xml` from the blog collection.
 - `@jdevalk/astro-seo-graph` — validates and generates SEO graph metadata and JSON-LD.
-- `@tailwindcss/vite` — Tailwind CSS via Vite plugin for incremental adoption.
 
 ## File structure
 
@@ -280,7 +279,7 @@ Key shared primitives:
 ## Styling strategy
 
 - The site is primarily styled with `src/styles/global.css` and modular CSS files in `src/styles/components/`.
-- Tailwind is available through the Vite plugin but is adopted incrementally. The codebase is not Tailwind-first.
+- The site relies on modular CSS rather than a second utility-first styling layer.
 - When editing existing components, prefer the surrounding pattern rather than introducing utility-heavy rewrites.
 - Design tokens live in `src/styles/tokens.css` and are imported where needed.
 
@@ -380,14 +379,12 @@ Every page includes:
 | `@axe-core/playwright`                    | Accessibility testing                |
 | `@lhci/cli`                               | Lighthouse CI                        |
 | `@playwright/test`                        | Browser and E2E testing              |
-| `@tailwindcss/vite`                       | Tailwind Vite integration            |
 | `@typescript-eslint/*`                    | TypeScript ESLint rules              |
 | `cross-env`                               | Cross-platform environment variables |
 | `eslint` + `eslint-plugin-astro`          | Linting                              |
 | `prettier` + `prettier-plugin-astro`      | Formatting                           |
 | `sharp`                                   | Image processing backend             |
 | `stylelint` + `stylelint-config-standard` | CSS linting                          |
-| `tailwindcss`                             | Incremental utility styling          |
 | `typescript`                              | Type checking                        |
 | `vitest`                                  | Unit and source-hygiene tests        |
 
@@ -475,7 +472,7 @@ Set `active: false`, provide `hiddenSince` and `hiddenReason`, and ensure the en
 - **Static-only:** No server runtime; everything is generated at build time.
 - **Content-first:** Dog profiles, stories, supporters, and blog posts are Markdown, not database entries.
 - **Consent-first analytics:** GTM/GA4 do not load until the user explicitly consents.
-- **Progressive Tailwind:** Tailwind is available but not forced; existing CSS patterns are preserved.
+- **CSS-first styling:** Existing modular CSS patterns are preserved without maintaining a parallel utility-first styling layer.
 - **Image cap:** 3 images per dog/story to keep pages light and galleries manageable.
 - **No markdown-alternate blog routes:** Disabled because it was a build breaker on Astro 7.
 - **Local-first assets:** No remote image CDNs for dog photography.
