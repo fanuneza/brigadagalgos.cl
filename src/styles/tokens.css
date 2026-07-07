@@ -55,6 +55,7 @@
   /* Foreground on brand colors */
   --on-primary: var(--color-text-on-brand); /* dark on cyan */
   --on-accent-warm: var(--color-text-on-brand); /* dark on orange */
+  /* Bright pink needs dark text in dark mode for WCAG AA. */
   --on-secondary: light-dark(var(--color-text-on-dark), #101217); /* light on magenta */
   --on-rainbow-green: var(--color-text-on-dark); /* light on green */
   --on-rainbow-purple: var(--color-text-on-dark); /* light on purple */

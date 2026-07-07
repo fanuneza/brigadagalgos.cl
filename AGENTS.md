@@ -209,6 +209,7 @@ Rules:
 - Hidden entries remain in the collection.
 - `tests/source-hygiene.test.ts` fails if tracking metadata is missing.
 - Hidden entries older than 90 days also fail the test suite.
+- Hiding a dog also removes its `/adoptar/<slug>/` page, so shared profile links 404 while it's hidden. Add the same `public/_redirects` entry described in "Moving a Dog to Success" for the duration of the hide, and remove the redirect once the dog is active again.
 
 ## Images and Asset Handling
 

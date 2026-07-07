@@ -72,8 +72,8 @@ function initStoriesSection() {
         data-story-id="${safeId}"
         data-story-name="${safeName}"
       >
-        <p class="story-card__name"></p>
-        <p class="story-card__quote"></p>
+        <p class="story-card__name t-card-title"></p>
+        <p class="story-card__quote t-small-muted"></p>
         ${instagramLink}
       </div>
     `;
