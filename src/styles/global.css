@@ -259,6 +259,31 @@ h2:not([hidden]) {
   display: block;
 }
 
+.link-icon {
+  display: inline-block;
+  width: 1.08em;
+  height: 1.08em;
+  flex: 0 0 auto;
+  background: currentColor;
+  vertical-align: -0.14em;
+  -webkit-mask: var(--link-icon) center / contain no-repeat;
+  mask: var(--link-icon) center / contain no-repeat;
+}
+
+.link-icon--whatsapp {
+  --link-icon: url("/icons/whatsapp.svg");
+}
+
+.link-icon--share {
+  --link-icon: url("/icons/share-nodes.svg");
+}
+
+.whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
 .btn--primary {
   background:
     linear-gradient(180deg, color-mix(in sRGB, var(--btn-primary-bg) 86%, #fff) 0%, var(--btn-primary-bg) 100%),

@@ -3,6 +3,8 @@ import type { AdoptionDogCard } from "../../utils/dog-content";
 import SharedPhotoGallery from "../SharedPhotoGallery.astro";
 import InstagramLink from "../InstagramLink.astro";
 import WhatsAppLink from "../WhatsAppLink.astro";
+import TrackedLink from "../TrackedLink.astro";
+import { SITE } from "../../config/site.ts";
 import { getInstagramHandleLabel } from "../../utils/instagram";
 
 interface Props {
@@ -66,18 +68,31 @@ const { dogs } = Astro.props;
                 <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
               </InstagramLink>
             )}
-            <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
-              Conocer a {dog.name}
-            </a>
+            <TrackedLink
+              href={SITE.adoptionForm}
+              class="btn btn--primary dog-card__cta"
+              newTab
+              trackEvent="adoption_apply_click"
+              trackLabel={`Postular - ${dog.name}`}
+              trackLocation="dog_card"
+              trackDestination={SITE.adoptionForm}
+              trackCategory="adoption"
+              trackOutbound
+            >
+              Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
+            </TrackedLink>
             <WhatsAppLink
               text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
               location="dog_card"
-              label={`Me interesa ${dog.name}`}
-              class="btn btn--primary dog-card__cta"
+              label={`Más información - ${dog.name}`}
+              class="btn btn--secondary dog-card__cta"
               data-dog-name={dog.name}
             >
-              Me interesa {dog.name}
+              Más información <span class="sr-only">sobre {dog.name}</span>
             </WhatsAppLink>
+            <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
+              Ver ficha de {dog.name}
+            </a>
           </div>
         </article>
       );

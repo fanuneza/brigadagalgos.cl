@@ -11,12 +11,13 @@ interface Props extends HTMLAttributes<"a"> {
 
 const { text, location, label, class: className, ...anchorProps } = Astro.props;
 const href = `${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
+const classes = ["whatsapp-link", className].filter(Boolean).join(" ");
 ---
 
 <TrackedLink
   {...anchorProps}
   href={href}
-  class={className}
+  class={classes}
   newTab
   hideExternalIndicator
   trackEvent="whatsapp_click"
@@ -28,5 +29,6 @@ const href = `${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
   data-whatsapp-location={location}
   data-whatsapp-text={text}
 >
+  <span class="link-icon link-icon--whatsapp" aria-hidden="true"></span>
   <slot />
 </TrackedLink>

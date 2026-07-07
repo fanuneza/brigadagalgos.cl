@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../../config/site.ts";
+import WhatsAppLink from "../../components/WhatsAppLink.astro";
 
 const ways = [
   {
@@ -40,14 +40,14 @@ const ways = [
         }
       </ul>
 
-      <a
-        href={`${SITE.whatsapp}?text=${encodeURIComponent("Hola, quiero ayudar de otra forma")}`}
+      <WhatsAppLink
+        text="Hola, quiero ayudar de otra forma"
+        location="help_tail_cta"
+        label="Coordina por WhatsApp - Help Tail CTA"
         class="btn btn--secondary"
-        target="_blank"
-        rel="noopener noreferrer"
       >
         Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-      </a>
+      </WhatsAppLink>
     </div>
   </div>
 </section>

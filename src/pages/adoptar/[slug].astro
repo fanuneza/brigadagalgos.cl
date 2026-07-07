@@ -66,28 +66,30 @@ const ogImage = firstImage
             )
           }
           <div class="dog-profile__ctas">
-            <WhatsAppLink
-              text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
-              location="dog_profile"
-              label={`Me interesa ${dog.name}`}
-              class="btn btn--primary"
-              data-dog-name={dog.name}
-            >
-              Me interesa {dog.name}
-            </WhatsAppLink>
             <TrackedLink
               href={SITE.adoptionForm}
-              class="btn btn--secondary"
+              class="btn btn--primary"
               newTab
-              trackEvent="cta_click"
-              trackLabel={`Postular por formulario - ${dog.name}`}
+              trackEvent="adoption_apply_click"
+              trackLabel={`Postular - ${dog.name}`}
               trackLocation="dog_profile"
               trackDestination={SITE.adoptionForm}
               trackCategory="adoption"
+              trackOutbound
             >
-              Postular por formulario
+              Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
             </TrackedLink>
+            <WhatsAppLink
+              text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
+              location="dog_profile"
+              label={`Más información - ${dog.name}`}
+              class="btn btn--secondary"
+              data-dog-name={dog.name}
+            >
+              Más información <span class="sr-only">sobre {dog.name}</span>
+            </WhatsAppLink>
             <button type="button" class="btn btn--ghost dog-profile__share" data-share-dog={dog.name}>
+              <span class="link-icon link-icon--share" aria-hidden="true"></span>
               Compartir a {dog.name}
             </button>
           </div>

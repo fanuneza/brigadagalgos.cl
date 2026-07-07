@@ -1,4 +1,6 @@
 ---
+import { SITE } from "../../config/site.ts";
+import TrackedLink from "../../components/TrackedLink.astro";
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
 ---
 
@@ -10,13 +12,26 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
         Escríbenos sin apuro. Te ayudamos a revisar si tu rutina, espacio y expectativas son adecuados para alguno de
         los galgos.
       </p>
+      <TrackedLink
+        href={SITE.adoptionForm}
+        class="btn btn--primary"
+        newTab
+        trackEvent="adoption_apply_click"
+        trackLabel="Postular - Adoption Tail CTA"
+        trackLocation="tail_cta"
+        trackDestination={SITE.adoptionForm}
+        trackCategory="adoption"
+        trackOutbound
+      >
+        Postular <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </TrackedLink>
       <WhatsAppLink
         text="Hola, quisiera saber más sobre adopción"
         location="tail_cta"
-        label="Escríbenos por WhatsApp - Adoption Tail CTA"
-        class="btn btn--primary"
+        label="Más información - Adoption Tail CTA"
+        class="btn btn--secondary"
       >
-        Quiero adoptar
+        Más información <span class="sr-only">sobre adopción</span>
       </WhatsAppLink>
       <p class="cta-card__aside">
         ¿Dudas sobre costos, departamento, niños u otros animales?

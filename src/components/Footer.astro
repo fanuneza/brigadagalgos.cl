@@ -2,6 +2,7 @@
 import { SITE } from "../config/site.ts";
 import ExternalLink from "./ExternalLink.astro";
 import TrackedLink from "./TrackedLink.astro";
+import WhatsAppLink from "./WhatsAppLink.astro";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -38,9 +39,14 @@ const currentYear = new Date().getFullYear();
           </a>
         </li>
         <li>
-          <ExternalLink href={SITE.whatsapp} class="footer__link">
+          <WhatsAppLink
+            text="Hola, quiero hablar con Brigada Galgos"
+            location="footer"
+            label="WhatsApp Footer"
+            class="footer__link"
+          >
             WhatsApp {SITE.whatsappPhone}<span class="sr-only"> (abre en una nueva pestaña)</span>
-          </ExternalLink>
+          </WhatsAppLink>
         </li>
       </ul>
       <div class="footer__social">
