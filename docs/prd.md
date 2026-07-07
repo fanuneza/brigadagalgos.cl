@@ -8,22 +8,28 @@ This document lists the functional requirements of the Brigada Galgos website as
 
 ### Public pages
 
-| Route                    | Purpose          | Key content                                                                                           |
-| ------------------------ | ---------------- | ----------------------------------------------------------------------------------------------------- |
-| `/`                      | Home             | Hero, mission, three main CTAs, featured dogs, success stories, how to help, donation callout, footer |
-| `/adoptar/`              | Adoption listing | Filterable dog cards, dog profile lightbox, process explanation, CTAs                                 |
-| `/por-que-galgos/`       | Why galgos       | Editorial sections, FAQ, selected success stories                                                     |
-| `/hogar-temporal/`       | Foster program   | Requirements, what Brigada covers, CTA                                                                |
-| `/donar/`                | Donations        | Impact amounts, bank details, eSponsor card, transparency notes                                       |
-| `/colaboradores/`        | Supporters       | Logo grid of institutions, companies, and people                                                      |
-| `/contacto/`             | Contact          | WhatsApp, email, social links, form                                                                   |
-| `/preguntas-frecuentes/` | FAQ              | Full FAQ grouped by topic                                                                             |
-| `/politica-de-cookies/`  | Cookie policy    | Plain explanation of cookies and consent                                                              |
-| `/404/`                  | Not found        | Helpful redirect to main pages                                                                        |
+| Route                    | Purpose          | Key content                                                                                                                                      |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/`                      | Home             | Hero, mission, three main CTAs, featured dogs, success stories, how to help, donation callout, footer                                            |
+| `/adoptar/`              | Adoption listing | Filterable dog cards, dog profile lightbox, process explanation, CTAs                                                                            |
+| `/adoptar/<slug>/`       | Dog profile      | Full profile page per active dog: gallery, details, per-dog meta description and OG image, breadcrumb, WhatsApp + form CTAs, native share button |
+| `/por-que-galgos/`       | Why galgos       | Editorial sections, FAQ, selected success stories                                                                                                |
+| `/hogar-temporal/`       | Foster program   | Requirements, what Brigada covers, CTA                                                                                                           |
+| `/donar/`                | Donations        | Impact amounts, bank details, eSponsor card, transparency notes                                                                                  |
+| `/colaboradores/`        | Supporters       | Logo grid of institutions, companies, and people                                                                                                 |
+| `/contacto/`             | Contact          | WhatsApp, email, social links, form                                                                                                              |
+| `/preguntas-frecuentes/` | FAQ              | Full FAQ grouped by topic                                                                                                                        |
+| `/politica-de-cookies/`  | Cookie policy    | Plain explanation of cookies and consent                                                                                                         |
+| `/404/`                  | Not found        | Helpful redirect to main pages                                                                                                                   |
 
 ### Content-driven routes
 
-There are no individual dog or blog detail pages at the time of writing. Dog profiles and success stories are rendered through cards and lightboxes on listing pages. Blog posts are published via the content collection but are not surfaced as individual pages yet; they feed the RSS feed at `/feed.xml`.
+| Route         | Purpose      | Key content                                                                          |
+| ------------- | ------------ | ------------------------------------------------------------------------------------ |
+| `/blog/`      | Blog listing | Published (non-draft) posts, newest first                                            |
+| `/blog/<id>/` | Blog post    | Full post body (headings start at `##`; the page renders the only `h1` from `title`) |
+
+Success stories are still rendered only through cards and lightboxes on listing pages; there is no individual success-story detail page. Dog profiles now render at `/adoptar/<slug>/` for every dog with `active !== false` (see the table above). Blog posts with `draft: true` are excluded from both `/blog/` pages and the RSS feed at `/feed.xml`.
 
 ### Utility / feed routes
 
@@ -266,8 +272,7 @@ These support the core goals and should be kept healthy:
 
 These can be deferred or improved incrementally:
 
-- Individual blog post pages.
-- Individual dog or success story detail pages.
+- Individual success story detail pages.
 - Search across content.
 - More advanced analytics (funnel tracking, A/B testing).
 - Multi-language support.
@@ -314,4 +319,4 @@ These can be deferred or improved incrementally:
 
 ## Last updated
 
-2026-07-05
+2026-07-06
