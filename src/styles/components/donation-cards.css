@@ -36,14 +36,13 @@
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: 0.3rem;
+  height: 1px;
   background: linear-gradient(
-    to right,
-    var(--color-primary) 0% 20%,
-    var(--color-secondary) 20% 40%,
-    var(--color-accent-warm) 40% 60%,
-    var(--color-rainbow-green) 60% 80%,
-    var(--color-rainbow-purple) 80% 100%
+    90deg,
+    var(--color-primary),
+    var(--color-secondary),
+    light-dark(#e91e8c, #ff4ead),
+    var(--color-accent-warm)
   );
 }
 
