@@ -16,7 +16,7 @@ const { cases } = Astro.props;
     <div class="why-galgos__cases-intro">
       <p class="eyebrow">CASOS REALES</p>
       <h2>Por eso insistimos con ellos</h2>
-      <p class="why-galgos__cases-lead">
+      <p class="why-galgos__cases-lead t-lead">
         No hablamos en abstracto. Cada recuperación vuelve más concreta la razón de esta brigada.
       </p>
     </div>
@@ -45,8 +45,8 @@ const { cases } = Astro.props;
               data-story-id={dog.id}
               data-story-name={dog.name}
             >
-              <h3 class="story-card__name">{dog.name}</h3>
-              <p class="story-card__quote">{dog.cardStory}</p>
+              <h3 class="story-card__name t-card-title">{dog.name}</h3>
+              <p class="story-card__quote t-small-muted">{dog.cardStory}</p>
               {dog.instagramUrl && (
                 <InstagramLink
                   url={dog.instagramUrl}

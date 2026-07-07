@@ -1,0 +1,113 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getImage } from "astro:assets";
+import PageLayout from "../../layouts/PageLayout.astro";
+import RainbowDivider from "../../components/RainbowDivider.astro";
+import SharedPhotoGallery from "../../components/SharedPhotoGallery.astro";
+import SharedGalleryLightbox from "../../components/SharedGalleryLightbox.astro";
+import AdoptionProcess from "../../components/sections/AdoptionProcess.astro";
+import WhatsAppLink from "../../components/WhatsAppLink.astro";
+import TrackedLink from "../../components/TrackedLink.astro";
+import InstagramLink from "../../components/InstagramLink.astro";
+import { SITE } from "../../config/site.ts";
+import { buildAdoptionDogCards, buildDogMetaDescription } from "../../utils/dog-content";
+import { getInstagramHandleLabel } from "../../utils/instagram";
+
+export async function getStaticPaths() {
+  const dogs = await getCollection(
+    "adoption-dogs",
+    ({ data }: CollectionEntry<"adoption-dogs">) => data.active !== false
+  );
+  return dogs.map((entry: CollectionEntry<"adoption-dogs">) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<"adoption-dogs"> };
+const [dog] = await buildAdoptionDogCards([entry]);
+const metaDescription = buildDogMetaDescription(entry.data);
+
+const firstImage = entry.data.gallery[0];
+const ogImage = firstImage
+  ? (await getImage({ src: firstImage, width: 1200, height: 630, format: "jpeg", fit: "cover" })).src
+  : undefined;
+---
+
+<PageLayout
+  title={`${dog.name}, galgo en adopción`}
+  description={metaDescription}
+  ogImage={ogImage}
+  breadcrumbNames={{ [entry.id]: dog.name }}
+>
+  <section class="dog-profile section-padding">
+    <div class="container">
+      <p class="dog-profile__back">
+        <a href="/adoptar/#galgos">Ver todos los galgos en adopción</a>
+      </p>
+      <div class="dog-profile__layout">
+        <div class="dog-profile__gallery">
+          <SharedPhotoGallery name={dog.name} photos={dog.pictures} id={dog.id} loadingPriority="eager" />
+        </div>
+        <div class="dog-profile__info">
+          <p class="eyebrow">GALGO EN ADOPCIÓN</p>
+          <h1>{dog.name}</h1>
+          <div class="dog-card__chips dog-profile__chips">
+            <span class="chip chip--sex">{dog.sex}</span>
+            <span class="chip chip--age">{dog.age}</span>
+            <span class="chip chip--weight">{dog.weight}</span>
+            <span class="chip chip--need">{dog.currentNeed}</span>
+          </div>
+          <p class="dog-profile__details">{dog.details}</p>
+          <p class="dog-profile__sketch">{dog.characterSketch}</p>
+          {
+            dog.instagramUrl && (
+              <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_profile" class="dog-social-link">
+                <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+              </InstagramLink>
+            )
+          }
+          <div class="dog-profile__ctas">
+            <WhatsAppLink
+              text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
+              location="dog_profile"
+              label={`Me interesa ${dog.name}`}
+              class="btn btn--primary"
+              data-dog-name={dog.name}
+            >
+              Me interesa {dog.name}
+            </WhatsAppLink>
+            <TrackedLink
+              href={SITE.adoptionForm}
+              class="btn btn--secondary"
+              newTab
+              trackEvent="cta_click"
+              trackLabel={`Postular por formulario - ${dog.name}`}
+              trackLocation="dog_profile"
+              trackDestination={SITE.adoptionForm}
+              trackCategory="adoption"
+            >
+              Postular por formulario
+            </TrackedLink>
+            <button type="button" class="btn btn--ghost dog-profile__share" data-share-dog={dog.name}>
+              Compartir a {dog.name}
+            </button>
+          </div>
+          <p class="dog-profile__share-live" data-share-live aria-live="polite"></p>
+          <p class="dog-profile__support">
+            Te preguntamos por tu rutina y tu casa para que {dog.name} esté seguro, no para juzgarte. Y seguimos acompañándote
+            después de la adopción.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <RainbowDivider />
+  <AdoptionProcess />
+
+  <SharedGalleryLightbox slot="afterShell" ariaLabel={`Galería de ${dog.name}`} />
+</PageLayout>
+
+<script>
+  import "../../scripts/init-shared-gallery";
+  import "../../scripts/share-dog";
+</script>

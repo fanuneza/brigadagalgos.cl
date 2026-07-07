@@ -97,3 +97,22 @@
   width: 100%;
   margin-top: auto;
 }
+
+.dog-card__name-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dog-card__name-link:hover {
+  color: var(--color-primary-700);
+}
+
+.dog-card__name-link:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-focus);
+}
+
+.dog-card__profile-link {
+  align-self: start;
+}

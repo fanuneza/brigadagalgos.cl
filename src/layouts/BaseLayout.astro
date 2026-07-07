@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { SITE } from "../config/site.ts";
 import { ClientRouter } from "astro:transitions";
+import barlowBody400 from "@fontsource/barlow/files/barlow-latin-400-normal.woff2?url";
 import barlow700 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url";
 import barlow900 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-900-normal.woff2?url";
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
@@ -13,9 +14,10 @@ interface Props {
   description: string;
   ogImage?: string;
   schema?: Record<string, any>;
+  breadcrumbNames?: Record<string, string>;
 }
 
-const { title, description, ogImage = SITE.ogImagePath, schema } = Astro.props;
+const { title, description, ogImage = SITE.ogImagePath, schema, breadcrumbNames } = Astro.props;
 const { siteUrl, gtmContainerId, consentCookie, name } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
@@ -28,6 +30,7 @@ const defaultSchema = buildStructuredDataGraph({
   imageUrl: ogImageUrl,
   logoUrl,
   pathname: Astro.url.pathname,
+  breadcrumbNames,
 });
 ---
 
@@ -39,6 +42,7 @@ const defaultSchema = buildStructuredDataGraph({
     <meta name="theme-color" content="#0FB0C9" data-theme-color />
     <link rel="preload" href={barlow700} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={barlow900} as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href={barlowBody400} as="font" type="font/woff2" crossorigin="anonymous" />
 
     <Seo
       title={title}

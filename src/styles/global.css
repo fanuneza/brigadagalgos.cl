@@ -1,3 +1,4 @@
+@import url("@fontsource/barlow/400.css");
 @import url("@fontsource/barlow-condensed/700.css");
 @import url("@fontsource/barlow-condensed/900.css");
 @import url("./tokens.css");
@@ -32,6 +33,19 @@
 @import url("./components/hogar-temporal.css");
 @import url("./components/home.css");
 @import url("./components/donation-cards.css");
+@import url("./components/blog.css");
+@import url("./components/dog-profile.css");
+@import url("./components/motion.css");
+
+/* Metrics-matched fallback so the swap from system font to Barlow causes no layout shift. */
+@font-face {
+  font-family: "Barlow Fallback";
+  src: local("Arial"), local("Liberation Sans"), local("Arimo"), local("Helvetica");
+  size-adjust: 96.68%;
+  ascent-override: 103.43%;
+  descent-override: 20.69%;
+  line-gap-override: 0%;
+}
 
 *,
 *::before,
@@ -121,46 +135,6 @@ h2:not([hidden]) {
   text-wrap: balance;
 }
 
-.section-heading,
-.stories__heading,
-.help-cards__heading,
-.stepper__heading,
-.donation-banner h2 {
-  font-size: var(--type-section-title);
-}
-
-.page-hero__lead,
-.hero__lead,
-.section-body,
-.adoption-intro__lead,
-.adoption-process__lead,
-.supporters-intro__lead,
-.supporters-cta__lead,
-.why-galgos__prose p,
-.why-galgos__cases-lead,
-.why-galgos__editorial-list li,
-.why-galgos__inline-points li {
-  font-size: var(--type-lead);
-  line-height: var(--line-loose);
-  color: var(--color-text-muted);
-}
-
-.page-hero__lead--bold {
-  font-size: var(--type-lead-strong);
-  line-height: var(--line-snug);
-  color: var(--color-text);
-}
-
-.card__desc,
-.supporter-card__description,
-.donation-card__info,
-.req-card__body,
-.channel-card__body {
-  font-size: var(--type-body);
-  line-height: var(--line-base);
-  color: var(--color-text-muted);
-}
-
 /* ── Icon circle utility ───────────────────────────────────────────── */
 .icon-circle {
   width: 48px;
@@ -206,30 +180,40 @@ h2:not([hidden]) {
   display: block;
 }
 
-.card__title,
-.dog-card__name,
-.story-card__name,
-.supporter-card__name,
-.donation-card__heading,
-.impact-card__title,
-.form__success-title {
+/* ── Type roles ─────────────────────────────────────────────────────
+   Components opt in by adding the role class in markup. These replace
+   the legacy per-component selector lists above. */
+.t-section-title {
+  font-size: var(--type-section-title);
+}
+
+.t-lead {
+  font-size: var(--type-lead);
+  line-height: var(--line-loose);
+  color: var(--color-text-muted);
+}
+
+.t-lead-strong {
+  font-size: var(--type-lead-strong);
+  line-height: var(--line-snug);
+  color: var(--color-text);
+}
+
+.t-card-body {
+  font-size: var(--type-body);
+  line-height: var(--line-base);
+  color: var(--color-text-muted);
+}
+
+.t-card-title {
   font-size: var(--type-card-title);
 }
 
-.req-card__title,
-.channel-card__title,
-.step__label,
-.stat-card__label {
+.t-ui-title {
   font-size: var(--type-ui-title);
 }
 
-.dog-card__details,
-.story-card__quote,
-.donation-card__subtitle,
-.impact-card__desc,
-.stat-card__body,
-.channel-card__hours,
-.step__sub {
+.t-small-muted {
   font-size: var(--type-body-small);
   line-height: var(--line-base);
   color: var(--color-text-muted);
@@ -311,11 +295,7 @@ h2:not([hidden]) {
   background: var(--btn-ghost-bg-hover);
 }
 
-.eyebrow,
-.stories__eyebrow,
-.help-cards__eyebrow,
-.stepper__eyebrow,
-.mission__eyebrow {
+.eyebrow {
   font-family: var(--font-body);
   font-size: var(--font-size-xs);
   font-weight: var(--weight-semi);
@@ -325,10 +305,15 @@ h2:not([hidden]) {
   margin: 0;
 }
 
-.stories__eyebrow,
-.help-cards__eyebrow,
-.stepper__eyebrow,
-.mission__eyebrow {
+/* stories/help-cards/stepper/mission stack their eyebrow directly against a
+   heading with no flex gap between them (unlike page-hero/why-galgos, whose
+   containers use `gap`) — the bottom margin below is load-bearing spacing,
+   not decoration. Scoped by ancestor so plain `.eyebrow` markup keeps working
+   everywhere else. #nosotros is Mission's section id (no distinct class). */
+.stories .eyebrow,
+.help-cards .eyebrow,
+.stepper-section .eyebrow,
+#nosotros .eyebrow {
   margin: 0 0 var(--space-3);
 }
 
@@ -485,6 +470,11 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-3);
+}
+
+.cta-card__aside {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
 main {

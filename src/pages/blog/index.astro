@@ -1,0 +1,56 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import RainbowDivider from "../../components/RainbowDivider.astro";
+import InstagramLink from "../../components/InstagramLink.astro";
+import { SITE } from "../../config/site.ts";
+
+const posts = (await getCollection("blog", ({ data }: CollectionEntry<"blog">) => !data.draft)).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<PageLayout
+  title="Blog de rescate y adopción de galgos"
+  description="Historias de rescate, aprendizajes de convivencia y novedades de los galgos que acompañamos en Chile, contadas por el equipo de Brigada Galgos."
+>
+  <PageHero
+    eyebrow="BLOG"
+    h1="Historias y novedades"
+    lead="Lo que aprendemos rescatando y acompañando galgos en Chile, contado con calma y sin adornos."
+  />
+  <RainbowDivider />
+
+  <section class="section-padding">
+    <div class="container container--narrow">
+      {
+        posts.length === 0 ? (
+          <div class="blog-empty">
+            <p>Todavía no publicamos artículos. Mientras tanto, las novedades de los galgos viven en nuestras redes.</p>
+            <InstagramLink url={SITE.instagram} name="Brigada Galgos" location="blog_empty" class="btn btn--secondary">
+              Ver novedades en Instagram
+            </InstagramLink>
+          </div>
+        ) : (
+          <ul class="blog-list">
+            {posts.map((post: CollectionEntry<"blog">) => (
+              <li class="blog-list__item">
+                <article>
+                  <h2 class="blog-list__title">
+                    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                  </h2>
+                  <p class="blog-list__meta">
+                    <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+                  </p>
+                  <p class="blog-list__desc">{post.data.description}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</PageLayout>

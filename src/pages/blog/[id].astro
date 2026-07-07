@@ -1,0 +1,38 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import RainbowDivider from "../../components/RainbowDivider.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => !data.draft);
+  return posts.map((post: CollectionEntry<"blog">) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<"blog"> };
+const { Content } = await render(post);
+const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<PageLayout title={post.data.title} description={post.data.description}>
+  <article class="blog-post section-padding">
+    <div class="container container--narrow">
+      <p class="eyebrow">BLOG</p>
+      <h1>{post.data.title}</h1>
+      <p class="blog-post__meta">
+        Por {post.data.author} ·
+        <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+      </p>
+    </div>
+  </article>
+  <RainbowDivider />
+  <section class="section-padding blog-post__section">
+    <div class="container container--narrow">
+      <div class="blog-post__body">
+        <Content />
+      </div>
+      <p class="blog-post__back">
+        <a href="/blog/">Volver al blog</a>
+      </p>
+    </div>
+  </section>
+</PageLayout>

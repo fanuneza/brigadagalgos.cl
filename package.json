@@ -35,6 +35,7 @@
   "dependencies": {
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
+    "@fontsource/barlow": "5.2.8",
     "@fontsource/barlow-condensed": "5.2.8",
     "@jdevalk/astro-seo-graph": "2.0.0",
     "@jdevalk/seo-graph-core": "0.6.2",

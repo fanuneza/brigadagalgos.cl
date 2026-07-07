@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildCardStoryExcerpt } from "../src/utils/story-card-copy";
+import { clampAtWordBoundary, buildDogMetaDescription } from "../src/utils/dog-content";
 
 describe("buildCardStoryExcerpt", () => {
   it("keeps short stories unchanged", () => {
@@ -23,5 +24,36 @@ describe("buildCardStoryExcerpt", () => {
     const excerpt = buildCardStoryExcerpt(story, 90);
     expect(excerpt.length).toBeLessThanOrEqual(91);
     expect(excerpt.endsWith("…")).toBe(true);
+  });
+});
+
+describe("clampAtWordBoundary", () => {
+  it("returns short text untouched", () => {
+    expect(clampAtWordBoundary("Hola", 20)).toBe("Hola");
+  });
+
+  it("clamps at a word boundary and appends an ellipsis", () => {
+    const result = clampAtWordBoundary("Un galgo tranquilo que busca una familia paciente", 30);
+    expect(result.length).toBeLessThanOrEqual(30);
+    expect(result.endsWith("…")).toBe(true);
+    expect(result).not.toMatch(/\s…$/);
+  });
+
+  it("drops trailing punctuation before the ellipsis", () => {
+    const result = clampAtWordBoundary("Llegó desde Maipú, y hoy descansa tranquilo en su cama", 20);
+    expect(result).not.toMatch(/[,;:.]…$/);
+  });
+});
+
+describe("buildDogMetaDescription", () => {
+  it("mentions the dog name and stays within SEO bounds", () => {
+    const description = buildDogMetaDescription({
+      name: "Turrón",
+      details:
+        "A Turrón lo arrojaron desde una camioneta en Isla de Maipo y hubo que operar su fractura. Hoy está recuperado, pero necesita un ambiente tranquilo, sin niños pequeños, sin gatos y sin perros machos.",
+    });
+    expect(description).toContain("Turrón");
+    expect(description.length).toBeGreaterThanOrEqual(70);
+    expect(description.length).toBeLessThanOrEqual(155);
   });
 });

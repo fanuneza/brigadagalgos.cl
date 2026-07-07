@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { SITE } from "../config/site";
 
 export async function GET(context: { site: URL }) {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => !data.draft);
   return rss({
     title: `${SITE.name} | Blog`,
     description: SITE.description,

@@ -87,7 +87,7 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - Dog cards and galleries are shaped through `src/utils/dog-content.ts`.
 - Success-story card summaries are derived through `src/utils/story-card-copy.ts`.
 - FAQ and structured-data copy are centralized in config and utility files. Prefer updating shared sources over duplicating text inside pages.
-- The blog collection powers the RSS feed. There is no markdown-alternate endpoint for blog posts right now.
+- The blog collection powers the RSS feed and the `/blog/` listing and `/blog/<id>/` post pages. Posts with `draft: true` are excluded from both the pages and the feed. There is no markdown-alternate endpoint for blog posts right now.
 
 ## Non-Negotiable Standards
 
@@ -186,6 +186,13 @@ When an adopted dog moves from `adoption-dogs` to `success-dogs`:
    - Keep `gallery` paths pointed to `../../assets/casos/exito/name/...`.
 3. Update data prep scripts if needed:
    - Remove the dog ID from `ADOPTION_IDS` and `ADOPTION_OVERRIDES` in `scripts/prepare-casos-site.mjs` when applicable.
+4. Add a permanent redirect for the retired profile URL in `public/_redirects`:
+
+   ```
+   /adoptar/name/ /adoptar/ 301
+   ```
+
+   Profile URLs are shared on social media and must not 404 after the dog is adopted.
 
 ### Hiding a Dog Temporarily
 
@@ -202,6 +209,7 @@ Rules:
 - Hidden entries remain in the collection.
 - `tests/source-hygiene.test.ts` fails if tracking metadata is missing.
 - Hidden entries older than 90 days also fail the test suite.
+- Hiding a dog also removes its `/adoptar/<slug>/` page, so shared profile links 404 while it's hidden. Add the same `public/_redirects` entry described in "Moving a Dog to Success" for the duration of the hide, and remove the redirect once the dog is active again.
 
 ## Images and Asset Handling
 

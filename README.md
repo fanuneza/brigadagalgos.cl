@@ -6,11 +6,12 @@ Este repositorio contiene el sitio público donde Brigada Galgos muestra perros 
 
 ## Qué se puede hacer en este sitio
 
-- Conocer galgos que hoy buscan familia.
+- Conocer galgos que hoy buscan familia, incluyendo la ficha individual de cada uno.
 - Leer historias de adopción y recuperación.
 - Revisar preguntas frecuentes antes de adoptar o ser hogar temporal.
 - Encontrar formas de donar o colaborar.
 - Contactar al equipo por WhatsApp, correo o redes sociales.
+- Leer el blog de la fundación.
 
 ## Dónde vive la información
 

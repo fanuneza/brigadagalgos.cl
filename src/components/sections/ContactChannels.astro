@@ -22,9 +22,9 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
             decoding="async"
           />
         </span>
-        <h3 class="channel-card__title">WHATSAPP</h3>
+        <h3 class="channel-card__title t-ui-title">WHATSAPP</h3>
         <p class="channel-card__detail">{SITE.whatsappPhone}</p>
-        <p class="channel-card__hours">Lun a Vie · 10:00 – 19:00</p>
+        <p class="channel-card__hours t-small-muted">Lun a Vie · 10:00 – 19:00</p>
         <WhatsAppLink
           text="Hola, quiero hablar con Brigada Galgos"
           location="contact_channels"
@@ -48,9 +48,9 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
             decoding="async"
           />
         </span>
-        <h3 class="channel-card__title">EMAIL</h3>
+        <h3 class="channel-card__title t-ui-title">EMAIL</h3>
         <p class="channel-card__detail">{SITE.email}</p>
-        <p class="channel-card__hours">Respondemos lo antes posible.</p>
+        <p class="channel-card__hours t-small-muted">Respondemos lo antes posible.</p>
         <a href={`mailto:${SITE.email}`} class="btn btn--secondary"> Escribir por correo </a>
       </div>
 
@@ -67,8 +67,8 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
             decoding="async"
           />
         </span>
-        <h3 class="channel-card__title">REDES</h3>
-        <p class="channel-card__body">Las novedades de los galgos viven en Instagram.</p>
+        <h3 class="channel-card__title t-ui-title">REDES</h3>
+        <p class="channel-card__body t-card-body">Las novedades de los galgos viven en Instagram.</p>
         <div class="channel-card__social">
           <ExternalLink href={SITE.instagram} class="btn btn--ghost channel-card__social-link">
             <span class="btn__icon" aria-hidden="true">

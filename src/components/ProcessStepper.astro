@@ -16,8 +16,8 @@ const { steps, eyebrow = "EL PROCESO", heading = "Así rescatamos un galgo" } = 
 
 <section class="section-padding stepper-section" data-track-section="rescue_process">
   <div class="container">
-    <p class="stepper__eyebrow">{eyebrow}</p>
-    <h2 class="stepper__heading">{heading}</h2>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="stepper__heading t-section-title">{heading}</h2>
     <ol class="stepper" role="list">
       {
         steps.map((step, i) => (
@@ -26,8 +26,8 @@ const { steps, eyebrow = "EL PROCESO", heading = "Así rescatamos un galgo" } = 
               {i + 1}
             </div>
             <div class="step__body">
-              <h3 class="step__label">{step.label}</h3>
-              <p class="step__sub">{step.subLabel}</p>
+              <h3 class="step__label t-ui-title">{step.label}</h3>
+              <p class="step__sub t-small-muted">{step.subLabel}</p>
             </div>
           </li>
         ))

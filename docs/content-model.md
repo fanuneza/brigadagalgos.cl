@@ -40,6 +40,7 @@ The site uses Astro content collections. Each collection is a directory of Markd
 - If `active: false`, both `hiddenSince` and `hiddenReason` are required.
 - Hidden entries remain in the collection but are excluded from the public listing.
 - Hidden entries older than 90 days fail `tests/source-hygiene.test.ts`.
+- Every dog with `active !== false` renders a profile page at `/adoptar/<slug>/`, with its own meta description (via `buildDogMetaDescription`), OG image (first gallery image), and breadcrumb name override.
 
 ### Example
 
@@ -148,15 +149,17 @@ order: 1
 
 ### Optional fields
 
-| Field       | Type   | Description               |
-| ----------- | ------ | ------------------------- |
-| `category`  | string | Post category             |
-| `heroImage` | string | Path or URL to hero image |
+| Field       | Type    | Description                                                          |
+| ----------- | ------- | -------------------------------------------------------------------- |
+| `category`  | string  | Post category                                                        |
+| `heroImage` | string  | Path or URL to hero image                                            |
+| `draft`     | boolean | Default `false`; set `true` to keep a post out of pages and the feed |
 
 ### Rules
 
-- Blog posts feed the RSS feed at `/feed.xml`.
-- There are no individual blog post pages currently; content is published via the collection and RSS only.
+- Blog posts feed the RSS feed at `/feed.xml` and the `/blog/` listing plus `/blog/<id>/` post pages.
+- Posts with `draft: true` are excluded from `/blog/`, `/blog/<id>/`, and `/feed.xml`.
+- Post bodies must start headings at `##`. The page renders the only `h1` from `title`, so a body-level `#` would create a duplicate top-level heading.
 - Markdown-alternate routes are disabled (`markdownAlternate: false` in `astro.config.mjs`).
 
 ## Editorial workflows
@@ -204,7 +207,8 @@ A hidden dog remains in the collection but does not appear in listings. After 90
 1. Create `src/content/blog/<slug>.md`.
 2. Fill required frontmatter: `title`, `pubDate`, `author`, `description`.
 3. Optionally add `category` and `heroImage`.
-4. The post will appear in `/feed.xml` automatically.
+4. Start body headings at `##` (the page renders the only `h1` from `title`).
+5. Set `draft: true` to keep the post out of `/blog/`, `/blog/<id>/`, and `/feed.xml` until it is ready; the post will appear automatically once `draft` is `false` (the default).
 
 ## Image rules
 
@@ -249,4 +253,4 @@ All content must follow `docs/voice-and-tone.md`. Key reminders:
 
 ## Last updated
 
-2026-07-05
+2026-07-06

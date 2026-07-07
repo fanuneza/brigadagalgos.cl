@@ -1,0 +1,58 @@
+.dog-profile__back {
+  margin-bottom: var(--space-5);
+  font-size: var(--font-size-sm);
+}
+
+.dog-profile__layout {
+  display: grid;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.dog-profile__info {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.dog-profile__info h1 {
+  font-size: var(--type-section-title);
+}
+
+.dog-profile__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.dog-profile__details,
+.dog-profile__sketch {
+  font-size: var(--type-lead);
+  line-height: var(--line-loose);
+  color: var(--color-text-muted);
+}
+
+.dog-profile__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.dog-profile__support {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  max-width: 34rem;
+}
+
+@media (min-width: 1024px) {
+  .dog-profile__layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+}
+
+.dog-profile__share-live {
+  min-height: 1.5em;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-700);
+}

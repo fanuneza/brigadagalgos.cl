@@ -24,6 +24,15 @@ This document lists every page, section, and capability of the current site. It 
 - Shared lightbox: gallery (max 3 images), details, WhatsApp CTA, adoption form link.
 - Process explanation (4 steps).
 - Reassurance about post-adoption support.
+- Cards link to a full profile page at `/adoptar/<slug>/` (name link + "Conocer a {name}" button).
+
+### Dog profile (`/adoptar/<slug>/`)
+
+- One page per adoption dog with `active !== false`.
+- Per-dog title, meta description (via `buildDogMetaDescription`), and OG image (first gallery image, 1200×630).
+- Breadcrumb name override for the dog's name.
+- WhatsApp CTA and link to the adoption form.
+- Native share button with clipboard fallback.
 
 ### Por qué galgos (`/por-que-galgos/`)
 
@@ -105,8 +114,9 @@ This document lists every page, section, and capability of the current site. It 
 ### Blog
 
 - Source: `src/content/blog/`.
-- Powers `/feed.xml` RSS feed.
-- No individual post pages currently rendered.
+- Powers `/feed.xml` RSS feed and the `/blog/` listing + `/blog/<id>/` post pages.
+- Posts with `draft: true` are excluded from both the pages and the feed.
+- Post bodies start headings at `##`; the page renders the only `h1` from `title`.
 - No markdown-alternate routes (`markdownAlternate: false`).
 
 ## Shared components
@@ -168,6 +178,8 @@ This document lists every page, section, and capability of the current site. It 
 
 ## Utility / feed outputs
 
+- `/blog/` — blog listing (published posts only).
+- `/blog/<id>/` — individual blog post page.
 - `/feed.xml` — RSS feed.
 - `/sitemap.xml` / `/sitemap-index.xml` — sitemap.
 - `/schemamap.xml` — schema map index.
@@ -177,8 +189,7 @@ This document lists every page, section, and capability of the current site. It 
 
 ## Not yet implemented
 
-- Individual blog post pages.
-- Individual dog or success story detail pages (rendered via lightbox/card only).
+- Individual success story detail pages (rendered via lightbox/card only).
 - Search across content.
 - Multi-language support.
 - Server-side forms or APIs.
@@ -195,4 +206,4 @@ This document lists every page, section, and capability of the current site. It 
 
 ## Last updated
 
-2026-07-05
+2026-07-06

@@ -1,3 +1,4 @@
+import { SITE } from "../config/site";
 import { dispatchAnalytics } from "../utils/analytics";
 
 function showToast(message: string, duration = 4000): void {
@@ -113,7 +114,7 @@ function initForm() {
     const formData = new FormData(form!);
     setSubmitting(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(SITE.web3forms.endpoint, {
         method: "POST",
         body: formData,
       });
@@ -131,7 +132,7 @@ function initForm() {
           form_id: form.id || "contact-form",
           error_message: data.message ?? "API Error",
         });
-        showToast(data.message ?? "No pudimos enviar el formulario. Intentá de nuevo.");
+        showToast(data.message ?? "No pudimos enviar el formulario. Inténtalo de nuevo.");
         setSubmitting(false);
       }
     } catch {
@@ -140,7 +141,7 @@ function initForm() {
         form_id: form.id || "contact-form",
         error_message: "Network Error",
       });
-      showToast("Error de red. Revisá tu conexión e intentá de nuevo.");
+      showToast("Error de red. Revisa tu conexión e inténtalo de nuevo.");
       setSubmitting(false);
     }
   });

@@ -38,6 +38,9 @@ module.exports = {
         "uses-responsive-images": "off",
         "modern-image-formats": "off",
         "render-blocking-resources": "off",
+        // Component CSS is bundled globally by design (AGENTS.md); pages that use
+        // few components trip this audit. Keep it visible but non-blocking.
+        "unused-css-rules": "warn",
       },
     },
     upload: {

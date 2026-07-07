@@ -1,12 +1,12 @@
 ---
-
+import { SITE } from "../../config/site.ts";
 ---
 
 <section class="section-padding">
   <div class="container container--narrow">
     <p class="eyebrow">ESCRÍBENOS</p>
     <h2>O envíanos un mensaje</h2>
-    <p class="section-body">
+    <p class="section-body t-lead">
       Cuéntanos si quieres adoptar, ser hogar temporal, apoyar con una donación o hacer otra pregunta. Si falta
       información, la revisamos contigo después.
     </p>
@@ -19,8 +19,8 @@
       toolname="enviar_mensaje_contacto"
       tooldescription="Envía un mensaje de contacto a la fundación Brigada Galgos para consultas sobre adopción, hogares temporales, donaciones o consultas generales."
     >
-      <input type="hidden" name="access_key" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
-      <input type="hidden" name="form_id" value="ef1e3d39-d9cf-4778-84c4-91e619f1cfeb" />
+      <input type="hidden" name="access_key" value={SITE.web3forms.accessKey} />
+      <input type="hidden" name="form_id" value={SITE.web3forms.accessKey} />
       <input type="hidden" name="subject" value="Nuevo mensaje desde brigadagalgos.cl" />
       <input
         type="checkbox"
@@ -90,7 +90,7 @@
     </form>
 
     <div class="form__success" hidden data-form-success id="contact-success">
-      <p class="form__success-title">¡Recibimos tu mensaje!</p>
+      <p class="form__success-title t-card-title">¡Recibimos tu mensaje!</p>
       <p>Te responderemos al correo que nos dejaste.</p>
       <a href="/" class="btn btn--secondary" data-astro-prefetch>Volver al inicio</a>
     </div>

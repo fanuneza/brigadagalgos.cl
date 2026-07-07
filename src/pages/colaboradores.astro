@@ -57,8 +57,8 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
 
               <div class="supporter-card__body">
                 <span class="supporter-card__kind">{supporter.data.kind}</span>
-                <h3 class="supporter-card__name">{supporter.data.name}</h3>
-                <p class="supporter-card__description">
+                <h3 class="supporter-card__name t-card-title">{supporter.data.name}</h3>
+                <p class="supporter-card__description t-card-body">
                   {supporter.data.description}{" "}
                   {supporter.data.thanksLabel && supporter.data.thanksUrl && (
                     <ExternalLink

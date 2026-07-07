@@ -3,10 +3,6 @@
   gap: var(--space-4);
 }
 
-.mission__eyebrow {
-  margin-bottom: 0;
-}
-
 .section-heading {
   margin-bottom: 0;
   color: var(--color-text);
