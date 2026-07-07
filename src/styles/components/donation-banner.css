@@ -67,7 +67,7 @@
   font-size: var(--type-lead);
   font-weight: var(--weight-medium);
   line-height: var(--line-base);
-  margin: 0;
+  margin: 0 auto;
 }
 
 .donation-banner__cta {

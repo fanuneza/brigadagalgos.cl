@@ -16,6 +16,9 @@ const { title, description, ogImage, schema, mainId = "main-content", breadcrumb
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage} schema={schema} breadcrumbNames={breadcrumbNames}>
+  <Fragment slot="head">
+    <slot name="head" />
+  </Fragment>
   <Navbar />
   <main id={mainId}>
     <slot />

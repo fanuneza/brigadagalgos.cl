@@ -10,31 +10,13 @@
 @import url("./components/stepper.css");
 @import url("./components/stories.css");
 @import url("./components/donation-banner.css");
-@import url("./components/page-hero.css");
-@import url("./components/adoption-intro.css");
-@import url("./components/adoption-grid.css");
-@import url("./components/adoption-process.css");
-@import url("./components/filter-chips.css");
-@import url("./components/dog-card.css");
-@import url("./components/requirement-card.css");
-@import url("./components/contact-channels.css");
-@import url("./components/form.css");
 @import url("./components/footer.css");
 @import url("./components/rainbow-divider.css");
 @import url("./components/impact-section.css");
 @import url("./components/por-que-galgos.css");
-@import url("./components/supporters-intro.css");
-@import url("./components/supporters-cta.css");
 @import url("./components/trust-stats.css");
-@import url("./components/colaboradores.css");
-@import url("./components/faq.css");
 @import url("./components/cookie-banner.css");
-@import url("./components/cookie-policy.css");
-@import url("./components/hogar-temporal.css");
 @import url("./components/home.css");
-@import url("./components/donation-cards.css");
-@import url("./components/blog.css");
-@import url("./components/dog-profile.css");
 @import url("./components/motion.css");
 
 /* Metrics-matched fallback so the swap from system font to Barlow causes no layout shift. */

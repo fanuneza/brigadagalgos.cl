@@ -1,10 +1,14 @@
 ---
 import portraitSrc from "../assets/images/hero-portrait.webp";
 import landscapeSrc from "../assets/images/hero-landscape.webp";
-import { buildHeroImageSources } from "../utils/hero-images";
+import { buildHeroImageSources, type HeroImageSources } from "../utils/hero-images";
 import TrackedLink from "./TrackedLink.astro";
 
-const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
+interface Props {
+  sources?: HeroImageSources;
+}
+
+const heroSources = Astro.props.sources ?? (await buildHeroImageSources(portraitSrc, landscapeSrc));
 ---
 
 <section class="hero section-padding" data-track-section="hero">
@@ -39,7 +43,7 @@ const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
         class="hero__img"
         loading="eager"
         fetchpriority="high"
-        decoding="async"
+        decoding="sync"
         width={portraitSrc.width}
         height={portraitSrc.height}
       />

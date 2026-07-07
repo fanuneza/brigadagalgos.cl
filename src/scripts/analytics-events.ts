@@ -283,6 +283,14 @@ function queueScrollDepthEvaluation() {
   window.requestAnimationFrame(evaluateScrollDepth);
 }
 
+function queueInitialScrollDepthEvaluation() {
+  const schedule = window.requestIdleCallback ?? ((callback: IdleRequestCallback) => window.setTimeout(callback, 1200));
+
+  schedule(() => {
+    queueScrollDepthEvaluation();
+  });
+}
+
 function startScrollTracking() {
   if (!scrollListenerAttached) {
     document.addEventListener("scroll", queueScrollDepthEvaluation, { passive: true });
@@ -294,7 +302,7 @@ function startScrollTracking() {
     resizeListenerAttached = true;
   }
 
-  queueScrollDepthEvaluation();
+  queueInitialScrollDepthEvaluation();
 }
 
 function handleAnalyticsEvent(event: CustomEvent<AnalyticsDetail>) {

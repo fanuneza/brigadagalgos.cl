@@ -1,4 +1,6 @@
 ---
+import portraitSrc from "../assets/images/hero-portrait.webp";
+import landscapeSrc from "../assets/images/hero-landscape.webp";
 import Hero from "../components/Hero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import MissionSection from "../components/MissionSection.astro";
@@ -11,6 +13,7 @@ import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
+import { buildHeroImageSources } from "../utils/hero-images";
 import { shuffle } from "../utils/shuffle";
 
 const rescueSteps = [
@@ -43,13 +46,34 @@ const rescueSteps = [
 
 const rawStoryDogs = shuffle(getEntriesWithGallery(await getCollection("success-dogs")));
 const storyDogs = await buildStoryDogSummaries(rawStoryDogs, 6);
+const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
 ---
 
 <PageLayout
   title="Rescatamos galgos en todo Chile"
   description="Rescatamos, rehabilitamos y reubicamos galgos en Chile hasta encontrarles una familia segura."
 >
-  <Hero />
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset={heroSources.portraitAvifSrcSet}
+      imagesizes="calc((100vw - 48px) / 1.75)"
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset={heroSources.landscapeAvifSrcSet}
+      imagesizes="(min-width: 1200px) 528px, (min-width: 1024px) calc(50vw - 72px), calc(100vw - 48px)"
+      media="(min-width: 768px)"
+      fetchpriority="high"
+    />
+  </Fragment>
+  <Hero sources={heroSources} />
   <RainbowDivider />
   <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
   <MissionSection />
