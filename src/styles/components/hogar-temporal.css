@@ -77,6 +77,10 @@
   margin: 0;
 }
 
+.foster-cta__whatsapp-link {
+  vertical-align: baseline;
+}
+
 .requirements__notes {
   display: grid;
   gap: var(--space-3);

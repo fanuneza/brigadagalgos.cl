@@ -342,7 +342,8 @@ h2:not([hidden]) {
   margin: 0 0 var(--space-3);
 }
 
-a:not([class]) {
+a:not([class]),
+.text-link {
   color: var(--link-color, var(--color-primary-700));
   text-decoration: underline;
   text-decoration-color: var(--link-decoration-color, var(--color-primary-100));
@@ -350,10 +351,12 @@ a:not([class]) {
   font-weight: var(--weight-medium);
   transition: text-decoration-color var(--duration-fast);
 }
-a:not([class]):hover {
+a:not([class]):hover,
+.text-link:hover {
   text-decoration-color: var(--link-color, var(--color-primary-700));
 }
-a:not([class]):focus-visible {
+a:not([class]):focus-visible,
+.text-link:focus-visible {
   outline: none;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-focus);
