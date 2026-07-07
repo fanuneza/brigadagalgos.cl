@@ -472,6 +472,11 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   gap: var(--space-3);
 }
 
+.cta-card__aside {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
 main {
   display: block;
 }
