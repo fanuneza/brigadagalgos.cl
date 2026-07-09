@@ -202,3 +202,14 @@ export function buildFaqStructuredData(
     })),
   };
 }
+
+export function buildWebSiteStructuredData(): JsonLdNode {
+  const { siteUrl, name, legalName } = SITE;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name,
+    alternateName: legalName,
+    url: siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`,
+  };
+}

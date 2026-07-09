@@ -14,7 +14,10 @@ import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
 import { buildHeroImageSources } from "../utils/hero-images";
+import { buildWebSiteStructuredData } from "../utils/structured-data";
 import { shuffle } from "../utils/shuffle";
+
+const webSiteSchema = buildWebSiteStructuredData();
 
 const rescueSteps = [
   {
@@ -54,6 +57,7 @@ const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
   description="Rescatamos, rehabilitamos y reubicamos galgos en Chile hasta encontrarles una familia segura."
 >
   <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
     <link
       rel="preload"
       as="image"

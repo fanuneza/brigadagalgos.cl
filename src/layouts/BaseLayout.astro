@@ -15,9 +15,17 @@ interface Props {
   ogImage?: string;
   schema?: Record<string, any>;
   breadcrumbNames?: Record<string, string>;
+  titleTemplate?: string;
 }
 
-const { title, description, ogImage = SITE.ogImagePath, schema, breadcrumbNames } = Astro.props;
+const {
+  title,
+  description,
+  ogImage = SITE.ogImagePath,
+  schema,
+  breadcrumbNames,
+  titleTemplate = "%s | Brigada Galgos",
+} = Astro.props;
 const { siteUrl, gtmContainerId, consentCookie, name } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
@@ -46,7 +54,7 @@ const defaultSchema = buildStructuredDataGraph({
 
     <Seo
       title={title}
-      titleTemplate="%s | Brigada Galgos"
+      titleTemplate={titleTemplate}
       description={description}
       canonical={canonicalUrl}
       ogType="website"
