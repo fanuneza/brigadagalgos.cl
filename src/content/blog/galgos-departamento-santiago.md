@@ -1,11 +1,11 @@
 ---
-title: "Galgos en departamento en Santiago"
+title: "¿Puede un galgo vivir feliz en departamento?"
 pubDate: 2026-07-09
 author: "Brigada Galgos"
 description: "Vivir en departamento no descarta adoptar un galgo. Esta guía explica rutina, paseos, seguridad, frío, vecinos, adaptación y cuidados reales para familias en Santiago."
 category: "Adopción"
-heroImage: ../../assets/casos/exito/praga/praga-01.jpg
-heroImageAlt: "Praga, galga adoptada, descansando cómodamente en un departamento"
+heroImage: ../../assets/blog/galgos-departamento-santiago/galgo-en-sofa.jpg
+heroImageAlt: "Galgo descansando tapado en un sofá dentro de un departamento"
 draft: false
 ---
 
@@ -47,7 +47,7 @@ En la práctica, lo que más ayuda es esto:
 
 El metro cuadrado más importante de la casa no suele ser el patio. Es ese rincón donde el galgo aprende que nadie lo va a apurar.
 
-![Mora, galga adoptada, tranquila en su hogar](../../assets/casos/exito/mora/mora-03.jpg)
+![Galgo durmiendo profundamente en el sillón de un departamento](../../assets/blog/galgos-departamento-santiago/galgo-en-departamento.jpg)
 
 ## Una rutina realista para Santiago
 

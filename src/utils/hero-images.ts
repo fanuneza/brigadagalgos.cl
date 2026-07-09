@@ -13,17 +13,14 @@ export interface HeroImageSources {
 const PORTRAIT_WIDTHS = [360, 540, 720];
 const LANDSCAPE_WIDTHS = [640, 960, 1120];
 
-export async function buildHeroImageSources(
-  portraitSrc: ImageMetadata,
-  landscapeSrc: ImageMetadata
-): Promise<HeroImageSources> {
+export async function buildHeroImageSources(src: ImageMetadata): Promise<HeroImageSources> {
   const [portraitAvifSrcSet, portraitWebpSrcSet, landscapeAvifSrcSet, landscapeWebpSrcSet, portraitFallback] =
     await Promise.all([
-      buildSrcSet(portraitSrc, "avif", PORTRAIT_WIDTHS, 50),
-      buildSrcSet(portraitSrc, "webp", PORTRAIT_WIDTHS, 65),
-      buildSrcSet(landscapeSrc, "avif", LANDSCAPE_WIDTHS, 50),
-      buildSrcSet(landscapeSrc, "webp", LANDSCAPE_WIDTHS, 65),
-      getImage({ src: portraitSrc, format: "webp", width: 540, quality: 65 }),
+      buildSrcSet(src, "avif", PORTRAIT_WIDTHS, 50),
+      buildSrcSet(src, "webp", PORTRAIT_WIDTHS, 65),
+      buildSrcSet(src, "avif", LANDSCAPE_WIDTHS, 50),
+      buildSrcSet(src, "webp", LANDSCAPE_WIDTHS, 65),
+      getImage({ src, format: "webp", width: 540, quality: 65 }),
     ]);
 
   return {

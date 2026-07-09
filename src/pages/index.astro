@@ -1,6 +1,5 @@
 ---
-import portraitSrc from "../assets/images/hero-portrait.webp";
-import landscapeSrc from "../assets/images/hero-landscape.webp";
+import heroSrc from "../assets/images/hero.webp";
 import Hero from "../components/Hero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import MissionSection from "../components/MissionSection.astro";
@@ -49,7 +48,7 @@ const rescueSteps = [
 
 const rawStoryDogs = shuffle(getEntriesWithGallery(await getCollection("success-dogs")));
 const storyDogs = await buildStoryDogSummaries(rawStoryDogs, 6);
-const heroSources = await buildHeroImageSources(portraitSrc, landscapeSrc);
+const heroSources = await buildHeroImageSources(heroSrc);
 ---
 
 <PageLayout
