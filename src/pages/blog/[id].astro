@@ -13,6 +13,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props as { post: CollectionEntry<"blog"> };
 const { Content } = await render(post);
 const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" });
+
+// Estimated reading time, computed from the raw markdown body word count.
+const wordCount = post.body ? post.body.trim().split(/\s+/).filter(Boolean).length : 0;
+const readingMinutes = Math.max(1, Math.round(wordCount / 200));
+const readingTimeLabel = `${readingMinutes} min de lectura`;
 ---
 
 <PageLayout title={post.data.title} description={post.data.description}>
@@ -21,19 +26,24 @@ const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: 
       <p class="eyebrow">BLOG</p>
       <h1>{post.data.title}</h1>
       <p class="blog-post__meta">
-        Por {post.data.author} ·
+        Por {post.data.author}
+        {" · "}
         <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+        {" · "}
+        {readingTimeLabel}
       </p>
       {
         post.data.heroImage && (
-          <Image
-            src={post.data.heroImage}
-            alt={post.data.heroImageAlt ?? post.data.title}
-            class="blog-post__hero"
-            widths={[480, 768, 1200]}
-            sizes="(min-width: 768px) 768px, 100vw"
-            quality={78}
-          />
+          <div class="blog-post__hero-wrap">
+            <Image
+              src={post.data.heroImage}
+              alt={post.data.heroImageAlt ?? post.data.title}
+              class="blog-post__hero"
+              widths={[480, 768, 1200, 1600]}
+              sizes="(min-width: 1024px) 920px, 100vw"
+              quality={78}
+            />
+          </div>
         )
       }
     </div>
@@ -45,7 +55,9 @@ const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: 
         <Content />
       </div>
       <p class="blog-post__back">
-        <a href="/blog/">Volver al blog</a>
+        <a class="blog-post__back-link" href="/blog/">
+          Volver al blog
+        </a>
       </p>
     </div>
   </section>

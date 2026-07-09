@@ -1,5 +1,5 @@
 ---
-title: "¿Por qué los galgos son la raza perfecta para vivir en departamento?"
+title: "Galgos: la raza ideal para departamento"
 pubDate: 2026-07-09
 author: "Brigada Galgos"
 description: "Los galgos tienen fama de perros de campo, pero en realidad son ideales para departamentos en Santiago: duermen la mayor parte del día, no ladran y necesitan poco espacio para estar felices."

@@ -1,6 +1,7 @@
 ---
 import "../../styles/components/blog.css";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import RainbowDivider from "../../components/RainbowDivider.astro";
@@ -35,17 +36,37 @@ const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: 
             </InstagramLink>
           </div>
         ) : (
-          <ul class="blog-list">
-            {posts.map((post: CollectionEntry<"blog">) => (
-              <li class="blog-list__item">
-                <article>
-                  <h2 class="blog-list__title">
-                    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-                  </h2>
-                  <p class="blog-list__meta">
-                    <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
-                  </p>
-                  <p class="blog-list__desc">{post.data.description}</p>
+          <ul class="blog-grid">
+            {posts.map((post: CollectionEntry<"blog">, index: number) => (
+              <li class={`blog-grid__item${index === 0 ? " blog-grid__item--featured" : ""}`}>
+                <article class={`blog-card${index === 0 ? " blog-card--featured" : ""}`}>
+                  <div class="blog-card__media">
+                    {post.data.heroImage ? (
+                      <Image
+                        src={post.data.heroImage}
+                        alt={post.data.heroImageAlt ?? post.data.title}
+                        class="blog-card__img"
+                        widths={index === 0 ? [480, 768, 1200, 1600] : [320, 480, 640]}
+                        sizes={index === 0 ? "(min-width: 1024px) 1040px, 100vw" : "(min-width: 768px) 480px, 100vw"}
+                        quality={78}
+                      />
+                    ) : (
+                      <div class="blog-card__placeholder" aria-hidden="true" />
+                    )}
+                  </div>
+                  <div class="blog-card__body">
+                    <p class="blog-card__meta">
+                      <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+                      {" · "}
+                      {post.data.author}
+                    </p>
+                    <h2 class="blog-card__title">
+                      <a class="blog-card__link" href={`/blog/${post.id}/`}>
+                        {post.data.title}
+                      </a>
+                    </h2>
+                    <p class="blog-card__desc">{post.data.description}</p>
+                  </div>
                 </article>
               </li>
             ))}
