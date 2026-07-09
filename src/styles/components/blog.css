@@ -59,6 +59,13 @@
   text-wrap: balance;
 }
 
+.blog-post__hero {
+  margin-top: var(--space-5);
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
 .blog-post__section {
   padding-top: var(--space-7);
 }
