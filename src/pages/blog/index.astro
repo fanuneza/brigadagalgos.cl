@@ -7,11 +7,13 @@ import PageHero from "../../components/PageHero.astro";
 import RainbowDivider from "../../components/RainbowDivider.astro";
 import InstagramLink from "../../components/InstagramLink.astro";
 import { SITE } from "../../config/site.ts";
+import { getReadingTimeLabel } from "../../utils/reading-time.ts";
 
 const posts = (await getCollection("blog", ({ data }: CollectionEntry<"blog">) => !data.draft)).sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" });
+const latestPost = posts[0];
 ---
 
 <PageLayout
@@ -23,6 +25,17 @@ const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: 
     h1="Historias y novedades"
     lead="Lo que aprendemos rescatando y acompañando galgos en Chile, contado con calma y sin adornos."
   />
+  {
+    latestPost && (
+      <div class="blog-summary" aria-label="Resumen del blog">
+        <span>{posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}</span>
+        <span aria-hidden="true">·</span>
+        <span>Última actualización: {dateFormatter.format(latestPost.data.pubDate)}</span>
+        <span aria-hidden="true">·</span>
+        <a href="/feed.xml">RSS</a>
+      </div>
+    )
+  }
   <RainbowDivider />
 
   <section class="section-padding">
@@ -56,9 +69,11 @@ const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: 
                   </div>
                   <div class="blog-card__body">
                     <p class="blog-card__meta">
+                      {post.data.category && <span>{post.data.category}</span>}
+                      {post.data.category && <span aria-hidden="true">·</span>}
                       <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
                       {" · "}
-                      {post.data.author}
+                      {getReadingTimeLabel(post.body)}
                     </p>
                     <h2 class="blog-card__title">
                       <a class="blog-card__link" href={`/blog/${post.id}/`}>
@@ -66,7 +81,9 @@ const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: 
                       </a>
                     </h2>
                     <p class="blog-card__desc">{post.data.description}</p>
-                    <span class="blog-card__more" aria-hidden="true">Leer artículo →</span>
+                    <span class="blog-card__more" aria-hidden="true">
+                      Leer artículo →
+                    </span>
                   </div>
                 </article>
               </li>
