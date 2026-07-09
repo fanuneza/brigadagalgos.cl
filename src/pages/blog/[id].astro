@@ -26,7 +26,7 @@ const readingTimeLabel = `${readingMinutes} min de lectura`;
       <p class="eyebrow">BLOG</p>
       <h1>{post.data.title}</h1>
       <p class="blog-post__meta">
-        Por {post.data.author}
+        Por <span class="blog-post__author">{post.data.author}</span>
         {" · "}
         <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
         {" · "}
