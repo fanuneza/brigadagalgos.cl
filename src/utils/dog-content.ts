@@ -34,7 +34,7 @@ export function getEntriesWithGallery<T extends { data: { gallery: unknown[] } }
   return entries.filter((entry) => entry.data.gallery.length > 0);
 }
 
-export function getAgeType(age: string): AdoptionDogCard["ageType"] {
+function getAgeType(age: string): AdoptionDogCard["ageType"] {
   return /cachor/i.test(age) ? "cachorro" : "adulto";
 }
 

@@ -1,7 +1,7 @@
 import { SITE } from "../config/site.ts";
 import { faqPairs } from "../config/faq";
 
-export interface StructuredDataInput {
+interface StructuredDataInput {
   canonicalUrl: string;
   title: string;
   description: string;
@@ -11,14 +11,14 @@ export interface StructuredDataInput {
   breadcrumbNames?: Record<string, string>;
 }
 
-export type JsonLdNode = Record<string, unknown>;
+type JsonLdNode = Record<string, unknown>;
 
-export interface JsonLdGraph {
+interface JsonLdGraph {
   "@context": "https://schema.org";
   "@graph": JsonLdNode[];
 }
 
-export const breadcrumbLabels: Record<string, string> = {
+const breadcrumbLabels: Record<string, string> = {
   adoptar: "Adoptar",
   "hogar-temporal": "Hogar temporal",
   "por-que-galgos": "Por qué galgos",
@@ -133,7 +133,7 @@ export function buildStructuredDataGraph(input: StructuredDataInput): JsonLdGrap
   return { "@context": "https://schema.org", "@graph": graph };
 }
 
-export function buildBreadcrumbList(
+function buildBreadcrumbList(
   siteUrl: string,
   pathSegments: string[],
   nameOverrides?: Record<string, string>
@@ -153,7 +153,7 @@ export function buildBreadcrumbList(
   };
 }
 
-export function buildGreyhoundFaqPage(): JsonLdNode {
+function buildGreyhoundFaqPage(): JsonLdNode {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -186,9 +186,7 @@ export function buildGreyhoundFaqPage(): JsonLdNode {
   };
 }
 
-export function buildFaqStructuredData(
-  qaPairs: Array<{ question: string; answer: string; details?: string[] }>
-): JsonLdNode {
+function buildFaqStructuredData(qaPairs: Array<{ question: string; answer: string; details?: string[] }>): JsonLdNode {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
