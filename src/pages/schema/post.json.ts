@@ -1,9 +1,10 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 import { createSchemaEndpoint } from "@jdevalk/astro-seo-graph";
+import { getPublishedBlogPosts } from "../../utils/blog-content";
 import { buildSchemaGraph } from "../../utils/schema";
 
 export const GET = createSchemaEndpoint({
-  entries: () => getCollection("blog"),
+  entries: getPublishedBlogPosts,
   mapper: (post: CollectionEntry<"blog">) => {
     const url = `https://brigadagalgos.cl/blog/${post.id}/`;
     const graph = buildSchemaGraph({

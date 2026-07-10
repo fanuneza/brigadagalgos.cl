@@ -31,6 +31,28 @@ test("robots and sitemap are available", async ({ request }) => {
   expect(sitemap.ok()).toBe(true);
 });
 
+test("published blog posts are syndicated and structured", async ({ page, request }) => {
+  const postPath = "/blog/galgos-departamento-santiago/";
+  const [feed, schemaEndpoint, sitemapIndex] = await Promise.all([
+    request.get("/feed.xml"),
+    request.get("/schema/post.json"),
+    request.get("/sitemap-index.xml"),
+  ]);
+  const sitemapPaths = [...(await sitemapIndex.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+    ([, url]) => new URL(url).pathname
+  );
+  const sitemapContent = await Promise.all(sitemapPaths.map(async (path) => (await request.get(path)).text()));
+
+  expect(await feed.text()).toContain(postPath);
+  expect(await schemaEndpoint.text()).toContain(postPath);
+  expect(sitemapContent.join()).toContain(postPath);
+
+  await page.goto(postPath, { waitUntil: "load" });
+  const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+  const graphs = scripts.map((script) => JSON.parse(script) as { "@graph"?: Array<{ "@type"?: string }> });
+  expect(graphs.some((graph) => graph["@graph"]?.some((node) => node["@type"] === "BlogPosting"))).toBe(true);
+});
+
 test("json-ld scripts parse", async ({ page }) => {
   await page.goto("/", { waitUntil: "load" });
   const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();

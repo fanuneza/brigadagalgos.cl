@@ -22,6 +22,55 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
   2. `plan_turn { "repo": "...", "query": "your task", "model": "<your-model-id>" }`
 - If the repo is unfamiliar, use `suggest_queries` after `resolve_repo`.
 
+## Codex model routing
+
+Default:
+
+- Use the root Terra agent for ordinary work.
+- Do not spawn subagents for simple, clear, single-file, or mechanical tasks.
+- Do not spawn subagents just because they are available.
+- The parent Terra agent owns the final decision and final user-facing answer.
+
+Use `luna_heartbeat` for cheap read-only checks:
+
+- repository status
+- file presence
+- dependency presence
+- small-file summaries
+- simple classification
+- yes/no routing
+- checking whether something changed
+
+Use `terra_worker` for bounded implementation:
+
+- clear small features
+- straightforward bug fixes
+- small refactors
+- tests
+- documentation tied to code changes
+
+Use `sol_escalation` only for hard reasoning:
+
+- architecture decisions
+- complex debugging
+- security-sensitive review
+- performance-sensitive review
+- risky multi-file refactors
+- unclear failures
+- final review before risky implementation
+
+Use `sol_max_review` only when explicitly requested or when `sol_escalation` was insufficient.
+
+Cost discipline:
+
+- Prefer no subagent.
+- Prefer Luna for cheap read-only work.
+- Prefer Terra for ordinary implementation.
+- Prefer Sol only when the task is complex enough to justify the cost.
+- Never spawn Luna, Terra, and Sol together unless the task explicitly benefits from parallel division.
+- Subagents must return compact summaries, not raw logs.
+- Subagents must not spawn other subagents.
+
 ## Project Snapshot
 
 - Framework: Astro 7, static output only.

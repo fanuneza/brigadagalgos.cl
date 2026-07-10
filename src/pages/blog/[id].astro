@@ -1,13 +1,16 @@
 ---
 import "../../styles/components/blog.css";
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import PageLayout from "../../layouts/PageLayout.astro";
 import RainbowDivider from "../../components/RainbowDivider.astro";
 import { getReadingTimeLabel } from "../../utils/reading-time.ts";
+import { SITE } from "../../config/site.ts";
+import { getPublishedBlogPosts } from "../../utils/blog-content.ts";
+import { buildSchemaGraph } from "../../utils/schema.ts";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => !data.draft);
+  const posts = await getPublishedBlogPosts();
   return posts.map((post: CollectionEntry<"blog">) => ({ params: { id: post.id }, props: { post } }));
 }
 
@@ -15,9 +18,20 @@ const { post } = Astro.props as { post: CollectionEntry<"blog"> };
 const { Content } = await render(post);
 const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" });
 const readingTimeLabel = getReadingTimeLabel(post.body);
+const heroImageUrl = post.data.heroImage ? new URL(post.data.heroImage.src, SITE.siteUrl).href : undefined;
+const schema = buildSchemaGraph({
+  pageType: "blogPost",
+  url: new URL(`/blog/${post.id}/`, SITE.siteUrl).href,
+  title: post.data.title,
+  description: post.data.description,
+  publishDate: post.data.pubDate,
+  authorName: post.data.author,
+  featureImageUrl: heroImageUrl,
+  category: post.data.category,
+});
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<PageLayout title={post.data.title} description={post.data.description} ogImage={heroImageUrl} schema={schema}>
   <article class="blog-post section-padding">
     <div class="container container--narrow">
       <a class="blog-post__top-link" href="/blog/">Volver al blog</a>
