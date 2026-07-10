@@ -26,7 +26,7 @@ export function getPhotoCaption(item: SharedGalleryItem, index: number) {
   return item.photos[index]?.caption ?? `${item.name} · Foto ${index + 1} de ${item.photos.length}`;
 }
 
-export function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, loading: "lazy" | "eager" = "lazy") {
+function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, loading: "lazy" | "eager" = "lazy") {
   const avifSource = photo.cardAvifSrcSet
     ? `<source srcset="${photo.cardAvifSrcSet}" sizes="${escapeAttribute(photo.cardSizes)}" type="image/avif" />`
     : "";

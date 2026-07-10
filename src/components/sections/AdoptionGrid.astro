@@ -43,61 +43,65 @@ const { dogs } = Astro.props;
           <SharedPhotoGallery name={dog.name} photos={dog.pictures} loadingPriority={dogIndex < 2 ? "eager" : "lazy"} />
 
           <div class="story-card__body dog-card__body">
-            <div class="dog-card__header">
-              <h3 class="story-card__name dog-card__name t-card-title">
-                <a
-                  href={`/adoptar/${dog.id}/`}
-                  class="dog-card__name-link"
-                  data-track-event="dog_profile_click"
-                  data-track-label={dog.name}
-                  data-track-location="dog_card"
-                  data-track-destination={`/adoptar/${dog.id}/`}
-                >
-                  {dog.name}
-                </a>
-              </h3>
-              <div class="dog-card__chips">
-                <span class="chip chip--sex">{dog.sex}</span>
-                <span class="chip chip--age">{dog.age}</span>
-                <span class="chip chip--weight">{dog.weight}</span>
-                <span class="chip chip--need">{dog.currentNeed}</span>
+            <div class="dog-card__content">
+              <div class="dog-card__header">
+                <h3 class="story-card__name dog-card__name t-card-title">
+                  <a
+                    href={`/adoptar/${dog.id}/`}
+                    class="dog-card__name-link"
+                    data-track-event="dog_profile_click"
+                    data-track-label={dog.name}
+                    data-track-location="dog_card"
+                    data-track-destination={`/adoptar/${dog.id}/`}
+                  >
+                    {dog.name}
+                  </a>
+                </h3>
+                <div class="dog-card__chips">
+                  <span class="chip chip--sex">{dog.sex}</span>
+                  <span class="chip chip--age">{dog.age}</span>
+                  <span class="chip chip--weight">{dog.weight}</span>
+                  <span class="chip chip--need">{dog.currentNeed}</span>
+                </div>
               </div>
+              <p class="dog-card__details t-small-muted">{dog.details}</p>
+              <p class="dog-card__sketch">{dog.characterSketch}</p>
+              {dog.instagramUrl && (
+                <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link">
+                  <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+                  <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
+                </InstagramLink>
+              )}
             </div>
-            <p class="dog-card__details t-small-muted">{dog.details}</p>
-            <p class="dog-card__sketch">{dog.characterSketch}</p>
-            {dog.instagramUrl && (
-              <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link">
-                <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
-                <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
-              </InstagramLink>
-            )}
-            <div class="dog-card__actions">
-              <TrackedLink
-                href={SITE.adoptionForm}
-                class="btn btn--primary dog-card__cta"
-                newTab
-                trackEvent="adoption_apply_click"
-                trackLabel={`Postular - ${dog.name}`}
-                trackLocation="dog_card"
-                trackDestination={SITE.adoptionForm}
-                trackCategory="adoption"
-                trackOutbound
-              >
-                Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
-              </TrackedLink>
-              <WhatsAppLink
-                text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
-                location="dog_card"
-                label={`Más información - ${dog.name}`}
-                class="btn btn--secondary dog-card__cta"
-                data-dog-name={dog.name}
-              >
-                Más información <span class="sr-only">sobre {dog.name}</span>
-              </WhatsAppLink>
+            <div class="dog-card__footer">
+              <div class="dog-card__actions">
+                <TrackedLink
+                  href={SITE.adoptionForm}
+                  class="btn btn--primary dog-card__cta"
+                  newTab
+                  trackEvent="adoption_apply_click"
+                  trackLabel={`Postular - ${dog.name}`}
+                  trackLocation="dog_card"
+                  trackDestination={SITE.adoptionForm}
+                  trackCategory="adoption"
+                  trackOutbound
+                >
+                  Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
+                </TrackedLink>
+                <WhatsAppLink
+                  text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
+                  location="dog_card"
+                  label={`Más información - ${dog.name}`}
+                  class="btn btn--secondary dog-card__cta"
+                  data-dog-name={dog.name}
+                >
+                  Más información <span class="sr-only">sobre {dog.name}</span>
+                </WhatsAppLink>
+              </div>
+              <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
+                Ver ficha de {dog.name}
+              </a>
             </div>
-            <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
-              Ver ficha de {dog.name}
-            </a>
           </div>
         </article>
       );

@@ -27,6 +27,13 @@
   flex: 1;
 }
 
+.dog-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
 .dog-card__header {
   display: flex;
   flex-direction: column;
@@ -93,12 +100,18 @@
   line-height: var(--line-base);
 }
 
-.dog-card__actions {
+.dog-card__footer {
   margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   padding-top: var(--space-3);
+}
+
+.dog-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .dog-card__cta {
