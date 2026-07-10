@@ -514,7 +514,7 @@ main {
   display: block;
 }
 
-.requirements__note {
+.foster-requirements__note {
   margin-top: var(--space-3);
 }
 
@@ -531,7 +531,6 @@ main {
    ========================================================================= */
 
 .dog-card,
-.card,
 .story-card,
 .supporter-card,
 .donation-card,
@@ -545,7 +544,6 @@ main {
 
 @media (hover: hover) {
   .dog-card:hover,
-  .card:hover,
   .story-card:hover,
   .supporter-card:hover,
   .donation-card:hover,
@@ -558,7 +556,6 @@ main {
 }
 
 .dog-card:active,
-.card:active,
 .story-card:active,
 .supporter-card:active,
 .donation-card:active,

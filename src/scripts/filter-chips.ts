@@ -1,7 +1,7 @@
 import { dispatchAnalytics } from "../utils/analytics";
 
 function initFilterChips() {
-  const chips = document.querySelectorAll<HTMLButtonElement>(".chip-btn");
+  const chips = document.querySelectorAll<HTMLButtonElement>(".filter-chip");
   const cards = document.querySelectorAll<HTMLElement>("[data-sex]");
   const countEl = document.querySelector<HTMLElement>("[data-count]");
   const countLabelEl = document.querySelector<HTMLElement>("[data-count-label]");
@@ -35,11 +35,11 @@ function initFilterChips() {
   chips.forEach((chip) => {
     chip.addEventListener("click", () => {
       chips.forEach((candidate) => {
-        candidate.classList.remove("chip-btn--active");
+        candidate.classList.remove("filter-chip--active");
         candidate.setAttribute("aria-pressed", "false");
       });
 
-      chip.classList.add("chip-btn--active");
+      chip.classList.add("filter-chip--active");
       chip.setAttribute("aria-pressed", "true");
       activeFilter = chip.dataset.filter ?? "all";
       filter(activeFilter);

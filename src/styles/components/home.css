@@ -1,4 +1,4 @@
-.home-why-galgo__summary {
+.why-galgos-section__summary {
   display: grid;
   gap: var(--space-4);
   margin-top: var(--space-5);
@@ -8,10 +8,10 @@
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
-.home-why-galgo__summary p {
+.why-galgos-section__summary p {
   margin: 0;
 }
 
-.home-why-galgo__cta {
+.why-galgos-section__cta {
   margin-top: var(--space-5);
 }

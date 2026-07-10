@@ -24,7 +24,7 @@
   }
 }
 
-.card {
+.help-card {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
@@ -36,7 +36,7 @@
   position: relative;
 }
 
-.card::before {
+.help-card::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -51,7 +51,7 @@
   );
 }
 
-.card__title {
+.help-card__title {
   font-family: var(--font-display);
   font-weight: var(--weight-black);
   text-transform: uppercase;
@@ -59,12 +59,12 @@
   margin: 0;
 }
 
-.card__desc {
+.help-card__desc {
   margin: 0;
   flex: 1;
 }
 
-.card__cta {
+.help-card__cta {
   font-size: var(--font-size-base);
   font-weight: var(--weight-semi);
   color: var(--color-primary-700);
@@ -73,10 +73,10 @@
   align-self: flex-start;
   margin-top: auto;
 }
-.card__cta:hover {
+.help-card__cta:hover {
   color: var(--color-primary);
 }
-.card__cta:focus-visible {
+.help-card__cta:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
   border-radius: var(--radius-sm);

@@ -31,16 +31,16 @@ const suggestedAmounts = [
 <section class="section-padding">
   <div class="container">
     <h2 class="sr-only">Formas de donar</h2>
-    <p class="donation-intro">
+    <p class="donation-cards__intro">
       No hay un monto único correcto. Elige una cantidad que puedas sostener y nosotros la destinamos a las necesidades
       reales de los galgos: salud, comida, traslados, implementos y acompañamiento.
     </p>
-    <div class="donation-amounts" aria-label="Montos sugeridos">
+    <div class="donation-cards__amounts" aria-label="Montos sugeridos">
       {
         suggestedAmounts.map((item) => (
-          <div class="donation-amount">
-            <p class="donation-amount__value">{item.amount}</p>
-            <p class="donation-amount__label">{item.label}</p>
+          <div class="donation-cards__amount">
+            <p class="donation-cards__amount-value">{item.amount}</p>
+            <p class="donation-cards__amount-label">{item.label}</p>
             <p>{item.detail}</p>
           </div>
         ))
@@ -48,69 +48,69 @@ const suggestedAmounts = [
     </div>
     <div class="donation-cards">
       <div class="donation-card donation-card--transferencia" id="datos-transferencia">
-        <span class="chip chip--recommended">Recomendado</span>
+        <span class="donation-card__badge">Recomendado</span>
         <h3 class="donation-card__heading t-card-title">TRANSFERENCIA ÚNICA</h3>
         <p class="donation-card__subtitle t-small-muted">O transferencia recurrente, si lo prefieres.</p>
-        <div class="bank-info">
+        <div class="donation-card__bank-info">
           <button
             type="button"
-            class="bank-info__row"
+            class="donation-card__bank-row"
             data-copy-value="Fundación Brigada Galgos"
             aria-label="Nombre Fundación Brigada Galgos. Copiar dato."
           >
-            <span class="bank-info__label">Nombre</span>
-            <span class="bank-info__value">Fundación Brigada Galgos</span>
+            <span class="donation-card__bank-label">Nombre</span>
+            <span class="donation-card__bank-value">Fundación Brigada Galgos</span>
           </button>
           <button
             type="button"
-            class="bank-info__row"
+            class="donation-card__bank-row"
             data-copy-value="65.132.425-4"
             aria-label="RUT 65.132.425-4. Copiar dato."
           >
-            <span class="bank-info__label">RUT</span>
-            <span class="bank-info__value">65.132.425-4</span>
+            <span class="donation-card__bank-label">RUT</span>
+            <span class="donation-card__bank-value">65.132.425-4</span>
           </button>
           <button
             type="button"
-            class="bank-info__row"
+            class="donation-card__bank-row"
             data-copy-value="Mercado Pago"
             aria-label="Banco Mercado Pago. Copiar dato."
           >
-            <span class="bank-info__label">Banco</span>
-            <span class="bank-info__value">Mercado Pago</span>
+            <span class="donation-card__bank-label">Banco</span>
+            <span class="donation-card__bank-value">Mercado Pago</span>
           </button>
           <button
             type="button"
-            class="bank-info__row"
+            class="donation-card__bank-row"
             data-copy-value="Cuenta Vista"
             aria-label="Tipo de cuenta Cuenta Vista. Copiar dato."
           >
-            <span class="bank-info__label">Tipo de cuenta</span>
-            <span class="bank-info__value">Cuenta Vista</span>
+            <span class="donation-card__bank-label">Tipo de cuenta</span>
+            <span class="donation-card__bank-value">Cuenta Vista</span>
           </button>
           <button
             type="button"
-            class="bank-info__row"
+            class="donation-card__bank-row"
             data-copy-value="1073480715"
             aria-label="Número de cuenta 1073480715. Copiar dato."
           >
-            <span class="bank-info__label">Número de cuenta</span>
-            <span class="bank-info__value">1073480715</span>
+            <span class="donation-card__bank-label">Número de cuenta</span>
+            <span class="donation-card__bank-value">1073480715</span>
           </button>
           <button
             type="button"
-            class="bank-info__row"
+            class="donation-card__bank-row"
             data-copy-value={SITE.email}
             aria-label={`Correo ${SITE.email}. Copiar dato.`}
           >
-            <span class="bank-info__label">Correo</span>
-            <span class="bank-info__value">{SITE.email}</span>
+            <span class="donation-card__bank-label">Correo</span>
+            <span class="donation-card__bank-value">{SITE.email}</span>
           </button>
         </div>
         <button type="button" class="btn btn--secondary" id="copy-bank-data" aria-label="Copiar datos bancarios">
           Copiar datos
         </button>
-        <div class="bank-info__live" data-copy-live aria-live="polite" aria-atomic="true"></div>
+        <div class="donation-card__copy-live" data-copy-live aria-live="polite" aria-atomic="true"></div>
         <p class="donation-card__info t-card-body">
           Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una vez.
         </p>
@@ -153,7 +153,7 @@ const suggestedAmounts = [
           Voy a apoyar un galgo <span class="sr-only"> (abre en una nueva pestaña)</span>
         </TrackedLink>
       </div>
-      <p class="donation-transparency">
+      <p class="donation-cards__transparency">
         Usamos los aportes para necesidades directas de los galgos rescatados y sus hogares temporales. Si necesitas
         coordinar una donación específica o pedir más detalle, escríbenos y lo revisamos contigo. También compartimos
         avances por nuestros canales cuando el equipo puede hacerlo, sin comprometer una cadencia fija.

@@ -18,11 +18,11 @@ const { dogs } = Astro.props;
 ---
 
 <div class="filter-chips" role="group" aria-label="Filtrar galgos">
-  <button class="chip-btn chip-btn--active" data-filter="all" aria-pressed="true">Todos</button>
-  <button class="chip-btn" data-filter="Macho" aria-pressed="false">Macho</button>
-  <button class="chip-btn" data-filter="Hembra" aria-pressed="false">Hembra</button>
-  <button class="chip-btn" data-filter="adulto" aria-pressed="false">Adultos</button>
-  <button class="chip-btn" data-filter="cachorro" aria-pressed="false">Cachorros</button>
+  <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">Todos</button>
+  <button class="filter-chip" data-filter="Macho" aria-pressed="false">Macho</button>
+  <button class="filter-chip" data-filter="Hembra" aria-pressed="false">Hembra</button>
+  <button class="filter-chip" data-filter="adulto" aria-pressed="false">Adultos</button>
+  <button class="filter-chip" data-filter="cachorro" aria-pressed="false">Cachorros</button>
 </div>
 
 <p class="dog-grid__count" aria-live="polite">
@@ -58,10 +58,10 @@ const { dogs } = Astro.props;
                   </a>
                 </h3>
                 <div class="dog-card__chips">
-                  <span class="chip chip--sex">{dog.sex}</span>
-                  <span class="chip chip--age">{dog.age}</span>
-                  <span class="chip chip--weight">{dog.weight}</span>
-                  <span class="chip chip--need">{dog.currentNeed}</span>
+                  <span class="dog-chip dog-chip--sex">{dog.sex}</span>
+                  <span class="dog-chip dog-chip--age">{dog.age}</span>
+                  <span class="dog-chip dog-chip--weight">{dog.weight}</span>
+                  <span class="dog-chip dog-chip--need">{dog.currentNeed}</span>
                 </div>
               </div>
               <p class="dog-card__details t-small-muted">{dog.details}</p>
@@ -72,8 +72,6 @@ const { dogs } = Astro.props;
                   <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
                 </InstagramLink>
               )}
-            </div>
-            <div class="dog-card__footer">
               <div class="dog-card__actions">
                 <TrackedLink
                   href={SITE.adoptionForm}
@@ -98,6 +96,8 @@ const { dogs } = Astro.props;
                   Más información <span class="sr-only">sobre {dog.name}</span>
                 </WhatsAppLink>
               </div>
+            </div>
+            <div class="dog-card__footer">
               <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
                 Ver ficha de {dog.name}
               </a>

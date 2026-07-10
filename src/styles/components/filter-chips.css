@@ -5,7 +5,7 @@
   margin-bottom: var(--space-4);
 }
 
-.chip-btn {
+.filter-chip {
   display: inline-flex;
   align-items: center;
   padding: var(--space-2) var(--space-4);
@@ -18,24 +18,24 @@
   cursor: pointer;
   min-height: 24px;
 }
-.chip-btn:focus-visible {
+.filter-chip:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
 }
 
-.chip-btn--active {
+.filter-chip--active {
   background: var(--color-primary);
   color: var(--on-primary);
 }
 
-:root[data-theme="dark"] .chip-btn--active {
+:root[data-theme="dark"] .filter-chip--active {
   background: var(--color-primary-100);
   border-color: var(--color-primary-100);
   color: var(--color-primary-700);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .chip-btn--active {
+  :root:not([data-theme]) .filter-chip--active {
     background: var(--color-primary-100);
     border-color: var(--color-primary-100);
     color: var(--color-primary-700);
@@ -43,7 +43,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .chip-btn {
+  .filter-chip {
     transition:
       background var(--duration-fast) var(--ease-out),
       color var(--duration-fast) var(--ease-out);

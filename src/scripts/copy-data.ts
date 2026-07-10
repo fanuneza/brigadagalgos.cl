@@ -28,18 +28,18 @@ function announceCopied(message: string) {
 }
 
 function showCopiedTooltip(target: HTMLElement) {
-  const existing = target.querySelector(".copy-tooltip");
+  const existing = target.querySelector(".donation-card__copy-tooltip");
   if (existing) return;
 
   const tooltip = document.createElement("span");
-  tooltip.className = "copy-tooltip";
+  tooltip.className = "donation-card__copy-tooltip";
   tooltip.textContent = "Copiado";
   target.appendChild(tooltip);
 
-  requestAnimationFrame(() => tooltip.classList.add("copy-tooltip--visible"));
+  requestAnimationFrame(() => tooltip.classList.add("donation-card__copy-tooltip--visible"));
 
   setTimeout(() => {
-    tooltip.classList.remove("copy-tooltip--visible");
+    tooltip.classList.remove("donation-card__copy-tooltip--visible");
     tooltip.addEventListener("transitionend", () => tooltip.remove(), { once: true });
   }, 1500);
 }

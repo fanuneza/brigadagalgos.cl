@@ -4,7 +4,7 @@
   align-items: start;
 }
 
-.donation-intro {
+.donation-cards__intro {
   max-width: 64ch;
   margin: 0 0 var(--space-5);
   font-size: var(--type-lead);
@@ -12,17 +12,17 @@
   color: var(--color-text-muted);
 }
 
-.donation-transparency {
+.donation-cards__transparency {
   margin: 0;
 }
 
-.donation-amounts {
+.donation-cards__amounts {
   display: grid;
   gap: var(--space-4);
   margin-bottom: var(--space-6);
 }
 
-.donation-amount {
+.donation-cards__amount {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -32,7 +32,7 @@
   overflow: hidden;
 }
 
-.donation-amount::before {
+.donation-cards__amount::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -46,7 +46,7 @@
   );
 }
 
-.donation-amount__value {
+.donation-cards__amount-value {
   font-family: var(--font-display);
   font-size: var(--font-size-xl);
   font-weight: var(--weight-black);
@@ -54,16 +54,16 @@
   line-height: var(--line-tight);
 }
 
-.donation-amount__label {
+.donation-cards__amount-label {
   font-weight: var(--weight-semi);
   margin: var(--space-1) 0 var(--space-2);
 }
 
-.donation-amount p:last-child {
+.donation-cards__amount p:last-child {
   margin: 0;
 }
 
-.bank-info__live {
+.donation-card__copy-live {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -76,7 +76,7 @@
 }
 
 @media (min-width: 768px) {
-  .donation-amounts {
+  .donation-cards__amounts {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -96,12 +96,12 @@
     grid-row: 1;
   }
 
-  .donation-transparency {
+  .donation-cards__transparency {
     grid-column: 2;
     grid-row: 2;
   }
 
-  .donation-amounts {
+  .donation-cards__amounts {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -137,7 +137,7 @@
     var(--color-bg);
 }
 
-.chip--recommended {
+.donation-card__badge {
   align-self: flex-start;
   background: var(--color-primary);
   color: var(--on-primary);
@@ -169,7 +169,7 @@
   margin: 0;
 }
 
-.donation-transparency {
+.donation-cards__transparency {
   max-width: 72ch;
   color: var(--color-text-muted);
   padding: var(--space-5);
@@ -178,7 +178,7 @@
   border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
 }
 
-.bank-info {
+.donation-card__bank-info {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -186,7 +186,7 @@
   padding: 0;
 }
 
-.bank-info__row {
+.donation-card__bank-row {
   appearance: none;
   width: 100%;
   border: 1px solid transparent;
@@ -201,7 +201,7 @@
   position: relative;
 }
 
-.bank-info__row::after {
+.donation-card__bank-row::after {
   content: "Copiar";
   position: absolute;
   top: 50%;
@@ -214,11 +214,11 @@
   transition: opacity var(--duration-fast) var(--ease-out);
 }
 
-.bank-info__row:active {
+.donation-card__bank-row:active {
   transform: translateY(1px);
 }
 
-.bank-info__label {
+.donation-card__bank-label {
   font-size: var(--font-size-xs);
   font-weight: var(--weight-semi);
   text-transform: uppercase;
@@ -227,20 +227,20 @@
   margin: 0;
 }
 
-.bank-info__value {
+.donation-card__bank-value {
   font-size: var(--font-size-base);
   color: var(--color-text);
   margin: 0;
 }
 
-.bank-info__row:hover,
-.bank-info__row:focus-visible {
+.donation-card__bank-row:hover,
+.donation-card__bank-row:focus-visible {
   border-color: var(--color-primary);
   box-shadow: var(--shadow-sm);
 }
 
-.bank-info__row:hover::after,
-.bank-info__row:focus-visible::after {
+.donation-card__bank-row:hover::after,
+.donation-card__bank-row:focus-visible::after {
   opacity: 1;
 }
 
@@ -248,7 +248,7 @@
   position: relative;
 }
 
-.copy-tooltip {
+.donation-card__copy-tooltip {
   position: absolute;
   top: 50%;
   right: var(--space-3);
@@ -266,6 +266,6 @@
   z-index: 1;
 }
 
-.copy-tooltip--visible {
+.donation-card__copy-tooltip--visible {
   opacity: 1;
 }

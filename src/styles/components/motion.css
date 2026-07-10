@@ -5,9 +5,7 @@
   @supports (animation-timeline: view()) {
     .story-card,
     .dog-card,
-    .card,
     .donation-card,
-    .donation-amount,
     .req-card,
     .stat-card,
     .channel-card,
