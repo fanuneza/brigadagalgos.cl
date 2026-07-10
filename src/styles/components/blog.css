@@ -26,13 +26,19 @@
 .blog-summary {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   gap: var(--space-2);
   max-width: 68ch;
-  margin: calc(-1 * var(--space-4)) auto var(--space-6);
-  padding-inline: var(--space-4);
+  margin: 0 auto var(--space-7);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: color-mix(in sRGB, var(--color-primary) 5%, var(--color-surface));
+  box-shadow: var(--shadow-sm);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
+  line-height: var(--line-base);
   text-align: center;
 }
 

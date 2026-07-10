@@ -4,8 +4,8 @@ pubDate: 2026-07-09
 author: "Brigada Galgos"
 description: "Vivir en departamento no descarta adoptar un galgo. Esta guía explica rutina, paseos, seguridad, frío, vecinos, adaptación y cuidados reales para familias en Santiago."
 category: "Adopción"
-heroImage: ../../assets/blog/galgos-departamento-santiago/galgo-en-sofa.jpg
-heroImageAlt: "Galgo descansando tapado en un sofá dentro de un departamento"
+heroImage: ../../assets/casos/exito/praga/praga-01.jpg
+heroImageAlt: "Praga, galga adoptada, descansando cómodamente en un departamento"
 draft: false
 ---
 
@@ -78,6 +78,8 @@ Los galgos tienen pelo corto, piel fina y poca grasa corporal. En otoño e invie
 
 También necesitan una cama blanda. Su cuerpo es largo, huesudo y liviano para correr, no para dormir en piso duro. Una cama gruesa evita molestias, ayuda al descanso y les da un lugar propio. Si el departamento recibe sol de tarde, probablemente ese punto se transformará en territorio galgo.
 
+![Galgo descansando tapado en un sofá dentro de un departamento](../../assets/blog/galgos-departamento-santiago/galgo-en-sofa.jpg)
+
 Con el calor pasa algo parecido: cuidado con paseos en horas de mucho sol, pavimento caliente y poca sombra. En verano santiaguino, las salidas largas funcionan mejor temprano o al atardecer. Agua disponible siempre.
 
 ## Seguridad dentro del departamento
@@ -107,6 +109,8 @@ Una de las mejores cosas que puedes hacer por un galgo recién adoptado es no ll
 Necesita entender dónde se duerme, cuándo se sale, quién lo cuida y qué sonidos son parte normal de la casa. El refrigerador. El ascensor. La aspiradora. El camión de la basura. Los perros del piso de arriba. La vida urbana está llena de información.
 
 Durante los primeros días, recomendamos paseos simples y repetidos, una zona de descanso clara, pocas visitas y supervisión tranquila. Si se esconde o mira todo con desconfianza, no significa que la adopción vaya mal. Muchas veces significa que por fin tiene tiempo para procesar.
+
+![Mora, galga adoptada, tranquila en su hogar](../../assets/casos/exito/mora/mora-03.jpg)
 
 ## Señales de que la rutina va bien
 

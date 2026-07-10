@@ -25,21 +25,21 @@ const latestPost = posts[0];
     h1="Historias y novedades"
     lead="Lo que aprendemos rescatando y acompañando galgos en Chile, contado con calma y sin adornos."
   />
-  {
-    latestPost && (
-      <div class="blog-summary" aria-label="Resumen del blog">
-        <span>{posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}</span>
-        <span aria-hidden="true">·</span>
-        <span>Última actualización: {dateFormatter.format(latestPost.data.pubDate)}</span>
-        <span aria-hidden="true">·</span>
-        <a href="/feed.xml">RSS</a>
-      </div>
-    )
-  }
   <RainbowDivider />
 
   <section class="section-padding">
     <div class="container container--narrow">
+      {
+        latestPost && (
+          <div class="blog-summary" aria-label="Resumen del blog">
+            <span>{posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}</span>
+            <span aria-hidden="true">·</span>
+            <span>Última actualización: {dateFormatter.format(latestPost.data.pubDate)}</span>
+            <span aria-hidden="true">·</span>
+            <a href="/feed.xml">RSS</a>
+          </div>
+        )
+      }
       {
         posts.length === 0 ? (
           <div class="blog-empty">
