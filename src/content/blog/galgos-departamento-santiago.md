@@ -1,6 +1,6 @@
 ---
 title: "¿Puede un galgo vivir feliz en departamento?"
-pubDate: 2026-07-09
+pubDate: 2026-06-22
 author: "Brigada Galgos"
 description: "Vivir en departamento no descarta adoptar un galgo. Esta guía explica rutina, paseos, seguridad, frío, vecinos, adaptación y cuidados reales para familias en Santiago."
 category: "Adopción"
