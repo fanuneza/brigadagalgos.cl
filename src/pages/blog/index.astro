@@ -28,16 +28,19 @@ const latestPost = posts[0];
   />
   <RainbowDivider />
 
-  <section class="section-padding">
-    <div class="container container--narrow">
+  <section class="section-padding blog-index">
+    <div class="container blog-index__container">
       {
         latestPost && (
-          <div class="blog-summary" aria-label="Resumen del blog">
-            <span>{posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}</span>
-            <span aria-hidden="true">·</span>
-            <span>Última actualización: {dateFormatter.format(latestPost.data.pubDate)}</span>
-            <span aria-hidden="true">·</span>
-            <a href="/feed.xml">RSS</a>
+          <div class="blog-listing__intro">
+            <p class="blog-listing__label">Publicaciones recientes</p>
+            <div class="blog-summary" aria-label="Resumen del blog">
+              <span>{posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}</span>
+              <span aria-hidden="true">·</span>
+              <span>Última actualización: {dateFormatter.format(latestPost.data.pubDate)}</span>
+              <span aria-hidden="true">·</span>
+              <a href="/feed.xml">RSS</a>
+            </div>
           </div>
         )
       }
