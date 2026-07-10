@@ -467,6 +467,29 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   text-align: center;
 }
 
+.end-cta {
+  position: relative;
+  overflow: clip;
+  background: linear-gradient(
+    180deg,
+    color-mix(in sRGB, var(--color-surface) 88%, var(--color-bg)),
+    color-mix(in sRGB, var(--color-primary-100) 12%, var(--color-bg))
+  );
+}
+
+.cta-card--end {
+  position: relative;
+  padding: clamp(var(--space-7), 5vw, calc(var(--space-8) * 1.4));
+}
+
+.cta-card--end > p:not(.eyebrow, .cta-card__aside) {
+  max-width: 62ch;
+}
+
+.cta-card--end h2 {
+  max-width: 20ch;
+}
+
 .cta-card > * {
   margin: 0;
 }

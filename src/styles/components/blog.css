@@ -284,7 +284,7 @@
     grid-column: span 6;
   }
 
-  .blog-grid__item--featured {
+  .blog-grid > .blog-grid__item--featured {
     grid-column: 1 / -1;
   }
 

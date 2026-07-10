@@ -20,9 +20,9 @@ const ways = [
 ];
 ---
 
-<section class="section-padding tail-cta">
+<section class="section-padding tail-cta end-cta">
   <div class="container container--narrow">
-    <div class="cta-card">
+    <div class="cta-card cta-card--end">
       <p class="eyebrow">OTRAS FORMAS DE AYUDAR</p>
       <h2>También nos puedes apoyar así</h2>
 
@@ -40,14 +40,16 @@ const ways = [
         }
       </ul>
 
-      <WhatsAppLink
-        text="Hola, quiero ayudar de otra forma"
-        location="help_tail_cta"
-        label="Coordina por WhatsApp - Help Tail CTA"
-        class="btn btn--secondary"
-      >
-        Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-      </WhatsAppLink>
+      <div class="cta-card__actions">
+        <WhatsAppLink
+          text="Hola, quiero ayudar de otra forma"
+          location="help_tail_cta"
+          label="Coordina por WhatsApp - Help Tail CTA"
+          class="btn btn--primary"
+        >
+          Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+        </WhatsAppLink>
+      </div>
     </div>
   </div>
 </section>

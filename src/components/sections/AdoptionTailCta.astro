@@ -4,37 +4,40 @@ import TrackedLink from "../../components/TrackedLink.astro";
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
 ---
 
-<section class="section-padding tail-cta">
+<section class="section-padding tail-cta end-cta">
   <div class="container container--narrow">
-    <div class="cta-card">
-      <h3>¿Quieres hablarlo antes de postular?</h3>
+    <div class="cta-card cta-card--end">
+      <p class="eyebrow">SIGUIENTE PASO</p>
+      <h2>¿Quieres hablarlo antes de postular?</h2>
       <p>
         Escríbenos sin apuro. Te ayudamos a revisar si tu rutina, espacio y expectativas son adecuados para alguno de
         los galgos.
       </p>
-      <TrackedLink
-        href={SITE.adoptionForm}
-        class="btn btn--primary"
-        newTab
-        trackEvent="adoption_apply_click"
-        trackLabel="Postular - Adoption Tail CTA"
-        trackLocation="tail_cta"
-        trackDestination={SITE.adoptionForm}
-        trackCategory="adoption"
-        trackOutbound
-      >
-        Postular <span class="sr-only"> (abre en una nueva pestaña)</span>
-      </TrackedLink>
-      <WhatsAppLink
-        text="Hola, quisiera saber más sobre adopción"
-        location="tail_cta"
-        label="Más información - Adoption Tail CTA"
-        class="btn btn--secondary"
-      >
-        Más información <span class="sr-only">sobre adopción</span>
-      </WhatsAppLink>
+      <div class="cta-card__actions">
+        <TrackedLink
+          href={SITE.adoptionForm}
+          class="btn btn--primary"
+          newTab
+          trackEvent="adoption_apply_click"
+          trackLabel="Postular - Adoption Tail CTA"
+          trackLocation="tail_cta"
+          trackDestination={SITE.adoptionForm}
+          trackCategory="adoption"
+          trackOutbound
+        >
+          Postular <span class="sr-only"> (abre en una nueva pestaña)</span>
+        </TrackedLink>
+        <WhatsAppLink
+          text="Hola, quisiera saber más sobre adopción"
+          location="tail_cta"
+          label="Más información - Adoption Tail CTA"
+          class="btn btn--secondary"
+        >
+          Más información <span class="sr-only">sobre adopción</span>
+        </WhatsAppLink>
+      </div>
       <p class="cta-card__aside">
-        ¿Dudas sobre costos, departamento, niños u otros animales?
+        ¿Dudas sobre costos, departamento, niños u otros animales?{" "}
         <a href="/preguntas-frecuentes/">Revisa las preguntas frecuentes</a>
       </p>
     </div>

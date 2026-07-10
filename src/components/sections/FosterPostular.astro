@@ -43,21 +43,25 @@ const steps = [
       }
     </ol>
 
-    <div class="foster-cta cta-card">
-      <TrackedLink
-        href="https://forms.gle/3YHPo8KKnCiySbCo6"
-        class="btn btn--primary"
-        newTab
-        trackEvent="foster_apply_click"
-        trackLabel="Postula aquí - Foster Application"
-        trackLocation="foster_cta"
-        trackDestination="https://forms.gle/3YHPo8KKnCiySbCo6"
-        trackCategory="foster"
-        trackOutbound
-        data-application-form-url="https://forms.gle/3YHPo8KKnCiySbCo6"
-      >
-        Puedo ser hogar temporal <span class="sr-only"> (abre en una nueva pestaña)</span>
-      </TrackedLink>
+    <div class="foster-cta cta-card cta-card--end">
+      <p class="eyebrow">SIGUIENTE PASO</p>
+      <h2>¿Puedes abrir un espacio temporal?</h2>
+      <div class="cta-card__actions">
+        <TrackedLink
+          href="https://forms.gle/3YHPo8KKnCiySbCo6"
+          class="btn btn--primary"
+          newTab
+          trackEvent="foster_apply_click"
+          trackLabel="Postula aquí - Foster Application"
+          trackLocation="foster_cta"
+          trackDestination="https://forms.gle/3YHPo8KKnCiySbCo6"
+          trackCategory="foster"
+          trackOutbound
+          data-application-form-url="https://forms.gle/3YHPo8KKnCiySbCo6"
+        >
+          Puedo ser hogar temporal <span class="sr-only"> (abre en una nueva pestaña)</span>
+        </TrackedLink>
+      </div>
       <p class="foster-cta__fallback">
         ¿Prefieres hablar primero?{" "}
         <WhatsAppLink
