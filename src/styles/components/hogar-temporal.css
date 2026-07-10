@@ -77,9 +77,9 @@
   gap: var(--space-3);
   margin-top: var(--space-6);
   padding: var(--space-5);
-  border-left: 3px solid var(--color-secondary);
+  border: 1px solid color-mix(in sRGB, var(--color-secondary) 38%, var(--color-border));
   background: color-mix(in sRGB, var(--color-bg) 86%, var(--color-secondary-100));
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
 

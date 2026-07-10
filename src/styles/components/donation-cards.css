@@ -173,9 +173,9 @@
   max-width: 72ch;
   color: var(--color-text-muted);
   padding: var(--space-5);
-  border-left: 4px solid color-mix(in sRGB, var(--color-primary) 42%, transparent);
+  border: 1px solid color-mix(in sRGB, var(--color-primary) 42%, var(--color-border));
   background: color-mix(in sRGB, var(--color-surface) 72%, var(--color-bg));
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  border-radius: var(--radius-lg);
 }
 
 .donation-card__bank-info {

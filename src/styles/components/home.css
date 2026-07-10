@@ -3,9 +3,9 @@
   gap: var(--space-4);
   margin-top: var(--space-5);
   padding: var(--space-5);
-  border-left: 3px solid var(--color-primary);
+  border: 1px solid color-mix(in sRGB, var(--color-primary) 34%, var(--color-border));
   background: color-mix(in sRGB, var(--color-surface) 72%, var(--color-bg));
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-radius: var(--radius-md);
 }
 
 .why-galgos-section__summary p {

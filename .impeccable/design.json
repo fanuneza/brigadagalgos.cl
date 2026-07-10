@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-10T00:00:00-04:00",
+  "title": "Design System: Brigada Galgos",
+  "extensions": {
+    "colorMeta": {
+      "primary-cyan": {
+        "role": "primary",
+        "displayName": "Cian de compañía",
+        "canonical": "#00bcd4",
+        "tonalRamp": ["#00343b", "#00515c", "#006d78", "#008b99", "#00a7bc", "#00bcd4", "#54d3df", "#cff4f8"]
+      },
+      "secondary-magenta": {
+        "role": "secondary",
+        "displayName": "Magenta de impulso",
+        "canonical": "#e91e8c",
+        "tonalRamp": ["#3f0928", "#681044", "#8d1460", "#b8156d", "#d51b80", "#e91e8c", "#f37ab8", "#fcdcec"]
+      },
+      "action-orange": {
+        "role": "tertiary",
+        "displayName": "Naranjo de acción",
+        "canonical": "#ffa726",
+        "tonalRamp": ["#402100", "#673500", "#8a4800", "#a85400", "#d27800", "#ffa726", "#ffc266", "#ffe7c2"]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Blanco de respiro",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1f2328", "#424a54", "#727982", "#a7adb5", "#cfd3d9", "#eceef2", "#f5f6f8", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Titular de rescate",
+        "purpose": "Titulares principales que deben leerse de inmediato."
+      },
+      "headline": { "displayName": "Titular de sección", "purpose": "Jerarquía de secciones y nombres destacados." },
+      "body": { "displayName": "Conversación clara", "purpose": "Explicaciones, fichas y contenido de apoyo." },
+      "lead": { "displayName": "Reaseguro", "purpose": "Resolver dudas antes de pedir una acción." }
+    },
+    "shadows": [
+      {
+        "name": "contacto-leve",
+        "value": "0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 1px rgba(15, 23, 42, 0.04)",
+        "purpose": "Separación mínima de controles y superficies."
+      },
+      {
+        "name": "tarjeta-activa",
+        "value": "0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04)",
+        "purpose": "Tarjetas al interactuar y barra desplazada."
+      },
+      {
+        "name": "panel",
+        "value": "0 16px 32px rgba(15, 23, 42, 0.12), 0 4px 8px rgba(15, 23, 42, 0.06)",
+        "purpose": "Drawer móvil y capas modales."
+      },
+      { "name": "foco", "value": "0 0 0 3px rgba(0, 188, 212, 0.35)", "purpose": "Foco visible de teclado." }
+    ],
+    "motion": [
+      {
+        "name": "salida",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Transiciones de estado y desplazamiento."
+      },
+      { "name": "rapida", "value": "150ms", "purpose": "Feedback de botón, enlace y foco." },
+      { "name": "base", "value": "240ms", "purpose": "Apertura de controles y cambios de estado normales." },
+      {
+        "name": "lenta",
+        "value": "420ms",
+        "purpose": "Transiciones de mayor presencia, siempre respetando reducción de movimiento."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "1024px" },
+      { "name": "lg", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal para adoptar, donar, postular o enviar un formulario.",
+      "html": "<button class=\"ds-btn-primary\">Quiero adoptar</button>",
+      "css": ".ds-btn-primary { min-height: 48px; padding: 12px 24px; border: 2px solid transparent; border-radius: 9999px; background: var(--color-accent-warm); color: var(--color-text-on-brand); font: 700 1rem var(--font-body); cursor: pointer; transition: background 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: var(--color-accent-warm-700); } .ds-btn-primary:focus-visible { outline: none; box-shadow: var(--shadow-focus); } .ds-btn-primary:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ruta alternativa importante, como hogar temporal o más información.",
+      "html": "<button class=\"ds-btn-secondary\">Puedo ser hogar temporal</button>",
+      "css": ".ds-btn-secondary { min-height: 48px; padding: 12px 24px; border: 2px solid var(--btn-secondary-border); border-radius: 9999px; background: var(--btn-secondary-bg); color: var(--btn-secondary-fg); font: 700 1rem var(--font-body); cursor: pointer; transition: background 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary:hover { background: var(--btn-secondary-bg-hover); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: var(--shadow-focus); }"
+    },
+    {
+      "name": "Ficha de galgo",
+      "kind": "card",
+      "refersTo": "story-card",
+      "description": "Contenedor fotográfico para una historia de adopción o un galgo disponible.",
+      "html": "<article class=\"ds-story-card\"><div class=\"ds-story-photo\"></div><div class=\"ds-story-body\"><strong>Bruno</strong><p>Conoce su historia y cómo acompañarlo.</p></div></article>",
+      "css": ".ds-story-card { overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); box-shadow: 0 18px 38px rgba(31, 35, 40, 0.08); color: var(--color-text); font-family: var(--font-body); transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-story-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); } .ds-story-photo { aspect-ratio: 1; background: var(--color-primary-100); } .ds-story-body { padding: 24px; } .ds-story-body strong { display: block; font: 900 1.375rem var(--font-display); text-transform: uppercase; } .ds-story-body p { margin: 8px 0 0; color: var(--color-text-muted); line-height: 1.55; }"
+    },
+    {
+      "name": "Chip de filtro",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "Filtro compacto para explorar galgos sin perder contexto.",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"true\">Todos</button>",
+      "css": ".ds-chip { min-height: 40px; padding: 8px 16px; border: 1px solid var(--color-border); border-radius: 9999px; background: var(--color-bg); color: var(--color-text); font: 700 0.875rem var(--font-body); cursor: pointer; } .ds-chip[aria-pressed=\"true\"] { border-color: var(--color-primary); background: var(--color-primary); color: var(--color-text-on-brand); } .ds-chip:focus-visible { outline: none; box-shadow: var(--shadow-focus); }"
+    },
+    {
+      "name": "Navegación móvil",
+      "kind": "nav",
+      "refersTo": "navbar-drawer",
+      "description": "Panel lateral para navegación móvil y acceso directo a donaciones.",
+      "html": "<nav class=\"ds-mobile-nav\"><strong>Brigada Galgos</strong><a href=\"#\">Adoptar</a><a href=\"#\">Hogar temporal</a><button>Voy a apoyar un galgo</button></nav>",
+      "css": ".ds-mobile-nav { width: min(320px, 100%); padding: 24px 32px; background: var(--color-bg); color: var(--color-text); box-shadow: var(--shadow-lg); font-family: var(--font-body); } .ds-mobile-nav strong { display: block; margin-bottom: 24px; font: 900 1.375rem var(--font-display); text-transform: uppercase; } .ds-mobile-nav a { display: block; padding: 12px 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); font: 700 1.375rem var(--font-display); text-decoration: none; text-transform: uppercase; } .ds-mobile-nav a:hover, .ds-mobile-nav a:focus-visible { color: var(--color-primary-700); } .ds-mobile-nav button { width: 100%; min-height: 48px; margin-top: 24px; border: 0; border-radius: 9999px; background: var(--color-accent-warm); color: var(--color-text-on-brand); font: 700 1rem var(--font-body); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El refugio en movimiento",
+    "overview": "El sistema combina la energía afectuosa de una organización de rescate con la calma que necesita quien está pensando en adoptar, donar o abrir su casa temporalmente. La fotografía de cada galgo es el punto de contacto principal; el color dirige la acción y la tipografía condensada hace que la voz se sienta humana, decidida y reconocible. La interfaz debe ser clara desde el primer scroll y estar hecha para móvil sin volverse pequeña ni tímida en pantallas grandes.",
+    "keyCharacteristics": [
+      "Fotografía cercana y optimizada como prueba emocional y práctica.",
+      "Tipografía compacta y expresiva para títulos, con cuerpo amable y muy legible.",
+      "Paleta pop controlada: cian, magenta y naranjo cumplen funciones distintas.",
+      "CTA directas, grandes y con lenguaje humano.",
+      "Superficies curvas, elevación suave y navegación accesible."
+    ],
+    "rules": [
+      {
+        "name": "The Purposeful Palette Rule",
+        "body": "Cada color saturado debe tener una tarea: orientar, pedir acción, señalar un hito o acompañar una imagen. Si no tiene una tarea, no se usa.",
+        "section": "colors"
+      },
+      {
+        "name": "The Human Headline Rule",
+        "body": "Los títulos pueden ser enfáticos, pero el cuerpo debe responder la duda práctica que sigue. Nunca uses el display como decoración desconectada de una decisión real.",
+        "section": "typography"
+      },
+      {
+        "name": "The Earned Elevation Rule",
+        "body": "Toda sombra debe explicar una relación espacial o un estado. El brillo difuso usado solo para verse moderno está prohibido.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do usar el naranjo para una sola acción principal por agrupación y el cian para rutas secundarias, foco y orientación.",
+      "Do dar a cada fotografía de galgo un texto alternativo útil y un encuadre que preserve la presencia del perro.",
+      "Do mantener el cuerpo en tinta o tinta atenuada sobre fondos claros, con contraste de texto de al menos 4.5:1.",
+      "Do respetar la reducción de movimiento y dejar el contenido visible incluso cuando una animación no pueda ejecutarse."
+    ],
+    "donts": [
+      "Don't parecer una ONG distante, institucional o genérica.",
+      "Don't usar culpa, urgencia vacía o relatos de sufrimiento sin salida para pedir una acción.",
+      "Don't reemplazar la claridad por gradientes decorativos, texto en gradiente, vidrio ornamental o sombras sin función.",
+      "Don't ocultar el foco de teclado, la etiqueta de un campo o el significado de un estado solo porque el color ya lo sugiere."
+    ]
+  }
+}

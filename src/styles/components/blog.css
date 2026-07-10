@@ -504,7 +504,7 @@
   position: relative;
   margin: var(--space-6) 0;
   padding: var(--space-3) var(--space-5) var(--space-3) var(--space-7);
-  border-left: 3px solid var(--color-secondary);
+  border: 1px solid color-mix(in sRGB, var(--color-secondary) 38%, var(--color-border));
   border-radius: var(--radius-sm);
   background: color-mix(in sRGB, var(--color-secondary) 5%, transparent);
   color: var(--color-text-muted);
