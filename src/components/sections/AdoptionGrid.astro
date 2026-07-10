@@ -71,28 +71,30 @@ const { dogs } = Astro.props;
                 <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
               </InstagramLink>
             )}
-            <TrackedLink
-              href={SITE.adoptionForm}
-              class="btn btn--primary dog-card__cta"
-              newTab
-              trackEvent="adoption_apply_click"
-              trackLabel={`Postular - ${dog.name}`}
-              trackLocation="dog_card"
-              trackDestination={SITE.adoptionForm}
-              trackCategory="adoption"
-              trackOutbound
-            >
-              Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
-            </TrackedLink>
-            <WhatsAppLink
-              text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
-              location="dog_card"
-              label={`Más información - ${dog.name}`}
-              class="btn btn--secondary dog-card__cta"
-              data-dog-name={dog.name}
-            >
-              Más información <span class="sr-only">sobre {dog.name}</span>
-            </WhatsAppLink>
+            <div class="dog-card__actions">
+              <TrackedLink
+                href={SITE.adoptionForm}
+                class="btn btn--primary dog-card__cta"
+                newTab
+                trackEvent="adoption_apply_click"
+                trackLabel={`Postular - ${dog.name}`}
+                trackLocation="dog_card"
+                trackDestination={SITE.adoptionForm}
+                trackCategory="adoption"
+                trackOutbound
+              >
+                Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
+              </TrackedLink>
+              <WhatsAppLink
+                text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
+                location="dog_card"
+                label={`Más información - ${dog.name}`}
+                class="btn btn--secondary dog-card__cta"
+                data-dog-name={dog.name}
+              >
+                Más información <span class="sr-only">sobre {dog.name}</span>
+              </WhatsAppLink>
+            </div>
             <a href={`/adoptar/${dog.id}/`} class="btn btn--ghost dog-card__profile-link">
               Ver ficha de {dog.name}
             </a>
