@@ -39,7 +39,22 @@ function initGalleryList(galleries: HTMLElement[]) {
     const renderedPhotos = hasGallery ? [item.photos[total - 1], ...item.photos, item.photos[0]] : item.photos;
 
     let slides: HTMLElement[];
-    if (track.children.length === 0) {
+    if (track.dataset.ssrInitialSlide === "true") {
+      const initialSlide = track.firstElementChild as HTMLElement | null;
+      if (!initialSlide) {
+        return;
+      }
+
+      if (hasGallery) {
+        const before = createSlide(item, item.photos[total - 1], total - 1, total, false);
+        const remaining = item.photos.slice(1).map((photo, index) => createSlide(item, photo, index + 1, total, false));
+        const after = createSlide(item, item.photos[0], 0, total, false);
+        track.replaceChildren(before, initialSlide, ...remaining, after);
+      }
+
+      delete track.dataset.ssrInitialSlide;
+      slides = [...track.children] as HTMLElement[];
+    } else if (track.children.length === 0) {
       // Fallback: create slides from scratch (for dynamically loaded stories or old markup)
       slides = renderedPhotos.map((photo, renderIndex) => {
         const realIndex = hasGallery
