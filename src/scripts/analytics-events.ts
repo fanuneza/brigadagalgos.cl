@@ -346,5 +346,9 @@ document.addEventListener("astro:page-load", () => {
   // scroll milestones fire fresh on every page.
   seenSections.clear();
   seenScrollMilestones.clear();
-  bindAnalytics();
+
+  // Deferred to idle: click/section/scroll tracking isn't needed before the
+  // page is interactive, and running it off the critical path lowers TBT.
+  const schedule = window.requestIdleCallback ?? ((callback: IdleRequestCallback) => window.setTimeout(callback, 200));
+  schedule(() => bindAnalytics());
 });

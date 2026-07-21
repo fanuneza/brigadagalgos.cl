@@ -154,6 +154,11 @@ function initStoriesSection() {
 }
 
 document.addEventListener("astro:page-load", () => {
-  initSharedGalleryLightbox();
-  initStoriesSection();
+  // Deferred to idle: gallery/carousel init isn't needed before the page is
+  // interactive, and running it off the critical path lowers TBT.
+  const schedule = window.requestIdleCallback ?? ((callback: IdleRequestCallback) => window.setTimeout(callback, 200));
+  schedule(() => {
+    initSharedGalleryLightbox();
+    initStoriesSection();
+  });
 });

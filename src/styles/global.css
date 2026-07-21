@@ -1,6 +1,6 @@
-@import url("@fontsource/barlow/400.css");
-@import url("@fontsource/barlow-condensed/700.css");
-@import url("@fontsource/barlow-condensed/900.css");
+@import url("@fontsource/barlow/latin-400.css");
+@import url("@fontsource/barlow-condensed/latin-700.css");
+@import url("@fontsource/barlow-condensed/latin-900.css");
 @import url("./tokens.css");
 @import url("./components/navbar.css");
 @import url("./components/skip-to-content.css");
