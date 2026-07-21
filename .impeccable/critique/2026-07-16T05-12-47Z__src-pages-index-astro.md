@@ -6,24 +6,25 @@ p1_count: 1
 timestamp: 2026-07-16T05-12-47Z
 slug: src-pages-index-astro
 ---
+
 ## Critique: homepage
 
 Method: dual-agent (A: /root/design_review · B: /root/detector_browser)
 
 ### Design health: 28/40 — Good, but conversion priorities are poorly sequenced on mobile
 
-| Heuristic | Score | Key issue |
-| --- | ---: | --- |
-| Visibility of system status | 3 | Static informational surface; no major status issue observed. |
-| Match with real world | 4 | Clear Chilean Spanish and humane rescue framing. |
-| User control and freedom | 3 | Main routes are present but alternative intents are delayed on mobile. |
-| Consistency and standards | 3 | Strong visual system; orange action hierarchy becomes ambiguous in donation. |
-| Error prevention | 3 | No relevant failure state exposed in this review. |
-| Recognition rather than recall | 2 | Cards omit the facts needed to compare dogs confidently. |
-| Flexibility and efficiency | 2 | Mobile donation and foster routes require excessive scrolling. |
-| Aesthetic and minimalist design | 3 | Authentic photography and color bands work, but eight blocks dilute the first decision. |
-| Error recovery | 2 | Not testable from screenshots; no contextual recovery evidence. |
-| Help and documentation | 3 | Process exists but arrives after several competing asks. |
+| Heuristic                       | Score | Key issue                                                                               |
+| ------------------------------- | ----: | --------------------------------------------------------------------------------------- |
+| Visibility of system status     |     3 | Static informational surface; no major status issue observed.                           |
+| Match with real world           |     4 | Clear Chilean Spanish and humane rescue framing.                                        |
+| User control and freedom        |     3 | Main routes are present but alternative intents are delayed on mobile.                  |
+| Consistency and standards       |     3 | Strong visual system; orange action hierarchy becomes ambiguous in donation.            |
+| Error prevention                |     3 | No relevant failure state exposed in this review.                                       |
+| Recognition rather than recall  |     2 | Cards omit the facts needed to compare dogs confidently.                                |
+| Flexibility and efficiency      |     2 | Mobile donation and foster routes require excessive scrolling.                          |
+| Aesthetic and minimalist design |     3 | Authentic photography and color bands work, but eight blocks dilute the first decision. |
+| Error recovery                  |     2 | Not testable from screenshots; no contextual recovery evidence.                         |
+| Help and documentation          |     3 | Process exists but arrives after several competing asks.                                |
 
 ### Anti-patterns
 
