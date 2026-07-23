@@ -39,7 +39,7 @@ test("success archive renders every story and returns visitors to active adoptio
 
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.locator(".rainbow-divider")).toHaveCount(1);
-  await expect(page.locator("[data-story-card]")).toHaveCount(25);
+  await expect(page.locator("[data-story-card]")).toHaveCount(29);
   await expect(
     page.locator(".stories-archive-cta").getByRole("link", { name: "Ver galgos disponibles" })
   ).toHaveAttribute("href", "/adoptar/");
