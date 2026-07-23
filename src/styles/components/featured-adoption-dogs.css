@@ -16,7 +16,7 @@
 }
 
 .featured-adoption__intro {
-  max-width: 46rem;
+  max-width: 44rem;
 }
 
 .featured-adoption__intro h2 {
@@ -115,24 +115,6 @@
 }
 
 @media (min-width: 768px) {
-  .featured-adoption__intro {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.78fr);
-    column-gap: var(--space-8);
-    align-items: end;
-  }
-
-  .featured-adoption__intro h2,
-  .featured-adoption__intro .eyebrow {
-    grid-column: 1;
-  }
-
-  .featured-adoption__lead {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    margin-bottom: var(--space-1);
-  }
-
   .featured-adoption__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
