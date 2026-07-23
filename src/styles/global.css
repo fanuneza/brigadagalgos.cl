@@ -46,17 +46,13 @@ body {
   color: var(--color-text);
   overflow-x: hidden;
   background:
+    radial-gradient(circle at 0 0, color-mix(in sRGB, var(--color-primary-100) 44%, transparent) 0, transparent 30rem),
     radial-gradient(
-      circle at top left,
-      color-mix(in sRGB, var(--color-primary-100) 68%, transparent) 0,
-      transparent 26rem
+      circle at 100% 8rem,
+      color-mix(in sRGB, var(--color-secondary-100) 36%, transparent) 0,
+      transparent 32rem
     ),
-    radial-gradient(
-      circle at top right,
-      color-mix(in sRGB, var(--color-secondary-100) 72%, transparent) 0,
-      transparent 28rem
-    ),
-    linear-gradient(180deg, color-mix(in sRGB, var(--color-surface) 88%, var(--color-bg)) 0%, var(--color-bg) 22rem);
+    linear-gradient(180deg, color-mix(in sRGB, var(--color-surface) 74%, var(--color-bg)) 0%, var(--color-bg) 30rem);
   margin: 0;
   min-width: 320px;
   text-wrap: pretty;

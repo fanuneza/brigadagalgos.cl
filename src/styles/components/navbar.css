@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background: color-mix(in sRGB, var(--color-bg) 72%, var(--color-surface));
+  background: color-mix(in sRGB, var(--color-bg) 86%, var(--color-surface));
   border-bottom: 1px solid color-mix(in sRGB, var(--color-border) 76%, var(--color-bg));
   backdrop-filter: blur(14px);
   transition:
@@ -35,7 +35,7 @@
 }
 
 .navbar__brand:hover {
-  background: color-mix(in sRGB, var(--color-surface) 84%, transparent);
+  background: color-mix(in sRGB, var(--color-primary-100) 52%, transparent);
 }
 
 .navbar__brand:focus-visible {
@@ -87,8 +87,8 @@
 }
 
 .navbar__hamburger:hover {
-  background: var(--color-surface);
-  border-color: var(--color-border);
+  background: color-mix(in sRGB, var(--color-primary-100) 66%, var(--color-surface));
+  border-color: color-mix(in sRGB, var(--color-primary) 32%, var(--color-border));
 }
 
 .navbar__hamburger:focus-visible {

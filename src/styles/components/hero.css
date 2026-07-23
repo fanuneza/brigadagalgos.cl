@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   overflow: clip;
-  padding-top: calc(var(--space-9) + var(--space-3));
+  padding-block: calc(var(--space-9) + var(--space-3)) var(--space-9);
 }
 
 .hero::before {
@@ -25,7 +25,7 @@
 .hero__grid {
   position: relative;
   display: grid;
-  gap: var(--space-8);
+  gap: clamp(var(--space-7), 6vw, var(--space-10));
 }
 
 .hero__text {
@@ -37,6 +37,8 @@
 .hero__lead {
   margin: 0;
   max-width: 34rem;
+  font-size: var(--font-size-md);
+  line-height: var(--line-relaxed);
 }
 
 .hero__actions {
@@ -66,16 +68,17 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   max-width: 34rem;
+  line-height: var(--line-base);
 }
 
 .hero__img {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: min(2rem, 6vw);
+  border-radius: min(2rem, 6vw) min(2rem, 6vw) min(2rem, 6vw) var(--radius-md);
   display: block;
   aspect-ratio: 4/5;
-  box-shadow: 0 28px 48px rgba(31, 35, 40, 0.16);
+  box-shadow: var(--shadow-lg);
   border: 1px solid color-mix(in sRGB, var(--color-border) 72%, var(--color-bg));
 }
 
@@ -86,7 +89,7 @@
 .hero__photo::after {
   content: "";
   position: absolute;
-  inset: auto -1rem -1rem 2rem;
+  inset: auto -0.85rem -0.85rem 1.25rem;
   height: 24%;
   border-radius: var(--radius-xl);
   background: linear-gradient(
@@ -97,6 +100,19 @@
   );
   filter: blur(20px);
   z-index: -1;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero__img {
+    transition:
+      transform var(--duration-slow) var(--ease-out),
+      box-shadow var(--duration-slow) var(--ease-out);
+  }
+
+  .hero__photo:hover .hero__img {
+    box-shadow: 0 22px 48px color-mix(in sRGB, var(--color-text) 18%, transparent);
+    transform: translateY(-4px) rotate(-0.35deg);
+  }
 }
 
 @media (min-width: 768px) {
