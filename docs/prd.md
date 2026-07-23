@@ -13,6 +13,7 @@ This document lists the functional requirements of the Brigada Galgos website as
 | `/`                      | Home             | Hero, mission, three main CTAs, featured dogs, success stories, how to help, donation callout, footer                                            |
 | `/adoptar/`              | Adoption listing | Filterable dog cards, dog profile lightbox, process explanation, CTAs                                                                            |
 | `/adoptar/<slug>/`       | Dog profile      | Full profile page per active dog: gallery, details, per-dog meta description and OG image, breadcrumb, WhatsApp + form CTAs, native share button |
+| `/casos-de-exito/`       | Success archive  | Complete build-time collection of adopted galgos, galleries and route back to active adoption                                                    |
 | `/por-que-galgos/`       | Why galgos       | Editorial sections, FAQ, selected success stories                                                                                                |
 | `/hogar-temporal/`       | Foster program   | Requirements, what Brigada covers, CTA                                                                                                           |
 | `/donar/`                | Donations        | Impact amounts, bank details, eSponsor card, transparency notes                                                                                  |
@@ -33,14 +34,13 @@ Success stories are still rendered only through cards and lightboxes on listing 
 
 ### Utility / feed routes
 
-| Route                                   | Purpose                                        |
-| --------------------------------------- | ---------------------------------------------- |
-| `/feed.xml`                             | RSS feed from the `blog` collection            |
-| `/schemamap.xml`                        | Schema.org sitemap index                       |
-| `/schema/post.json`                     | Post schema metadata                           |
-| `/casos/exito-home.json`                | Paginated success-story data for the home page |
-| `/591c2b87f0b68c44f260215f5d8e9da3.txt` | IndexNow verification file                     |
-| `/.well-known/api-catalog`              | API catalog                                    |
+| Route                                   | Purpose                             |
+| --------------------------------------- | ----------------------------------- |
+| `/feed.xml`                             | RSS feed from the `blog` collection |
+| `/schemamap.xml`                        | Schema.org sitemap index            |
+| `/schema/post.json`                     | Post schema metadata                |
+| `/591c2b87f0b68c44f260215f5d8e9da3.txt` | IndexNow verification file          |
+| `/.well-known/api-catalog`              | API catalog                         |
 
 ## User stories and acceptance criteria
 
@@ -63,9 +63,9 @@ Success stories are still rendered only through cards and lightboxes on listing 
 **US-HOME-3: As a visitor, I want to read success stories so that I trust the adoption process.**
 
 - **Acceptance criteria:**
-  - An initial set of success stories is shown.
-  - A "load more" control fetches additional stories from `/casos/exito-home.json`.
-  - Stories are displayed in a consistent card format with photo, name, and excerpt.
+  - Three or fewer success stories are shown as a preview after the adoption, mission, trust and educational content.
+  - The preview links to the complete `/casos-de-exito/` archive; it does not fetch additional stories.
+  - Stories are displayed in a consistent card format with photo when available, name, and excerpt.
 
 ### Adoption page (`/adoptar`)
 

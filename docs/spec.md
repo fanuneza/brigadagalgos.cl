@@ -101,7 +101,8 @@ brigadagalgos.cl/
 │   │   ├── RequirementCard.astro
 │   │   ├── SharedGalleryLightbox.astro
 │   │   ├── SharedPhotoGallery.astro
-│   │   ├── StoriesSection.astro
+│   │   ├── StoriesSection.astro      # Home preview
+│   │   ├── StoryCard.astro           # Shared success-story card
 │   │   ├── StructuredData.astro
 │   │   ├── TrackedLink.astro
 │   │   └── WhatsAppLink.astro
@@ -122,6 +123,7 @@ brigadagalgos.cl/
 │   ├── pages/
 │   │   ├── index.astro
 │   │   ├── adoptar.astro
+│   │   ├── casos-de-exito.astro      # Full success-story archive
 │   │   ├── por-que-galgos.astro
 │   │   ├── hogar-temporal.astro
 │   │   ├── donar.astro
@@ -132,8 +134,6 @@ brigadagalgos.cl/
 │   │   ├── 404.astro
 │   │   ├── feed.xml.ts
 │   │   ├── schemamap.xml.ts
-│   │   ├── casos/
-│   │   │   └── exito-home.json.ts
 │   │   ├── schema/
 │   │   │   └── post.json.ts
 │   │   ├── .well-known/
@@ -148,7 +148,6 @@ brigadagalgos.cl/
 │   │   ├── init-shared-gallery.ts
 │   │   ├── navbar.ts             # Mobile menu and theme toggle
 │   │   ├── shared-gallery.ts
-│   │   ├── stories-section.ts    # Home success-story load-more
 │   │   ├── theme.ts              # Dark/light theme persistence
 │   │   └── gallery/              # Lightbox implementation modules
 │   │       ├── carousel.ts
@@ -273,7 +272,6 @@ Key shared primitives:
 - `src/scripts/filter-chips.ts` — adoption page filter chips.
 - `src/scripts/form.ts` — contact form validation and submission handling.
 - `src/scripts/copy-data.ts` — copy-to-clipboard for bank details and similar.
-- `src/scripts/stories-section.ts` — home success-story load-more.
 - `src/scripts/gallery/*.ts` — modular lightbox implementation (carousel, DOM, markup, lightbox, types).
 
 ## Styling strategy
@@ -313,6 +311,13 @@ Build output (static files)
 5. **Image generation:** `src/utils/responsive-gallery-images.ts` and `astro:assets` generate responsive srcsets.
 6. **Rendering:** Astro components produce server-rendered HTML, JSON endpoints, and RSS.
 7. **Deployment:** Static files are uploaded to Cloudflare Pages.
+
+## Adoption and success-story routes
+
+- The homepage renders up to three active entries from `adoption-dogs` immediately after the hero, ordered by `order` and then name.
+- `/adoptar/` remains the full active listing with filters and conversion actions; `/adoptar/<slug>/` remains the active profile route.
+- The homepage renders a fixed three-story `success-dogs` preview. `/casos-de-exito/` statically renders the complete success-story collection using `StoryCard.astro` and shared galleries.
+- The old homepage JSON pagination endpoint and its client script are intentionally absent.
 
 ## Image pipeline
 

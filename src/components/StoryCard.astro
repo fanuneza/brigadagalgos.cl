@@ -1,0 +1,54 @@
+---
+import SharedPhotoGallery from "./SharedPhotoGallery.astro";
+import InstagramLink from "./InstagramLink.astro";
+import type { StoryDogSummary } from "../utils/dog-content";
+import { getInstagramHandleLabel } from "../utils/instagram";
+
+interface Props {
+  story: StoryDogSummary;
+  location: string;
+  summary?: boolean;
+  loadingPriority?: "eager" | "lazy";
+}
+
+const { story, location, summary = false, loadingPriority = "lazy" } = Astro.props;
+---
+
+<article
+  class="story-card"
+  data-story-card
+  data-story-id={story.id}
+  data-story-name={story.name}
+  data-story-location={location}
+>
+  {
+    story.photos.length > 0 && (
+      <SharedPhotoGallery name={story.name} photos={story.photos} id={story.id} loadingPriority={loadingPriority} />
+    )
+  }
+  <div
+    class="story-card__body"
+    data-track-event="story_click"
+    data-track-label={story.name}
+    data-track-location={location}
+    data-track-destination={`/casos-de-exito/#${story.id}`}
+    data-story-id={story.id}
+    data-story-name={story.name}
+  >
+    <h3 class="story-card__name t-card-title" id={story.id}>{story.name}</h3>
+    <p class="story-card__quote t-small-muted">{summary ? story.cardStory : story.story}</p>
+    {
+      story.instagramUrl && (
+        <InstagramLink
+          url={story.instagramUrl}
+          name={story.name}
+          location={location}
+          class="story-card__social dog-social-link"
+        >
+          <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+          <span>{getInstagramHandleLabel(story.instagramUrl)}</span>
+        </InstagramLink>
+      )
+    }
+  </div>
+</article>

@@ -1,0 +1,80 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import PageLayout from "../layouts/PageLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
+import StoryCard from "../components/StoryCard.astro";
+import TrackedLink from "../components/TrackedLink.astro";
+import { buildStoryDogSummaries } from "../utils/dog-content";
+
+const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
+const stories = await buildStoryDogSummaries(successDogs.sort((a, b) => a.data.name.localeCompare(b.data.name, "es")));
+---
+
+<PageLayout
+  title="Historias de galgos que encontraron hogar"
+  description="Conoce las historias de galgos que fueron adoptados y hoy viven acompañados junto a Brigada Galgos Chile."
+>
+  <PageHero
+    eyebrow="HISTORIAS DE ADOPCIÓN"
+    h1="Historias que encontraron hogar"
+    lead="Este archivo reúne a los galgos que ya fueron adoptados. Cada historia recuerda que detrás de una llegada a casa hubo rescate, cuidados y una familia que abrió su puerta."
+    ctaText="Conocer galgos disponibles"
+    ctaHref="/adoptar/"
+    ctaVariant="primary"
+    ctaTrackLabel="Conocer galgos disponibles - Success Stories Hero"
+    ctaTrackLocation="success_stories_archive_hero"
+    ctaTrackCategory="adoption"
+  />
+
+  <section class="section-padding stories stories--archive" data-track-section="success_stories_archive">
+    <div class="container">
+      {
+        stories.length > 0 ? (
+          <div class="stories__grid">
+            {stories.map((story, index) => (
+              <StoryCard
+                story={story}
+                location="success_stories_archive"
+                loadingPriority={index < 2 ? "eager" : "lazy"}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="stories__empty">
+            <h2 class="t-section-title">Todavía no hay historias publicadas</h2>
+            <p>Seguimos rescatando y acompañando. Si quieres saber cómo puedes ayudar hoy, conversemos.</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section-padding stories-archive-cta">
+    <div class="container container--narrow">
+      <div class="cta-card cta-card--end">
+        <h2>Aún hay galgos esperando familia</h2>
+        <p>Conoce a quienes buscan adopción hoy. Te acompañamos antes, durante y después de la llegada a casa.</p>
+        <div class="cta-card__actions">
+          <TrackedLink
+            href="/adoptar/"
+            class="btn btn--primary"
+            trackEvent="cta_click"
+            trackLabel="Ver galgos disponibles - Success Stories Archive"
+            trackLocation="success_stories_archive_cta"
+            trackDestination="/adoptar/"
+            trackCategory="adoption"
+          >
+            Ver galgos disponibles
+          </TrackedLink>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de historias de adopción" />
+</PageLayout>
+
+<script>
+  import "../scripts/init-shared-gallery";
+</script>

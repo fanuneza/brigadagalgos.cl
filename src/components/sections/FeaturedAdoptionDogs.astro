@@ -1,0 +1,124 @@
+---
+import "../../styles/components/featured-adoption-dogs.css";
+import type { AdoptionDogCard } from "../../utils/dog-content";
+import SharedPhotoGallery from "../SharedPhotoGallery.astro";
+import TrackedLink from "../TrackedLink.astro";
+import WhatsAppLink from "../WhatsAppLink.astro";
+
+interface Props {
+  dogs: AdoptionDogCard[];
+}
+
+const { dogs } = Astro.props;
+---
+
+<section
+  id="galgos-en-adopcion"
+  class="section-padding featured-adoption"
+  data-track-section="homepage_featured_adoptions"
+>
+  <div class="container">
+    <div class="featured-adoption__intro">
+      <p class="eyebrow">EN ADOPCIÓN HOY</p>
+      <h2 class="t-section-title">Conoce a los galgos que necesitan una familia</h2>
+      <p class="featured-adoption__lead">
+        Estos galgos buscan adopción o un hogar temporal. Conócelos con calma y escríbenos si alguno puede estar bien en
+        tu hogar.
+      </p>
+    </div>
+
+    {
+      dogs.length > 0 ? (
+        <>
+          <div class="featured-adoption__grid">
+            {dogs.map((dog, index) => (
+              <article class="featured-adoption__card" data-featured-adoption-card data-dog-id={dog.id}>
+                {dog.pictures.length > 0 && (
+                  <SharedPhotoGallery
+                    name={dog.name}
+                    photos={dog.pictures}
+                    id={`home-${dog.id}`}
+                    loadingPriority={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
+                <div class="featured-adoption__body">
+                  <div>
+                    <p class="featured-adoption__need">{dog.currentNeed}</p>
+                    <h3 class="t-card-title">
+                      <a
+                        href={`/adoptar/${dog.id}/`}
+                        data-track-event="dog_profile_click"
+                        data-track-label={dog.name}
+                        data-track-location="homepage_featured_adoptions"
+                        data-track-destination={`/adoptar/${dog.id}/`}
+                        data-track-category="adoption"
+                      >
+                        {dog.name}
+                      </a>
+                    </h3>
+                    <p class="featured-adoption__details">
+                      {dog.age} · {dog.weight}
+                    </p>
+                    <p class="featured-adoption__sketch">{dog.characterSketch}</p>
+                  </div>
+                  <a
+                    href={`/adoptar/${dog.id}/`}
+                    class="btn btn--ghost featured-adoption__profile"
+                    data-track-event="dog_profile_click"
+                    data-track-label={`Ver ficha - ${dog.name}`}
+                    data-track-location="homepage_featured_adoptions"
+                    data-track-destination={`/adoptar/${dog.id}/`}
+                    data-track-category="adoption"
+                  >
+                    Ver ficha de {dog.name}
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div class="featured-adoption__actions">
+            <TrackedLink
+              href="/adoptar/"
+              class="btn btn--primary"
+              trackEvent="cta_click"
+              trackLabel="Ver todos los galgos - Homepage Featured Adoptions"
+              trackLocation="homepage_featured_adoptions"
+              trackDestination="/adoptar/"
+              trackCategory="adoption"
+            >
+              Ver todos los galgos en adopción
+            </TrackedLink>
+          </div>
+        </>
+      ) : (
+        <div class="featured-adoption__empty">
+          <p>
+            Ahora no hay galgos publicados para adopción. Puedes escribirnos para conversar sobre hogar temporal o
+            conocer otras formas de apoyar.
+          </p>
+          <div class="featured-adoption__actions">
+            <WhatsAppLink
+              text="Hola, quisiera saber más sobre ser hogar temporal"
+              location="homepage_featured_adoptions_empty"
+              label="Consultar por hogar temporal - Homepage Featured Adoptions"
+              class="btn btn--primary"
+            >
+              Conversar sobre hogar temporal
+            </WhatsAppLink>
+            <TrackedLink
+              href="/hogar-temporal/"
+              class="btn btn--secondary"
+              trackEvent="cta_click"
+              trackLabel="Conocer hogar temporal - Homepage Featured Adoptions"
+              trackLocation="homepage_featured_adoptions_empty"
+              trackDestination="/hogar-temporal/"
+              trackCategory="foster"
+            >
+              Conocer el hogar temporal
+            </TrackedLink>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>

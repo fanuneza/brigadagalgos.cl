@@ -119,25 +119,25 @@ This document turns the technical specification into an ordered build plan. Each
 
 **Goal:** Build all public pages and content-driven routes.
 
-| #    | Task                                                   | Effort | Dependencies       | Acceptance criteria                                                                      |
-| ---- | ------------------------------------------------------ | ------ | ------------------ | ---------------------------------------------------------------------------------------- |
-| 5.1  | Home page                                              | M      | 2.4, 3.2, 4.5      | Hero, mission, CTAs, featured dogs, success stories, help cards, donation banner, footer |
-| 5.2  | Adoption page (`/adoptar`)                             | L      | 2.4, 3.2, 4.5, 4.6 | Dog grid, filter chips, dog card, lightbox with WhatsApp/form CTAs                       |
-| 5.3  | Why galgos page (`/por-que-galgos`)                    | M      | 2.4, 3.2, 4.5      | Editorial sections, FAQ group, 3 random success stories per build                        |
-| 5.4  | Foster page (`/hogar-temporal`)                        | M      | 2.4, 3.2           | Requirements, what Brigada covers, CTA, non-guilt tone                                   |
-| 5.5  | Donate page (`/donar`)                                 | M      | 2.4, 3.2           | Impact amounts, bank details with copy, eSponsor card, transparency notes                |
-| 5.6  | Collaborators page (`/colaboradores`)                  | S      | 2.4, 3.2, 4.4      | Supporter logo grid, accessible alt text, ordering by kind/order                         |
-| 5.7  | Contact page (`/contacto`)                             | M      | 2.4, 3.2           | WhatsApp, email, social links, contact form with validation                              |
-| 5.8  | FAQ page (`/preguntas-frecuentes`)                     | M      | 2.4, 3.2           | Grouped FAQ, expand/collapse, FAQ structured data                                        |
-| 5.9  | Cookie policy page (`/politica-de-cookies`)            | S      | 2.4, 3.2           | Plain explanation of cookies and consent                                                 |
-| 5.10 | 404 page (`/404`)                                      | S      | 2.4                | Friendly message with links to main pages                                                |
-| 5.11 | RSS feed (`/feed.xml`)                                 | S      | 4.4                | Generated from blog collection                                                           |
-| 5.12 | Sitemap and schema map                                 | S      | 2.2                | Sitemap index and schema map generated                                                   |
-| 5.13 | Success-story JSON endpoint (`/casos/exito-home.json`) | S      | 4.5                | Paginated JSON for home load-more                                                        |
+| #    | Task                                        | Effort | Dependencies       | Acceptance criteria                                                                      |
+| ---- | ------------------------------------------- | ------ | ------------------ | ---------------------------------------------------------------------------------------- |
+| 5.1  | Home page                                   | M      | 2.4, 3.2, 4.5      | Hero, mission, CTAs, featured dogs, success stories, help cards, donation banner, footer |
+| 5.2  | Adoption page (`/adoptar`)                  | L      | 2.4, 3.2, 4.5, 4.6 | Dog grid, filter chips, dog card, lightbox with WhatsApp/form CTAs                       |
+| 5.3  | Why galgos page (`/por-que-galgos`)         | M      | 2.4, 3.2, 4.5      | Editorial sections, FAQ group, 3 random success stories per build                        |
+| 5.4  | Foster page (`/hogar-temporal`)             | M      | 2.4, 3.2           | Requirements, what Brigada covers, CTA, non-guilt tone                                   |
+| 5.5  | Donate page (`/donar`)                      | M      | 2.4, 3.2           | Impact amounts, bank details with copy, eSponsor card, transparency notes                |
+| 5.6  | Collaborators page (`/colaboradores`)       | S      | 2.4, 3.2, 4.4      | Supporter logo grid, accessible alt text, ordering by kind/order                         |
+| 5.7  | Contact page (`/contacto`)                  | M      | 2.4, 3.2           | WhatsApp, email, social links, contact form with validation                              |
+| 5.8  | FAQ page (`/preguntas-frecuentes`)          | M      | 2.4, 3.2           | Grouped FAQ, expand/collapse, FAQ structured data                                        |
+| 5.9  | Cookie policy page (`/politica-de-cookies`) | S      | 2.4, 3.2           | Plain explanation of cookies and consent                                                 |
+| 5.10 | 404 page (`/404`)                           | S      | 2.4                | Friendly message with links to main pages                                                |
+| 5.11 | RSS feed (`/feed.xml`)                      | S      | 4.4                | Generated from blog collection                                                           |
+| 5.12 | Sitemap and schema map                      | S      | 2.2                | Sitemap index and schema map generated                                                   |
+| 5.13 | Success-story archive (`/casos-de-exito/`)  | M      | 4.5                | Static complete archive with galleries and a route back to active adoption               |
 
 ### 6. Client-side interactivity
 
-**Goal:** Add progressive enhancement for filters, gallery, consent, form, theme, and load-more.
+**Goal:** Add progressive enhancement for filters, gallery, consent, form and theme.
 
 | #   | Task                               | Effort | Dependencies | Acceptance criteria                                                                                        |
 | --- | ---------------------------------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------- |
@@ -145,7 +145,6 @@ This document turns the technical specification into an ordered build plan. Each
 | 6.2 | Analytics events                   | M      | 6.1          | `data-track-*` and `brigada:analytics` event listeners wired to `dataLayer`                                |
 | 6.3 | Adoption filter chips              | M      | 5.2          | Filter by sex and current need, update visible cards, handle empty state                                   |
 | 6.4 | Dog gallery lightbox               | M      | 5.2          | Open from card, navigate images, close, handle 1–3 images, keyboard accessible                             |
-| 6.5 | Home success-story load-more       | S      | 5.1          | Fetches additional stories from `/casos/exito-home.json`, preserves accessibility                          |
 | 6.6 | Contact form validation            | S      | 5.7          | Field validation, success/error states, analytics events                                                   |
 | 6.7 | Copy-to-clipboard for bank details | S      | 5.5          | Copy button updates on success/failure, details remain selectable                                          |
 | 6.8 | Theme toggle                       | S      | 3.4          | Toggle button updates theme, persists across ClientRouter transitions                                      |

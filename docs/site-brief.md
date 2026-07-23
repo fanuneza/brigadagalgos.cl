@@ -36,13 +36,13 @@ A fast, accessible, static-first website that helps Brigada Galgos:
 
 ## Key flows
 
-| Flow               | Entry                                          | Action                                               | Success signal                                      |
-| ------------------ | ---------------------------------------------- | ---------------------------------------------------- | --------------------------------------------------- |
-| Adopt a galgo      | Home, `/adoptar`, dog profile                  | WhatsApp message or form submission                  | Visitor starts a conversation with Brigada          |
-| Offer foster home  | `/hogar-temporal`, Home                        | WhatsApp message                                     | Visitor asks about foster requirements              |
-| Donate             | `/donar`, Home                                 | Copy bank details, click eSponsor, or start transfer | Visitor reaches a donation channel                  |
-| Learn about galgos | `/por-que-galgos`, FAQs                        | Read, then move to adopt or contact                  | Visitor understands whether a galgo fits their life |
-| Read a story       | Home success stories, `/casos/exito-home.json` | Scroll, open gallery, share                          | Visitor connects emotionally with the cause         |
+| Flow               | Entry                            | Action                                                    | Success signal                                      |
+| ------------------ | -------------------------------- | --------------------------------------------------------- | --------------------------------------------------- |
+| Adopt a galgo      | Home, `/adoptar`, dog profile    | WhatsApp message or form submission                       | Visitor starts a conversation with Brigada          |
+| Offer foster home  | `/hogar-temporal`, Home          | WhatsApp message                                          | Visitor asks about foster requirements              |
+| Donate             | `/donar`, Home                   | Copy bank details, click eSponsor, or start transfer      | Visitor reaches a donation channel                  |
+| Learn about galgos | `/por-que-galgos`, FAQs          | Read, then move to adopt or contact                       | Visitor understands whether a galgo fits their life |
+| Read a story       | Home preview, `/casos-de-exito/` | Revisar el archivo, abrir una galería y volver a adopción | Visitor connects emotionally with the cause         |
 
 ## Success metrics
 

@@ -94,8 +94,8 @@ Optional afterShell slot:
 ## Content to page routing
 
 ```
-src/content/adoption-dogs/  ──→  /adoptar  +  Home
-src/content/success-dogs/   ──→  /por-que-galgos  +  /casos/exito-home.json  +  Home
+src/content/adoption-dogs/  ──→  Home featured selection  +  /adoptar  +  /adoptar/<slug>
+src/content/success-dogs/   ──→  Home preview  +  /casos-de-exito/  +  /por-que-galgos
 src/content/supporters/     ──→  /colaboradores
 src/content/blog/             ──→  /feed.xml (RSS)
 ```

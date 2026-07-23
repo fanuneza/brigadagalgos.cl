@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const requiredPages = [
   { path: "/", titleIncludes: "Brigada Galgos" },
+  { path: "/casos-de-exito/", titleIncludes: "Historias de galgos" },
   { path: "/404.html", titleIncludes: "no encontrada" },
 ];
 
@@ -46,6 +47,7 @@ test("published blog posts are syndicated and structured", async ({ page, reques
   expect(await feed.text()).toContain(postPath);
   expect(await schemaEndpoint.text()).toContain(postPath);
   expect(sitemapContent.join()).toContain(postPath);
+  expect(sitemapContent.join()).toContain("/casos-de-exito/");
 
   await page.goto(postPath, { waitUntil: "load" });
   const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();

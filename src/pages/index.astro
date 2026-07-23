@@ -9,12 +9,13 @@ import StoriesSection from "../components/StoriesSection.astro";
 import DonationBanner from "../components/DonationBanner.astro";
 import WhyGalgosSection from "../components/sections/WhyGalgosSection.astro";
 import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
+import FeaturedAdoptionDogs from "../components/sections/FeaturedAdoptionDogs.astro";
+import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-import { getCollection } from "astro:content";
-import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { buildAdoptionDogCards, buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
 import { buildHeroImageSources } from "../utils/hero-images";
 import { buildWebSiteStructuredData } from "../utils/structured-data";
-import { shuffle } from "../utils/shuffle";
 
 const webSiteSchema = buildWebSiteStructuredData();
 
@@ -46,8 +47,22 @@ const rescueSteps = [
   },
 ];
 
-const rawStoryDogs = shuffle(getEntriesWithGallery(await getCollection("success-dogs")));
-const storyDogs = await buildStoryDogSummaries(rawStoryDogs, 6);
+const adoptionDogs: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
+const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
+const featuredDogs = await buildAdoptionDogCards(
+  adoptionDogs
+    .filter((dog) => dog.data.active !== false)
+    .sort(
+      (a, b) =>
+        (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER) ||
+        a.data.name.localeCompare(b.data.name, "es")
+    )
+    .slice(0, 3)
+);
+const storyDogs = await buildStoryDogSummaries(
+  getEntriesWithGallery(successDogs).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
+  3
+);
 const heroSources = await buildHeroImageSources(heroSrc);
 ---
 
@@ -78,11 +93,13 @@ const heroSources = await buildHeroImageSources(heroSrc);
   </Fragment>
   <Hero sources={heroSources} />
   <RainbowDivider />
-  <StoriesSection dogs={storyDogs} totalCount={rawStoryDogs.length} endpoint="/casos/exito-home.json" />
+  <FeaturedAdoptionDogs dogs={featuredDogs} />
   <MissionSection />
   <TrustStatsSection />
   <WhyGalgosSection />
+  <StoriesSection dogs={storyDogs} />
   <ProcessStepper steps={rescueSteps} />
   <HelpCards />
   <DonationBanner />
+  <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de Brigada Galgos" />
 </PageLayout>

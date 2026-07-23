@@ -106,6 +106,13 @@ Cost discipline:
 
 ## Architecture Essentials
 
+### Homepage and success stories
+
+- The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It selects active `adoption-dogs` deterministically by `order`, then name.
+- `/adoptar/` remains the complete active listing. Do not turn the homepage preview into the full catalogue.
+- `success-dogs` powers a three-story homepage preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
+- The archive is static and server-rendered. Do not restore homepage story pagination, `/casos/exito-home.json`, or `src/scripts/stories-section.ts` without a new product requirement.
+
 ### Layouts and page shells
 
 - `src/layouts/BaseLayout.astro` owns the document shell: global styles, SEO graph, canonical metadata, GTM noscript fallback, cookie banner, and client bootstrap scripts.
@@ -238,10 +245,10 @@ When an adopted dog moves from `adoption-dogs` to `success-dogs`:
 4. Add a permanent redirect for the retired profile URL in `public/_redirects`:
 
    ```
-   /adoptar/name/ /adoptar/ 301
+   /adoptar/name/ /casos-de-exito/ 301
    ```
 
-   Profile URLs are shared on social media and must not 404 after the dog is adopted.
+Profile URLs are shared on social media and must not 404 after the dog is adopted. The success archive is the stable destination because it contains the adoption outcome; do not use an anchor redirect unless Cloudflare behavior is covered by tests.
 
 ### Hiding a Dog Temporarily
 

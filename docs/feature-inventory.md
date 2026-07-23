@@ -10,8 +10,8 @@ This document lists every page, section, and capability of the current site. It 
 
 - Hero with mission statement and primary CTAs.
 - Mission / value proposition.
-- Featured adoption dogs (cards link to `/adoptar`).
-- Success stories section with initial stories and load-more.
+- Featured active adoption dogs immediately after the hero (cards link to `/adoptar/<slug>/` and the section links to `/adoptar/`).
+- Three-story success preview after the mission, trust and educational content, with a link to `/casos-de-exito/`.
 - How to help (adopt, foster, donate).
 - Donation callout / impact card.
 - Footer with links and social channels.
@@ -101,7 +101,7 @@ This document lists every page, section, and capability of the current site. It 
 ### Success dogs
 
 - Source: `src/content/success-dogs/`.
-- Rendered on home (load-more) and `/por-que-galgos` (3 random).
+- Rendered as a three-story home preview, the complete `/casos-de-exito/` archive, and `/por-que-galgos` (3 random).
 - Stories max 260 characters and must mention adoption outcome.
 - Max 3 images per story.
 
@@ -126,7 +126,7 @@ This document lists every page, section, and capability of the current site. It 
 - `Hero` — homepage hero.
 - `PageHero` — hero for inner pages.
 - `MissionSection` — mission/value proposition.
-- `StoriesSection` — success story grid with load-more.
+- `StoriesSection` — success-story preview with archive route.
 - `ProcessStepper` — adoption/foster steps.
 - `RequirementCard` — checklist item component.
 - `HelpCards` — CTA cards (adopt, foster, donate).
@@ -143,7 +143,6 @@ This document lists every page, section, and capability of the current site. It 
 - Cookie consent banner with accept / reject.
 - Adoption filter chips (sex, current need).
 - Dog gallery lightbox with next/previous/close.
-- Success story load-more on home.
 - Bank details copy-to-clipboard.
 - Contact form validation and submission feedback.
 - Smooth scrolling / anchor links.
@@ -184,7 +183,6 @@ This document lists every page, section, and capability of the current site. It 
 - `/sitemap.xml` / `/sitemap-index.xml` — sitemap.
 - `/schemamap.xml` — schema map index.
 - `/schema/post.json` — post schema metadata.
-- `/casos/exito-home.json` — paginated success story JSON for home.
 - `/591c2b87f0b68c44f260215f5d8e9da3.txt` — IndexNow verification.
 
 ## Not yet implemented

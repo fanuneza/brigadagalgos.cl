@@ -1,89 +1,40 @@
 ---
 import "../styles/components/stories.css";
-import SharedPhotoGallery from "./SharedPhotoGallery.astro";
-import SharedGalleryLightbox from "./SharedGalleryLightbox.astro";
 import type { StoryDogSummary } from "../utils/dog-content";
-import InstagramLink from "./InstagramLink.astro";
-import { getInstagramHandleLabel } from "../utils/instagram";
+import StoryCard from "./StoryCard.astro";
+import TrackedLink from "./TrackedLink.astro";
 
 interface Props {
   dogs: StoryDogSummary[];
-  totalCount: number;
-  endpoint: string;
 }
 
-const { dogs, totalCount, endpoint } = Astro.props;
+const { dogs } = Astro.props;
 ---
 
-<section
-  id="historias"
-  class="section-padding stories"
-  data-stories-root
-  data-stories-endpoint={endpoint}
-  data-stories-loaded={String(dogs.length)}
-  data-track-section="success_stories"
->
+<section id="historias" class="section-padding stories" data-track-section="success_stories">
   <div class="container">
     <p class="eyebrow">Historias</p>
     <h2 class="stories__heading t-section-title">Historias con final de hogar</h2>
     <p class="stories__lead">
-      Cada historia tiene un nombre, una espera y una red detrás: rescate, atención veterinaria, hogar temporal,
-      adopción y seguimiento. Verlos en casa también muestra lo que una adopción, un hogar temporal o una donación
-      pueden cambiar.
+      Una parte del camino ya está escrita: estos galgos fueron adoptados y hoy viven acompañados. Sus historias
+      muestran lo que puede abrir una adopción responsable.
     </p>
 
     <div class="stories__grid" data-stories-list>
-      {
-        dogs.map((dog) => (
-          <article
-            class="story-card"
-            data-story-card
-            data-story-id={dog.id}
-            data-story-name={dog.name}
-            data-story-location="success_stories"
-          >
-            <SharedPhotoGallery name={dog.name} photos={dog.photos} id={dog.id} loadingPriority="lazy" />
-            <div
-              class="story-card__body"
-              data-track-event="story_click"
-              data-track-label={dog.name}
-              data-track-location="success_stories"
-              data-story-id={dog.id}
-              data-story-name={dog.name}
-            >
-              <h3 class="story-card__name t-card-title">{dog.name}</h3>
-              <p class="story-card__quote t-small-muted">{dog.cardStory}</p>
-              {dog.instagramUrl && (
-                <InstagramLink
-                  url={dog.instagramUrl}
-                  name={dog.name}
-                  location="success_stories"
-                  class="story-card__social dog-social-link"
-                >
-                  <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
-                  <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
-                </InstagramLink>
-              )}
-            </div>
-          </article>
-        ))
-      }
+      {dogs.map((dog) => <StoryCard story={dog} location="homepage_success_stories" summary />)}
     </div>
-
-    {
-      totalCount > dogs.length && (
-        <div class="stories__ver-mas-wrap">
-          <button type="button" class="btn btn--secondary" data-stories-ver-mas>
-            Ver más historias
-          </button>
-        </div>
-      )
-    }
+    <div class="stories__ver-mas-wrap">
+      <TrackedLink
+        href="/casos-de-exito/"
+        class="btn btn--secondary"
+        trackEvent="cta_click"
+        trackLabel="Ver todas las historias - Homepage Success Stories"
+        trackLocation="homepage_success_stories"
+        trackDestination="/casos-de-exito/"
+        trackCategory="success_stories"
+      >
+        Ver todas las historias
+      </TrackedLink>
+    </div>
   </div>
 </section>
-
-<SharedGalleryLightbox ariaLabel="Galería de historias" />
-
-<script>
-  import "../scripts/stories-section";
-</script>

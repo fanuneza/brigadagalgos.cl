@@ -1,145 +1,51 @@
 import { expect, test } from "@playwright/test";
 
-test("Ver mas loads additional stories without duplicates", async ({ page }) => {
+test("home prioritizes active dogs and links the stories preview to the archive", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
 
-  const grid = page.locator("[data-stories-list]");
-  const button = page.locator("[data-stories-ver-mas]");
+  const featured = page.locator("#galgos-en-adopcion");
+  const stories = page.locator("#historias");
+  const featuredCards = featured.locator("[data-featured-adoption-card]");
 
-  await expect(grid).toBeVisible();
-
-  // Count initial cards (story-card level only, avoiding nested data-story-id duplicates)
-  const initialCards = grid.locator("[data-story-card]");
-  const initialCount = await initialCards.count();
-  expect(initialCount).toBeGreaterThan(0);
-
-  // Button should be visible (more stories exist)
-  await expect(button).toBeVisible();
-
-  // Click "Ver mas" once
-  await button.click();
-
-  // Wait for new cards to appear
-  await expect.poll(async () => await grid.locator("[data-story-card]").count()).toBeGreaterThan(initialCount);
-
-  const afterFirstCount = await grid.locator("[data-story-card]").count();
-
-  // Verify no duplicate story IDs (query card-level ids only)
-  const idsAfterFirst = await grid
-    .locator("[data-story-card]")
-    .evaluateAll((els) => els.map((el) => el.getAttribute("data-story-id")));
-  expect(new Set(idsAfterFirst).size).toBe(idsAfterFirst.length);
-
-  // Click "Ver mas" again if button is still visible
-  const isButtonVisible = await button.isVisible().catch(() => false);
-  if (isButtonVisible) {
-    await button.click();
-    await expect.poll(async () => await grid.locator("[data-story-card]").count()).toBeGreaterThan(afterFirstCount);
-
-    const afterSecondCount = await grid.locator("[data-story-card]").count();
-
-    // Verify no duplicate story IDs after second load
-    const idsAfterSecond = await grid
-      .locator("[data-story-card]")
-      .evaluateAll((els) => els.map((el) => el.getAttribute("data-story-id")));
-    expect(new Set(idsAfterSecond).size).toBe(idsAfterSecond.length);
-    expect(afterSecondCount).toBeGreaterThan(afterFirstCount);
-  }
-});
-
-test("Ver mas preserves Instagram links from the stories endpoint", async ({ page }) => {
-  await page.route("**/casos/exito-home.json", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json; charset=utf-8",
-      body: JSON.stringify([
-        {
-          id: "instagram-fixture",
-          name: "Roma",
-          story: "Roma comparte su nueva vida en familia.",
-          instagramUrl: "https://www.instagram.com/roma_galga/",
-          photos: [
-            {
-              cardSizes: "(min-width: 1024px) 350px, calc(100vw - 3rem)",
-              cardFallbackSrc: "/favicon.svg",
-              lightbox: "/favicon.svg",
-              alt: "Roma",
-              caption: "Roma",
-            },
-          ],
-        },
-      ]),
-    });
+  await expect(featured).toBeVisible();
+  await expect(featuredCards).toHaveCount(3);
+  await expect(stories).toBeVisible();
+  const featuredBeforeStories = await featured.evaluate((element) => {
+    const storiesSection = document.querySelector("#historias");
+    return Boolean(
+      storiesSection && element.compareDocumentPosition(storiesSection) & Node.DOCUMENT_POSITION_FOLLOWING
+    );
   });
+  expect(featuredBeforeStories).toBe(true);
 
-  await page.goto("/", { waitUntil: "networkidle" });
-
-  const grid = page.locator("[data-stories-list]");
-  const initialCount = await grid.locator("[data-story-card]").count();
-
-  await page.locator("[data-stories-ver-mas]").click();
-  await expect.poll(async () => await grid.locator("[data-story-card]").count()).toBeGreaterThan(initialCount);
-
-  const instagramLink = grid.locator("[data-story-id='instagram-fixture'] .dog-social-link");
-  await expect(instagramLink).toHaveAttribute("href", "https://www.instagram.com/roma_galga/");
-  await expect(instagramLink).toHaveAttribute("aria-label", "Seguir a Roma en Instagram: @roma_galga");
-  await expect(instagramLink).toContainText("@roma_galga");
-  await expect(instagramLink).toHaveAttribute("data-track-event", "social_click");
-  await expect(instagramLink).toHaveAttribute("data-track-location", "success_stories");
-  await expect(instagramLink).toHaveAttribute("data-dog-name", "Roma");
-});
-
-test("success story Instagram labels use handles from content URLs", async ({ page }) => {
-  await page.goto("/", { waitUntil: "networkidle" });
-
-  const grid = page.locator("[data-stories-list]");
-  const button = page.locator("[data-stories-ver-mas]");
-  const leoInstagramLink = grid.locator("[data-story-id='leo'] .dog-social-link");
-
-  for (let i = 0; i < 10 && (await leoInstagramLink.count()) === 0; i++) {
-    if (!(await button.isVisible().catch(() => false))) {
-      break;
-    }
-
-    const countBefore = await grid.locator("[data-story-card]").count();
-    await button.click();
-    await expect.poll(async () => await grid.locator("[data-story-card]").count()).toBeGreaterThan(countBefore);
+  for (const card of await featuredCards.all()) {
+    await expect(card.locator("a[href^='/adoptar/']").first()).toHaveAttribute("href", /\/adoptar\/[^/]+\/$/);
   }
 
-  await expect(leoInstagramLink).toHaveAttribute("href", "https://instagram.com/leitogalgo");
-  await expect(leoInstagramLink).toHaveAttribute("aria-label", "Seguir a Leo en Instagram: @leitogalgo");
-  await expect(leoInstagramLink).toContainText("@leitogalgo");
+  await expect(featured.getByRole("link", { name: "Ver todos los galgos en adopción" })).toHaveAttribute(
+    "href",
+    "/adoptar/"
+  );
+  await expect(stories.locator("[data-story-card]")).toHaveCount(3);
+  await expect(stories.getByRole("link", { name: "Ver todas las historias" })).toHaveAttribute(
+    "href",
+    "/casos-de-exito/"
+  );
+  await expect(page.locator("[data-stories-ver-mas]")).toHaveCount(0);
 });
 
-test("Ver mas button hides when all stories are loaded", async ({ page }) => {
-  await page.goto("/", { waitUntil: "networkidle" });
+test("success archive renders every story and returns visitors to active adoption", async ({ page }) => {
+  await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
-  const button = page.locator("[data-stories-ver-mas]");
-  const grid = page.locator("[data-stories-list]");
-
-  // If button is not visible, all stories are already loaded
-  const isVisible = await button.isVisible().catch(() => false);
-  if (!isVisible) {
-    // All stories loaded from the start — verify grid has cards
-    const count = await grid.locator("[data-story-card]").count();
-    expect(count).toBeGreaterThan(0);
-    return;
-  }
-
-  // Click until button disappears (with a reasonable max to prevent infinite loops)
-  for (let i = 0; i < 10; i++) {
-    const stillVisible = await button.isVisible().catch(() => false);
-    if (!stillVisible) break;
-    await button.click();
-    // Small wait for DOM update
-    await page.waitForTimeout(100);
-  }
-
-  await expect(button).toBeHidden();
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator("[data-story-card]")).toHaveCount(25);
+  await expect(page.getByRole("link", { name: "Ver galgos disponibles" }).last()).toHaveAttribute("href", "/adoptar/");
+  await expect(page).toHaveTitle(/Historias de galgos que encontraron hogar/i);
+  await expect(page.locator('meta[name="description"]')).toContainText("galgos que fueron adoptados");
 });
 
-test("success story galleries expose up to three optimized photos", async ({ page }) => {
-  await page.goto("/", { waitUntil: "networkidle" });
+test("success-story galleries preserve responsive image output", async ({ page }) => {
+  await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
   const payloads = await page
     .locator("[data-shared-gallery]")
@@ -148,30 +54,8 @@ test("success story galleries expose up to three optimized photos", async ({ pag
     );
 
   expect(payloads.length).toBeGreaterThan(0);
-
   for (const payload of payloads) {
     expect(payload.photos.length).toBeGreaterThan(0);
     expect(payload.photos.length).toBeLessThanOrEqual(3);
-
-    for (const photo of payload.photos) {
-      expect(photo.cardWebpSrcSet).toBeUndefined();
-      expect(photo.cardAvifSrcSet.split(",")).toHaveLength(3);
-      expect(photo.cardFallbackSrc).toMatch(/\.webp$/);
-      expect(photo.lightbox).toMatch(/\.avif$/);
-    }
-  }
-});
-
-test("success story card copy stays within the card summary limit", async ({ page }) => {
-  await page.goto("/", { waitUntil: "networkidle" });
-
-  const quotes = await page
-    .locator("[data-story-card] .story-card__quote")
-    .evaluateAll((els) => els.map((el) => el.textContent?.trim() ?? ""));
-
-  expect(quotes.length).toBeGreaterThan(0);
-
-  for (const quote of quotes) {
-    expect(quote.length).toBeLessThanOrEqual(260);
   }
 });

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/adoptar/", "/contacto/", "/donar/"];
+const routes = ["/", "/adoptar/", "/casos-de-exito/", "/contacto/", "/donar/"];
 
 for (const route of routes) {
   test(`smoke ${route}`, async ({ page }) => {

@@ -8,6 +8,7 @@ Este repositorio contiene el sitio público donde Brigada Galgos muestra perros 
 
 - Conocer galgos que hoy buscan familia, incluyendo la ficha individual de cada uno.
 - Leer historias de adopción y recuperación.
+- Recorrer el archivo completo de historias en `/casos-de-exito/`.
 - Revisar preguntas frecuentes antes de adoptar o ser hogar temporal.
 - Encontrar formas de donar o colaborar.
 - Contactar al equipo por WhatsApp, correo o redes sociales.

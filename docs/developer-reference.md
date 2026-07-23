@@ -26,7 +26,7 @@ Casos de éxito en Markdown con frontmatter:
 - `instagramUrl` — URL de Instagram de la historia (opcional).
 - `gallery` — Array de imágenes (máximo 3, procesadas por `astro:assets`).
 
-_Nota:_ En `/por-que-galgos`, se seleccionan 3 historias aleatorias en cada build. En el Home, `StoriesSection.astro` renderiza las iniciales y carga las restantes mediante la API `/casos/exito-home.json`.
+_Nota:_ En `/por-que-galgos`, se seleccionan 3 historias aleatorias en cada build. El Home muestra una vista previa fija de 3 historias y el archivo completo se genera en `/casos-de-exito/`; no hay API de paginación para historias.
 
 ### 3. Colaboradores (`src/content/supporters/`)
 
@@ -109,7 +109,6 @@ La carga de analíticas es estrictamente opt-in bajo consentimiento del usuario.
   - `gallery_open`
   - `gallery_next`
   - `gallery_previous`
-  - `stories_load_more`
   - `dog_filter_click`
   - `dog_interest_click`
   - `foster_apply_click`
