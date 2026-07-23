@@ -25,7 +25,7 @@
 .hero__grid {
   position: relative;
   display: grid;
-  gap: clamp(var(--space-7), 6vw, var(--space-10));
+  gap: clamp(var(--space-6), 4vw, var(--space-7));
 }
 
 .hero__text {

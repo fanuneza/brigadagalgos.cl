@@ -56,7 +56,14 @@ const storyDogs = await buildStoryDogSummaries(
   getEntriesWithGallery(successDogs).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
   3
 );
-const heroSources = await buildHeroImageSources(heroSrc);
+
+const activeAdoptionDogsWithPhoto = getEntriesWithGallery(activeAdoptionDogs);
+const heroDog = activeAdoptionDogsWithPhoto.length > 0 ? shuffle(activeAdoptionDogsWithPhoto)[0] : null;
+const heroImage = heroDog?.data.gallery[0] ?? heroSrc;
+const heroAlt = heroDog
+  ? `${heroDog.data.name}, galgo en adopción con Brigada Galgos, mirando hacia adelante`
+  : "Galgo blanco y crema con arnés amarillo, mirando con calma hacia adelante";
+const heroSources = await buildHeroImageSources(heroImage);
 ---
 
 <PageLayout
@@ -84,7 +91,14 @@ const heroSources = await buildHeroImageSources(heroSrc);
       fetchpriority="high"
     />
   </Fragment>
-  <Hero sources={heroSources} activeDogsCount={activeAdoptionDogs.length} />
+  <Hero
+    sources={heroSources}
+    alt={heroAlt}
+    width={heroImage.width}
+    height={heroImage.height}
+    dogName={heroDog?.data.name}
+    activeDogsCount={activeAdoptionDogs.length}
+  />
   <RainbowDivider />
   <FeaturedAdoptionDogs dogs={featuredDogs} />
   <MissionSection />
