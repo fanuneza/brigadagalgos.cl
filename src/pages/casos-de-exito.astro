@@ -1,4 +1,5 @@
 ---
+import "../styles/components/stories.css";
 import { getCollection, type CollectionEntry } from "astro:content";
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
@@ -6,9 +7,10 @@ import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import StoryCard from "../components/StoryCard.astro";
 import TrackedLink from "../components/TrackedLink.astro";
 import { buildStoryDogSummaries } from "../utils/dog-content";
+import { shuffle } from "../utils/shuffle";
 
 const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
-const stories = await buildStoryDogSummaries(successDogs.sort((a, b) => a.data.name.localeCompare(b.data.name, "es")));
+const stories = await buildStoryDogSummaries(shuffle(successDogs));
 ---
 
 <PageLayout

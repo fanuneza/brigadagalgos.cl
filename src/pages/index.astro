@@ -15,6 +15,7 @@ import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { buildAdoptionDogCards, buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
 import { buildHeroImageSources } from "../utils/hero-images";
+import { shuffle } from "../utils/shuffle";
 import { buildWebSiteStructuredData } from "../utils/structured-data";
 
 const webSiteSchema = buildWebSiteStructuredData();
@@ -50,14 +51,7 @@ const rescueSteps = [
 const adoptionDogs: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
 const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
 const featuredDogs = await buildAdoptionDogCards(
-  adoptionDogs
-    .filter((dog) => dog.data.active !== false)
-    .sort(
-      (a, b) =>
-        (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER) ||
-        a.data.name.localeCompare(b.data.name, "es")
-    )
-    .slice(0, 3)
+  shuffle(adoptionDogs.filter((dog) => dog.data.active !== false)).slice(0, 3)
 );
 const storyDogs = await buildStoryDogSummaries(
   getEntriesWithGallery(successDogs).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
