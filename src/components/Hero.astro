@@ -6,9 +6,11 @@ import TrackedLink from "./TrackedLink.astro";
 
 interface Props {
   sources?: HeroImageSources;
+  activeDogsCount?: number;
 }
 
 const heroSources = Astro.props.sources ?? (await buildHeroImageSources(heroSrc));
+const activeDogsCount = Astro.props.activeDogsCount;
 ---
 
 <section class="hero section-padding" data-track-section="hero">
@@ -39,7 +41,7 @@ const heroSources = Astro.props.sources ?? (await buildHeroImageSources(heroSrc)
         srcset={heroSources.portraitWebpSrcSet}
         sizes="calc((100vw - 48px) / 1.75)"
         src={heroSources.portraitFallbackSrc}
-        alt="Galgo rescatado mirando hacia adelante"
+        alt="Galgo blanco y crema con arnés amarillo, mirando con calma hacia adelante"
         class="hero__img"
         loading="eager"
         fetchpriority="high"
@@ -47,6 +49,20 @@ const heroSources = Astro.props.sources ?? (await buildHeroImageSources(heroSrc)
         width={heroSrc.width}
         height={heroSrc.height}
       />
+
+      {
+        activeDogsCount !== undefined && activeDogsCount > 0 && (
+          <p class="hero__badge">
+            <span class="hero__badge-icon" aria-hidden="true">
+              🐾
+            </span>
+            <span>
+              <strong>{activeDogsCount}</strong> {activeDogsCount === 1 ? "galgo espera" : "galgos esperan"} familia
+              ahora
+            </span>
+          </p>
+        )
+      }
     </picture>
 
     <div class="hero__actions">

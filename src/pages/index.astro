@@ -50,9 +50,8 @@ const rescueSteps = [
 
 const adoptionDogs: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
 const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
-const featuredDogs = await buildAdoptionDogCards(
-  shuffle(adoptionDogs.filter((dog) => dog.data.active !== false)).slice(0, 3)
-);
+const activeAdoptionDogs = adoptionDogs.filter((dog) => dog.data.active !== false);
+const featuredDogs = await buildAdoptionDogCards(shuffle(activeAdoptionDogs).slice(0, 3));
 const storyDogs = await buildStoryDogSummaries(
   getEntriesWithGallery(successDogs).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
   3
@@ -85,7 +84,7 @@ const heroSources = await buildHeroImageSources(heroSrc);
       fetchpriority="high"
     />
   </Fragment>
-  <Hero sources={heroSources} />
+  <Hero sources={heroSources} activeDogsCount={activeAdoptionDogs.length} />
   <RainbowDivider />
   <FeaturedAdoptionDogs dogs={featuredDogs} />
   <MissionSection />

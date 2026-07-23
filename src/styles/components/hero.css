@@ -90,16 +90,47 @@
   content: "";
   position: absolute;
   inset: auto -0.85rem -0.85rem 1.25rem;
-  height: 24%;
+  height: 28%;
   border-radius: var(--radius-xl);
   background: linear-gradient(
     90deg,
-    color-mix(in sRGB, var(--color-primary) 26%, transparent),
-    color-mix(in sRGB, var(--color-secondary) 22%, transparent),
-    color-mix(in sRGB, var(--color-accent-warm) 34%, transparent)
+    color-mix(in sRGB, var(--color-primary) 30%, transparent),
+    color-mix(in sRGB, var(--color-secondary) 26%, transparent),
+    color-mix(in sRGB, var(--color-accent-warm) 30%, transparent),
+    color-mix(in sRGB, var(--color-rainbow-green) 22%, transparent),
+    color-mix(in sRGB, var(--color-rainbow-purple) 26%, transparent)
   );
-  filter: blur(20px);
+  filter: blur(22px);
   z-index: -1;
+}
+
+.hero__badge {
+  position: absolute;
+  left: var(--space-4);
+  bottom: calc(-1 * var(--space-4));
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  max-width: calc(100% - var(--space-6));
+}
+
+.hero__badge strong {
+  font-family: var(--font-display);
+  color: var(--color-secondary-700);
+}
+
+.hero__badge-icon {
+  font-size: var(--font-size-md);
+  line-height: 1;
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -112,6 +143,39 @@
   .hero__photo:hover .hero__img {
     box-shadow: 0 22px 48px color-mix(in sRGB, var(--color-text) 18%, transparent);
     transform: translateY(-4px) rotate(-0.35deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__photo {
+    animation: hero-photo-in var(--duration-slow) var(--ease-out) both;
+  }
+
+  .hero__badge {
+    animation: hero-badge-in var(--duration-slow) var(--ease-out) both;
+    animation-delay: 90ms;
+  }
+
+  @keyframes hero-photo-in {
+    from {
+      translate: 0 14px;
+    }
+
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes hero-badge-in {
+    from {
+      translate: 0 6px;
+      scale: 0.92;
+    }
+
+    to {
+      translate: 0 0;
+      scale: 1;
+    }
   }
 }
 
