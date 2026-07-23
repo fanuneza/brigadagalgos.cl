@@ -49,7 +49,7 @@ Una lista sencilla ayuda mucho:
 
 La correa no es un castigo ni una fase que se supera rápido. En espacios abiertos, es la herramienta que evita una pérdida. Un galgo puede ser muy cariñoso y estar muy conectado contigo; aun así, su impulso visual puede ser más rápido que cualquier llamado.
 
-![Arepita, galga en adopción, descansando sobre una cama](../../assets/casos/adopcion/arepita/arepita-03.jpg)
+![Arepita, galga rescatada, descansando sobre una cama](../../assets/casos/exito/arepita/arepita-03.jpg)
 
 ## Arma su rincón: una cama no es un lujo
 

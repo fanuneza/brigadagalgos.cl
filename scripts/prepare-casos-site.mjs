@@ -16,7 +16,7 @@ const CARD_SIZES = {
 
 const LIGHTBOX_SIZE = 1600;
 const SUCCESS_STATES = new Set(["Adoptado", "Adoptada"]);
-const ADOPTION_IDS = ["turron", "huayca", "foxy", "arepita", "loica"];
+const ADOPTION_IDS = ["turron", "huayca", "foxy"];
 const MOVED_TO_ADOPTION = new Set(["huayca"]);
 
 const SUCCESS_OVERRIDES = {
@@ -111,18 +111,6 @@ const ADOPTION_OVERRIDES = {
     weight: "Peso por confirmar",
     details:
       "Foxy llegó después de un rescate en el cerro El Carbón y hoy sigue en hogar temporal. Buscamos una familia tranquila para acompañar su recuperación y su tratamiento dental.",
-  },
-  arepita: {
-    age: "Menor de 1 año",
-    weight: "Peso por confirmar",
-    details:
-      "Arepita fue rescatada en Limache y pasó directo por clínica. Es una galga muy joven que sigue recuperándose mientras espera una familia comprometida.",
-  },
-  loica: {
-    age: "Edad por confirmar",
-    weight: "Peso por confirmar",
-    details:
-      "Loica llegó desde Maipú después de haber sido mamá hace pocos meses. Está en hogar temporal y buscamos una casa paciente para que siga ganando seguridad a su ritmo.",
   },
 };
 
