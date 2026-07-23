@@ -1,3 +1,13 @@
+section.dog-profile {
+  padding-block-start: var(--space-7);
+}
+
+@media (min-width: 1024px) {
+  section.dog-profile {
+    padding-block-start: var(--space-8);
+  }
+}
+
 .dog-profile__back {
   margin-bottom: var(--space-5);
   font-size: var(--font-size-sm);
