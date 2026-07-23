@@ -3,6 +3,7 @@ import "../styles/components/stories.css";
 import { getCollection, type CollectionEntry } from "astro:content";
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import RainbowDivider from "../components/RainbowDivider.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import StoryCard from "../components/StoryCard.astro";
 import TrackedLink from "../components/TrackedLink.astro";
@@ -28,6 +29,7 @@ const stories = await buildStoryDogSummaries(shuffle(successDogs));
     ctaTrackLocation="success_stories_archive_hero"
     ctaTrackCategory="adoption"
   />
+  <RainbowDivider />
 
   <section class="section-padding stories stories--archive" data-track-section="success_stories_archive">
     <div class="container">

@@ -38,8 +38,11 @@ test("success archive renders every story and returns visitors to active adoptio
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
   await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator(".rainbow-divider")).toHaveCount(1);
   await expect(page.locator("[data-story-card]")).toHaveCount(25);
-  await expect(page.getByRole("link", { name: "Ver galgos disponibles" }).last()).toHaveAttribute("href", "/adoptar/");
+  await expect(
+    page.locator(".stories-archive-cta").getByRole("link", { name: "Ver galgos disponibles" })
+  ).toHaveAttribute("href", "/adoptar/");
   await expect(page).toHaveTitle(/Historias de galgos que encontraron hogar/i);
   await expect(page.locator('meta[name="description"]')).toContainText("galgos que fueron adoptados");
 });
