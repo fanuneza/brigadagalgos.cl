@@ -1,8 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const port = Number(process.env.PLAYWRIGHT_PORT ?? 4325);
+const port = Number(process.env.PLAYWRIGHT_PORT ?? 4399);
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${port}`;
 const useExternalBaseUrl = Boolean(process.env.PLAYWRIGHT_BASE_URL);
+const reuseExistingServer = process.env.PLAYWRIGHT_REUSE_EXISTING_SERVER === "true";
 
 export default defineConfig({
   testDir: "./tests",
@@ -28,7 +29,7 @@ export default defineConfig({
     : {
         command: `node scripts/run-playwright-server.mjs --host 127.0.0.1 --port ${port}`,
         url: baseURL,
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer,
         timeout: 60_000,
         stdout: "pipe",
         stderr: "pipe",

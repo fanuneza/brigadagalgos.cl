@@ -32,7 +32,7 @@ function run(command, args) {
 }
 
 const host = getArgValue("--host") ?? "127.0.0.1";
-const port = getArgValue("--port") ?? "4325";
+const port = getArgValue("--port") ?? "4399";
 
 await run("npm", ["run", "build"]);
 await new Promise((resolve, reject) => {

@@ -37,8 +37,14 @@ test("filter chips show subset of adoption cards and update count", async ({ pag
 
   const hembraCards = cards.filter({ has: page.locator(".dog-chip--sex", { hasText: "Hembra" }) });
   const hembraCount = await hembraCards.count();
-  expect(hembraCount).toBeGreaterThan(0);
   await expect(count).toHaveText(String(hembraCount));
+  await expect(visibleCards).toHaveCount(hembraCount);
+
+  if (hembraCount === 0) {
+    await expect(emptyMessage).toBeVisible();
+  } else {
+    await expect(emptyMessage).toBeHidden();
+  }
 
   // Filter by "Adultos" (age type) — all current dogs are adulto
   await page.locator(".filter-chip[data-filter='adulto']").click();
