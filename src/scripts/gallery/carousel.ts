@@ -36,7 +36,7 @@ function initGalleryList(galleries: HTMLElement[]) {
     let isDragging = false;
     let isAnimating = false;
 
-    const renderedPhotos = hasGallery ? [item.photos[total - 1], ...item.photos, item.photos[0]] : item.photos;
+    const renderedPhotos = item.photos;
 
     let slides: HTMLElement[];
     if (track.dataset.ssrInitialSlide === "true") {
@@ -46,10 +46,8 @@ function initGalleryList(galleries: HTMLElement[]) {
       }
 
       if (hasGallery) {
-        const before = createSlide(item, item.photos[total - 1], total - 1, total, false);
         const remaining = item.photos.slice(1).map((photo, index) => createSlide(item, photo, index + 1, total, false));
-        const after = createSlide(item, item.photos[0], 0, total, false);
-        track.replaceChildren(before, initialSlide, ...remaining, after);
+        track.replaceChildren(initialSlide, ...remaining);
       }
 
       delete track.dataset.ssrInitialSlide;
@@ -57,16 +55,8 @@ function initGalleryList(galleries: HTMLElement[]) {
     } else if (track.children.length === 0) {
       // Fallback: create slides from scratch (for dynamically loaded stories or old markup)
       slides = renderedPhotos.map((photo, renderIndex) => {
-        const realIndex = hasGallery
-          ? renderIndex === 0
-            ? total - 1
-            : renderIndex === renderedPhotos.length - 1
-              ? 0
-              : renderIndex - 1
-          : renderIndex;
-
-        const isInitialSlide = hasGallery ? renderIndex === 1 : renderIndex === 0;
-        return createSlide(item, photo, realIndex, total, isInitialSlide, isInitialSlide ? loadingPriority : "lazy");
+        const isInitialSlide = renderIndex === 0;
+        return createSlide(item, photo, renderIndex, total, isInitialSlide, isInitialSlide ? loadingPriority : "lazy");
       });
 
       track.replaceChildren(...slides);
@@ -85,22 +75,13 @@ function initGalleryList(galleries: HTMLElement[]) {
     }
 
     function setTrackPosition(animate: boolean) {
-      const offsetIndex = hasGallery ? activeIndex + 1 : activeIndex;
-      ensureSlideImage(slides[offsetIndex], galleryItem);
+      ensureSlideImage(slides[activeIndex], galleryItem);
       track!.style.transition = animate ? "transform var(--duration-base) var(--ease-in-out)" : "none";
-      track!.style.transform = `translateX(-${offsetIndex * 100}%)`;
+      track!.style.transform = `translateX(-${activeIndex * 100}%)`;
       syncDots();
     }
 
     function settleAfterLoop() {
-      if (activeIndex < 0) {
-        activeIndex = total - 1;
-        setTrackPosition(false);
-      } else if (activeIndex >= total) {
-        activeIndex = 0;
-        setTrackPosition(false);
-      }
-
       window.requestAnimationFrame(() => {
         isAnimating = false;
       });
@@ -133,7 +114,7 @@ function initGalleryList(galleries: HTMLElement[]) {
         });
       }
 
-      goTo(activeIndex + delta, true);
+      goTo(wrapIndex(activeIndex + delta, total), true);
     }
 
     if (hasGallery) {
@@ -146,6 +127,7 @@ function initGalleryList(galleries: HTMLElement[]) {
         setTrackPosition(true);
         isAnimating = true;
       });
+      setTrackPosition(false);
 
       previousButton.addEventListener("click", () => step(-1));
       nextButton.addEventListener("click", () => step(1));
