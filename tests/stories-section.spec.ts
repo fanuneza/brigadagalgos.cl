@@ -44,7 +44,7 @@ test("success archive renders every story and returns visitors to active adoptio
     page.locator(".stories-archive-cta").getByRole("link", { name: "Ver galgos disponibles" })
   ).toHaveAttribute("href", "/adoptar/");
   await expect(page).toHaveTitle(/Historias de galgos que encontraron hogar/i);
-  await expect(page.locator('meta[name="description"]')).toContainText("galgos que fueron adoptados");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /galgos que fueron adoptados/);
 });
 
 test("success-story galleries preserve responsive image output", async ({ page }) => {
