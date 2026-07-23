@@ -331,8 +331,15 @@
 }
 
 /* ── Blog post ────────────────────────────────────────────────────── */
-.blog-post {
+article.blog-post {
+  padding-block-start: var(--space-7);
   padding-bottom: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  article.blog-post {
+    padding-block-start: var(--space-8);
+  }
 }
 
 .blog-post__top-link {
