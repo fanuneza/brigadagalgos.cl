@@ -4,17 +4,6 @@
   background: color-mix(in sRGB, var(--color-primary-100) 20%, var(--color-bg));
 }
 
-.featured-adoption::before {
-  position: absolute;
-  top: 0;
-  left: max(0px, calc((100% - var(--content-max)) / 2 + var(--gutter)));
-  width: clamp(5rem, 12vw, 10rem);
-  height: 0.35rem;
-  border-radius: 0 0 var(--radius-full) var(--radius-full);
-  background: var(--color-primary);
-  content: "";
-}
-
 .featured-adoption__intro {
   max-width: 44rem;
 }

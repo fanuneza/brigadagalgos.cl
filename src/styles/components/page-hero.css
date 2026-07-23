@@ -2,6 +2,13 @@
   text-align: center;
   position: relative;
   overflow: clip;
+  padding-block-start: var(--space-7);
+}
+
+@media (min-width: 1024px) {
+  .page-hero {
+    padding-block-start: var(--space-8);
+  }
 }
 
 .page-hero::before {
