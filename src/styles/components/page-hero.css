@@ -2,11 +2,14 @@
   text-align: center;
   position: relative;
   overflow: clip;
+}
+
+section.page-hero {
   padding-block-start: var(--space-7);
 }
 
 @media (min-width: 1024px) {
-  .page-hero {
+  section.page-hero {
     padding-block-start: var(--space-8);
   }
 }
