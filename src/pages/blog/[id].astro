@@ -32,7 +32,16 @@ const schema = buildSchemaGraph({
 });
 ---
 
-<PageLayout title={post.data.title} description={post.data.description} ogImage={heroImageUrl} schema={schema}>
+<PageLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={heroImageUrl}
+  ogImageAlt={post.data.heroImageAlt ?? post.data.title}
+  ogType="article"
+  article={{ publishedTime: post.data.pubDate, authors: [post.data.author], section: post.data.category }}
+  articlePublisher={SITE.facebook}
+  schema={schema}
+>
   <article class="blog-post section-padding">
     <div class="container container--narrow">
       <a class="blog-post__top-link" href="/blog/">Volver al blog</a>

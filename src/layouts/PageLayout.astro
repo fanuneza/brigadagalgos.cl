@@ -7,22 +7,49 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogImageAlt?: string;
   schema?: Record<string, any>;
   mainId?: string;
   breadcrumbNames?: Record<string, string>;
   titleTemplate?: string;
+  ogType?: "website" | "article" | "profile" | "book";
+  article?: {
+    publishedTime?: Date | string;
+    modifiedTime?: Date | string;
+    expirationTime?: Date | string;
+    authors?: readonly string[];
+    tags?: readonly string[];
+    section?: string;
+  };
+  articlePublisher?: string;
 }
 
-const { title, description, ogImage, schema, mainId = "main-content", breadcrumbNames, titleTemplate } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  ogImageAlt,
+  schema,
+  mainId = "main-content",
+  breadcrumbNames,
+  titleTemplate,
+  ogType,
+  article,
+  articlePublisher,
+} = Astro.props;
 ---
 
 <BaseLayout
   title={title}
   description={description}
   ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
   schema={schema}
   breadcrumbNames={breadcrumbNames}
   titleTemplate={titleTemplate}
+  ogType={ogType}
+  article={article}
+  articlePublisher={articlePublisher}
 >
   <Fragment slot="head">
     <slot name="head" />

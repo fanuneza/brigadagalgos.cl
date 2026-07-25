@@ -13,18 +13,33 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogImageAlt?: string;
   schema?: Record<string, any>;
   breadcrumbNames?: Record<string, string>;
   titleTemplate?: string;
+  ogType?: "website" | "article" | "profile" | "book";
+  article?: {
+    publishedTime?: Date | string;
+    modifiedTime?: Date | string;
+    expirationTime?: Date | string;
+    authors?: readonly string[];
+    tags?: readonly string[];
+    section?: string;
+  };
+  articlePublisher?: string;
 }
 
 const {
   title,
   description,
   ogImage = SITE.ogImagePath,
+  ogImageAlt,
   schema,
   breadcrumbNames,
   titleTemplate = "%s | Brigada Galgos",
+  ogType = "website",
+  article,
+  articlePublisher,
 } = Astro.props;
 const { siteUrl, gtmContainerId, consentCookie, name } = SITE;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
@@ -57,14 +72,16 @@ const defaultSchema = buildStructuredDataGraph({
       titleTemplate={titleTemplate}
       description={description}
       canonical={canonicalUrl}
-      ogType="website"
+      ogType={ogType}
       ogImage={ogImageUrl}
-      ogImageAlt={title}
+      ogImageAlt={ogImageAlt ?? title}
       ogImageWidth={1200}
       ogImageHeight={630}
       siteName={name}
       locale="es_CL"
       graph={schema || defaultSchema}
+      article={article}
+      articlePublisher={articlePublisher}
       extraLinks={[
         {
           rel: "alternate",
