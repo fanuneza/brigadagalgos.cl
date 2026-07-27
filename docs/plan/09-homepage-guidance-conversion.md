@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: Homepage “Why galgos,” success stories, process, help options, donation band, mobile/dark-mode criteria
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`
@@ -48,7 +47,7 @@ Run the required jCodeMunch opening sequence and inspect:
 - Do not change process facts, help paths, story selection/count, substantive copy, donation destination, or analytics labels.
 - Do not edit the homepage hero, featured dogs, mission, or evidence strip from stage 08.
 - Do not change base `StoryCard`, shared gallery, or global controls.
-- Do not add new imagery unless it is a current local/source-backed project asset and the audit’s content remains unchanged.
+- Do not add new imagery unless it is a current local/source-backed project asset and all existing content remains unchanged.
 
 ## Implementation requirements
 

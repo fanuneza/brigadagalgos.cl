@@ -10,7 +10,6 @@ Read completely before editing:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: “Overall verdict,” Parts 1–2, “Tokens and global CSS,” “Theme system,” and Roadmap Batch 1
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`
@@ -26,7 +25,7 @@ Inspect the current repository through the required jCodeMunch opening sequence,
 - The component CSS import topology and all current consumers of radius, shadow, surface, section-spacing, and color tokens
 - Relevant source-hygiene and build tests
 
-Do not trust the audit’s line numbers or selector examples without confirming the current code. Use Astro Docs MCP if any framework-sensitive stylesheet loading behavior is in question.
+Do not trust remembered line numbers or selector examples without confirming the current code. Use Astro Docs MCP if any framework-sensitive stylesheet loading behavior is in question.
 
 ## Exact scope
 
@@ -35,7 +34,7 @@ Do not trust the audit’s line numbers or selector examples without confirming 
 - Make “no shadow” the global default and remove the cross-family card elevation/lift block.
 - Establish neutral light/dark surface steps and stable action/selection aliases.
 - Add narrowly scoped compatibility aliases where removing a legacy token immediately would create uncontrolled breakage.
-- Audit and resolve undefined/inconsistent global tokens such as `--line-relaxed` if still present.
+- Identify and resolve undefined/inconsistent global tokens such as `--line-relaxed` if still present.
 
 ## Explicit non-goals
 
@@ -48,7 +47,7 @@ Do not trust the audit’s line numbers or selector examples without confirming 
 
 ## Implementation requirements
 
-- Preserve the existing palette while assigning the audit’s stable semantic roles.
+- Preserve the existing palette while assigning the semantic roles specified in this stage and the index.
 - Keep the current 1200px wide container unless evidence demonstrates a safe adjustment.
 - Provide reading, compact, and form width roles; compact/standard/generous section spacing; modest control/card/media/panel radii; and exceptional-only shadow roles.
 - Retain `light-dark()`, explicit `data-theme`, `color-scheme`, and the current anti-flash model.
@@ -79,7 +78,7 @@ Do not run the full regression suite or Lighthouse; the orchestrator owns those.
 
 ## Acceptance criteria
 
-- Semantic tokens cover the audit’s typography, layout, color, depth, radius, and motion policies.
+- Semantic tokens cover this plan’s typography, layout, color, depth, radius, and motion policies.
 - The page background and shared surfaces are flat and stable in both themes.
 - The global unrelated-card elevation selector is gone.
 - Existing components continue to render without severe layout breakage.

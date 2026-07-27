@@ -1,12 +1,25 @@
 # Visual-polish implementation plan
 
-This directory turns [`audit.md`](./audit.md) into small, reviewable implementation stages. The audit is the source of truth for design intent. The stage files define execution boundaries; they do not supersede the audit, `AGENTS.md`, or current project documentation.
+This directory is the execution source for the Brigada Galgos visual-polish project. It divides the work into small, reviewable implementation stages while preserving `AGENTS.md` and current project documentation as repository-wide authority.
+
+## Shared design direction
+
+The visual north star is **editorial restraint with photographic primacy**. Keep Barlow, Barlow Condensed, the established brand palette, local photography, static rendering, and the existing content architecture. Make photography, proportion, typography, whitespace, alignment, and practical information carry the presentation. Decorative CSS must become exceptional rather than routine.
+
+Across every stage:
+
+- Use Barlow Condensed selectively for page titles, major section titles, dog names, and large confirmed statistics; use Barlow for supporting hierarchy and prose.
+- Use cyan for links, focus, selection, and navigation emphasis; magenta for branding and rare editorial emphasis; orange for primary conversion; green for confirmed positive/completed states; and purple only as a rare illustrative accent.
+- Prefer flat neutral surfaces, quiet borders, modest radii, and separators. Remove routine gradients, glows, shadows, hover lift, photographic rotation, pill styling, and repeated multicolor treatments.
+- Give each content type its own composition: photographic dog profiles, editorial success stories, structured guidance, evidence strips, financial panels, channel rows, and chronological processes.
+- Allow one visually dominant action per grouping while preserving every existing route, destination, tracking attribute, consent rule, and shared link primitive.
+- Treat light and dark modes, mobile and desktop composition, WCAG 2.2 AA, 44px targets, reduced motion, progressive enhancement, static output, responsive images, and Lighthouse performance as non-negotiable.
 
 ## Working contract
 
 - The Sol-5.6 orchestrator owns dependency management, agent selection, dispatch, conflict resolution, integration review, final testing, representative visual checks, Lighthouse validation, and documentation consistency.
 - Every stage must be completed by a fresh agent that begins with no assumed repository context.
-- Before editing, every stage agent must read `AGENTS.md` completely, its assigned stage file completely, the audit sections named by that stage, and the listed project documentation.
+- Before editing, every stage agent must read `AGENTS.md` completely, its assigned stage file completely, and the project documentation listed in that stage. Each stage file contains the design context needed for its own work.
 - Every stage agent must run the required jCodeMunch opening sequence and inspect the current repository. Paths in these files are verified planning anchors, not permission to skip discovery.
 - Astro Docs MCP is mandatory before changing any current Astro API or framework-sensitive behavior.
 - A stage agent must not expand its scope to fix unrelated visual residue. Record it for the orchestrator instead.
@@ -20,7 +33,7 @@ This directory turns [`audit.md`](./audit.md) into small, reviewable implementat
 Before dispatching implementation stages, the orchestrator must:
 
 1. Confirm the worktree state and preserve unrelated user changes.
-2. Read `AGENTS.md`, this index, every stage file, and `audit.md`.
+2. Read `AGENTS.md`, this index, every stage file, and the project documentation referenced by those stages.
 3. Resolve and refresh the jCodeMunch index if needed.
 4. Inspect `package.json`, current scripts, and the current test topology; do not infer command names.
 5. Select one current active dog profile route for repeated profile checks.
@@ -89,14 +102,14 @@ After stages 08, 09, and 12–16, the orchestrator resolves CSS/import conflicts
 
 Only after every accepted stage is integrated, the Sol-5.6 orchestrator must:
 
-1. Audit the complete diff against `audit.md`, `AGENTS.md`, `PRODUCT.md`, `DESIGN.md`, and relevant files under `docs/`.
+1. Review the complete diff against this index, every accepted stage, `AGENTS.md`, `PRODUCT.md`, `DESIGN.md`, and relevant files under `docs/`.
 2. Resolve conflicts and remove compatibility aliases or obsolete overrides only when proven safe.
 3. Verify analytics, consent, routing, content schemas, structured data, redirects, image processing, and theme anti-flash behavior did not change unintentionally.
-4. Perform the cross-site light/dark audit, responsive audit at 320, 375, 430, 768, 1024, 1280, and 1440+ px, keyboard review, 200% zoom review, reduced-motion review, and representative no-JavaScript checks.
+4. Perform cross-site light/dark and responsive reviews at 320, 375, 430, 768, 1024, 1280, and 1440+ px, plus keyboard, 200% zoom, reduced-motion, and representative no-JavaScript checks.
 5. Run the complete repository-required validation from `AGENTS.md` and `package.json`, including formatting, linting, build, unit/source-hygiene tests, Playwright, accessibility coverage, and any defined browser regression suites.
-6. Run Lighthouse on the audit’s representative routes and preserve the project’s established 100 targets.
+6. Run Lighthouse on `/`, `/adoptar/`, one active `/adoptar/[slug]/`, `/hogar-temporal/`, `/donar/`, `/casos-de-exito/`, and `/contacto/`; preserve the project’s established 100 targets.
 7. Review final before/after screenshots for `/`, `/adoptar/`, one dog profile, `/hogar-temporal/`, `/donar/`, `/casos-de-exito/`, `/por-que-galgos/`, `/contacto/`, and `/colaboradores/` in both themes.
 8. Update current documentation only where the implemented visual system makes it inaccurate. Keep `AGENTS.md` operational and human-facing docs appropriately concise.
-9. Produce the final report requested by `audit.md`, including validation results, visual evidence, remaining risks, and intentionally deferred product/architecture changes.
+9. Produce a final report containing the implemented visual direction, changed files grouped by stage, representative before/after screenshots, validation commands/results, Lighthouse and accessibility results, light/dark and responsive verification, remaining risks, and recommendations intentionally deferred because they would change product scope, content, structure, or architecture.
 
 The orchestrator must not hide failed checks, waive Lighthouse regressions, or fold unrelated cleanup into the visual-polish series.

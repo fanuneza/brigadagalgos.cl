@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: color roles, radius policy, button hierarchy, links, “Buttons and links”
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

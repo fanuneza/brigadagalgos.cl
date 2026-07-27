@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: Donation page, impact/transparency, bank-copy interaction, trust constraints
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

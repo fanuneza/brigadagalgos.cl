@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: Contact route, forms, accessibility requirements
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

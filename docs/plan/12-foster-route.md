@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: Foster page, process, forms, mobile/dark requirements
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

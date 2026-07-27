@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: “Foundation and trust presentation,” collaborators/supporters requirements, color/depth policy
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

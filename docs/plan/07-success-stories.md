@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: success-story photography, `/casos-de-exito/`, card-family separation, content/performance constraints
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

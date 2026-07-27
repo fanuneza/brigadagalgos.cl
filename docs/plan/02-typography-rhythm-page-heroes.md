@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: typography, layout system, “PageHero,” route mappings, Roadmap Batch 2
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`
@@ -36,7 +35,7 @@ After the required jCodeMunch opening sequence, inspect:
 - Implement reading/lead widths, balanced short display headings, and pretty wrapping for prose where supported.
 - Replace universal section padding assumptions with compact, standard, and generous relationship classes/tokens.
 - Add typed `PageHero` presentation variants equivalent to `editorial`, `conversion`, and `compact`, plus start/center alignment.
-- Map the audited routes intentionally: adoption/foster/donation to start-aligned conversion, success/why-galgos to start-aligned editorial, and contact to start-aligned compact.
+- Map routes intentionally: adoption/foster/donation to start-aligned conversion, success/why-galgos to start-aligned editorial, and contact to start-aligned compact.
 - Preserve safe defaults for unaffected routes such as 404, FAQ, and blog.
 - Remove default decorative PageHero gradients.
 
@@ -51,7 +50,7 @@ After the required jCodeMunch opening sequence, inspect:
 ## Implementation requirements
 
 - Sentence case must be the default; uppercase remains limited to genuine eyebrows, compact metadata, and short display labels.
-- Page titles and major section titles may use Barlow Condensed; subsection/card/form/navigation headings use Barlow unless the audit explicitly grants a display role.
+- Page titles and major section titles may use Barlow Condensed; subsection/card/form/navigation headings use Barlow unless this stage explicitly grants a display role.
 - Keep prose near 62–68ch and hero leads near 54–60ch.
 - Maintain one meaningful `h1` per route and preserve semantic heading order.
 - Variants must be typed, content-driven, and stable with or without CTA content.
@@ -81,7 +80,7 @@ Do not run full regression or Lighthouse.
 ## Acceptance criteria
 
 - Hierarchy remains understandable without relying on colored backgrounds or card frames.
-- `PageHero` variants cover audited route needs without one-off route positioning.
+- `PageHero` variants cover the specified route needs without one-off route positioning.
 - All existing PageHero importers compile and unaffected routes retain safe behavior.
 - No display heading overflows from 320px through wide desktop.
 - Light and dark modes use the same typographic hierarchy.

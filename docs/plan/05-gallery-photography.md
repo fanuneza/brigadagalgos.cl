@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: photography, gallery controls, “Shared gallery,” performance requirements
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

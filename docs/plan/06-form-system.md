@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: “Forms,” shared-component forms, contact accessibility requirements
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`
@@ -40,7 +39,7 @@ After the required jCodeMunch opening sequence, inspect:
 
 - Do not redesign the contact page layout; stage 15 owns it.
 - Do not recompose the foster page or application area; stage 12 owns it.
-- Do not change field labels, requiredness, endpoints, privacy copy, analytics events, or external contact destinations without an audited defect.
+- Do not change field labels, requiredness, endpoints, privacy copy, analytics events, or external contact destinations without a verified defect.
 - Do not replace native controls with custom widgets.
 
 ## Implementation requirements

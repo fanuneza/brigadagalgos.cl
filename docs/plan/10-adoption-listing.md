@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: action hierarchy, adoption photography, `/adoptar/`, card-family separation
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

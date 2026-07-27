@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: Why galgos route, editorial reading widths, photography, content caveats
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

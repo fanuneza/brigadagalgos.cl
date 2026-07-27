@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: “Header and navigation,” “Footer,” “Navigation and footer,” rainbow/color policy
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`
@@ -40,7 +39,7 @@ After the required jCodeMunch opening sequence, inspect:
 - Preserve and visually regroup the mobile drawer without changing its semantics.
 - Remove Footer glow, simplify its brand/social/action treatments, and move to a mission-led unequal-column composition.
 - Preserve RUT, contact, navigation, legal links, cookie preferences, site credit, and social/external semantics.
-- Choose the audit’s single restrained rainbow signature location, preferably the Footer; remove or neutralize repeated site-frame usage without deleting route instances owned by later stages.
+- Choose one restrained rainbow signature location, preferably the Footer; remove or neutralize repeated site-frame usage without deleting route instances owned by later stages.
 
 ## Explicit non-goals
 

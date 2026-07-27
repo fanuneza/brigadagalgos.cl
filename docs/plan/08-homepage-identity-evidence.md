@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: Homepage hero, featured dogs, mission, trust statistics, photography, action hierarchy
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`

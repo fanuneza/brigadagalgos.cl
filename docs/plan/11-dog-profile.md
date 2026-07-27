@@ -10,7 +10,6 @@ Read completely:
 
 - `AGENTS.md`
 - This stage file
-- `docs/plan/audit.md`: profile photography, action hierarchy, `/adoptar/[slug]/`
 - `PRODUCT.md`
 - `DESIGN.md`
 - `docs/site-brief.md`
@@ -40,7 +39,7 @@ Use Astro Docs MCP before changing `getStaticPaths`, image generation, or route 
 - Lead with name/current need, structured neutral facts, character sketch, then details.
 - Keep application as the sole filled action, WhatsApp outlined, share/Instagram quiet utilities, and support reassurance directly beneath the primary actions.
 - Reduce/remove the profile rainbow divider and make the repeated adoption process a compact follow-on section.
-- Implement the audit’s mobile reading order without a fixed bottom bar.
+- Implement this mobile reading order without a fixed bottom bar: back link, name/current need, gallery, essential facts, character sketch, details, primary/secondary actions, support reassurance, then utility actions.
 
 ## Explicit non-goals
 
