@@ -2,7 +2,7 @@
 
 ## Scope
 
-This document describes the content collections, schemas, editorial rules, and workflows for the Brigada Galgos website. It is a companion to `src/content.config.ts` and `docs/developer-reference.md`.
+This document describes the content collections, schemas, editorial rules, and workflows for the Brigada Galgos website. It is a companion to `src/content.config.ts`, which remains the canonical schema definition.
 
 ## Content collections
 
@@ -182,6 +182,13 @@ order: 1
    - Remove: `sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, `order`, `active`, `hiddenSince`, `hiddenReason`.
    - Add: `story` (≤260 chars, mentions adoption).
    - Keep: `name`, `instagramUrl`, `gallery` (with updated paths).
+4. Add a permanent redirect in `public/_redirects` for the retired profile URL:
+
+   ```
+   /adoptar/<slug>/ /casos-de-exito/ 301
+   ```
+
+Profile URLs are shared on social media and must not 404 after adoption. `tests/source-hygiene.test.ts` fails the build if a retired or hidden profile is missing its redirect.
 
 ### Hiding a dog temporarily
 
@@ -193,7 +200,7 @@ hiddenSince: "2026-01-15"
 hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 ```
 
-A hidden dog remains in the collection but does not appear in listings. After 90 days, `tests/source-hygiene.test.ts` will fail unless the dog is moved or reactivated.
+A hidden dog remains in the collection but does not appear in listings, and its `/adoptar/<slug>/` profile page is not generated — shared profile links would 404 while the dog is hidden. Add the same `public/_redirects` entry described in "Moving a dog to success stories" for the duration of the hide, and remove it once the dog is active again. After 90 days, `tests/source-hygiene.test.ts` will fail unless the dog is moved or reactivated.
 
 ### Adding a supporter
 
@@ -226,9 +233,10 @@ The following rules are enforced by `tests/source-hygiene.test.ts` and other che
 - No success story over 260 characters or missing an adoption outcome.
 - No hidden dog without `hiddenSince` and `hiddenReason`.
 - No hidden dog older than 90 days.
-- No absolute filesystem paths in repo files or docs.
+- No absolute filesystem paths in source files or root-level Markdown (the scan covers `src/`, `public/`, `scripts/`, `tests/`, and root `*.md`; `docs/` is excluded).
 - No standalone `gtag.js` references.
 - Analytics must be consent-gated.
+- Retired or hidden dog profiles must have a redirect in `public/_redirects`.
 - Text-quality checks enforce voice and tone patterns (for example, no “encajar” in site copy).
 
 ## Voice and tone
@@ -241,16 +249,6 @@ All content must follow `docs/voice-and-tone.md`. Key reminders:
 - Mention post-adoption support on adoption copy.
 - No em dashes in site copy.
 
-## Related documents
-
-- `src/content.config.ts` — canonical schemas
-- `docs/site-brief.md` — product intent
-- `docs/prd.md` — functional requirements
-- `docs/spec.md` — technical specification
-- `docs/feature-inventory.md` — current pages and features
-- `docs/developer-reference.md` — detailed image sizes and analytics events
-- `AGENTS.md` — operational guidance
-
 ## Last updated
 
-2026-07-06
+2026-07-28

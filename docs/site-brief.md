@@ -80,12 +80,10 @@ A fast, accessible, static-first website that helps Brigada Galgos:
 - `docs/voice-and-tone.md` — copy and brand voice rules
 - `docs/prd.md` — functional requirements
 - `docs/spec.md` — technical specification
-- `docs/feature-inventory.md` — current pages and features
 - `docs/content-model.md` — content schemas and editorial rules
-- `docs/architecture-map.md` — component and content flow
 - `AGENTS.md` — operational guidance for AI agents
 - `README.md` — human-facing project overview
 
 ## Last updated
 
-2026-07-05
+2026-07-28

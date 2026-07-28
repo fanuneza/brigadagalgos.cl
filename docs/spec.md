@@ -2,7 +2,7 @@
 
 ## Scope
 
-This document is the technical specification for the Brigada Galgos website. It describes the stack, file structure, data flow, external dependencies, submission approach, and key implementation decisions. It complements `docs/developer-reference.md`, which contains the detailed content model, image sizes, and analytics event list.
+This document is the technical specification for the Brigada Galgos website. It describes the stack, file structure, data flow, external dependencies, submission approach, and key implementation decisions. Editorial rules and content workflows live in `docs/content-model.md`; functional requirements live in `docs/prd.md`.
 
 ## Stack choices
 
@@ -67,6 +67,7 @@ The site is a static Astro 7 site. All pages are generated at build time from Ma
 brigadagalgos.cl/
 ├── README.md
 ├── AGENTS.md
+├── DESIGN.md
 ├── astro.config.mjs
 ├── package.json
 ├── package-lock.json
@@ -85,8 +86,8 @@ brigadagalgos.cl/
 │   │   ├── casos/
 │   │   │   ├── adopcion/        # Dog profile photos
 │   │   │   └── exito/           # Success story photos
-│   │   └── colaboradores/        # Supporter logos
-│   ├── components/
+│   │   └── colaboradores/       # Supporter logos
+│   ├── components/              # Shared UI components
 │   │   ├── DonationBanner.astro
 │   │   ├── ExternalLink.astro
 │   │   ├── Footer.astro
@@ -101,29 +102,55 @@ brigadagalgos.cl/
 │   │   ├── RequirementCard.astro
 │   │   ├── SharedGalleryLightbox.astro
 │   │   ├── SharedPhotoGallery.astro
-│   │   ├── StoriesSection.astro      # Home preview
+│   │   ├── StoriesSection.astro      # Home success-story preview
 │   │   ├── StoryCard.astro           # Shared success-story card
 │   │   ├── StructuredData.astro
 │   │   ├── TrackedLink.astro
 │   │   └── WhatsAppLink.astro
-│   ├── components/sections/      # Page-specific sections (if any)
+│   ├── components/sections/     # Page-specific section components
+│   │   ├── AdoptionGrid.astro
+│   │   ├── AdoptionIntro.astro
+│   │   ├── AdoptionProcess.astro
+│   │   ├── AdoptionTailCta.astro
+│   │   ├── CasesBand.astro
+│   │   ├── ContactChannels.astro
+│   │   ├── ContactForm.astro
+│   │   ├── CookieBanner.astro
+│   │   ├── CookiePolicyArticle.astro
+│   │   ├── DonationCards.astro
+│   │   ├── FaqSection.astro
+│   │   ├── FeaturedAdoptionDogs.astro
+│   │   ├── FosterPostular.astro
+│   │   ├── FosterRequirements.astro
+│   │   ├── HelpTailCta.astro
+│   │   ├── ImpactSection.astro
+│   │   ├── NextStepCta.astro
+│   │   ├── NotFoundLinks.astro
+│   │   ├── PressSection.astro
+│   │   ├── SupportersCtaSection.astro
+│   │   ├── SupportersIntro.astro
+│   │   ├── TrustStatsSection.astro
+│   │   ├── WhyGalgosEditorial.astro
+│   │   └── WhyGalgosSection.astro
 │   ├── config/
-│   │   ├── faq.ts                # FAQ data and grouping
-│   │   └── site.ts               # Site metadata, contact links, IDs
+│   │   ├── faq.ts               # FAQ data and grouping
+│   │   └── site.ts              # Site metadata, contact links, IDs
 │   ├── content/
-│   │   ├── adoption-dogs/        # Markdown dog profiles
-│   │   ├── success-dogs/         # Markdown success stories
-│   │   ├── supporters/           # Markdown supporter entries
-│   │   └── blog/                 # Markdown blog posts
-│   ├── content.config.ts          # Astro content collection schemas
+│   │   ├── adoption-dogs/       # Markdown dog profiles
+│   │   ├── success-dogs/        # Markdown success stories
+│   │   ├── supporters/          # Markdown supporter entries
+│   │   └── blog/                # Markdown blog posts
+│   ├── content.config.ts        # Astro content collection schemas
 │   ├── env.d.ts
 │   ├── layouts/
-│   │   ├── BaseLayout.astro      # Document shell
-│   │   └── PageLayout.astro      # Standard page wrapper
+│   │   ├── BaseLayout.astro     # Document shell
+│   │   └── PageLayout.astro     # Standard page wrapper
 │   ├── pages/
 │   │   ├── index.astro
 │   │   ├── adoptar.astro
-│   │   ├── casos-de-exito.astro      # Full success-story archive
+│   │   ├── adoptar/
+│   │   │   └── [slug].astro     # Per-dog profile page
+│   │   ├── casos-de-exito.astro # Full success-story archive
 │   │   ├── por-que-galgos.astro
 │   │   ├── hogar-temporal.astro
 │   │   ├── donar.astro
@@ -132,6 +159,9 @@ brigadagalgos.cl/
 │   │   ├── preguntas-frecuentes.astro
 │   │   ├── politica-de-cookies.astro
 │   │   ├── 404.astro
+│   │   ├── blog/
+│   │   │   ├── index.astro      # Blog listing
+│   │   │   └── [id].astro       # Blog post page
 │   │   ├── feed.xml.ts
 │   │   ├── schemamap.xml.ts
 │   │   ├── schema/
@@ -140,16 +170,16 @@ brigadagalgos.cl/
 │   │   │   └── api-catalog.ts
 │   │   └── 591c2b87f0b68c44f260215f5d8e9da3.txt.ts
 │   ├── scripts/
-│   │   ├── analytics-events.ts   # Tracked element and section event listeners
-│   │   ├── cookie-consent.ts     # Consent banner and GTM lifecycle
-│   │   ├── copy-data.ts          # Copy-to-clipboard helper (bank details, etc.)
-│   │   ├── filter-chips.ts       # Adoption page filters
-│   │   ├── form.ts               # Contact form validation and submission
-│   │   ├── init-shared-gallery.ts
-│   │   ├── navbar.ts             # Mobile menu and theme toggle
-│   │   ├── shared-gallery.ts
-│   │   ├── theme.ts              # Dark/light theme persistence
-│   │   └── gallery/              # Lightbox implementation modules
+│   │   ├── analytics-events.ts  # Tracked element and section event listeners
+│   │   ├── cookie-consent.ts    # Consent banner and GTM lifecycle
+│   │   ├── copy-data.ts         # Copy-to-clipboard helper (bank details, etc.)
+│   │   ├── filter-chips.ts      # Adoption page filters
+│   │   ├── form.ts              # Contact form validation and submission
+│   │   ├── init-shared-gallery.ts # Gallery/lightbox bootstrap
+│   │   ├── navbar.ts            # Mobile menu and theme toggle
+│   │   ├── share-dog.ts         # Native share button with clipboard fallback
+│   │   ├── theme.ts             # Dark/light theme persistence
+│   │   └── gallery/             # Lightbox implementation modules
 │   │       ├── carousel.ts
 │   │       ├── dom.ts
 │   │       ├── index.ts
@@ -157,50 +187,47 @@ brigadagalgos.cl/
 │   │       ├── markup.ts
 │   │       └── types.ts
 │   ├── styles/
-│   │   ├── global.css             # Global styles and imports
-│   │   ├── tokens.css             # Design tokens
-│   │   └── components/            # Modular component CSS
+│   │   ├── global.css           # Global styles and imports
+│   │   ├── tokens.css           # Design tokens
+│   │   └── components/          # Modular component CSS
 │   ├── types/
 │   │   └── global.d.ts
 │   └── utils/
-│       ├── analytics.ts           # Analytics helpers and types
-│       ├── dog-content.ts         # Dog/story card shaping
-│       ├── hero-images.ts         # Hero image resolution
-│       ├── html-escape.ts         # HTML escape utilities
-│       ├── instagram.ts           # Instagram URL handling
-│       ├── responsive-gallery-images.ts  # Responsive image generation
-│       ├── schema.ts              # Schema helpers
-│       ├── shuffle.ts             # Randomization utilities
-│       ├── story-card-copy.ts     # Success-story excerpt builder
-│       └── structured-data.ts     # JSON-LD builders
-├── scripts/                       # Maintenance and workflow scripts
+│       ├── analytics.ts         # Analytics helpers and types
+│       ├── blog-content.ts      # Blog entry shaping
+│       ├── dog-content.ts       # Dog/story card shaping
+│       ├── hero-images.ts       # Hero image resolution
+│       ├── html-escape.ts       # HTML escape utilities
+│       ├── instagram.ts         # Instagram URL handling
+│       ├── reading-time.ts      # Blog reading-time estimate
+│       ├── responsive-gallery-images.ts # Responsive image generation
+│       ├── schema.ts            # Schema helpers
+│       ├── shuffle.ts           # Randomization utilities
+│       ├── story-card-copy.ts   # Success-story excerpt builder
+│       └── structured-data.ts   # JSON-LD builders
+├── scripts/                     # Maintenance and workflow scripts
 │   ├── check-text-quality.mjs
 │   ├── normalize-dog-images.mjs
 │   └── run-playwright-server.mjs
-├── tests/                         # Playwright specs and Vitest tests
+├── tests/                       # Playwright specs and Vitest tests
 │   ├── a11y.spec.ts
 │   ├── analytics-consent.spec.ts
 │   ├── build-output.spec.ts
 │   ├── capture.spec.ts
+│   ├── dog-content.test.ts
+│   ├── dog-profile.spec.ts
 │   ├── filter-chips.spec.ts
 │   ├── nav.spec.ts
 │   ├── smoke.spec.ts
 │   ├── source-hygiene.test.ts
 │   └── stories-section.spec.ts
-├── docs/                          # Project documentation
-│   ├── builder-profile.md
-│   ├── scope.md
-│   ├── site-brief.md
-│   ├── prd.md
-│   ├── spec.md
-│   ├── feature-inventory.md
-│   ├── content-model.md
-│   ├── architecture-map.md
-│   ├── voice-and-tone.md
-│   ├── developer-reference.md
-│   └── deep-research.md
-└── .claude/                       # Claude Code configuration
-    └── CLAUDE.md
+└── docs/                        # Project documentation
+    ├── site-brief.md
+    ├── prd.md
+    ├── spec.md
+    ├── content-model.md
+    ├── voice-and-tone.md
+    └── plan/
 ```
 
 ## Content architecture
@@ -216,15 +243,47 @@ Content is stored as Markdown files with frontmatter in `src/content/`. Astro co
 
 Images referenced by collections live in `src/assets/` and are processed by `astro:assets`.
 
+Content-to-page routing:
+
+```
+src/content/adoption-dogs/  ──→  Home featured selection + /adoptar/ + /adoptar/<slug>/
+src/content/success-dogs/   ──→  Home preview + /casos-de-exito/ + /por-que-galgos/
+src/content/supporters/     ──→  /colaboradores/
+src/content/blog/           ──→  /blog/ + /blog/<id>/ + /feed.xml (RSS)
+```
+
 ## Layout hierarchy
 
 ```
 BaseLayout.astro
-  └── PageLayout.astro (most pages)
-        ├── Navbar
-        ├── <main>
-        │     └── page content
-        └── Footer
+│
+├── Document shell
+│   ├── Global styles (global.css + components)
+│   ├── Theme init script (anti-flash, localStorage)
+│   ├── SEO graph + JSON-LD (StructuredData.astro)
+│   ├── GTM noscript fallback (only if consent given)
+│   └── Cookie banner (server-rendered)
+│
+└── PageLayout.astro (most pages)
+    │
+    ├── Navbar
+    │   ├── Logo + navigation links
+    │   ├── Mobile menu toggle
+    │   └── Theme toggle
+    │
+    ├── <main>
+    │   └── Page-specific content
+    │       ├── Hero / PageHero
+    │       ├── Section components (src/components/sections/)
+    │       └── Shared UI (StoriesSection, HelpCards, DonationBanner, ...)
+    │
+    └── Footer
+        ├── Links
+        ├── Social links
+        └── Legal / cookies
+
+Optional afterShell slot:
+└── SharedGalleryLightbox
 ```
 
 - `BaseLayout.astro` — document shell, global styles, SEO graph, GTM noscript fallback, cookie banner, client bootstrap scripts.
@@ -232,10 +291,10 @@ BaseLayout.astro
 
 ## Component organization
 
-| Directory                  | Responsibility                            |
-| -------------------------- | ----------------------------------------- |
-| `src/components/`          | Shared UI components used across pages    |
-| `src/components/sections/` | Page-specific section components (if any) |
+| Directory                  | Responsibility                         |
+| -------------------------- | -------------------------------------- |
+| `src/components/`          | Shared UI components used across pages |
+| `src/components/sections/` | Page-specific section components       |
 
 Key shared primitives:
 
@@ -253,6 +312,8 @@ Key shared primitives:
 | ---------------------------------------- | ------------------------------------------------------------------- |
 | `src/utils/dog-content.ts`               | Shapes adoption-dog and success-dog entries for cards and galleries |
 | `src/utils/story-card-copy.ts`           | Builds success-story card excerpts with the 260-character default   |
+| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                      |
+| `src/utils/reading-time.ts`              | Estimates blog post reading time                                    |
 | `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data      |
 | `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images               |
 | `src/utils/hero-images.ts`               | Hero image resolution helpers                                       |
@@ -271,6 +332,8 @@ Key shared primitives:
 - `src/scripts/filter-chips.ts` — adoption page filter chips.
 - `src/scripts/form.ts` — contact form validation and submission handling.
 - `src/scripts/copy-data.ts` — copy-to-clipboard for bank details and similar.
+- `src/scripts/share-dog.ts` — native share button with clipboard fallback on dog profiles.
+- `src/scripts/init-shared-gallery.ts` — gallery/lightbox bootstrap.
 - `src/scripts/gallery/*.ts` — modular lightbox implementation (carousel, DOM, markup, lightbox, types).
 
 ## Styling strategy
@@ -279,6 +342,7 @@ Key shared primitives:
 - The site relies on modular CSS rather than a second utility-first styling layer.
 - When editing existing components, prefer the surrounding pattern rather than introducing utility-heavy rewrites.
 - Design tokens live in `src/styles/tokens.css` and are imported where needed.
+- The visual design system (colors, typography, components) is documented in `DESIGN.md`.
 
 ## Data flow
 
@@ -321,11 +385,19 @@ Build output (static files)
 ## Image pipeline
 
 - Dog photos are stored in `src/assets/casos/adopcion/` and `src/assets/casos/exito/`.
-- Astro's image service generates responsive AVIF and WebP variants.
-- Cards use 360w/480w/640w AVIF with a 480w WebP fallback.
-- Lightbox uses 1200w AVIF.
-- Hero images use portrait and landscape sizes.
-- All dog galleries are capped at 3 images.
+- Astro's image service generates responsive AVIF and WebP variants via `getImage`.
+- All dog galleries are capped at 3 images (schema-validated).
+
+Responsive variants generated per surface (verified against `src/utils/responsive-gallery-images.ts`, `src/utils/hero-images.ts`, and the consuming components):
+
+| Surface                               | Widths            | Formats and fallback                          |
+| ------------------------------------- | ----------------- | --------------------------------------------- |
+| Dog/story cards                       | 360w, 480w, 640w  | AVIF srcset + single 480w WebP fallback `src` |
+| Lightbox                              | 1200w             | AVIF only                                     |
+| Hero portrait                         | 360w, 540w, 720w  | AVIF + WebP srcsets; 540w WebP fallback `src` |
+| Hero landscape                        | 640w, 960w, 1120w | AVIF + WebP srcsets                           |
+| Editorial section (`/por-que-galgos`) | 400w, 600w, 728w  | AVIF + WebP via `Picture`                     |
+| Supporter logos (`/colaboradores`)    | 240w, 360w, 480w  | `Image` srcset, quality 72                    |
 
 ## Analytics and consent flow
 
@@ -340,7 +412,7 @@ User accepts → GTM injected → dataLayer consent granted
 User rejects → known cookies cleared → dataLayer consent denied
 ```
 
-Analytics events are emitted via `dataLayer` from tracked elements, custom events, and form interactions. The full event list is in `docs/developer-reference.md`.
+Analytics is delivered through a single GTM container (`GTM-M2RN5B38`, configured in `src/config/site.ts`) that loads GA4; there is no standalone `gtag.js`. Events are pushed to `dataLayer` from `data-track-*` attributes, tracked sections, and the custom `brigada:analytics` DOM event. No personal data (emails, names, phone numbers) is sent.
 
 ### Consent state machine
 
@@ -350,6 +422,24 @@ Analytics events are emitted via `dataLayer` from tracked elements, custom event
 | Accepted | Injected     | Allowed     | Granted        |
 | Rejected | Not loaded   | Cleared     | Denied         |
 | Changed  | Re-evaluated | Updated     | Updated        |
+
+### Tracked events
+
+Full event list, verified against `src/scripts/` and the `trackEvent` props in components:
+
+- Navigation and links: `cta_click`, `navigation_click`, `social_click`, `whatsapp_click`, `outbound_click`
+- Engagement: `section_view`, `scroll_depth`, `story_click`
+- Gallery: `gallery_open`, `gallery_next`, `gallery_previous`
+- Dogs: `dog_filter_click`, `dog_profile_click`, `dog_share_click`, `adoption_apply_click`, `foster_apply_click`
+- Donations: `donation_esponsor_click`, `bank_data_copy`
+- Contact form: `contact_form_submit`, `contact_form_invalid`, `contact_form_success`, `contact_form_error`
+- Consent: `cookie_consent_action`, `cookie_consent_update`
+
+To extend tracking:
+
+1. Add `data-track-event` / `data-track-location` attributes to elements, or pass `trackEvent`/`trackLocation` to the shared link components.
+2. Use `data-track-section="name"` for section view tracking.
+3. Dispatch the custom `brigada:analytics` event with details from complex scripts (see `src/utils/analytics.ts`).
 
 ## SEO and structured data
 
@@ -411,9 +501,21 @@ Every page includes:
 - CSP is strict; third-party allowances are documented in code and headers.
 - HTTPS-only assumptions throughout.
 
+Deployment flow:
+
+```
+GitHub push
+    │
+    ▼
+Cloudflare Pages build (npm install, npm run build, deploy static files)
+    │
+    ▼
+Cloudflare edge (_headers and _redirects applied, global CDN)
+```
+
 ## Testing strategy
 
-- **Vitest** — source-hygiene checks, unit tests, content validation.
+- **Vitest** — source-hygiene checks (`tests/source-hygiene.test.ts`), unit tests (`tests/dog-content.test.ts`).
 - **Playwright** — browser tests, accessibility scans, smoke tests, analytics-consent tests, build-output checks.
 - **Lighthouse CI** — performance, accessibility, best practices, SEO.
 
@@ -452,15 +554,7 @@ Markdown-only changes to `docs/`, `README.md`, or `AGENTS.md` may skip the full 
 
 ## Content workflow for dog status changes
 
-### Moving a dog from adoption to success
-
-1. `git mv src/content/adoption-dogs/name.md src/content/success-dogs/name.md`
-2. `git mv src/assets/casos/adopcion/name src/assets/casos/exito/name`
-3. Rewrite frontmatter: remove adoption-only fields, add `story` (≤260 chars, mentions adoption).
-
-### Hiding a dog temporarily
-
-Set `active: false`, provide `hiddenSince` and `hiddenReason`, and ensure the entry is not older than 90 days.
+The editorial workflows for adding, hiding, and moving dogs (including the required `public/_redirects` entries) are documented in `docs/content-model.md`. `tests/source-hygiene.test.ts` enforces the tracking metadata and the redirect for every retired or hidden profile.
 
 ## Extensibility notes
 
@@ -481,16 +575,14 @@ Set `active: false`, provide `hiddenSince` and `hiddenReason`, and ensure the en
 - **Local-first assets:** No remote image CDNs for dog photography.
 - **Accessibility as a hard constraint:** Lighthouse and axe-core tests are part of the delivery pipeline.
 
-## Related documents
+## Open items
 
-- `docs/site-brief.md` — product intent
-- `docs/prd.md` — functional requirements
-- `docs/feature-inventory.md` — current pages and features
-- `docs/content-model.md` — content schemas and editorial rules
-- `docs/architecture-map.md` — component and content flow
-- `docs/developer-reference.md` — detailed content model, image sizes, and analytics events
-- `AGENTS.md` — operational guidance
+Carried over from the retired follow-up notes; none of these block shipping.
+
+- **Lighthouse local flakiness:** `.lighthouserc.cjs` runs with `numberOfRuns: 1` and a performance `minScore` of `0.99`. The page-hero LCP sits near a scoring-curve boundary, so a single local run can flake on one page. If exactly one page fails at the boundary, re-run once before treating it as a regression. Durable fixes, not yet applied: aggregate with `numberOfRuns: 3` (median), or relax only the performance category on documented borderline-LCP pages.
+- **Blog post semantic structure:** in `src/pages/blog/[id].astro`, the `<article>` wraps only the post header; the body (`<Content />`) renders in a sibling `<section>`. Semantically the article should wrap both. Fix when the first real blog post ships.
+- **`dog_share_click` timing:** the event fires when the share button is clicked, before the share completes (see `src/scripts/share-dog.ts`). This is an accepted trade-off — it measures intent, which is the useful funnel signal.
 
 ## Last updated
 
-2026-07-05
+2026-07-28

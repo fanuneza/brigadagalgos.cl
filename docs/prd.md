@@ -42,6 +42,33 @@ Success stories are still rendered only through cards and lightboxes on listing 
 | `/591c2b87f0b68c44f260215f5d8e9da3.txt` | IndexNow verification file          |
 | `/.well-known/api-catalog`              | API catalog                         |
 
+## Shared components
+
+Reusable UI used across pages (see `docs/spec.md` for the full file map):
+
+- `Navbar` — site navigation, mobile menu, theme toggle.
+- `Footer` — links, social, legal.
+- `Hero` — homepage hero; `PageHero` — hero for inner pages.
+- `MissionSection` — mission/value proposition.
+- `StoriesSection` — success-story preview; `StoryCard` — shared story card.
+- `ProcessStepper` — adoption/foster steps; `RequirementCard` — checklist item.
+- `HelpCards` — CTA cards (adopt, foster, donate); `DonationBanner` — donation callout.
+- `SharedPhotoGallery` / `SharedGalleryLightbox` — image gallery and lightbox.
+- `StructuredData` — JSON-LD injection.
+- `TrackedLink`, `ExternalLink`, `WhatsAppLink`, `InstagramLink` — link primitives.
+- `src/components/sections/` — page-specific sections (adoption grid, featured dogs, FAQ, donation cards, contact form, cookie banner, editorial blocks, and similar).
+
+## Interactive capabilities
+
+- Dark / light theme toggle (persisted in `localStorage`, respects `prefers-color-scheme`).
+- Mobile navigation menu.
+- Cookie consent banner with accept / reject.
+- Adoption filter chips (sex, current need).
+- Dog gallery lightbox with next/previous/close.
+- Native share button with clipboard fallback on dog profiles.
+- Bank details copy-to-clipboard.
+- Contact form validation and submission feedback.
+
 ## User stories and acceptance criteria
 
 ### Home page
@@ -307,16 +334,6 @@ These can be deferred or improved incrementally:
 - No absolute filesystem paths in repo files or docs.
 - UTF-8 preserved everywhere.
 
-## Related documents
-
-- `docs/site-brief.md` — product intent and success metrics
-- `docs/spec.md` — technical specification
-- `docs/feature-inventory.md` — current pages and features
-- `docs/content-model.md` — content schemas and editorial rules
-- `docs/architecture-map.md` — component and content flow
-- `AGENTS.md` — operational guidance
-- `docs/developer-reference.md` — detailed technical reference
-
 ## Last updated
 
-2026-07-06
+2026-07-28
