@@ -7,7 +7,8 @@ import RainbowDivider from "../components/RainbowDivider.astro";
 import ExternalLink from "../components/ExternalLink.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import SupportersIntro from "../components/sections/SupportersIntro.astro";
-import SupportersCtaSection from "../components/sections/SupportersCtaSection.astro";
+import CtaCard from "../components/sections/CtaCard.astro";
+import WhatsAppLink from "../components/WhatsAppLink.astro";
 
 const PARTNER_UTM_SOURCE = "brigadagalgos.cl";
 const PARTNER_UTM_MEDIUM = "referral";
@@ -81,5 +82,21 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
     </div>
   </section>
 
-  <SupportersCtaSection />
+  <CtaCard
+    eyebrow="SUMAR APOYO"
+    heading="Si quieres colaborar, conversemos"
+    body="Si representas a una institución, marca o equipo profesional y quieres apoyar a Brigada Galgos, estaremos felices de explorar una forma de trabajo en conjunto."
+    bodyClass="t-lead"
+  >
+    <Fragment slot="actions">
+      <WhatsAppLink
+        text="Hola, me interesa colaborar con Brigada Galgos"
+        location="supporters_cta"
+        label="Hablar por WhatsApp - Supporters CTA"
+        class="btn btn--primary"
+      >
+        Hablar por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </WhatsAppLink>
+    </Fragment>
+  </CtaCard>
 </PageLayout>

@@ -7,7 +7,9 @@ import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import AdoptionIntro from "../components/sections/AdoptionIntro.astro";
 import AdoptionGrid from "../components/sections/AdoptionGrid.astro";
 import AdoptionProcess from "../components/sections/AdoptionProcess.astro";
-import AdoptionTailCta from "../components/sections/AdoptionTailCta.astro";
+import CtaCard from "../components/sections/CtaCard.astro";
+import TrackedLink from "../components/TrackedLink.astro";
+import WhatsAppLink from "../components/WhatsAppLink.astro";
 import { SITE } from "../config/site.ts";
 import { buildAdoptionDogCards } from "../utils/dog-content";
 import { shuffle } from "../utils/shuffle";
@@ -42,7 +44,40 @@ const dogs = await buildAdoptionDogCards(shuffle(rawDogs));
   </section>
 
   <AdoptionProcess />
-  <AdoptionTailCta />
+  <CtaCard
+    tail
+    eyebrow="SIGUIENTE PASO"
+    heading="¿Quieres hablarlo antes de postular?"
+    body="Escríbenos sin apuro. Te ayudamos a revisar si tu rutina, espacio y expectativas son adecuados para alguno de los galgos."
+  >
+    <Fragment slot="actions">
+      <TrackedLink
+        href={SITE.adoptionForm}
+        class="btn btn--primary"
+        newTab
+        trackEvent="adoption_apply_click"
+        trackLabel="Postular - Adoption Tail CTA"
+        trackLocation="tail_cta"
+        trackDestination={SITE.adoptionForm}
+        trackCategory="adoption"
+        trackOutbound
+      >
+        Postular <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </TrackedLink>
+      <WhatsAppLink
+        text="Hola, quisiera saber más sobre adopción"
+        location="tail_cta"
+        label="Más información - Adoption Tail CTA"
+        class="btn btn--secondary"
+      >
+        Más información <span class="sr-only">sobre adopción</span>
+      </WhatsAppLink>
+    </Fragment>
+    <p slot="aside" class="cta-card__aside">
+      ¿Dudas sobre costos, departamento, niños u otros animales?{" "}
+      <a href="/preguntas-frecuentes/">Revisa las preguntas frecuentes</a>.
+    </p>
+  </CtaCard>
 
   <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de adopción" />
 </PageLayout>

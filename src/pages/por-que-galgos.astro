@@ -6,7 +6,8 @@ import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import WhyGalgosEditorial from "../components/sections/WhyGalgosEditorial.astro";
 import CasesBand from "../components/sections/CasesBand.astro";
-import NextStepCta from "../components/sections/NextStepCta.astro";
+import CtaCard from "../components/sections/CtaCard.astro";
+import TrackedLink from "../components/TrackedLink.astro";
 import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
 import { shuffle } from "../utils/shuffle";
 
@@ -28,7 +29,36 @@ const cases = await buildStoryDogSummaries(shuffle(successDogs), 3);
 
   <WhyGalgosEditorial />
   <CasesBand cases={cases} />
-  <NextStepCta />
+  <CtaCard
+    eyebrow="SIGUIENTE PASO"
+    heading="Si un galgo te hace sentido, conversemos"
+    body="Si crees que tu casa podría ser un buen lugar para uno de ellos, te acompañamos desde el primer mensaje. Y si todavía no es el momento de adoptar, un hogar temporal también puede cambiar por completo la historia de un rescate."
+  >
+    <Fragment slot="actions">
+      <TrackedLink
+        href="/adoptar/"
+        class="btn btn--primary"
+        trackEvent="cta_click"
+        trackLabel="Quiero adoptar"
+        trackLocation="why_galgos"
+        trackDestination="/adoptar/"
+        trackCategory="adoption"
+      >
+        Quiero adoptar
+      </TrackedLink>
+      <TrackedLink
+        href="/hogar-temporal/"
+        class="btn btn--secondary"
+        trackEvent="cta_click"
+        trackLabel="Puedo ser hogar temporal"
+        trackLocation="why_galgos"
+        trackDestination="/hogar-temporal/"
+        trackCategory="foster"
+      >
+        Puedo ser hogar temporal
+      </TrackedLink>
+    </Fragment>
+  </CtaCard>
 
   <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de casos reales" />
 </PageLayout>

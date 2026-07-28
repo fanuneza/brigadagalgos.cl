@@ -5,7 +5,26 @@ import RainbowDivider from "../components/RainbowDivider.astro";
 import DonationCards from "../components/sections/DonationCards.astro";
 import ImpactSection from "../components/sections/ImpactSection.astro";
 import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
-import HelpTailCta from "../components/sections/HelpTailCta.astro";
+import CtaCard from "../components/sections/CtaCard.astro";
+import WhatsAppLink from "../components/WhatsAppLink.astro";
+
+const otherWaysToHelp = [
+  {
+    title: "Donación de materiales",
+    body: "Comida, mantas o medicamentos.",
+    tone: "primary",
+  },
+  {
+    title: "Servicios profesionales",
+    body: "Veterinarios, transporte, fotografía.",
+    tone: "secondary",
+  },
+  {
+    title: "Difusión de casos",
+    body: "Comparte nuestras publicaciones a traves de tus redes sociales.",
+    tone: "warm",
+  },
+];
 ---
 
 <PageLayout
@@ -28,5 +47,29 @@ import HelpTailCta from "../components/sections/HelpTailCta.astro";
   <DonationCards />
   <ImpactSection />
   <TrustStatsSection />
-  <HelpTailCta />
+  <CtaCard tail eyebrow="OTRAS FORMAS DE AYUDAR" heading="También nos puedes apoyar así">
+    <ul class="tail-cta__list" role="list">
+      {
+        otherWaysToHelp.map((way) => (
+          <li class="tail-cta__item">
+            <span class={`tail-cta__dot tail-cta__dot--${way.tone}`} aria-hidden="true" />
+            <div>
+              <h3 class="tail-cta__item-title">{way.title}</h3>
+              <p>{way.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <Fragment slot="actions">
+      <WhatsAppLink
+        text="Hola, quiero ayudar de otra forma"
+        location="help_tail_cta"
+        label="Coordina por WhatsApp - Help Tail CTA"
+        class="btn btn--primary"
+      >
+        Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </WhatsAppLink>
+    </Fragment>
+  </CtaCard>
 </PageLayout>
