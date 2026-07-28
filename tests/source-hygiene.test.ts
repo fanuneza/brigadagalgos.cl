@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { execSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { extname, join, relative } from "node:path";
+import { basename, extname, join, relative } from "node:path";
 
 const root = process.cwd();
 const textExtensions = new Set([".astro", ".css", ".js", ".json", ".md", ".mjs", ".svg", ".ts", ".txt"]);
@@ -42,6 +43,26 @@ describe("source hygiene", () => {
     for (const file of files) {
       const source = readFileSync(file, "utf8");
       expect(source, relative(root, file)).not.toContain("REPLACE_WITH_");
+    }
+  });
+
+  it("does not hardcode absolute filesystem paths", () => {
+    const rootMarkdown = readdirSync(root)
+      .filter((entry) => entry.endsWith(".md") && statSync(join(root, entry)).isFile())
+      .map((entry) => join(root, entry));
+    const files = [
+      ...textFilesIn(join(root, "src")),
+      ...textFilesIn(join(root, "public")),
+      ...textFilesIn(join(root, "scripts")),
+      ...textFilesIn(join(root, "tests")),
+      ...rootMarkdown,
+    ];
+
+    const absolutePathPattern = /(?:\/home|\/Users)\/[A-Za-z0-9._-]+|[A-Za-z]:[\\/]Users[\\/]/;
+
+    for (const file of files) {
+      const source = readFileSync(file, "utf8");
+      expect(source, relative(root, file)).not.toMatch(absolutePathPattern);
     }
   });
 
@@ -109,6 +130,52 @@ describe("source hygiene", () => {
 
       expect(story.length, `${file} story exceeds 260 characters`).toBeLessThanOrEqual(260);
       expect(story, `${file} story must mention the adoption outcome`).toMatch(/adopt/i);
+    }
+  });
+
+  it("redirects every retired or hidden adoption profile to the success archive", () => {
+    const redirects = readFileSync(join(root, "public", "_redirects"), "utf8");
+    const adoptionDogsDir = join(root, "src", "content", "adoption-dogs");
+    const files = readdirSync(adoptionDogsDir).filter((file) => file.endsWith(".md"));
+
+    const activeSlugs: string[] = [];
+    const hiddenSlugs: string[] = [];
+
+    for (const file of files) {
+      const content = readFileSync(join(adoptionDogsDir, file), "utf8");
+      const slug = basename(file, ".md");
+
+      if (/^active:\s*false/m.test(content)) {
+        hiddenSlugs.push(slug);
+      } else {
+        activeSlugs.push(slug);
+      }
+    }
+
+    // Slugs that once had an /adoptar/<slug>/ page and were moved to success-dogs
+    // live only in git history. On shallow clones the history is unavailable and
+    // the rule degrades to currently hidden dogs only.
+    let retiredSlugs: string[] = [];
+    try {
+      retiredSlugs = execSync('git log --diff-filter=D --name-only --format= -- "src/content/adoption-dogs/"', {
+        encoding: "utf8",
+      })
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.endsWith(".md"))
+        .map((line) => basename(line, ".md"));
+    } catch {
+      retiredSlugs = [];
+    }
+
+    for (const slug of new Set([...retiredSlugs, ...hiddenSlugs])) {
+      expect(redirects, `missing redirect for retired profile /adoptar/${slug}/`).toContain(
+        `/adoptar/${slug}/ /casos-de-exito/ 301`
+      );
+    }
+
+    for (const slug of activeSlugs) {
+      expect(redirects, `active profile /adoptar/${slug}/ must not be redirected`).not.toContain(`/adoptar/${slug}/`);
     }
   });
 });

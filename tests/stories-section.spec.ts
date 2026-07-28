@@ -1,4 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+
+const successStoryCount = readdirSync(join(process.cwd(), "src", "content", "success-dogs")).filter((file) =>
+  file.endsWith(".md")
+).length;
 
 test("home prioritizes active dogs and links the stories preview to the archive", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
@@ -39,7 +45,7 @@ test("success archive renders every story and returns visitors to active adoptio
 
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.locator(".rainbow-divider")).toHaveCount(1);
-  await expect(page.locator("[data-story-card]")).toHaveCount(29);
+  await expect(page.locator("[data-story-card]")).toHaveCount(successStoryCount);
   await expect(
     page.locator(".stories-archive-cta").getByRole("link", { name: "Ver galgos disponibles" })
   ).toHaveAttribute("href", "/adoptar/");

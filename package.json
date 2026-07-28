@@ -13,7 +13,7 @@
     "check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
     "dog-images:check": "node scripts/normalize-dog-images.mjs --check",
     "dog-images:write": "node scripts/normalize-dog-images.mjs --write",
-    "lint": "eslint . && stylelint \"src/**/*.css\" --allow-empty-input && npm run test:text",
+    "lint": "eslint . && stylelint \"src/**/*.css\" --allow-empty-input && npm run test:text && npm run dog-images:check",
     "lint:fix": "eslint . --fix && stylelint \"src/**/*.css\" --fix --allow-empty-input",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

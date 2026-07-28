@@ -3,6 +3,16 @@ import { buildCardStoryExcerpt } from "../src/utils/story-card-copy";
 import { clampAtWordBoundary, buildDogMetaDescription } from "../src/utils/dog-content";
 
 describe("buildCardStoryExcerpt", () => {
+  it("defaults to the 260-character content rule for success stories", () => {
+    const fits = "x".repeat(260);
+    expect(buildCardStoryExcerpt(fits)).toBe(fits);
+
+    const overflow = "x".repeat(261);
+    const excerpt = buildCardStoryExcerpt(overflow);
+    expect(excerpt).not.toBe(overflow);
+    expect(excerpt.length).toBeLessThanOrEqual(261);
+  });
+
   it("keeps short stories unchanged", () => {
     const story = "Mora fue adoptada y hoy duerme en sofá y sale a pasear con calma.";
     expect(buildCardStoryExcerpt(story, 165)).toBe(story);
