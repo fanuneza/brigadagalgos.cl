@@ -13,7 +13,6 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto",
   },
-  vite: {},
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith(".json"),

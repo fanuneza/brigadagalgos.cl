@@ -176,7 +176,6 @@ brigadagalgos.cl/
 ├── scripts/                       # Maintenance and workflow scripts
 │   ├── check-text-quality.mjs
 │   ├── normalize-dog-images.mjs
-│   ├── prepare-casos-site.mjs
 │   └── run-playwright-server.mjs
 ├── tests/                         # Playwright specs and Vitest tests
 │   ├── a11y.spec.ts
@@ -458,7 +457,6 @@ Markdown-only changes to `docs/`, `README.md`, or `AGENTS.md` may skip the full 
 1. `git mv src/content/adoption-dogs/name.md src/content/success-dogs/name.md`
 2. `git mv src/assets/casos/adopcion/name src/assets/casos/exito/name`
 3. Rewrite frontmatter: remove adoption-only fields, add `story` (≤260 chars, mentions adoption).
-4. Update `scripts/prepare-casos-site.mjs` if the dog is in `ADOPTION_IDS` or `ADOPTION_OVERRIDES`.
 
 ### Hiding a dog temporarily
 

@@ -13,7 +13,6 @@ export const GET = createSchemaEndpoint({
       title: post.data.title,
       description: post.data.description,
       publishDate: post.data.pubDate,
-      authorName: post.data.author,
       featureImageUrl: post.data.heroImage,
       category: post.data.category,
     });

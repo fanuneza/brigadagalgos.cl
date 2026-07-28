@@ -182,7 +182,6 @@ order: 1
    - Remove: `sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, `order`, `active`, `hiddenSince`, `hiddenReason`.
    - Add: `story` (≤260 chars, mentions adoption).
    - Keep: `name`, `instagramUrl`, `gallery` (with updated paths).
-4. Update `scripts/prepare-casos-site.mjs` if the dog appears in `ADOPTION_IDS` or `ADOPTION_OVERRIDES`.
 
 ### Hiding a dog temporarily
 

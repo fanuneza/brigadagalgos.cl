@@ -240,9 +240,7 @@ When an adopted dog moves from `adoption-dogs` to `success-dogs`:
    - Keep the `story` at 260 characters or fewer.
    - Mention the adoption outcome explicitly.
    - Keep `gallery` paths pointed to `../../assets/casos/exito/name/...`.
-3. Update data prep scripts if needed:
-   - Remove the dog ID from `ADOPTION_IDS` and `ADOPTION_OVERRIDES` in `scripts/prepare-casos-site.mjs` when applicable.
-4. Add a permanent redirect for the retired profile URL in `public/_redirects`:
+3. Add a permanent redirect for the retired profile URL in `public/_redirects`:
 
    ```
    /adoptar/name/ /casos-de-exito/ 301

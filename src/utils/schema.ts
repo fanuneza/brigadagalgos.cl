@@ -9,7 +9,6 @@ export function buildSchemaGraph(options: {
   title: string;
   description: string;
   publishDate?: Date;
-  authorName?: string;
   featureImageUrl?: string;
   category?: string;
 }) {
@@ -39,7 +38,7 @@ export function buildSchemaGraph(options: {
     )
   );
 
-  // 2. Organización / Autor / Persona
+  // 2. Organización (también autora del blog)
   pieces.push(
     buildPiece({
       "@type": "Organization",
@@ -50,17 +49,6 @@ export function buildSchemaGraph(options: {
         "@type": "ImageObject",
         url: `${SITE_URL}${SITE.logoPath}`,
       },
-    })
-  );
-
-  const authorId = `${SITE_URL}/#author-pepito`;
-  pieces.push(
-    buildPiece({
-      "@type": "Person",
-      "@id": authorId,
-      name: options.authorName || "Pepito Perez",
-      url: `${SITE_URL}/nosotros/`,
-      knowsAbout: ["Compostaje", "Permacultura", "Biología del Suelo"],
     })
   );
 
@@ -88,7 +76,7 @@ export function buildSchemaGraph(options: {
           headline: options.title,
           description: options.description,
           datePublished: options.publishDate || new Date(),
-          author: { "@id": authorId },
+          author: { "@id": ids.organization("brigada-galgos") },
           publisher: { "@id": ids.organization("brigada-galgos") },
           articleSection: options.category || "General",
         },

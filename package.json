@@ -11,7 +11,6 @@
     "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
-    "prepare:casos": "node scripts/prepare-casos-site.mjs",
     "dog-images:check": "node scripts/normalize-dog-images.mjs --check",
     "dog-images:write": "node scripts/normalize-dog-images.mjs --write",
     "lint": "eslint . && stylelint \"src/**/*.css\" --allow-empty-input && npm run test:text",
