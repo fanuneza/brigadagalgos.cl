@@ -11,65 +11,19 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - Respect the content model for dogs, supporters, and story cards.
 - Keep verification green: formatting, linting, build, unit tests, browser tests, and Lighthouse when relevant.
 
-## Required Opening Moves
+## Working with Astro
 
 - Use Astro Docs MCP for Astro framework questions, integrations, routing, content collections, image handling, and current best practices.
 - Verify current Astro APIs before changing areas that drift across versions: content collections, image handling, integrations, adapters, actions, and view transitions.
-- Use jCodeMunch for code navigation when the repo is indexed. Prefer indexed discovery, outlines, symbol lookups, references, and blast-radius checks over blind searching.
-- If the repo is not indexed, index it before broad code navigation work.
-- Start every code session with:
-  1. `resolve_repo { "path": "." }`
-  2. `plan_turn { "repo": "...", "query": "your task", "model": "<your-model-id>" }`
-- If the repo is unfamiliar, use `suggest_queries` after `resolve_repo`.
 
 ## Codex model routing
 
-Default:
-
-- Use the root Terra agent for ordinary work.
-- Do not spawn subagents for simple, clear, single-file, or mechanical tasks.
-- Do not spawn subagents just because they are available.
-- The parent Terra agent owns the final decision and final user-facing answer.
-
-Use `luna_heartbeat` for cheap read-only checks:
-
-- repository status
-- file presence
-- dependency presence
-- small-file summaries
-- simple classification
-- yes/no routing
-- checking whether something changed
-
-Use `terra_worker` for bounded implementation:
-
-- clear small features
-- straightforward bug fixes
-- small refactors
-- tests
-- documentation tied to code changes
-
-Use `sol_escalation` only for hard reasoning:
-
-- architecture decisions
-- complex debugging
-- security-sensitive review
-- performance-sensitive review
-- risky multi-file refactors
-- unclear failures
-- final review before risky implementation
-
-Use `sol_max_review` only when explicitly requested or when `sol_escalation` was insufficient.
-
-Cost discipline:
-
-- Prefer no subagent.
-- Prefer Luna for cheap read-only work.
-- Prefer Terra for ordinary implementation.
-- Prefer Sol only when the task is complex enough to justify the cost.
-- Never spawn Luna, Terra, and Sol together unless the task explicitly benefits from parallel division.
-- Subagents must return compact summaries, not raw logs.
-- Subagents must not spawn other subagents.
+- Default: the root Terra agent handles ordinary work. Do not spawn subagents for simple, clear, single-file, or mechanical tasks. The parent Terra agent owns the final decision and the final user-facing answer.
+- `luna_heartbeat`: cheap read-only checks (repo status, file or dependency presence, small-file summaries, simple classification, yes/no routing, change detection).
+- `terra_worker`: bounded implementation (clear small features, straightforward bug fixes, small refactors, tests, documentation tied to code changes).
+- `sol_escalation`: hard reasoning only (architecture decisions, complex debugging, security- or performance-sensitive review, risky multi-file refactors, unclear failures, final review before risky implementation).
+- `sol_max_review`: only when explicitly requested or when `sol_escalation` was insufficient.
+- Cost discipline: prefer no subagent, then Luna, then Terra, then Sol. Never spawn several tiers together unless the task explicitly benefits from parallel division. Subagents must return compact summaries, not raw logs, and must not spawn other subagents.
 
 ## Project Snapshot
 
@@ -84,25 +38,7 @@ Cost discipline:
 - Feed: RSS is generated at `src/pages/feed.xml.ts` from the `blog` collection.
 - Tests: Vitest for source/unit tests, Playwright for browser, regression, and build-output checks.
 
-## Repo Layout
-
-- `src/pages/`: public routes.
-- `src/layouts/`: page shells and document-level layout code.
-- `src/components/`: shared UI components.
-- `src/components/sections/`: page-specific section components.
-- `src/content/`: Markdown content collections.
-  - `adoption-dogs/`
-  - `success-dogs/`
-  - `supporters/`
-  - `blog/`
-- `src/utils/`: content shaping, analytics helpers, schema builders, image helpers.
-- `src/scripts/`: client scripts such as consent, analytics, navbar, theme, and filters.
-- `src/styles/`: design tokens and modular CSS.
-- `src/assets/`: imported images that Astro processes.
-- `public/`: static assets, headers, redirects, icons, and manifest-adjacent files.
-- `scripts/`: maintenance scripts for dog data, text quality, Playwright server bootstrapping, and related workflows.
-- `tests/`: Vitest and Playwright coverage, including source hygiene, accessibility, smoke, content, consent, and capture suites.
-- `docs/`: voice, site brief, PRD, technical spec, feature inventory, content model, architecture map, and reference material.
+For the repo layout and full file tree, see `docs/spec.md`.
 
 ## Architecture Essentials
 
@@ -122,13 +58,8 @@ Cost discipline:
 
 ### Links and outbound tracking
 
-- Reuse link helpers instead of hand-rolling outbound-link behavior:
-  - `src/components/TrackedLink.astro`
-  - `src/components/ExternalLink.astro`
-  - `src/components/WhatsAppLink.astro`
-  - `src/components/InstagramLink.astro`
-- `TrackedLink` is the shared primitive for outbound analytics metadata and optional new-tab handling.
-- `ExternalLink` is for simple external links that should open in a new tab without analytics metadata.
+- Reuse the link helpers (`src/components/TrackedLink.astro`, `ExternalLink.astro`, `WhatsAppLink.astro`, `InstagramLink.astro`) instead of hand-rolling outbound-link behavior.
+- `TrackedLink` is the shared primitive for outbound analytics metadata and optional new-tab handling; `ExternalLink` is for simple external links that open in a new tab without analytics metadata.
 - Keep new-tab semantics and external indicators consistent. Do not duplicate `target`, `rel`, or tracking attributes inline unless there is a clear exception.
 
 ### Styling strategy
@@ -147,7 +78,7 @@ Cost discipline:
 
 ## Non-Negotiable Standards
 
-- Never use absolute filesystem paths in repo files or docs. Use repo-relative paths.
+- Never use absolute filesystem paths in repo files or docs. Use repo-relative paths. Enforced by `tests/source-hygiene.test.ts` for `src/`, `public/`, `scripts/`, `tests/`, and root-level Markdown.
 - Preserve UTF-8 everywhere. Never introduce mojibake, replacement characters, or broken accents.
 - Prefer small, named, typed helpers over duplicated inline logic.
 - Do not hand-edit dependency versions into `package.json`; use npm commands when dependencies change.
@@ -164,93 +95,25 @@ Cost discipline:
 
 ## Content Collections
 
-### Adoption Dogs
-
-Defined in `src/content.config.ts`.
-
-Required frontmatter fields:
-
-- `name`
-- `sex`
-- `age`
-- `weight`
-- `details`
-- `currentNeed`
-- `characterSketch`
-- `gallery`
-
-Optional fields:
-
-- `location`
-- `instagramUrl`
-- `order`
-- `active`
-- `hiddenSince`
-- `hiddenReason`
-
-Rules:
-
-- `gallery` accepts at most 3 images.
-- If `active: false`, both `hiddenSince` and `hiddenReason` are required.
-- Hidden dogs expire after 90 days; `tests/source-hygiene.test.ts` enforces this.
-
-### Success Dogs
-
-Defined in `src/content.config.ts`.
-
-Required frontmatter fields:
-
-- `name`
-- `story`
-- `gallery`
-
-Optional fields:
-
-- `instagramUrl`
-
-Rules:
-
-- `gallery` accepts at most 3 images.
-- Every success-dog `story` must be **260 characters or fewer**.
-- Every success-dog `story` must explicitly mention the adoption outcome. `tests/source-hygiene.test.ts` enforces this with `/adopt/i`.
-- Keep stories general enough to avoid inventing facts, but specific enough not to sound templated.
-- Card summaries are derived from `story` through `src/utils/story-card-copy.ts`. The helper default is also 260 characters and should stay aligned with the content rule unless the product requirement changes.
-- `tests/stories-section.spec.ts` also guards the summary limit at the UI level.
-
-### Supporters
-
-- Keep logos local.
-- Include accessible `logoAlt`.
-- Prefer consistent `kind` values already defined in the schema.
+The canonical schemas live in `src/content.config.ts`; the editorial rules and field tables live in `docs/content-model.md`. Key rules (gallery caps, story length, hidden-dog metadata and expiry, redirect coverage) are enforced by the schema and `tests/source-hygiene.test.ts` — keep those the source of truth instead of restating them here.
 
 ## Managing Dog Statuses
 
+The full editorial workflows, with examples, are in `docs/content-model.md`. The operational essentials:
+
 ### Moving a Dog to Success
 
-When an adopted dog moves from `adoption-dogs` to `success-dogs`:
-
-1. Use `git mv` for the markdown file and asset folder:
-   ```bash
-   git mv src/content/adoption-dogs/name.md src/content/success-dogs/name.md
-   git mv src/assets/casos/adopcion/name src/assets/casos/exito/name
-   ```
-2. Rewrite the content:
-   - Remove adoption-only fields such as `sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, and `order`.
-   - Add a `story` string in the site voice.
-   - Keep the `story` at 260 characters or fewer.
-   - Mention the adoption outcome explicitly.
-   - Keep `gallery` paths pointed to `../../assets/casos/exito/name/...`.
+1. `git mv` the markdown file from `adoption-dogs/` to `success-dogs/` and the asset folder from `src/assets/casos/adopcion/<slug>` to `src/assets/casos/exito/<slug>`.
+2. Rewrite the frontmatter: drop the adoption-only fields, add a `story` (≤260 characters, mentions the adoption outcome), and point `gallery` at the new asset path.
 3. Add a permanent redirect for the retired profile URL in `public/_redirects`:
 
    ```
-   /adoptar/name/ /casos-de-exito/ 301
+   /adoptar/<slug>/ /casos-de-exito/ 301
    ```
 
-Profile URLs are shared on social media and must not 404 after the dog is adopted. The success archive is the stable destination because it contains the adoption outcome; do not use an anchor redirect unless Cloudflare behavior is covered by tests.
+Profile URLs are shared on social media and must not 404 after the dog is adopted. `tests/source-hygiene.test.ts` fails the build when a retired or hidden profile is missing its redirect.
 
 ### Hiding a Dog Temporarily
-
-To hide a dog from adoption without deleting the record:
 
 ```yaml
 active: false
@@ -258,12 +121,8 @@ hiddenSince: YYYY-MM-DD
 hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 ```
 
-Rules:
-
-- Hidden entries remain in the collection.
-- `tests/source-hygiene.test.ts` fails if tracking metadata is missing.
-- Hidden entries older than 90 days also fail the test suite.
-- Hiding a dog also removes its `/adoptar/<slug>/` page, so shared profile links 404 while it's hidden. Add the same `public/_redirects` entry described in "Moving a Dog to Success" for the duration of the hide, and remove the redirect once the dog is active again.
+- Hidden entries remain in the collection but lose their `/adoptar/<slug>/` page. Add the same `public/_redirects` entry for the duration of the hide, and remove it once the dog is active again.
+- Hidden entries older than 90 days fail the test suite.
 
 ## Images and Asset Handling
 
@@ -321,7 +180,7 @@ npm run test:lighthouse
 
 Notes:
 
-- `npm run lint` includes ESLint, Stylelint, and text-quality checks.
+- `npm run lint` includes ESLint, Stylelint, text-quality checks, and `dog-images:check`.
 - `npm test` runs Vitest and Playwright.
 - Playwright uses `scripts/run-playwright-server.mjs` to build and start `astro preview` on `127.0.0.1`.
 - In CI, `capture.spec.ts` is ignored by Playwright config.
@@ -329,30 +188,16 @@ Notes:
 
 ## Key Files Worth Knowing
 
-- `astro.config.mjs`
-  - Static build config, sitemap integration, SEO graph integration, and current Astro build behavior.
-  - `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`.
-  - `markdownAlternate` is intentionally disabled.
-- `src/layouts/BaseLayout.astro`
-  - Document shell, metadata, RSS link, cookie banner, and client bootstrap.
-- `src/layouts/PageLayout.astro`
-  - Shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
-- `src/components/TrackedLink.astro`
-  - Shared tracked outbound-link primitive.
-- `src/components/ExternalLink.astro`
-  - Shared simple external-link primitive.
-- `src/content.config.ts`
-  - Canonical content schemas.
-- `src/utils/dog-content.ts`
-  - Shapes collection entries for cards and galleries.
-- `src/utils/story-card-copy.ts`
-  - Builds success-story card excerpts and carries the 260-character default.
-- `src/utils/structured-data.ts`
-  - Centralized JSON-LD builders, breadcrumbs, and FAQ structured data.
-- `tests/source-hygiene.test.ts`
-  - Enforces repository invariants that linters do not catch.
-- `playwright.config.ts`
-  - Browser test orchestration and preview server behavior.
+- `astro.config.mjs` — static build config, sitemap and SEO graph integrations. `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`; `markdownAlternate` is intentionally disabled.
+- `src/layouts/BaseLayout.astro` — document shell, metadata, RSS link, cookie banner, and client bootstrap.
+- `src/layouts/PageLayout.astro` — shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
+- `src/components/TrackedLink.astro` / `ExternalLink.astro` — shared outbound-link primitives.
+- `src/content.config.ts` — canonical content schemas.
+- `src/utils/dog-content.ts` — shapes collection entries for cards and galleries.
+- `src/utils/story-card-copy.ts` — builds success-story card excerpts and carries the 260-character default.
+- `src/utils/structured-data.ts` — centralized JSON-LD builders, breadcrumbs, and FAQ structured data.
+- `tests/source-hygiene.test.ts` — enforces repository invariants that linters do not catch.
+- `playwright.config.ts` — browser test orchestration and preview server behavior.
 
 ## Known Gotchas
 
@@ -362,127 +207,19 @@ Notes:
 - When touching FAQ or “why galgos” copy, remember that similar text may also exist in structured data.
 - A build can pass while Lighthouse still fails on semantics. If you touch headings, buttons, labels, or link names, run Lighthouse.
 
-## Code Navigation Rules
-
-Always prefer jCodeMunch over raw shell exploration for repo understanding.
-
-Use:
-
-- `search_symbols` for named code entities.
-- `search_text` for strings, comments, config values, and frontmatter patterns.
-- `get_repo_outline` or `get_file_tree` for structure.
-- `get_file_outline` before opening a file.
-- `get_symbol_source` and `get_context_bundle` for implementation context.
-- `find_references`, `find_importers`, and `get_blast_radius` before changing reused modules.
-
-If `plan_turn` confidence is:
-
-- `high`: follow the recommended files and use minimal supplementary reads.
-- `medium`: inspect recommended files, then broaden carefully.
-- `low`: report that the feature likely does not exist; do not keep thrashing.
-
 ## Editing Behavior
 
-- Respect existing user changes.
-- Do not revert unrelated work.
+- Respect existing user changes. Do not revert unrelated work.
 - Keep comments sparse and useful.
 - Keep changes small and defensible.
-- If PostToolUse hooks are unavailable and cache invalidation matters, register edited paths.
 
 ## Documentation Expectations
 
 - `AGENTS.md` is the operational source for agents. Keep it specific and updated when workflows change.
 - `README.md` is for humans. Keep it illustrative, clear, and lighter on internal implementation detail.
+- `DESIGN.md` is the visual design system (colors, typography, components). Keep it aligned with `src/styles/tokens.css`.
 - `docs/site-brief.md` is the product-intent reference for scope decisions.
-- `docs/prd.md` captures the current functional requirements.
-- `docs/spec.md` describes architecture, data flow, integrations, and key implementation decisions.
-- `docs/feature-inventory.md` lists every page, section, and capability.
+- `docs/prd.md` captures the current functional requirements, shared components, and capabilities.
+- `docs/spec.md` describes architecture, file tree, data flow, integrations, analytics events, and image variants.
 - `docs/content-model.md` documents schemas, editorial rules, and content workflows.
-- `docs/architecture-map.md` maps component and content flow.
-- `docs/developer-reference.md` contains the detailed content model, image sizes, analytics events, and SEO/structured-data notes.
 - `docs/voice-and-tone.md` is the source of truth for site copy.
-
-## Code Exploration Policy
-
-Always use jCodemunch-MCP tools for code navigation. Never fall back to Read, Grep, Glob, or Bash for code exploration.
-**Exception:** Use `Read` when you need to edit a file — the agent harness requires a `Read` before `Edit`/`Write` will succeed. Use jCodemunch tools to _find and understand_ code, then `Read` only the specific file you're about to modify.
-
-**Start any session:**
-
-1. `resolve_repo { "path": "." }` — confirm the project is indexed. If not: `index_folder { "path": "." }`
-2. `suggest_queries` — when the repo is unfamiliar
-
-**Finding code:**
-
-- symbol by name → `search_symbols` (add `kind=`, `language=`, `file_pattern=`, `decorator=` to narrow)
-- decorator-aware queries → `search_symbols(decorator="X")` to find symbols with a specific decorator (e.g. `@property`, `@route`); combine with set-difference to find symbols _lacking_ a decorator (e.g. "which endpoints lack CSRF protection?")
-- string, comment, config value → `search_text` (supports regex, `context_lines`)
-- database columns (dbt/SQLMesh) → `search_columns`
-
-**Reading code:**
-
-- before opening any file → `get_file_outline` first
-- one or more symbols → `get_symbol_source` (single ID → flat object; array → batch)
-- symbol + its imports → `get_context_bundle`
-- specific line range only → `get_file_content` (last resort)
-
-**Repo structure:**
-
-- `get_repo_outline` → dirs, languages, symbol counts
-- `get_file_tree` → file layout, filter with `path_prefix`
-
-**Relationships & impact:**
-
-- what imports this file → `find_importers`
-- where is this name used → `find_references`
-- is this identifier used anywhere → `check_references`
-- file dependency graph → `get_dependency_graph`
-- what breaks if I change X → `get_blast_radius`
-- what symbols actually changed since last commit → `get_changed_symbols`
-- find unreachable/dead code → `find_dead_code`
-- class hierarchy → `get_class_hierarchy`
-
-## Session-Aware Routing
-
-**Opening move for any task:**
-
-1. `plan_turn { "repo": "...", "query": "your task description", "model": "<your-model-id>" }` — get confidence + recommended files; the `model` parameter narrows the exposed tool list to match your capabilities at zero extra requests.
-2. Obey the confidence level:
-   - `high` → go directly to recommended symbols, max 2 supplementary reads
-   - `medium` → explore recommended files, max 5 supplementary reads
-   - `low` → the feature likely doesn't exist. Report the gap to the user. Do NOT search further hoping to find it.
-3. **One-call shortcut for a concrete task** — `assemble_task_context { "repo": "...", "task": "..." }` returns a single token-budgeted, source-attributed context capsule. It auto-classifies the task (explore / debug / refactor / extend / audit / review), auto-extracts anchor symbols, and runs the intent-appropriate sequence of the tools below end-to-end — so you get the whole context in one request instead of chaining the primitives by hand. Prefer it over a manual chain when the task is well-defined; fall back to step 1's routing when you need to decide _whether_ the feature exists first.
-
-**Interpreting search results:**
-
-- If `search_symbols` returns `negative_evidence` with `verdict: "no_implementation_found"`:
-  - Do NOT re-search with different terms hoping to find it
-  - Do NOT assume a related file (e.g. auth middleware) implements the missing feature (e.g. CSRF)
-  - DO report: "No existing implementation found for X. This would need to be created."
-  - DO check `related_existing` files — they show what's nearby, not what exists
-- If `verdict: "low_confidence_matches"`: examine the matches critically before assuming they implement the feature
-
-**After editing files:**
-
-- If PostToolUse hooks are installed (Claude Code only), edited files are auto-reindexed
-- Otherwise, call `register_edit` with edited file paths to invalidate caches and keep the index fresh
-- For bulk edits (5+ files), always use `register_edit` with all paths to batch-invalidate
-
-**Token efficiency:**
-
-- If `_meta` contains `budget_warning`: stop exploring and work with what you have
-- If `auto_compacted: true` appears: results were automatically compressed due to turn budget
-- Use `get_session_context` to check what you've already read — avoid re-reading the same files
-
-## Model-Driven Tool Tiering
-
-Your jcodemunch-mcp server narrows the exposed tool list based on the model you are running as. To avoid wasting requests on primitives when a composite would do, always include `model="<your-model-id>"` in your opening `plan_turn` call.
-
-Replace `<your-model-id>` with your active model:
-
-- Claude Opus variants → `claude-opus-4-7` (or any `claude-opus-*`)
-- Claude Sonnet variants → `claude-sonnet-4-6`
-- Claude Haiku variants → `claude-haiku-4-5`
-- GPT-4o / GPT-5 / o1 / Llama → use the model id as printed by your runner
-
-The `model=` parameter rides on the existing `plan_turn` call — it does **not** add a separate tool invocation. If `plan_turn` is not appropriate for a non-code task, call `announce_model(model="...")` once instead.
