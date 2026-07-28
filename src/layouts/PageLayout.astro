@@ -1,56 +1,17 @@
 ---
+import type { ComponentProps } from "astro/types";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import BaseLayout from "./BaseLayout.astro";
 
-interface Props {
-  title: string;
-  description: string;
-  ogImage?: string;
-  ogImageAlt?: string;
-  schema?: Record<string, any>;
+interface Props extends ComponentProps<typeof BaseLayout> {
   mainId?: string;
-  breadcrumbNames?: Record<string, string>;
-  titleTemplate?: string;
-  ogType?: "website" | "article" | "profile" | "book";
-  article?: {
-    publishedTime?: Date | string;
-    modifiedTime?: Date | string;
-    expirationTime?: Date | string;
-    authors?: readonly string[];
-    tags?: readonly string[];
-    section?: string;
-  };
-  articlePublisher?: string;
 }
 
-const {
-  title,
-  description,
-  ogImage,
-  ogImageAlt,
-  schema,
-  mainId = "main-content",
-  breadcrumbNames,
-  titleTemplate,
-  ogType,
-  article,
-  articlePublisher,
-} = Astro.props;
+const { mainId = "main-content", ...baseLayoutProps } = Astro.props;
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  ogImage={ogImage}
-  ogImageAlt={ogImageAlt}
-  schema={schema}
-  breadcrumbNames={breadcrumbNames}
-  titleTemplate={titleTemplate}
-  ogType={ogType}
-  article={article}
-  articlePublisher={articlePublisher}
->
+<BaseLayout {...baseLayoutProps}>
   <Fragment slot="head">
     <slot name="head" />
   </Fragment>

@@ -1,7 +1,7 @@
 ---
 import "../../styles/components/contact-channels.css";
 import { SITE } from "../../config/site.ts";
-import ExternalLink from "../../components/ExternalLink.astro";
+import TrackedLink from "../../components/TrackedLink.astro";
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
 ---
 
@@ -71,7 +71,7 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
         <h3 class="channel-card__title t-ui-title">REDES</h3>
         <p class="channel-card__body t-card-body">Las novedades de los galgos viven en Instagram.</p>
         <div class="channel-card__social">
-          <ExternalLink href={SITE.instagram} class="btn btn--ghost channel-card__social-link">
+          <TrackedLink href={SITE.instagram} class="btn btn--ghost channel-card__social-link" newTab>
             <span class="btn__icon" aria-hidden="true">
               <img
                 src="/icons/instagram.svg"
@@ -85,8 +85,8 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
               />
             </span>
             <span>Instagram <span class="sr-only"> (abre en una nueva pestaña)</span></span>
-          </ExternalLink>
-          <ExternalLink href={SITE.facebook} class="btn btn--ghost channel-card__social-link">
+          </TrackedLink>
+          <TrackedLink href={SITE.facebook} class="btn btn--ghost channel-card__social-link" newTab>
             <span class="btn__icon" aria-hidden="true">
               <img
                 src="/icons/facebook.svg"
@@ -100,7 +100,7 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
               />
             </span>
             <span>Facebook <span class="sr-only"> (abre en una nueva pestaña)</span></span>
-          </ExternalLink>
+          </TrackedLink>
         </div>
       </div>
     </div>

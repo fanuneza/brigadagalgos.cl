@@ -1,7 +1,7 @@
 ---
 import "../../styles/components/featured-adoption-dogs.css";
 import type { AdoptionDogCard } from "../../utils/dog-content";
-import SharedPhotoGallery from "../SharedPhotoGallery.astro";
+import DogCard from "../DogCard.astro";
 import TrackedLink from "../TrackedLink.astro";
 import WhatsAppLink from "../WhatsAppLink.astro";
 
@@ -33,46 +33,7 @@ const { dogs } = Astro.props;
           <div class="featured-adoption__grid">
             {dogs.map((dog, index) => (
               <article class="featured-adoption__card" data-featured-adoption-card data-dog-id={dog.id}>
-                {dog.pictures.length > 0 && (
-                  <SharedPhotoGallery
-                    name={dog.name}
-                    photos={dog.pictures}
-                    id={`home-${dog.id}`}
-                    loadingPriority={index === 0 ? "eager" : "lazy"}
-                  />
-                )}
-                <div class="featured-adoption__body">
-                  <div>
-                    <p class="featured-adoption__need">{dog.currentNeed}</p>
-                    <h3 class="t-card-title">
-                      <a
-                        href={`/adoptar/${dog.id}/`}
-                        data-track-event="dog_profile_click"
-                        data-track-label={dog.name}
-                        data-track-location="homepage_featured_adoptions"
-                        data-track-destination={`/adoptar/${dog.id}/`}
-                        data-track-category="adoption"
-                      >
-                        {dog.name}
-                      </a>
-                    </h3>
-                    <p class="featured-adoption__details">
-                      {dog.age} · {dog.weight}
-                    </p>
-                    <p class="featured-adoption__sketch">{dog.characterSketch}</p>
-                  </div>
-                  <a
-                    href={`/adoptar/${dog.id}/`}
-                    class="btn btn--ghost featured-adoption__profile"
-                    data-track-event="dog_profile_click"
-                    data-track-label={`Ver ficha - ${dog.name}`}
-                    data-track-location="homepage_featured_adoptions"
-                    data-track-destination={`/adoptar/${dog.id}/`}
-                    data-track-category="adoption"
-                  >
-                    Ver ficha de {dog.name}
-                  </a>
-                </div>
+                <DogCard dog={dog} variant="featured" loadingPriority={index === 0 ? "eager" : "lazy"} />
               </article>
             ))}
           </div>

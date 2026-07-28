@@ -1,0 +1,98 @@
+---
+import type { AdoptionDogCard } from "../utils/dog-content";
+import SharedPhotoGallery from "./SharedPhotoGallery.astro";
+import TrackedLink from "./TrackedLink.astro";
+
+interface Props {
+  dog: AdoptionDogCard;
+  variant: "featured" | "grid";
+  loadingPriority?: "eager" | "lazy";
+}
+
+const { dog, variant, loadingPriority = "lazy" } = Astro.props;
+const profileHref = `/adoptar/${dog.id}/`;
+const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "dog_card";
+---
+
+{
+  variant === "featured" ? (
+    <>
+      {dog.pictures.length > 0 && (
+        <SharedPhotoGallery
+          name={dog.name}
+          photos={dog.pictures}
+          id={`home-${dog.id}`}
+          loadingPriority={loadingPriority}
+        />
+      )}
+      <div class="featured-adoption__body">
+        <div>
+          <p class="featured-adoption__need">{dog.currentNeed}</p>
+          <h3 class="t-card-title">
+            <TrackedLink
+              href={profileHref}
+              trackEvent="dog_profile_click"
+              trackLabel={dog.name}
+              trackLocation={trackLocation}
+              trackDestination={profileHref}
+              trackCategory="adoption"
+            >
+              {dog.name}
+            </TrackedLink>
+          </h3>
+          <p class="featured-adoption__details">
+            {dog.age} · {dog.weight}
+          </p>
+          <p class="featured-adoption__sketch">{dog.characterSketch}</p>
+        </div>
+        <TrackedLink
+          href={profileHref}
+          class="btn btn--ghost featured-adoption__profile"
+          trackEvent="dog_profile_click"
+          trackLabel={`Ver ficha - ${dog.name}`}
+          trackLocation={trackLocation}
+          trackDestination={profileHref}
+          trackCategory="adoption"
+        >
+          Ver ficha de {dog.name}
+        </TrackedLink>
+      </div>
+    </>
+  ) : (
+    <>
+      <SharedPhotoGallery name={dog.name} photos={dog.pictures} loadingPriority={loadingPriority} />
+      <div class="story-card__body dog-card__body">
+        <div class="dog-card__content">
+          <div class="dog-card__header">
+            <h3 class="story-card__name dog-card__name t-card-title">
+              <TrackedLink
+                href={profileHref}
+                class="dog-card__name-link"
+                trackEvent="dog_profile_click"
+                trackLabel={dog.name}
+                trackLocation={trackLocation}
+                trackDestination={profileHref}
+              >
+                {dog.name}
+              </TrackedLink>
+            </h3>
+            <div class="dog-card__chips">
+              <span class="dog-chip dog-chip--sex">{dog.sex}</span>
+              <span class="dog-chip dog-chip--age">{dog.age}</span>
+              <span class="dog-chip dog-chip--weight">{dog.weight}</span>
+              <span class="dog-chip dog-chip--need">{dog.currentNeed}</span>
+            </div>
+          </div>
+          <p class="dog-card__details t-small-muted">{dog.details}</p>
+          <p class="dog-card__sketch">{dog.characterSketch}</p>
+          <slot />
+        </div>
+        <div class="dog-card__footer">
+          <a href={profileHref} class="btn btn--ghost dog-card__profile-link">
+            Ver ficha de {dog.name}
+          </a>
+        </div>
+      </div>
+    </>
+  )
+}

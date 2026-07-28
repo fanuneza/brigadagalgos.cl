@@ -2,7 +2,6 @@
 import SharedPhotoGallery from "./SharedPhotoGallery.astro";
 import InstagramLink from "./InstagramLink.astro";
 import type { StoryDogSummary } from "../utils/dog-content";
-import { getInstagramHandleLabel } from "../utils/instagram";
 
 interface Props {
   story: StoryDogSummary;
@@ -44,10 +43,7 @@ const { story, location, summary = false, loadingPriority = "lazy" } = Astro.pro
           name={story.name}
           location={location}
           class="story-card__social dog-social-link"
-        >
-          <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
-          <span>{getInstagramHandleLabel(story.instagramUrl)}</span>
-        </InstagramLink>
+        />
       )
     }
   </div>

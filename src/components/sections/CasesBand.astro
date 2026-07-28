@@ -2,7 +2,6 @@
 import SharedPhotoGallery from "../SharedPhotoGallery.astro";
 import type { StoryDogSummary } from "../../utils/dog-content";
 import InstagramLink from "../InstagramLink.astro";
-import { getInstagramHandleLabel } from "../../utils/instagram";
 
 interface Props {
   cases: StoryDogSummary[];
@@ -53,10 +52,7 @@ const { cases } = Astro.props;
                   name={dog.name}
                   location="why_galgos"
                   class="story-card__social dog-social-link"
-                >
-                  <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
-                  <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
-                </InstagramLink>
+                />
               )}
             </div>
           </article>

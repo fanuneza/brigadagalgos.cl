@@ -58,8 +58,8 @@ For the repo layout and full file tree, see `docs/spec.md`.
 
 ### Links and outbound tracking
 
-- Reuse the link helpers (`src/components/TrackedLink.astro`, `ExternalLink.astro`, `WhatsAppLink.astro`, `InstagramLink.astro`) instead of hand-rolling outbound-link behavior.
-- `TrackedLink` is the shared primitive for outbound analytics metadata and optional new-tab handling; `ExternalLink` is for simple external links that open in a new tab without analytics metadata.
+- Reuse the link helpers (`src/components/TrackedLink.astro`, `WhatsAppLink.astro`, `InstagramLink.astro`) instead of hand-rolling outbound-link behavior.
+- `TrackedLink` is the shared primitive for outbound links: analytics metadata is optional, and `newTab` covers external links without tracking.
 - Keep new-tab semantics and external indicators consistent. Do not duplicate `target`, `rel`, or tracking attributes inline unless there is a clear exception.
 
 ### Styling strategy
@@ -191,7 +191,7 @@ Notes:
 - `astro.config.mjs` — static build config, sitemap and SEO graph integrations. `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`; `markdownAlternate` is intentionally disabled.
 - `src/layouts/BaseLayout.astro` — document shell, metadata, RSS link, cookie banner, and client bootstrap.
 - `src/layouts/PageLayout.astro` — shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
-- `src/components/TrackedLink.astro` / `ExternalLink.astro` — shared outbound-link primitives.
+- `src/components/TrackedLink.astro` — shared outbound-link primitive (optional analytics metadata).
 - `src/content.config.ts` — canonical content schemas.
 - `src/utils/dog-content.ts` — shapes collection entries for cards and galleries.
 - `src/utils/story-card-copy.ts` — builds success-story card excerpts and carries the 260-character default.

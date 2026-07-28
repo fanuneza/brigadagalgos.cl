@@ -13,7 +13,6 @@ import TrackedLink from "../../components/TrackedLink.astro";
 import InstagramLink from "../../components/InstagramLink.astro";
 import { SITE } from "../../config/site.ts";
 import { buildAdoptionDogCards, buildDogMetaDescription } from "../../utils/dog-content";
-import { getInstagramHandleLabel } from "../../utils/instagram";
 
 export async function getStaticPaths() {
   const dogs = await getCollection(
@@ -62,10 +61,7 @@ const ogImage = firstImage
           <p class="dog-profile__sketch">{dog.characterSketch}</p>
           {
             dog.instagramUrl && (
-              <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_profile" class="dog-social-link">
-                <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
-                <span>{getInstagramHandleLabel(dog.instagramUrl)}</span>
-              </InstagramLink>
+              <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_profile" class="dog-social-link" />
             )
           }
           <div class="dog-profile__ctas">

@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import { getCollection, type CollectionEntry } from "astro:content";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
-import ExternalLink from "../components/ExternalLink.astro";
+import TrackedLink from "../components/TrackedLink.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import SupportersIntro from "../components/sections/SupportersIntro.astro";
 import CtaCard from "../components/sections/CtaCard.astro";
@@ -63,17 +63,18 @@ const supportersGridClass = supporters.length === 1 ? "supporters-grid supporter
                 <p class="supporter-card__description t-card-body">
                   {supporter.data.description}{" "}
                   {supporter.data.thanksLabel && supporter.data.thanksUrl && (
-                    <ExternalLink
+                    <TrackedLink
                       href={withPartnerUtm(supporter.data.thanksUrl)}
                       class="supporter-card__description-link"
+                      newTab
                     >
                       {supporter.data.thanksLabel} <span class="sr-only"> (abre en una nueva pestaña)</span>
-                    </ExternalLink>
+                    </TrackedLink>
                   )}
                 </p>
-                <ExternalLink href={withPartnerUtm(supporter.data.website)} class="btn btn--secondary">
+                <TrackedLink href={withPartnerUtm(supporter.data.website)} class="btn btn--secondary" newTab>
                   Visitar sitio <span class="sr-only"> (abre en una nueva pestaña)</span>
-                </ExternalLink>
+                </TrackedLink>
               </div>
             </article>
           ))

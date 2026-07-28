@@ -29,5 +29,8 @@ const handle = getInstagramHandleLabel(url);
   trackLocation={location}
   trackDestination={url}
 >
-  <slot />
+  <slot>
+    <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+    <span>{handle}</span>
+  </slot>
 </TrackedLink>
