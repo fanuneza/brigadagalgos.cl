@@ -3,11 +3,77 @@
 @import url("@fontsource/barlow-condensed/latin-900.css");
 @import url("./tokens.css");
 @import url("./components/navbar.css");
-@import url("./components/skip-to-content.css");
 @import url("./components/footer.css");
-@import url("./components/rainbow-divider.css");
 @import url("./components/cookie-banner.css");
-@import url("./components/motion.css");
+
+.skip-to-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.75rem 1rem;
+  background: var(--color-accent-warm);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius-sm) 0;
+  transform: translateY(-110%);
+  transition: transform 150ms ease-out;
+  z-index: 1000;
+}
+
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.rainbow-divider {
+  border: none;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--color-primary) 0% 20%,
+    var(--color-secondary) 20% 40%,
+    var(--color-accent-warm) 40% 60%,
+    var(--color-rainbow-green) 60% 80%,
+    var(--color-rainbow-purple) 80% 100%
+  );
+  margin: 0;
+}
+
+/* Scroll-driven entrance reveals. Uses the `translate` property, never
+   `transform`, so the shared hover lift (which uses transform) still works
+   while the fill-mode keeps the final keyframe applied. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .story-card,
+    .dog-card,
+    .donation-card,
+    .req-card,
+    .stat-card,
+    .channel-card,
+    .supporter-card,
+    .impact-card {
+      animation: reveal-rise both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    translate: 0 10px;
+  }
+
+  to {
+    translate: 0 0;
+  }
+}
 
 /* Metrics-matched fallback so the swap from system font to Barlow causes no layout shift. */
 @font-face {
@@ -562,4 +628,55 @@ main {
   clip-path: inset(50%);
   white-space: nowrap;
   border-width: 0;
+}
+
+.section-heading {
+  margin-bottom: 0;
+  color: var(--color-text);
+}
+
+.mission__prose {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+  max-width: 68ch;
+}
+
+.mission__prose p {
+  margin: 0;
+}
+
+.mission-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-5) 0 0;
+}
+
+.mission-values li {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-weight: var(--weight-semi);
+  background: color-mix(in sRGB, var(--color-primary-100) 24%, var(--color-bg));
+}
+
+.why-galgos-section__summary {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border: 1px solid color-mix(in sRGB, var(--color-primary) 34%, var(--color-border));
+  background: color-mix(in sRGB, var(--color-surface) 72%, var(--color-bg));
+  border-radius: var(--radius-md);
+}
+
+.why-galgos-section__summary p {
+  margin: 0;
+}
+
+.why-galgos-section__cta {
+  margin-top: var(--space-5);
 }

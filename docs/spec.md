@@ -88,47 +88,39 @@ brigadagalgos.cl/
 │   │   │   └── exito/           # Success story photos
 │   │   └── colaboradores/       # Supporter logos
 │   ├── components/              # Shared UI components
-│   │   ├── DonationBanner.astro
-│   │   ├── ExternalLink.astro
+│   │   ├── DogCard.astro             # Shared adoption-dog card (featured + grid variants)
 │   │   ├── Footer.astro
-│   │   ├── HelpCards.astro
-│   │   ├── Hero.astro
 │   │   ├── InstagramLink.astro
-│   │   ├── MissionSection.astro
 │   │   ├── Navbar.astro
 │   │   ├── PageHero.astro
-│   │   ├── ProcessStepper.astro
 │   │   ├── RainbowDivider.astro
 │   │   ├── RequirementCard.astro
 │   │   ├── SharedGalleryLightbox.astro
 │   │   ├── SharedPhotoGallery.astro
-│   │   ├── StoriesSection.astro      # Home success-story preview
 │   │   ├── StoryCard.astro           # Shared success-story card
-│   │   ├── StructuredData.astro
 │   │   ├── TrackedLink.astro
 │   │   └── WhatsAppLink.astro
 │   ├── components/sections/     # Page-specific section components
 │   │   ├── AdoptionGrid.astro
-│   │   ├── AdoptionIntro.astro
 │   │   ├── AdoptionProcess.astro
-│   │   ├── AdoptionTailCta.astro
 │   │   ├── CasesBand.astro
 │   │   ├── ContactChannels.astro
 │   │   ├── ContactForm.astro
 │   │   ├── CookieBanner.astro
 │   │   ├── CookiePolicyArticle.astro
+│   │   ├── CtaCard.astro             # Shared end-of-page CTA card
+│   │   ├── DonationBanner.astro
 │   │   ├── DonationCards.astro
 │   │   ├── FaqSection.astro
 │   │   ├── FeaturedAdoptionDogs.astro
 │   │   ├── FosterPostular.astro
 │   │   ├── FosterRequirements.astro
-│   │   ├── HelpTailCta.astro
+│   │   ├── HelpCards.astro
+│   │   ├── Hero.astro
 │   │   ├── ImpactSection.astro
-│   │   ├── NextStepCta.astro
-│   │   ├── NotFoundLinks.astro
-│   │   ├── PressSection.astro
-│   │   ├── SupportersCtaSection.astro
-│   │   ├── SupportersIntro.astro
+│   │   ├── MissionSection.astro
+│   │   ├── ProcessStepper.astro
+│   │   ├── StoriesSection.astro      # Home success-story preview
 │   │   ├── TrustStatsSection.astro
 │   │   ├── WhyGalgosEditorial.astro
 │   │   └── WhyGalgosSection.astro

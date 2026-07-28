@@ -2,7 +2,6 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
-import NotFoundLinks from "../components/sections/NotFoundLinks.astro";
 import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
 ---
 
@@ -19,5 +18,15 @@ import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
     <FuzzyRedirect />
   </div>
   <RainbowDivider />
-  <NotFoundLinks />
+  <section class="section-padding">
+    <div class="container container--narrow">
+      <ul class="requisitos-list">
+        <li><a href="/">Volver al inicio</a></li>
+        <li><a href="/adoptar/">Ver galgos en adopción</a></li>
+        <li><a href="/hogar-temporal/">Postular a hogar temporal</a></li>
+        <li><a href="/donar/">Apoyar el rescate</a></li>
+        <li><a href="/contacto/">Escribirnos</a></li>
+      </ul>
+    </div>
+  </section>
 </PageLayout>
