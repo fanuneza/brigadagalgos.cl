@@ -133,7 +133,9 @@ La paleta toma la energía de la marca sin convertir cada pantalla en un arcoír
 ## 3. Typography
 
 **Display Font:** Barlow Condensed, con Impact como reserva.
-**Body Font:** Barlow, con Barlow Fallback y una pila de sistema como reserva.
+**Body Font:** Barlow, con una pila de sistema como reserva.
+
+Ambas familias se cargan con la Fonts API de Astro (ver `fonts` en `astro.config.mjs`), que genera automáticamente fallbacks optimizados con métricas ajustadas para las dos familias, de modo que el cambio de fuente no produce saltos de layout.
 
 **Character:** Barlow Condensed aporta una voz fuerte, directa y de rótulo popular para los titulares. Barlow deja el resto de la conversación clara, cálida y fácil de leer. La combinación mantiene la energía del logo sin disfrazar el contenido como una campaña institucional.
 

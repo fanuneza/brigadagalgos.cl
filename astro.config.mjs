@@ -1,4 +1,4 @@
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, fontProviders } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import seoGraph from "@jdevalk/astro-seo-graph/integration";
 import { INDEXNOW_KEY, SITE } from "./src/config/site.ts";
@@ -19,6 +19,26 @@ export default defineConfig({
       ENABLE_INDEXNOW: envField.boolean({ context: "server", access: "public", default: false }),
     },
   },
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Barlow",
+      cssVariable: "--font-body",
+      weights: [400],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["Segoe UI Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Barlow Condensed",
+      cssVariable: "--font-display",
+      weights: [700, 900],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["Impact", "Haettenschweiler", "Arial Narrow Bold", "Arial Narrow", "sans-serif"],
+    },
+  ],
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith(".json"),
