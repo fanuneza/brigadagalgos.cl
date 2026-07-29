@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { assertSharedGallerySlides } from "./helpers/shared-gallery";
 
 test("filter chips show subset of adoption cards and update count", async ({ page }) => {
   await page.setViewportSize({ width: 1200, height: 900 });
@@ -47,44 +46,47 @@ test("filter chips show subset of adoption cards and update count", async ({ pag
     await expect(emptyMessage).toBeHidden();
   }
 
-  // Filter by "Adultos" (age type) — all current dogs are adulto
-  await page.locator(".filter-chip[data-filter='adulto']").click();
-  await expect(page.locator(".filter-chip--active")).toHaveAttribute("data-filter", "adulto");
-
-  const adultoCards = page.locator("[data-age-type='adulto']");
-  const adultoCount = await adultoCards.count();
-  expect(adultoCount).toBeGreaterThan(0);
-  await expect(count).toHaveText(String(adultoCount));
-
   // Back to "Todos"
   await page.locator(".filter-chip[data-filter='all']").click();
   await expect(page.locator(".filter-chip--active")).toHaveAttribute("data-filter", "all");
   await expect(count).toHaveText(String(totalCards));
 });
 
-test("filter chips handle empty results and restore on reset", async ({ page }) => {
+test("filter chips are keyboard operable and restore all results", async ({ page }) => {
   await page.setViewportSize({ width: 1200, height: 900 });
   await page.goto("/adoptar/", { waitUntil: "networkidle" });
 
   const cards = page.locator("[data-sex]");
-  const emptyMessage = page.locator(".dog-grid__empty");
   const totalCards = await cards.count();
 
-  // Apply a filter that should never match (simulate by checking a non-existent value
-  // isn't possible via UI, so we test the "all" reset path instead)
-  await page.locator(".filter-chip[data-filter='adulto']").click();
-  await expect(page.locator(".filter-chip--active")).toHaveAttribute("data-filter", "adulto");
-  await expect(emptyMessage).toBeHidden();
+  const maleChip = page.locator(".filter-chip[data-filter='Macho']");
+  await maleChip.focus();
+  await page.keyboard.press("Enter");
+  await expect(maleChip).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("[data-sex]:not([hidden])")).toHaveCount(
+    await cards.filter({ has: page.locator(".dog-chip--sex", { hasText: "Macho" }) }).count()
+  );
 
   // Reset to all
   await page.locator(".filter-chip[data-filter='all']").click();
   await expect(page.locator(".filter-chip--active")).toHaveAttribute("data-filter", "all");
   await expect(cards).toHaveCount(totalCards);
-  await expect(emptyMessage).toBeHidden();
 });
 
-test("adoption galleries render up to three optimized photos server-side", async ({ page }) => {
+test("adoption cards use one image and a named profile action", async ({ page }) => {
   await page.goto("/adoptar/", { waitUntil: "networkidle" });
 
-  await assertSharedGallerySlides(page);
+  const cards = page.locator("[data-adoption-card]");
+  const count = await cards.count();
+
+  for (let index = 0; index < count; index++) {
+    const card = cards.nth(index);
+    const name = (await card.locator(".dog-card__name").textContent())?.trim();
+    await expect(card.locator(".dog-card__image")).toHaveCount(1);
+    await expect(card.locator("[data-shared-gallery]")).toHaveCount(0);
+    await expect(card.getByRole("link", { name: `Conocer a ${name}` })).toHaveAttribute(
+      "href",
+      /\/adoptar\/[a-z0-9-]+\/$/
+    );
+  }
 });
