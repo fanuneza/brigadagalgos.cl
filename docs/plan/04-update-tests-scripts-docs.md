@@ -32,7 +32,7 @@ Do not touch: `src/pages/**`, `src/components/**`, `src/utils/dog-content.ts`,
 1. **`tests/source-hygiene.test.ts`** — port the three dog rules to the new layout:
    - Hidden dogs (currently lines 138-174): scan `src/content/dogs/*.md`; the rule applies
      only to files with `status: "adopcion"`. Keep: `active: false` ⇒ valid `hiddenSince`
-     + non-empty `hiddenReason`, max 90 days hidden.
+     - non-empty `hiddenReason`, max 90 days hidden.
    - Story rule (176-192): applies to files with `status: "exito"`. Keep: double-quoted
      `story`, ≤260 chars, matches `/adopt/i`.
    - Redirect coverage (194-238): the current heuristic lists slugs via

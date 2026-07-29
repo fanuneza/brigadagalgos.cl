@@ -46,10 +46,10 @@ docs, `public/_redirects`.
    error on empty/missing bases. If the glob loader errors on a missing base, that is
    expected and acceptable only if the build still passes — otherwise report it and
    temporarily point the old loaders at `src/content/dogs` with a `status`-based pattern
-     filter (e.g. pattern `**/*.md` cannot filter; use a small custom filter in
-     `getCollection` call sites is NOT allowed here). Prefer: verify actual behavior first;
-     Astro's glob loader tolerates empty results from an existing directory, so leaving
-     empty `adoption-dogs/` and `success-dogs/` dirs with a `.gitkeep` is the fallback.
+   filter (e.g. pattern `**/*.md` cannot filter; use a small custom filter in
+   `getCollection` call sites is NOT allowed here). Prefer: verify actual behavior first;
+   Astro's glob loader tolerates empty results from an existing directory, so leaving
+   empty `adoption-dogs/` and `success-dogs/` dirs with a `.gitkeep` is the fallback.
 
 ## Acceptance checks
 

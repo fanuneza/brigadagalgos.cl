@@ -91,14 +91,14 @@ Rules for every subagent:
 
 ## Waves
 
-| Wave | Branch | Tasks | Mode |
-| --- | --- | --- | --- |
-| 1 — Unified schema & migration | `wave-1/unify-dog-collections` | 01 → 02 | Sequential |
-| 2 — Consumers, tests, docs | `wave-2/consumers` + `wave-2/tests-docs` | 03 ∥ 04 | Swarm (2) |
-| 3 — SSR carousel | `wave-3/ssr-carousel` | 05 | Single |
-| 4 — Native lightbox | `wave-4/native-lightbox` | 06 | Single |
-| 5 — Card visual redesign | `wave-5/card-redesign` | 07 | Single |
-| 6 — Review & integration | — | 08 | Orchestrator |
+| Wave                           | Branch                                   | Tasks   | Mode         |
+| ------------------------------ | ---------------------------------------- | ------- | ------------ |
+| 1 — Unified schema & migration | `wave-1/unify-dog-collections`           | 01 → 02 | Sequential   |
+| 2 — Consumers, tests, docs     | `wave-2/consumers` + `wave-2/tests-docs` | 03 ∥ 04 | Swarm (2)    |
+| 3 — SSR carousel               | `wave-3/ssr-carousel`                    | 05      | Single       |
+| 4 — Native lightbox            | `wave-4/native-lightbox`                 | 06      | Single       |
+| 5 — Card visual redesign       | `wave-5/card-redesign`                   | 07      | Single       |
+| 6 — Review & integration       | —                                        | 08      | Orchestrator |
 
 Waves 3–5 are sequential because they share `shared-gallery.css` and the card components;
 do not parallelize them. Wave 2 is a swarm because tasks 03 and 04 own disjoint file sets.

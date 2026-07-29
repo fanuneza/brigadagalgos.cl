@@ -13,7 +13,7 @@ repository clean.
 ## Steps
 
 1. **Branch hygiene.** `git branch` shows no `wave-*` branches; `git log --oneline main`
-  shows one commit per task (01–07), each with its specified message.
+   shows one commit per task (01–07), each with its specified message.
 2. **Full verification:**
 
    ```bash

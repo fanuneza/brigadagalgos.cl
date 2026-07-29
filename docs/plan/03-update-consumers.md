@@ -60,7 +60,7 @@ npx vitest run                       # unit tests
 npx playwright test tests/stories-section.spec.ts tests/filter-chips.spec.ts tests/dog-profile.spec.ts
 ```
 
-Note: task 04 updates the test *sources* in parallel; if a test fails only because of an
+Note: task 04 updates the test _sources_ in parallel; if a test fails only because of an
 edit task 04 is making, coordinate via the orchestrator rather than editing tests here.
 
 ## Done when
