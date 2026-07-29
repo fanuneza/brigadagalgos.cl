@@ -7,12 +7,14 @@ interface Props {
   name: string;
   photos: SharedGalleryPhoto[];
   loadingPriority?: "lazy" | "eager";
+  // Dog kind; the lightbox reads it as the analytics location for gallery_open.
+  context: "adopcion" | "exito";
   // Unique per page; callers derive it from the content slug so a card image
   // can morph into the same photo on the destination page (ClientRouter).
   transitionName: string;
 }
 
-const { id, name, photos, loadingPriority = "lazy", transitionName } = Astro.props;
+const { id, name, photos, loadingPriority = "lazy", context, transitionName } = Astro.props;
 
 // Every slide is server-rendered: the carousel is a CSS scroll-snap track, so
 // navigation works with JavaScript disabled. JS only wires the lightbox.
@@ -24,12 +26,24 @@ const slideId = (index: number) => `${galleryKey}-slide-${index + 1}`;
 const hasMultiplePhotos = photos.length > 1;
 ---
 
-<div class="story-card__photo" data-shared-gallery data-gallery-id={id} data-gallery-name={name}>
+<div
+  class="story-card__photo"
+  data-shared-gallery
+  data-gallery-id={id}
+  data-gallery-name={name}
+  data-gallery-context={context}
+>
   <div class="story-card__viewport" role="group" tabindex="0" aria-label={`Galería de ${name}`}>
     <div class="story-card__track">
       {
         photos.map((photo, index) => (
-          <div class="story-card__slide" id={slideId(index)} data-full={photo.lightbox} data-caption={photo.caption}>
+          <div
+            class="story-card__slide"
+            id={slideId(index)}
+            data-full={photo.lightbox}
+            data-alt={getPhotoAlt(item, index)}
+            data-caption={photo.caption}
+          >
             <button
               type="button"
               class="story-card__zoom"

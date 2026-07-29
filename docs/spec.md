@@ -166,7 +166,7 @@ brigadagalgos.cl/
 │   │   ├── copy-data.ts         # Copy-to-clipboard helper (bank details, etc.)
 │   │   ├── filter-chips.ts      # Adoption page filters
 │   │   ├── form.ts              # Contact form validation and submission
-│   │   ├── init-shared-gallery.ts # Gallery/lightbox bootstrap
+│   │   ├── gallery-lightbox.ts  # Native <dialog> lightbox for shared galleries
 │   │   ├── navbar.ts            # Mobile menu and theme toggle
 │   │   ├── share-dog.ts         # Native share button with clipboard fallback
 │   │   ├── theme.ts             # Dark/light theme persistence
@@ -321,8 +321,7 @@ Key shared primitives:
 - `src/scripts/form.ts` — contact form validation and submission handling.
 - `src/scripts/copy-data.ts` — copy-to-clipboard for bank details and similar.
 - `src/scripts/share-dog.ts` — native share button with clipboard fallback on dog profiles.
-- `src/scripts/init-shared-gallery.ts` — gallery/lightbox bootstrap.
-- `src/scripts/gallery/*.ts` — modular lightbox implementation (carousel, DOM, lightbox).
+- `src/scripts/gallery-lightbox.ts` — native `<dialog>` lightbox for the shared photo galleries.
 
 ## Styling strategy
 

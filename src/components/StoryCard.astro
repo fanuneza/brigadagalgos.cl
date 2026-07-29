@@ -27,6 +27,7 @@ const { story, location, summary = false, loadingPriority = "lazy" } = Astro.pro
         photos={story.photos}
         id={story.id}
         loadingPriority={loadingPriority}
+        context="exito"
         transitionName={`story-photo-${story.id}`}
       />
     )
