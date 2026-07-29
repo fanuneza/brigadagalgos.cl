@@ -46,9 +46,9 @@ For the repo layout and full file tree, see `docs/spec.md`.
 
 ### Homepage and success stories
 
-- The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It picks three active `adoption-dogs` at random (shuffled per build); the optional `order` field in the schema is currently unused.
+- The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It picks three active adoption dogs (`status: "adopcion"` in the unified `dogs` collection) at random (shuffled per build); the optional `order` field in the schema is currently unused.
 - `/adoptar/` remains the complete active listing. Do not turn the homepage preview into the full catalogue.
-- `success-dogs` powers a three-story homepage preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
+- Dogs with `status: "exito"` power a three-story homepage preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
 - The archive is static and server-rendered. Do not restore homepage story pagination, `/casos/exito-home.json`, or `src/scripts/stories-section.ts` without a new product requirement.
 
 ### Layouts and page shells
@@ -104,9 +104,10 @@ The full editorial workflows, with examples, are in `docs/content-model.md`. The
 
 ### Moving a Dog to Success
 
-1. `git mv` the markdown file from `adoption-dogs/` to `success-dogs/` and the asset folder from `src/assets/casos/adopcion/<slug>` to `src/assets/casos/exito/<slug>`.
-2. Rewrite the frontmatter: drop the adoption-only fields, add a `story` (≤260 characters, mentions the adoption outcome), and point `gallery` at the new asset path.
-3. Add a permanent redirect for the retired profile URL in `public/_redirects`:
+All dogs live in `src/content/dogs/<slug>.md` with assets in `src/assets/casos/<slug>/`; neither moves when the dog is adopted.
+
+1. Edit the frontmatter: change `status` to `"exito"`, drop the adoption-only fields, and add a `story` (≤260 characters, mentions the adoption outcome). `gallery` paths stay the same.
+2. Add a permanent redirect for the retired profile URL in `public/_redirects`:
 
    ```
    /adoptar/<slug>/ /casos-de-exito/ 301
@@ -115,6 +116,8 @@ The full editorial workflows, with examples, are in `docs/content-model.md`. The
 Profile URLs are shared on social media and must not 404 after the dog is adopted. `tests/source-hygiene.test.ts` fails the build when a retired or hidden profile is missing its redirect.
 
 ### Hiding a Dog Temporarily
+
+Applies only to dogs with `status: "adopcion"`:
 
 ```yaml
 active: false

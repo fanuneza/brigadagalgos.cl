@@ -16,8 +16,7 @@ Este repositorio contiene el sitio público donde Brigada Galgos muestra perros 
 
 ## Dónde vive la información
 
-- `src/content/adoption-dogs/`: fichas de galgos en adopción.
-- `src/content/success-dogs/`: historias de galgos ya adoptados.
+- `src/content/dogs/`: fichas de galgos en adopción (`status: "adopcion"`) e historias de galgos ya adoptados (`status: "exito"`).
 - `src/content/supporters/`: instituciones, marcas y personas que apoyan a Brigada Galgos.
 - `src/content/blog/`: publicaciones del blog.
 - `src/assets/`: imágenes del sitio y galerías.

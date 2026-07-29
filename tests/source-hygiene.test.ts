@@ -217,25 +217,36 @@ describe("source hygiene", () => {
       }
     }
 
-    // Slugs that once had an /adoptar/<slug>/ page and were moved to success-dogs
-    // live only in git history. On shallow clones the history is unavailable and
-    // the rule degrades to currently hidden dogs only.
+    // A slug is retired when it once had an /adoptar/<slug>/ page and no longer
+    // does. Two git-history signals detect that on the unified layout:
+    //   1. files deleted from the pre-unification src/content/adoption-dogs/
+    //      directory (the migration renamed every file out of it, so this also
+    //      lists dogs whose profiles are still live — filtered out below);
+    //   2. files in src/content/dogs/ that ever carried status: "adopcion"
+    //      (pickaxe), which catches in-place retirements where status flips
+    //      from "adopcion" to "exito" without any file moving, as well as
+    //      deleted src/content/dogs/*.md files that had an adoption profile.
+    // On shallow clones the history is unavailable and the rule degrades to
+    // currently hidden dogs only.
     let retiredSlugs: string[] = [];
     try {
-      retiredSlugs = execSync('git log --diff-filter=D --name-only --format= -- "src/content/adoption-dogs/"', {
-        encoding: "utf8",
-      })
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((line) => line.endsWith(".md"))
-        .map((line) => basename(line, ".md"));
+      const slugsFromGitLog = (args: string): string[] =>
+        execSync(`git log --format= --name-only ${args}`, { encoding: "utf8" })
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line.endsWith(".md"))
+          .map((line) => basename(line, ".md"));
+
+      retiredSlugs = [
+        ...slugsFromGitLog('--diff-filter=D -- "src/content/adoption-dogs/"'),
+        ...slugsFromGitLog('-S\'status: "adopcion"\' -- "src/content/dogs/"'),
+      ];
     } catch {
       retiredSlugs = [];
     }
 
-    // The unified-collection migration renamed every file out of the old
-    // adoption directory, so the path-limited history above also lists dogs
-    // whose profiles are still live. Currently active dogs need no redirect.
+    // Currently active dogs need no redirect, even though the history-based
+    // sets above also list them (migration rename, creation commits).
     const retiredOrHiddenSlugs = new Set([
       ...retiredSlugs.filter((slug) => !activeSlugs.includes(slug)),
       ...hiddenSlugs,

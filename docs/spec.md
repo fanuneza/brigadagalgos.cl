@@ -128,8 +128,7 @@ brigadagalgos.cl/
 │   │   ├── faq.ts               # FAQ data and grouping
 │   │   └── site.ts              # Site metadata, contact links, IDs
 │   ├── content/
-│   │   ├── adoption-dogs/       # Markdown dog profiles
-│   │   ├── success-dogs/        # Markdown success stories
+│   │   ├── dogs/                # Markdown dog profiles and success stories (status discriminator)
 │   │   ├── supporters/          # Markdown supporter entries
 │   │   └── blog/                # Markdown blog posts
 │   ├── content.config.ts        # Astro content collection schemas
@@ -226,22 +225,23 @@ brigadagalgos.cl/
 
 Content is stored as Markdown files with frontmatter in `src/content/`. Astro content collections validate frontmatter at build time through `src/content.config.ts`.
 
-| Collection      | Location                     | Schema source           |
-| --------------- | ---------------------------- | ----------------------- |
-| `adoption-dogs` | `src/content/adoption-dogs/` | `src/content.config.ts` |
-| `success-dogs`  | `src/content/success-dogs/`  | `src/content.config.ts` |
-| `supporters`    | `src/content/supporters/`    | `src/content.config.ts` |
-| `blog`          | `src/content/blog/`          | `src/content.config.ts` |
+| Collection   | Location                  | Schema source           |
+| ------------ | ------------------------- | ----------------------- |
+| `dogs`       | `src/content/dogs/`       | `src/content.config.ts` |
+| `supporters` | `src/content/supporters/` | `src/content.config.ts` |
+| `blog`       | `src/content/blog/`       | `src/content.config.ts` |
+
+The `dogs` collection is discriminated by `status`: `"adopcion"` for adoption profiles and `"exito"` for success stories.
 
 Images referenced by collections live in `src/assets/` and are processed by `astro:assets`.
 
 Content-to-page routing:
 
 ```
-src/content/adoption-dogs/  ──→  Home featured selection + /adoptar/ + /adoptar/<slug>/
-src/content/success-dogs/   ──→  Home preview + /casos-de-exito/ + /por-que-galgos/
-src/content/supporters/     ──→  /colaboradores/
-src/content/blog/           ──→  /blog/ + /blog/<id>/ + /feed.xml (RSS)
+src/content/dogs/ (status: "adopcion")  ──→  Home featured selection + /adoptar/ + /adoptar/<slug>/
+src/content/dogs/ (status: "exito")     ──→  Home preview + /casos-de-exito/ + /por-que-galgos/
+src/content/supporters/                 ──→  /colaboradores/
+src/content/blog/                       ──→  /blog/ + /blog/<id>/ + /feed.xml (RSS)
 ```
 
 ## Layout hierarchy
@@ -365,14 +365,14 @@ Build output (static files)
 
 ## Adoption and success-story routes
 
-- The homepage renders up to three active entries from `adoption-dogs` immediately after the hero, chosen at random (shuffled per build); the optional `order` field is currently unused.
+- The homepage renders up to three active entries from the `dogs` collection (`status: "adopcion"`) immediately after the hero, chosen at random (shuffled per build); the optional `order` field is currently unused.
 - `/adoptar/` remains the full active listing with filters and conversion actions; `/adoptar/<slug>/` remains the active profile route.
-- The homepage renders a fixed three-story `success-dogs` preview. `/casos-de-exito/` statically renders the complete success-story collection using `StoryCard.astro` and shared galleries.
+- The homepage renders a fixed three-story preview of `status: "exito"` dogs. `/casos-de-exito/` statically renders the complete set of success stories using `StoryCard.astro` and shared galleries.
 - The old homepage JSON pagination endpoint and its client script are intentionally absent.
 
 ## Image pipeline
 
-- Dog photos are stored in `src/assets/casos/adopcion/` and `src/assets/casos/exito/`.
+- Dog photos are stored in `src/assets/casos/<slug>/`.
 - Astro's image service generates responsive AVIF and WebP variants via `getImage`.
 - All dog galleries are capped at 3 images (schema-validated).
 

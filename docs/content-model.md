@@ -8,45 +8,54 @@ This document describes the content collections, schemas, editorial rules, and w
 
 The site uses Astro content collections. Each collection is a directory of Markdown files with YAML frontmatter. Schemas are defined in `src/content.config.ts` and validated at build time.
 
-## Adoption dogs (`src/content/adoption-dogs/`)
+## Dogs (`src/content/dogs/`)
 
-### Required fields
+All dogs live in a single `dogs` collection, discriminated by the `status` field: `"adopcion"` for dogs available for adoption and `"exito"` for adoption success stories. The schema is a Zod discriminated union on `status`, so each variant validates only its own fields.
 
-| Field             | Type    | Description                                                                        |
-| ----------------- | ------- | ---------------------------------------------------------------------------------- |
-| `name`            | string  | Name of the galgo                                                                  |
-| `sex`             | enum    | `Macho` or `Hembra`                                                                |
-| `age`             | string  | Descriptive age (e.g., "3 años")                                                   |
-| `weight`          | string  | Descriptive weight (e.g., "22 kg")                                                 |
-| `details`         | string  | Longer profile description                                                         |
-| `currentNeed`     | enum    | `Adopción`, `Hogar temporal`, or `Adopción u hogar temporal` (default: `Adopción`) |
-| `characterSketch` | string  | Short character summary for cards                                                  |
-| `gallery`         | image[] | Up to 3 local images                                                               |
+### Fields
 
-### Optional fields
-
-| Field          | Type    | Description                         |
-| -------------- | ------- | ----------------------------------- |
-| `location`     | string  | Where the dog is located            |
-| `instagramUrl` | URL     | Instagram post/profile for this dog |
-| `order`        | integer | Manual sort order                   |
-| `active`       | boolean | Default `true`; set `false` to hide |
-| `hiddenSince`  | date    | Date the dog was hidden             |
-| `hiddenReason` | string  | Why the dog is hidden               |
+| Field             | Type    | Applies to | Description                                                                        |
+| ----------------- | ------- | ---------- | ---------------------------------------------------------------------------------- |
+| `name`            | string  | both       | Name of the galgo                                                                  |
+| `status`          | enum    | both       | `"adopcion"` or `"exito"` (discriminator)                                          |
+| `gallery`         | image[] | both       | Up to 3 local images (required for `adopcion`; defaults to empty for `exito`)      |
+| `instagramUrl`    | URL     | both       | Optional Instagram post/profile for this dog                                       |
+| `sex`             | enum    | `adopcion` | `Macho` or `Hembra`                                                                |
+| `age`             | string  | `adopcion` | Descriptive age (e.g., "3 años")                                                   |
+| `weight`          | string  | `adopcion` | Descriptive weight (e.g., "22 kg")                                                 |
+| `details`         | string  | `adopcion` | Longer profile description                                                         |
+| `currentNeed`     | enum    | `adopcion` | `Adopción`, `Hogar temporal`, or `Adopción u hogar temporal` (default: `Adopción`) |
+| `characterSketch` | string  | `adopcion` | Short character summary for cards                                                  |
+| `location`        | string  | `adopcion` | Optional; where the dog is located                                                 |
+| `order`           | integer | `adopcion` | Optional manual sort order                                                         |
+| `active`          | boolean | `adopcion` | Default `true`; set `false` to hide                                                |
+| `hiddenSince`     | date    | `adopcion` | Date the dog was hidden                                                            |
+| `hiddenReason`    | string  | `adopcion` | Why the dog is hidden                                                              |
+| `story`           | string  | `exito`    | Adoption success story                                                             |
 
 ### Rules
 
 - `gallery` accepts at most 3 images.
-- If `active: false`, both `hiddenSince` and `hiddenReason` are required.
-- Hidden entries remain in the collection but are excluded from the public listing.
-- Hidden entries older than 90 days fail `tests/source-hygiene.test.ts`.
-- Every dog with `active !== false` renders a profile page at `/adoptar/<slug>/`, with its own meta description (via `buildDogMetaDescription`), OG image (first gallery image), and breadcrumb name override.
+- Adoption variant:
+  - If `active: false`, both `hiddenSince` and `hiddenReason` are required.
+  - Hidden entries remain in the collection but are excluded from the public listing.
+  - Hidden entries older than 90 days fail `tests/source-hygiene.test.ts`.
+  - Every dog with `active !== false` renders a profile page at `/adoptar/<slug>/`, with its own meta description (via `buildDogMetaDescription`), OG image (first gallery image), and breadcrumb name override.
+- Success variant:
+  - `story` must be 260 characters or fewer.
+  - `story` must explicitly mention the adoption outcome (enforced with `/adopt/i`).
+  - Keep stories general enough to avoid invented facts, but specific enough to avoid sounding templated.
+  - Card summaries are derived from `story` via `src/utils/dog-content.ts`. The 260-character default should stay aligned with the content rule unless the product requirement changes.
+  - Success entries power the home preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
 
-### Example
+### Examples
+
+Adoption dog:
 
 ```yaml
 ---
 name: "Bruno"
+status: "adopcion"
 sex: "Macho"
 age: "4 años"
 weight: "24 kg"
@@ -55,44 +64,20 @@ currentNeed: "Adopción"
 characterSketch: "Cariñoso una vez que confía, le encanta las caminatas tranquilas."
 location: "Santiago"
 gallery:
-  - "../../assets/casos/adopcion/bruno/bruno-1.jpg"
-  - "../../assets/casos/adopcion/bruno/bruno-2.jpg"
+  - "../../assets/casos/bruno/bruno-1.jpg"
+  - "../../assets/casos/bruno/bruno-2.jpg"
 ---
 ```
 
-## Success dogs (`src/content/success-dogs/`)
-
-### Required fields
-
-| Field     | Type    | Description                              |
-| --------- | ------- | ---------------------------------------- |
-| `name`    | string  | Name of the galgo                        |
-| `story`   | string  | Adoption success story                   |
-| `gallery` | image[] | Up to 3 local images (defaults to empty) |
-
-### Optional fields
-
-| Field          | Type | Description                           |
-| -------------- | ---- | ------------------------------------- |
-| `instagramUrl` | URL  | Instagram post/profile for this story |
-
-### Rules
-
-- `story` must be 260 characters or fewer.
-- `story` must explicitly mention the adoption outcome (enforced with `/adopt/i`).
-- `gallery` accepts at most 3 images.
-- Keep stories general enough to avoid invented facts, but specific enough to avoid sounding templated.
-- Card summaries are derived from `story` via `src/utils/dog-content.ts`. The 260-character default should stay aligned with the content rule unless the product requirement changes.
-- The collection powers the home preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
-
-### Example
+Success dog:
 
 ```yaml
 ---
 name: "Mora"
+status: "exito"
 story: "Mora fue adoptada. Su hogar temporal no se pudo resistir. Ahora duerme en la cama y pasea todos los días."
 gallery:
-  - "../../assets/casos/exito/mora/mora-1.jpg"
+  - "../../assets/casos/mora/mora-1.jpg"
 ---
 ```
 
@@ -167,8 +152,8 @@ order: 1
 
 ### Adding a new dog for adoption
 
-1. Create `src/content/adoption-dogs/<slug>.md`.
-2. Add 1–3 images to `src/assets/casos/adopcion/<slug>/`.
+1. Create `src/content/dogs/<slug>.md` with `status: "adopcion"`.
+2. Add 1–3 images to `src/assets/casos/<slug>/`.
 3. Fill required frontmatter and optional fields as needed.
 4. Set `currentNeed` to the appropriate value.
 5. Run `npm run dog-images:check` to verify image consistency.
@@ -176,13 +161,14 @@ order: 1
 
 ### Moving a dog to success stories
 
-1. `git mv src/content/adoption-dogs/<slug>.md src/content/success-dogs/<slug>.md`
-2. `git mv src/assets/casos/adopcion/<slug> src/assets/casos/exito/<slug>`
-3. Rewrite frontmatter:
-   - Remove: `sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, `order`, `active`, `hiddenSince`, `hiddenReason`.
-   - Add: `story` (≤260 chars, mentions adoption).
-   - Keep: `name`, `instagramUrl`, `gallery` (with updated paths).
-4. Add a permanent redirect in `public/_redirects` for the retired profile URL:
+The dog's markdown file and asset folder stay where they are — only the frontmatter changes.
+
+1. Edit `src/content/dogs/<slug>.md`:
+   - Change `status` to `"exito"`.
+   - Add `story` (≤260 chars, mentions adoption).
+   - Remove the profile-only fields: `sex`, `age`, `weight`, `details`, `location`, `currentNeed`, `characterSketch`, `order`, `active`, `hiddenSince`, `hiddenReason`.
+   - Keep `name`, `instagramUrl`, and `gallery` unchanged (asset paths do not move).
+2. Add a permanent redirect in `public/_redirects` for the retired profile URL:
 
    ```
    /adoptar/<slug>/ /casos-de-exito/ 301
@@ -192,7 +178,7 @@ Profile URLs are shared on social media and must not 404 after adoption. `tests/
 
 ### Hiding a dog temporarily
 
-Set the following frontmatter:
+Applies only to entries with `status: "adopcion"`. Set the following frontmatter:
 
 ```yaml
 active: false
@@ -251,4 +237,4 @@ All content must follow `docs/voice-and-tone.md`. Key reminders:
 
 ## Last updated
 
-2026-07-28
+2026-07-29

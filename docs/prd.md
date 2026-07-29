@@ -99,7 +99,7 @@ Reusable UI used across pages (see `docs/spec.md` for the full file map):
 **US-ADOPT-1: As a visitor, I want to browse all active galgos in adoption so that I can find one that fits my life.**
 
 - **Acceptance criteria:**
-  - All dogs with `active: true` in `src/content/adoption-dogs/` are listed.
+  - All dogs with `status: "adopcion"` and `active: true` in `src/content/dogs/` are listed.
   - Dogs with `active: false` are not shown.
   - Dogs are sorted by `order` when provided, otherwise by a sensible default (e.g., file order or name).
 
