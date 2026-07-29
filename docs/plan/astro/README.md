@@ -57,19 +57,19 @@ File-conflict map (tasks sharing files must not run in parallel):
 
 ## Task index
 
-| File | Theme | Effort | Risk |
-| --- | --- | --- | --- |
-| 01 | Prefetch strategy | S | Low |
-| 02 | `astro:env` schema | S | Low |
-| 03 | Site URL consistency | S | Low |
-| 04 | Astro Fonts API migration | M | Medium |
-| 05 | Responsive images (`layout`, `responsiveStyles`) | M | Medium |
-| 06 | Gallery `set:html` → components | L | Medium |
-| 07 | Duplicate WebSite JSON-LD | S | Low |
-| 08 | View transition names/persist | M | Medium |
-| 09 | SVG components + `svgOptimizer` | M | Low |
-| 10 | Blog `<article>` semantics | S | Low |
-| 11 | Dead asset cleanup | S | Low |
+| File | Theme                                            | Effort | Risk   |
+| ---- | ------------------------------------------------ | ------ | ------ |
+| 01   | Prefetch strategy                                | S      | Low    |
+| 02   | `astro:env` schema                               | S      | Low    |
+| 03   | Site URL consistency                             | S      | Low    |
+| 04   | Astro Fonts API migration                        | M      | Medium |
+| 05   | Responsive images (`layout`, `responsiveStyles`) | M      | Medium |
+| 06   | Gallery `set:html` → components                  | L      | Medium |
+| 07   | Duplicate WebSite JSON-LD                        | S      | Low    |
+| 08   | View transition names/persist                    | M      | Medium |
+| 09   | SVG components + `svgOptimizer`                  | M      | Low    |
+| 10   | Blog `<article>` semantics                       | S      | Low    |
+| 11   | Dead asset cleanup                               | S      | Low    |
 
 ## Non-goals
 

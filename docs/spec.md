@@ -387,6 +387,14 @@ Responsive variants generated per surface (verified against `src/utils/responsiv
 | Editorial section (`/por-que-galgos`) | 400w, 600w, 728w  | AVIF + WebP via `Picture`                     |
 | Supporter logos (`/colaboradores`)    | 240w, 360w, 480w  | `Image` srcset, quality 72                    |
 
+## Font pipeline
+
+- Web fonts are managed by the Astro Fonts API, configured under `fonts` in `astro.config.mjs` with the built-in `fontProviders.fontsource()` provider.
+- Two families are registered: `Barlow` (latin 400, body, `--font-body`) and `Barlow Condensed` (latin 700/900, display, `--font-display`). Weights and subsets match exactly what the site uses; do not add weights without a design requirement.
+- `BaseLayout.astro` renders `<Font cssVariable="--font-body" preload />` and `<Font cssVariable="--font-display" preload />` in `<head>`, which emits the `@font-face` rules, preload links, and each CSS variable as a full `font-family` stack.
+- The API generates metric-matched optimized fallbacks for both families automatically (`optimizedFallbacks` defaults to true), so the hand-written `"Barlow Fallback"` `@font-face` no longer exists. The declared `fallbacks` chains in the config preserve the previous system-font stacks.
+- Font files are self-hosted in the build output under `_astro/fonts/`; no external font requests are made.
+
 ## Analytics and consent flow
 
 ```
@@ -451,7 +459,8 @@ Every page includes:
 | `@astrojs/sitemap`             | Sitemap generation                |
 | `@jdevalk/astro-seo-graph`     | SEO graph and JSON-LD integration |
 | `@jdevalk/seo-graph-core`      | SEO graph core utilities          |
-| `@fontsource/barlow-condensed` | Web font                          |
+| `@fontsource/barlow`           | Web font (body)                   |
+| `@fontsource/barlow-condensed` | Web font (display)                |
 
 ### Development dependencies
 
@@ -572,4 +581,4 @@ Carried over from the retired follow-up notes; none of these block shipping.
 
 ## Last updated
 
-2026-07-28
+2026-07-29

@@ -1,5 +1,6 @@
 import { createIndexNowKeyRoute } from "@jdevalk/astro-seo-graph";
+import { INDEXNOW_KEY } from "../config/site";
 
 export const GET = createIndexNowKeyRoute({
-  key: "591c2b87f0b68c44f260215f5d8e9da3",
+  key: INDEXNOW_KEY,
 });

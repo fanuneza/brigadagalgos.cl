@@ -73,10 +73,11 @@
      Mono:     JetBrains Mono (rare; for placeholder badges in wireframes).
      --------------------------------------------------------------------- */
 
-  --font-display: "Barlow Condensed", "Impact", "Haettenschweiler", "Arial Narrow Bold", "Arial Narrow", sans-serif;
-  --font-body:
-    "Barlow", "Barlow Fallback", "Segoe UI Variable", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  /* --font-display (Barlow Condensed) and --font-body (Barlow) are defined
+     by the Astro Fonts API (see `fonts` in astro.config.mjs, consumed via
+     `<Font>` in BaseLayout.astro). The API emits each variable as a full
+     font-family stack including metric-matched optimized fallbacks. */
+
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", menlo, monospace;
 
   /* Scale — modular, ratio ~1.250 (major third) */
