@@ -36,7 +36,7 @@ const darkPages = [
 ] as const;
 
 async function loadLazyImages(page: import("@playwright/test").Page) {
-  const images = page.locator("img");
+  const images = page.locator("img:visible");
 
   for (let index = 0; index < (await images.count()); index += 1) {
     await images.nth(index).scrollIntoViewIfNeeded();
@@ -52,16 +52,21 @@ async function loadLazyImages(page: import("@playwright/test").Page) {
       )
     )
     .toBe(true);
-  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 }
 
 async function prepareCapture(page: import("@playwright/test").Page, path: string) {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(path, { waitUntil: "networkidle" });
   await expect(page.locator("body")).toBeVisible();
 
   // Captures always use an explicit rejected-consent state so the fixed banner
   // neither obscures the page nor produces an ambiguous visual baseline.
   await page.locator("#cookie-reject").click();
+  await page.addStyleTag({
+    content: ".story-card, .dog-card { content-visibility: visible !important; }",
+  });
   await loadLazyImages(page);
 }
 
