@@ -1,17 +1,12 @@
 ---
-import { SITE } from "../config/site.ts";
+import { SITE, NAVBAR_LINKS } from "../config/site.ts";
+import TrackedLink from "./TrackedLink.astro";
 import WhatsAppIcon from "../assets/icons/whatsapp.svg";
 import InstagramIcon from "../assets/icons/instagram.svg";
 import FacebookIcon from "../assets/icons/facebook.svg";
 
 const { pathname } = Astro.url;
-const nav = [
-  { href: "/adoptar/", label: "Adoptar" },
-  { href: "/hogar-temporal/", label: "Hogar temporal" },
-  { href: "/casos-de-exito/", label: "Historias" },
-  { href: "/colaboradores/", label: "Colaboradores" },
-  { href: "/contacto/", label: "Contacto" },
-];
+const nav = NAVBAR_LINKS;
 ---
 
 <header class="navbar" data-navbar transition:persist>
@@ -181,51 +176,48 @@ const nav = [
     </a>
 
     <div class="drawer__social">
-      <a
+      <TrackedLink
         href={SITE.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
         aria-label="WhatsApp"
-        data-external-indicator="off"
-        data-track-event="social_click"
-        data-track-label="WhatsApp"
-        data-track-location="mobile_drawer"
-        data-track-destination={SITE.whatsapp}
-        data-track-category="whatsapp"
-        data-track-outbound="true"
+        newTab
+        hideExternalIndicator
+        trackEvent="social_click"
+        trackLabel="WhatsApp"
+        trackLocation="mobile_drawer"
+        trackDestination={SITE.whatsapp}
+        trackCategory="whatsapp"
+        trackOutbound
       >
         <WhatsAppIcon class="drawer__social-icon" width={24} height={24} aria-hidden="true" />
-      </a>
-      <a
+      </TrackedLink>
+      <TrackedLink
         href={SITE.instagram}
-        target="_blank"
-        rel="noopener noreferrer"
         aria-label="Instagram"
-        data-external-indicator="off"
-        data-track-event="social_click"
-        data-track-label="Instagram"
-        data-track-location="mobile_drawer"
-        data-track-destination={SITE.instagram}
-        data-track-category="instagram"
-        data-track-outbound="true"
+        newTab
+        hideExternalIndicator
+        trackEvent="social_click"
+        trackLabel="Instagram"
+        trackLocation="mobile_drawer"
+        trackDestination={SITE.instagram}
+        trackCategory="instagram"
+        trackOutbound
       >
         <InstagramIcon class="drawer__social-icon" width={24} height={24} aria-hidden="true" />
-      </a>
-      <a
+      </TrackedLink>
+      <TrackedLink
         href={SITE.facebook}
-        target="_blank"
-        rel="noopener noreferrer"
         aria-label="Facebook"
-        data-external-indicator="off"
-        data-track-event="social_click"
-        data-track-label="Facebook"
-        data-track-location="mobile_drawer"
-        data-track-destination={SITE.facebook}
-        data-track-category="facebook"
-        data-track-outbound="true"
+        newTab
+        hideExternalIndicator
+        trackEvent="social_click"
+        trackLabel="Facebook"
+        trackLocation="mobile_drawer"
+        trackDestination={SITE.facebook}
+        trackCategory="facebook"
+        trackOutbound
       >
         <FacebookIcon class="drawer__social-icon" width={24} height={24} aria-hidden="true" />
-      </a>
+      </TrackedLink>
     </div>
   </div>
 </header>
