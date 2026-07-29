@@ -4,19 +4,19 @@ async function fillValidContactForm(page: import("@playwright/test").Page) {
   await page.getByLabel("Nombre").fill("Camila Soto");
   await page.getByLabel("Correo").fill("camila@example.com");
   await page.getByLabel("Asunto").selectOption("Adopción");
-  await page.getByLabel("Mensaje").fill("Quiero conocer el proceso de adopción.");
+  await page.getByRole("textbox", { name: "Mensaje", exact: true }).fill("Quiero conocer el proceso de adopción.");
 }
 
 test("an intent routes to the matching form topic without clearing typed input", async ({ page }) => {
   await page.goto("/contacto/");
   await page.getByLabel("Nombre").fill("Camila Soto");
-  await page.getByLabel("Mensaje").fill("Ya escribí esta consulta.");
+  await page.getByRole("textbox", { name: "Mensaje", exact: true }).fill("Ya escribí esta consulta.");
 
   await page.getByRole("button", { name: "Quiero adoptar" }).click();
 
   await expect(page.getByLabel("Asunto")).toHaveValue("Adopción");
   await expect(page.getByLabel("Nombre")).toHaveValue("Camila Soto");
-  await expect(page.getByLabel("Mensaje")).toHaveValue("Ya escribí esta consulta.");
+  await expect(page.getByRole("textbox", { name: "Mensaje", exact: true })).toHaveValue("Ya escribí esta consulta.");
   await expect(page.getByLabel("Asunto")).toBeFocused();
 });
 
@@ -57,7 +57,10 @@ test("submission exposes pending and success states", async ({ page }) => {
 
 test("a failed submission preserves the message and offers recovery", async ({ page }) => {
   await page.route("https://api.web3forms.com/submit", async (route) => {
-    await route.fulfill({ contentType: "application/json", body: JSON.stringify({ success: false, message: "Inténtalo otra vez" }) });
+    await route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify({ success: false, message: "Inténtalo otra vez" }),
+    });
   });
 
   await page.goto("/contacto/");
@@ -66,6 +69,8 @@ test("a failed submission preserves the message and offers recovery", async ({ p
 
   await expect(page.locator("[data-form-status]")).toBeVisible();
   await expect(page.locator("[data-form-status]")).toContainText("Tu mensaje sigue escrito");
-  await expect(page.getByLabel("Mensaje")).toHaveValue("Quiero conocer el proceso de adopción.");
+  await expect(page.getByRole("textbox", { name: "Mensaje", exact: true })).toHaveValue(
+    "Quiero conocer el proceso de adopción.",
+  );
   await expect(page.getByRole("button", { name: "Enviar mensaje" })).toBeEnabled();
 });

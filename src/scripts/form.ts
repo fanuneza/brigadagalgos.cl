@@ -43,7 +43,10 @@ function initForm(): void {
 
   function clearErrors(): void {
     contactForm.querySelectorAll(".field--error").forEach((field) => field.classList.remove("field--error"));
-    contactForm.querySelectorAll<FormField>("[aria-invalid]").forEach((field) => field.removeAttribute("aria-invalid"));
+    contactForm.querySelectorAll<FormField>("[aria-invalid]").forEach((field) => {
+      field.removeAttribute("aria-invalid");
+      field.removeAttribute("aria-describedby");
+    });
     contactForm.querySelectorAll(".field__error-msg").forEach((message) => message.remove());
     errorList?.replaceChildren();
     if (errorSummary) errorSummary.hidden = true;

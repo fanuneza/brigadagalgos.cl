@@ -35,7 +35,14 @@ const web3formsAccessKey = PUBLIC_WEB3FORMS_KEY ?? SITE.web3forms.accessKey;
         class="form__honeypot"
       />
 
-      <div class="form__errors" data-form-errors hidden tabindex="-1" role="alert" aria-labelledby="contact-form-errors-title">
+      <div
+        class="form__errors"
+        data-form-errors
+        hidden
+        tabindex="-1"
+        role="alert"
+        aria-labelledby="contact-form-errors-title"
+      >
         <p id="contact-form-errors-title" class="form__errors-title">Revisa los campos marcados</p>
         <ul data-form-errors-list></ul>
       </div>
@@ -100,7 +107,9 @@ const web3formsAccessKey = PUBLIC_WEB3FORMS_KEY ?? SITE.web3forms.accessKey;
 
     <div class="form__status" hidden data-form-status role="alert" tabindex="-1">
       <p class="form__status-title t-card-title">No pudimos enviar tu mensaje</p>
-      <p data-form-status-message>Revisa tu conexión e inténtalo de nuevo. Tu mensaje sigue escrito en el formulario.</p>
+      <p data-form-status-message>
+        Revisa tu conexión e inténtalo de nuevo. Tu mensaje sigue escrito en el formulario.
+      </p>
     </div>
 
     <div class="form__success" hidden data-form-success id="contact-success" role="status" tabindex="-1">

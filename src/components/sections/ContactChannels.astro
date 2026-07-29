@@ -11,8 +11,8 @@ import WhatsAppIcon from "../../assets/icons/whatsapp.svg";
     <p class="eyebrow eyebrow--lead">PRIMER MENSAJE</p>
     <h2 id="contact-options-title">Elige cómo quieres conversar</h2>
     <p class="section-body t-lead">
-      WhatsApp es la forma más directa de escribirnos. Si prefieres dejarnos tu consulta con calma, usa el
-      formulario. No necesitas tener todo resuelto antes de contactarnos.
+      WhatsApp es la forma más directa de escribirnos. Si prefieres dejarnos tu consulta con calma, usa el formulario.
+      No necesitas tener todo resuelto antes de contactarnos.
     </p>
 
     <div class="contact-methods">
@@ -48,10 +48,22 @@ import WhatsAppIcon from "../../assets/icons/whatsapp.svg";
       <p class="contact-intents__intro">Elige un tema y dejaremos preparado el formulario. Puedes cambiarlo después.</p>
       <ul class="contact-intents__list">
         <li><button type="button" class="contact-intent" data-contact-intent="Adopción">Quiero adoptar</button></li>
-        <li><button type="button" class="contact-intent" data-contact-intent="Hogar temporal">Quiero ser hogar temporal</button></li>
-        <li><button type="button" class="contact-intent" data-contact-intent="Donación">Quiero apoyar con una donación</button></li>
+        <li>
+          <button type="button" class="contact-intent" data-contact-intent="Hogar temporal"
+            >Quiero ser hogar temporal</button
+          >
+        </li>
+        <li>
+          <button type="button" class="contact-intent" data-contact-intent="Donación"
+            >Quiero apoyar con una donación</button
+          >
+        </li>
         <li><button type="button" class="contact-intent" data-contact-intent="Prensa">Prensa o alianzas</button></li>
-        <li><button type="button" class="contact-intent" data-contact-intent="Consulta general">Tengo otra pregunta</button></li>
+        <li>
+          <button type="button" class="contact-intent" data-contact-intent="Consulta general"
+            >Tengo otra pregunta</button
+          >
+        </li>
       </ul>
     </div>
 
@@ -59,7 +71,9 @@ import WhatsAppIcon from "../../assets/icons/whatsapp.svg";
       Antes de escribirnos también puedes revisar <a class="text-link" href="/adoptar/">los galgos en adopción</a>,
       <a class="text-link" href="/hogar-temporal/">cómo funciona el hogar temporal</a> y
       <a class="text-link" href="/donar/">las formas de donar</a>. Para prensa o alianzas, también puedes escribir a
-      <a class="text-link" href={"mailto:" + SITE.email + "?subject=" + encodeURIComponent("Prensa y alianzas")}>{SITE.email}</a>.
+      <a class="text-link" href={"mailto:" + SITE.email + "?subject=" + encodeURIComponent("Prensa y alianzas")}
+        >{SITE.email}</a
+      >.
     </p>
 
     <p class="contact-routes__social t-small-muted">

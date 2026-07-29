@@ -9,7 +9,7 @@ test("el índice de temas llega a cada grupo de preguntas frecuentes", async ({ 
   await expect(index).toBeVisible();
 
   for (const group of faqGroups) {
-    const link = index.getByRole("link", { name: group.topicLabel });
+    const link = index.getByRole("link", { name: group.topicLabel, exact: true });
     await expect(link).toHaveAttribute("href", `#${group.id}`);
   }
 
@@ -27,9 +27,8 @@ test("los enlaces profundos muestran el grupo y el FAQ JSON-LD conserva las resp
 
   const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
   const graphs = scripts.map((script) => JSON.parse(script) as { "@graph"?: Array<Record<string, unknown>> });
-  const faqPage = graphs
-    .flatMap((graph) => graph["@graph"] ?? [])
-    .find((node) => node["@type"] === "FAQPage") as { mainEntity: Array<Record<string, unknown>> } | undefined;
+  const faqPage = graphs.flatMap((graph) => graph["@graph"] ?? []).find((node) => node["@type"] === "FAQPage") as
+    { mainEntity: Array<Record<string, unknown>> } | undefined;
 
   expect(faqPage?.mainEntity).toHaveLength(faqPairs.length);
 
