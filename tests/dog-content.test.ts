@@ -4,6 +4,7 @@ import {
   buildStoryDogSummaries,
   buildDogMetaDescription,
   filterActiveAdoptionDogs,
+  getAdoptionDecisionData,
   isAdoptionDog,
   isSuccessDog,
   truncateAtWordBoundary,
@@ -114,6 +115,37 @@ describe("buildDogMetaDescription", () => {
 });
 
 describe("unified dogs collection helpers", () => {
+  it("preserves explicit adoption decision statuses, including unknown and case-by-case", () => {
+    const decisionData = getAdoptionDecisionData({
+      location: "Hogar temporal",
+      adoptionFacts: {
+        compatibility: {
+          children: "sí",
+          cats: "no",
+          femaleDogs: "caso a caso",
+          maleDogs: "sin información confirmada",
+        },
+        homeGuidance: "Necesita una presentación gradual.",
+      },
+    });
+
+    expect(decisionData).toEqual({
+      location: "Hogar temporal",
+      compatibility: {
+        children: "sí",
+        cats: "no",
+        femaleDogs: "caso a caso",
+        maleDogs: "sin información confirmada",
+      },
+      homeGuidance: "Necesita una presentación gradual.",
+    });
+    expect(decisionData?.compatibility.maleDogs).not.toBe("sí");
+  });
+
+  it("keeps decision data absent when no confirmed structured facts exist", () => {
+    expect(getAdoptionDecisionData({ location: "Isla de Maipo" })).toBeUndefined();
+  });
+
   it("filters entries by status with the type guards", () => {
     const entries = [
       makeAdoptionDogEntry({ id: "turron" }),
@@ -170,10 +202,43 @@ describe("unified dogs collection helpers", () => {
       ageType: "adulto",
       weight: "Talla grande",
       details: "A Turrón lo arrojaron desde una camioneta en Isla de Maipo. Hoy está recuperado.",
+      location: undefined,
+      adoptionFacts: undefined,
       currentNeed: "Adopción",
       characterSketch: "Tranquilo y recuperado, necesita una rutina sin sobresaltos.",
       instagramUrl: undefined,
       pictures: [],
+    });
+  });
+
+  it("keeps location and explicit adoption facts in the derived card model", async () => {
+    const entry = makeAdoptionDogEntry({
+      data: {
+        location: "Hogar temporal",
+        adoptionFacts: {
+          compatibility: {
+            children: "sin información confirmada",
+            cats: "no",
+            femaleDogs: "sí",
+            maleDogs: "caso a caso",
+          },
+          personalityBehavior: "Busca mimos cuando ya confía.",
+        },
+      },
+    });
+
+    const [card] = await buildAdoptionDogCards([entry]);
+
+    expect(card.location).toBe("Hogar temporal");
+    expect(card.adoptionFacts).toEqual({
+      location: "Hogar temporal",
+      compatibility: {
+        children: "sin información confirmada",
+        cats: "no",
+        femaleDogs: "sí",
+        maleDogs: "caso a caso",
+      },
+      personalityBehavior: "Busca mimos cuando ya confía.",
     });
   });
 });

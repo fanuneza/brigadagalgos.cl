@@ -4,10 +4,18 @@ status: "adopcion"
 sex: Hembra
 age: "3 años aprox."
 weight: "Talla grande"
-details: "Blue estaba deambulando en Isla de Maipo. Es una galguita amigable que se lleva bien con otros perritos y animales. Ya está esterilizada y busca una familia que le dé un hogar definitivo."
+details: "Blue estaba deambulando en Isla de Maipo antes de ser rescatada."
 location: "Isla de Maipo"
+adoptionFacts:
+  compatibility:
+    children: "sin información confirmada"
+    cats: "sin información confirmada"
+    femaleDogs: "sin información confirmada"
+    maleDogs: "sin información confirmada"
+  medicalOrSafetyNeeds: "Ya está esterilizada."
+  personalityBehavior: "Se muestra amigable y sociable con otros perros y animales."
 currentNeed: "Adopción"
-characterSketch: "Amigable y sociable con otros perritos y animales. Blue está lista para encontrar una familia que la quiera para siempre."
+characterSketch: "Blue se muestra amigable y sociable con otros perros y animales."
 order: 15
 gallery:
   - ../../assets/casos/blue/blue-01.jpg

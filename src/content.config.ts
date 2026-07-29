@@ -2,6 +2,8 @@ import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
+const compatibilityStatus = z.enum(["sí", "no", "caso a caso", "sin información confirmada"]);
+
 const dogs = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/dogs" }),
   schema: ({ image }) => {
@@ -20,6 +22,20 @@ const dogs = defineCollection({
         weight: z.string(),
         details: z.string(),
         location: z.string().optional(),
+        adoptionFacts: z
+          .object({
+            compatibility: z.object({
+              children: compatibilityStatus,
+              cats: compatibilityStatus,
+              femaleDogs: compatibilityStatus,
+              maleDogs: compatibilityStatus,
+            }),
+            homeGuidance: z.string().optional(),
+            exerciseNeeds: z.string().optional(),
+            medicalOrSafetyNeeds: z.string().optional(),
+            personalityBehavior: z.string().optional(),
+          })
+          .optional(),
         currentNeed: z.enum(["Adopción", "Hogar temporal", "Adopción u hogar temporal"]).default("Adopción"),
         characterSketch: z.string(),
         order: z.number().int().optional(),
