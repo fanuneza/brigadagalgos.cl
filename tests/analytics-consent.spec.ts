@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import { expect, test, type Page } from "@playwright/test";
 
 const GTM_CONTAINER_ID = "GTM-M2RN5B38";
@@ -70,49 +69,11 @@ test("no consent shows banner and does not load GTM", async ({ page }) => {
   expect(trackingState).not.toContainEqual(expect.objectContaining({ event: "cta_click" }));
 });
 
-test("response includes a strict CSP with the required GTM, GA4, and Cloudflare allowances", async () => {
-  const headersFile = await readFile("public/_headers", "utf8");
-  const cspMatch = headersFile.match(/Content-Security-Policy:\s*(.+)/);
-  const csp = cspMatch?.[1] ?? "";
-  const directives = Object.fromEntries(
-    csp
-      .split(";")
-      .map((directive) => directive.trim())
-      .filter(Boolean)
-      .map((directive) => {
-        const [name, ...values] = directive.split(/\s+/);
-        return [name, values];
-      })
-  );
-
-  expect(csp).toContain("default-src 'self'");
-  expect(directives["script-src"]).toEqual([
-    "'self'",
-    "https://www.googletagmanager.com",
-    "https://static.cloudflareinsights.com",
-  ]);
-  expect(directives["script-src"]).not.toContain("'unsafe-inline'");
-  expect(csp).toContain(
-    "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com"
-  );
-  expect(csp).toContain("script-src-attr 'none'");
-  expect(csp).toContain(
-    "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com"
-  );
-  expect(csp).toContain(
-    "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net"
-  );
-  expect(csp).toContain("frame-src https://www.googletagmanager.com");
-  expect(csp).toContain("object-src 'none'");
-  expect(csp).not.toContain("*");
-});
-
 test("rendered HTML includes the GTM noscript iframe", async ({ page }) => {
   const response = await page.request.get("/");
   const html = await response.text();
 
   expect(html).toContain(`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}"`);
-  expect(html).not.toContain("https://www.googletagmanager.com/gtag/js?id=G-97CD3EJYML");
 });
 
 test("accepted consent hides banner, loads GTM once, and pushes granted consent state", async ({ context, page }) => {

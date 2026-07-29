@@ -196,18 +196,23 @@ brigadagalgos.cl/
 │   ├── check-text-quality.mjs
 │   ├── normalize-dog-images.mjs
 │   └── run-playwright-server.mjs
+├── capture/                     # On-demand visual-parity screenshots (npm run capture:*)
+│   └── capture.spec.ts
 ├── tests/                       # Playwright specs and Vitest tests
 │   ├── a11y.spec.ts
+│   ├── a11y-disabled-rules.json # Disabled axe/Lighthouse rules (shared with .lighthouserc.cjs)
 │   ├── analytics-consent.spec.ts
 │   ├── build-output.spec.ts
-│   ├── capture.spec.ts
 │   ├── dog-content.test.ts
 │   ├── dog-profile.spec.ts
 │   ├── filter-chips.spec.ts
+│   ├── helpers/
+│   │   └── shared-gallery.ts    # Shared gallery payload assertions
 │   ├── nav.spec.ts
-│   ├── smoke.spec.ts
 │   ├── source-hygiene.test.ts
-│   └── stories-section.spec.ts
+│   ├── stories-section.spec.ts
+│   └── stubs/
+│       └── astro-content.ts     # Vitest alias for astro:content
 └── docs/                        # Project documentation
     ├── site-brief.md
     ├── prd.md

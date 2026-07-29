@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["src/**/*", "src/pages/.well-known/**/*", "tests/**/*", "*.ts"],
+  "include": ["src/**/*", "src/pages/.well-known/**/*", "tests/**/*", "capture/**/*", "*.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

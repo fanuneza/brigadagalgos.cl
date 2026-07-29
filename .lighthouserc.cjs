@@ -1,3 +1,7 @@
+// Axe/Lighthouse rules disabled for pre-existing design/content issues.
+// Single-sourced with tests/a11y.spec.ts — edit the JSON file only.
+const a11yDisabledRules = require("./tests/a11y-disabled-rules.json");
+
 module.exports = {
   ci: {
     collect: {
@@ -21,9 +25,8 @@ module.exports = {
         // because Chrome evicts the page after too much buffered network data.
         "bf-cache": "off",
         // Existing issues should remain visible in reports, but not block CI.
-        "color-contrast": "off",
-        "label-content-name-mismatch": "off",
-        "heading-order": "off",
+        // Disabled axe rules are single-sourced in tests/a11y-disabled-rules.json.
+        ...Object.fromEntries(a11yDisabledRules.map((rule) => [rule, "off"])),
         "lcp-lazy-loaded": "off",
         "aria-hidden-focus": "off",
         "target-size": "off",

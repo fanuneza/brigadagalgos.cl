@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import DISABLED_RULES from "./a11y-disabled-rules.json" with { type: "json" };
 
 const pages = [
   { name: "home", path: "/" },
@@ -15,7 +16,7 @@ const pages = [
 
 // Rules disabled due to pre-existing design/content choices that would require
 // significant redesign to fix. We still run the scan and monitor for regressions.
-const DISABLED_RULES = ["color-contrast", "label-content-name-mismatch", "heading-order"];
+// Shared with .lighthouserc.cjs — edit tests/a11y-disabled-rules.json only.
 
 for (const pageInfo of pages) {
   test(`a11y ${pageInfo.name}`, async ({ page }) => {

@@ -59,6 +59,16 @@ npm run build
 npm test
 ```
 
+`npm test` corre primero las pruebas de Vitest (`tests/*.test.ts`) y luego las de Playwright (`tests/*.spec.ts`), que compilan el sitio y lo sirven localmente.
+
+Scripts de prueba disponibles:
+
+- `npm test`: suite completa (Vitest + Playwright).
+- `npm run test:source`: solo las reglas de higiene del repositorio (Vitest).
+- `npm run test:text`: revisión de calidad de textos (parte de `npm run lint`).
+- `npm run test:lighthouse`: presupuestos de rendimiento, accesibilidad y SEO sobre `dist/`.
+- `npm run capture:local`: capturas de pantalla de paridad visual en `.cache/parity/` (bajo demanda; no forman parte de `npm test`). También existen `capture:home`, `capture:adoptar` y `capture:donar` para acotar por página.
+
 Si el cambio afecta rendimiento, accesibilidad o estructura visual de páginas clave, también conviene correr:
 
 ```bash

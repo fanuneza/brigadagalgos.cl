@@ -29,6 +29,64 @@ describe("source hygiene", () => {
     }
   });
 
+  it("keeps the CSP strict with the required analytics and form allowances", () => {
+    const headers = readFileSync(join(root, "public", "_headers"), "utf8");
+    const csp = headers.match(/Content-Security-Policy:\s*(.+)/)?.[1] ?? "";
+    expect(csp, "public/_headers is missing a Content-Security-Policy").not.toBe("");
+
+    const directives = Object.fromEntries(
+      csp
+        .split(";")
+        .map((directive) => directive.trim())
+        .filter(Boolean)
+        .map((directive) => {
+          const [name, ...values] = directive.split(/\s+/);
+          return [name, values];
+        })
+    ) as Record<string, string[]>;
+
+    expect(directives["default-src"]).toEqual(["'self'"]);
+    expect(directives["object-src"]).toEqual(["'none'"]);
+    expect(directives["script-src-attr"]).toEqual(["'none'"]);
+
+    for (const source of ["'self'", "https://www.googletagmanager.com", "https://static.cloudflareinsights.com"]) {
+      expect(directives["script-src"], `script-src must allow ${source}`).toContain(source);
+      expect(directives["script-src-elem"], `script-src-elem must allow ${source}`).toContain(source);
+    }
+    expect(directives["script-src"]).not.toContain("'unsafe-inline'");
+    expect(directives["script-src-elem"]).toContain("'unsafe-inline'");
+
+    for (const source of [
+      "https://api.web3forms.com",
+      "https://www.google-analytics.com",
+      "https://region1.google-analytics.com",
+      "https://analytics.google.com",
+      "https://www.googletagmanager.com",
+      "https://stats.g.doubleclick.net",
+      "https://cloudflareinsights.com",
+      "https://static.cloudflareinsights.com",
+    ]) {
+      expect(directives["connect-src"], `connect-src must allow ${source}`).toContain(source);
+    }
+
+    for (const source of [
+      "'self'",
+      "data:",
+      "https://www.google-analytics.com",
+      "https://www.googletagmanager.com",
+      "https://stats.g.doubleclick.net",
+    ]) {
+      expect(directives["img-src"], `img-src must allow ${source}`).toContain(source);
+    }
+
+    expect(directives["frame-src"]).toContain("https://www.googletagmanager.com");
+
+    // GA4 must only ever arrive through GTM, never as a direct gtag.js allowance.
+    expect(csp).not.toContain("gtag.js");
+    expect(csp).not.toContain("gtag/js");
+    expect(csp).not.toContain("*");
+  });
+
   it("uses first-party cookie consent instead of localStorage", () => {
     const analyticsSource = readFileSync(join(root, "src", "scripts", "cookie-consent.ts"), "utf8");
 

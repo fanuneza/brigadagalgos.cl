@@ -8,7 +8,6 @@ const reuseExistingServer = process.env.PLAYWRIGHT_REUSE_EXISTING_SERVER === "tr
 export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.spec.ts",
-  testIgnore: process.env.CI ? ["**/capture.spec.ts"] : [],
   timeout: 60_000,
   expect: {
     timeout: 10_000,

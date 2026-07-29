@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { getSharedGalleryPayloads } from "./helpers/shared-gallery";
 
 test("filter chips show subset of adoption cards and update count", async ({ page }) => {
   await page.setViewportSize({ width: 1200, height: 900 });
@@ -85,18 +86,9 @@ test("filter chips handle empty results and restore on reset", async ({ page }) 
 test("adoption galleries expose up to three optimized photos", async ({ page }) => {
   await page.goto("/adoptar/", { waitUntil: "networkidle" });
 
-  const payloads = await page
-    .locator("[data-shared-gallery]")
-    .evaluateAll((galleries) =>
-      galleries.map((gallery) => JSON.parse(gallery.getAttribute("data-gallery-payload") ?? "{}"))
-    );
-
-  expect(payloads.length).toBeGreaterThan(0);
+  const payloads = await getSharedGalleryPayloads(page);
 
   for (const payload of payloads) {
-    expect(payload.photos.length).toBeGreaterThan(0);
-    expect(payload.photos.length).toBeLessThanOrEqual(3);
-
     for (const photo of payload.photos) {
       expect(photo.cardWebpSrcSet).toBeUndefined();
       expect(photo.cardAvifSrcSet.split(",")).toHaveLength(3);

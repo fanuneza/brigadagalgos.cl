@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
+import { getSharedGalleryPayloads } from "./helpers/shared-gallery";
 
 const successStoryCount = readdirSync(join(process.cwd(), "src", "content", "success-dogs")).filter((file) =>
   file.endsWith(".md")
@@ -56,15 +57,5 @@ test("success archive renders every story and returns visitors to active adoptio
 test("success-story galleries preserve responsive image output", async ({ page }) => {
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
-  const payloads = await page
-    .locator("[data-shared-gallery]")
-    .evaluateAll((galleries) =>
-      galleries.map((gallery) => JSON.parse(gallery.getAttribute("data-gallery-payload") ?? "{}"))
-    );
-
-  expect(payloads.length).toBeGreaterThan(0);
-  for (const payload of payloads) {
-    expect(payload.photos.length).toBeGreaterThan(0);
-    expect(payload.photos.length).toBeLessThanOrEqual(3);
-  }
+  await getSharedGalleryPayloads(page);
 });

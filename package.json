@@ -18,18 +18,13 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run && playwright test",
-    "test:a11y": "playwright test tests/a11y.spec.ts",
-    "test:build": "playwright test tests/build-output.spec.ts",
-    "test:consent": "playwright test tests/analytics-consent.spec.ts",
     "test:source": "vitest run tests/source-hygiene.test.ts",
     "test:text": "node scripts/check-text-quality.mjs",
     "test:lighthouse": "lhci autorun",
-    "test:e2e": "playwright test",
-    "test:smoke": "playwright test tests/smoke.spec.ts",
-    "capture:local": "playwright test --config playwright.config.ts",
-    "capture:home": "playwright test --config playwright.config.ts --grep @home",
-    "capture:adoptar": "playwright test --config playwright.config.ts --grep @adoptar",
-    "capture:donar": "playwright test --config playwright.config.ts --grep @donar"
+    "capture:local": "playwright test --config playwright.capture.config.ts",
+    "capture:home": "playwright test --config playwright.capture.config.ts --grep @home",
+    "capture:adoptar": "playwright test --config playwright.capture.config.ts --grep @adoptar",
+    "capture:donar": "playwright test --config playwright.capture.config.ts --grep @donar"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",

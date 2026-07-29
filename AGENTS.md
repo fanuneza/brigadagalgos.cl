@@ -182,7 +182,7 @@ Notes:
 - `npm run lint` includes ESLint, Stylelint, text-quality checks, and `dog-images:check`.
 - `npm test` runs Vitest and Playwright.
 - Playwright uses `scripts/run-playwright-server.mjs` to build and start `astro preview` on `127.0.0.1`.
-- In CI, `capture.spec.ts` is ignored by Playwright config.
+- Visual-parity screenshots live in `capture/` (outside `testDir`) and run only on demand via `npm run capture:*`; `npm test` never runs them, locally or in CI.
 - If a required check is skipped, state that explicitly and explain why.
 
 ## Key Files Worth Knowing
