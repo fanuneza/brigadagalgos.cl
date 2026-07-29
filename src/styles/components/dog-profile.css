@@ -21,7 +21,7 @@ section.dog-profile {
 
 .dog-profile__info {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   justify-items: start;
 }
 
@@ -32,6 +32,22 @@ section.dog-profile {
 .dog-profile__gallery {
   border-radius: var(--radius-md);
   overflow: clip;
+}
+
+.dog-profile__group {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.dog-profile__group-heading {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--color-text-muted);
+  margin: 0;
 }
 
 .dog-profile__chips {
@@ -45,6 +61,27 @@ section.dog-profile {
   font-size: var(--type-lead);
   line-height: var(--line-loose);
   color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* "Lo que necesita ahora" is the most decision-relevant fact on the page:
+   it gets card weight (DESIGN.md §6) instead of living as a fourth chip
+   among the physical attributes. */
+.dog-profile__group--need {
+  gap: var(--space-2);
+}
+
+.dog-profile__group--need .dog-profile__group-heading {
+  color: var(--color-primary-700);
+}
+
+.dog-profile__need-value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--type-ui-title);
+  font-weight: var(--weight-black);
+  text-transform: uppercase;
+  color: var(--color-text);
 }
 
 .dog-profile__ctas {
