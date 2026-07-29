@@ -1,12 +1,20 @@
-// Axe/Lighthouse rules disabled for pre-existing design/content issues.
-// Single-sourced with tests/a11y.spec.ts — edit the JSON file only.
-const a11yDisabledRules = require("./tests/a11y-disabled-rules.json");
-
 module.exports = {
   ci: {
     collect: {
       staticDistDir: "./dist",
-      url: ["/", "/adoptar/", "/contacto/", "/donar/", "/hogar-temporal/"],
+      url: [
+        "/",
+        "/adoptar/",
+        "/adoptar/blue/",
+        "/contacto/",
+        "/donar/",
+        "/hogar-temporal/",
+        "/preguntas-frecuentes/",
+        "/blog/",
+        "/blog/adoptar-un-galgo-por-primera-vez/",
+        "/politica-de-cookies/",
+        "/404.html",
+      ],
       numberOfRuns: 1,
     },
     assert: {
@@ -24,9 +32,6 @@ module.exports = {
         // Lighthouse reports the current home-page bfcache miss as "Not actionable"
         // because Chrome evicts the page after too much buffered network data.
         "bf-cache": "off",
-        // Existing issues should remain visible in reports, but not block CI.
-        // Disabled axe rules are single-sourced in tests/a11y-disabled-rules.json.
-        ...Object.fromEntries(a11yDisabledRules.map((rule) => [rule, "off"])),
         "lcp-lazy-loaded": "off",
         "aria-hidden-focus": "off",
         "target-size": "off",

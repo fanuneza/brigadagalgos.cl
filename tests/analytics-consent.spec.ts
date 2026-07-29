@@ -69,6 +69,38 @@ test("no consent shows banner and does not load GTM", async ({ page }) => {
   expect(trackingState).not.toContainEqual(expect.objectContaining({ event: "cta_click" }));
 });
 
+test("compact banner leaves core actions unobstructed at audited viewport widths", async ({ page }) => {
+  const auditedViewports = [320, 390, 768, 1024, 1440];
+
+  for (const width of auditedViewports) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const primaryActionLocator = page.locator('a[data-track-location="hero"][data-track-category="adoption"]');
+    await primaryActionLocator.scrollIntoViewIfNeeded();
+
+    const banner = await page.locator("#cookie-banner").boundingBox();
+    const primaryAction = await primaryActionLocator.boundingBox();
+
+    expect(banner, `banner should render at ${width}px`).not.toBeNull();
+    expect(primaryAction, `hero CTA should render at ${width}px`).not.toBeNull();
+    const overlaps =
+      banner!.x < primaryAction!.x + primaryAction!.width &&
+      banner!.x + banner!.width > primaryAction!.x &&
+      banner!.y < primaryAction!.y + primaryAction!.height &&
+      banner!.y + banner!.height > primaryAction!.y;
+    expect(overlaps, `banner should not cover the hero CTA at ${width}px`).toBe(false);
+  }
+});
+
+test("consent actions are consecutive keyboard targets", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await page.locator("#cookie-accept").focus();
+  await expect(page.locator("#cookie-accept")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#cookie-reject")).toBeFocused();
+});
+
 test("rendered HTML includes the GTM noscript iframe", async ({ page }) => {
   const response = await page.request.get("/");
   const html = await response.text();
