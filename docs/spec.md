@@ -365,7 +365,7 @@ Build output (static files)
 
 ## Adoption and success-story routes
 
-- The homepage renders up to three active entries from `adoption-dogs` immediately after the hero, ordered by `order` and then name.
+- The homepage renders up to three active entries from `adoption-dogs` immediately after the hero, chosen at random (shuffled per build); the optional `order` field is currently unused.
 - `/adoptar/` remains the full active listing with filters and conversion actions; `/adoptar/<slug>/` remains the active profile route.
 - The homepage renders a fixed three-story `success-dogs` preview. `/casos-de-exito/` statically renders the complete success-story collection using `StoryCard.astro` and shared galleries.
 - The old homepage JSON pagination endpoint and its client script are intentionally absent.

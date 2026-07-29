@@ -46,7 +46,7 @@ For the repo layout and full file tree, see `docs/spec.md`.
 
 ### Homepage and success stories
 
-- The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It selects active `adoption-dogs` deterministically by `order`, then name.
+- The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It picks three active `adoption-dogs` at random (shuffled per build); the optional `order` field in the schema is currently unused.
 - `/adoptar/` remains the complete active listing. Do not turn the homepage preview into the full catalogue.
 - `success-dogs` powers a three-story homepage preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
 - The archive is static and server-rendered. Do not restore homepage story pagination, `/casos/exito-home.json`, or `src/scripts/stories-section.ts` without a new product requirement.
