@@ -23,9 +23,6 @@ import {
 } from "../utils/dog-content";
 import { buildSrcSet } from "../utils/responsive-gallery-images";
 import { shuffle } from "../utils/shuffle";
-import { buildWebSiteStructuredData } from "../utils/structured-data";
-
-const webSiteSchema = buildWebSiteStructuredData();
 
 const PORTRAIT_WIDTHS = [360, 540, 720];
 const LANDSCAPE_WIDTHS = [640, 960, 1120];
@@ -99,7 +96,6 @@ const heroSources = await buildHeroImageSources(heroImage);
   description="Rescatamos, rehabilitamos y reubicamos galgos en Chile hasta encontrarles una familia segura."
 >
   <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
     <link
       rel="preload"
       as="image"
