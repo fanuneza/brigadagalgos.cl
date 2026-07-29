@@ -1,7 +1,7 @@
 # Simplification Plan
 
-Status: proposal, not yet implemented. Each stage is independently executable and
-independently committable. Do not start a stage without reading its context capsule.
+Status: implemented (all six stages landed on `main`). Each stage was independently
+executable and independently committable.
 
 ## Why
 
