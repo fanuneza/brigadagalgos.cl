@@ -1,0 +1,9 @@
+.why-galgos-section__faq {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.why-galgos-section__faq a {
+  color: var(--color-primary-700);
+}
