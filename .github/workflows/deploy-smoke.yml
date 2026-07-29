@@ -14,6 +14,10 @@ jobs:
       PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: tests/source-hygiene.test.ts derives retired dog
+          # profile slugs from git log to enforce _redirects coverage.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
