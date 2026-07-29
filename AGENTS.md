@@ -31,7 +31,9 @@ The repo mixes product code, structured content, image assets, SEO/analytics rul
 - Hosting: Cloudflare Pages.
 - Package manager: npm with committed `package-lock.json`.
 - Runtime: Node 22+ via `.nvmrc`.
-- Images: Astro assets with responsive AVIF/WebP generation.
+- Images: Astro assets with responsive AVIF/WebP generation; `image.responsiveStyles` is enabled and blog/editorial images use `layout="constrained"`.
+- Fonts: Astro Fonts API — `fonts` in `astro.config.mjs` plus `<Font>` components in `BaseLayout.astro`. No manual woff2 preloads or `@fontsource` file imports.
+- Environment: `PUBLIC_GTM_ID`, `PUBLIC_WEB3FORMS_KEY`, and `ENABLE_INDEXNOW` are typed via the `env.schema` in `astro.config.mjs` (`astro:env`); `.env.example` documents them.
 - Styling: site CSS remains the main styling layer. Tailwind has been removed from the project and should not be reintroduced casually.
 - Analytics: GTM-delivered GA4 only after consent, plus Cloudflare Web Analytics.
 - SEO: `@astrojs/sitemap` and `@jdevalk/astro-seo-graph`.
@@ -126,7 +128,9 @@ hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
 ## Images and Asset Handling
 
 - Prefer imported images inside `src/assets/` so Astro can optimize them.
+- UI icons live in `src/assets/icons/` and are imported as inline SVG components (svgo-optimized at build). Do not add icons back under `public/icons/` or render them as `<img>`.
 - Dog galleries are intentionally capped at 3 images in both schema and UI helpers.
+- `SharedPhotoGallery` renders native Astro markup (no `set:html`) and requires a unique `transitionName` prop, derived from the content slug, for ClientRouter image morphing.
 - When normalizing dog image filenames or extensions, use the provided scripts instead of ad hoc renames:
   - `npm run dog-images:check`
   - `npm run dog-images:write`
@@ -188,7 +192,7 @@ Notes:
 ## Key Files Worth Knowing
 
 - `astro.config.mjs` — static build config, sitemap and SEO graph integrations. `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`; `markdownAlternate` is intentionally disabled.
-- `src/layouts/BaseLayout.astro` — document shell, metadata, RSS link, cookie banner, and client bootstrap.
+- `src/layouts/BaseLayout.astro` — document shell, metadata, RSS link, cookie banner, `<Font>` preloads, and client bootstrap.
 - `src/layouts/PageLayout.astro` — shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
 - `src/components/TrackedLink.astro` — shared outbound-link primitive (optional analytics metadata).
 - `src/content.config.ts` — canonical content schemas.

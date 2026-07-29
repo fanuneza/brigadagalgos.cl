@@ -294,22 +294,22 @@ Key shared primitives:
 - `WhatsAppLink.astro` — WhatsApp CTA with phone and message.
 - `InstagramLink.astro` — Instagram link helper.
 - `SharedGalleryLightbox.astro` — image gallery lightbox (also attaches the gallery init script).
-- `SharedPhotoGallery.astro` — photo grid with responsive images.
+- `SharedPhotoGallery.astro` — shared photo gallery carousel; renders native Astro markup and requires a unique `transitionName` for ClientRouter image morphing.
 
 ## Utility modules
 
-| Module                                   | Responsibility                                                            |
-| ---------------------------------------- | ------------------------------------------------------------------------- |
-| `src/utils/dog-content.ts`               | Collection queries plus card/story shaping; 260-character excerpt default |
-| `src/utils/gallery.ts`                   | Shared gallery types and build-time gallery markup                        |
-| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                            |
-| `src/utils/reading-time.ts`              | Estimates blog post reading time                                          |
-| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data            |
-| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images                     |
-| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                        |
-| `src/utils/shuffle.ts`                   | Randomization helpers                                                     |
-| `src/utils/html-escape.ts`               | HTML escape utilities                                                     |
-| `src/utils/instagram.ts`                 | Instagram URL handling                                                    |
+| Module                                   | Responsibility                                                               |
+| ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `src/utils/dog-content.ts`               | Collection queries plus card/story shaping; 260-character excerpt default    |
+| `src/utils/gallery.ts`                   | Shared gallery types, alt/caption helpers, and the client payload serializer |
+| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                               |
+| `src/utils/reading-time.ts`              | Estimates blog post reading time                                             |
+| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data               |
+| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images                        |
+| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                           |
+| `src/utils/shuffle.ts`                   | Randomization helpers                                                        |
+| `src/utils/html-escape.ts`               | HTML escape utilities                                                        |
+| `src/utils/instagram.ts`                 | Instagram URL handling                                                       |
 
 ## Client scripts
 
@@ -395,6 +395,18 @@ Responsive variants generated per surface (verified against `src/utils/responsiv
 - The API generates metric-matched optimized fallbacks for both families automatically (`optimizedFallbacks` defaults to true), so the hand-written `"Barlow Fallback"` `@font-face` no longer exists. The declared `fallbacks` chains in the config preserve the previous system-font stacks.
 - Font files are self-hosted in the build output under `_astro/fonts/`; no external font requests are made.
 
+## Environment variables
+
+Typed via the `env.schema` in `astro.config.mjs` (`astro:env`) and documented in `.env.example`.
+
+| Variable               | Scope          | Purpose                                                                 |
+| ---------------------- | -------------- | ----------------------------------------------------------------------- |
+| `PUBLIC_GTM_ID`        | client, public | GTM container override; falls back to `SITE.gtmContainerId`             |
+| `PUBLIC_WEB3FORMS_KEY` | client, public | web3forms access key override; falls back to `SITE.web3forms.accessKey` |
+| `ENABLE_INDEXNOW`      | server, public | Gate for the IndexNow ping after build (default `false`)                |
+
+`astro:env` is not available inside `astro.config.mjs` itself, so the config file reads `process.env.ENABLE_INDEXNOW` directly; both paths stay in sync through the schema default.
+
 ## Analytics and consent flow
 
 ```
@@ -408,7 +420,7 @@ User accepts → GTM injected → dataLayer consent granted
 User rejects → known cookies cleared → dataLayer consent denied
 ```
 
-Analytics is delivered through a single GTM container (`GTM-M2RN5B38`, configured in `src/config/site.ts`) that loads GA4; there is no standalone `gtag.js`. Events are pushed to `dataLayer` from `data-track-*` attributes, tracked sections, and the custom `brigada:analytics` DOM event. No personal data (emails, names, phone numbers) is sent.
+Analytics is delivered through a single GTM container (`GTM-M2RN5B38`, default in `src/config/site.ts`, overridable via `PUBLIC_GTM_ID`) that loads GA4; there is no standalone `gtag.js`. Events are pushed to `dataLayer` from `data-track-*` attributes, tracked sections, and the custom `brigada:analytics` DOM event. No personal data (emails, names, phone numbers) is sent.
 
 ### Consent state machine
 
