@@ -96,6 +96,18 @@
   width: 100%;
 }
 
+/* Inverted secondary: adoption owns the homepage's primary action, so this exit
+   stays one weight below it while keeping AA contrast on the dark band. */
+.donation-banner__cta .btn--secondary {
+  background: transparent;
+  color: var(--color-text-on-dark);
+  border-color: rgba(255, 255, 255, 0.62);
+}
+.donation-banner__cta .btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-text-on-dark);
+}
+
 .donation-banner__transfer {
   font-size: var(--type-lead);
   font-weight: var(--weight-medium);

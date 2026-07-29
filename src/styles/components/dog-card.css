@@ -110,25 +110,6 @@
   border: 1px solid var(--color-border);
 }
 
-/* --need is no longer used inside DogCard (the need is an eyebrow there) but
-   the dog profile page still renders it as a chip. */
-.dog-chip--need {
-  background: var(--color-secondary);
-  color: var(--on-secondary);
-}
-
-:root[data-theme="dark"] .dog-chip--need {
-  background: var(--color-secondary-100);
-  color: var(--color-secondary-700);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .dog-chip--need {
-    background: var(--color-secondary-100);
-    color: var(--color-secondary-700);
-  }
-}
-
 .dog-card__sketch {
   margin: 0;
   color: var(--color-text-muted);
