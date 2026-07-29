@@ -6,10 +6,6 @@ export default defineConfig({
   output: "static",
   site: "https://brigadagalgos.cl",
   trailingSlash: "always",
-  prefetch: {
-    prefetchAll: false,
-    defaultStrategy: "hover",
-  },
   build: {
     inlineStylesheets: "auto",
   },

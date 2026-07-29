@@ -568,7 +568,6 @@ The editorial workflows for adding, hiding, and moving dogs (including the requi
 Carried over from the retired follow-up notes; none of these block shipping.
 
 - **Lighthouse local flakiness:** `.lighthouserc.cjs` runs with `numberOfRuns: 1` and a performance `minScore` of `0.99`. The page-hero LCP sits near a scoring-curve boundary, so a single local run can flake on one page. If exactly one page fails at the boundary, re-run once before treating it as a regression. Durable fixes, not yet applied: aggregate with `numberOfRuns: 3` (median), or relax only the performance category on documented borderline-LCP pages.
-- **Blog post semantic structure:** in `src/pages/blog/[id].astro`, the `<article>` wraps only the post header; the body (`<Content />`) renders in a sibling `<section>`. Semantically the article should wrap both. Fix when the first real blog post ships.
 - **`dog_share_click` timing:** the event fires when the share button is clicked, before the share completes (see `src/scripts/share-dog.ts`). This is an accepted trade-off — it measures intent, which is the useful funnel signal.
 
 ## Last updated

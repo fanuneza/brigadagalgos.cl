@@ -271,14 +271,3 @@ export function buildBlogPostingGraph(input: BlogPostingGraphInput): JsonLdGraph
 
   return { "@context": "https://schema.org", "@graph": [website, organization, webpage, blogPosting] };
 }
-
-export function buildWebSiteStructuredData(): JsonLdNode {
-  const { siteUrl, name, legalName } = SITE;
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name,
-    alternateName: legalName,
-    url: siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`,
-  };
-}
