@@ -1,7 +1,7 @@
 ---
 title: "Placeholder Post"
 pubDate: 2026-06-28
-author: "Admin"
+author: "Brigada Galgos"
 description: "This is a placeholder post to ensure content collection builds successfully."
 category: "General"
 draft: true
