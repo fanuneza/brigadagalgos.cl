@@ -6,10 +6,7 @@ sharp.cache(false);
 
 const repoRoot = process.cwd();
 const assetsRoot = path.join(repoRoot, "src", "assets", "casos");
-const contentRoots = {
-  adopcion: path.join(repoRoot, "src", "content", "adoption-dogs"),
-  exito: path.join(repoRoot, "src", "content", "success-dogs"),
-};
+const contentRoot = path.join(repoRoot, "src", "content", "dogs");
 const MAX_LONG_EDGE = 1600;
 const JPEG_QUALITY = 82;
 
@@ -119,12 +116,11 @@ function replaceGallery(frontmatter, galleryPaths) {
   return `${frontmatter.trimEnd()}\n${gallery}`;
 }
 
-async function readEntries(kind) {
-  const dir = contentRoots[kind];
-  const files = (await fs.readdir(dir)).filter((file) => file.endsWith(".md")).sort();
+async function readEntries() {
+  const files = (await fs.readdir(contentRoot)).filter((file) => file.endsWith(".md")).sort();
   return files.map((file) => {
-    const filePath = path.join(dir, file);
-    return { kind, file, filePath };
+    const filePath = path.join(contentRoot, file);
+    return { file, filePath };
   });
 }
 
@@ -133,7 +129,7 @@ async function loadEntry(entry) {
   const { frontmatter, body } = parseFrontmatter(entry.filePath, raw);
   const currentSlug = path.basename(entry.file, ".md");
   const name = readScalar(frontmatter, "name");
-  const canonicalSlug = entry.kind === "exito" ? slugify(name ?? currentSlug) : currentSlug;
+  const canonicalSlug = slugify(name ?? currentSlug);
   const gallery = readGallery(frontmatter);
 
   return {
@@ -143,13 +139,13 @@ async function loadEntry(entry) {
     body,
     currentSlug,
     canonicalSlug,
-    canonicalFilePath: path.join(contentRoots[entry.kind], `${canonicalSlug}.md`),
+    canonicalFilePath: path.join(contentRoot, `${canonicalSlug}.md`),
     gallery,
   };
 }
 
 function expectedGalleryPath(entry, index) {
-  return `../../assets/casos/${entry.kind}/${entry.canonicalSlug}/${entry.canonicalSlug}-${String(index + 1).padStart(2, "0")}.jpg`;
+  return `../../assets/casos/${entry.canonicalSlug}/${entry.canonicalSlug}-${String(index + 1).padStart(2, "0")}.jpg`;
 }
 
 function resolveGalleryPath(entry, galleryPath) {
@@ -191,7 +187,7 @@ async function processEntry(entry) {
   const nextFrontmatter = replaceGallery(entry.frontmatter, expectedPaths);
   const nextRaw = `---\n${nextFrontmatter.trimEnd()}\n---\n${entry.body}`;
 
-  if (entry.kind === "exito" && entry.filePath !== entry.canonicalFilePath) {
+  if (entry.filePath !== entry.canonicalFilePath) {
     if (shouldWrite) {
       await fs.writeFile(entry.canonicalFilePath, nextRaw);
       await fs.unlink(entry.filePath);
@@ -202,7 +198,7 @@ async function processEntry(entry) {
       );
     } else {
       problems.push(
-        `Success entry filename should be ${entry.canonicalSlug}.md: ${toPosix(path.relative(repoRoot, entry.filePath))}`
+        `Entry filename should be ${entry.canonicalSlug}.md: ${toPosix(path.relative(repoRoot, entry.filePath))}`
       );
     }
   } else if (entry.raw !== nextRaw) {
@@ -219,7 +215,6 @@ async function processEntry(entry) {
     const sourcePath = resolveGalleryPath(entry, entry.gallery[index]);
     const targetPath = path.join(
       assetsRoot,
-      entry.kind,
       entry.canonicalSlug,
       `${entry.canonicalSlug}-${String(index + 1).padStart(2, "0")}.jpg`
     );
@@ -251,10 +246,7 @@ async function processEntry(entry) {
 }
 
 async function main() {
-  const entries = [
-    ...(await Promise.all((await readEntries("adopcion")).map(loadEntry))),
-    ...(await Promise.all((await readEntries("exito")).map(loadEntry))),
-  ];
+  const entries = await Promise.all((await readEntries()).map(loadEntry));
   const keepFiles = new Set();
 
   for (const entry of entries) {

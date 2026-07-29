@@ -136,15 +136,17 @@ describe("source hygiene", () => {
   });
 
   it("verifies temporarily hidden dogs have required tracking metadata and haven't expired", () => {
-    const adoptionDogsDir = join(root, "src", "content", "adoption-dogs");
-    const files = readdirSync(adoptionDogsDir).filter((file) => file.endsWith(".md"));
+    const dogsDir = join(root, "src", "content", "dogs");
+    const files = readdirSync(dogsDir).filter((file) => file.endsWith(".md"));
 
     const MAX_HIDDEN_DAYS = 90;
     const now = new Date();
 
     for (const file of files) {
-      const filePath = join(adoptionDogsDir, file);
+      const filePath = join(dogsDir, file);
       const content = readFileSync(filePath, "utf8");
+
+      if (!/^status:\s*"adopcion"/m.test(content)) continue;
 
       const activeMatch = content.match(/^active:\s*(true|false)/m);
       const active = activeMatch ? activeMatch[1] === "true" : true;
@@ -174,12 +176,15 @@ describe("source hygiene", () => {
   });
 
   it("keeps every success dog story at 260 characters or less and explicitly adopted", () => {
-    const successDogsDir = join(root, "src", "content", "success-dogs");
-    const files = readdirSync(successDogsDir).filter((file) => file.endsWith(".md"));
+    const dogsDir = join(root, "src", "content", "dogs");
+    const files = readdirSync(dogsDir).filter((file) => file.endsWith(".md"));
 
     for (const file of files) {
-      const filePath = join(successDogsDir, file);
+      const filePath = join(dogsDir, file);
       const content = readFileSync(filePath, "utf8");
+
+      if (!/^status:\s*"exito"/m.test(content)) continue;
+
       const storyMatch = content.match(/^story:\s*"([^"]*)"/m);
 
       expect(storyMatch, `${file} has no story field`).not.toBeNull();
@@ -193,15 +198,17 @@ describe("source hygiene", () => {
 
   it("redirects every retired or hidden adoption profile to the success archive", () => {
     const redirects = readFileSync(join(root, "public", "_redirects"), "utf8");
-    const adoptionDogsDir = join(root, "src", "content", "adoption-dogs");
-    const files = readdirSync(adoptionDogsDir).filter((file) => file.endsWith(".md"));
+    const dogsDir = join(root, "src", "content", "dogs");
+    const files = readdirSync(dogsDir).filter((file) => file.endsWith(".md"));
 
     const activeSlugs: string[] = [];
     const hiddenSlugs: string[] = [];
 
     for (const file of files) {
-      const content = readFileSync(join(adoptionDogsDir, file), "utf8");
+      const content = readFileSync(join(dogsDir, file), "utf8");
       const slug = basename(file, ".md");
+
+      if (!/^status:\s*"adopcion"/m.test(content)) continue;
 
       if (/^active:\s*false/m.test(content)) {
         hiddenSlugs.push(slug);
@@ -226,7 +233,15 @@ describe("source hygiene", () => {
       retiredSlugs = [];
     }
 
-    for (const slug of new Set([...retiredSlugs, ...hiddenSlugs])) {
+    // The unified-collection migration renamed every file out of the old
+    // adoption directory, so the path-limited history above also lists dogs
+    // whose profiles are still live. Currently active dogs need no redirect.
+    const retiredOrHiddenSlugs = new Set([
+      ...retiredSlugs.filter((slug) => !activeSlugs.includes(slug)),
+      ...hiddenSlugs,
+    ]);
+
+    for (const slug of retiredOrHiddenSlugs) {
       expect(redirects, `missing redirect for retired profile /adoptar/${slug}/`).toContain(
         `/adoptar/${slug}/ /casos-de-exito/ 301`
       );

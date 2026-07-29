@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { readdirSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { getSharedGalleryPayloads } from "./helpers/shared-gallery";
 
-const successStoryCount = readdirSync(join(process.cwd(), "src", "content", "success-dogs")).filter((file) =>
-  file.endsWith(".md")
-).length;
+const dogsDir = join(process.cwd(), "src", "content", "dogs");
+const successStoryCount = readdirSync(dogsDir)
+  .filter((file) => file.endsWith(".md"))
+  .filter((file) => /^status:\s*"exito"/m.test(readFileSync(join(dogsDir, file), "utf8"))).length;
 
 test("home prioritizes active dogs and links the stories preview to the archive", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
