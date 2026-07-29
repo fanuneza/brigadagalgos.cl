@@ -32,13 +32,30 @@
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
   box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
 
 .featured-adoption__card .story-card__slide {
   cursor: zoom-in;
+}
+
+/* Keyboard affordance mirrors the pointer lift so the card reads clickable
+   from the name link or the ghost CTA. */
+.featured-adoption__card:focus-within {
+  border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Photo treatment: gentle zoom on hover/focus, gated for motion and pointer. */
+.featured-adoption__card .story-card__img {
+  transition: transform var(--duration-slow) var(--ease-out);
 }
 
 .featured-adoption__body {
@@ -47,7 +64,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-5) var(--space-6);
+  padding: var(--space-5);
 }
 
 .featured-adoption__need {
@@ -55,7 +72,7 @@
   color: var(--color-primary-700);
   font-size: var(--font-size-xs);
   font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-wide);
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -67,15 +84,9 @@
   color: inherit;
 }
 
-.featured-adoption__details,
+.featured-adoption__chips,
 .featured-adoption__sketch {
   margin: var(--space-2) 0 0;
-}
-
-.featured-adoption__details {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  font-weight: var(--weight-medium);
 }
 
 .featured-adoption__sketch {
@@ -110,17 +121,21 @@
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .featured-adoption__card {
-    transition:
-      border-color var(--duration-base) var(--ease-out),
-      box-shadow var(--duration-base) var(--ease-out),
-      transform var(--duration-base) var(--ease-out);
-  }
-
   .featured-adoption__card:hover {
     border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .featured-adoption__card:hover .story-card__img,
+  .featured-adoption__card:focus-within .story-card__img {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 767px) {
+  .featured-adoption__body {
+    padding: var(--space-4);
   }
 }
 

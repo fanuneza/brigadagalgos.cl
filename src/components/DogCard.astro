@@ -1,4 +1,5 @@
 ---
+import "../styles/components/dog-card.css";
 import type { AdoptionDogCard } from "../utils/dog-content";
 import SharedPhotoGallery from "./SharedPhotoGallery.astro";
 import TrackedLink from "./TrackedLink.astro";
@@ -42,9 +43,11 @@ const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "
               {dog.name}
             </TrackedLink>
           </h3>
-          <p class="featured-adoption__details">
-            {dog.age} · {dog.weight}
-          </p>
+          <div class="dog-card__chips featured-adoption__chips">
+            <span class="dog-chip dog-chip--sex">{dog.sex}</span>
+            <span class="dog-chip dog-chip--age">{dog.age}</span>
+            <span class="dog-chip dog-chip--weight">{dog.weight}</span>
+          </div>
           <p class="featured-adoption__sketch">{dog.characterSketch}</p>
         </div>
         <TrackedLink
@@ -69,10 +72,11 @@ const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "
         context="adopcion"
         transitionName={`dog-photo-${dog.id}`}
       />
-      <div class="story-card__body dog-card__body">
+      <div class="dog-card__body">
         <div class="dog-card__content">
           <div class="dog-card__header">
-            <h3 class="story-card__name dog-card__name t-card-title">
+            <p class="dog-card__need">{dog.currentNeed}</p>
+            <h3 class="dog-card__name t-card-title">
               <TrackedLink
                 href={profileHref}
                 class="dog-card__name-link"
@@ -88,7 +92,6 @@ const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "
               <span class="dog-chip dog-chip--sex">{dog.sex}</span>
               <span class="dog-chip dog-chip--age">{dog.age}</span>
               <span class="dog-chip dog-chip--weight">{dog.weight}</span>
-              <span class="dog-chip dog-chip--need">{dog.currentNeed}</span>
             </div>
           </div>
           <p class="dog-card__details t-small-muted">{dog.details}</p>

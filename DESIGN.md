@@ -185,11 +185,13 @@ Los filtros y datos breves usan cápsulas compactas para permitir exploración s
 
 Las tarjetas son contenedores para un caso real, no decoración repetida.
 
-- **Corner Style:** curva generosa (20px) y borde de 1px.
+- **Corner Style:** curva generosa (20px) y borde de 1px, igual en tarjetas de adopción, destacadas y casos de éxito.
 - **Background:** fondo blanco sobre superficies ligeramente frías.
-- **Shadow Strategy:** elevación discreta al reposo y un levantamiento de 2px al pasar el cursor.
-- **Internal Padding:** 24px para el contenido textual.
-- **Image Behavior:** la foto ocupa una región clara y recortada con `object-fit: cover`; los controles de galería se superponen con contraste alto.
+- **Shadow Strategy:** elevación discreta al reposo (`--shadow-sm`) y un levantamiento suave al pasar el cursor.
+- **Internal Padding:** 24px para el contenido textual (16px en móvil).
+- **Image Behavior:** la foto ocupa una región clara y recortada con `object-fit: cover`; los controles de galería se superponen con contraste alto. Al pasar el cursor (o enfocar con teclado) la foto hace un zoom sutil, siempre condicionado a `prefers-reduced-motion: no-preference` y puntero con hover real.
+- **Hierarchy:** la necesidad actual del galgo se lee como ceja en mayúsculas sobre el nombre; los chips de sexo, edad y peso son metadatos y no se mezclan con esa ceja. La ficha se abre desde el nombre y desde la CTA fantasma.
+- **Class Systems:** `DogCard` usa solo clases `dog-card__*` y `StoryCard` solo `story-card__*`; cada familia de tarjetas se estila de forma independiente aunque compartan tokens.
 
 ### Inputs / Fields
 

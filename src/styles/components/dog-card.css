@@ -1,3 +1,7 @@
+/* DogCard owns its card styling end to end: no story-card rules are required
+   to render the adoption grid. The `.story-card__*` selectors below hook into
+   SharedPhotoGallery's own classes (shared-gallery.css), not the story card. */
+
 .dog-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -13,10 +17,29 @@
     border-color var(--duration-fast) var(--ease-out);
 }
 
+/* Hover lift comes from the shared card elevation block in global.css. */
 .dog-card:hover {
-  transform: translateY(-2px);
+  border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
+}
+
+/* Keyboard affordance mirrors the pointer lift so the card reads clickable
+   from the name link or the CTA. */
+.dog-card:focus-within {
+  border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
   box-shadow: var(--shadow-md);
-  border-color: var(--color-border);
+  transform: translateY(-2px);
+}
+
+/* Photo treatment: gentle zoom on hover/focus, gated for motion and pointer. */
+.dog-card .story-card__img {
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .dog-card:hover .story-card__img,
+  .dog-card:focus-within .story-card__img {
+    transform: scale(1.04);
+  }
 }
 
 .dog-card__body {
@@ -37,14 +60,25 @@
 .dog-card__header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
+}
+
+/* Eyebrow: the dog's current need, visually distinct from the meta chips. */
+.dog-card__need {
+  margin: 0;
+  color: var(--color-primary-700);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
 }
 
 .dog-card__name {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-weight: var(--weight-bold);
   margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  text-transform: uppercase;
 }
 
 .dog-card__chips {
@@ -57,22 +91,22 @@
   display: inline-block;
   font-size: var(--font-size-xs);
   font-weight: var(--weight-semi);
-  padding: 0.3rem 0.55rem;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-full);
 }
 
-.dog-chip--sex {
-  background: var(--color-primary);
-  color: var(--on-primary);
-}
-.dog-chip--age {
-  background: var(--color-secondary-100);
-  color: var(--color-text);
-}
+/* Meta chips (sex, age, weight) stay quiet surface pills: saturated color is
+   reserved for the need eyebrow, the CTAs, and the --need chip below. */
+.dog-chip--sex,
+.dog-chip--age,
 .dog-chip--weight {
-  background: var(--color-accent-warm);
-  color: var(--on-accent-warm);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
 }
+
+/* --need is no longer used inside DogCard (the need is an eyebrow there) but
+   the dog profile page still renders it as a chip. */
 .dog-chip--need {
   background: var(--color-secondary);
   color: var(--on-secondary);
@@ -136,4 +170,10 @@
 
 .dog-card__profile-link {
   align-self: start;
+}
+
+@media (max-width: 767px) {
+  .dog-card__body {
+    padding: var(--space-4);
+  }
 }

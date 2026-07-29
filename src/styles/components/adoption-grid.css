@@ -43,10 +43,6 @@
   cursor: zoom-in;
 }
 
-.adoption-card .story-card__body {
-  gap: var(--space-3);
-}
-
 .dog-grid__support-note {
   margin-top: var(--space-6);
   color: var(--color-text-muted);

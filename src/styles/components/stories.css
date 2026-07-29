@@ -55,7 +55,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-bg);
-  box-shadow: 0 18px 38px rgba(31, 35, 40, 0.08);
+  box-shadow: var(--shadow-sm);
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
   transition:
@@ -64,10 +64,29 @@
     border-color var(--duration-fast) var(--ease-out);
 }
 
+/* Hover lift comes from the shared card elevation block in global.css. */
 .story-card:hover {
-  transform: translateY(-2px);
+  border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
+}
+
+/* Keyboard affordance mirrors the pointer lift (global.css shared elevation)
+   so the card reads interactive from the gallery or the Instagram link. */
+.story-card:focus-within {
+  border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
   box-shadow: var(--shadow-md);
-  border-color: color-mix(in sRGB, var(--color-primary) 18%, var(--color-border));
+  transform: translateY(-2px);
+}
+
+/* Photo treatment: gentle zoom on hover/focus, gated for motion and pointer. */
+.story-card .story-card__img {
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .story-card:hover .story-card__img,
+  .story-card:focus-within .story-card__img {
+    transform: scale(1.04);
+  }
 }
 
 .story-card__body {

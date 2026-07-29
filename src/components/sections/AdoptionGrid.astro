@@ -32,12 +32,7 @@ const { dogs } = Astro.props;
 <div class="dog-grid" data-dog-grid>
   {
     dogs.map((dog, dogIndex) => (
-      <article
-        class="story-card dog-card adoption-card"
-        data-adoption-card
-        data-sex={dog.sex}
-        data-age-type={dog.ageType}
-      >
+      <article class="dog-card adoption-card" data-adoption-card data-sex={dog.sex} data-age-type={dog.ageType}>
         <DogCard dog={dog} variant="grid" loadingPriority={dogIndex < 2 ? "eager" : "lazy"}>
           {dog.instagramUrl && (
             <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link" />
