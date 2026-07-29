@@ -43,20 +43,33 @@
   }
 }
 
-.impact-section__negative {
-  margin-top: var(--space-9);
+/* Exclusions: same claims as before, rendered as a quiet list instead of a
+   second bank of cards so they read as a footnote to the impact evidence. */
+.impact-exclusions {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.impact-section__negative .impact-card {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in sRGB, var(--color-secondary-100) 10%, var(--color-bg)),
-      color-mix(in sRGB, var(--color-surface) 92%, var(--color-bg))
-    ),
-    var(--color-surface);
+@media (min-width: 640px) {
+  .impact-exclusions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.impact-card--negative .impact-card__title {
-  color: var(--color-secondary-700);
+.impact-exclusion {
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--space-4);
+}
+
+.impact-exclusion__title {
+  color: var(--color-text);
+  margin: 0 0 var(--space-1);
+  text-transform: none;
+}
+
+.impact-exclusion__desc {
+  margin: 0;
 }

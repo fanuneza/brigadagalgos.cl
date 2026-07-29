@@ -4,7 +4,6 @@ import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import DonationCards from "../components/sections/DonationCards.astro";
 import ImpactSection from "../components/sections/ImpactSection.astro";
-import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
 import CtaCard from "../components/sections/CtaCard.astro";
 import WhatsAppLink from "../components/WhatsAppLink.astro";
 
@@ -46,8 +45,7 @@ const otherWaysToHelp = [
 
   <DonationCards />
   <ImpactSection />
-  <TrustStatsSection />
-  <CtaCard tail eyebrow="OTRAS FORMAS DE AYUDAR" heading="También nos puedes apoyar así">
+  <CtaCard tail weight="quiet" eyebrow="OTRAS FORMAS DE AYUDAR" heading="También nos puedes apoyar así">
     <ul class="tail-cta__list" role="list">
       {
         otherWaysToHelp.map((way) => (
@@ -66,7 +64,7 @@ const otherWaysToHelp = [
         text="Hola, quiero ayudar de otra forma"
         location="help_tail_cta"
         label="Coordina por WhatsApp - Help Tail CTA"
-        class="btn btn--primary"
+        class="btn btn--secondary"
       >
         Coordina por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
       </WhatsAppLink>
