@@ -33,7 +33,13 @@ const latestPost = posts[0];
       {
         latestPost && (
           <div class="blog-listing__intro">
-            <p class="blog-listing__label">Publicaciones recientes</p>
+            <div>
+              <p class="blog-listing__label">Publicaciones recientes</p>
+              <p class="blog-listing__context">
+                Si estás pensando en adoptar, empieza por las <a href="/preguntas-frecuentes/">dudas frecuentes</a> o
+                conoce a los <a href="/adoptar/">galgos disponibles</a>.
+              </p>
+            </div>
             <div class="blog-summary" aria-label="Resumen del blog">
               <span>{posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}</span>
               <span aria-hidden="true">·</span>

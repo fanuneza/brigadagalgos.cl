@@ -8,9 +8,11 @@ interface Props {
   location: string;
   summary?: boolean;
   loadingPriority?: "eager" | "lazy";
+  gallery?: "full" | "single";
 }
 
-const { story, location, summary = false, loadingPriority = "lazy" } = Astro.props;
+const { story, location, loadingPriority = "lazy", gallery = "full" } = Astro.props;
+const featuredPhoto = story.photos[0];
 ---
 
 <article
@@ -21,7 +23,7 @@ const { story, location, summary = false, loadingPriority = "lazy" } = Astro.pro
   data-story-location={location}
 >
   {
-    story.photos.length > 0 && (
+    gallery === "full" && story.photos.length > 0 ? (
       <SharedPhotoGallery
         name={story.name}
         photos={story.photos}
@@ -30,6 +32,26 @@ const { story, location, summary = false, loadingPriority = "lazy" } = Astro.pro
         context="exito"
         transitionName={`story-photo-${story.id}`}
       />
+    ) : (
+      featuredPhoto && (
+        <div class="story-card__photo story-card__photo--single">
+          <picture>
+            {featuredPhoto.cardAvifSrcSet && (
+              <source srcset={featuredPhoto.cardAvifSrcSet} sizes={featuredPhoto.cardSizes} type="image/avif" />
+            )}
+            <img
+              src={featuredPhoto.cardFallbackSrc}
+              alt={featuredPhoto.alt ?? `${story.name}, historia de adopción`}
+              class="story-card__img"
+              loading={loadingPriority}
+              decoding="async"
+              fetchpriority={loadingPriority === "eager" ? "high" : undefined}
+              width="350"
+              height="350"
+            />
+          </picture>
+        </div>
+      )
     )
   }
   <div
@@ -42,7 +64,7 @@ const { story, location, summary = false, loadingPriority = "lazy" } = Astro.pro
     data-story-name={story.name}
   >
     <h3 class="story-card__name t-card-title" id={story.id}>{story.name}</h3>
-    <p class="story-card__quote t-small-muted">{summary ? story.cardStory : story.story}</p>
+    <p class="story-card__quote t-small-muted">{story.cardStory}</p>
     {
       story.instagramUrl && (
         <InstagramLink

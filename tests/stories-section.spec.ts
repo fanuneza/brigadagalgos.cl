@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { assertSharedGallerySlides } from "./helpers/shared-gallery";
 
 const dogsDir = join(process.cwd(), "src", "content", "dogs");
 const successStoryCount = readdirSync(dogsDir)
@@ -76,8 +75,12 @@ test("success archive renders every story and returns visitors to active adoptio
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /galgos que fueron adoptados/);
 });
 
-test("success-story galleries preserve responsive image output", async ({ page }) => {
+test("success archive uses one decisive image per story and keeps the proof path to adoption", async ({ page }) => {
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
-  await assertSharedGallerySlides(page);
+  const cards = page.locator("[data-story-card]");
+  await expect(cards.locator(".story-card__photo--single")).toHaveCount(successStoryCount);
+  await expect(cards.locator("[data-shared-gallery]")).toHaveCount(0);
+  await expect(cards.locator(".story-card__quote")).toHaveCount(successStoryCount);
+  await expect(page.locator(".stories-archive-cta .btn--primary")).toHaveCount(0);
 });
