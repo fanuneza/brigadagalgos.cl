@@ -13,7 +13,7 @@ module.exports = {
         "/blog/",
         "/blog/adoptar-un-galgo-por-primera-vez/",
         "/politica-de-cookies/",
-        "/404",
+        "/404.html",
       ],
       numberOfRuns: 1,
     },

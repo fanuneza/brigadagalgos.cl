@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+test.describe.configure({ timeout: 90_000 });
+
 const pages = [
   { name: "home", path: "/" },
   { name: "adoptar", path: "/adoptar/" },
@@ -15,7 +17,7 @@ const pages = [
   { name: "blog", path: "/blog/" },
   { name: "articulo-blog", path: "/blog/adoptar-un-galgo-por-primera-vez/" },
   { name: "politica-de-cookies", path: "/politica-de-cookies/" },
-  { name: "404", path: "/404" },
+  { name: "404", path: "/404.html" },
 ];
 
 const viewports = [

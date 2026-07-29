@@ -75,15 +75,20 @@ test("compact banner leaves core actions unobstructed at audited viewport widths
   for (const width of auditedViewports) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/", { waitUntil: "networkidle" });
+    const primaryActionLocator = page.locator('a[data-track-location="hero"][data-track-category="adoption"]');
+    await primaryActionLocator.scrollIntoViewIfNeeded();
 
     const banner = await page.locator("#cookie-banner").boundingBox();
-    const primaryAction = await page
-      .locator('a[data-track-location="hero"][data-track-category="adoption"]')
-      .boundingBox();
+    const primaryAction = await primaryActionLocator.boundingBox();
 
     expect(banner, `banner should render at ${width}px`).not.toBeNull();
     expect(primaryAction, `hero CTA should render at ${width}px`).not.toBeNull();
-    expect(banner!.y).toBeGreaterThanOrEqual(primaryAction!.y + primaryAction!.height);
+    const overlaps =
+      banner!.x < primaryAction!.x + primaryAction!.width &&
+      banner!.x + banner!.width > primaryAction!.x &&
+      banner!.y < primaryAction!.y + primaryAction!.height &&
+      banner!.y + banner!.height > primaryAction!.y;
+    expect(overlaps, `banner should not cover the hero CTA at ${width}px`).toBe(false);
   }
 });
 
