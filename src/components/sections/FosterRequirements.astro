@@ -1,80 +1,94 @@
 ---
+import { Picture } from "astro:assets";
 import "../../styles/components/hogar-temporal.css";
 import "../../styles/components/requirement-card.css";
-import RequirementCard from "../RequirementCard.astro";
-import SeguridadIcon from "../../assets/icons/seguridad.svg";
-import TiempoIcon from "../../assets/icons/tiempo.svg";
-import ConvivenciaIcon from "../../assets/icons/convivencia.svg";
+import sofiaCanelaImage from "../../assets/casos/sofia-canela/sofia-canela-03.jpg";
 ---
 
-<section class="section-padding">
+<section class="section-padding section--support">
+  <div class="container foster-intro">
+    <div class="foster-intro__copy">
+      <p class="eyebrow eyebrow--support">UN PUENTE HACIA SU FAMILIA</p>
+      <h2 class="section-heading section-heading--support">Un tiempo acotado, con apoyo de Brigada</h2>
+      <p class="foster-intro__lead t-lead">
+        El hogar temporal es para personas que pueden ofrecer un espacio seguro, una rutina amable y paciencia mientras
+        un galgo se recupera o espera a su familia. Puede durar desde unas semanas hasta unos pocos meses, según cada
+        galgo y tu disponibilidad.
+      </p>
+      <p class="foster-intro__detail">
+        No necesitas una casa grande ni saberlo todo antes de empezar. Conversamos contigo sobre tu casa, tu rutina y
+        los animales que viven contigo para encontrar un caso que pueda estar bien en ese entorno.
+      </p>
+    </div>
+
+    <figure class="foster-proof">
+      <Picture
+        src={sofiaCanelaImage}
+        alt="Sofía Canela descansando en el sillón de su hogar"
+        class="foster-proof__image"
+        layout="constrained"
+        widths={[400, 600, 728]}
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        sizes="(min-width: 1024px) 480px, calc(100vw - 3rem)"
+        loading="eager"
+      />
+      <figcaption class="foster-proof__caption">
+        Sofía Canela pasó por hogar temporal y esa misma familia terminó adoptándola. Una casa que fue refugio también
+        puede convertirse en hogar.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section-padding section--support foster-responsibilities">
   <div class="container">
-    <p class="eyebrow">QUÉ SE EVALÚA</p>
-    <h2>Quién puede ser hogar temporal</h2>
-    <p class="section-body t-lead">
-      Buscamos personas con un espacio seguro, paciencia, rutina diaria y disposición para coordinar con Brigada. Puede
-      ser casa o departamento si las condiciones son adecuadas para el galgo.
-    </p>
-    <div class="req-cards">
-      <RequirementCard
-        icon={SeguridadIcon}
-        title="SEGURIDAD"
-        tone="primary"
-        body="En departamentos debe haber malla en balcones y ventanas. También revisamos cómo será cada salida y cada espacio de descanso."
-      />
-      <RequirementCard
-        icon={TiempoIcon}
-        title="TIEMPO"
-        tone="secondary"
-        body="Tu disponibilidad puede ser desde un día hasta semanas o meses. Lo importante es saber con qué tiempo real cuentas para acompañarlo."
-      />
-      <RequirementCard
-        icon={ConvivenciaIcon}
-        title="CONVIVENCIA E IMPLEMENTOS"
-        tone="warm"
-        body="Vemos si tienes correa, arnés, camas o mantas, y cómo conviven perros o gatos en casa. Si falta algo, podemos proveer implementos."
-      />
-    </div>
-
-    <div class="foster-requirements__notes">
-      <p class="foster-requirements__note">
-        Si ya viven otros animales contigo, revisamos vacunas al día, esterilización o castración, edades, carácter y
-        convivencia con machos o hembras.
-      </p>
-      <p class="foster-requirements__note">
-        Si hay gatos, necesitamos que tengan un espacio seguro en altura y saber cómo conviven con perros.
-      </p>
-      <p class="foster-requirements__note">
-        <strong>Nunca se debe soltar al galgo.</strong> Los paseos siempre deben ser con arnés, correa y chapita con número
-        de teléfono, porque pueden asustarse fácilmente y correr muy rápido.
+    <div class="foster-responsibilities__heading">
+      <p class="eyebrow eyebrow--support">EN EL DÍA A DÍA</p>
+      <h2 class="section-heading section-heading--support">Cada parte aporta algo claro</h2>
+      <p class="section-body t-lead">
+        Tú cuidas la rutina de casa. Nosotras sostenemos el acompañamiento y coordinamos lo que el galgo necesita.
       </p>
     </div>
 
-    <p class="foster-support__intro t-lead">
-      Ser hogar temporal cambia por completo la espera de un galgo: mientras está contigo, conocemos su rutina, lo
-      cuidamos mejor y preparamos una adopción responsable. Así se reparte lo que aporta cada parte.
-    </p>
     <div class="foster-support">
-      <div class="foster-support__box">
-        <h3>Lo que aporta Brigada</h3>
-        <ul class="foster-support__list">
-          <li>Atención veterinaria, vacunas y antiparasitarios.</li>
-          <li>Alimento e implementos cuando el hogar temporal los necesita.</li>
-          <li>Acompañamiento durante la adaptación y coordinación de la adopción.</li>
-          <li>
-            Coordinación por WhatsApp durante la acogida, con novedades cuando hay avances relevantes, sin prometer una
-            frecuencia fija.
-          </li>
+      <article class="foster-support__box card--plain">
+        <h3>Brigada se encarga de</h3>
+        <ul class="foster-support__list" role="list">
+          <li>Atención veterinaria, vacunas, antiparasitarios y alimentación.</li>
+          <li>Acompañar la adaptación y coordinar la búsqueda de familia.</li>
+          <li>Conversar por WhatsApp durante la acogida y mantenerte al tanto cuando haya avances relevantes.</li>
+          <li>Coordinar el siguiente paso cuando aparezca la familia adecuada.</li>
         </ul>
-      </div>
-      <div class="foster-support__box">
-        <h3>Lo que aportas tú</h3>
-        <ul class="foster-support__list">
-          <li>Un lugar seguro para descansar y una rutina estable.</li>
-          <li>Paseos con arnés, correa y cuidado en cada salida.</li>
-          <li>Paciencia para observar, avisar cambios y acompañar su transición.</li>
+      </article>
+      <article class="foster-support__box card--plain">
+        <h3>Tú aportas</h3>
+        <ul class="foster-support__list" role="list">
+          <li>Un espacio seguro para descansar y una rutina estable.</li>
+          <li>Paseos diarios con arnés, correa y cuidado en cada salida.</li>
+          <li>Paciencia para observar cómo se adapta y avisarnos si algo cambia.</li>
+          <li>Información sobre las personas y otros animales con quienes convivirá.</li>
         </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding section--quiet">
+  <div class="container container--narrow">
+    <div class="foster-checklist">
+      <div>
+        <p class="eyebrow eyebrow--quiet">PARA PARTIR TRANQUILOS</p>
+        <h2 class="section-heading section-heading--quiet">Las preguntas importantes se conversan antes</h2>
       </div>
+      <ul class="foster-checklist__items" role="list">
+        <li>Si hay perros, gatos o niños en casa, revisamos la convivencia caso a caso.</li>
+        <li>Si aparece una necesidad veterinaria o algo cambia durante la acogida, nos avisas para coordinarlo.</li>
+        <li>
+          <strong>Nunca se debe soltar al galgo.</strong> Cada paseo es con arnés, correa y chapita con número de teléfono,
+          porque pueden asustarse y correr muy rápido.
+        </li>
+      </ul>
     </div>
   </div>
 </section>

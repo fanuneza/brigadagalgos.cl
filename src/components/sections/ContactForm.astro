@@ -6,10 +6,10 @@ import { SITE } from "../../config/site.ts";
 const web3formsAccessKey = PUBLIC_WEB3FORMS_KEY ?? SITE.web3forms.accessKey;
 ---
 
-<section id="mensaje" class="section-padding">
+<section id="formulario" class="section-padding" aria-labelledby="contact-form-title">
   <div class="container container--narrow">
     <p class="eyebrow">ESCRÍBENOS</p>
-    <h2>O envíanos un mensaje</h2>
+    <h2 id="contact-form-title">Déjanos tu mensaje</h2>
     <p class="section-body t-lead">
       Cuéntanos si quieres adoptar, ser hogar temporal, apoyar con una donación o hacer otra pregunta. Si falta
       información, la revisamos contigo después.
@@ -34,6 +34,18 @@ const web3formsAccessKey = PUBLIC_WEB3FORMS_KEY ?? SITE.web3forms.accessKey;
         aria-hidden="true"
         class="form__honeypot"
       />
+
+      <div
+        class="form__errors"
+        data-form-errors
+        hidden
+        tabindex="-1"
+        role="alert"
+        aria-labelledby="contact-form-errors-title"
+      >
+        <p id="contact-form-errors-title" class="form__errors-title">Revisa los campos marcados</p>
+        <ul data-form-errors-list></ul>
+      </div>
 
       <div class="field">
         <label for="nombre">Nombre</label>
@@ -89,11 +101,18 @@ const web3formsAccessKey = PUBLIC_WEB3FORMS_KEY ?? SITE.web3forms.accessKey;
 
       <button type="submit" class="btn btn--primary form__submit">
         <span class="form__submit-label">Enviar mensaje</span>
-        <span class="form__submit-spinner" hidden aria-hidden="true">Enviando…</span>
+        <span class="form__submit-spinner" hidden aria-live="polite">Enviando mensaje…</span>
       </button>
     </form>
 
-    <div class="form__success" hidden data-form-success id="contact-success">
+    <div class="form__status" hidden data-form-status role="alert" tabindex="-1">
+      <p class="form__status-title t-card-title">No pudimos enviar tu mensaje</p>
+      <p data-form-status-message>
+        Revisa tu conexión e inténtalo de nuevo. Tu mensaje sigue escrito en el formulario.
+      </p>
+    </div>
+
+    <div class="form__success" hidden data-form-success id="contact-success" role="status" tabindex="-1">
       <p class="form__success-title t-card-title">¡Recibimos tu mensaje!</p>
       <p>Te responderemos al correo que nos dejaste.</p>
       <a href="/" class="btn btn--secondary">Volver al inicio</a>
