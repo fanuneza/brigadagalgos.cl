@@ -24,7 +24,8 @@
     "capture:local": "playwright test --config playwright.capture.config.ts",
     "capture:home": "playwright test --config playwright.capture.config.ts --grep @home",
     "capture:adoptar": "playwright test --config playwright.capture.config.ts --grep @adoptar",
-    "capture:donar": "playwright test --config playwright.capture.config.ts --grep @donar"
+    "capture:donar": "playwright test --config playwright.capture.config.ts --grep @donar",
+    "dog-collections:migrate": "node scripts/migrate-dog-collections.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",

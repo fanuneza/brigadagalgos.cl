@@ -39,6 +39,52 @@ const successDogs = defineCollection({
     }),
 });
 
+const dogs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/dogs" }),
+  schema: ({ image }) => {
+    const sharedDogFields = {
+      name: z.string(),
+      instagramUrl: z.url().optional(),
+      gallery: z.array(image()).max(3),
+    };
+
+    const adoptionDog = z
+      .object({
+        ...sharedDogFields,
+        status: z.literal("adopcion"),
+        sex: z.enum(["Macho", "Hembra"]),
+        age: z.string(),
+        weight: z.string(),
+        details: z.string(),
+        location: z.string().optional(),
+        currentNeed: z.enum(["Adopción", "Hogar temporal", "Adopción u hogar temporal"]).default("Adopción"),
+        characterSketch: z.string(),
+        order: z.number().int().optional(),
+        active: z.boolean().default(true),
+        hiddenSince: z.coerce.date().optional(),
+        hiddenReason: z.string().optional(),
+      })
+      .superRefine((data, ctx) => {
+        if (data.active === false && (data.hiddenSince === undefined || data.hiddenReason === undefined)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "If active is false, hiddenSince and hiddenReason must be provided to keep the record orderly",
+            path: ["active"],
+          });
+        }
+      });
+
+    const successDog = z.object({
+      ...sharedDogFields,
+      status: z.literal("exito"),
+      story: z.string(),
+      gallery: z.array(image()).max(3).default([]),
+    });
+
+    return z.discriminatedUnion("status", [adoptionDog, successDog]);
+  },
+});
+
 const supporters = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/supporters" }),
   schema: ({ image }) =>
@@ -73,6 +119,7 @@ const blog = defineCollection({
 export const collections = {
   "adoption-dogs": adoptionDogs,
   "success-dogs": successDogs,
+  dogs,
   supporters,
   blog,
 };

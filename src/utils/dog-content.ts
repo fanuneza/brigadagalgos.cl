@@ -31,6 +31,67 @@ export interface StoryDogSummary {
   photos: SharedGalleryPhoto[];
 }
 
+// Unified `dogs` collection: canonical query layer. The legacy collections keep
+// feeding the site until wave 2 switches consumers to these functions.
+
+type DogsEntry = CollectionEntry<"dogs">;
+type DogsEntryData = DogsEntry["data"];
+
+export type AdoptionDogEntry = Omit<DogsEntry, "data"> & { data: Extract<DogsEntryData, { status: "adopcion" }> };
+export type SuccessDogEntry = Omit<DogsEntry, "data"> & { data: Extract<DogsEntryData, { status: "exito" }> };
+export type DogStatus = DogsEntryData["status"];
+
+export function isAdoptionDog(entry: DogsEntry): entry is AdoptionDogEntry {
+  return entry.data.status === "adopcion";
+}
+
+export function isSuccessDog(entry: DogsEntry): entry is SuccessDogEntry {
+  return entry.data.status === "exito";
+}
+
+export function filterActiveAdoptionDogs(entries: AdoptionDogEntry[]): AdoptionDogEntry[] {
+  return entries.filter((entry) => entry.data.active !== false);
+}
+
+export async function getDogs(status: "adopcion"): Promise<AdoptionDogEntry[]>;
+export async function getDogs(status: "exito"): Promise<SuccessDogEntry[]>;
+export async function getDogs(status: DogStatus): Promise<DogsEntry[]> {
+  const dogs: DogsEntry[] = await getCollection("dogs");
+  return status === "adopcion" ? dogs.filter(isAdoptionDog) : dogs.filter(isSuccessDog);
+}
+
+export async function getActiveDogs(): Promise<AdoptionDogEntry[]> {
+  return filterActiveAdoptionDogs(await getDogs("adopcion"));
+}
+
+// Structural input types shared by both the legacy collections and the unified
+// `dogs` collection, so the card builders accept either entry type.
+
+interface AdoptionDogCardEntry {
+  id: string;
+  data: {
+    name: string;
+    sex: "Macho" | "Hembra";
+    age: string;
+    weight: string;
+    details: string;
+    currentNeed: "Adopción" | "Hogar temporal" | "Adopción u hogar temporal";
+    characterSketch: string;
+    instagramUrl?: string;
+    gallery: ImageMetadata[];
+  };
+}
+
+interface StoryDogSummaryEntry {
+  id: string;
+  data: {
+    name: string;
+    story: string;
+    instagramUrl?: string;
+    gallery: ImageMetadata[];
+  };
+}
+
 export function getEntriesWithGallery<T extends { data: { gallery: unknown[] } }>(entries: T[]): T[] {
   return entries.filter((entry) => entry.data.gallery.length > 0);
 }
@@ -57,7 +118,7 @@ function getAgeType(age: string): AdoptionDogCard["ageType"] {
   return /cachor/i.test(age) ? "cachorro" : "adulto";
 }
 
-export async function buildAdoptionDogCards(entries: CollectionEntry<"adoption-dogs">[]): Promise<AdoptionDogCard[]> {
+export async function buildAdoptionDogCards(entries: AdoptionDogCardEntry[]): Promise<AdoptionDogCard[]> {
   return Promise.all(
     entries.map(async (entry) => ({
       id: entry.id,
@@ -85,7 +146,7 @@ export async function buildAdoptionDogCards(entries: CollectionEntry<"adoption-d
 }
 
 export async function buildStoryDogSummaries(
-  entries: CollectionEntry<"success-dogs">[],
+  entries: StoryDogSummaryEntry[],
   limit?: number
 ): Promise<StoryDogSummary[]> {
   const selectedEntries = typeof limit === "number" ? entries.slice(0, limit) : entries;
