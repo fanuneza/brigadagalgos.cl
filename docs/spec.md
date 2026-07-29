@@ -79,14 +79,14 @@ brigadagalgos.cl/
 │   ├── robots.txt
 │   ├── site.webmanifest
 │   ├── llms.txt
-│   ├── icons/
 │   └── images/
 ├── src/
 │   ├── assets/
 │   │   ├── casos/
 │   │   │   ├── adopcion/        # Dog profile photos
 │   │   │   └── exito/           # Success story photos
-│   │   └── colaboradores/       # Supporter logos
+│   │   ├── colaboradores/       # Supporter logos
+│   │   └── icons/               # UI icons (imported as inline SVG components, optimized at build)
 │   ├── components/              # Shared UI components
 │   │   ├── DogCard.astro             # Shared adoption-dog card (featured + grid variants)
 │   │   ├── Footer.astro

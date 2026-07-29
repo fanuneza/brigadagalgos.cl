@@ -1,26 +1,19 @@
 ---
+import type { SvgComponent } from "astro/types";
+
 interface Props {
-  icon: string;
+  icon: SvgComponent;
   title: string;
   body: string;
   tone?: "primary" | "secondary" | "warm";
 }
 
-const { icon, title, body, tone = "primary" } = Astro.props;
+const { icon: Icon, title, body, tone = "primary" } = Astro.props;
 ---
 
 <article class="req-card">
   <span class={`icon-circle icon-circle--${tone}`} aria-hidden="true">
-    <img
-      src={icon}
-      alt=""
-      aria-hidden="true"
-      class="icon-circle__image"
-      width="24"
-      height="24"
-      loading="lazy"
-      decoding="async"
-    />
+    <Icon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
   </span>
   <h3 class="req-card__title t-ui-title">{title}</h3>
   <p class="req-card__body t-card-body">{body}</p>

@@ -1,5 +1,8 @@
 ---
 import { SITE } from "../config/site.ts";
+import WhatsAppIcon from "../assets/icons/whatsapp.svg";
+import InstagramIcon from "../assets/icons/instagram.svg";
+import FacebookIcon from "../assets/icons/facebook.svg";
 
 const { pathname } = Astro.url;
 const nav = [
@@ -191,16 +194,7 @@ const nav = [
         data-track-category="whatsapp"
         data-track-outbound="true"
       >
-        <img
-          src="/icons/whatsapp.svg"
-          alt=""
-          aria-hidden="true"
-          class="drawer__social-icon"
-          width="24"
-          height="24"
-          loading="lazy"
-          decoding="async"
-        />
+        <WhatsAppIcon class="drawer__social-icon" width={24} height={24} aria-hidden="true" />
       </a>
       <a
         href={SITE.instagram}
@@ -215,16 +209,7 @@ const nav = [
         data-track-category="instagram"
         data-track-outbound="true"
       >
-        <img
-          src="/icons/instagram.svg"
-          alt=""
-          aria-hidden="true"
-          class="drawer__social-icon"
-          width="24"
-          height="24"
-          loading="lazy"
-          decoding="async"
-        />
+        <InstagramIcon class="drawer__social-icon" width={24} height={24} aria-hidden="true" />
       </a>
       <a
         href={SITE.facebook}
@@ -239,16 +224,7 @@ const nav = [
         data-track-category="facebook"
         data-track-outbound="true"
       >
-        <img
-          src="/icons/facebook.svg"
-          alt=""
-          aria-hidden="true"
-          class="drawer__social-icon"
-          width="24"
-          height="24"
-          loading="lazy"
-          decoding="async"
-        />
+        <FacebookIcon class="drawer__social-icon" width={24} height={24} aria-hidden="true" />
       </a>
     </div>
   </div>
