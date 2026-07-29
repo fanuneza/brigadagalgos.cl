@@ -1,12 +1,14 @@
+/* The two donation paths are one decision, so they share a row and stretch to
+   the same height. Nothing distinguishes them except the `__kind` label. */
 .donation-cards {
   display: grid;
   gap: var(--space-6);
-  align-items: start;
+  align-items: stretch;
 }
 
 .donation-cards__intro {
   max-width: 64ch;
-  margin: 0 0 var(--space-5);
+  margin: var(--space-8) 0 var(--space-5);
   font-size: var(--type-lead);
   line-height: var(--line-loose);
   color: var(--color-text-muted);
@@ -76,31 +78,16 @@
 }
 
 @media (min-width: 768px) {
+  .donation-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .donation-cards__amounts {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .donation-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .donation-card--transferencia {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-  }
-
-  .donation-card--mensual {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .donation-cards__transparency {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
   .donation-cards__amounts {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -127,24 +114,17 @@
   position: relative;
 }
 
-.donation-card--mensual {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in sRGB, var(--color-primary-100) 24%, var(--color-bg)),
-      color-mix(in sRGB, var(--color-surface) 86%, var(--color-bg))
-    ),
-    var(--color-bg);
+.donation-card__kind {
+  margin: 0;
 }
 
-.donation-card__badge {
-  align-self: flex-start;
-  background: var(--color-primary);
-  color: var(--on-primary);
-  font-size: var(--font-size-xs);
-  font-weight: var(--weight-semi);
-  padding: 2px 10px;
-  border-radius: var(--radius-full);
+/* Both actions sit at the bottom edge of their card so the two options line
+   up as a comparison rather than a recommendation plus an afterthought. */
+.donation-card__actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
 .donation-card__heading {
@@ -184,6 +164,44 @@
   gap: var(--space-2);
   margin: 0;
   padding: 0;
+}
+
+/* Two columns of bank rows keep the transfer card from towering over the
+   monthly one while every field stays visible without interaction. */
+@media (min-width: 768px) {
+  .donation-card__bank-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* On a phone the six rows have to stack, so the card is tightened instead —
+   the monthly option must still come into view as part of the same decision. */
+@media (max-width: 767px) {
+  .donation-card {
+    padding: var(--space-5);
+    gap: var(--space-3);
+  }
+
+  /* Short fields pair up; the two long values keep a full row of their own. */
+  .donation-card__bank-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  .donation-card__bank-row:first-child,
+  .donation-card__bank-row:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .donation-card__bank-row {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .donation-card__bank-row::after {
+    right: var(--space-3);
+  }
 }
 
 .donation-card__bank-row {

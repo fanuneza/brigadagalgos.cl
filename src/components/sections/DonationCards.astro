@@ -28,27 +28,12 @@ const suggestedAmounts = [
 ];
 ---
 
-<section class="section-padding">
+<section class="section-padding section--lead">
   <div class="container">
     <h2 class="sr-only">Formas de donar</h2>
-    <p class="donation-cards__intro">
-      No hay un monto único correcto. Elige una cantidad que puedas sostener y nosotros la destinamos a las necesidades
-      reales de los galgos: salud, comida, traslados, implementos y acompañamiento.
-    </p>
-    <div class="donation-cards__amounts" aria-label="Montos sugeridos">
-      {
-        suggestedAmounts.map((item) => (
-          <div class="donation-cards__amount">
-            <p class="donation-cards__amount-value">{item.amount}</p>
-            <p class="donation-cards__amount-label">{item.label}</p>
-            <p>{item.detail}</p>
-          </div>
-        ))
-      }
-    </div>
     <div class="donation-cards">
       <div class="donation-card donation-card--transferencia" id="datos-transferencia">
-        <span class="donation-card__badge">Recomendado</span>
+        <p class="donation-card__kind eyebrow eyebrow--support">APORTE DIRECTO</p>
         <h3 class="donation-card__heading t-card-title">TRANSFERENCIA ÚNICA</h3>
         <p class="donation-card__subtitle t-small-muted">O transferencia recurrente, si lo prefieres.</p>
         <div class="donation-card__bank-info">
@@ -107,16 +92,19 @@ const suggestedAmounts = [
             <span class="donation-card__bank-value">{SITE.email}</span>
           </button>
         </div>
-        <button type="button" class="btn btn--secondary" id="copy-bank-data" aria-label="Copiar datos bancarios">
-          Copiar datos
-        </button>
-        <div class="donation-card__copy-live" data-copy-live aria-live="polite" aria-atomic="true"></div>
         <p class="donation-card__info t-card-body">
           Si prefieres donar por transferencia, puedes copiar una fila individual o llevarte todos los datos de una vez.
         </p>
+        <div class="donation-card__actions">
+          <button type="button" class="btn btn--primary" id="copy-bank-data" aria-label="Copiar datos bancarios">
+            Copiar datos
+          </button>
+        </div>
+        <div class="donation-card__copy-live" data-copy-live aria-live="polite" aria-atomic="true"></div>
       </div>
 
       <div class="donation-card donation-card--mensual">
+        <p class="donation-card__kind eyebrow eyebrow--support">APORTE MENSUAL</p>
         <h3 class="donation-card__heading t-card-title">AMIGOS DE LOS GALGOS</h3>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -138,27 +126,46 @@ const suggestedAmounts = [
           acogidas.
         </p>
         <p>Es una forma simple de sostener el trabajo continuo y dar más estabilidad a cada caso.</p>
-        <TrackedLink
-          href={SITE.esponsor}
-          class="btn btn--primary"
-          newTab
-          trackEvent="donation_esponsor_click"
-          trackLabel="Voy a apoyar un galgo en eSponsor"
-          trackLocation="donation_card"
-          trackDestination={SITE.esponsor}
-          trackCategory="donation"
-          trackOutbound
-          data-donation-location="donation_card"
-        >
-          Voy a apoyar un galgo <span class="sr-only"> (abre en una nueva pestaña)</span>
-        </TrackedLink>
+        <div class="donation-card__actions">
+          <TrackedLink
+            href={SITE.esponsor}
+            class="btn btn--primary"
+            newTab
+            trackEvent="donation_esponsor_click"
+            trackLabel="Voy a apoyar un galgo en eSponsor"
+            trackLocation="donation_card"
+            trackDestination={SITE.esponsor}
+            trackCategory="donation"
+            trackOutbound
+            data-donation-location="donation_card"
+          >
+            Voy a apoyar un galgo <span class="sr-only"> (abre en una nueva pestaña)</span>
+          </TrackedLink>
+        </div>
       </div>
-      <p class="donation-cards__transparency">
-        Usamos los aportes para necesidades directas de los galgos rescatados y sus hogares temporales. Si necesitas
-        coordinar una donación específica o pedir más detalle, escríbenos y lo revisamos contigo. También compartimos
-        avances por nuestros canales cuando el equipo puede hacerlo, sin comprometer una cadencia fija.
-      </p>
     </div>
+
+    <p class="donation-cards__intro">
+      No hay un monto único correcto. Elige una cantidad que puedas sostener y nosotros la destinamos a las necesidades
+      reales de los galgos: salud, comida, traslados, implementos y acompañamiento.
+    </p>
+    <div class="donation-cards__amounts" aria-label="Montos sugeridos">
+      {
+        suggestedAmounts.map((item) => (
+          <div class="donation-cards__amount">
+            <p class="donation-cards__amount-value">{item.amount}</p>
+            <p class="donation-cards__amount-label">{item.label}</p>
+            <p>{item.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="donation-cards__transparency">
+      Usamos los aportes para necesidades directas de los galgos rescatados y sus hogares temporales. Si necesitas
+      coordinar una donación específica o pedir más detalle, escríbenos y lo revisamos contigo. También compartimos
+      avances por nuestros canales cuando el equipo puede hacerlo, sin comprometer una cadencia fija.
+    </p>
   </div>
 </section>
 
