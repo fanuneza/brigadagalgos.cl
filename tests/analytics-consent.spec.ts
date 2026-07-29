@@ -404,7 +404,9 @@ test("accepted consent records the adoption-intent funnel once without form cont
 
   await page.locator('footer a[href="/preguntas-frecuentes/"]').click();
   await page.waitForURL("**/preguntas-frecuentes/");
-  await page.locator('[data-support-type="faq"]').scrollIntoViewIfNeeded();
+  await page.locator('[data-support-type="faq"]').evaluate((element) => {
+    element.scrollIntoView({ block: "start" });
+  });
   await page.waitForFunction(() =>
     (window.dataLayer ?? []).some((entry) => entry?.event === "adoption_support_view" && entry?.support_type === "faq")
   );
