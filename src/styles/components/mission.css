@@ -1,6 +1,6 @@
 /* Homepage mission block — "quiénes somos y qué hemos hecho".
    It absorbs the institutional prose, the numbers strip (slotted
-   `TrustStatsSection variant="compact"`) and a one-line rescue flow that
+   `TrustStatsSection`) and a one-line rescue flow that
    replaced the full five-step homepage stepper. `/hogar-temporal/` keeps the
    real stepper; this is a proof line, not a process page. */
 
