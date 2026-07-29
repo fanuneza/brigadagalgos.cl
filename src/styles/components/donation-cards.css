@@ -6,9 +6,17 @@
   align-items: stretch;
 }
 
-.donation-cards__intro {
+.donation-cards__impact-intro {
   max-width: 64ch;
   margin: var(--space-8) 0 var(--space-5);
+}
+
+.donation-cards__impact-intro h2 {
+  margin-bottom: var(--space-3);
+}
+
+.donation-cards__impact-intro p {
+  margin: 0;
   font-size: var(--type-lead);
   line-height: var(--line-loose);
   color: var(--color-text-muted);

@@ -98,10 +98,9 @@ const suggestedAmounts = [
           </g>
         </svg>
         <p>
-          Aporta una cantidad fija cada mes a través de eSponsor para ayudarnos a sostener rescates, tratamientos y
-          acogidas.
+          Aporta una cantidad fija cada mes a través de eSponsor para sostener rescates, tratamientos y hogares
+          temporales con más estabilidad.
         </p>
-        <p>Es una forma simple de sostener el trabajo continuo y dar más estabilidad a cada caso.</p>
         <div class="donation-card__actions">
           <TrackedLink
             href={SITE.esponsor}
@@ -121,10 +120,13 @@ const suggestedAmounts = [
       </div>
     </div>
 
-    <p class="donation-cards__intro">
-      No hay un monto único correcto. Elige una cantidad que puedas sostener y nosotros la destinamos a las necesidades
-      reales de los galgos: salud, comida, traslados, implementos y acompañamiento.
-    </p>
+    <div class="donation-cards__impact-intro">
+      <h2 class="section-heading--support">Una referencia para elegir tu aporte</h2>
+      <p>
+        No hay un monto único correcto. Elige una cantidad que puedas sostener y nosotros la destinamos a las
+        necesidades reales de los galgos.
+      </p>
+    </div>
     <div class="donation-cards__amounts" aria-label="Montos sugeridos">
       {
         suggestedAmounts.map((item) => (
@@ -138,8 +140,7 @@ const suggestedAmounts = [
     </div>
 
     <p class="donation-cards__transparency">
-      Usamos los aportes para necesidades directas de los galgos rescatados y sus hogares temporales. Si necesitas
-      coordinar una donación específica o pedir más detalle, escríbenos y lo revisamos contigo. También compartimos
+      Si necesitas coordinar una donación específica o pedir más detalle, escríbenos y lo revisamos contigo. Compartimos
       avances por nuestros canales cuando el equipo puede hacerlo, sin comprometer una cadencia fija.
     </p>
   </div>
