@@ -3,97 +3,74 @@ import "../../styles/components/contact-channels.css";
 import { SITE } from "../../config/site.ts";
 import TrackedLink from "../../components/TrackedLink.astro";
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
-import AdoptarIcon from "../../assets/icons/adoptar.svg";
-import HogarTemporalIcon from "../../assets/icons/hogar-temporal.svg";
-import DonarIcon from "../../assets/icons/donar.svg";
-import ShareNodesIcon from "../../assets/icons/share-nodes.svg";
 import WhatsAppIcon from "../../assets/icons/whatsapp.svg";
 ---
 
-<section class="section-padding section--lead">
-  <div class="container">
-    <p class="eyebrow eyebrow--lead">¿EN QUÉ TE PODEMOS AYUDAR?</p>
-    <h2 class="sr-only">Elige tu motivo de contacto</h2>
-    <div class="contact-routes">
-      <article class="route-card">
-        <span class="icon-circle icon-circle--primary" aria-hidden="true">
-          <AdoptarIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
-        </span>
-        <h3 class="route-card__title t-ui-title">ADOPTAR</h3>
-        <p class="route-card__body t-card-body">
-          Conoce a los galgos que hoy buscan familia y postula cuando encuentres al tuyo.
-        </p>
-        <a href="/adoptar/" class="btn btn--secondary">Ver galgos en adopción</a>
-      </article>
+<section class="section-padding section--lead" aria-labelledby="contact-options-title">
+  <div class="container container--narrow">
+    <p class="eyebrow eyebrow--lead">PRIMER MENSAJE</p>
+    <h2 id="contact-options-title">Elige cómo quieres conversar</h2>
+    <p class="section-body t-lead">
+      WhatsApp es la forma más directa de escribirnos. Si prefieres dejarnos tu consulta con calma, usa el
+      formulario. No necesitas tener todo resuelto antes de contactarnos.
+    </p>
 
-      <article class="route-card">
-        <span class="icon-circle icon-circle--secondary" aria-hidden="true">
-          <HogarTemporalIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
-        </span>
-        <h3 class="route-card__title t-ui-title">HOGAR TEMPORAL</h3>
-        <p class="route-card__body t-card-body">
-          Abre tu casa por un tiempo mientras un galgo espera a su familia definitiva.
-        </p>
-        <a href="/hogar-temporal/" class="btn btn--secondary">Ver cómo ser hogar temporal</a>
-      </article>
-
-      <article class="route-card">
-        <span class="icon-circle icon-circle--warm" aria-hidden="true">
-          <DonarIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
-        </span>
-        <h3 class="route-card__title t-ui-title">DONAR</h3>
-        <p class="route-card__body t-card-body">
-          Tu aporte cubre atención veterinaria, alimento y cuidado mientras esperan familia.
-        </p>
-        <a href="/donar/" class="btn btn--secondary">Ver formas de donar</a>
-      </article>
-
-      <article class="route-card">
-        <span class="icon-circle icon-circle--purple" aria-hidden="true">
-          <ShareNodesIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
-        </span>
-        <h3 class="route-card__title t-ui-title">PRENSA Y ALIANZAS</h3>
-        <p class="route-card__body t-card-body">
-          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa y quieres apoyarnos, escríbenos
-          para coordinar la conversación.
-        </p>
-        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Prensa y alianzas")}`} class="btn btn--secondary">
-          Escribir por correo
-        </a>
-      </article>
-
-      <article class="route-card">
+    <div class="contact-methods">
+      <article class="contact-method contact-method--whatsapp">
         <span class="icon-circle icon-circle--green" aria-hidden="true">
           <WhatsAppIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
         </span>
-        <h3 class="route-card__title t-ui-title">OTRA DUDA</h3>
-        <p class="route-card__body t-card-body">
-          ¿Tu consulta no calza con lo anterior? Escríbenos por WhatsApp o completa el formulario más abajo.
-        </p>
-        <div class="route-card__actions">
-          <WhatsAppLink
-            text="Hola, tengo una duda para Brigada Galgos"
-            location="contact_channels"
-            label="Abrir WhatsApp - Contact General"
-            class="btn btn--secondary"
-          >
-            Abrir WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-          </WhatsAppLink>
-          <a href="#mensaje" class="text-link route-card__form-link">o completa el formulario</a>
+        <div>
+          <h3 class="contact-method__title t-ui-title">WHATSAPP</h3>
+          <p class="contact-method__body">Cuéntanos tu duda y seguimos la conversación contigo.</p>
         </div>
-        <p class="route-card__hours t-small-muted">Lun a Vie · 10:00 – 19:00</p>
+        <WhatsAppLink
+          text="Hola, quiero hacer una consulta a Brigada Galgos"
+          location="contact_primary"
+          label="Abrir WhatsApp desde contacto"
+          class="btn btn--secondary"
+        >
+          Escribir por WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+        </WhatsAppLink>
+      </article>
+
+      <article class="contact-method">
+        <div>
+          <h3 class="contact-method__title t-ui-title">FORMULARIO</h3>
+          <p class="contact-method__body">Déjanos tu mensaje y te responderemos al correo que nos indiques.</p>
+        </div>
+        <a class="btn btn--secondary" href="#contact-form">Ir al formulario</a>
       </article>
     </div>
 
+    <div class="contact-intents" aria-labelledby="contact-intents-title">
+      <h3 id="contact-intents-title" class="contact-intents__title">¿Sobre qué quieres escribirnos?</h3>
+      <p class="contact-intents__intro">Elige un tema y dejaremos preparado el formulario. Puedes cambiarlo después.</p>
+      <ul class="contact-intents__list">
+        <li><button type="button" class="contact-intent" data-contact-intent="Adopción">Quiero adoptar</button></li>
+        <li><button type="button" class="contact-intent" data-contact-intent="Hogar temporal">Quiero ser hogar temporal</button></li>
+        <li><button type="button" class="contact-intent" data-contact-intent="Donación">Quiero apoyar con una donación</button></li>
+        <li><button type="button" class="contact-intent" data-contact-intent="Prensa">Prensa o alianzas</button></li>
+        <li><button type="button" class="contact-intent" data-contact-intent="Consulta general">Tengo otra pregunta</button></li>
+      </ul>
+    </div>
+
+    <p class="contact-support t-small-muted">
+      Antes de escribirnos también puedes revisar <a class="text-link" href="/adoptar/">los galgos en adopción</a>,
+      <a class="text-link" href="/hogar-temporal/">cómo funciona el hogar temporal</a> y
+      <a class="text-link" href="/donar/">las formas de donar</a>. Para prensa o alianzas, también puedes escribir a
+      <a class="text-link" href={"mailto:" + SITE.email + "?subject=" + encodeURIComponent("Prensa y alianzas")}>{SITE.email}</a>.
+    </p>
+
     <p class="contact-routes__social t-small-muted">
-      Las novedades de los galgos viven en Instagram y Facebook:{" "}
+      Las novedades de los galgos viven en
       <TrackedLink href={SITE.instagram} class="text-link" newTab>
         Instagram <span class="sr-only"> (abre en una nueva pestaña)</span>
       </TrackedLink>
-      {" · "}
+      {" y "}
       <TrackedLink href={SITE.facebook} class="text-link" newTab>
         Facebook <span class="sr-only"> (abre en una nueva pestaña)</span>
-      </TrackedLink>
+      </TrackedLink>.
     </p>
   </div>
 </section>
