@@ -41,7 +41,7 @@ const schema = buildBlogPostingGraph({
   schema={schema}
 >
   <article class="blog-post section-padding">
-    <div class="container container--narrow">
+    <div class="container container--narrow blog-post__header">
       <a class="blog-post__top-link" href="/blog/">Volver al blog</a>
       <p class="eyebrow">BLOG</p>
       <h1>{post.data.title}</h1>
@@ -76,18 +76,18 @@ const schema = buildBlogPostingGraph({
         )
       }
     </div>
-  </article>
-  <RainbowDivider />
-  <section class="section-padding blog-post__section">
-    <div class="container container--narrow">
-      <div class="blog-post__body">
-        <Content />
+    <RainbowDivider />
+    <div class="blog-post__section">
+      <div class="container container--narrow">
+        <div class="blog-post__body">
+          <Content />
+        </div>
+        <p class="blog-post__back">
+          <a class="blog-post__back-link" href="/blog/"> Volver al blog </a>
+        </p>
       </div>
-      <p class="blog-post__back">
-        <a class="blog-post__back-link" href="/blog/"> Volver al blog </a>
-      </p>
     </div>
-  </section>
+  </article>
   <CtaCard
     eyebrow="SIGUIENTE PASO"
     heading="Si un galgo te hace sentido, conversemos"
