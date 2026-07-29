@@ -2,15 +2,19 @@
    to render the adoption grid. The `.story-card__*` selectors below hook into
    SharedPhotoGallery's own classes (shared-gallery.css), not the story card. */
 
+/* Plain card weight (DESIGN.md §6): the listing is a wall of comparable
+   galgos, so the card itself stays quiet — background, border and shadow
+   come from the shared `.card--plain` tokens. The photo and the name carry
+   the visual weight instead of an elevated box. */
 .dog-card {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--card-plain-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  background: var(--card-plain-bg);
+  box-shadow: none;
   transition:
     transform var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out),
@@ -23,7 +27,7 @@
 }
 
 /* Keyboard affordance mirrors the pointer lift so the card reads clickable
-   from the name link or the CTA. */
+   from the name link, its only tab stop. */
 .dog-card:focus-within {
   border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
   box-shadow: var(--shadow-md);
@@ -43,6 +47,7 @@
 }
 
 .dog-card__body {
+  position: relative;
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
@@ -124,33 +129,10 @@
   }
 }
 
-.dog-card__details {
-  margin: 0;
-}
-
 .dog-card__sketch {
   margin: 0;
   color: var(--color-text-muted);
   line-height: var(--line-base);
-}
-
-.dog-card__footer {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding-top: var(--space-3);
-}
-
-.dog-card__actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  margin-top: auto;
-}
-
-.dog-card__cta {
-  width: 100%;
 }
 
 .dog-card__name-link {
@@ -164,12 +146,25 @@
 
 .dog-card__name-link:focus-visible {
   outline: none;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-focus);
 }
 
-.dog-card__profile-link {
-  align-self: start;
+/* Stretched-link pattern (mirrors .blog-card__link in blog.css): the name
+   link's ::after covers `.dog-card__body` (its positioned ancestor), so the
+   whole body area is clickable while the dog's name stays the sole
+   accessible link text and the only tab stop. The overlay stops at the
+   photo/gallery boundary on purpose — the gallery keeps its own zoom and
+   prev/next controls, which live outside `.dog-card__body` and would
+   otherwise sit under the overlay at the same stacking level. */
+.dog-card__name-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.dog-card__name-link:focus-visible::after {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-focus);
 }
 
 @media (max-width: 767px) {
