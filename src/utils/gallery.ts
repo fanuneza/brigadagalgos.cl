@@ -1,5 +1,19 @@
-import { escapeAttribute } from "../../utils/html-escape";
-import type { SharedGalleryItem, SharedGalleryPhoto } from "./types";
+import { escapeAttribute } from "./html-escape";
+
+export interface SharedGalleryPhoto {
+  cardAvifSrcSet?: string;
+  cardSizes: string;
+  cardFallbackSrc: string;
+  lightbox: string;
+  alt?: string;
+  caption?: string;
+}
+
+export interface SharedGalleryItem {
+  id?: string;
+  name: string;
+  photos: SharedGalleryPhoto[];
+}
 
 function buildInitialSlide(item: SharedGalleryItem, photo: SharedGalleryPhoto, loadingPriority: "lazy" | "eager") {
   const avifSource = photo.cardAvifSrcSet

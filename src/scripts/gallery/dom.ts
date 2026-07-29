@@ -1,5 +1,5 @@
 import { escapeAttribute } from "../../utils/html-escape";
-import type { SharedGalleryItem, SharedGalleryPhoto } from "./types";
+import type { SharedGalleryItem, SharedGalleryPhoto } from "../../utils/gallery";
 
 export function getStoryContext(element: HTMLElement, fallbackItem: SharedGalleryItem) {
   const storyCard = element.closest<HTMLElement>("[data-story-card]");

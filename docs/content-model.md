@@ -82,7 +82,7 @@ gallery:
 - `story` must explicitly mention the adoption outcome (enforced with `/adopt/i`).
 - `gallery` accepts at most 3 images.
 - Keep stories general enough to avoid invented facts, but specific enough to avoid sounding templated.
-- Card summaries are derived from `story` via `src/utils/story-card-copy.ts`. The 260-character default should stay aligned with the content rule unless the product requirement changes.
+- Card summaries are derived from `story` via `src/utils/dog-content.ts`. The 260-character default should stay aligned with the content rule unless the product requirement changes.
 - The collection powers the home preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
 
 ### Example

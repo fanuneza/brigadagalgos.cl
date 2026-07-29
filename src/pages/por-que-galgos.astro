@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
@@ -8,11 +7,9 @@ import WhyGalgosEditorial from "../components/sections/WhyGalgosEditorial.astro"
 import CasesBand from "../components/sections/CasesBand.astro";
 import CtaCard from "../components/sections/CtaCard.astro";
 import TrackedLink from "../components/TrackedLink.astro";
-import { buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
-import { shuffle } from "../utils/shuffle";
+import { getShuffledStorySummaries } from "../utils/dog-content";
 
-const successDogs = getEntriesWithGallery(await getCollection("success-dogs"));
-const cases = await buildStoryDogSummaries(shuffle(successDogs), 3);
+const cases = await getShuffledStorySummaries({ limit: 3, requireGallery: true });
 ---
 
 <PageLayout
@@ -62,7 +59,3 @@ const cases = await buildStoryDogSummaries(shuffle(successDogs), 3);
 
   <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de casos reales" />
 </PageLayout>
-
-<script>
-  import "../scripts/init-shared-gallery";
-</script>

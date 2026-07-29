@@ -1,7 +1,7 @@
 ---
 import "../../styles/components/dog-card.css";
 import "../../styles/components/dog-profile.css";
-import { getCollection, type CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { getImage } from "astro:assets";
 import PageLayout from "../../layouts/PageLayout.astro";
 import RainbowDivider from "../../components/RainbowDivider.astro";
@@ -12,14 +12,11 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
 import TrackedLink from "../../components/TrackedLink.astro";
 import InstagramLink from "../../components/InstagramLink.astro";
 import { SITE } from "../../config/site.ts";
-import { buildAdoptionDogCards, buildDogMetaDescription } from "../../utils/dog-content";
+import { buildAdoptionDogCards, buildDogMetaDescription, getActiveAdoptionDogs } from "../../utils/dog-content";
 
 export async function getStaticPaths() {
-  const dogs = await getCollection(
-    "adoption-dogs",
-    ({ data }: CollectionEntry<"adoption-dogs">) => data.active !== false
-  );
-  return dogs.map((entry: CollectionEntry<"adoption-dogs">) => ({ params: { slug: entry.id }, props: { entry } }));
+  const dogs = await getActiveAdoptionDogs();
+  return dogs.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
 const { entry } = Astro.props as { entry: CollectionEntry<"adoption-dogs"> };
@@ -109,6 +106,5 @@ const ogImage = firstImage
 </PageLayout>
 
 <script>
-  import "../../scripts/init-shared-gallery";
   import "../../scripts/share-dog";
 </script>

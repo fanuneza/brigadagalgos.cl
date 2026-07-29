@@ -1,28 +1,27 @@
 import { describe, expect, it } from "vitest";
-import { buildCardStoryExcerpt } from "../src/utils/story-card-copy";
-import { clampAtWordBoundary, buildDogMetaDescription } from "../src/utils/dog-content";
+import { truncateAtWordBoundary, buildDogMetaDescription } from "../src/utils/dog-content";
 
-describe("buildCardStoryExcerpt", () => {
+describe("truncateAtWordBoundary (sentence-break mode, story cards)", () => {
   it("defaults to the 260-character content rule for success stories", () => {
     const fits = "x".repeat(260);
-    expect(buildCardStoryExcerpt(fits)).toBe(fits);
+    expect(truncateAtWordBoundary(fits, { preferSentenceBreak: true })).toBe(fits);
 
     const overflow = "x".repeat(261);
-    const excerpt = buildCardStoryExcerpt(overflow);
+    const excerpt = truncateAtWordBoundary(overflow, { preferSentenceBreak: true });
     expect(excerpt).not.toBe(overflow);
     expect(excerpt.length).toBeLessThanOrEqual(261);
   });
 
   it("keeps short stories unchanged", () => {
     const story = "Mora fue adoptada y hoy duerme en sofá y sale a pasear con calma.";
-    expect(buildCardStoryExcerpt(story, 165)).toBe(story);
+    expect(truncateAtWordBoundary(story, { preferSentenceBreak: true, maxCharacters: 165 })).toBe(story);
   });
 
   it("cuts long stories at a sentence break when possible", () => {
     const story =
       "A Belén la rescatamos con un tumor mamario maligno y una patita tan dañada que tuvimos que amputarla. Su pronóstico era duro y sabíamos que su tiempo podía ser corto. Igual apareció una familia que la eligió.";
 
-    expect(buildCardStoryExcerpt(story, 140)).toBe(
+    expect(truncateAtWordBoundary(story, { preferSentenceBreak: true, maxCharacters: 140 })).toBe(
       "A Belén la rescatamos con un tumor mamario maligno y una patita tan dañada que tuvimos que amputarla."
     );
   });
@@ -31,26 +30,28 @@ describe("buildCardStoryExcerpt", () => {
     const story =
       "Belén vive acompañada con una familia que la eligió para darle cuidados, descanso, compañía diaria y una rutina tranquila mientras sigue adaptándose.";
 
-    const excerpt = buildCardStoryExcerpt(story, 90);
+    const excerpt = truncateAtWordBoundary(story, { preferSentenceBreak: true, maxCharacters: 90 });
     expect(excerpt.length).toBeLessThanOrEqual(91);
     expect(excerpt.endsWith("…")).toBe(true);
   });
 });
 
-describe("clampAtWordBoundary", () => {
+describe("truncateAtWordBoundary (word-break mode, meta descriptions)", () => {
   it("returns short text untouched", () => {
-    expect(clampAtWordBoundary("Hola", 20)).toBe("Hola");
+    expect(truncateAtWordBoundary("Hola", { maxCharacters: 20 })).toBe("Hola");
   });
 
   it("clamps at a word boundary and appends an ellipsis", () => {
-    const result = clampAtWordBoundary("Un galgo tranquilo que busca una familia paciente", 30);
+    const result = truncateAtWordBoundary("Un galgo tranquilo que busca una familia paciente", { maxCharacters: 30 });
     expect(result.length).toBeLessThanOrEqual(30);
     expect(result.endsWith("…")).toBe(true);
     expect(result).not.toMatch(/\s…$/);
   });
 
   it("drops trailing punctuation before the ellipsis", () => {
-    const result = clampAtWordBoundary("Llegó desde Maipú, y hoy descansa tranquilo en su cama", 20);
+    const result = truncateAtWordBoundary("Llegó desde Maipú, y hoy descansa tranquilo en su cama", {
+      maxCharacters: 20,
+    });
     expect(result).not.toMatch(/[,;:.]…$/);
   });
 });

@@ -174,10 +174,7 @@ brigadagalgos.cl/
 │   │   └── gallery/             # Lightbox implementation modules
 │   │       ├── carousel.ts
 │   │       ├── dom.ts
-│   │       ├── index.ts
-│   │       ├── lightbox.ts
-│   │       ├── markup.ts
-│   │       └── types.ts
+│   │       └── lightbox.ts
 │   ├── styles/
 │   │   ├── global.css           # Global styles and imports
 │   │   ├── tokens.css           # Design tokens
@@ -187,15 +184,13 @@ brigadagalgos.cl/
 │   └── utils/
 │       ├── analytics.ts         # Analytics helpers and types
 │       ├── blog-content.ts      # Blog entry shaping
-│       ├── dog-content.ts       # Dog/story card shaping
-│       ├── hero-images.ts       # Hero image resolution
+│       ├── dog-content.ts       # Dog/story collection queries and card shaping
+│       ├── gallery.ts           # Shared gallery types and build-time markup
 │       ├── html-escape.ts       # HTML escape utilities
 │       ├── instagram.ts         # Instagram URL handling
 │       ├── reading-time.ts      # Blog reading-time estimate
 │       ├── responsive-gallery-images.ts # Responsive image generation
-│       ├── schema.ts            # Schema helpers
 │       ├── shuffle.ts           # Randomization utilities
-│       ├── story-card-copy.ts   # Success-story excerpt builder
 │       └── structured-data.ts   # JSON-LD builders
 ├── scripts/                     # Maintenance and workflow scripts
 │   ├── check-text-quality.mjs
@@ -291,29 +286,25 @@ Optional afterShell slot:
 Key shared primitives:
 
 - `TrackedLink.astro` — outbound link with analytics metadata.
-- `ExternalLink.astro` — simple external new-tab link.
 - `WhatsAppLink.astro` — WhatsApp CTA with phone and message.
 - `InstagramLink.astro` — Instagram link helper.
-- `SharedGalleryLightbox.astro` — image gallery lightbox.
+- `SharedGalleryLightbox.astro` — image gallery lightbox (also attaches the gallery init script).
 - `SharedPhotoGallery.astro` — photo grid with responsive images.
-- `StructuredData.astro` — injects JSON-LD.
 
 ## Utility modules
 
-| Module                                   | Responsibility                                                      |
-| ---------------------------------------- | ------------------------------------------------------------------- |
-| `src/utils/dog-content.ts`               | Shapes adoption-dog and success-dog entries for cards and galleries |
-| `src/utils/story-card-copy.ts`           | Builds success-story card excerpts with the 260-character default   |
-| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                      |
-| `src/utils/reading-time.ts`              | Estimates blog post reading time                                    |
-| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data      |
-| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images               |
-| `src/utils/hero-images.ts`               | Hero image resolution helpers                                       |
-| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                  |
-| `src/utils/schema.ts`                    | Schema-related helpers                                              |
-| `src/utils/shuffle.ts`                   | Randomization helpers                                               |
-| `src/utils/html-escape.ts`               | HTML escape utilities                                               |
-| `src/utils/instagram.ts`                 | Instagram URL handling                                              |
+| Module                                   | Responsibility                                                            |
+| ---------------------------------------- | ------------------------------------------------------------------------- |
+| `src/utils/dog-content.ts`               | Collection queries plus card/story shaping; 260-character excerpt default |
+| `src/utils/gallery.ts`                   | Shared gallery types and build-time gallery markup                        |
+| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                            |
+| `src/utils/reading-time.ts`              | Estimates blog post reading time                                          |
+| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data            |
+| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images                     |
+| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                        |
+| `src/utils/shuffle.ts`                   | Randomization helpers                                                     |
+| `src/utils/html-escape.ts`               | HTML escape utilities                                                     |
+| `src/utils/instagram.ts`                 | Instagram URL handling                                                    |
 
 ## Client scripts
 
@@ -326,7 +317,7 @@ Key shared primitives:
 - `src/scripts/copy-data.ts` — copy-to-clipboard for bank details and similar.
 - `src/scripts/share-dog.ts` — native share button with clipboard fallback on dog profiles.
 - `src/scripts/init-shared-gallery.ts` — gallery/lightbox bootstrap.
-- `src/scripts/gallery/*.ts` — modular lightbox implementation (carousel, DOM, markup, lightbox, types).
+- `src/scripts/gallery/*.ts` — modular lightbox implementation (carousel, DOM, lightbox).
 
 ## Styling strategy
 
@@ -348,7 +339,7 @@ Astro content loader (glob)
 Zod schema validation
        │
        ▼
-Utility shaping (dog-content.ts, story-card-copy.ts)
+Utility shaping (dog-content.ts)
        │
        ▼
 Components render HTML + responsive images
@@ -362,7 +353,7 @@ Build output (static files)
 1. **Source:** Markdown files in `src/content/` with YAML frontmatter.
 2. **Loading:** Astro's `glob` loader reads each file into a collection entry.
 3. **Validation:** Zod schemas in `src/content.config.ts` enforce types, required fields, and image limits.
-4. **Shaping:** `src/utils/dog-content.ts` and `src/utils/story-card-copy.ts` transform entries into card-friendly data.
+4. **Shaping:** `src/utils/dog-content.ts` transforms entries into card-friendly data.
 5. **Image generation:** `src/utils/responsive-gallery-images.ts` and `astro:assets` generate responsive srcsets.
 6. **Rendering:** Astro components produce server-rendered HTML, JSON endpoints, and RSS.
 7. **Deployment:** Static files are uploaded to Cloudflare Pages.
@@ -380,7 +371,7 @@ Build output (static files)
 - Astro's image service generates responsive AVIF and WebP variants via `getImage`.
 - All dog galleries are capped at 3 images (schema-validated).
 
-Responsive variants generated per surface (verified against `src/utils/responsive-gallery-images.ts`, `src/utils/hero-images.ts`, and the consuming components):
+Responsive variants generated per surface (verified against `src/utils/responsive-gallery-images.ts`, the hero sources builder in `src/pages/index.astro`, and the consuming components):
 
 | Surface                               | Widths            | Formats and fallback                          |
 | ------------------------------------- | ----------------- | --------------------------------------------- |

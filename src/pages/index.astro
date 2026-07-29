@@ -13,12 +13,41 @@ import FeaturedAdoptionDogs from "../components/sections/FeaturedAdoptionDogs.as
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
-import { buildAdoptionDogCards, buildStoryDogSummaries, getEntriesWithGallery } from "../utils/dog-content";
-import { buildHeroImageSources } from "../utils/hero-images";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import {
+  buildStoryDogSummaries,
+  getActiveAdoptionDogCards,
+  getActiveAdoptionDogs,
+  getEntriesWithGallery,
+} from "../utils/dog-content";
+import { buildSrcSet } from "../utils/responsive-gallery-images";
 import { shuffle } from "../utils/shuffle";
 import { buildWebSiteStructuredData } from "../utils/structured-data";
 
 const webSiteSchema = buildWebSiteStructuredData();
+
+const PORTRAIT_WIDTHS = [360, 540, 720];
+const LANDSCAPE_WIDTHS = [640, 960, 1120];
+
+async function buildHeroImageSources(src: ImageMetadata) {
+  const [portraitAvifSrcSet, portraitWebpSrcSet, landscapeAvifSrcSet, landscapeWebpSrcSet, portraitFallback] =
+    await Promise.all([
+      buildSrcSet(src, "avif", PORTRAIT_WIDTHS, 50),
+      buildSrcSet(src, "webp", PORTRAIT_WIDTHS, 65),
+      buildSrcSet(src, "avif", LANDSCAPE_WIDTHS, 50),
+      buildSrcSet(src, "webp", LANDSCAPE_WIDTHS, 65),
+      getImage({ src, format: "webp", width: 540, quality: 65 }),
+    ]);
+
+  return {
+    portraitAvifSrcSet,
+    portraitWebpSrcSet,
+    landscapeAvifSrcSet,
+    landscapeWebpSrcSet,
+    portraitFallbackSrc: portraitFallback.src,
+  };
+}
 
 const rescueSteps = [
   {
@@ -48,10 +77,9 @@ const rescueSteps = [
   },
 ];
 
-const adoptionDogs: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
+const activeAdoptionDogs = await getActiveAdoptionDogs();
+const featuredDogs = await getActiveAdoptionDogCards(3);
 const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
-const activeAdoptionDogs = adoptionDogs.filter((dog) => dog.data.active !== false);
-const featuredDogs = await buildAdoptionDogCards(shuffle(activeAdoptionDogs).slice(0, 3));
 const storyDogs = await buildStoryDogSummaries(
   getEntriesWithGallery(successDogs).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
   3

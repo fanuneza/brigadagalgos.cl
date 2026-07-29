@@ -71,8 +71,7 @@ For the repo layout and full file tree, see `docs/spec.md`.
 
 ### Content-driven behavior
 
-- Dog cards and galleries are shaped through `src/utils/dog-content.ts`.
-- Success-story card summaries are derived through `src/utils/story-card-copy.ts`.
+- Dog cards and galleries are shaped through `src/utils/dog-content.ts`, which also derives success-story card excerpts (260-character default).
 - FAQ and structured-data copy are centralized in config and utility files. Prefer updating shared sources over duplicating text inside pages.
 - The blog collection powers the RSS feed and the `/blog/` listing and `/blog/<id>/` post pages. Posts with `draft: true` are excluded from both the pages and the feed. There is no markdown-alternate endpoint for blog posts right now.
 
@@ -193,8 +192,7 @@ Notes:
 - `src/layouts/PageLayout.astro` — shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
 - `src/components/TrackedLink.astro` — shared outbound-link primitive (optional analytics metadata).
 - `src/content.config.ts` — canonical content schemas.
-- `src/utils/dog-content.ts` — shapes collection entries for cards and galleries.
-- `src/utils/story-card-copy.ts` — builds success-story card excerpts and carries the 260-character default.
+- `src/utils/dog-content.ts` — collection queries plus card/story shaping; carries the 260-character story-excerpt default.
 - `src/utils/structured-data.ts` — centralized JSON-LD builders, breadcrumbs, and FAQ structured data.
 - `tests/source-hygiene.test.ts` — enforces repository invariants that linters do not catch.
 - `playwright.config.ts` — browser test orchestration and preview server behavior.

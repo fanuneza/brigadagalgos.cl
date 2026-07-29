@@ -1,11 +1,12 @@
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
-import type { SharedGalleryPhoto } from "../scripts/gallery/types";
+import type { SharedGalleryPhoto } from "./gallery";
 import { createResponsiveGalleryPhoto } from "./responsive-gallery-images";
-import { buildCardStoryExcerpt } from "./story-card-copy";
+import { shuffle } from "./shuffle";
 
 const MAX_DOG_GALLERY_IMAGES = 3;
 const META_DESCRIPTION_MAX = 155;
+const STORY_CARD_MAX_CHARACTERS = 260;
 
 export interface AdoptionDogCard {
   id: string;
@@ -32,6 +33,24 @@ export interface StoryDogSummary {
 
 export function getEntriesWithGallery<T extends { data: { gallery: unknown[] } }>(entries: T[]): T[] {
   return entries.filter((entry) => entry.data.gallery.length > 0);
+}
+
+export async function getActiveAdoptionDogs(): Promise<CollectionEntry<"adoption-dogs">[]> {
+  const dogs: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
+  return dogs.filter((dog) => dog.data.active !== false);
+}
+
+export async function getActiveAdoptionDogCards(limit?: number): Promise<AdoptionDogCard[]> {
+  const selected = shuffle(await getActiveAdoptionDogs());
+  return buildAdoptionDogCards(typeof limit === "number" ? selected.slice(0, limit) : selected);
+}
+
+export async function getShuffledStorySummaries(
+  options: { limit?: number; requireGallery?: boolean } = {}
+): Promise<StoryDogSummary[]> {
+  const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
+  const eligible = options.requireGallery ? getEntriesWithGallery(successDogs) : successDogs;
+  return buildStoryDogSummaries(shuffle(eligible), options.limit);
 }
 
 function getAgeType(age: string): AdoptionDogCard["ageType"] {
@@ -76,7 +95,7 @@ export async function buildStoryDogSummaries(
       id: entry.id,
       name: entry.data.name,
       story: entry.data.story,
-      cardStory: buildCardStoryExcerpt(entry.data.story),
+      cardStory: truncateAtWordBoundary(entry.data.story, { preferSentenceBreak: true }),
       instagramUrl: entry.data.instagramUrl,
       photos: await Promise.all(
         entry.data.gallery
@@ -87,9 +106,36 @@ export async function buildStoryDogSummaries(
   );
 }
 
-export function clampAtWordBoundary(text: string, max: number): string {
-  if (text.length <= max) return text;
-  const slice = text.slice(0, max - 1);
+interface TruncateOptions {
+  preferSentenceBreak?: boolean;
+  maxCharacters?: number;
+}
+
+export function truncateAtWordBoundary(
+  text: string,
+  { preferSentenceBreak = false, maxCharacters = STORY_CARD_MAX_CHARACTERS }: TruncateOptions = {}
+): string {
+  const normalized = preferSentenceBreak ? text.replace(/\s+/g, " ").trim() : text;
+
+  if (normalized.length <= maxCharacters) {
+    return normalized;
+  }
+
+  if (preferSentenceBreak) {
+    const slice = normalized.slice(0, maxCharacters + 1);
+    const sentenceBreak = Math.max(slice.lastIndexOf(". "), slice.lastIndexOf("! "), slice.lastIndexOf("? "));
+
+    if (sentenceBreak >= Math.floor(maxCharacters * 0.6)) {
+      return slice.slice(0, sentenceBreak + 1).trim();
+    }
+
+    const wordBreak = slice.lastIndexOf(" ");
+    const safeBreak = wordBreak >= Math.floor(maxCharacters * 0.75) ? wordBreak : maxCharacters;
+
+    return `${slice.slice(0, safeBreak).trimEnd()}…`;
+  }
+
+  const slice = normalized.slice(0, maxCharacters - 1);
   const lastSpace = slice.lastIndexOf(" ");
   const cut = lastSpace > 0 ? slice.slice(0, lastSpace) : slice;
   return `${cut.replace(/[,;:.]+$/, "")}…`;
@@ -97,5 +143,5 @@ export function clampAtWordBoundary(text: string, max: number): string {
 
 export function buildDogMetaDescription(data: { name: string; details: string }): string {
   const base = `${data.name} está en adopción con Brigada Galgos. ${data.details}`;
-  return clampAtWordBoundary(base, META_DESCRIPTION_MAX);
+  return truncateAtWordBoundary(base, { maxCharacters: META_DESCRIPTION_MAX });
 }

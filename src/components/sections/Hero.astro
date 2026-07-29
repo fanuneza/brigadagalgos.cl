@@ -1,10 +1,15 @@
 ---
 import "../../styles/components/hero.css";
-import type { HeroImageSources } from "../../utils/hero-images";
 import TrackedLink from "../TrackedLink.astro";
 
 interface Props {
-  sources: HeroImageSources;
+  sources: {
+    portraitAvifSrcSet: string;
+    portraitWebpSrcSet: string;
+    landscapeAvifSrcSet: string;
+    landscapeWebpSrcSet: string;
+    portraitFallbackSrc: string;
+  };
   alt: string;
   width: number;
   height: number;
