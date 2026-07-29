@@ -68,6 +68,7 @@ const schema = buildBlogPostingGraph({
               src={post.data.heroImage}
               alt={post.data.heroImageAlt ?? post.data.title}
               class="blog-post__hero"
+              layout="constrained"
               widths={[480, 768, 1200, 1600]}
               sizes="(min-width: 1024px) 920px, 100vw"
               quality={78}

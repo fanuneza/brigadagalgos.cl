@@ -12,6 +12,9 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto",
   },
+  image: {
+    responsiveStyles: true,
+  },
   env: {
     schema: {
       PUBLIC_GTM_ID: envField.string({ context: "client", access: "public", optional: true }),
