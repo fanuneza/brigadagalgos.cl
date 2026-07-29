@@ -201,6 +201,77 @@ function buildFaqStructuredData(qaPairs: Array<{ question: string; answer: strin
   };
 }
 
+interface BlogPostingGraphInput {
+  url: string;
+  title: string;
+  description: string;
+  publishDate: Date;
+  category?: string;
+}
+
+export function buildBlogPostingGraph(input: BlogPostingGraphInput): JsonLdGraph {
+  const { siteUrl, name, legalName } = SITE;
+  const siteRoot = siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`;
+  const websiteId = `${siteUrl}/#/schema.org/WebSite`;
+  const organizationId = `${siteUrl}/#/schema.org/Organization/brigada-galgos`;
+
+  const website: JsonLdNode = {
+    "@type": "WebSite",
+    "@id": websiteId,
+    url: siteRoot,
+    name,
+    publisher: { "@id": organizationId },
+    alternateName: [legalName, "brigadagalgos.cl"],
+    description: SITE.description,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteUrl}/?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const organization: JsonLdNode = {
+    "@type": "Organization",
+    "@id": organizationId,
+    name,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}${SITE.logoPath}`,
+    },
+  };
+
+  const webpage: JsonLdNode = {
+    "@type": "WebPage",
+    "@id": input.url,
+    url: input.url,
+    name: input.title,
+    isPartOf: { "@id": websiteId },
+    potentialAction: [{ "@type": "ReadAction", target: [input.url] }],
+    breadcrumb: { "@id": `${input.url}#breadcrumb` },
+    description: input.description,
+    datePublished: input.publishDate.toISOString(),
+  };
+
+  const blogPosting: JsonLdNode = {
+    "@type": "BlogPosting",
+    "@id": `${input.url}#article`,
+    isPartOf: { "@id": input.url },
+    author: { "@id": organizationId },
+    headline: input.title,
+    mainEntityOfPage: { "@id": input.url },
+    publisher: { "@id": organizationId },
+    description: input.description,
+    datePublished: input.publishDate.toISOString(),
+    articleSection: input.category || "General",
+  };
+
+  return { "@context": "https://schema.org", "@graph": [website, organization, webpage, blogPosting] };
+}
+
 export function buildWebSiteStructuredData(): JsonLdNode {
   const { siteUrl, name, legalName } = SITE;
   return {

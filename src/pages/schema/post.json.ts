@@ -1,19 +1,17 @@
 import { type CollectionEntry } from "astro:content";
 import { createSchemaEndpoint } from "@jdevalk/astro-seo-graph";
 import { getPublishedBlogPosts } from "../../utils/blog-content";
-import { buildSchemaGraph } from "../../utils/schema";
+import { buildBlogPostingGraph } from "../../utils/structured-data";
 
 export const GET = createSchemaEndpoint({
   entries: getPublishedBlogPosts,
   mapper: (post: CollectionEntry<"blog">) => {
     const url = `https://brigadagalgos.cl/blog/${post.id}/`;
-    const graph = buildSchemaGraph({
-      pageType: "blogPost",
+    const graph = buildBlogPostingGraph({
       url,
       title: post.data.title,
       description: post.data.description,
       publishDate: post.data.pubDate,
-      featureImageUrl: post.data.heroImage,
       category: post.data.category,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

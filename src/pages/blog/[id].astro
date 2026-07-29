@@ -9,7 +9,7 @@ import TrackedLink from "../../components/TrackedLink.astro";
 import { getReadingTimeLabel } from "../../utils/reading-time.ts";
 import { SITE } from "../../config/site.ts";
 import { getPublishedBlogPosts } from "../../utils/blog-content.ts";
-import { buildSchemaGraph } from "../../utils/schema.ts";
+import { buildBlogPostingGraph } from "../../utils/structured-data.ts";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -21,13 +21,11 @@ const { Content } = await render(post);
 const dateFormatter = new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" });
 const readingTimeLabel = getReadingTimeLabel(post.body);
 const heroImageUrl = post.data.heroImage ? new URL(post.data.heroImage.src, SITE.siteUrl).href : undefined;
-const schema = buildSchemaGraph({
-  pageType: "blogPost",
+const schema = buildBlogPostingGraph({
   url: new URL(`/blog/${post.id}/`, SITE.siteUrl).href,
   title: post.data.title,
   description: post.data.description,
   publishDate: post.data.pubDate,
-  featureImageUrl: heroImageUrl,
   category: post.data.category,
 });
 ---
