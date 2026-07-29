@@ -2,9 +2,19 @@
   background: color-mix(in sRGB, var(--color-surface) 74%, var(--color-bg));
 }
 
+/* The compact teaser opts into `.section--quiet`'s tint (DESIGN.md §6)
+   instead of the full variant's surface background. */
+.adoption-process--compact {
+  background: var(--section-quiet-bg);
+}
+
 .adoption-process .container--narrow {
   display: grid;
   gap: var(--space-5);
+}
+
+.adoption-process--compact .container--narrow {
+  gap: var(--space-3);
 }
 
 .adoption-process__lead {

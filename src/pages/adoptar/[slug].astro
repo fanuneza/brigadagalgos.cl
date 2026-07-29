@@ -59,19 +59,35 @@ const ogImage = firstImage
         <div class="dog-profile__info">
           <p class="eyebrow">GALGO EN ADOPCIÓN</p>
           <h1>{dog.name}</h1>
-          <div class="dog-card__chips dog-profile__chips">
-            <span class="dog-chip dog-chip--sex">{dog.sex}</span>
-            <span class="dog-chip dog-chip--age">{dog.age}</span>
-            <span class="dog-chip dog-chip--weight">{dog.weight}</span>
-            <span class="dog-chip dog-chip--need">{dog.currentNeed}</span>
-          </div>
-          <p class="dog-profile__details">{dog.details}</p>
-          <p class="dog-profile__sketch">{dog.characterSketch}</p>
-          {
-            dog.instagramUrl && (
-              <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_profile" class="dog-social-link" />
-            )
-          }
+
+          <section class="dog-profile__group dog-profile__group--facts" aria-labelledby="dog-profile-facts-heading">
+            <h2 id="dog-profile-facts-heading" class="dog-profile__group-heading">Datos clave</h2>
+            <div class="dog-card__chips dog-profile__chips">
+              <span class="dog-chip dog-chip--sex">{dog.sex}</span>
+              <span class="dog-chip dog-chip--age">{dog.age}</span>
+              <span class="dog-chip dog-chip--weight">{dog.weight}</span>
+            </div>
+          </section>
+
+          <section class="dog-profile__group dog-profile__group--about" aria-labelledby="dog-profile-about-heading">
+            <h2 id="dog-profile-about-heading" class="dog-profile__group-heading">Sobre {dog.name}</h2>
+            <p class="dog-profile__details">{dog.details}</p>
+            <p class="dog-profile__sketch">{dog.characterSketch}</p>
+            {
+              dog.instagramUrl && (
+                <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_profile" class="dog-social-link" />
+              )
+            }
+          </section>
+
+          <section
+            class="dog-profile__group dog-profile__group--need card card--elevated"
+            aria-labelledby="dog-profile-need-heading"
+          >
+            <h2 id="dog-profile-need-heading" class="dog-profile__group-heading">Lo que necesita ahora</h2>
+            <p class="dog-profile__need-value">{dog.currentNeed}</p>
+          </section>
+
           <div class="dog-profile__ctas">
             <TrackedLink
               href={SITE.adoptionForm}
@@ -111,7 +127,7 @@ const ogImage = firstImage
   </section>
 
   <RainbowDivider />
-  <AdoptionProcess />
+  <AdoptionProcess variant="compact" />
 
   <SharedGalleryLightbox slot="afterShell" ariaLabel={`Galería de ${dog.name}`} />
 </PageLayout>

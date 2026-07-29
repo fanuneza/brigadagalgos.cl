@@ -1,56 +1,91 @@
 ---
 import "../../styles/components/adoption-process.css";
+
+interface Props {
+  /**
+   * `full` (default) is the historical, unabridged rendering used on
+   * `/adoptar/`. `compact` is a low-weight teaser for surfaces where the
+   * generic process would otherwise repeat at full weight, such as the dog
+   * profile — it links back to the full process instead of restating it.
+   */
+  variant?: "full" | "compact";
+}
+
+const { variant = "full" } = Astro.props;
 ---
 
-<section id="proceso" class="section-padding adoption-process">
-  <div class="container container--narrow">
-    <p class="eyebrow">PROCESO</p>
-    <h2>Te guiamos paso a paso</h2>
-    <p class="adoption-process__lead t-lead">
-      Adoptar no tiene que sentirse burocrático. Te escuchamos, resolvemos dudas y buscamos un galgo que pueda estar
-      bien en tu hogar.
-    </p>
+{
+  variant === "compact" ? (
+    <section id="proceso-resumen" class="section-padding section--quiet adoption-process adoption-process--compact">
+      <div class="container container--narrow">
+        <p class="eyebrow eyebrow--quiet">PROCESO</p>
+        <h2 class="section-heading--quiet">¿Cómo sigue?</h2>
+        <p class="adoption-process__lead t-lead">
+          Conversamos contigo, resolvemos tus dudas y coordinamos un encuentro sin presión antes de avanzar.{" "}
+          <a href="/adoptar/#proceso">Revisa el proceso completo</a>.
+        </p>
+      </div>
+    </section>
+  ) : (
+    <section id="proceso" class="section-padding adoption-process">
+      <div class="container container--narrow">
+        <p class="eyebrow">PROCESO</p>
+        <h2>Te guiamos paso a paso</h2>
+        <p class="adoption-process__lead t-lead">
+          Adoptar no tiene que sentirse burocrático. Te escuchamos, resolvemos dudas y buscamos un galgo que pueda estar
+          bien en tu hogar.
+        </p>
 
-    <ol class="adoption-process__list" role="list">
-      <li class="adoption-process__step">
-        <span class="adoption-process__step-number" aria-hidden="true">1</span>
-        <div class="adoption-process__step-body">
-          <h3 class="adoption-process__step-title">Nos escribes</h3>
-          <p>Completa el formulario o escríbenos por WhatsApp contándonos qué estás buscando.</p>
-        </div>
-      </li>
-      <li class="adoption-process__step">
-        <span class="adoption-process__step-number" aria-hidden="true">2</span>
-        <div class="adoption-process__step-body">
-          <h3 class="adoption-process__step-title">Conversamos</h3>
-          <p>Hablamos de tu hogar, rutina, expectativas, tiempos disponibles y dudas antes de avanzar.</p>
-        </div>
-      </li>
-      <li class="adoption-process__step">
-        <span class="adoption-process__step-number" aria-hidden="true">3</span>
-        <div class="adoption-process__step-body">
-          <h3 class="adoption-process__step-title">Conoces al galgo</h3>
-          <p>Revisamos qué galgo podría estar bien contigo y coordinamos un encuentro sin presión.</p>
-        </div>
-      </li>
-      <li class="adoption-process__step">
-        <span class="adoption-process__step-number" aria-hidden="true">4</span>
-        <div class="adoption-process__step-body">
-          <h3 class="adoption-process__step-title">Llega a casa</h3>
-          <p>Si ambos se sienten bien, viene la prueba o adopción, firmamos el acuerdo y seguimos acompañándote.</p>
-        </div>
-      </li>
-    </ol>
+        <ol class="adoption-process__list" role="list">
+          <li class="adoption-process__step">
+            <span class="adoption-process__step-number" aria-hidden="true">
+              1
+            </span>
+            <div class="adoption-process__step-body">
+              <h3 class="adoption-process__step-title">Nos escribes</h3>
+              <p>Completa el formulario o escríbenos por WhatsApp contándonos qué estás buscando.</p>
+            </div>
+          </li>
+          <li class="adoption-process__step">
+            <span class="adoption-process__step-number" aria-hidden="true">
+              2
+            </span>
+            <div class="adoption-process__step-body">
+              <h3 class="adoption-process__step-title">Conversamos</h3>
+              <p>Hablamos de tu hogar, rutina, expectativas, tiempos disponibles y dudas antes de avanzar.</p>
+            </div>
+          </li>
+          <li class="adoption-process__step">
+            <span class="adoption-process__step-number" aria-hidden="true">
+              3
+            </span>
+            <div class="adoption-process__step-body">
+              <h3 class="adoption-process__step-title">Conoces al galgo</h3>
+              <p>Revisamos qué galgo podría estar bien contigo y coordinamos un encuentro sin presión.</p>
+            </div>
+          </li>
+          <li class="adoption-process__step">
+            <span class="adoption-process__step-number" aria-hidden="true">
+              4
+            </span>
+            <div class="adoption-process__step-body">
+              <h3 class="adoption-process__step-title">Llega a casa</h3>
+              <p>Si ambos se sienten bien, viene la prueba o adopción, firmamos el acuerdo y seguimos acompañándote.</p>
+            </div>
+          </li>
+        </ol>
 
-    <div class="adoption-process__reassurance">
-      <p>
-        Puedes consultar antes de postular. Hablamos con honestidad sobre costos, tiempos, departamento, niños, otros
-        animales y experiencia previa para que tomes una decisión tranquila.
-      </p>
-      <p>
-        Si la adopción no resulta, lo conversamos a tiempo y buscamos una alternativa responsable. Nuestro criterio
-        existe para cuidar a la familia y al galgo, no para poner barreras innecesarias.
-      </p>
-    </div>
-  </div>
-</section>
+        <div class="adoption-process__reassurance">
+          <p>
+            Puedes consultar antes de postular. Hablamos con honestidad sobre costos, tiempos, departamento, niños,
+            otros animales y experiencia previa para que tomes una decisión tranquila.
+          </p>
+          <p>
+            Si la adopción no resulta, lo conversamos a tiempo y buscamos una alternativa responsable. Nuestro criterio
+            existe para cuidar a la familia y al galgo, no para poner barreras innecesarias.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}

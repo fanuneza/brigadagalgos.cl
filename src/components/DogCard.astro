@@ -94,14 +94,7 @@ const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "
               <span class="dog-chip dog-chip--weight">{dog.weight}</span>
             </div>
           </div>
-          <p class="dog-card__details t-small-muted">{dog.details}</p>
           <p class="dog-card__sketch">{dog.characterSketch}</p>
-          <slot />
-        </div>
-        <div class="dog-card__footer">
-          <a href={profileHref} class="btn btn--ghost dog-card__profile-link">
-            Ver ficha de {dog.name}
-          </a>
         </div>
       </div>
     </>

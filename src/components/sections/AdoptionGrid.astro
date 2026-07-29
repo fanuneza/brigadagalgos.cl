@@ -4,10 +4,7 @@ import "../../styles/components/filter-chips.css";
 import "../../styles/components/dog-card.css";
 import type { AdoptionDogCard } from "../../utils/dog-content";
 import DogCard from "../DogCard.astro";
-import InstagramLink from "../InstagramLink.astro";
 import WhatsAppLink from "../WhatsAppLink.astro";
-import TrackedLink from "../TrackedLink.astro";
-import { SITE } from "../../config/site.ts";
 
 interface Props {
   dogs: AdoptionDogCard[];
@@ -33,35 +30,7 @@ const { dogs } = Astro.props;
   {
     dogs.map((dog, dogIndex) => (
       <article class="dog-card adoption-card" data-adoption-card data-sex={dog.sex} data-age-type={dog.ageType}>
-        <DogCard dog={dog} variant="grid" loadingPriority={dogIndex < 2 ? "eager" : "lazy"}>
-          {dog.instagramUrl && (
-            <InstagramLink url={dog.instagramUrl} name={dog.name} location="dog_card" class="dog-social-link" />
-          )}
-          <div class="dog-card__actions">
-            <TrackedLink
-              href={SITE.adoptionForm}
-              class="btn btn--primary dog-card__cta"
-              newTab
-              trackEvent="adoption_apply_click"
-              trackLabel={`Postular - ${dog.name}`}
-              trackLocation="dog_card"
-              trackDestination={SITE.adoptionForm}
-              trackCategory="adoption"
-              trackOutbound
-            >
-              Postular <span class="sr-only">por {dog.name} (abre en una nueva pestaña)</span>
-            </TrackedLink>
-            <WhatsAppLink
-              text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
-              location="dog_card"
-              label={`Más información - ${dog.name}`}
-              class="btn btn--secondary dog-card__cta"
-              data-dog-name={dog.name}
-            >
-              Más información <span class="sr-only">sobre {dog.name}</span>
-            </WhatsAppLink>
-          </div>
-        </DogCard>
+        <DogCard dog={dog} variant="grid" loadingPriority={dogIndex < 2 ? "eager" : "lazy"} />
       </article>
     ))
   }
