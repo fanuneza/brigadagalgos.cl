@@ -23,6 +23,7 @@ const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "
           photos={dog.pictures}
           id={`home-${dog.id}`}
           loadingPriority={loadingPriority}
+          transitionName={`dog-photo-${dog.id}`}
         />
       )}
       <div class="featured-adoption__body">
@@ -60,7 +61,12 @@ const trackLocation = variant === "featured" ? "homepage_featured_adoptions" : "
     </>
   ) : (
     <>
-      <SharedPhotoGallery name={dog.name} photos={dog.pictures} loadingPriority={loadingPriority} />
+      <SharedPhotoGallery
+        name={dog.name}
+        photos={dog.pictures}
+        loadingPriority={loadingPriority}
+        transitionName={`dog-photo-${dog.id}`}
+      />
       <div class="story-card__body dog-card__body">
         <div class="dog-card__content">
           <div class="dog-card__header">

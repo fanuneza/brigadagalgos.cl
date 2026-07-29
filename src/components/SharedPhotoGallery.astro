@@ -7,9 +7,12 @@ interface Props {
   name: string;
   photos: SharedGalleryPhoto[];
   loadingPriority?: "lazy" | "eager";
+  // Unique per page; callers derive it from the content slug so a card image
+  // can morph into the same photo on the destination page (ClientRouter).
+  transitionName: string;
 }
 
-const { id, name, photos, loadingPriority = "lazy" } = Astro.props;
+const { id, name, photos, loadingPriority = "lazy", transitionName } = Astro.props;
 
 // The gallery shell and its first slide are server-rendered here. Slides 2..n
 // are built lazily in the browser from the JSON payload by
@@ -50,6 +53,7 @@ const initialPhoto = photos[0];
                 fetchpriority={loadingPriority === "eager" ? "high" : undefined}
                 width="350"
                 height="350"
+                transition:name={transitionName}
               />
             </picture>
           </button>

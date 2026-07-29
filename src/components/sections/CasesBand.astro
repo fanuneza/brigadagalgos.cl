@@ -35,6 +35,7 @@ const { cases } = Astro.props;
               photos={dog.photos}
               id={dog.id}
               loadingPriority={caseIndex < 2 ? "eager" : "lazy"}
+              transitionName={`story-photo-${dog.id}`}
             />
             <div
               class="story-card__body"
