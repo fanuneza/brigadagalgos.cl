@@ -126,7 +126,7 @@ brigadagalgos.cl/
 │   │   └── WhyGalgosSection.astro
 │   ├── config/
 │   │   ├── faq.ts               # FAQ data and grouping
-│   │   └── site.ts              # Site metadata, contact links, IDs
+│   │   └── site.ts              # Site metadata, contact links, IDs, navigation entries
 │   ├── content/
 │   │   ├── dogs/                # Markdown dog profiles and success stories (status discriminator)
 │   │   ├── supporters/          # Markdown supporter entries
@@ -442,6 +442,16 @@ Full event list, verified against `src/scripts/` and the `trackEvent` props in c
 - Contact form: `contact_form_submit`, `contact_form_invalid`, `contact_form_success`, `contact_form_error`
 - Consent: `cookie_consent_action`, `cookie_consent_update`
 
+`data-track-location` values are unique per surface. Notable ones: `hero`, `navbar`, `desktop_nav`, `mobile_drawer`,
+`footer`, `homepage_featured_adoptions`, `homepage_success_stories`, `help_cards`, `donation_banner`, `adoption_hero`,
+`dog_card`, `dog_grid_empty`, `dog_profile`, `tail_cta`, `foster_hero`, `foster_cta`, `contact_channels`,
+`donation_hero`, `donation_card`, `help_tail_cta`.
+
+Adoption cards emit only `dog_profile_click` at `location="dog_card"`. The per-card apply, WhatsApp, and Instagram
+actions were removed when the listing became an assessment surface — those conversions now fire from the dog profile
+and the page-level CTAs instead. `data-track-section="rescue_process"` fires on `/hogar-temporal/` only; the homepage
+no longer renders that section.
+
 To extend tracking:
 
 1. Add `data-track-event` / `data-track-location` attributes to elements, or pass `trackEvent`/`trackLocation` to the shared link components.
@@ -457,7 +467,10 @@ Every page includes:
 - JSON-LD for Organization, WebSite, WebPage, and BreadcrumbList.
 - FAQ pages include FAQPage structured data.
 
-`src/config/site.ts` centralizes site metadata, contact links, and third-party IDs.
+`src/config/site.ts` centralizes site metadata, contact links, third-party IDs, and external form URLs
+(`adoptionForm`, `fosterForm`). It is also the single source of navigation: `NAV_ENTRIES` holds one entry per
+href/label, and `NAVBAR_LINKS` / `FOOTER_LINKS` derive the two independently ordered menus from it. Editing a nav
+label or URL is a one-line change there.
 
 ## External dependencies
 

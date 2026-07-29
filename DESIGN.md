@@ -259,7 +259,7 @@ Dos niveles. La elevación es un recurso escaso; si todo flota, nada destaca.
   acompaña: requisitos, datos, comparaciones, listados densos.
 
 `.cta-card--plain` aplica el mismo peso plano a la CTA de cierre cuando esa no es la conversión
-real de la página. Las tarjetas de ruta (`dog-card`, `story-card`, `channel-card`) mantienen su
+real de la página. Las tarjetas de ruta (`dog-card`, `story-card`, `route-card`) mantienen su
 propio sistema de clases y adoptan estos pesos cuando corresponda.
 
 ### Peso de acción
@@ -270,6 +270,14 @@ como una sola decisión.
 - **`.btn--primary`** — relleno naranjo. Una sola por agrupación: adoptar, postular, donar, enviar.
 - **`.btn--secondary`** — cian suave con borde. Una ruta alternativa que sigue importando.
 - **`.btn--ghost`** — sin relleno ni borde. Detalles de baja presión: ver una ficha, volver.
+
+**Una sola primaria por ruta.** No por sección: por página completa. Si dos secciones compiten
+por la misma atención, una de las dos baja a secundaria. Repetir la _misma_ acción (el CTA del
+hero y el de cierre apuntando al mismo formulario) no cuenta como competencia: refuerza.
+
+**Secundaria invertida sobre fondo oscuro.** En bandas oscuras como `.donation-banner`, la
+secundaria se dibuja con borde y tinta claros sobre fondo transparente. Mantiene el contraste AA
+sin recuperar el peso de una primaria.
 
 ## 7. Do's and Don'ts
 

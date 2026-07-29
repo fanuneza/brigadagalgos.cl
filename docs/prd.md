@@ -10,15 +10,15 @@ This document lists the functional requirements of the Brigada Galgos website as
 
 | Route                    | Purpose          | Key content                                                                                                                                      |
 | ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/`                      | Home             | Hero, mission, three main CTAs, featured dogs, success stories, how to help, donation callout, footer                                            |
-| `/adoptar/`              | Adoption listing | Filterable dog cards, dog profile lightbox, process explanation, CTAs                                                                            |
+| `/`                      | Home             | Hero, featured dogs (lead), mission with trust figures and rescue flow, why galgos, success stories, how to help, donation band                  |
+| `/adoptar/`              | Adoption listing | Filterable dog cards for assessment, adoption process, tail CTA                                                                                  |
 | `/adoptar/<slug>/`       | Dog profile      | Full profile page per active dog: gallery, details, per-dog meta description and OG image, breadcrumb, WhatsApp + form CTAs, native share button |
 | `/casos-de-exito/`       | Success archive  | Complete build-time collection of adopted galgos, galleries and route back to active adoption                                                    |
 | `/por-que-galgos/`       | Why galgos       | Editorial sections, FAQ, selected success stories                                                                                                |
 | `/hogar-temporal/`       | Foster program   | Requirements, what Brigada covers, CTA                                                                                                           |
-| `/donar/`                | Donations        | Impact amounts, bank details, eSponsor card, transparency notes                                                                                  |
+| `/donar/`                | Donations        | Two parallel donation options first, then suggested amounts, impact, exclusions, other ways to help                                              |
 | `/colaboradores/`        | Supporters       | Logo grid of institutions, companies, and people                                                                                                 |
-| `/contacto/`             | Contact          | WhatsApp, email, social links, form                                                                                                              |
+| `/contacto/`             | Contact          | Five intent cards (adoptar, hogar temporal, donar, prensa, otra duda), message form, social note                                                 |
 | `/preguntas-frecuentes/` | FAQ              | Full FAQ grouped by topic                                                                                                                        |
 | `/politica-de-cookies/`  | Cookie policy    | Plain explanation of cookies and consent                                                                                                         |
 | `/404/`                  | Not found        | Helpful redirect to main pages                                                                                                                   |
@@ -51,7 +51,9 @@ Reusable UI used across pages (see `docs/spec.md` for the full file map):
 - `Hero` — homepage hero; `PageHero` — hero for inner pages.
 - `MissionSection` — mission/value proposition.
 - `StoriesSection` — success-story preview; `StoryCard` — shared story card.
-- `ProcessStepper` — adoption/foster steps; `RequirementCard` — checklist item.
+- `ProcessStepper` — foster steps on `/hogar-temporal/`; `RequirementCard` — checklist item.
+- `AdoptionProcess` — adoption steps; `variant="full"` on `/adoptar/`, `variant="compact"` teaser on dog profiles.
+- `TrustStatsSection` — trust figures; `variant="compact"` renders inside `MissionSection`'s slot on the homepage.
 - `HelpCards` — CTA cards (adopt, foster, donate); `DonationBanner` — donation callout.
 - `SharedPhotoGallery` / `SharedGalleryLightbox` — image gallery and lightbox.
 - `StructuredData` — JSON-LD injection.
@@ -77,7 +79,8 @@ Reusable UI used across pages (see `docs/spec.md` for the full file map):
 
 - **Acceptance criteria:**
   - The hero section states the mission within the first viewport.
-  - The three primary CTAs (adopt, foster, donate) are visible above the fold on desktop and within one scroll on mobile.
+  - Adoption is the homepage's single primary action. The hero pairs one primary CTA ("Quiero adoptar") with a
+    secondary foster CTA; donation is reachable from the closing band and the navbar, one weight below.
   - The CTAs use verb-first copy: "Quiero adoptar", "Puedo ser hogar temporal", "Voy a apoyar un galgo" or equivalent.
 
 **US-HOME-2: As a potential adopter, I want to see real galgos looking for a home so that I can imagine adopting one.**
@@ -85,7 +88,7 @@ Reusable UI used across pages (see `docs/spec.md` for the full file map):
 - **Acceptance criteria:**
   - At least one featured adoption dog card is shown on the home page.
   - Each card shows a photo, name, age, weight, and a short character sketch.
-  - The card links to `/adoptar/` or opens the dog profile lightbox.
+  - The dog's name is the card's only link and leads to `/adoptar/<slug>/`; the photo still opens the gallery lightbox.
 
 **US-HOME-3: As a visitor, I want to read success stories so that I trust the adoption process.**
 
@@ -114,10 +117,11 @@ Reusable UI used across pages (see `docs/spec.md` for the full file map):
 **US-ADOPT-3: As a visitor, I want to view a dog's full profile so that I can decide whether to contact Brigada.**
 
 - **Acceptance criteria:**
-  - Clicking a dog card opens a lightbox with the full profile.
-  - The lightbox shows up to 3 gallery images.
-  - The lightbox shows details, character sketch, and current need.
-  - The lightbox provides a clear WhatsApp CTA and a link to the adoption form.
+  - The card is an assessment surface: photo, current need, sex/age/weight chips, and character sketch, with the
+    dog's name as its single link to `/adoptar/<slug>/`. Conversion CTAs live on the profile, not on the card.
+  - The profile groups content under "Datos clave", "Sobre <name>", and "Lo que necesita ahora".
+  - The gallery shows up to 3 images and opens the shared lightbox from the photo.
+  - The profile provides one primary adoption-form CTA plus a secondary WhatsApp CTA.
 
 ### Why galgos page (`/por-que-galgos`)
 
@@ -336,4 +340,4 @@ These can be deferred or improved incrementally:
 
 ## Last updated
 
-2026-07-28
+2026-07-29

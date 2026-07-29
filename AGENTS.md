@@ -47,6 +47,7 @@ For the repo layout and full file tree, see `docs/spec.md`.
 ### Homepage and success stories
 
 - The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It picks three active adoption dogs (`status: "adopcion"` in the unified `dogs` collection) at random (shuffled per build); the optional `order` field in the schema is currently unused.
+- The homepage runs six sections after the hero, in this order and weight: `FeaturedAdoptionDogs` (lead), `MissionSection` (support, with `TrustStatsSection variant="compact"` in its slot and the rescue flow as a compact list), `WhyGalgosSection` (support), `StoriesSection` (support), `HelpCards` (quiet), `DonationBanner` (quiet band). Adoption is the page's single primary action; do not add a second competing primary.
 - `/adoptar/` remains the complete active listing. Do not turn the homepage preview into the full catalogue.
 - Dogs with `status: "exito"` power a three-story homepage preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
 - The archive is static and server-rendered. Do not restore homepage story pagination, `/casos/exito-home.json`, or `src/scripts/stories-section.ts` without a new product requirement.
@@ -60,6 +61,8 @@ For the repo layout and full file tree, see `docs/spec.md`.
 
 ### Links and outbound tracking
 
+- Navigation is defined once in `src/config/site.ts`: `NAV_ENTRIES` holds one entry per href/label, and `NAVBAR_LINKS` / `FOOTER_LINKS` derive the two independently ordered menus. Edit labels and URLs there, never inside `Navbar.astro` or `Footer.astro`.
+- External organizational URLs (forms, social, donation platforms) live in `SITE` — including `adoptionForm` and `fosterForm`. Do not hardcode them in components.
 - Reuse the link helpers (`src/components/TrackedLink.astro`, `WhatsAppLink.astro`, `InstagramLink.astro`) instead of hand-rolling outbound-link behavior.
 - `TrackedLink` is the shared primitive for outbound links: analytics metadata is optional, and `newTab` covers external links without tracking.
 - Keep new-tab semantics and external indicators consistent. Do not duplicate `target`, `rel`, or tracking attributes inline unless there is a clear exception.
@@ -67,6 +70,7 @@ For the repo layout and full file tree, see `docs/spec.md`.
 ### Styling strategy
 
 - The site is still primarily styled with `src/styles/global.css` plus modular CSS files in `src/styles/components/`.
+- Express hierarchy with the shared weight vocabulary documented in `DESIGN.md` §6 rather than one-off spacing: section weights `.section--lead` / `.section--support` / `.section--quiet`, heading and eyebrow weights `.section-heading--{weight}` / `.eyebrow--{weight}`, card weights `.card--elevated` / `.card--plain`, and action weights `.btn--primary` / `.btn--secondary` / `.btn--ghost`. `PageHero` and `CtaCard` take an optional `weight` prop. Give each route exactly one primary action.
 - Tailwind is no longer part of this project.
 - Prefer existing patterns in the surrounding code and keep styling changes within the established CSS architecture instead of introducing a second styling system.
 - Preserve the current visual language and avoid “one-off” utility-heavy rewrites when editing established components.
