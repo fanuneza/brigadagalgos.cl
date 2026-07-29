@@ -405,7 +405,7 @@ Typed via the `env.schema` in `astro.config.mjs` (`astro:env`) and documented in
 | `PUBLIC_WEB3FORMS_KEY` | client, public | web3forms access key override; falls back to `SITE.web3forms.accessKey` |
 | `ENABLE_INDEXNOW`      | server, public | Gate for the IndexNow ping after build (default `false`)                |
 
-`astro:env` is not available inside `astro.config.mjs` itself, so the config file reads `process.env.ENABLE_INDEXNOW` directly; both paths stay in sync through the schema default.
+`astro:env` is not available inside `astro.config.mjs` itself, so the config file loads `.env` files with Vite's `loadEnv` helper (the Astro-documented pattern for config files) and gates on `ENABLE_INDEXNOW === "true"`; both paths stay in sync through the schema default.
 
 ## Analytics and consent flow
 

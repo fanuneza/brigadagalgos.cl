@@ -1,9 +1,17 @@
 import { defineConfig, envField, fontProviders, svgoOptimizer } from "astro/config";
+import { loadEnv } from "vite";
 import sitemap from "@astrojs/sitemap";
 import seoGraph from "@jdevalk/astro-seo-graph/integration";
 import { INDEXNOW_KEY, SITE } from "./src/config/site.ts";
 
 const siteUrl = SITE.siteUrl;
+
+// astro:env is not available inside astro.config.mjs (Astro evaluates the
+// config before the virtual module exists), so load .env files with Vite's
+// loadEnv helper, per the Astro docs. loadEnv also merges process.env, so
+// CLI-set variables keep working. Stays in sync with the ENABLE_INDEXNOW
+// entry in env.schema below.
+const { ENABLE_INDEXNOW } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
 
 export default defineConfig({
   output: "static",
@@ -62,10 +70,10 @@ export default defineConfig({
           href.startsWith("/schemamap.xml") ||
           href.startsWith("/schema/"),
       },
-      // astro:env is not available inside astro.config.mjs (Astro limitation),
-      // so this gate stays in sync with ENABLE_INDEXNOW in env.schema above.
+      // astro:env is not available inside astro.config.mjs; the gate reads
+      // the value loaded via loadEnv above (see comment there).
       indexNow:
-        process.env.ENABLE_INDEXNOW === "true"
+        ENABLE_INDEXNOW === "true"
           ? {
               key: INDEXNOW_KEY,
               host: new URL(siteUrl).host,
