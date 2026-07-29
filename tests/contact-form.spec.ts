@@ -70,7 +70,7 @@ test("a failed submission preserves the message and offers recovery", async ({ p
   await expect(page.locator("[data-form-status]")).toBeVisible();
   await expect(page.locator("[data-form-status]")).toContainText("Tu mensaje sigue escrito");
   await expect(page.getByRole("textbox", { name: "Mensaje", exact: true })).toHaveValue(
-    "Quiero conocer el proceso de adopción.",
+    "Quiero conocer el proceso de adopción."
   );
   await expect(page.getByRole("button", { name: "Enviar mensaje" })).toBeEnabled();
 });

@@ -83,4 +83,18 @@ test("success archive uses one decisive image per story and keeps the proof path
   await expect(cards.locator("[data-shared-gallery]")).toHaveCount(0);
   await expect(cards.locator(".story-card__quote")).toHaveCount(successStoryCount);
   await expect(page.locator(".stories-archive-cta .btn--primary")).toHaveCount(0);
+
+  const images = cards.locator(".story-card__photo--single img");
+  for (let index = 0; index < (await images.count()); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((element) => {
+          const img = element as HTMLImageElement;
+          return img.complete && img.naturalWidth > 0;
+        })
+      )
+      .toBe(true);
+  }
 });
