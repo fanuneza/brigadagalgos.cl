@@ -1,4 +1,4 @@
-import { defineConfig, envField, fontProviders } from "astro/config";
+import { defineConfig, envField, fontProviders, svgoOptimizer } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import seoGraph from "@jdevalk/astro-seo-graph/integration";
 import { INDEXNOW_KEY, SITE } from "./src/config/site.ts";
@@ -11,6 +11,12 @@ export default defineConfig({
   trailingSlash: "always",
   build: {
     inlineStylesheets: "auto",
+  },
+  image: {
+    responsiveStyles: true,
+  },
+  experimental: {
+    svgOptimizer: svgoOptimizer({ plugins: ["preset-default", "removeXMLNS"] }),
   },
   env: {
     schema: {

@@ -1,5 +1,5 @@
 import { escapeAttribute } from "../../utils/html-escape";
-import type { SharedGalleryItem, SharedGalleryPhoto } from "../../utils/gallery";
+import { getPhotoAlt, type SharedGalleryItem, type SharedGalleryPhoto } from "../../utils/gallery";
 
 export function getStoryContext(element: HTMLElement, fallbackItem: SharedGalleryItem) {
   const storyCard = element.closest<HTMLElement>("[data-story-card]");
@@ -16,14 +16,6 @@ export function getStoryContext(element: HTMLElement, fallbackItem: SharedGaller
 
 export function wrapIndex(index: number, total: number) {
   return ((index % total) + total) % total;
-}
-
-export function getPhotoAlt(item: SharedGalleryItem, index: number) {
-  return item.photos[index]?.alt ?? `${item.name}, foto ${index + 1}`;
-}
-
-export function getPhotoCaption(item: SharedGalleryItem, index: number) {
-  return item.photos[index]?.caption ?? `${item.name} · Foto ${index + 1} de ${item.photos.length}`;
 }
 
 function buildPictureMarkup(photo: SharedGalleryPhoto, alt: string, loading: "lazy" | "eager" = "lazy") {

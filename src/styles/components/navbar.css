@@ -207,22 +207,7 @@ body.drawer-open {
   width: 32px;
   height: 32px;
   display: block;
-  opacity: 0.55;
-  transition: opacity var(--duration-fast);
-}
-
-.drawer__social a:hover .drawer__social-icon {
-  opacity: 1;
-}
-
-:root[data-theme="dark"] .drawer__social-icon {
-  filter: brightness(0) invert(1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .drawer__social-icon {
-    filter: brightness(0) invert(1);
-  }
+  fill: currentColor;
 }
 
 .drawer__close:focus-visible {

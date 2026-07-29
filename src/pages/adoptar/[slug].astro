@@ -43,7 +43,13 @@ const ogImage = firstImage
       </p>
       <div class="dog-profile__layout">
         <div class="dog-profile__gallery">
-          <SharedPhotoGallery name={dog.name} photos={dog.pictures} id={dog.id} loadingPriority="eager" />
+          <SharedPhotoGallery
+            name={dog.name}
+            photos={dog.pictures}
+            id={dog.id}
+            loadingPriority="eager"
+            transitionName={`dog-photo-${dog.id}`}
+          />
         </div>
         <div class="dog-profile__info">
           <p class="eyebrow">GALGO EN ADOPCIÓN</p>

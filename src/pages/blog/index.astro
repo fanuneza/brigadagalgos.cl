@@ -63,6 +63,7 @@ const latestPost = posts[0];
                         src={post.data.heroImage}
                         alt={post.data.heroImageAlt ?? post.data.title}
                         class="blog-card__img"
+                        layout="constrained"
                         widths={index === 0 ? [480, 768, 1200, 1600] : [320, 480, 640]}
                         sizes={index === 0 ? "(min-width: 1024px) 1040px, 100vw" : "(min-width: 768px) 480px, 100vw"}
                         quality={78}

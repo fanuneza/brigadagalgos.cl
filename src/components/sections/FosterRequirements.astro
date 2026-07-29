@@ -2,6 +2,9 @@
 import "../../styles/components/hogar-temporal.css";
 import "../../styles/components/requirement-card.css";
 import RequirementCard from "../RequirementCard.astro";
+import SeguridadIcon from "../../assets/icons/seguridad.svg";
+import TiempoIcon from "../../assets/icons/tiempo.svg";
+import ConvivenciaIcon from "../../assets/icons/convivencia.svg";
 ---
 
 <section class="section-padding">
@@ -14,19 +17,19 @@ import RequirementCard from "../RequirementCard.astro";
     </p>
     <div class="req-cards">
       <RequirementCard
-        icon="/icons/seguridad.svg"
+        icon={SeguridadIcon}
         title="SEGURIDAD"
         tone="primary"
         body="En departamentos debe haber malla en balcones y ventanas. También revisamos cómo será cada salida y cada espacio de descanso."
       />
       <RequirementCard
-        icon="/icons/tiempo.svg"
+        icon={TiempoIcon}
         title="TIEMPO"
         tone="secondary"
         body="Tu disponibilidad puede ser desde un día hasta semanas o meses. Lo importante es saber con qué tiempo real cuentas para acompañarlo."
       />
       <RequirementCard
-        icon="/icons/convivencia.svg"
+        icon={ConvivenciaIcon}
         title="CONVIVENCIA E IMPLEMENTOS"
         tone="warm"
         body="Vemos si tienes correa, arnés, camas o mantas, y cómo conviven perros o gatos en casa. Si falta algo, podemos proveer implementos."

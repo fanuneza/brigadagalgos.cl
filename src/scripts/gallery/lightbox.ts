@@ -1,5 +1,6 @@
 import { dispatchAnalytics } from "../../utils/analytics";
-import { getPhotoAlt, getPhotoCaption, wrapIndex } from "./dom";
+import { getPhotoAlt, getPhotoCaption } from "../../utils/gallery";
+import { wrapIndex } from "./dom";
 import type { SharedGalleryItem } from "../../utils/gallery";
 
 const LIGHTBOX_ROOT_SELECTOR = "[data-shared-gallery-lightbox]";

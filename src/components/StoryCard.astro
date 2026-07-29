@@ -22,7 +22,13 @@ const { story, location, summary = false, loadingPriority = "lazy" } = Astro.pro
 >
   {
     story.photos.length > 0 && (
-      <SharedPhotoGallery name={story.name} photos={story.photos} id={story.id} loadingPriority={loadingPriority} />
+      <SharedPhotoGallery
+        name={story.name}
+        photos={story.photos}
+        id={story.id}
+        loadingPriority={loadingPriority}
+        transitionName={`story-photo-${story.id}`}
+      />
     )
   }
   <div
