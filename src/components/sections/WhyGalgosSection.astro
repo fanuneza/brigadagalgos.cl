@@ -1,5 +1,6 @@
 ---
 import TrackedLink from "../../components/TrackedLink.astro";
+import "../../styles/components/why-galgos.css";
 ---
 
 <section class="section-padding section--support" data-track-section="why_galgos">
@@ -8,16 +9,13 @@ import TrackedLink from "../../components/TrackedLink.astro";
     <h2 class="section-heading section-heading--support">¿Un galgo podría vivir conmigo?</h2>
     <ul class="requisitos-list">
       <li>Muchos son tranquilos dentro de casa y disfrutan tener un rincón cómodo donde descansar.</li>
-      <li>Suelen estar bien con paseos diarios razonables, juego suave y una rutina predecible.</li>
-      <li>Pueden adaptarse a departamento cuando hay compromiso, seguridad y salidas responsables.</li>
-      <li>Con buenas presentaciones, varios conviven con niños u otros animales según su historia y carácter.</li>
-      <li>Buscan compañía cercana: no necesitan una vida perfecta, necesitan una familia dispuesta a conocerlos.</li>
+      <li>Necesitan paseos diarios, seguridad y una rutina predecible.</li>
+      <li>La convivencia con niños u otros animales siempre se mira caso a caso.</li>
     </ul>
 
     <div class="why-galgos-section__summary">
       <p class="section-body t-lead">
-        Miramos la rutina completa: espacio, tiempos, experiencia, otros animales y el ritmo de cada galgo. Así cuidamos
-        que la adopción sea buena para tu familia y para él.
+        Miramos tu rutina, espacio y convivencia para orientarte sin apuro antes de proponer un galgo.
       </p>
     </div>
 
@@ -30,7 +28,20 @@ import TrackedLink from "../../components/TrackedLink.astro";
       trackDestination="/por-que-galgos/"
       trackCategory="adoption"
     >
-      Por qué rescatamos galgos
+      Ver cómo es vivir con un galgo
     </TrackedLink>
+    <p class="why-galgos-section__faq">
+      ¿Tienes una duda concreta?
+      <TrackedLink
+        href="/preguntas-frecuentes/"
+        trackEvent="cta_click"
+        trackLabel="Preguntas frecuentes"
+        trackLocation="why_galgos"
+        trackDestination="/preguntas-frecuentes/"
+        trackCategory="adoption"
+      >
+        Revisa nuestras preguntas frecuentes.
+      </TrackedLink>
+    </p>
   </div>
 </section>

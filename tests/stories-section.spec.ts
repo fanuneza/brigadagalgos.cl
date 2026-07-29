@@ -42,6 +42,27 @@ test("home prioritizes active dogs and links the stories preview to the archive"
   await expect(page.locator("[data-stories-ver-mas]")).toHaveCount(0);
 });
 
+test("home keeps adoption as its single primary action and secondary sections in order", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator("main .btn--primary")).toHaveCount(1);
+  await expect(page.locator("main .btn--primary")).toHaveAttribute("href", "/adoptar/");
+  await expect(page.locator(".help-cards .help-card")).toHaveCount(2);
+
+  const sectionOrder = await page
+    .locator("main > section")
+    .evaluateAll((sections) => sections.map((section) => section.getAttribute("data-track-section")));
+  expect(sectionOrder).toEqual([
+    "hero",
+    "homepage_featured_adoptions",
+    "mission",
+    "why_galgos",
+    "success_stories",
+    "help_cards",
+    "donation_banner",
+  ]);
+});
+
 test("success archive renders every story and returns visitors to active adoption", async ({ page }) => {
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
