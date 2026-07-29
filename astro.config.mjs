@@ -1,10 +1,13 @@
 import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import seoGraph from "@jdevalk/astro-seo-graph/integration";
+import { INDEXNOW_KEY, SITE } from "./src/config/site.ts";
+
+const siteUrl = SITE.siteUrl;
 
 export default defineConfig({
   output: "static",
-  site: "https://brigadagalgos.cl",
+  site: siteUrl,
   trailingSlash: "always",
   build: {
     inlineStylesheets: "auto",
@@ -38,9 +41,9 @@ export default defineConfig({
       indexNow:
         process.env.ENABLE_INDEXNOW === "true"
           ? {
-              key: "591c2b87f0b68c44f260215f5d8e9da3",
-              host: "brigadagalgos.cl",
-              siteUrl: "https://brigadagalgos.cl",
+              key: INDEXNOW_KEY,
+              host: new URL(siteUrl).host,
+              siteUrl,
             }
           : undefined,
       markdownAlternate: false,

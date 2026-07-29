@@ -1,3 +1,7 @@
+// IndexNow key shared between the astro.config.mjs integration and the
+// key-file endpoint (src/pages/<key>.txt.ts must keep matching this value).
+export const INDEXNOW_KEY = "591c2b87f0b68c44f260215f5d8e9da3";
+
 export const SITE = {
   name: "Brigada Galgos",
   legalName: "Fundación Brigada Galgos",
