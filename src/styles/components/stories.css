@@ -20,7 +20,9 @@
   pointer-events: none;
 }
 
-.stories__heading {
+/* Scoped by ancestor so it outranks `.section-heading { margin-bottom: 0 }`
+   regardless of stylesheet order. */
+.stories .stories__heading {
   margin-bottom: var(--space-4);
 }
 

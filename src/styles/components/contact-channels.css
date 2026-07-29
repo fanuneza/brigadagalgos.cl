@@ -1,16 +1,22 @@
-.contact-channels {
+.contact-routes {
   display: grid;
   gap: var(--space-5);
   margin-top: var(--space-6);
 }
 
+@media (min-width: 768px) {
+  .contact-routes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (min-width: 1024px) {
-  .contact-channels {
+  .contact-routes {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.channel-card {
+.route-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
@@ -19,44 +25,37 @@
   gap: var(--space-3);
 }
 
-.channel-card__title {
+.route-card__title {
   font-family: var(--font-display);
   font-weight: var(--weight-black);
   text-transform: uppercase;
   margin: 0;
 }
 
-.channel-card__detail {
-  font-weight: var(--weight-semi);
+.route-card__body {
   margin: 0;
 }
 
-.channel-card__hours {
+.route-card__hours {
   margin: 0;
 }
 
-.channel-card__body {
-  margin: 0;
-}
-
-.channel-card > .btn {
+.route-card > .btn {
   margin-top: auto;
 }
 
-.channel-card__social {
+.route-card__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  align-items: center;
+  gap: var(--space-3);
   margin-top: auto;
 }
 
-.channel-card__social-link {
-  gap: var(--space-2);
+.route-card__form-link {
+  font-size: var(--font-size-sm);
 }
 
-.channel-card__social-icon {
-  width: 18px;
-  height: 18px;
-  display: block;
-  fill: currentColor;
+.contact-routes__social {
+  margin-top: var(--space-6);
 }

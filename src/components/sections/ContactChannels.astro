@@ -3,66 +3,97 @@ import "../../styles/components/contact-channels.css";
 import { SITE } from "../../config/site.ts";
 import TrackedLink from "../../components/TrackedLink.astro";
 import WhatsAppLink from "../../components/WhatsAppLink.astro";
+import AdoptarIcon from "../../assets/icons/adoptar.svg";
+import HogarTemporalIcon from "../../assets/icons/hogar-temporal.svg";
+import DonarIcon from "../../assets/icons/donar.svg";
+import ShareNodesIcon from "../../assets/icons/share-nodes.svg";
 import WhatsAppIcon from "../../assets/icons/whatsapp.svg";
-import EmailIcon from "../../assets/icons/email.svg";
-import RedesIcon from "../../assets/icons/redes.svg";
-import InstagramIcon from "../../assets/icons/instagram.svg";
-import FacebookIcon from "../../assets/icons/facebook.svg";
 ---
 
 <section class="section-padding">
   <div class="container">
-    <p class="eyebrow">CANALES DIRECTOS</p>
-    <h2 class="sr-only">Elige cómo quieres contactarnos</h2>
-    <div class="contact-channels">
-      <div class="channel-card">
+    <p class="eyebrow">¿EN QUÉ TE PODEMOS AYUDAR?</p>
+    <h2 class="sr-only">Elige tu motivo de contacto</h2>
+    <div class="contact-routes">
+      <article class="route-card">
+        <span class="icon-circle icon-circle--primary" aria-hidden="true">
+          <AdoptarIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
+        </span>
+        <h3 class="route-card__title t-ui-title">ADOPTAR</h3>
+        <p class="route-card__body t-card-body">
+          Conoce a los galgos que hoy buscan familia y postula cuando encuentres al tuyo.
+        </p>
+        <a href="/adoptar/" class="btn btn--primary">Ver galgos en adopción</a>
+      </article>
+
+      <article class="route-card">
+        <span class="icon-circle icon-circle--secondary" aria-hidden="true">
+          <HogarTemporalIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
+        </span>
+        <h3 class="route-card__title t-ui-title">HOGAR TEMPORAL</h3>
+        <p class="route-card__body t-card-body">
+          Abre tu casa por un tiempo mientras un galgo espera a su familia definitiva.
+        </p>
+        <a href="/hogar-temporal/" class="btn btn--primary">Ver cómo ser hogar temporal</a>
+      </article>
+
+      <article class="route-card">
+        <span class="icon-circle icon-circle--warm" aria-hidden="true">
+          <DonarIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
+        </span>
+        <h3 class="route-card__title t-ui-title">DONAR</h3>
+        <p class="route-card__body t-card-body">
+          Tu aporte cubre atención veterinaria, alimento y cuidado mientras esperan familia.
+        </p>
+        <a href="/donar/" class="btn btn--primary">Ver formas de donar</a>
+      </article>
+
+      <article class="route-card">
+        <span class="icon-circle icon-circle--purple" aria-hidden="true">
+          <ShareNodesIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
+        </span>
+        <h3 class="route-card__title t-ui-title">PRENSA Y ALIANZAS</h3>
+        <p class="route-card__body t-card-body">
+          Si eres medio de comunicación, clínica veterinaria, municipalidad o empresa y quieres apoyarnos, escríbenos
+          para coordinar la conversación.
+        </p>
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Prensa y alianzas")}`} class="btn btn--secondary">
+          Escribir por correo
+        </a>
+      </article>
+
+      <article class="route-card">
         <span class="icon-circle icon-circle--green" aria-hidden="true">
           <WhatsAppIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
         </span>
-        <h3 class="channel-card__title t-ui-title">WHATSAPP</h3>
-        <p class="channel-card__detail">{SITE.whatsappPhone}</p>
-        <p class="channel-card__hours t-small-muted">Lun a Vie · 10:00 – 19:00</p>
-        <WhatsAppLink
-          text="Hola, quiero hablar con Brigada Galgos"
-          location="contact_channels"
-          label="Abrir WhatsApp - Contact Channels"
-          class="btn btn--primary"
-        >
-          Abrir WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
-        </WhatsAppLink>
-      </div>
-
-      <div class="channel-card">
-        <span class="icon-circle icon-circle--warm" aria-hidden="true">
-          <EmailIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
-        </span>
-        <h3 class="channel-card__title t-ui-title">EMAIL</h3>
-        <p class="channel-card__detail">{SITE.email}</p>
-        <p class="channel-card__hours t-small-muted">Respondemos lo antes posible.</p>
-        <a href={`mailto:${SITE.email}`} class="btn btn--secondary"> Escribir por correo </a>
-      </div>
-
-      <div class="channel-card">
-        <span class="icon-circle icon-circle--purple" aria-hidden="true">
-          <RedesIcon class="icon-circle__image" width={24} height={24} aria-hidden="true" />
-        </span>
-        <h3 class="channel-card__title t-ui-title">REDES</h3>
-        <p class="channel-card__body t-card-body">Las novedades de los galgos viven en Instagram.</p>
-        <div class="channel-card__social">
-          <TrackedLink href={SITE.instagram} class="btn btn--ghost channel-card__social-link" newTab>
-            <span class="btn__icon" aria-hidden="true">
-              <InstagramIcon class="channel-card__social-icon" width={18} height={18} aria-hidden="true" />
-            </span>
-            <span>Instagram <span class="sr-only"> (abre en una nueva pestaña)</span></span>
-          </TrackedLink>
-          <TrackedLink href={SITE.facebook} class="btn btn--ghost channel-card__social-link" newTab>
-            <span class="btn__icon" aria-hidden="true">
-              <FacebookIcon class="channel-card__social-icon" width={18} height={18} aria-hidden="true" />
-            </span>
-            <span>Facebook <span class="sr-only"> (abre en una nueva pestaña)</span></span>
-          </TrackedLink>
+        <h3 class="route-card__title t-ui-title">OTRA DUDA</h3>
+        <p class="route-card__body t-card-body">
+          ¿Tu consulta no calza con lo anterior? Escríbenos por WhatsApp o completa el formulario más abajo.
+        </p>
+        <div class="route-card__actions">
+          <WhatsAppLink
+            text="Hola, tengo una duda para Brigada Galgos"
+            location="contact_channels"
+            label="Abrir WhatsApp - Contact General"
+            class="btn btn--primary"
+          >
+            Abrir WhatsApp <span class="sr-only"> (abre en una nueva pestaña)</span>
+          </WhatsAppLink>
+          <a href="#mensaje" class="text-link route-card__form-link">o completa el formulario</a>
         </div>
-      </div>
+        <p class="route-card__hours t-small-muted">Lun a Vie · 10:00 – 19:00</p>
+      </article>
     </div>
+
+    <p class="contact-routes__social t-small-muted">
+      Las novedades de los galgos viven en Instagram y Facebook:{" "}
+      <TrackedLink href={SITE.instagram} class="text-link" newTab>
+        Instagram <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </TrackedLink>
+      {" · "}
+      <TrackedLink href={SITE.facebook} class="text-link" newTab>
+        Facebook <span class="sr-only"> (abre en una nueva pestaña)</span>
+      </TrackedLink>
+    </p>
   </div>
 </section>

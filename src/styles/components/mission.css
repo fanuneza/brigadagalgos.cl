@@ -1,0 +1,45 @@
+/* Homepage mission block — "quiénes somos y qué hemos hecho".
+   It absorbs the institutional prose, the numbers strip (slotted
+   `TrustStatsSection variant="compact"`) and a one-line rescue flow that
+   replaced the full five-step homepage stepper. `/hogar-temporal/` keeps the
+   real stepper; this is a proof line, not a process page. */
+
+.mission__flow {
+  margin-top: var(--space-6);
+}
+
+.mission__flow-title {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.mission__flow-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: mission-step;
+}
+
+.mission__flow-list li {
+  counter-increment: mission-step;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-base);
+  color: var(--color-text);
+  border: 1px solid var(--card-plain-border);
+  background: var(--card-plain-bg);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+}
+
+.mission__flow-list li::before {
+  content: counter(mission-step);
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  color: var(--color-primary-700);
+}

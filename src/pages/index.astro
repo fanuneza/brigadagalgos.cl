@@ -4,7 +4,6 @@ import Hero from "../components/sections/Hero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
 import MissionSection from "../components/sections/MissionSection.astro";
 import HelpCards from "../components/sections/HelpCards.astro";
-import ProcessStepper from "../components/sections/ProcessStepper.astro";
 import StoriesSection from "../components/sections/StoriesSection.astro";
 import DonationBanner from "../components/sections/DonationBanner.astro";
 import WhyGalgosSection from "../components/sections/WhyGalgosSection.astro";
@@ -49,34 +48,6 @@ async function buildHeroImageSources(src: ImageMetadata) {
     portraitFallbackSrc: portraitFallback.src,
   };
 }
-
-const rescueSteps = [
-  {
-    label: "Recibimos el aviso",
-    subLabel: "Los casos suelen llegar por WhatsApp o redes sociales.",
-    colorClass: "primary",
-  },
-  {
-    label: "Rescate y traslado",
-    subLabel: "Evaluamos la urgencia y movemos al galgo a un lugar seguro.",
-    colorClass: "secondary",
-  },
-  {
-    label: "Atención veterinaria integral",
-    subLabel: "No solo lo básico: hacemos la evaluación y tratamiento que cada caso necesita.",
-    colorClass: "warm",
-  },
-  {
-    label: "Acogida temporal",
-    subLabel: "Una familia lo recibe mientras se estabiliza y conocemos mejor su ritmo.",
-    colorClass: "green",
-  },
-  {
-    label: "Familia y acompañamiento",
-    subLabel: "Buscamos una familia segura y seguimos presentes después de la adopción.",
-    colorClass: "purple",
-  },
-];
 
 const activeAdoptionDogs = await getActiveDogs();
 const featuredDogs = await getActiveAdoptionDogCards(3);
@@ -128,12 +99,13 @@ const heroSources = await buildHeroImageSources(heroImage);
     activeDogsCount={activeAdoptionDogs.length}
   />
   <RainbowDivider />
+  {/* Weights (DESIGN.md §6): lead → support ×3 → quiet → subordinate band. */}
   <FeaturedAdoptionDogs dogs={featuredDogs} />
-  <MissionSection />
-  <TrustStatsSection />
+  <MissionSection>
+    <TrustStatsSection variant="compact" />
+  </MissionSection>
   <WhyGalgosSection />
   <StoriesSection dogs={storyDogs} />
-  <ProcessStepper steps={rescueSteps} />
   <HelpCards />
   <DonationBanner />
   <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de Brigada Galgos" />
