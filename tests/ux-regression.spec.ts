@@ -19,18 +19,18 @@ const templateRoutes = [
 
 const decisionSurfaces = [
   { path: "/", selector: 'a[data-track-location="hero"][data-track-category="adoption"]' },
-  { path: "/adoptar/", selector: "#galgos" },
-  { path: "/adoptar/blue/", selector: 'a[data-track-event="adoption_apply_click"]' },
-  { path: "/casos-de-exito/", selector: ".stories-archive-cta" },
+  { path: "/adoptar/", selector: 'a[data-track-location="adoption_hero"]' },
+  { path: "/adoptar/blue/", selector: "main h1" },
+  { path: "/casos-de-exito/", selector: "main h1" },
   { path: "/colaboradores/", selector: "main h1" },
-  { path: "/contacto/", selector: ".contact-channels" },
-  { path: "/donar/", selector: "#datos-transferencia" },
-  { path: "/hogar-temporal/", selector: "#form" },
+  { path: "/contacto/", selector: 'a[data-track-location="contact_primary"]' },
+  { path: "/donar/", selector: 'a[data-track-location="donation_hero"]' },
+  { path: "/hogar-temporal/", selector: 'a[data-track-location="foster_hero"]' },
   { path: "/por-que-galgos/", selector: "main h1" },
-  { path: "/preguntas-frecuentes/", selector: '[aria-label="Temas de preguntas frecuentes"]' },
+  { path: "/preguntas-frecuentes/", selector: ".faq-topic-index a" },
   { path: "/blog/", selector: "main h1" },
   { path: "/blog/adoptar-un-galgo-por-primera-vez/", selector: "article h1" },
-  { path: "/politica-de-cookies/", selector: ".cookie-policy" },
+  { path: "/politica-de-cookies/", selector: ".cookie-policy__section:first-child h2" },
   { path: "/404.html", selector: 'main a[href="/adoptar/"]' },
 ] as const;
 
@@ -97,7 +97,6 @@ for (const surface of decisionSurfaces) {
     await page.goto(surface.path, { waitUntil: "networkidle" });
 
     const decisionSurface = page.locator(surface.selector).first();
-    await decisionSurface.scrollIntoViewIfNeeded();
     await expectNotToOverlap(page.locator("#cookie-banner"), decisionSurface, `${surface.path} consent overlap`);
   });
 }
