@@ -1,6 +1,6 @@
 ---
 import "../styles/components/shared-gallery.css";
-import { getPhotoAlt, serializeGalleryPayload, type SharedGalleryPhoto } from "../utils/gallery";
+import { getPhotoAlt, type SharedGalleryPhoto } from "../utils/gallery";
 
 interface Props {
   id?: string;
@@ -14,68 +14,95 @@ interface Props {
 
 const { id, name, photos, loadingPriority = "lazy", transitionName } = Astro.props;
 
-// The gallery shell and its first slide are server-rendered here. Slides 2..n
-// are built lazily in the browser from the JSON payload by
-// src/scripts/gallery/ (see data-gallery-payload below), so the markup,
-// classes, and data attributes emitted here must stay aligned with that
-// client contract.
+// Every slide is server-rendered: the carousel is a CSS scroll-snap track, so
+// navigation works with JavaScript disabled. JS only wires the lightbox.
+// Slide ids double as anchor targets for the prev/next/dot controls; they
+// derive from `id` or `transitionName`, which callers keep unique per page.
 const item = { id, name, photos };
-const initialPhoto = photos[0];
+const galleryKey = id ?? transitionName;
+const slideId = (index: number) => `${galleryKey}-slide-${index + 1}`;
+const hasMultiplePhotos = photos.length > 1;
 ---
 
-<div
-  class="story-card__photo"
-  data-shared-gallery
-  data-gallery-payload={serializeGalleryPayload(item)}
-  data-loading-priority={loadingPriority}
->
-  <div class="story-card__viewport">
-    <div class="story-card__track" data-gallery-track data-ssr-initial-slide="true">
+<div class="story-card__photo" data-shared-gallery data-gallery-id={id} data-gallery-name={name}>
+  <div class="story-card__viewport" role="group" tabindex="0" aria-label={`Galería de ${name}`}>
+    <div class="story-card__track">
       {
-        initialPhoto && (
-          <button
-            type="button"
-            class="story-card__slide"
-            data-photo-index="0"
-            data-image-loaded="true"
-            aria-label={`Abrir foto 1 de ${photos.length} de ${name}`}
-          >
-            <picture>
-              {initialPhoto.cardAvifSrcSet && (
-                <source srcset={initialPhoto.cardAvifSrcSet} sizes={initialPhoto.cardSizes} type="image/avif" />
-              )}
-              <img
-                src={initialPhoto.cardFallbackSrc}
-                alt={getPhotoAlt(item, 0)}
-                class="story-card__img"
-                loading={loadingPriority}
-                decoding="async"
-                fetchpriority={loadingPriority === "eager" ? "high" : undefined}
-                width="350"
-                height="350"
-                transition:name={transitionName}
-              />
-            </picture>
-          </button>
-        )
+        photos.map((photo, index) => (
+          <div class="story-card__slide" id={slideId(index)} data-full={photo.lightbox} data-caption={photo.caption}>
+            <button
+              type="button"
+              class="story-card__zoom"
+              data-gallery-zoom
+              aria-label={`Abrir foto ${index + 1} de ${photos.length} de ${name}`}
+            >
+              <picture>
+                {photo.cardAvifSrcSet && (
+                  <source srcset={photo.cardAvifSrcSet} sizes={photo.cardSizes} type="image/avif" />
+                )}
+                {
+                  // transition:name cannot be conditional, so only the first
+                  // slide's <img> carries it (dog-photo-<id> profile morph).
+                  index === 0 ? (
+                    <img
+                      src={photo.cardFallbackSrc}
+                      alt={getPhotoAlt(item, index)}
+                      class="story-card__img"
+                      loading={loadingPriority}
+                      decoding="async"
+                      fetchpriority={loadingPriority === "eager" ? "high" : undefined}
+                      width="350"
+                      height="350"
+                      transition:name={transitionName}
+                    />
+                  ) : (
+                    <img
+                      src={photo.cardFallbackSrc}
+                      alt={getPhotoAlt(item, index)}
+                      class="story-card__img"
+                      loading="lazy"
+                      decoding="async"
+                      width="350"
+                      height="350"
+                    />
+                  )
+                }
+              </picture>
+            </button>
+            {hasMultiplePhotos && index > 0 && (
+              <a
+                class="story-card__control story-card__control--prev"
+                href={`#${slideId(index - 1)}`}
+                aria-label={`Ver foto anterior de ${name}`}
+              >
+                <span aria-hidden="true">&lsaquo;</span>
+              </a>
+            )}
+            {hasMultiplePhotos && index < photos.length - 1 && (
+              <a
+                class="story-card__control story-card__control--next"
+                href={`#${slideId(index + 1)}`}
+                aria-label={`Ver foto siguiente de ${name}`}
+              >
+                <span aria-hidden="true">&rsaquo;</span>
+              </a>
+            )}
+          </div>
+        ))
       }
     </div>
   </div>
-  <button
-    type="button"
-    class="story-card__control story-card__control--prev"
-    data-gallery-prev
-    aria-label={`Ver foto anterior de ${name}`}
-  >
-    <span aria-hidden="true">&lsaquo;</span>
-  </button>
-  <button
-    type="button"
-    class="story-card__control story-card__control--next"
-    data-gallery-next
-    aria-label={`Ver foto siguiente de ${name}`}
-  >
-    <span aria-hidden="true">&rsaquo;</span>
-  </button>
-  <div class="story-card__dots" data-gallery-dots></div>
+  {
+    hasMultiplePhotos && (
+      <div class="story-card__dots">
+        {photos.map((_, index) => (
+          <a
+            class="story-card__dot"
+            href={`#${slideId(index)}`}
+            aria-label={`Ver foto ${index + 1} de ${photos.length} de ${name}`}
+          />
+        ))}
+      </div>
+    )
+  }
 </div>

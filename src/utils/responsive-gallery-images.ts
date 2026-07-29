@@ -2,12 +2,11 @@ import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { SharedGalleryPhoto } from "./gallery";
 
-// Card galleries are intentionally manual: the shared gallery carousel builds
-// slides 2..n lazily in the browser from a JSON payload (see
-// src/scripts/gallery/), and the lightbox swaps a plain <img> src at runtime.
-// <Image layout="constrained"> only renders at build time, so it cannot feed
-// that client-side contract. The bespoke pipeline stays here; layout-based
-// responsive images are used on server-rendered images (blog, editorial).
+// Card galleries are intentionally manual: SharedPhotoGallery server-renders
+// every slide from these variants (AVIF srcset, WebP fallback, 1200px lightbox
+// AVIF), and the lightbox swaps a plain <img> src at runtime. Layout-based
+// responsive images (<Image layout="constrained">) are used on editorial
+// images instead (blog, editorial pages).
 
 const CARD_WIDTHS = [360, 480, 640];
 const CARD_SIZES =

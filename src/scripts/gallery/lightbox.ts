@@ -1,12 +1,27 @@
 import { dispatchAnalytics } from "../../utils/analytics";
-import { getPhotoAlt, getPhotoCaption } from "../../utils/gallery";
-import { wrapIndex } from "./dom";
-import type { SharedGalleryItem } from "../../utils/gallery";
 
 const LIGHTBOX_ROOT_SELECTOR = "[data-shared-gallery-lightbox]";
 
-let lightboxState: { item: SharedGalleryItem; index: number; location: string } | null = null;
+// Slides are read from the SSR markup (data-full carries the 1200px AVIF URL);
+// the JSON payload is gone. Task 06 rebuilds this lightbox.
+export interface LightboxSlide {
+  full: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface LightboxGallery {
+  id?: string;
+  name: string;
+  slides: LightboxSlide[];
+}
+
+let lightboxState: { gallery: LightboxGallery; index: number; location: string } | null = null;
 let documentKeydownAttached = false;
+
+function wrapIndex(index: number, total: number) {
+  return ((index % total) + total) % total;
+}
 
 function getLightboxElements() {
   const root = document.querySelector<HTMLElement>(LIGHTBOX_ROOT_SELECTOR);
@@ -28,18 +43,19 @@ function getLightboxElements() {
   };
 }
 
-export function openLightbox(item: SharedGalleryItem, index: number, location = "success_stories") {
+export function openLightbox(gallery: LightboxGallery, index: number, location = "success_stories") {
   const elements = getLightboxElements();
   if (!elements?.image || !elements.caption) {
     return;
   }
 
-  const safeIndex = wrapIndex(index, item.photos.length);
-  lightboxState = { item, index: safeIndex, location };
+  const safeIndex = wrapIndex(index, gallery.slides.length);
+  lightboxState = { gallery, index: safeIndex, location };
 
-  elements.image.src = item.photos[safeIndex].lightbox;
-  elements.image.alt = getPhotoAlt(item, safeIndex);
-  elements.caption.textContent = getPhotoCaption(item, safeIndex);
+  const slide = gallery.slides[safeIndex];
+  elements.image.src = slide.full;
+  elements.image.alt = slide.alt;
+  elements.caption.textContent = slide.caption ?? `${gallery.name} · Foto ${safeIndex + 1} de ${gallery.slides.length}`;
   elements.root.hidden = false;
   document.documentElement.classList.add("has-lightbox-open");
   elements.root.querySelector<HTMLElement>("[data-shared-gallery-lightbox-close-button]")?.focus();
@@ -64,10 +80,10 @@ function stepLightbox(delta: number) {
   dispatchAnalytics({
     event: delta > 0 ? "gallery_next" : "gallery_previous",
     location: lightboxState.location,
-    story_id: lightboxState.item.id ?? "",
-    story_name: lightboxState.item.name,
+    story_id: lightboxState.gallery.id ?? "",
+    story_name: lightboxState.gallery.name,
   });
-  openLightbox(lightboxState.item, lightboxState.index + delta, lightboxState.location);
+  openLightbox(lightboxState.gallery, lightboxState.index + delta, lightboxState.location);
 }
 
 export function initSharedGalleryLightbox() {

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { getSharedGalleryPayloads } from "./helpers/shared-gallery";
+import { assertSharedGallerySlides } from "./helpers/shared-gallery";
 
 test("filter chips show subset of adoption cards and update count", async ({ page }) => {
   await page.setViewportSize({ width: 1200, height: 900 });
@@ -83,17 +83,8 @@ test("filter chips handle empty results and restore on reset", async ({ page }) 
   await expect(emptyMessage).toBeHidden();
 });
 
-test("adoption galleries expose up to three optimized photos", async ({ page }) => {
+test("adoption galleries render up to three optimized photos server-side", async ({ page }) => {
   await page.goto("/adoptar/", { waitUntil: "networkidle" });
 
-  const payloads = await getSharedGalleryPayloads(page);
-
-  for (const payload of payloads) {
-    for (const photo of payload.photos) {
-      expect(photo.cardWebpSrcSet).toBeUndefined();
-      expect(photo.cardAvifSrcSet.split(",")).toHaveLength(3);
-      expect(photo.cardFallbackSrc).toMatch(/\.webp$/);
-      expect(photo.lightbox).toMatch(/\.avif$/);
-    }
-  }
+  await assertSharedGallerySlides(page);
 });

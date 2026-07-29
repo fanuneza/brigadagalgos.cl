@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { getSharedGalleryPayloads } from "./helpers/shared-gallery";
+import { assertSharedGallerySlides } from "./helpers/shared-gallery";
 
 const dogsDir = join(process.cwd(), "src", "content", "dogs");
 const successStoryCount = readdirSync(dogsDir)
@@ -58,5 +58,5 @@ test("success archive renders every story and returns visitors to active adoptio
 test("success-story galleries preserve responsive image output", async ({ page }) => {
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
-  await getSharedGalleryPayloads(page);
+  await assertSharedGallerySlides(page);
 });
