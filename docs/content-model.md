@@ -27,6 +27,7 @@ All dogs live in a single `dogs` collection, discriminated by the `status` field
 | `currentNeed`     | enum    | `adopcion` | `Adopción`, `Hogar temporal`, or `Adopción u hogar temporal` (default: `Adopción`) |
 | `characterSketch` | string  | `adopcion` | Short character summary for cards                                                  |
 | `location`        | string  | `adopcion` | Optional; where the dog is located                                                 |
+| `adoptionFacts`   | object  | `adopcion` | Optional decision data, with explicit compatibility and confirmed care facts       |
 | `order`           | integer | `adopcion` | Optional manual sort order                                                         |
 | `active`          | boolean | `adopcion` | Default `true`; set `false` to hide                                                |
 | `hiddenSince`     | date    | `adopcion` | Date the dog was hidden                                                            |
@@ -41,6 +42,8 @@ All dogs live in a single `dogs` collection, discriminated by the `status` field
   - Hidden entries remain in the collection but are excluded from the public listing.
   - Hidden entries older than 90 days fail `tests/source-hygiene.test.ts`.
   - Every dog with `active !== false` renders a profile page at `/adoptar/<slug>/`, with its own meta description (via `buildDogMetaDescription`), OG image (first gallery image), and breadcrumb name override.
+  - Active profiles must include `adoptionFacts.compatibility` for children, cats, female dogs, and male dogs. Each uses one of `sí`, `no`, `caso a caso`, or `sin información confirmada`. Never turn a general description such as “se lleva bien con todos” into a guarantee for a specific group.
+  - Add `homeGuidance`, `exerciseNeeds`, `medicalOrSafetyNeeds`, and `personalityBehavior` only when the profile copy confirms them. Keep `location` as the current place or care setting.
 - Success variant:
   - `story` must be 260 characters or fewer.
   - `story` must explicitly mention the adoption outcome (enforced with `/adopt/i`).
@@ -63,6 +66,14 @@ details: "Bruno llegó con miedo a los ruidos fuertes. Hoy busca una familia tra
 currentNeed: "Adopción"
 characterSketch: "Cariñoso una vez que confía, le encanta las caminatas tranquilas."
 location: "Santiago"
+adoptionFacts:
+  compatibility:
+    children: "caso a caso"
+    cats: "sin información confirmada"
+    femaleDogs: "sí"
+    maleDogs: "caso a caso"
+  homeGuidance: "Busca una familia tranquila."
+  personalityBehavior: "Se acerca por mimos cuando ya confía."
 gallery:
   - "../../assets/casos/bruno/bruno-1.jpg"
   - "../../assets/casos/bruno/bruno-2.jpg"
@@ -156,8 +167,11 @@ order: 1
 2. Add 1–3 images to `src/assets/casos/<slug>/`.
 3. Fill required frontmatter and optional fields as needed.
 4. Set `currentNeed` to the appropriate value.
-5. Run `npm run dog-images:check` to verify image consistency.
-6. Run `npm run test:source` to catch content-rule violations.
+5. Add `adoptionFacts.compatibility` with an explicit status for children, cats, female dogs, and male dogs. Use `sin información confirmada` when the record has no specific observation.
+6. Add care, routine, medical, exercise, or personality fields only when the intake or profile copy confirms them. Do not infer them from breed stereotypes or a broad phrase such as “se lleva bien con todos”.
+7. Keep rescue context in `details` and daily-life behavior in `characterSketch`.
+8. Run `npm run dog-images:check` to verify image consistency.
+9. Run `npm run test:source` to catch content-rule violations.
 
 ### Moving a dog to success stories
 

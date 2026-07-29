@@ -8,6 +8,25 @@ const MAX_DOG_GALLERY_IMAGES = 3;
 const META_DESCRIPTION_MAX = 155;
 const STORY_CARD_MAX_CHARACTERS = 260;
 
+export const ADOPTION_COMPATIBILITY_STATUSES = ["sí", "no", "caso a caso", "sin información confirmada"] as const;
+export type AdoptionCompatibilityStatus = (typeof ADOPTION_COMPATIBILITY_STATUSES)[number];
+
+export interface AdoptionCompatibility {
+  children: AdoptionCompatibilityStatus;
+  cats: AdoptionCompatibilityStatus;
+  femaleDogs: AdoptionCompatibilityStatus;
+  maleDogs: AdoptionCompatibilityStatus;
+}
+
+export interface AdoptionDecisionData {
+  location?: string;
+  compatibility: AdoptionCompatibility;
+  homeGuidance?: string;
+  exerciseNeeds?: string;
+  medicalOrSafetyNeeds?: string;
+  personalityBehavior?: string;
+}
+
 export interface AdoptionDogCard {
   id: string;
   name: string;
@@ -16,6 +35,8 @@ export interface AdoptionDogCard {
   ageType: "adulto" | "cachorro";
   weight: string;
   details: string;
+  location?: string;
+  adoptionFacts?: AdoptionDecisionData;
   currentNeed: "Adopción" | "Hogar temporal" | "Adopción u hogar temporal";
   characterSketch: string;
   instagramUrl?: string;
@@ -75,11 +96,20 @@ interface AdoptionDogCardEntry {
     age: string;
     weight: string;
     details: string;
+    location?: string;
+    adoptionFacts?: Omit<AdoptionDecisionData, "location">;
     currentNeed: "Adopción" | "Hogar temporal" | "Adopción u hogar temporal";
     characterSketch: string;
     instagramUrl?: string;
     gallery: ImageMetadata[];
   };
+}
+
+export function getAdoptionDecisionData(data: {
+  location?: string;
+  adoptionFacts?: Omit<AdoptionDecisionData, "location">;
+}): AdoptionDecisionData | undefined {
+  return data.adoptionFacts ? { location: data.location, ...data.adoptionFacts } : undefined;
 }
 
 interface StoryDogSummaryEntry {
@@ -123,6 +153,8 @@ export async function buildAdoptionDogCards(entries: AdoptionDogCardEntry[]): Pr
       ageType: getAgeType(entry.data.age),
       weight: entry.data.weight,
       details: entry.data.details,
+      location: entry.data.location,
+      adoptionFacts: getAdoptionDecisionData(entry.data),
       currentNeed: entry.data.currentNeed,
       characterSketch: entry.data.characterSketch,
       instagramUrl: entry.data.instagramUrl,
