@@ -402,14 +402,14 @@ test("accepted consent records the adoption-intent funnel once without form cont
     element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
   });
 
-  await page.locator('a[href="/preguntas-frecuentes/"]').first().click();
+  await page.locator('footer a[href="/preguntas-frecuentes/"]').click();
   await page.waitForURL("**/preguntas-frecuentes/");
   await page.locator('[data-support-type="faq"]').scrollIntoViewIfNeeded();
   await page.waitForFunction(() =>
     (window.dataLayer ?? []).some((entry) => entry?.event === "adoption_support_view" && entry?.support_type === "faq")
   );
 
-  await page.locator('a[href="/contacto/"]').first().click();
+  await page.locator('footer a[href="/contacto/"]').click();
   await page.waitForURL("**/contacto/");
   await page.getByLabel("Nombre").fill("Camila Soto");
   await page.getByLabel("Correo").fill("camila@example.com");
