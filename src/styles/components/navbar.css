@@ -101,7 +101,7 @@
   width: 24px;
   height: 2px;
   background: var(--color-text);
-  border-radius: 2px;
+  border-radius: var(--radius-full);
   transition:
     transform var(--duration-fast) var(--ease-out),
     opacity var(--duration-fast) var(--ease-out);

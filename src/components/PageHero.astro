@@ -3,7 +3,7 @@ import "../styles/components/page-hero.css";
 import TrackedLink from "./TrackedLink.astro";
 
 interface Props {
-  eyebrow: string;
+  eyebrow?: string;
   h1: string;
   lead?: string;
   leadBold?: string;
@@ -34,7 +34,7 @@ const {
 
 <section class:list={["page-hero", "section-padding", `page-hero--${weight}`]}>
   <div class="container container--narrow">
-    <p class:list={["eyebrow", `eyebrow--${weight}`]}>{eyebrow}</p>
+    {eyebrow && <p class:list={["eyebrow", `eyebrow--${weight}`]}>{eyebrow}</p>}
     <h1>{h1}</h1>
     {lead && <p class="page-hero__lead t-lead">{lead}</p>}
     {leadBold && <p class="page-hero__lead page-hero__lead--bold t-lead t-lead-strong">{leadBold}</p>}

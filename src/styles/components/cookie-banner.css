@@ -29,9 +29,9 @@
 }
 
 .cookie-banner__link {
-  color: #fef3c7;
+  color: var(--color-accent-warm);
   text-decoration: underline;
-  text-decoration-color: rgba(254, 243, 199, 0.7);
+  text-decoration-color: color-mix(in sRGB, var(--color-accent-warm) 70%, transparent);
   text-underline-offset: 3px;
 }
 

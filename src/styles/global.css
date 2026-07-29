@@ -51,7 +51,6 @@
     .dog-card,
     .donation-card,
     .req-card,
-    .stat-card,
     .channel-card,
     .supporter-card,
     .impact-card {
@@ -562,7 +561,7 @@ main {
 .not-found-redirect {
   text-align: center;
   margin: 2rem 0;
-  font-size: 1.25rem;
+  font-size: var(--font-size-md);
   font-weight: var(--weight-bold);
 }
 
@@ -576,8 +575,7 @@ main {
 .supporter-card,
 .donation-card,
 .channel-card,
-.req-card,
-.stat-card {
+.req-card {
   transition:
     transform var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
@@ -589,8 +587,7 @@ main {
   .supporter-card:hover,
   .donation-card:hover,
   .channel-card:hover,
-  .req-card:hover,
-  .stat-card:hover {
+  .req-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
@@ -601,8 +598,7 @@ main {
 .supporter-card:active,
 .donation-card:active,
 .channel-card:active,
-.req-card:active,
-.stat-card:active {
+.req-card:active {
   transform: translateY(0);
   box-shadow: var(--shadow-sm);
 }
