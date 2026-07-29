@@ -16,7 +16,12 @@ const { variant = "full" } = Astro.props;
 
 {
   variant === "compact" ? (
-    <section id="proceso-resumen" class="section-padding section--quiet adoption-process adoption-process--compact">
+    <section
+      id="proceso-resumen"
+      class="section-padding section--quiet adoption-process adoption-process--compact"
+      data-track-milestone="adoption_support_view"
+      data-support-type="adoption_process"
+    >
       <div class="container container--narrow">
         <p class="eyebrow eyebrow--quiet">PROCESO</p>
         <h2 class="section-heading--quiet">¿Cómo sigue?</h2>
@@ -27,7 +32,12 @@ const { variant = "full" } = Astro.props;
       </div>
     </section>
   ) : (
-    <section id="proceso" class="section-padding adoption-process">
+    <section
+      id="proceso"
+      class="section-padding adoption-process"
+      data-track-milestone="adoption_support_view"
+      data-support-type="adoption_process"
+    >
       <div class="container container--narrow">
         <p class="eyebrow">PROCESO</p>
         <h2>Te guiamos paso a paso</h2>

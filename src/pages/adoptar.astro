@@ -29,7 +29,7 @@ const dogs = await getActiveAdoptionDogCards();
   />
   <RainbowDivider />
 
-  <section id="galgos" class="section-padding section--lead">
+  <section id="galgos" class="section-padding section--lead" data-track-milestone="adoption_listing_view">
     <div class="container">
       <div class="adoption-intro">
         <p class="eyebrow eyebrow--lead">EN ADOPCIÓN</p>
@@ -57,7 +57,7 @@ const dogs = await getActiveAdoptionDogCards();
         class="btn btn--primary"
         newTab
         trackEvent="adoption_apply_click"
-        trackLabel="Postular - Adoption Tail CTA"
+        trackLabel="Postular para adoptar"
         trackLocation="tail_cta"
         trackDestination={SITE.adoptionForm}
         trackCategory="adoption"
@@ -68,7 +68,7 @@ const dogs = await getActiveAdoptionDogCards();
       <WhatsAppLink
         text="Hola, quisiera saber más sobre adopción"
         location="tail_cta"
-        label="Más información - Adoption Tail CTA"
+        intent="adoption"
         class="btn btn--secondary"
       >
         Más información <span class="sr-only">sobre adopción</span>

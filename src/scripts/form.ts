@@ -154,11 +154,10 @@ function initForm(): void {
         successPanel.focus();
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Error de red";
       dispatchAnalytics({
         event: "contact_form_error",
         form_id: contactForm.id || "contact-form",
-        error_message: message,
+        error_type: error instanceof TypeError ? "network" : "submission",
       });
       if (statusMessage) {
         statusMessage.textContent =
