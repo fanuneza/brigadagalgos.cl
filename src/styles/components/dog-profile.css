@@ -95,15 +95,15 @@ section.dog-profile {
 
 .dog-profile__compatibility-item--no {
   border-color: var(--color-danger);
-  background: color-mix(in srgb, var(--color-danger) 8%, var(--color-bg));
+  background: color-mix(in sRGB, var(--color-danger) 8%, var(--color-bg));
 }
 
-.dog-profile__compatibility-item--caso-a-caso {
+.dog-profile__compatibility-item--case-by-case {
   border-color: var(--color-accent-warm-700);
   background: var(--color-accent-warm-100);
 }
 
-.dog-profile__compatibility-item--sin-información-confirmada {
+.dog-profile__compatibility-item--unknown {
   border-style: dashed;
 }
 

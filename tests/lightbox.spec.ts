@@ -27,8 +27,8 @@ test("story gallery opens the native dialog lightbox and returns focus on Escape
   await expect(zoom).toBeFocused();
 });
 
-test("adoption galleries carry the adopcion analytics context and open the lightbox", async ({ page }) => {
-  await page.goto("/adoptar/", { waitUntil: "networkidle" });
+test("profile galleries carry the adopcion analytics context and open the lightbox", async ({ page }) => {
+  await page.goto("/adoptar/blue/", { waitUntil: "networkidle" });
 
   const gallery = page.locator("[data-shared-gallery][data-gallery-context='adopcion']").first();
   await expect(gallery).toBeVisible();

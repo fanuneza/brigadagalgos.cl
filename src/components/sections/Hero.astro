@@ -37,6 +37,34 @@ const badgeRest =
       </p>
     </div>
 
+    <div class="hero__actions">
+      <div class="hero__ctas">
+        <TrackedLink
+          href="/adoptar/"
+          class="btn btn--primary hero__cta-primary"
+          trackEvent="cta_click"
+          trackLabel="Quiero adoptar"
+          trackLocation="hero"
+          trackDestination="/adoptar/"
+          trackCategory="adoption"
+        >
+          Quiero adoptar
+        </TrackedLink>
+        <TrackedLink
+          href="/hogar-temporal/"
+          class="btn btn--secondary"
+          trackEvent="cta_click"
+          trackLabel="Puedo ser hogar temporal"
+          trackLocation="hero"
+          trackDestination="/hogar-temporal/"
+          trackCategory="foster"
+        >
+          Puedo ser hogar temporal
+        </TrackedLink>
+      </div>
+      <p class="hero__support">Te orientamos antes y seguimos presentes después de la adopción.</p>
+    </div>
+
     <picture class="hero__photo">
       <source
         media="(min-width: 768px)"
@@ -78,33 +106,5 @@ const badgeRest =
         )
       }
     </picture>
-
-    <div class="hero__actions">
-      <div class="hero__ctas">
-        <TrackedLink
-          href="/adoptar/"
-          class="btn btn--primary hero__cta-primary"
-          trackEvent="cta_click"
-          trackLabel="Quiero adoptar"
-          trackLocation="hero"
-          trackDestination="/adoptar/"
-          trackCategory="adoption"
-        >
-          Quiero adoptar
-        </TrackedLink>
-        <TrackedLink
-          href="/hogar-temporal/"
-          class="btn btn--secondary"
-          trackEvent="cta_click"
-          trackLabel="Puedo ser hogar temporal"
-          trackLocation="hero"
-          trackDestination="/hogar-temporal/"
-          trackCategory="foster"
-        >
-          Puedo ser hogar temporal
-        </TrackedLink>
-      </div>
-      <p class="hero__support">Te orientamos antes y seguimos presentes después de la adopción.</p>
-    </div>
   </div>
 </section>

@@ -2,7 +2,6 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
-import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import AdoptionGrid from "../components/sections/AdoptionGrid.astro";
 import AdoptionProcess from "../components/sections/AdoptionProcess.astro";
 import CtaCard from "../components/sections/CtaCard.astro";
@@ -81,6 +80,4 @@ const dogs = await getActiveAdoptionDogCards();
       <a href="/preguntas-frecuentes/">Revisa las preguntas frecuentes</a>.
     </p>
   </CtaCard>
-
-  <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de adopción" />
 </PageLayout>

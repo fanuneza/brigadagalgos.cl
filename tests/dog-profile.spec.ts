@@ -30,5 +30,5 @@ test("an unknown compatibility state asks for a conversation instead of promisin
 
   await expect(page.getByRole("listitem").filter({ hasText: /^GatosSin información confirmada$/ })).toBeVisible();
   await expect(page.getByText("Aún estamos conociendo esta parte de su convivencia.")).toBeVisible();
-  await expect(page.getByText("Al postular revisamos tu rutina y conversamos sobre Blue.")).toBeVisible();
+  await expect(page.getByText("Al postular revisamos tu rutina y conversamos sobre Blue;")).toBeVisible();
 });

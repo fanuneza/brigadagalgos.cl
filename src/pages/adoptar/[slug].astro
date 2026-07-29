@@ -15,6 +15,7 @@ import {
   buildAdoptionDogCards,
   buildDogMetaDescription,
   getActiveDogs,
+  type AdoptionCompatibilityStatus,
   type AdoptionDogEntry,
 } from "../../utils/dog-content";
 
@@ -27,13 +28,22 @@ const { entry } = Astro.props as { entry: AdoptionDogEntry };
 const [dog] = await buildAdoptionDogCards([entry]);
 const metaDescription = buildDogMetaDescription(entry.data);
 const adoptionFacts = dog.adoptionFacts;
+const compatibilityPresentation = {
+  sí: { label: "Sí", modifier: "yes" },
+  no: { label: "No", modifier: "no" },
+  "caso a caso": { label: "Caso a caso", modifier: "case-by-case" },
+  "sin información confirmada": { label: "Sin información confirmada", modifier: "unknown" },
+} satisfies Record<AdoptionCompatibilityStatus, { label: string; modifier: string }>;
 const compatibilityItems = adoptionFacts
   ? [
       { label: "Niños", value: adoptionFacts.compatibility.children },
       { label: "Gatos", value: adoptionFacts.compatibility.cats },
       { label: "Perras", value: adoptionFacts.compatibility.femaleDogs },
       { label: "Perros machos", value: adoptionFacts.compatibility.maleDogs },
-    ]
+    ].map((item) => {
+      const presentation = compatibilityPresentation[item.value];
+      return { ...item, statusLabel: presentation.label, modifier: presentation.modifier };
+    })
   : [];
 
 const firstImage = entry.data.gallery[0];
@@ -81,6 +91,10 @@ const ogImage = firstImage
           <section class="dog-profile__group dog-profile__group--about" aria-labelledby="dog-profile-about-heading">
             <h2 id="dog-profile-about-heading" class="dog-profile__group-heading">Su personalidad</h2>
             <p class="dog-profile__sketch">{adoptionFacts?.personalityBehavior ?? dog.characterSketch}</p>
+          </section>
+
+          <section class="dog-profile__group" aria-labelledby="dog-profile-history-heading">
+            <h2 id="dog-profile-history-heading" class="dog-profile__group-heading">Su historia</h2>
             <p class="dog-profile__details">{dog.details}</p>
             {
               dog.instagramUrl && (
@@ -98,10 +112,13 @@ const ogImage = firstImage
                 <ul class="dog-profile__compatibility" role="list">
                   {compatibilityItems.map((item) => (
                     <li
-                      class:list={["dog-profile__compatibility-item", `dog-profile__compatibility-item--${item.value}`]}
+                      class:list={[
+                        "dog-profile__compatibility-item",
+                        `dog-profile__compatibility-item--${item.modifier}`,
+                      ]}
                     >
                       <span>{item.label}</span>
-                      <strong>{item.value}</strong>
+                      <strong>{item.statusLabel}</strong>
                     </li>
                   ))}
                 </ul>
@@ -185,12 +202,8 @@ const ogImage = firstImage
           </div>
           <p class="dog-profile__share-live" data-share-live aria-live="polite"></p>
           <p class="dog-profile__action-note">
-            Al postular revisamos tu rutina y conversamos sobre {dog.name}. Antes de una adopción coordinamos un
-            encuentro y seguimos presentes durante la adaptación.
-          </p>
-          <p class="dog-profile__support">
-            Te preguntamos por tu rutina y tu casa para que {dog.name} esté seguro, no para juzgarte. Y seguimos acompañándote
-            después de la adopción.
+            Al postular revisamos tu rutina y conversamos sobre {dog.name}; buscamos cuidar el encuentro, no juzgarte.
+            Antes de una adopción coordinamos una visita y seguimos presentes durante la adaptación.
           </p>
         </div>
       </div>
