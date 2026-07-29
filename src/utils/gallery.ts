@@ -16,11 +16,3 @@ export interface SharedGalleryItem {
 export function getPhotoAlt(item: SharedGalleryItem, index: number) {
   return item.photos[index]?.alt ?? `${item.name}, foto ${index + 1}`;
 }
-
-export function getPhotoCaption(item: SharedGalleryItem, index: number) {
-  return item.photos[index]?.caption ?? `${item.name} · Foto ${index + 1} de ${item.photos.length}`;
-}
-
-export function serializeGalleryPayload(item: SharedGalleryItem) {
-  return JSON.stringify(item);
-}
