@@ -79,14 +79,14 @@ brigadagalgos.cl/
 │   ├── robots.txt
 │   ├── site.webmanifest
 │   ├── llms.txt
-│   ├── icons/
 │   └── images/
 ├── src/
 │   ├── assets/
 │   │   ├── casos/
 │   │   │   ├── adopcion/        # Dog profile photos
 │   │   │   └── exito/           # Success story photos
-│   │   └── colaboradores/       # Supporter logos
+│   │   ├── colaboradores/       # Supporter logos
+│   │   └── icons/               # UI icons (imported as inline SVG components, optimized at build)
 │   ├── components/              # Shared UI components
 │   │   ├── DogCard.astro             # Shared adoption-dog card (featured + grid variants)
 │   │   ├── Footer.astro
@@ -294,22 +294,22 @@ Key shared primitives:
 - `WhatsAppLink.astro` — WhatsApp CTA with phone and message.
 - `InstagramLink.astro` — Instagram link helper.
 - `SharedGalleryLightbox.astro` — image gallery lightbox (also attaches the gallery init script).
-- `SharedPhotoGallery.astro` — photo grid with responsive images.
+- `SharedPhotoGallery.astro` — shared photo gallery carousel; renders native Astro markup and requires a unique `transitionName` for ClientRouter image morphing.
 
 ## Utility modules
 
-| Module                                   | Responsibility                                                            |
-| ---------------------------------------- | ------------------------------------------------------------------------- |
-| `src/utils/dog-content.ts`               | Collection queries plus card/story shaping; 260-character excerpt default |
-| `src/utils/gallery.ts`                   | Shared gallery types and build-time gallery markup                        |
-| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                            |
-| `src/utils/reading-time.ts`              | Estimates blog post reading time                                          |
-| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data            |
-| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images                     |
-| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                        |
-| `src/utils/shuffle.ts`                   | Randomization helpers                                                     |
-| `src/utils/html-escape.ts`               | HTML escape utilities                                                     |
-| `src/utils/instagram.ts`                 | Instagram URL handling                                                    |
+| Module                                   | Responsibility                                                               |
+| ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `src/utils/dog-content.ts`               | Collection queries plus card/story shaping; 260-character excerpt default    |
+| `src/utils/gallery.ts`                   | Shared gallery types, alt/caption helpers, and the client payload serializer |
+| `src/utils/blog-content.ts`              | Shapes blog entries for listing and post pages                               |
+| `src/utils/reading-time.ts`              | Estimates blog post reading time                                             |
+| `src/utils/structured-data.ts`           | Centralized JSON-LD builders, breadcrumbs, FAQ structured data               |
+| `src/utils/responsive-gallery-images.ts` | Generates responsive AVIF/WebP srcsets for dog images                        |
+| `src/utils/analytics.ts`                 | Analytics helpers and event typing                                           |
+| `src/utils/shuffle.ts`                   | Randomization helpers                                                        |
+| `src/utils/html-escape.ts`               | HTML escape utilities                                                        |
+| `src/utils/instagram.ts`                 | Instagram URL handling                                                       |
 
 ## Client scripts
 
@@ -387,6 +387,26 @@ Responsive variants generated per surface (verified against `src/utils/responsiv
 | Editorial section (`/por-que-galgos`) | 400w, 600w, 728w  | AVIF + WebP via `Picture`                     |
 | Supporter logos (`/colaboradores`)    | 240w, 360w, 480w  | `Image` srcset, quality 72                    |
 
+## Font pipeline
+
+- Web fonts are managed by the Astro Fonts API, configured under `fonts` in `astro.config.mjs` with the built-in `fontProviders.fontsource()` provider.
+- Two families are registered: `Barlow` (latin 400, body, `--font-body`) and `Barlow Condensed` (latin 700/900, display, `--font-display`). Weights and subsets match exactly what the site uses; do not add weights without a design requirement.
+- `BaseLayout.astro` renders `<Font cssVariable="--font-body" preload />` and `<Font cssVariable="--font-display" preload />` in `<head>`, which emits the `@font-face` rules, preload links, and each CSS variable as a full `font-family` stack.
+- The API generates metric-matched optimized fallbacks for both families automatically (`optimizedFallbacks` defaults to true), so the hand-written `"Barlow Fallback"` `@font-face` no longer exists. The declared `fallbacks` chains in the config preserve the previous system-font stacks.
+- Font files are self-hosted in the build output under `_astro/fonts/`; no external font requests are made.
+
+## Environment variables
+
+Typed via the `env.schema` in `astro.config.mjs` (`astro:env`) and documented in `.env.example`.
+
+| Variable               | Scope          | Purpose                                                                 |
+| ---------------------- | -------------- | ----------------------------------------------------------------------- |
+| `PUBLIC_GTM_ID`        | client, public | GTM container override; falls back to `SITE.gtmContainerId`             |
+| `PUBLIC_WEB3FORMS_KEY` | client, public | web3forms access key override; falls back to `SITE.web3forms.accessKey` |
+| `ENABLE_INDEXNOW`      | server, public | Gate for the IndexNow ping after build (default `false`)                |
+
+`astro:env` is not available inside `astro.config.mjs` itself, so the config file reads `process.env.ENABLE_INDEXNOW` directly; both paths stay in sync through the schema default.
+
 ## Analytics and consent flow
 
 ```
@@ -400,7 +420,7 @@ User accepts → GTM injected → dataLayer consent granted
 User rejects → known cookies cleared → dataLayer consent denied
 ```
 
-Analytics is delivered through a single GTM container (`GTM-M2RN5B38`, configured in `src/config/site.ts`) that loads GA4; there is no standalone `gtag.js`. Events are pushed to `dataLayer` from `data-track-*` attributes, tracked sections, and the custom `brigada:analytics` DOM event. No personal data (emails, names, phone numbers) is sent.
+Analytics is delivered through a single GTM container (`GTM-M2RN5B38`, default in `src/config/site.ts`, overridable via `PUBLIC_GTM_ID`) that loads GA4; there is no standalone `gtag.js`. Events are pushed to `dataLayer` from `data-track-*` attributes, tracked sections, and the custom `brigada:analytics` DOM event. No personal data (emails, names, phone numbers) is sent.
 
 ### Consent state machine
 
@@ -451,7 +471,8 @@ Every page includes:
 | `@astrojs/sitemap`             | Sitemap generation                |
 | `@jdevalk/astro-seo-graph`     | SEO graph and JSON-LD integration |
 | `@jdevalk/seo-graph-core`      | SEO graph core utilities          |
-| `@fontsource/barlow-condensed` | Web font                          |
+| `@fontsource/barlow`           | Web font (body)                   |
+| `@fontsource/barlow-condensed` | Web font (display)                |
 
 ### Development dependencies
 
@@ -568,9 +589,8 @@ The editorial workflows for adding, hiding, and moving dogs (including the requi
 Carried over from the retired follow-up notes; none of these block shipping.
 
 - **Lighthouse local flakiness:** `.lighthouserc.cjs` runs with `numberOfRuns: 1` and a performance `minScore` of `0.99`. The page-hero LCP sits near a scoring-curve boundary, so a single local run can flake on one page. If exactly one page fails at the boundary, re-run once before treating it as a regression. Durable fixes, not yet applied: aggregate with `numberOfRuns: 3` (median), or relax only the performance category on documented borderline-LCP pages.
-- **Blog post semantic structure:** in `src/pages/blog/[id].astro`, the `<article>` wraps only the post header; the body (`<Content />`) renders in a sibling `<section>`. Semantically the article should wrap both. Fix when the first real blog post ships.
 - **`dog_share_click` timing:** the event fires when the share button is clicked, before the share completes (see `src/scripts/share-dog.ts`). This is an accepted trade-off — it measures intent, which is the useful funnel signal.
 
 ## Last updated
 
-2026-07-28
+2026-07-29

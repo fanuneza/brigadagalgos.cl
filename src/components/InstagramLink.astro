@@ -2,6 +2,7 @@
 import { getInstagramHandleLabel } from "../utils/instagram";
 import type { HTMLAttributes } from "astro/types";
 import TrackedLink from "./TrackedLink.astro";
+import InstagramIcon from "../assets/icons/instagram.svg";
 
 interface Props extends HTMLAttributes<"a"> {
   url: string;
@@ -30,7 +31,7 @@ const handle = getInstagramHandleLabel(url);
   trackDestination={url}
 >
   <slot>
-    <img src="/icons/instagram.svg" alt="" aria-hidden="true" />
+    <InstagramIcon width={16} height={16} aria-hidden="true" />
     <span>{handle}</span>
   </slot>
 </TrackedLink>

@@ -23,13 +23,14 @@ import {
 } from "../utils/dog-content";
 import { buildSrcSet } from "../utils/responsive-gallery-images";
 import { shuffle } from "../utils/shuffle";
-import { buildWebSiteStructuredData } from "../utils/structured-data";
-
-const webSiteSchema = buildWebSiteStructuredData();
 
 const PORTRAIT_WIDTHS = [360, 540, 720];
 const LANDSCAPE_WIDTHS = [640, 960, 1120];
 
+// The hero keeps a hand-built <picture>: it is art-directed (portrait vs
+// landscape crops) and needs matching preload links, which Astro's `layout`
+// responsive images do not generate. The global responsiveStyles only apply to
+// [data-astro-image], so there is no conflict with .hero__img.
 async function buildHeroImageSources(src: ImageMetadata) {
   const [portraitAvifSrcSet, portraitWebpSrcSet, landscapeAvifSrcSet, landscapeWebpSrcSet, portraitFallback] =
     await Promise.all([
@@ -99,7 +100,6 @@ const heroSources = await buildHeroImageSources(heroImage);
   description="Rescatamos, rehabilitamos y reubicamos galgos en Chile hasta encontrarles una familia segura."
 >
   <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
     <link
       rel="preload"
       as="image"

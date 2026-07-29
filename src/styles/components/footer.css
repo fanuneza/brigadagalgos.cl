@@ -162,13 +162,7 @@
   width: 20px;
   height: 20px;
   display: block;
-  filter: brightness(0) invert(1);
-  opacity: 0.5;
-  transition: opacity var(--duration-fast);
-}
-
-.footer__social-link:hover .footer__social-icon {
-  opacity: 1;
+  fill: currentColor;
 }
 
 .footer__bottom {

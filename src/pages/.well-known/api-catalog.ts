@@ -1,7 +1,8 @@
 import { createApiCatalog } from "@jdevalk/astro-seo-graph";
+import { SITE } from "../../config/site";
 
 export const GET = createApiCatalog({
-  siteUrl: "https://brigadagalgos.cl",
+  siteUrl: import.meta.env.SITE || SITE.siteUrl,
   schemaEndpoints: [
     {
       path: "/schema/post.json",

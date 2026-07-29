@@ -1,15 +1,81 @@
 ---
 import "../styles/components/shared-gallery.css";
-import { buildSharedGalleryMarkup, type SharedGalleryPhoto } from "../utils/gallery";
+import { getPhotoAlt, serializeGalleryPayload, type SharedGalleryPhoto } from "../utils/gallery";
 
 interface Props {
   id?: string;
   name: string;
   photos: SharedGalleryPhoto[];
   loadingPriority?: "lazy" | "eager";
+  // Unique per page; callers derive it from the content slug so a card image
+  // can morph into the same photo on the destination page (ClientRouter).
+  transitionName: string;
 }
 
-const { id, name, photos, loadingPriority = "lazy" } = Astro.props;
+const { id, name, photos, loadingPriority = "lazy", transitionName } = Astro.props;
+
+// The gallery shell and its first slide are server-rendered here. Slides 2..n
+// are built lazily in the browser from the JSON payload by
+// src/scripts/gallery/ (see data-gallery-payload below), so the markup,
+// classes, and data attributes emitted here must stay aligned with that
+// client contract.
+const item = { id, name, photos };
+const initialPhoto = photos[0];
 ---
 
-<Fragment set:html={buildSharedGalleryMarkup({ id, name, photos }, loadingPriority)} />
+<div
+  class="story-card__photo"
+  data-shared-gallery
+  data-gallery-payload={serializeGalleryPayload(item)}
+  data-loading-priority={loadingPriority}
+>
+  <div class="story-card__viewport">
+    <div class="story-card__track" data-gallery-track data-ssr-initial-slide="true">
+      {
+        initialPhoto && (
+          <button
+            type="button"
+            class="story-card__slide"
+            data-photo-index="0"
+            data-image-loaded="true"
+            aria-label={`Abrir foto 1 de ${photos.length} de ${name}`}
+          >
+            <picture>
+              {initialPhoto.cardAvifSrcSet && (
+                <source srcset={initialPhoto.cardAvifSrcSet} sizes={initialPhoto.cardSizes} type="image/avif" />
+              )}
+              <img
+                src={initialPhoto.cardFallbackSrc}
+                alt={getPhotoAlt(item, 0)}
+                class="story-card__img"
+                loading={loadingPriority}
+                decoding="async"
+                fetchpriority={loadingPriority === "eager" ? "high" : undefined}
+                width="350"
+                height="350"
+                transition:name={transitionName}
+              />
+            </picture>
+          </button>
+        )
+      }
+    </div>
+  </div>
+  <button
+    type="button"
+    class="story-card__control story-card__control--prev"
+    data-gallery-prev
+    aria-label={`Ver foto anterior de ${name}`}
+  >
+    <span aria-hidden="true">&lsaquo;</span>
+  </button>
+  <button
+    type="button"
+    class="story-card__control story-card__control--next"
+    data-gallery-next
+    aria-label={`Ver foto siguiente de ${name}`}
+  >
+    <span aria-hidden="true">&rsaquo;</span>
+  </button>
+  <div class="story-card__dots" data-gallery-dots></div>
+</div>

@@ -2,6 +2,9 @@
 import { SITE } from "../config/site.ts";
 import TrackedLink from "./TrackedLink.astro";
 import WhatsAppLink from "./WhatsAppLink.astro";
+import InstagramIcon from "../assets/icons/instagram.svg";
+import FacebookIcon from "../assets/icons/facebook.svg";
+import HeartIcon from "../assets/icons/heart.svg";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -56,16 +59,7 @@ const currentYear = new Date().getFullYear();
           data-external-indicator="off"
           newTab
         >
-          <img
-            src="/icons/instagram.svg"
-            alt=""
-            aria-hidden="true"
-            class="footer__social-icon"
-            width="36"
-            height="36"
-            loading="lazy"
-            decoding="async"
-          />
+          <InstagramIcon class="footer__social-icon" width={36} height={36} aria-hidden="true" />
         </TrackedLink>
         <TrackedLink
           href={SITE.facebook}
@@ -74,16 +68,7 @@ const currentYear = new Date().getFullYear();
           data-external-indicator="off"
           newTab
         >
-          <img
-            src="/icons/facebook.svg"
-            alt=""
-            aria-hidden="true"
-            class="footer__social-icon"
-            width="36"
-            height="36"
-            loading="lazy"
-            decoding="async"
-          />
+          <FacebookIcon class="footer__social-icon" width={36} height={36} aria-hidden="true" />
         </TrackedLink>
       </div>
     </div>
@@ -108,16 +93,7 @@ const currentYear = new Date().getFullYear();
       <div class="footer__copy">
         <p>
           Sitio web hecho con{" "}
-          <img
-            src="/icons/heart.svg"
-            alt=""
-            aria-hidden="true"
-            class="footer__heart-icon"
-            width="16"
-            height="16"
-            loading="lazy"
-            decoding="async"
-          />{" "}
+          <HeartIcon class="footer__heart-icon" width={16} height={16} aria-hidden="true" />{" "}
           por{" "}
           <TrackedLink
             href="https://fnunez.cl/?utm_source=brigadagalgos.cl&utm_medium=referral&utm_campaign=credit_footer"

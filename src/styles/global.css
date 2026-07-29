@@ -1,6 +1,3 @@
-@import url("@fontsource/barlow/latin-400.css");
-@import url("@fontsource/barlow-condensed/latin-700.css");
-@import url("@fontsource/barlow-condensed/latin-900.css");
 @import url("./tokens.css");
 @import url("./components/navbar.css");
 @import url("./components/footer.css");
@@ -73,16 +70,6 @@
   to {
     translate: 0 0;
   }
-}
-
-/* Metrics-matched fallback so the swap from system font to Barlow causes no layout shift. */
-@font-face {
-  font-family: "Barlow Fallback";
-  src: local("Arial"), local("Liberation Sans"), local("Arimo"), local("Helvetica");
-  size-adjust: 96.68%;
-  ascent-override: 103.43%;
-  descent-override: 20.69%;
-  line-gap-override: 0%;
 }
 
 *,
@@ -201,17 +188,11 @@ h2:not([hidden]) {
   color: var(--color-text-on-dark);
 }
 
-/* Invert dark SVGs to light on dark-background circles */
-.icon-circle--secondary .icon-circle__image,
-.icon-circle--green .icon-circle__image,
-.icon-circle--purple .icon-circle__image {
-  filter: brightness(0) invert(1);
-}
-
 .icon-circle__image {
   width: 24px;
   height: 24px;
   display: block;
+  fill: currentColor;
 }
 
 /* ── Type roles ─────────────────────────────────────────────────────
@@ -287,7 +268,7 @@ h2:not([hidden]) {
   flex-shrink: 0;
 }
 
-.btn__icon img {
+.btn__icon svg {
   width: 32px;
   height: 32px;
   display: block;
@@ -305,11 +286,11 @@ h2:not([hidden]) {
 }
 
 .link-icon--whatsapp {
-  --link-icon: url("/icons/whatsapp.svg");
+  --link-icon: url("../assets/icons/whatsapp.svg");
 }
 
 .link-icon--share {
-  --link-icon: url("/icons/share-nodes.svg");
+  --link-icon: url("../assets/icons/share-nodes.svg");
 }
 
 .whatsapp-link {

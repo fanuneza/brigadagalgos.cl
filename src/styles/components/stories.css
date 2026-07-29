@@ -123,20 +123,11 @@
   box-shadow: var(--shadow-focus);
 }
 
-.dog-social-link img {
+.dog-social-link svg {
   width: 1rem;
   height: 1rem;
   flex: 0 0 auto;
-}
-
-:root[data-theme="dark"] .dog-social-link img {
-  filter: brightness(0) invert(1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .dog-social-link img {
-    filter: brightness(0) invert(1);
-  }
+  fill: currentColor;
 }
 
 @media (min-width: 768px) {
