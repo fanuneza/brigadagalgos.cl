@@ -1,5 +1,10 @@
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+// Module-level because the header is transition:persist: the element (and its
+// listeners) survives ClientRouter swaps, and per-navigation sync must see the
+// same drawer state the one-time listeners mutate.
+let isDrawerOpen = false;
+
 function initNavbar() {
   const hamburger = document.querySelector("[data-hamburger]") as HTMLButtonElement | null;
   const drawer = document.querySelector("[data-drawer]") as HTMLElement | null;
@@ -15,7 +20,6 @@ function initNavbar() {
   const close = closeBtn;
   const back = backdrop;
   const navbar = nav;
-  let isDrawerOpen = false;
 
   function getFocusable(): HTMLElement[] {
     return Array.from(drw.querySelectorAll<HTMLElement>(FOCUSABLE));
@@ -106,6 +110,43 @@ function initNavbar() {
   );
 }
 
+// The navbar header is transition:persist, so it (and its state) survives
+// ClientRouter swaps. Before each new page paints, reset per-page state:
+// close an open drawer, refresh aria-current from the new URL, and
+// re-evaluate the scrolled styling at the restored scroll position.
+function syncNavbar() {
+  const nav = document.querySelector("[data-navbar]") as HTMLElement | null;
+  if (!nav) return;
+
+  if (isDrawerOpen) {
+    const drawer = nav.querySelector("[data-drawer]") as HTMLElement | null;
+    const backdrop = nav.querySelector("[data-backdrop]") as HTMLElement | null;
+    const hamburger = nav.querySelector("[data-hamburger]") as HTMLButtonElement | null;
+    if (drawer && backdrop && hamburger) {
+      isDrawerOpen = false;
+      drawer.classList.remove("drawer--open");
+      backdrop.classList.remove("backdrop--visible");
+      drawer.hidden = true;
+      drawer.inert = true;
+      document.body.classList.remove("drawer-open");
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.setAttribute("aria-label", "Abrir menu");
+    }
+  }
+
+  const pathname = window.location.pathname;
+  nav.querySelectorAll<HTMLAnchorElement>("a.navbar__link, a.drawer__link").forEach((link) => {
+    if (link.getAttribute("href") === pathname) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
+  nav.classList.toggle("navbar--scrolled", window.scrollY > 0);
+}
+
 document.addEventListener("astro:page-load", initNavbar);
+document.addEventListener("astro:after-swap", syncNavbar);
 
 export {};
