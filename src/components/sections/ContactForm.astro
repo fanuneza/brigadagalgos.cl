@@ -1,6 +1,9 @@
 ---
 import "../../styles/components/form.css";
+import { PUBLIC_WEB3FORMS_KEY } from "astro:env/client";
 import { SITE } from "../../config/site.ts";
+
+const web3formsAccessKey = PUBLIC_WEB3FORMS_KEY ?? SITE.web3forms.accessKey;
 ---
 
 <section class="section-padding">
@@ -20,8 +23,8 @@ import { SITE } from "../../config/site.ts";
       toolname="enviar_mensaje_contacto"
       tooldescription="Envía un mensaje de contacto a la fundación Brigada Galgos para consultas sobre adopción, hogares temporales, donaciones o consultas generales."
     >
-      <input type="hidden" name="access_key" value={SITE.web3forms.accessKey} />
-      <input type="hidden" name="form_id" value={SITE.web3forms.accessKey} />
+      <input type="hidden" name="access_key" value={web3formsAccessKey} />
+      <input type="hidden" name="form_id" value={web3formsAccessKey} />
       <input type="hidden" name="subject" value="Nuevo mensaje desde brigadagalgos.cl" />
       <input
         type="checkbox"

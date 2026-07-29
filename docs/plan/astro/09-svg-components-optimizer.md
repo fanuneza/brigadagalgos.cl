@@ -22,7 +22,9 @@ Move inline/icon SVG usage to Astro's SVG component imports and turn on build-ti
 3. Enable in `astro.config.mjs`:
    ```js
    import { defineConfig, svgoOptimizer } from "astro/config";
-   experimental: { svgOptimizer: svgoOptimizer({ plugins: ["preset-default", "removeXMLNS"] }) }
+   experimental: {
+     svgOptimizer: svgoOptimizer({ plugins: ["preset-default", "removeXMLNS"] });
+   }
    ```
    Verify visually that no icon breaks (SVGO can strip needed attrs); adjust plugin overrides if so.
 4. Delete now-unused files from `public/icons/`; update `tests/build-output.spec.ts` if it asserts their presence.

@@ -1,3 +1,4 @@
+import { PUBLIC_GTM_ID } from "astro:env/client";
 import { CONSENT_ACCEPTED, getCookie, getTrackingWindow } from "../utils/analytics";
 
 const CONSENT_REJECTED = "rejected";
@@ -9,7 +10,7 @@ function getConsentCookie() {
 }
 
 function getGtmContainerId() {
-  return document.documentElement.dataset.gtmId ?? "";
+  return PUBLIC_GTM_ID ?? document.documentElement.dataset.gtmId ?? "";
 }
 
 function setCookie(name: string, value: string) {
