@@ -32,11 +32,7 @@ module.exports = {
         // Lighthouse reports the current home-page bfcache miss as "Not actionable"
         // because Chrome evicts the page after too much buffered network data.
         "bf-cache": "off",
-        "lcp-lazy-loaded": "off",
-        "aria-hidden-focus": "off",
-        "target-size": "off",
         "cls-culprits-insight": "off",
-        "dom-size": "off",
         // Insights are informational only.
         "forced-reflow-insight": "off",
         "network-dependency-tree-insight": "off",
