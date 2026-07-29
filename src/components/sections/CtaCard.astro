@@ -5,16 +5,28 @@ interface Props {
   body?: string;
   bodyClass?: string;
   tail?: boolean;
+  /** Emphasis of the CTA block. `lead` is the historical rendering. */
+  weight?: "lead" | "support" | "quiet";
 }
 
-const { eyebrow, heading, body, bodyClass, tail = false } = Astro.props;
+const { eyebrow, heading, body, bodyClass, tail = false, weight = "lead" } = Astro.props;
+
+const isLead = weight === "lead";
 ---
 
-<section class={tail ? "section-padding tail-cta end-cta" : "section-padding end-cta"}>
+<section
+  class:list={[
+    "section-padding",
+    tail && "tail-cta",
+    // The magenta-ish band is the loud treatment; a quiet CTA sits on the page.
+    weight !== "quiet" && "end-cta",
+    !isLead && `section--${weight}`,
+  ]}
+>
   <div class="container container--narrow">
-    <div class="cta-card cta-card--end">
-      <p class="eyebrow">{eyebrow}</p>
-      <h2>{heading}</h2>
+    <div class:list={["cta-card", "cta-card--end", !isLead && "cta-card--plain"]}>
+      <p class:list={["eyebrow", `eyebrow--${weight}`]}>{eyebrow}</p>
+      <h2 class:list={[!isLead && `section-heading--${weight}`]}>{heading}</h2>
       {body && <p class={bodyClass}>{body}</p>}
       <slot />
       <div class="cta-card__actions">

@@ -7,6 +7,8 @@ interface Props {
   h1: string;
   lead?: string;
   leadBold?: string;
+  /** Emphasis of the whole hero. `lead` is the historical rendering. */
+  weight?: "lead" | "support" | "quiet";
   ctaText?: string;
   ctaHref?: string;
   ctaVariant?: "primary" | "secondary" | "ghost";
@@ -20,6 +22,7 @@ const {
   h1,
   lead,
   leadBold,
+  weight = "lead",
   ctaText,
   ctaHref,
   ctaVariant = "ghost",
@@ -29,9 +32,9 @@ const {
 } = Astro.props;
 ---
 
-<section class="page-hero section-padding">
+<section class:list={["page-hero", "section-padding", `page-hero--${weight}`]}>
   <div class="container container--narrow">
-    <p class="eyebrow">{eyebrow}</p>
+    <p class:list={["eyebrow", `eyebrow--${weight}`]}>{eyebrow}</p>
     <h1>{h1}</h1>
     {lead && <p class="page-hero__lead t-lead">{lead}</p>}
     {leadBold && <p class="page-hero__lead page-hero__lead--bold t-lead t-lead-strong">{leadBold}</p>}
