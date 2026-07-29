@@ -1,7 +1,6 @@
 ---
 import "../../styles/components/dog-card.css";
 import "../../styles/components/dog-profile.css";
-import type { CollectionEntry } from "astro:content";
 import { getImage } from "astro:assets";
 import PageLayout from "../../layouts/PageLayout.astro";
 import RainbowDivider from "../../components/RainbowDivider.astro";
@@ -12,14 +11,19 @@ import WhatsAppLink from "../../components/WhatsAppLink.astro";
 import TrackedLink from "../../components/TrackedLink.astro";
 import InstagramLink from "../../components/InstagramLink.astro";
 import { SITE } from "../../config/site.ts";
-import { buildAdoptionDogCards, buildDogMetaDescription, getActiveAdoptionDogs } from "../../utils/dog-content";
+import {
+  buildAdoptionDogCards,
+  buildDogMetaDescription,
+  getActiveDogs,
+  type AdoptionDogEntry,
+} from "../../utils/dog-content";
 
 export async function getStaticPaths() {
-  const dogs = await getActiveAdoptionDogs();
+  const dogs = await getActiveDogs();
   return dogs.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
-const { entry } = Astro.props as { entry: CollectionEntry<"adoption-dogs"> };
+const { entry } = Astro.props as { entry: AdoptionDogEntry };
 const [dog] = await buildAdoptionDogCards([entry]);
 const metaDescription = buildDogMetaDescription(entry.data);
 

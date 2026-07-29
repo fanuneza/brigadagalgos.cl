@@ -4,7 +4,7 @@ pubDate: 2026-06-22
 author: "Brigada Galgos"
 description: "Vivir en departamento no descarta adoptar un galgo. Esta guía explica rutina, paseos, seguridad, frío, vecinos, adaptación y cuidados reales para familias en Santiago."
 category: "Adopción"
-heroImage: ../../assets/casos/exito/praga/praga-01.jpg
+heroImage: ../../assets/casos/praga/praga-01.jpg
 heroImageAlt: "Praga, galga adoptada, descansando cómodamente en un departamento"
 draft: false
 ---
@@ -110,7 +110,7 @@ Necesita entender dónde se duerme, cuándo se sale, quién lo cuida y qué soni
 
 Durante los primeros días, recomendamos paseos simples y repetidos, una zona de descanso clara, pocas visitas y supervisión tranquila. Si se esconde o mira todo con desconfianza, no significa que la adopción vaya mal. Muchas veces significa que por fin tiene tiempo para procesar.
 
-![Mora, galga adoptada, tranquila en su hogar](../../assets/casos/exito/mora/mora-03.jpg)
+![Mora, galga adoptada, tranquila en su hogar](../../assets/casos/mora/mora-03.jpg)
 
 ## Señales de que la rutina va bien
 

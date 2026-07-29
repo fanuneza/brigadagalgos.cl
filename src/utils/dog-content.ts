@@ -96,21 +96,16 @@ export function getEntriesWithGallery<T extends { data: { gallery: unknown[] } }
   return entries.filter((entry) => entry.data.gallery.length > 0);
 }
 
-export async function getActiveAdoptionDogs(): Promise<CollectionEntry<"adoption-dogs">[]> {
-  const dogs: CollectionEntry<"adoption-dogs">[] = await getCollection("adoption-dogs");
-  return dogs.filter((dog) => dog.data.active !== false);
-}
-
 export async function getActiveAdoptionDogCards(limit?: number): Promise<AdoptionDogCard[]> {
-  const selected = shuffle(await getActiveAdoptionDogs());
+  const selected = shuffle(await getActiveDogs());
   return buildAdoptionDogCards(typeof limit === "number" ? selected.slice(0, limit) : selected);
 }
 
 export async function getShuffledStorySummaries(
   options: { limit?: number; requireGallery?: boolean } = {}
 ): Promise<StoryDogSummary[]> {
-  const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
-  const eligible = options.requireGallery ? getEntriesWithGallery(successDogs) : successDogs;
+  const storyEntries = await getDogs("exito");
+  const eligible = options.requireGallery ? getEntriesWithGallery(storyEntries) : storyEntries;
   return buildStoryDogSummaries(shuffle(eligible), options.limit);
 }
 

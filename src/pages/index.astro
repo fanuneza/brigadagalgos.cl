@@ -12,13 +12,13 @@ import TrustStatsSection from "../components/sections/TrustStatsSection.astro";
 import FeaturedAdoptionDogs from "../components/sections/FeaturedAdoptionDogs.astro";
 import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import {
   buildStoryDogSummaries,
   getActiveAdoptionDogCards,
-  getActiveAdoptionDogs,
+  getActiveDogs,
+  getDogs,
   getEntriesWithGallery,
 } from "../utils/dog-content";
 import { buildSrcSet } from "../utils/responsive-gallery-images";
@@ -78,11 +78,11 @@ const rescueSteps = [
   },
 ];
 
-const activeAdoptionDogs = await getActiveAdoptionDogs();
+const activeAdoptionDogs = await getActiveDogs();
 const featuredDogs = await getActiveAdoptionDogCards(3);
-const successDogs: CollectionEntry<"success-dogs">[] = await getCollection("success-dogs");
+const storyEntries = await getDogs("exito");
 const storyDogs = await buildStoryDogSummaries(
-  getEntriesWithGallery(successDogs).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
+  getEntriesWithGallery(storyEntries).sort((a, b) => a.data.name.localeCompare(b.data.name, "es")),
   3
 );
 

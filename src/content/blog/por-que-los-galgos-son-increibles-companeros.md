@@ -41,7 +41,7 @@ No son perros guardianes que estén vigilando cada sonido del edificio. Algunos 
 
 Lo esencial no es el número de metros cuadrados. Es la calidad de la vida cotidiana: si tiene dónde descansar sin frío, si sale con regularidad, si hay tiempo para acompañarlo y si las puertas, ventanas y balcones son seguros.
 
-![Antonia, galga adoptada, descansando plácidamente en casa](../../assets/casos/exito/antonia/antonia-01.jpg)
+![Antonia, galga adoptada, descansando plácidamente en casa](../../assets/casos/antonia/antonia-01.jpg)
 
 ## Son una lección de comodidad sin culpa
 

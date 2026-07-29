@@ -4,7 +4,7 @@ pubDate: 2026-07-09
 author: "Brigada Galgos"
 description: "Todo lo que conviene preparar antes, durante y después de adoptar un galgo: seguridad, primeros días, paseos, descanso, salud, convivencia y acompañamiento."
 category: "Adopción"
-heroImage: ../../assets/casos/exito/mozzarella/mozzarella-02.jpg
+heroImage: ../../assets/casos/mozzarella/mozzarella-02.jpg
 heroImageAlt: "Mozzarella, galga adoptada, descansando junto a su familia"
 draft: false
 ---
@@ -49,7 +49,7 @@ Una lista sencilla ayuda mucho:
 
 La correa no es un castigo ni una fase que se supera rápido. En espacios abiertos, es la herramienta que evita una pérdida. Un galgo puede ser muy cariñoso y estar muy conectado contigo; aun así, su impulso visual puede ser más rápido que cualquier llamado.
 
-![Arepita, galga rescatada, descansando sobre una cama](../../assets/casos/exito/arepita/arepita-03.jpg)
+![Arepita, galga rescatada, descansando sobre una cama](../../assets/casos/arepita/arepita-03.jpg)
 
 ## Arma su rincón: una cama no es un lujo
 
@@ -97,7 +97,7 @@ Si hay otro perro en casa, la presentación debe ser gradual y en un contexto ma
 
 Para las visitas, prepara un lugar donde pueda retirarse. No todos disfrutan que alguien nuevo les hable encima o los toque al llegar. Pedir a las personas que lo ignoren al principio suele ser más amable que insistir en saludarlo.
 
-![Francia, galga adoptada, disfrutando un momento de calma](../../assets/casos/exito/francia/francia-02.jpg)
+![Francia, galga adoptada, disfrutando un momento de calma](../../assets/casos/francia/francia-02.jpg)
 
 ## Enseñar a quedarse solo se hace de a poco
 
