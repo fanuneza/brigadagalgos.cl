@@ -46,8 +46,22 @@ export const NAV_ENTRIES = {
   blog: { href: "/blog/", label: "Blog" },
 } as const satisfies Record<string, NavEntry>;
 
-// Desktop nav + mobile drawer (Navbar.astro).
+// Mobile drawer order follows the adoption journey end-to-end.
 export const NAVBAR_LINKS: NavEntry[] = [
+  NAV_ENTRIES.adoptar,
+  NAV_ENTRIES.porQueGalgos,
+  NAV_ENTRIES.preguntasFrecuentes,
+  NAV_ENTRIES.hogarTemporal,
+  NAV_ENTRIES.historias,
+  NAV_ENTRIES.colaboradores,
+  NAV_ENTRIES.contacto,
+];
+
+// The desktop bar keeps the two explanatory routes in a compact native menu
+// so the entire shell remains usable at the 1024px breakpoint.
+export const NAVBAR_INFORMATION_LINKS: NavEntry[] = [NAV_ENTRIES.porQueGalgos, NAV_ENTRIES.preguntasFrecuentes];
+
+export const NAVBAR_DESKTOP_LINKS: NavEntry[] = [
   NAV_ENTRIES.adoptar,
   NAV_ENTRIES.hogarTemporal,
   NAV_ENTRIES.historias,

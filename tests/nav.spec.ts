@@ -1,6 +1,14 @@
 import { expect, test } from "@playwright/test";
 
-const expectedOrder = ["Adoptar", "Hogar temporal", "Historias", "Colaboradores", "Contacto"];
+const expectedDrawerOrder = [
+  "Adoptar",
+  "Por qué galgos",
+  "Preguntas frecuentes",
+  "Hogar temporal",
+  "Historias",
+  "Colaboradores",
+  "Contacto",
+];
 
 test("desktop nav still fits at the desktop breakpoint", async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 900 });
@@ -8,9 +16,19 @@ test("desktop nav still fits at the desktop breakpoint", async ({ page }) => {
 
   const nav = page.locator(".navbar__nav");
   await expect(nav).toBeVisible();
-  await expect(page.locator(".navbar__cta")).toBeVisible();
+  await expect(page.locator(".navbar__cta")).toHaveText("Apoyar");
+  await expect(page.locator(".navbar__cta")).toHaveClass(/btn--secondary/);
   await expect(page.locator(".navbar__hamburger")).toBeHidden();
-  await expect(nav.locator(".navbar__link")).toHaveText(expectedOrder);
+  await expect(nav.locator(":scope > .navbar__link, :scope > .navbar__information > summary")).toHaveText([
+    "Adoptar",
+    "Información",
+    "Hogar temporal",
+    "Historias",
+    "Colaboradores",
+    "Contacto",
+  ]);
+  await page.locator(".navbar__information summary").click();
+  await expect(page.locator(".navbar__information-link")).toHaveText(["Por qué galgos", "Preguntas frecuentes"]);
 });
 
 const drawerViewports = [
@@ -29,7 +47,7 @@ for (const viewport of drawerViewports) {
     await page.locator(".navbar__hamburger").click();
     const drawer = page.locator(".navbar__drawer");
     await expect(drawer).toBeVisible();
-    await expect(drawer.locator(".drawer__link")).toHaveText(expectedOrder);
+    await expect(drawer.locator(".drawer__link")).toHaveText(expectedDrawerOrder);
     await expect(drawer.locator(".drawer__cta")).toBeVisible();
   });
 }
@@ -53,4 +71,45 @@ test("persisted navbar resets drawer and aria-current on client-side navigation"
   await expect(page.locator(".navbar__hamburger")).toHaveAttribute("aria-expanded", "false");
   await expect(page.locator('.drawer__link[href="/contacto/"]')).toHaveAttribute("aria-current", "page");
   await expect(page.locator('.drawer__link[href="/adoptar/"]')).not.toHaveAttribute("aria-current", "page");
+});
+
+const sharedShellRoutes = [
+  "/",
+  "/adoptar/",
+  "/casos-de-exito/",
+  "/colaboradores/",
+  "/contacto/",
+  "/donar/",
+  "/hogar-temporal/",
+  "/por-que-galgos/",
+  "/preguntas-frecuentes/",
+];
+
+for (const route of sharedShellRoutes) {
+  test(`shared shell does not overflow at 320px on ${route}`, async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 844 });
+    await page.goto(route, { waitUntil: "networkidle" });
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
+      await page.evaluate(() => document.documentElement.clientWidth)
+    );
+    await expect(page.locator(".navbar__brand")).toBeVisible();
+    await expect(page.locator(".navbar__theme-toggle")).toBeVisible();
+    await expect(page.locator(".navbar__hamburger")).toBeVisible();
+  });
+}
+
+test("shared shell remains usable with 200% text", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
+    await page.evaluate(() => document.documentElement.clientWidth)
+  );
+  await expect(page.locator(".navbar__brand")).toBeVisible();
+  await expect(page.locator(".navbar__theme-toggle")).toBeVisible();
+  await expect(page.locator(".navbar__hamburger")).toBeVisible();
 });

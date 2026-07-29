@@ -1,12 +1,14 @@
 ---
-import { SITE, NAVBAR_LINKS } from "../config/site.ts";
+import { SITE, NAVBAR_DESKTOP_LINKS, NAVBAR_INFORMATION_LINKS, NAVBAR_LINKS } from "../config/site.ts";
 import TrackedLink from "./TrackedLink.astro";
 import WhatsAppIcon from "../assets/icons/whatsapp.svg";
 import InstagramIcon from "../assets/icons/instagram.svg";
 import FacebookIcon from "../assets/icons/facebook.svg";
 
 const { pathname } = Astro.url;
-const nav = NAVBAR_LINKS;
+const drawerNav = NAVBAR_LINKS;
+const desktopNav = NAVBAR_DESKTOP_LINKS;
+const informationNav = NAVBAR_INFORMATION_LINKS;
 ---
 
 <header class="navbar" data-navbar transition:persist>
@@ -35,7 +37,42 @@ const nav = NAVBAR_LINKS;
 
     <nav class="navbar__nav" aria-label="Navegación principal">
       {
-        nav.map(({ href, label }) => (
+        desktopNav.slice(0, 1).map(({ href, label }) => (
+          <a
+            href={href}
+            class="navbar__link"
+            aria-current={pathname === href ? "page" : undefined}
+            data-track-event="navigation_click"
+            data-track-label={label}
+            data-track-location="desktop_nav"
+            data-track-destination={href}
+          >
+            {label}
+          </a>
+        ))
+      }
+      <details class="navbar__information">
+        <summary class="navbar__link">Información</summary>
+        <div class="navbar__information-menu">
+          {
+            informationNav.map(({ href, label }) => (
+              <a
+                href={href}
+                class="navbar__link navbar__information-link"
+                aria-current={pathname === href ? "page" : undefined}
+                data-track-event="navigation_click"
+                data-track-label={label}
+                data-track-location="desktop_nav"
+                data-track-destination={href}
+              >
+                {label}
+              </a>
+            ))
+          }
+        </div>
+      </details>
+      {
+        desktopNav.slice(1).map(({ href, label }) => (
           <a
             href={href}
             class="navbar__link"
@@ -101,14 +138,14 @@ const nav = NAVBAR_LINKS;
 
     <a
       href="/donar/"
-      class="btn btn--primary navbar__cta"
+      class="btn btn--secondary navbar__cta"
       data-track-event="cta_click"
       data-track-label="Apóyanos"
       data-track-location="navbar"
       data-track-destination="/donar/"
       data-track-category="donation"
     >
-      Apóyanos
+      Apoyar
     </a>
 
     <button
@@ -145,7 +182,7 @@ const nav = NAVBAR_LINKS;
 
     <nav aria-label="Menú móvil">
       {
-        nav.map(({ href, label }) => (
+        drawerNav.map(({ href, label }) => (
           <a
             href={href}
             class="drawer__link"
@@ -165,7 +202,7 @@ const nav = NAVBAR_LINKS;
 
     <a
       href="/donar/"
-      class="btn btn--primary drawer__cta"
+      class="btn btn--secondary drawer__cta"
       data-track-event="cta_click"
       data-track-label="Voy a apoyar un galgo"
       data-track-location="mobile_drawer"
