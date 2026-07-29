@@ -1,7 +1,11 @@
-<section id="nosotros" class="section-padding" data-track-section="mission">
+---
+import "../../styles/components/mission.css";
+---
+
+<section id="nosotros" class="section-padding section--support" data-track-section="mission">
   <div class="container container--narrow">
-    <p class="eyebrow">Quiénes somos</p>
-    <h2 class="section-heading t-section-title">Protegemos, acogemos y damos en adopción galgos en Chile</h2>
+    <p class="eyebrow eyebrow--support">Quiénes somos</p>
+    <h2 class="section-heading section-heading--support">Protegemos, acogemos y damos en adopción galgos en Chile</h2>
 
     <div class="mission__prose">
       <p class="section-body t-lead">
@@ -16,11 +20,17 @@
       </p>
     </div>
 
-    <ul class="mission-values" aria-label="Valores de Brigada Galgos">
-      <li>Compasión</li>
-      <li>Responsabilidad</li>
-      <li>Transparencia</li>
-      <li>Comunidad</li>
-    </ul>
+    <slot />
+
+    <div class="mission__flow">
+      <h3 class="mission__flow-title t-ui-title">El camino de cada rescate</h3>
+      <ol class="mission__flow-list">
+        <li>Recibimos el aviso</li>
+        <li>Rescate y traslado</li>
+        <li>Atención veterinaria integral</li>
+        <li>Acogida temporal</li>
+        <li>Familia y acompañamiento</li>
+      </ol>
+    </div>
   </div>
 </section>

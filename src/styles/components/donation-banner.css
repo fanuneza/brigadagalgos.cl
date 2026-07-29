@@ -5,7 +5,9 @@
     color-mix(in sRGB, var(--color-secondary) 74%, #31102a)
   );
   color: var(--color-text-on-dark);
-  padding-block: var(--space-9);
+  /* Subordinate exit: the band keeps its own identity but sits below the
+     featured-galgos section in weight, so it runs on the quiet rhythm. */
+  padding-block: var(--section-space-quiet);
   --link-color: var(--color-text-on-dark);
   --link-decoration-color: rgba(255, 255, 255, 0.35);
   position: relative;
@@ -23,10 +25,10 @@
 .donation-banner::before {
   top: -6rem;
   right: -4rem;
-  width: 18rem;
-  height: 18rem;
+  width: 12rem;
+  height: 12rem;
   border-radius: 999px;
-  background: color-mix(in sRGB, var(--color-accent-warm) 18%, transparent);
+  background: color-mix(in sRGB, var(--color-accent-warm) 12%, transparent);
   filter: blur(18px);
 }
 
@@ -36,13 +38,13 @@
 }
 @media (min-width: 1024px) {
   .donation-banner {
-    padding-block: var(--space-12);
+    padding-block: var(--section-space-quiet-lg);
   }
 }
 
 .donation-banner__grid {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-6);
   position: relative;
 }
 @media (min-width: 1024px) {

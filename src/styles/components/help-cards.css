@@ -1,13 +1,8 @@
-.help-cards {
-  background: linear-gradient(
-    180deg,
-    color-mix(in sRGB, var(--color-surface) 88%, var(--color-bg)),
-    color-mix(in sRGB, var(--color-primary-100) 18%, var(--color-bg))
-  );
-}
-
+/* Quiet weight: these are the page's secondary exits, not its decision. The
+   section tint now comes from `.section--quiet`; the cards are flat (no
+   elevation, no rainbow rule) so they never compete with the featured galgos. */
 .help-cards__header {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-5);
 }
 
 .help-cards__heading {
@@ -16,39 +11,27 @@
 
 .help-cards__grid {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-4);
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .help-cards__grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .help-card {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  padding: var(--space-6);
-  box-shadow: 0 16px 32px rgba(31, 35, 40, 0.08);
+  background: var(--card-plain-bg);
+  border: 1px solid var(--card-plain-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  position: relative;
+  gap: var(--space-2);
 }
 
-.help-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: linear-gradient(
-    to right,
-    var(--color-primary) 0% 20%,
-    var(--color-secondary) 20% 40%,
-    var(--color-accent-warm) 40% 60%,
-    var(--color-rainbow-green) 60% 80%,
-    var(--color-rainbow-purple) 80% 100%
-  );
+.help-card .icon-circle {
+  width: 36px;
+  height: 36px;
 }
 
 .help-card__title {

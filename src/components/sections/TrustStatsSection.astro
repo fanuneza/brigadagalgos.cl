@@ -2,43 +2,73 @@
 import "../../styles/components/trust-stats.css";
 import { getActiveDogs } from "../../utils/dog-content";
 
+interface Props {
+  /**
+   * `full` is the standalone section (default, unchanged — `/donar/` relies on it).
+   * `compact` renders only the numbers, with no section wrapper or heading, so a
+   * host section such as the homepage mission block can absorb it.
+   */
+  variant?: "full" | "compact";
+}
+
+const { variant = "full" } = Astro.props;
+
 const adoptionDogCount = (await getActiveDogs()).length;
 const yearsActive = Math.max(new Date().getFullYear() - 2023, 1);
+
+const stats = [
+  {
+    value: `${yearsActive}+`,
+    tone: "cyan",
+    label: "años activas",
+    body: "Nos formamos en 2023 desde experiencia previa rescatando y adoptando galgos.",
+  },
+  {
+    value: "6",
+    tone: "magenta",
+    label: "mujeres coordinando",
+    body: "Sostenemos rescates, hogares temporales, adopciones y seguimiento con una red de apoyo.",
+  },
+  {
+    value: "100+",
+    tone: "orange",
+    label: "rescates",
+    body: "Cada historia muestra un galgo que tuvo acompañamiento hasta llegar a una nueva vida.",
+  },
+  {
+    value: String(adoptionDogCount),
+    tone: "green",
+    label: "galgos en adopción",
+    body: "Presentamos nombres, fotos y detalles para que cada postulación parta con información real.",
+  },
+];
 ---
 
-<section class="section-padding trust-stats">
-  <div class="container">
-    <p class="eyebrow">COMPROMISO</p>
-    <h2>Los números que nos avalan</h2>
-    <div class="trust-stats__grid">
-      <div class="stat-card">
-        <p class="stat-card__value stat-card__value--cyan">{yearsActive}+</p>
-        <h3 class="stat-card__label t-ui-title">años activas</h3>
-        <p class="stat-card__body t-small-muted">
-          Nos formamos en 2023 desde experiencia previa rescatando y adoptando galgos.
-        </p>
+{
+  variant === "compact" ? (
+    <ul class="trust-stats__strip" aria-label="Nuestro trabajo en números">
+      {stats.map((stat) => (
+        <li class="trust-stat">
+          <span class={`trust-stat__value stat-card__value--${stat.tone}`}>{stat.value}</span>
+          <span class="trust-stat__label t-small-muted">{stat.label}</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <section class="section-padding trust-stats">
+      <div class="container">
+        <p class="eyebrow">COMPROMISO</p>
+        <h2>Los números que nos avalan</h2>
+        <div class="trust-stats__grid">
+          {stats.map((stat) => (
+            <div class="stat-card">
+              <p class={`stat-card__value stat-card__value--${stat.tone}`}>{stat.value}</p>
+              <h3 class="stat-card__label t-ui-title">{stat.label}</h3>
+              <p class="stat-card__body t-small-muted">{stat.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <div class="stat-card">
-        <p class="stat-card__value stat-card__value--magenta">6</p>
-        <h3 class="stat-card__label t-ui-title">mujeres coordinando</h3>
-        <p class="stat-card__body t-small-muted">
-          Sostenemos rescates, hogares temporales, adopciones y seguimiento con una red de apoyo.
-        </p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-card__value stat-card__value--orange">100+</p>
-        <h3 class="stat-card__label t-ui-title">rescates</h3>
-        <p class="stat-card__body t-small-muted">
-          Cada historia muestra un galgo que tuvo acompañamiento hasta llegar a una nueva vida.
-        </p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-card__value stat-card__value--green">{adoptionDogCount}</p>
-        <h3 class="stat-card__label t-ui-title">galgos en adopción</h3>
-        <p class="stat-card__body t-small-muted">
-          Presentamos nombres, fotos y detalles para que cada postulación parta con información real.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  )
+}
