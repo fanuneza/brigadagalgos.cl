@@ -1,5 +1,8 @@
 # Plan: Unified Dog Collection + Gallery/Lightbox Revamp
 
+> **Status: completed** (2026-07-29). All waves merged to `main`; see `git log` for the
+> per-task commits. This directory remains as the record of the program.
+
 This directory contains a modular execution plan for two coupled initiatives:
 
 1. **Unify `adoption-dogs` and `success-dogs` into a single `dogs` collection** with a
