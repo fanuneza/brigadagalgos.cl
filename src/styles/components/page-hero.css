@@ -56,3 +56,55 @@ section.page-hero {
     padding-inline: var(--space-4);
   }
 }
+
+/* ── Hero weight ────────────────────────────────────────────────────
+   `page-hero--lead` is the default and deliberately has no rules: it
+   documents intent in the markup while leaving rendering untouched.
+   Selectors below are doubled (`.page-hero.page-hero--x`) so they beat
+   the (0,1,1) `.page-hero h1` rule in global.css regardless of the order
+   the two stylesheets end up in the bundle. */
+section.page-hero.page-hero--support {
+  padding-block-end: var(--section-space-support);
+}
+
+.page-hero.page-hero--support h1 {
+  font-size: var(--type-section-title);
+}
+
+section.page-hero.page-hero--quiet {
+  padding-block: var(--space-5) var(--section-space-quiet);
+}
+
+.page-hero.page-hero--quiet h1 {
+  font-size: var(--type-subsection-title);
+}
+
+.page-hero.page-hero--quiet .page-hero__lead {
+  font-size: var(--type-body);
+  line-height: var(--line-base);
+}
+
+.page-hero.page-hero--quiet .btn {
+  min-height: 44px;
+  padding-block: var(--space-2);
+}
+
+/* A quiet hero keeps the surface wash but drops the magenta bloom, so it
+   does not announce itself like a landing page. */
+.page-hero--quiet::before {
+  background: linear-gradient(
+    180deg,
+    color-mix(in sRGB, var(--color-bg) 96%, transparent),
+    color-mix(in sRGB, var(--color-surface) 70%, transparent)
+  );
+}
+
+@media (min-width: 1024px) {
+  section.page-hero.page-hero--support {
+    padding-block-end: var(--section-space-support-lg);
+  }
+
+  section.page-hero.page-hero--quiet {
+    padding-block: var(--space-6) var(--section-space-quiet-lg);
+  }
+}

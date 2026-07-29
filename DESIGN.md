@@ -217,7 +217,61 @@ La galería permite conocer a cada galgo sin sacar al visitante del contexto de 
 - **Style:** imagen protagonista, controles circulares oscuros y puntos de avance sobre la fotografía.
 - **Behavior:** las imágenes se abren para ver detalles; las alternativas de texto y el control por teclado son obligatorios.
 
-## 6. Do's and Don'ts
+## 6. Jerarquía: sección, tarjeta y acción
+
+Una página no puede tener ocho secciones que pesen lo mismo. Este vocabulario existe para que
+cada ruta declare qué es principal, qué acompaña y qué es un apunte al margen, eligiendo una
+variante en vez de inventar CSS por página. Todo es opcional: sin modificador, nada cambia.
+
+### Peso de sección
+
+Modificadores que se suman a `.section-padding`. Tres niveles, sin excepciones.
+
+- **`.section--lead`** — la decisión de la página. Ritmo vertical amplio (80px móvil / 96px
+  escritorio). Como máximo una o dos por ruta.
+- **`.section--support`** — contenido que sostiene esa decisión: prueba, proceso, contexto.
+  Reproduce exactamente el ritmo histórico (64px / 80px), así que agregarlo no cambia nada.
+- **`.section--quiet`** — apuntes, notas al pie, enlaces de servicio. Ritmo corto (40px / 48px)
+  sobre un tinte apenas perceptible (`--section-quiet-bg`) que la separa sin encenderla.
+
+### Peso de titular y ceja
+
+El par ceja + titular sigue el mismo eje, para que una sección de apoyo no grite igual que una
+principal.
+
+- **`.section-heading--lead`** — escala fluida de titular, display en mayúsculas.
+- **`.section-heading--support`** — un escalón más abajo, misma voz condensada.
+- **`.section-heading--quiet`** — 1.75rem en caja normal, sin mayúsculas.
+- **`.eyebrow--lead` / `--support` / `--quiet`** — cian profundo, tinta atenuada, y tinta
+  atenuada más liviana, respectivamente.
+
+**La regla de la mayúscula selectiva.** Las mayúsculas se reservan para cejas, etiquetas breves
+y titulares display. Nunca para texto corrido. Las mayúsculas en español conservan sus tildes
+siempre: `ADOPCIÓN`, jamás `ADOPCION`.
+
+### Peso de tarjeta
+
+Dos niveles. La elevación es un recurso escaso; si todo flota, nada destaca.
+
+- **`.card` + `.card--elevated`** — fondo propio, borde fino y sombra de contacto. Para un caso
+  real que invita a decidir: un galgo, una historia, una vía de contacto.
+- **`.card` + `.card--plain`** — plano, sin relleno, solo una línea fina. Para información que
+  acompaña: requisitos, datos, comparaciones, listados densos.
+
+`.cta-card--plain` aplica el mismo peso plano a la CTA de cierre cuando esa no es la conversión
+real de la página. Las tarjetas de ruta (`dog-card`, `story-card`, `channel-card`) mantienen su
+propio sistema de clases y adoptan estos pesos cuando corresponda.
+
+### Peso de acción
+
+Tres niveles, y solo tres. Una agrupación con una acción principal más una terciaria debe leerse
+como una sola decisión.
+
+- **`.btn--primary`** — relleno naranjo. Una sola por agrupación: adoptar, postular, donar, enviar.
+- **`.btn--secondary`** — cian suave con borde. Una ruta alternativa que sigue importando.
+- **`.btn--ghost`** — sin relleno ni borde. Detalles de baja presión: ver una ficha, volver.
+
+## 7. Do's and Don'ts
 
 ### Do:
 

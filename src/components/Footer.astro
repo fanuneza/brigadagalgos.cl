@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../config/site.ts";
+import { SITE, FOOTER_LINKS } from "../config/site.ts";
 import TrackedLink from "./TrackedLink.astro";
 import WhatsAppLink from "./WhatsAppLink.astro";
 import InstagramIcon from "../assets/icons/instagram.svg";
@@ -76,14 +76,15 @@ const currentYear = new Date().getFullYear();
     <div class="footer__nav">
       <h3 class="footer__section-title">Navegar</h3>
       <ul class="footer__list">
-        <li><a href="/adoptar/" class="footer__link">Adoptar</a></li>
-        <li><a href="/casos-de-exito/" class="footer__link">Historias</a></li>
-        <li><a href="/hogar-temporal/" class="footer__link">Hogar temporal</a></li>
-        <li><a href="/por-que-galgos/" class="footer__link">Por qué galgos</a></li>
-        <li><a href="/preguntas-frecuentes/" class="footer__link">Preguntas frecuentes</a></li>
-        <li><a href="/colaboradores/" class="footer__link">Colaboradores</a></li>
-        <li><a href="/blog/" class="footer__link">Blog</a></li>
-        <li><a href="/contacto/" class="footer__link">Contacto</a></li>
+        {
+          FOOTER_LINKS.map(({ href, label }) => (
+            <li>
+              <a href={href} class="footer__link">
+                {label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>

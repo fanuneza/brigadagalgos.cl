@@ -152,6 +152,22 @@
   --bp-lg: 1280px;
 
   /* ---------------------------------------------------------------------
+     SECTION RHYTHM — three weights of vertical breathing room.
+     `support` intentionally equals the historical `.section-padding`
+     default, so `.section-padding.section--support` renders unchanged.
+     --------------------------------------------------------------------- */
+  --section-space-lead: var(--space-10); /* 80 */
+  --section-space-lead-lg: var(--space-12); /* 96 */
+  --section-space-support: var(--space-9); /* 64 — legacy default */
+  --section-space-support-lg: var(--space-10); /* 80 — legacy default */
+  --section-space-quiet: var(--space-7); /* 40 */
+  --section-space-quiet-lg: var(--space-8); /* 48 */
+
+  /* Quiet sections may sit on a barely-there tint so they read as an
+     aside rather than a peer of the sections around them. */
+  --section-quiet-bg: color-mix(in sRGB, var(--color-surface) 62%, var(--color-bg));
+
+  /* ---------------------------------------------------------------------
      RADIUS
      --------------------------------------------------------------------- */
   --radius-sm: 6px;
@@ -231,4 +247,25 @@
   --btn-radius: var(--radius-full);
   --btn-font-weight: var(--weight-bold);
   --btn-min-height: 48px; /* a11y hit target */
+}
+
+/* =========================================================================
+   COMPONENT TOKENS — Cards
+   Two weights only: elevated (a real case that invites a decision) and
+   plain (supporting information that must not compete with it).
+   ========================================================================= */
+
+:root {
+  --card-radius: var(--radius-lg);
+  --card-padding: var(--space-5);
+  --card-padding-compact: var(--space-4);
+
+  /* Elevated — white surface, hairline border, contact shadow. */
+  --card-elevated-bg: var(--color-bg);
+  --card-elevated-border: var(--color-border);
+  --card-elevated-shadow: var(--shadow-sm);
+
+  /* Plain — flat, no fill, softer hairline. */
+  --card-plain-bg: transparent;
+  --card-plain-border: color-mix(in sRGB, var(--color-border) 70%, transparent);
 }

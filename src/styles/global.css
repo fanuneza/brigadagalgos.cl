@@ -543,6 +543,14 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
   color: var(--color-text-muted);
 }
 
+/* Plain weight — a page-tail CTA that must stay subordinate to the page's
+   real conversion action. Same shape, no fill and no elevation. */
+.cta-card--plain {
+  background: var(--card-plain-bg);
+  border-color: var(--card-plain-border);
+  box-shadow: none;
+}
+
 main {
   display: block;
 }
@@ -614,6 +622,106 @@ main {
 .section-heading {
   margin-bottom: 0;
   color: var(--color-text);
+}
+
+/* =========================================================================
+   HIERARCHY VOCABULARY — section weight, card weight, action weight.
+   Opt-in only: nothing here applies until a route adds the modifier.
+   Documented in DESIGN.md §6.
+   ========================================================================= */
+
+/* ── Section weight ─────────────────────────────────────────────────
+   Modifiers layered on `.section-padding`. `--support` reproduces the
+   historical default exactly, so it is safe to add for explicitness. */
+.section--lead {
+  padding-block: var(--section-space-lead);
+}
+
+.section--support {
+  padding-block: var(--section-space-support);
+}
+
+.section--quiet {
+  padding-block: var(--section-space-quiet);
+  background: var(--section-quiet-bg);
+}
+
+@media (min-width: 1024px) {
+  .section--lead {
+    padding-block: var(--section-space-lead-lg);
+  }
+
+  .section--support {
+    padding-block: var(--section-space-support-lg);
+  }
+
+  .section--quiet {
+    padding-block: var(--section-space-quiet-lg);
+  }
+}
+
+/* ── Section heading weight ─────────────────────────────────────────
+   `h2:not([hidden])` already sets a size at (0,1,1), so these carry the
+   same `:not([hidden])` guard to win without hard-coding a tag name. */
+.section-heading--lead:not([hidden]) {
+  font-size: var(--type-section-title);
+}
+
+.section-heading--support:not([hidden]) {
+  font-size: var(--type-subsection-title);
+}
+
+/* Quiet headings drop the uppercase display voice: uppercase is reserved
+   for eyebrows and short labels. Spanish accents survive `text-transform`,
+   but sentence case keeps ADOPCIÓN-style words unambiguous at small sizes. */
+.section-heading--quiet:not([hidden]) {
+  font-size: var(--font-size-xl);
+  text-transform: none;
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-bold);
+}
+
+/* ── Eyebrow weight ─────────────────────────────────────────────────
+   Always uppercase — this is the one place uppercase is the default. */
+.eyebrow--lead {
+  color: var(--color-primary-700);
+}
+
+.eyebrow--support {
+  color: var(--color-text-muted);
+}
+
+.eyebrow--quiet {
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ── Card weight ────────────────────────────────────────────────────
+   Shared primitive for new surfaces. Route-specific cards (`dog-card`,
+   `story-card`, `channel-card`, …) keep their own class systems and opt
+   in later; nothing here restyles them. */
+.card {
+  border-radius: var(--card-radius);
+  padding: var(--card-padding-compact);
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: var(--card-padding);
+  }
+}
+
+.card--elevated {
+  background: var(--card-elevated-bg);
+  border: 1px solid var(--card-elevated-border);
+  box-shadow: var(--card-elevated-shadow);
+}
+
+.card--plain {
+  background: var(--card-plain-bg);
+  border: 1px solid var(--card-plain-border);
+  box-shadow: none;
 }
 
 .mission__prose {
