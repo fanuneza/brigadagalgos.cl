@@ -12,6 +12,7 @@ adoptionFacts:
     cats: "sin información confirmada"
     femaleDogs: "sin información confirmada"
     maleDogs: "sin información confirmada"
+  medicalOrSafetyNeeds: "Está sano."
   personalityBehavior: "Es alegre y muy amoroso."
 currentNeed: "Adopción"
 characterSketch: "Luciano es alegre y muy amoroso. Está a salvo en hogar temporal y busca una familia."

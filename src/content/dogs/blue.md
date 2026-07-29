@@ -4,7 +4,7 @@ status: "adopcion"
 sex: Hembra
 age: "3 años aprox."
 weight: "Talla grande"
-details: "Blue estaba deambulando en Isla de Maipo. Ya está esterilizada y busca una familia."
+details: "Blue estaba deambulando en Isla de Maipo antes de ser rescatada."
 location: "Isla de Maipo"
 adoptionFacts:
   compatibility:

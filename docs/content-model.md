@@ -42,7 +42,7 @@ All dogs live in a single `dogs` collection, discriminated by the `status` field
   - Hidden entries remain in the collection but are excluded from the public listing.
   - Hidden entries older than 90 days fail `tests/source-hygiene.test.ts`.
   - Every dog with `active !== false` renders a profile page at `/adoptar/<slug>/`, with its own meta description (via `buildDogMetaDescription`), OG image (first gallery image), and breadcrumb name override.
-  - Active profiles must include `adoptionFacts.compatibility` for children, cats, female dogs, and male dogs. Each uses one of `sí`, `no`, `caso a caso`, or `sin información confirmada`. Never turn a general description such as “se lleva bien con todos” into a guarantee for a specific group.
+  - Active profiles must include `adoptionFacts.compatibility` for children, cats, female dogs, and male dogs. Each uses one of `sí`, `no`, `caso a caso`, or `sin información confirmada`. Use `caso a caso` when the confirmed limit applies only to part of a group—for example, “sin niños pequeños”—and preserve the precise limit in `homeGuidance`. Never turn a general description such as “se lleva bien con todos” into a guarantee for a specific group.
   - Add `homeGuidance`, `exerciseNeeds`, `medicalOrSafetyNeeds`, and `personalityBehavior` only when the profile copy confirms them. Keep `location` as the current place or care setting.
 - Success variant:
   - `story` must be 260 characters or fewer.

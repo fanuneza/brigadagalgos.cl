@@ -4,7 +4,7 @@ status: "adopcion"
 sex: Macho
 age: "2 años aprox."
 weight: "Talla grande"
-details: "Nilo fue rescatado en la Región de Valparaíso. Tiene aproximadamente 2 años, es grande y temeroso, y tiene algunas cicatrices. Ya está castrado y necesita un hogar donde pueda rehabilitarse o ser adoptado desde ya. Se lleva bien con todos."
+details: "Nilo fue rescatado en la Región de Valparaíso. Tiene algunas cicatrices y ya está castrado."
 location: "Región de Valparaíso"
 adoptionFacts:
   compatibility:
@@ -13,6 +13,7 @@ adoptionFacts:
     femaleDogs: "sin información confirmada"
     maleDogs: "sin información confirmada"
   homeGuidance: "Necesita un entorno paciente para rehabilitarse y ganar confianza."
+  medicalOrSafetyNeeds: "Tiene algunas cicatrices y ya está castrado."
   personalityBehavior: "Es grande, temeroso y se lleva bien con todos."
 currentNeed: "Adopción u hogar temporal"
 characterSketch: "Nilo es grande y temeroso. Necesita un entorno paciente para rehabilitarse y ganar confianza."
