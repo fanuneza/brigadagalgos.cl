@@ -114,7 +114,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-7);
 }
 
@@ -438,7 +438,7 @@ article.blog-post {
   margin-inline: calc(-1 * var(--space-5));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .blog-post__hero-wrap {
     margin-inline: calc(-1 * var(--space-8));
   }

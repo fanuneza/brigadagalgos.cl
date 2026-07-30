@@ -5,6 +5,7 @@ function getConsentCookieName() {
 }
 
 const SECTION_SELECTOR = "[data-track-section]";
+const MILESTONE_SELECTOR = "[data-track-milestone]";
 const TRACKED_CLICK_SELECTOR = "[data-track-event]";
 const SCROLL_MILESTONES = [25, 50, 75, 90] as const;
 
@@ -23,10 +24,12 @@ type AnalyticsDetail = Omit<DataLayerEvent, "page_path"> & {
 type ConsentStatus = "accepted" | "rejected" | "unknown";
 
 let sectionObserver: IntersectionObserver | null = null;
+let milestoneObserver: IntersectionObserver | null = null;
 let scrollListenerAttached = false;
 let resizeListenerAttached = false;
 let scrollTicking = false;
 const seenSections = new Set<string>();
+const seenMilestones = new Set<string>();
 const seenScrollMilestones = new Set<number>();
 
 function getConsentStatus(): ConsentStatus {
@@ -135,10 +138,12 @@ function buildTrackedClickPayload(element: HTMLElement): AnalyticsDetail {
   // Parse custom parameters dynamically from dataset (e.g. data-dog-name -> dogName -> dog_name)
   const customParams = [
     "dogName",
+    "dogSlug",
     "applicationFormUrl",
     "copiedField",
     "whatsappLocation",
-    "whatsappText",
+    "adoptionIntent",
+    "supportType",
     "donationLocation",
     "socialPlatform",
     "filterCategory",
@@ -247,6 +252,62 @@ function startSectionTracking() {
   });
 }
 
+function getMilestoneKey(milestone: HTMLElement) {
+  return [
+    normalizeText(milestone.dataset.trackMilestone),
+    normalizeText(milestone.dataset.supportType),
+    normalizeText(milestone.dataset.dogSlug),
+  ]
+    .filter(Boolean)
+    .join(":");
+}
+
+function handleMilestoneEntries(entries: IntersectionObserverEntry[]) {
+  entries.forEach((entry) => {
+    const milestone = entry.target as HTMLElement;
+    const eventName = normalizeText(milestone.dataset.trackMilestone);
+    const milestoneKey = getMilestoneKey(milestone);
+    if (!eventName || !milestoneKey || seenMilestones.has(milestoneKey)) {
+      return;
+    }
+
+    const isVisibleEnough =
+      entry.intersectionRatio >= getSectionThreshold(entry) ||
+      (entry.isIntersecting &&
+        entry.boundingClientRect.height > window.innerHeight &&
+        entry.intersectionRect.height >= window.innerHeight * 0.6);
+    if (!isVisibleEnough) {
+      return;
+    }
+
+    seenMilestones.add(milestoneKey);
+    pushAnalyticsEvent({
+      event: eventName,
+      dog_slug: normalizeText(milestone.dataset.dogSlug) || undefined,
+      dog_name: normalizeText(milestone.dataset.dogName) || undefined,
+      support_type: normalizeText(milestone.dataset.supportType) || undefined,
+    });
+    milestoneObserver?.unobserve(milestone);
+  });
+}
+
+function startMilestoneTracking() {
+  if (!("IntersectionObserver" in window)) {
+    return;
+  }
+
+  milestoneObserver?.disconnect();
+  milestoneObserver = new IntersectionObserver(handleMilestoneEntries, {
+    threshold: [0, 0.3, 0.5, 0.75, 1],
+  });
+
+  document.querySelectorAll<HTMLElement>(MILESTONE_SELECTOR).forEach((milestone) => {
+    if (!seenMilestones.has(getMilestoneKey(milestone))) {
+      milestoneObserver?.observe(milestone);
+    }
+  });
+}
+
 function evaluateScrollDepth() {
   scrollTicking = false;
 
@@ -319,6 +380,7 @@ function activateConsentAwareTracking() {
   }
 
   startSectionTracking();
+  startMilestoneTracking();
   startScrollTracking();
 }
 
@@ -345,6 +407,7 @@ document.addEventListener("astro:page-load", () => {
   // Reset per-page tracking state on each navigation so section views and
   // scroll milestones fire fresh on every page.
   seenSections.clear();
+  seenMilestones.clear();
   seenScrollMilestones.clear();
 
   // Deferred to idle: click/section/scroll tracking isn't needed before the

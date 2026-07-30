@@ -59,7 +59,12 @@ const ogImage = firstImage
   ogImageAlt={`${dog.name}, galgo en adopción en Chile`}
   breadcrumbNames={{ [entry.id]: dog.name }}
 >
-  <section class="dog-profile section-padding">
+  <section
+    class="dog-profile section-padding"
+    data-track-milestone="adoption_dog_profile_view"
+    data-dog-slug={dog.id}
+    data-dog-name={dog.name}
+  >
     <div class="container">
       <p class="dog-profile__back">
         <a href="/adoptar/#galgos">Ver todos los galgos en adopción</a>
@@ -177,7 +182,7 @@ const ogImage = firstImage
               class="btn btn--primary"
               newTab
               trackEvent="adoption_apply_click"
-              trackLabel={`Postular - ${dog.name}`}
+              trackLabel="Postular para adoptar"
               trackLocation="dog_profile"
               trackDestination={SITE.adoptionForm}
               trackCategory="adoption"
@@ -188,9 +193,8 @@ const ogImage = firstImage
             <WhatsAppLink
               text={`Hola, me interesa ${dog.name} y quisiera saber más sobre su adopción`}
               location="dog_profile"
-              label={`Más información - ${dog.name}`}
+              intent="adoption"
               class="btn btn--secondary"
-              data-dog-name={dog.name}
             >
               Hablar sobre {dog.name}
               <span class="sr-only">por WhatsApp</span>

@@ -30,8 +30,13 @@
 
 .footer__grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-8);
   padding-bottom: var(--space-8);
+}
+
+.footer__grid > * {
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
@@ -122,6 +127,7 @@
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
   transition: color var(--duration-fast);
 }
 .footer__link:hover {

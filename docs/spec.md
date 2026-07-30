@@ -442,6 +442,25 @@ Full event list, verified against `src/scripts/` and the `trackEvent` props in c
 - Contact form: `contact_form_submit`, `contact_form_invalid`, `contact_form_success`, `contact_form_error`
 - Consent: `cookie_consent_action`, `cookie_consent_update`
 
+### Adoption-intent funnel
+
+The adoption funnel is intentionally small. It answers where an interested person progresses or pauses without
+recording dog-fit responses, contact details, form fields, or free text. All milestones below are discarded until
+analytics consent is accepted; with default or rejected consent, GTM/GA are not loaded and no behavioral event is sent.
+
+| Event                       | Trigger                                                   | Parameters                                                         | Question answered                         |
+| --------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------- |
+| `adoption_listing_view`     | The active listing is meaningfully visible on `/adoptar/` | `page_path`                                                        | Do visitors reach the current dogs?       |
+| `adoption_dog_profile_view` | An active dog profile is meaningfully visible             | `page_path`, `dog_slug`, `dog_name`                                | Which published profiles are opened?      |
+| `adoption_support_view`     | The adoption process or FAQ is meaningfully visible       | `page_path`, `support_type` (`adoption_process` or `faq`)          | Do visitors seek decision support?        |
+| `whatsapp_click`            | An adoption-intent WhatsApp CTA is activated              | `page_path`, `event_location`, `adoption_intent: "true"`           | Do visitors ask to start a conversation?  |
+| `adoption_apply_click`      | The adoption form link is activated                       | `page_path`, `event_location`, `destination_url`, `outbound: true` | Do visitors move to the application form? |
+| `contact_form_success`      | The contact form reports a successful submission          | `page_path`, `form_id`                                             | Do contact submissions complete?          |
+
+Views are emitted once per page visit after the relevant surface becomes meaningfully visible. They are context, not a
+conversion claim. Click milestones fire once per activation. WhatsApp's prefilled message remains in the link only and
+is never added to `dataLayer`; form errors use a fixed error class rather than a provider message.
+
 `data-track-location` values are unique per surface. Notable ones: `hero`, `navbar`, `desktop_nav`, `mobile_drawer`,
 `footer`, `homepage_featured_adoptions`, `homepage_success_stories`, `help_cards`, `donation_banner`, `adoption_hero`,
 `dog_card`, `dog_grid_empty`, `dog_profile`, `tail_cta`, `foster_hero`, `foster_cta`, `contact_channels`,
