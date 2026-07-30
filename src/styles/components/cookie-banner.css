@@ -2,7 +2,6 @@
   position: fixed;
   right: max(var(--space-3), env(safe-area-inset-right));
   bottom: max(var(--space-3), env(safe-area-inset-bottom));
-  left: max(var(--space-3), env(safe-area-inset-left));
   z-index: var(--z-modal);
   max-width: 30rem;
   background: var(--color-cookie-bg);
