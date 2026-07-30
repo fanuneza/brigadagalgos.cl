@@ -8,6 +8,7 @@
 .filter-chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-full);
   border: 2px solid var(--color-primary);
@@ -16,7 +17,7 @@
   font-size: var(--font-size-sm);
   font-weight: var(--weight-medium);
   cursor: pointer;
-  min-height: 24px;
+  min-height: 44px;
 }
 .filter-chip:focus-visible {
   outline: none;

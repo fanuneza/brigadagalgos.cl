@@ -5,6 +5,12 @@ const CONSENT_COOKIE = "brigadagalgos_consent";
 const GTM_SCRIPT_SELECTOR = `script[src*="googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}"]`;
 const DIRECT_GA4_SELECTOR = 'script[src*="googletagmanager.com/gtag/js"], script[src*="google-analytics.com/gtag/js"]';
 
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
+  }
+}
+
 async function stubGtm(page: Page) {
   let gtmRequestCount = 0;
   let gaCollectRequestCount = 0;
@@ -67,6 +73,38 @@ test("no consent shows banner and does not load GTM", async ({ page }) => {
   });
 
   expect(trackingState).not.toContainEqual(expect.objectContaining({ event: "cta_click" }));
+});
+
+test("compact banner leaves core actions unobstructed at audited viewport widths", async ({ page }) => {
+  const auditedViewports = [320, 390, 768, 1024, 1440];
+
+  for (const width of auditedViewports) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const primaryActionLocator = page.locator('a[data-track-location="hero"][data-track-category="adoption"]');
+    await primaryActionLocator.scrollIntoViewIfNeeded();
+
+    const banner = await page.locator("#cookie-banner").boundingBox();
+    const primaryAction = await primaryActionLocator.boundingBox();
+
+    expect(banner, `banner should render at ${width}px`).not.toBeNull();
+    expect(primaryAction, `hero CTA should render at ${width}px`).not.toBeNull();
+    const overlaps =
+      banner!.x < primaryAction!.x + primaryAction!.width &&
+      banner!.x + banner!.width > primaryAction!.x &&
+      banner!.y < primaryAction!.y + primaryAction!.height &&
+      banner!.y + banner!.height > primaryAction!.y;
+    expect(overlaps, `banner should not cover the hero CTA at ${width}px`).toBe(false);
+  }
+});
+
+test("consent actions are consecutive keyboard targets", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await page.locator("#cookie-accept").focus();
+  await expect(page.locator("#cookie-accept")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#cookie-reject")).toBeFocused();
 });
 
 test("rendered HTML includes the GTM noscript iframe", async ({ page }) => {
@@ -322,6 +360,159 @@ test("accepted consent allows CTA, section visibility, and scroll analytics once
   ).toHaveLength(1);
   expect(dataLayer.filter((entry) => entry.event === "scroll_depth" && entry.percent === 25)).toHaveLength(1);
   expect(dataLayer.filter((entry) => entry.event === "scroll_depth" && entry.percent === 50)).toHaveLength(1);
+});
+
+test("accepted consent records the adoption-intent funnel once without form contents", async ({ context, page }) => {
+  await context.addCookies([
+    {
+      name: CONSENT_COOKIE,
+      value: "accepted",
+      domain: "127.0.0.1",
+      path: "/",
+    },
+  ]);
+  await stubGtm(page);
+  await page.route("https://api.web3forms.com/submit", async (route) => {
+    await route.fulfill({ contentType: "application/json", body: JSON.stringify({ success: true }) });
+  });
+
+  await page.goto("/adoptar/", { waitUntil: "networkidle" });
+  await page.locator("#galgos").scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => (window.dataLayer ?? []).some((entry) => entry?.event === "adoption_listing_view"));
+
+  const profileLink = page.locator('a[data-track-event="dog_profile_click"]').first();
+  await profileLink.click();
+  await page.waitForURL("**/adoptar/*/");
+  const dogName = await page.locator("h1").textContent();
+  await page.waitForFunction(() =>
+    (window.dataLayer ?? []).some((entry) => entry?.event === "adoption_dog_profile_view")
+  );
+
+  await page.locator('[data-support-type="adoption_process"]').scrollIntoViewIfNeeded();
+  await page.waitForFunction(() =>
+    (window.dataLayer ?? []).some(
+      (entry) => entry?.event === "adoption_support_view" && entry?.support_type === "adoption_process"
+    )
+  );
+
+  await page.locator('a[data-adoption-intent="true"]').evaluate((element) => {
+    element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+  });
+  await page.locator('a[data-track-event="adoption_apply_click"]').evaluate((element) => {
+    element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+  });
+
+  await page.locator('footer a[href="/preguntas-frecuentes/"]').click();
+  await page.waitForURL("**/preguntas-frecuentes/");
+  await page.locator('[data-support-type="faq"]').evaluate((element) => {
+    element.scrollIntoView({ block: "start" });
+  });
+  await page.waitForFunction(() =>
+    (window.dataLayer ?? []).some((entry) => entry?.event === "adoption_support_view" && entry?.support_type === "faq")
+  );
+
+  await page.locator('footer a[href="/contacto/"]').click();
+  await page.waitForURL("**/contacto/");
+  await page.getByLabel("Nombre").fill("Camila Soto");
+  await page.getByLabel("Correo").fill("camila@example.com");
+  await page.getByLabel("Asunto").selectOption("Adopción");
+  await page.getByRole("textbox", { name: "Mensaje", exact: true }).fill("Quiero conocer el proceso de adopción.");
+  await page.getByRole("button", { name: "Enviar mensaje" }).click();
+  await expect(page.locator("[data-form-success]")).toBeVisible();
+
+  const dataLayer = await page.evaluate(() => window.dataLayer ?? []);
+  expect(dataLayer).toContainEqual(expect.objectContaining({ event: "adoption_listing_view", page_path: "/adoptar/" }));
+  expect(dataLayer).toContainEqual(
+    expect.objectContaining({
+      event: "adoption_dog_profile_view",
+      dog_name: dogName,
+      dog_slug: expect.any(String),
+    })
+  );
+  expect(
+    dataLayer.filter((entry) => entry?.event === "adoption_support_view" && entry?.support_type === "adoption_process")
+  ).toHaveLength(1);
+  expect(
+    dataLayer.filter((entry) => entry?.event === "adoption_support_view" && entry?.support_type === "faq")
+  ).toHaveLength(1);
+  expect(dataLayer).toContainEqual(
+    expect.objectContaining({
+      event: "whatsapp_click",
+      event_label: "Conversar sobre adopción",
+      adoption_intent: "true",
+    })
+  );
+  expect(dataLayer).toContainEqual(expect.objectContaining({ event: "adoption_apply_click" }));
+  expect(dataLayer).toContainEqual(expect.objectContaining({ event: "contact_form_success", form_id: "contact-form" }));
+
+  const serializedPayloads = JSON.stringify(dataLayer);
+  expect(serializedPayloads).not.toContain("Camila Soto");
+  expect(serializedPayloads).not.toContain("camila@example.com");
+  expect(serializedPayloads).not.toContain("Quiero conocer el proceso de adopción.");
+  expect(serializedPayloads).not.toContain("whatsapp_text");
+  expect(serializedPayloads).not.toContain("error_message");
+  for (const payload of dataLayer) {
+    expect(Object.keys(payload)).not.toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/^(nombre|email|correo|asunto|mensaje|whatsapp_text|error_message)$/),
+      ])
+    );
+  }
+});
+
+test("default and rejected consent discard adoption-funnel events", async ({ context, page }) => {
+  const tracking = await stubGtm(page);
+  await page.goto("/adoptar/", { waitUntil: "networkidle" });
+  await page.locator("#galgos").scrollIntoViewIfNeeded();
+  await page
+    .locator('a[data-track-event="dog_profile_click"]')
+    .first()
+    .evaluate((element) => {
+      element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    });
+
+  expect(tracking.getGtmRequestCount()).toBe(0);
+  expect(await page.evaluate(() => window.dataLayer ?? [])).toEqual([]);
+
+  await context.addCookies([
+    {
+      name: CONSENT_COOKIE,
+      value: "rejected",
+      domain: "127.0.0.1",
+      path: "/",
+    },
+  ]);
+  await page.reload({ waitUntil: "networkidle" });
+  await page.locator("#galgos").scrollIntoViewIfNeeded();
+  await page
+    .locator('a[data-track-event="dog_profile_click"]')
+    .first()
+    .evaluate((element) => {
+      element.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    });
+
+  expect(tracking.getGtmRequestCount()).toBe(0);
+  const behavioralEvents = await page.evaluate(() =>
+    (window.dataLayer ?? []).filter((entry) => entry?.event !== "cookie_consent_update")
+  );
+  expect(behavioralEvents).toEqual([]);
+});
+
+test("accepting after a visible adoption milestone starts fresh tracking instead of replaying a queue", async ({
+  page,
+}) => {
+  await stubGtm(page);
+  await page.goto("/adoptar/", { waitUntil: "networkidle" });
+  await page.locator("#galgos").scrollIntoViewIfNeeded();
+  expect(await page.evaluate(() => window.dataLayer ?? [])).toEqual([]);
+
+  await page.locator("#cookie-accept").click();
+  await page.waitForFunction(() => (window.dataLayer ?? []).some((entry) => entry?.event === "adoption_listing_view"));
+
+  const listingViews = await page.evaluate(() =>
+    (window.dataLayer ?? []).filter((entry) => entry?.event === "adoption_listing_view")
+  );
+  expect(listingViews).toHaveLength(1);
 });
 
 test("manage consent clears the cookie and restores the banner on reload", async ({ context, page }) => {

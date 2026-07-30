@@ -1,71 +1,21 @@
-.trust-stats__grid {
-  display: grid;
-  gap: var(--space-6);
-  margin-top: var(--space-8);
-}
-
-@media (min-width: 1024px) {
-  .trust-stats__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.stat-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in sRGB, var(--color-bg) 90%, transparent),
-      color-mix(in sRGB, var(--color-surface) 86%, transparent)
-    ),
-    var(--color-surface);
-}
-
-.stat-card__value {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--weight-black);
-  line-height: var(--line-tight);
-  margin: 0;
-}
-
-.stat-card__value--cyan {
+.trust-stat__value--cyan {
   color: var(--color-primary-700);
 }
 
-.stat-card__value--magenta {
+.trust-stat__value--magenta {
   color: var(--color-secondary-700);
 }
 
-.stat-card__value--orange {
+.trust-stat__value--orange {
   color: var(--color-accent-warm-700);
 }
 
-.stat-card__value--green {
+.trust-stat__value--green {
   color: var(--color-rainbow-green-700);
 }
-
-.stat-card__label {
-  font-family: var(--font-display);
-  font-weight: var(--weight-semi);
-  text-transform: uppercase;
-  margin: var(--space-1) 0 0;
-}
-
-.stat-card__body {
-  margin: var(--space-2) 0 0;
-}
-
-/* ── Compact variant ────────────────────────────────────────────────
-   Numbers only, no cards and no heading: this strip is embedded inside a
-   host section (homepage mission block) that already owns the h2. Colour
-   comes from the shared `.stat-card__value--*` tone modifiers above. */
 .trust-stats__strip {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4) var(--space-5);
   list-style: none;
   padding: 0;
@@ -76,7 +26,7 @@
 
 @media (min-width: 640px) {
   .trust-stats__strip {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -84,6 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  min-width: 0;
 }
 
 .trust-stat__value {
@@ -94,5 +45,6 @@
 }
 
 .trust-stat__label {
+  overflow-wrap: anywhere;
   text-wrap: pretty;
 }

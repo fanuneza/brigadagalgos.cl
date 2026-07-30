@@ -1,11 +1,28 @@
 ---
 import "../../styles/components/impact-section.css";
+import { Image } from "astro:assets";
+import ferminImage from "../../assets/casos/fermin/fermin-01.jpg";
 ---
 
 <section class="section-padding section--support">
   <div class="container container--narrow">
     <p class="eyebrow eyebrow--support">QUÉ HACE TU APORTE</p>
     <h2 class="section-heading--support">En qué se transforma tu ayuda</h2>
+    <figure class="impact-case">
+      <Image
+        src={ferminImage}
+        alt="Fermín con arnés violeta al aire libre"
+        class="impact-case__image"
+        widths={[360, 520, 720]}
+        sizes="(min-width: 768px) 18rem, calc(100vw - 48px)"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        <strong>Fermín necesitó cirugías, rehabilitación y apoyo de etólogo antes de ser adoptado.</strong> Cada aporte permite
+        responder a cuidados como estos mientras un galgo vuelve a estar seguro.
+      </figcaption>
+    </figure>
     <div class="impact-cards">
       <div class="impact-card">
         <h3 class="impact-card__title t-card-title">Atención veterinaria</h3>

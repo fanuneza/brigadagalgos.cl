@@ -2,7 +2,6 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import RainbowDivider from "../components/RainbowDivider.astro";
-import SharedGalleryLightbox from "../components/SharedGalleryLightbox.astro";
 import AdoptionGrid from "../components/sections/AdoptionGrid.astro";
 import AdoptionProcess from "../components/sections/AdoptionProcess.astro";
 import CtaCard from "../components/sections/CtaCard.astro";
@@ -19,19 +18,18 @@ const dogs = await getActiveAdoptionDogCards();
   description="Conoce a los galgos en adopción y adopta al que puede ser tu compañero. Te acompañamos en todo el proceso, desde el primer mensaje hasta la llegada a casa."
 >
   <PageHero
-    eyebrow="GALGOS EN ADOPCIÓN"
     h1="Adopta un galgo en Chile"
     lead="Los conocemos de cerca y te acompañamos en todo el proceso de adopción, desde tu primer mensaje hasta los primeros días en casa."
-    ctaText="Postular"
-    ctaHref={SITE.adoptionForm}
-    ctaVariant="primary"
-    ctaTrackLabel="Postular - Adoption Hero"
+    ctaText="Ver galgos en adopción"
+    ctaHref="#galgos"
+    ctaVariant="secondary"
+    ctaTrackLabel="Ver galgos en adopción - Adoption Hero"
     ctaTrackLocation="adoption_hero"
     ctaTrackCategory="adoption"
   />
   <RainbowDivider />
 
-  <section id="galgos" class="section-padding section--lead">
+  <section id="galgos" class="section-padding section--lead" data-track-milestone="adoption_listing_view">
     <div class="container">
       <div class="adoption-intro">
         <p class="eyebrow eyebrow--lead">EN ADOPCIÓN</p>
@@ -49,9 +47,9 @@ const dogs = await getActiveAdoptionDogCards();
   <CtaCard
     tail
     weight="support"
-    eyebrow="SIGUIENTE PASO"
+    eyebrow="HABLEMOS"
     heading="¿Quieres hablarlo antes de postular?"
-    body="Escríbenos sin apuro. Te ayudamos a revisar si tu rutina, espacio y expectativas son adecuados para alguno de los galgos."
+    body="El formulario abre en una nueva pestaña. Ahí nos cuentas sobre tu rutina, tu casa y los animales con que vives para orientarte antes de avanzar."
   >
     <Fragment slot="actions">
       <TrackedLink
@@ -59,7 +57,7 @@ const dogs = await getActiveAdoptionDogCards();
         class="btn btn--primary"
         newTab
         trackEvent="adoption_apply_click"
-        trackLabel="Postular - Adoption Tail CTA"
+        trackLabel="Postular para adoptar"
         trackLocation="tail_cta"
         trackDestination={SITE.adoptionForm}
         trackCategory="adoption"
@@ -70,7 +68,7 @@ const dogs = await getActiveAdoptionDogCards();
       <WhatsAppLink
         text="Hola, quisiera saber más sobre adopción"
         location="tail_cta"
-        label="Más información - Adoption Tail CTA"
+        intent="adoption"
         class="btn btn--secondary"
       >
         Más información <span class="sr-only">sobre adopción</span>
@@ -81,6 +79,4 @@ const dogs = await getActiveAdoptionDogCards();
       <a href="/preguntas-frecuentes/">Revisa las preguntas frecuentes</a>.
     </p>
   </CtaCard>
-
-  <SharedGalleryLightbox slot="afterShell" ariaLabel="Galería de adopción" />
 </PageLayout>

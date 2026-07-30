@@ -5,6 +5,40 @@
   margin-top: var(--space-6);
 }
 
+.impact-case {
+  display: grid;
+  gap: var(--space-4);
+  align-items: center;
+  margin: var(--space-6) 0 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.impact-case__image {
+  width: 100%;
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.impact-case figcaption {
+  max-width: 56ch;
+  color: var(--color-text-muted);
+}
+
+.impact-case strong {
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .impact-case {
+    grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+    padding: var(--space-5);
+  }
+}
+
 .impact-card {
   display: grid;
   grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);

@@ -87,9 +87,9 @@ above is made.
 
 ---
 
-## 2. `TrustStatsSection`'s `full` variant is now unreferenced
+## 2. `TrustStatsSection`'s `full` variant was unreferenced
 
-**Status:** dead-but-documented default. Harmless. Prunable.
+**Status:** resolved 2026-07-29 — pruned in T13.
 
 ### How it happened
 
@@ -105,7 +105,7 @@ above already carries the proof.
 The two agents ran in different waves and neither could see the other's outcome. The result is
 correct on both counts — and leaves the default branch with no callers.
 
-### Current state
+### State when recorded
 
 ```
 src/pages/index.astro:105:    <TrustStatsSection variant="compact" />
@@ -133,16 +133,9 @@ eight-commit refactor whose stated goal was hierarchy. The four figures (`{years
 `100+`, `{adoptionDogCount}`) and the derived `getActiveDogs()` / `yearsActive` logic all still
 compute correctly for the compact path, so nothing is broken.
 
-### To close this
+### Resolution
 
-Pick one:
-
-- **Prune.** Delete the `full` branch and its now-unused CSS, drop the `variant` prop, and let
-  the component render only the compact numbers. Smallest surface, least to explain. Verify no
-  `.stat-card` / `.trust-stats` selectors are referenced elsewhere first.
-- **Keep as the documented default.** Fix the stale `/donar/` comment, and note in
-  `docs/spec.md` that `full` is currently unused but retained for reuse. Costs a few hundred
-  bytes of CSS in the shared bundle.
-
-Recommendation: **prune**, and fix the comment either way. The site has one consumer and a clear
-place to restore the standalone section from git history if a future page wants it.
+T13 removed the unused full branch, its `variant` prop and its unreferenced
+`.trust-stats` / `.stat-card` CSS. The homepage remains the sole consumer and now renders the
+compact strip directly. A future standalone statistics section can be rebuilt from the content
+and visual evidence that supports the route where it is needed.

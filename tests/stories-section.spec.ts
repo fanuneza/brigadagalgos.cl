@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { assertSharedGallerySlides } from "./helpers/shared-gallery";
 
 const dogsDir = join(process.cwd(), "src", "content", "dogs");
 const successStoryCount = readdirSync(dogsDir)
@@ -42,6 +41,27 @@ test("home prioritizes active dogs and links the stories preview to the archive"
   await expect(page.locator("[data-stories-ver-mas]")).toHaveCount(0);
 });
 
+test("home keeps adoption as its single primary action and secondary sections in order", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator("main .btn--primary")).toHaveCount(1);
+  await expect(page.locator("main .btn--primary")).toHaveAttribute("href", "/adoptar/");
+  await expect(page.locator(".help-cards .help-card")).toHaveCount(2);
+
+  const sectionOrder = await page
+    .locator("main > section")
+    .evaluateAll((sections) => sections.map((section) => section.getAttribute("data-track-section")));
+  expect(sectionOrder).toEqual([
+    "hero",
+    "homepage_featured_adoptions",
+    "mission",
+    "why_galgos",
+    "success_stories",
+    "help_cards",
+    "donation_banner",
+  ]);
+});
+
 test("success archive renders every story and returns visitors to active adoption", async ({ page }) => {
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
@@ -55,8 +75,26 @@ test("success archive renders every story and returns visitors to active adoptio
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /galgos que fueron adoptados/);
 });
 
-test("success-story galleries preserve responsive image output", async ({ page }) => {
+test("success archive uses one decisive image per story and keeps the proof path to adoption", async ({ page }) => {
   await page.goto("/casos-de-exito/", { waitUntil: "networkidle" });
 
-  await assertSharedGallerySlides(page);
+  const cards = page.locator("[data-story-card]");
+  await expect(cards.locator(".story-card__photo--single")).toHaveCount(successStoryCount);
+  await expect(cards.locator("[data-shared-gallery]")).toHaveCount(0);
+  await expect(cards.locator(".story-card__quote")).toHaveCount(successStoryCount);
+  await expect(page.locator(".stories-archive-cta .btn--primary")).toHaveCount(0);
+
+  const images = cards.locator(".story-card__photo--single img");
+  for (let index = 0; index < (await images.count()); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate((element) => {
+          const img = element as HTMLImageElement;
+          return img.complete && img.naturalWidth > 0;
+        })
+      )
+      .toBe(true);
+  }
 });

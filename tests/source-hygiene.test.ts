@@ -175,6 +175,27 @@ describe("source hygiene", () => {
     }
   });
 
+  it("records explicit compatibility statuses for every active adoption profile", () => {
+    const dogsDir = join(root, "src", "content", "dogs");
+    const files = readdirSync(dogsDir).filter((file) => file.endsWith(".md"));
+    const compatibilityFields = ["children", "cats", "femaleDogs", "maleDogs"];
+    const validStatuses = "sí|no|caso a caso|sin información confirmada";
+
+    for (const file of files) {
+      const content = readFileSync(join(dogsDir, file), "utf8");
+
+      if (!/^status:\s*"adopcion"/m.test(content) || /^active:\s*false/m.test(content)) continue;
+
+      expect(content, `${file} has no adoptionFacts`).toMatch(/^adoptionFacts:/m);
+
+      for (const field of compatibilityFields) {
+        expect(content, `${file} has no explicit ${field} compatibility status`).toMatch(
+          new RegExp(`^\\s+${field}:\\s*"(?:${validStatuses})"$`, "m")
+        );
+      }
+    }
+  });
+
   it("keeps every success dog story at 260 characters or less and explicitly adopted", () => {
     const dogsDir = join(root, "src", "content", "dogs");
     const files = readdirSync(dogsDir).filter((file) => file.endsWith(".md"));

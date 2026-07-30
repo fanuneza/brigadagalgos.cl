@@ -17,8 +17,6 @@ const { dogs } = Astro.props;
   <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">Todos</button>
   <button class="filter-chip" data-filter="Macho" aria-pressed="false">Macho</button>
   <button class="filter-chip" data-filter="Hembra" aria-pressed="false">Hembra</button>
-  <button class="filter-chip" data-filter="adulto" aria-pressed="false">Adultos</button>
-  <button class="filter-chip" data-filter="cachorro" aria-pressed="false">Cachorros</button>
 </div>
 
 <p class="dog-grid__count" aria-live="polite">
@@ -48,7 +46,7 @@ const { dogs } = Astro.props;
   <WhatsAppLink
     text="Hola, quisiera adoptar un galgo"
     location="dog_grid_empty"
-    label="Escríbenos por WhatsApp - Adoption Empty Grid"
+    intent="adoption"
     class="btn btn--primary"
   >
     Escríbenos por WhatsApp

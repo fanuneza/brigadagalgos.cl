@@ -51,7 +51,6 @@
     .dog-card,
     .donation-card,
     .req-card,
-    .stat-card,
     .channel-card,
     .supporter-card,
     .impact-card {
@@ -97,6 +96,7 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-base);
   color: var(--color-text);
+  overflow-wrap: anywhere;
   overflow-x: hidden;
   background:
     radial-gradient(circle at 0 0, color-mix(in sRGB, var(--color-primary-100) 44%, transparent) 0, transparent 30rem),
@@ -120,6 +120,7 @@ h3 {
   font-weight: var(--weight-black);
   letter-spacing: var(--tracking-normal);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 h2:not([hidden]) {
@@ -245,6 +246,10 @@ h2:not([hidden]) {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: var(--btn-font-weight);
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
@@ -360,6 +365,7 @@ h2:not([hidden]) {
 a:not([class]),
 .text-link {
   color: var(--link-color, var(--color-primary-700));
+  overflow-wrap: anywhere;
   text-decoration: underline;
   text-decoration-color: var(--link-decoration-color, var(--color-primary-100));
   text-underline-offset: 3px;
@@ -495,6 +501,7 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
     var(--color-bg);
   box-shadow: var(--shadow-md);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
   justify-items: center;
   text-align: center;
@@ -524,6 +531,8 @@ a[target="_blank"]:not([data-external-indicator="off"])::after {
 }
 
 .cta-card > * {
+  max-width: 100%;
+  min-width: 0;
   margin: 0;
 }
 
@@ -562,7 +571,7 @@ main {
 .not-found-redirect {
   text-align: center;
   margin: 2rem 0;
-  font-size: 1.25rem;
+  font-size: var(--font-size-md);
   font-weight: var(--weight-bold);
 }
 
@@ -576,8 +585,7 @@ main {
 .supporter-card,
 .donation-card,
 .channel-card,
-.req-card,
-.stat-card {
+.req-card {
   transition:
     transform var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
@@ -589,8 +597,7 @@ main {
   .supporter-card:hover,
   .donation-card:hover,
   .channel-card:hover,
-  .req-card:hover,
-  .stat-card:hover {
+  .req-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
@@ -601,8 +608,7 @@ main {
 .supporter-card:active,
 .donation-card:active,
 .channel-card:active,
-.req-card:active,
-.stat-card:active {
+.req-card:active {
   transform: translateY(0);
   box-shadow: var(--shadow-sm);
 }

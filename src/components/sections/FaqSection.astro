@@ -5,10 +5,28 @@ import { faqPairs, faqGroups } from "../../config/faq";
 
 <section class="faq-section" aria-label="Preguntas frecuentes">
   <div class="container container--narrow">
+    <nav
+      class="faq-topic-index"
+      aria-label="Temas de preguntas frecuentes"
+      data-track-milestone="adoption_support_view"
+      data-support-type="faq"
+    >
+      <h2 class="faq-topic-index__title">Encuentra tu duda</h2>
+      <ul class="faq-topic-index__list" role="list">
+        {
+          faqGroups.map((group) => (
+            <li>
+              <a href={`#${group.id}`}>{group.topicLabel}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
     {
       faqGroups.map((group) => (
-        <section class="faq-group" aria-labelledby={`group-${group.ids[0]}`}>
-          <h2 id={`group-${group.ids[0]}`}>{group.eyebrow}</h2>
+        <section class="faq-group" id={group.id} aria-labelledby={`group-${group.id}`}>
+          <h2 id={`group-${group.id}`}>{group.eyebrow}</h2>
 
           {group.ids.map((idx) => {
             const item = faqPairs[idx];
@@ -32,6 +50,19 @@ import { faqPairs, faqGroups } from "../../config/faq";
               </article>
             );
           })}
+
+          {group.links && (
+            <nav class="faq-group__next-steps" aria-label={`Siguientes pasos sobre ${group.topicLabel}`}>
+              <span>También puedes</span>
+              <ul role="list">
+                {group.links.map((link) => (
+                  <li>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
         </section>
       ))
     }

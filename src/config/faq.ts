@@ -5,6 +5,19 @@ interface FaqPair {
   details?: string[];
 }
 
+interface FaqLink {
+  href: string;
+  label: string;
+}
+
+interface FaqGroup {
+  id: string;
+  eyebrow: string;
+  topicLabel: string;
+  ids: number[];
+  links?: FaqLink[];
+}
+
 export const faqPairs: FaqPair[] = [
   {
     id: "que-es-un-galgo",
@@ -91,25 +104,67 @@ export const faqPairs: FaqPair[] = [
   },
 ];
 
-export const faqGroups = [
+export const faqGroups: FaqGroup[] = [
   {
-    eyebrow: "SOBRE LOS GALGOS",
-    ids: [0, 1, 2],
-  },
-  {
+    id: "adopcion",
     eyebrow: "ADOPCIÓN",
-    ids: [3, 4, 5, 6],
+    topicLabel: "Adopción",
+    ids: [0, 3, 6],
+    links: [
+      { href: "/adoptar/#galgos", label: "Ver galgos en adopción" },
+      { href: "/adoptar/#proceso", label: "Conocer el proceso completo" },
+      { href: "/contacto/", label: "Resolver otra duda" },
+    ],
   },
   {
+    id: "convivencia",
+    eyebrow: "CONVIVENCIA",
+    topicLabel: "Niños y otros animales",
+    ids: [5],
+    links: [
+      { href: "/adoptar/#galgos", label: "Ver galgos en adopción" },
+      { href: "/contacto/", label: "Contarnos sobre tu hogar" },
+    ],
+  },
+  {
+    id: "hogar-y-departamento",
+    eyebrow: "HOGAR Y DEPARTAMENTO",
+    topicLabel: "Hogar y departamento",
+    ids: [1, 2],
+    links: [{ href: "/adoptar/#proceso", label: "Revisar el proceso de adopción" }],
+  },
+  {
+    id: "costos",
+    eyebrow: "COSTOS",
+    topicLabel: "Costos de adopción",
+    ids: [4],
+    links: [{ href: "/donar/", label: "Ver cómo apoyar otros rescates" }],
+  },
+  {
+    id: "hogar-temporal",
     eyebrow: "HOGAR TEMPORAL",
+    topicLabel: "Hogar temporal",
     ids: [7, 8],
+    links: [
+      { href: "/hogar-temporal/", label: "Conocer el hogar temporal" },
+      { href: "/contacto/", label: "Conversar sobre tu disponibilidad" },
+    ],
   },
   {
+    id: "donaciones",
     eyebrow: "DONACIONES Y APOYO",
+    topicLabel: "Donaciones",
     ids: [9, 10],
+    links: [{ href: "/donar/", label: "Ver formas de donar" }],
   },
   {
+    id: "garantias",
     eyebrow: "GARANTÍAS",
+    topicLabel: "Acompañamiento y garantías",
     ids: [11],
+    links: [
+      { href: "/adoptar/#proceso", label: "Revisar el proceso de adopción" },
+      { href: "/contacto/", label: "Escribirnos antes de decidir" },
+    ],
   },
 ];

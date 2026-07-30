@@ -38,6 +38,7 @@ const stories = await getShuffledStorySummaries();
                 story={story}
                 location="success_stories_archive"
                 loadingPriority={index < 2 ? "eager" : "lazy"}
+                gallery="single"
               />
             ))}
           </div>
@@ -51,15 +52,15 @@ const stories = await getShuffledStorySummaries();
     </div>
   </section>
 
-  <section class="section-padding stories-archive-cta">
+  <section class="section-padding section--quiet stories-archive-cta">
     <div class="container container--narrow">
-      <div class="cta-card cta-card--end">
-        <h2>Aún hay galgos esperando familia</h2>
-        <p>Conoce a quienes buscan adopción hoy. Te acompañamos antes, durante y después de la llegada a casa.</p>
+      <div class="cta-card cta-card--end cta-card--plain">
+        <h2>El próximo hogar todavía se está buscando</h2>
+        <p>Las historias de arriba partieron con una conversación. Hoy hay galgos esperando conocer a su familia.</p>
         <div class="cta-card__actions">
           <TrackedLink
             href="/adoptar/"
-            class="btn btn--primary"
+            class="btn btn--secondary"
             trackEvent="cta_click"
             trackLabel="Ver galgos disponibles - Success Stories Archive"
             trackLocation="success_stories_archive_cta"
