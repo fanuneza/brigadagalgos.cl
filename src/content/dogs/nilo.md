@@ -9,6 +9,9 @@ location: "Región de Valparaíso"
 currentNeed: "Adopción u hogar temporal"
 characterSketch: "Es un galgo grande y temeroso que necesita un entorno paciente para rehabilitarse y ganar confianza. Se lleva bien con todos."
 order: 12
+active: false
+hiddenSince: 2026-07-29
+hiddenReason: "Retirado de publicación"
 gallery:
   - ../../assets/casos/nilo/nilo-01.jpg
   - ../../assets/casos/nilo/nilo-02.jpg
