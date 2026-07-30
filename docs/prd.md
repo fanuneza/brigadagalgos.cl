@@ -52,7 +52,7 @@ Reusable UI used across pages (see `docs/spec.md` for the full file map):
 - `MissionSection` — mission/value proposition.
 - `StoriesSection` — success-story preview; `StoryCard` — shared story card.
 - `ProcessStepper` — foster steps on `/hogar-temporal/`; `RequirementCard` — checklist item.
-- `AdoptionProcess` — adoption steps; `variant="full"` on `/adoptar/`, `variant="compact"` teaser on dog profiles.
+- `AdoptionProcess` — adoption steps; `variant="full"` on `/adoptar/` and dog profiles; a `variant="compact"` teaser exists for surfaces where the full process would repeat, but no page uses it right now.
 - `TrustStatsSection` — trust figures; `variant="compact"` renders inside `MissionSection`'s slot on the homepage.
 - `HelpCards` — CTA cards (adopt, foster, donate); `DonationBanner` — donation callout.
 - `SharedPhotoGallery` / `SharedGalleryLightbox` — image gallery and lightbox.

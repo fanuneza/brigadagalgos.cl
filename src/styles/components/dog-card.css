@@ -27,7 +27,7 @@
 }
 
 /* Keyboard affordance mirrors the pointer lift so the card reads clickable
-   from the name link, its only tab stop. */
+   from its links (name and ghost CTA). */
 .dog-card:focus-within {
   border-color: color-mix(in sRGB, var(--color-primary) 40%, var(--color-border));
   box-shadow: var(--shadow-md);
@@ -101,6 +101,10 @@
   text-transform: uppercase;
 }
 
+.dog-card__name a {
+  color: inherit;
+}
+
 .dog-card__chips {
   display: flex;
   flex-wrap: wrap;
@@ -115,14 +119,29 @@
   border-radius: var(--radius-full);
 }
 
-/* Meta chips (sex, age, weight) stay quiet surface pills: saturated color is
-   reserved for the need eyebrow, the CTAs, and the --need chip below. */
-.dog-chip--sex,
-.dog-chip--age,
+/* Meta chips carry the brand accents: cyan for sex, soft magenta for age,
+   warm orange for talla. Tokens adapt via light-dark(), so both themes keep
+   dark text on saturated fills. */
+.dog-chip--sex {
+  background: var(--color-primary);
+  color: var(--on-primary);
+}
+
+.dog-chip--age {
+  background: var(--color-secondary-100);
+  color: var(--color-text);
+}
+
 .dog-chip--weight {
-  background: var(--color-surface-2);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
+  background: var(--color-accent-warm);
+  color: var(--on-accent-warm);
+}
+
+/* The dog's current need is the one decision chip: deep magenta keeps white
+   text above 4.5:1 at 12px semibold. */
+.dog-chip--need {
+  background: var(--color-secondary-700);
+  color: var(--on-secondary);
 }
 
 .dog-card__sketch {

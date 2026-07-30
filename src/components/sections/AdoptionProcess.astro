@@ -4,9 +4,10 @@ import "../../styles/components/adoption-process.css";
 interface Props {
   /**
    * `full` (default) is the historical, unabridged rendering used on
-   * `/adoptar/`. `compact` is a low-weight teaser for surfaces where the
-   * generic process would otherwise repeat at full weight, such as the dog
-   * profile — it links back to the full process instead of restating it.
+   * `/adoptar/` and the dog profiles. `compact` is a low-weight teaser kept
+   * available for surfaces where the generic process would otherwise repeat
+   * at full weight — it links back to the full process instead of restating
+   * it. No page uses `compact` right now.
    */
   variant?: "full" | "compact";
 }

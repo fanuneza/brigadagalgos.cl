@@ -25,7 +25,7 @@ const compatibilitySummary = compatibility
       .filter(Boolean)
       .join(" · ")
   : "";
-const cardSummary = dog.adoptionFacts?.homeGuidance ?? dog.adoptionFacts?.personalityBehavior ?? dog.characterSketch;
+const cardSummary = dog.characterSketch;
 ---
 
 {
@@ -102,7 +102,18 @@ const cardSummary = dog.adoptionFacts?.homeGuidance ?? dog.adoptionFacts?.person
         <div class="dog-card__content">
           <div class="dog-card__header">
             <p class="dog-card__need">{dog.currentNeed}</p>
-            <h3 class="dog-card__name t-card-title">{dog.name}</h3>
+            <h3 class="dog-card__name t-card-title">
+              <TrackedLink
+                href={profileHref}
+                trackEvent="dog_profile_click"
+                trackLabel={dog.name}
+                trackLocation={trackLocation}
+                trackDestination={profileHref}
+                trackCategory="adoption"
+              >
+                {dog.name}
+              </TrackedLink>
+            </h3>
             <div class="dog-card__chips">
               <span class="dog-chip dog-chip--sex">{dog.sex}</span>
               <span class="dog-chip dog-chip--age">{dog.age}</span>

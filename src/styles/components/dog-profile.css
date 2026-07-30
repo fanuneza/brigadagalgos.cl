@@ -21,7 +21,7 @@ section.dog-profile {
 
 .dog-profile__info {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-4);
   justify-items: start;
 }
 
@@ -40,7 +40,9 @@ section.dog-profile {
   width: 100%;
 }
 
-.dog-profile__group-heading {
+/* Group labels must beat the global `h2:not([hidden])` section-title rule
+   (specificity 0,1,1) or they render as giant display headings. */
+.dog-profile__group .dog-profile__group-heading {
   font-family: var(--font-display);
   font-size: var(--font-size-sm);
   font-weight: var(--weight-bold);
@@ -48,6 +50,15 @@ section.dog-profile {
   letter-spacing: var(--tracking-eyebrow);
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* Structured decision data (convivencia, cuidados, ubicación) sits below the
+   conversion block, so it reads as supporting detail, not the lead. */
+.dog-profile__facts {
+  display: grid;
+  gap: var(--space-5);
+  width: 100%;
+  margin-top: var(--space-2);
 }
 
 .dog-profile__chips {
@@ -156,10 +167,11 @@ section.dog-profile {
   color: var(--color-text);
 }
 
+/* "Busca: …" supporting line under the location value. */
 .dog-profile__location {
   margin: 0;
-  font-weight: var(--weight-bold);
-  color: var(--color-primary-700);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
 .dog-profile__ctas {
@@ -171,12 +183,6 @@ section.dog-profile {
 
 .dog-profile__share {
   gap: 0.45em;
-}
-
-.dog-profile__support {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  max-width: 34rem;
 }
 
 .dog-profile__action-note {
@@ -197,6 +203,12 @@ section.dog-profile {
 @media (min-width: 1024px) {
   .dog-profile__layout {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  /* The info column is taller than the gallery; keep the photo in view. */
+  .dog-profile__gallery {
+    position: sticky;
+    top: var(--space-7);
   }
 }
 
