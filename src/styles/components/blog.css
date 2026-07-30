@@ -438,7 +438,7 @@ article.blog-post {
   margin-inline: calc(-1 * var(--space-5));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .blog-post__hero-wrap {
     margin-inline: calc(-1 * var(--space-8));
   }
