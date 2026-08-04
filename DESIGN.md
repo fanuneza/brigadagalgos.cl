@@ -89,212 +89,226 @@ components:
 
 ## 1. Overview
 
-**Creative North Star: "El refugio en movimiento"**
+**Creative North Star: "El refugio en movimiento"** (the shelter in motion)
 
-El sistema combina la energía afectuosa de una organización de rescate con la calma que necesita quien está pensando en adoptar, donar o abrir su casa temporalmente. La fotografía de cada galgo es el punto de contacto principal; el color dirige la acción y la tipografía condensada hace que la voz se sienta humana, decidida y reconocible.
+The system combines the warm energy of a rescue organization with the calm needed by someone considering adopting, donating, or opening their home temporarily. Each galgo's photography is the primary point of contact; color directs action, and the condensed typeface makes the voice feel human, determined, and recognizable.
 
-La interfaz debe ser clara desde el primer scroll y estar hecha para móvil sin volverse pequeña ni tímida en pantallas grandes. Usa una base neutra limpia, destellos muy suaves de cian y magenta, y naranjo para las decisiones principales. Rechaza toda apariencia de ONG distante, las campañas que apelan a la culpa, el dramatismo vacío y cualquier adorno que opaque a los perros o complique el siguiente paso.
+The interface must be clear from the first scroll and built for mobile without becoming small or timid on large screens. It uses a clean neutral base, very soft flashes of cyan and magenta, and orange for the primary decisions. It rejects any appearance of a distant NGO, guilt-driven campaigns, empty drama, and any ornament that overshadows the dogs or complicates the next step.
 
 **Key Characteristics:**
 
-- Fotografía cercana y optimizada como prueba emocional y práctica.
-- Tipografía compacta y expresiva para títulos, con cuerpo amable y muy legible.
-- Paleta pop controlada: cian, magenta y naranjo cumplen funciones distintas.
-- CTA directas, grandes y con lenguaje humano.
-- Superficies curvas, elevación suave y navegación accesible.
+- Close, optimized photography as emotional and practical proof.
+- Compact, expressive type for headings, with a warm, highly legible body face.
+- A controlled pop palette: cyan, magenta, and orange serve distinct functions.
+- Direct, large CTAs with human language.
+- Curved surfaces, soft elevation, and accessible navigation.
 
 ## 2. Colors
 
-La paleta toma la energía de la marca sin convertir cada pantalla en un arcoíris: el color siempre aclara una acción, jerarquía o estado.
+The palette draws the brand's energy without turning every screen into a rainbow: color always clarifies an action, a hierarchy, or a state.
 
 ### Primary
 
-- **Cian de compañía:** lleva enlaces activos, acciones secundarias, anillos de foco y destellos de fondo. Es el color de orientación, no el relleno dominante.
-- **Cian profundo:** sostiene texto y bordes sobre fondos claros cuando se necesita contraste real.
+- **Companion cyan:** carries active links, secondary actions, focus rings, and background accents. It is the wayfinding color, not the dominant fill.
+- **Deep cyan:** supports text and borders on light backgrounds when real contrast is needed.
 
 ### Secondary
 
-- **Magenta de impulso:** marca bandas de llamada, momentos editoriales y acentos de alto impacto. Úsalo para concentrar atención, no como sustituto del cian.
-- **Magenta profundo:** reserva para superficies de CTA sostenidas y estados de mayor contraste.
+- **Momentum magenta:** marks callout bands, editorial moments, and high-impact accents. Use it to focus attention, not as a substitute for cyan.
+- **Deep magenta:** reserved for sustained CTA surfaces and higher-contrast states.
 
 ### Tertiary
 
-- **Naranjo de acción:** es el único relleno principal de las CTA que piden una decisión. Conserva texto oscuro encima.
-- **Verde y púrpura de recorrido:** distinguen hitos, chips e ilustraciones; no deben convertirse en texto corrido ni en fondos de página.
+- **Action orange:** the only primary fill for CTAs that ask for a decision. Keep dark text on top.
+- **Journey green and purple:** distinguish milestones, chips, and illustrations; they must not become body text or page backgrounds.
 
 ### Neutral
 
-- **Blanco y superficie fría:** sostienen lectura, fotografía y separación entre secciones.
-- **Tinta y tinta atenuada:** llevan toda la lectura normal; nunca reemplaces la tinta atenuada por grises más pálidos.
-- **Borde frío:** separa tarjetas, campos y controles con una línea fina.
+- **White and cool surface:** support reading, photography, and separation between sections.
+- **Ink and muted ink:** carry all normal reading; never replace muted ink with paler grays.
+- **Cool border:** separates cards, fields, and controls with a hairline.
 
-**The Purposeful Palette Rule.** Cada color saturado debe tener una tarea: orientar, pedir acción, señalar un hito o acompañar una imagen. Si no tiene una tarea, no se usa.
+**The Purposeful Palette Rule.** Every saturated color must have a job: guide, request action, mark a milestone, or accompany an image. If it has no job, it is not used.
 
 ## 3. Typography
 
-**Display Font:** Barlow Condensed, con Impact como reserva.
-**Body Font:** Barlow, con una pila de sistema como reserva.
+**Display Font:** Barlow Condensed, with Impact as fallback.
+**Body Font:** Barlow, with a system stack as fallback.
 
-Ambas familias se cargan con la Fonts API de Astro (ver `fonts` en `astro.config.mjs`), que genera automáticamente fallbacks optimizados con métricas ajustadas para las dos familias, de modo que el cambio de fuente no produce saltos de layout.
+Both families load through the Astro Fonts API (see `fonts` in `astro.config.mjs`), which automatically generates metric-matched optimized fallbacks for the two families, so the font swap causes no layout shift.
 
-**Character:** Barlow Condensed aporta una voz fuerte, directa y de rótulo popular para los titulares. Barlow deja el resto de la conversación clara, cálida y fácil de leer. La combinación mantiene la energía del logo sin disfrazar el contenido como una campaña institucional.
+**Character:** Barlow Condensed brings a strong, direct, street-sign voice to headlines. Barlow keeps the rest of the conversation clear, warm, and easy to read. The pairing keeps the logo's energy without dressing the content up as an institutional campaign.
 
 ### Hierarchy
 
-- **Display:** peso 900 y escala fluida. Solo para el título de página o el mensaje que debe verse antes de leer; usa mayúsculas y `text-wrap: balance`.
-- **Headline:** peso 900 y escala fluida. Para títulos de sección, con la misma voz condensada y mayúsculas.
-- **Title:** peso 700 a 900 entre 1.125rem y 1.375rem. Para nombres de galgos, tarjetas y controles destacados.
-- **Body:** peso 400 a 1rem con interlineado 1.55. Mantén el texto de lectura en contenedores estrechos y evita bloques de más de 75 caracteres por línea.
-- **Lead:** 1.125rem con interlineado 1.75. Sirve para despejar dudas y preparar una CTA, no para repetir el titular.
+- **Display:** 900 weight, fluid scale. Only for the page title or the message that must be seen before reading; uses uppercase and `text-wrap: balance`.
+- **Headline:** 900 weight, fluid scale. For section titles, with the same condensed voice and uppercase.
+- **Title:** weight 700 to 900 between 1.125rem and 1.375rem. For galgo names, cards, and featured controls.
+- **Body:** weight 400 at 1rem with 1.55 line height. Keep reading text in narrow containers and avoid blocks longer than 75 characters per line.
+- **Lead:** 1.125rem with 1.75 line height. It clears up doubts and sets up a CTA; it does not repeat the headline.
 
-**The Human Headline Rule.** Los títulos pueden ser enfáticos, pero el cuerpo debe responder la duda práctica que sigue. Nunca uses el display como decoración desconectada de una decisión real.
+**The Human Headline Rule.** Headlines may be emphatic, but the body must answer the practical question that follows. Never use display type as decoration disconnected from a real decision.
 
 ## 4. Elevation
 
-La profundidad es suave y estructural. Las tarjetas, la foto principal, el menú móvil y la barra fija pueden elevarse para aclarar jerarquía o interacción; el resto de la página permanece plano y deja respirar las imágenes. La luz se construye con sombras azuladas de baja opacidad y capas de superficie, no con vidrio decorativo.
+Depth is soft and structural. Cards, the featured photo, the mobile menu, and the sticky bar may lift to clarify hierarchy or interaction; the rest of the page stays flat and lets the images breathe. Light is built with low-opacity bluish shadows and surface layers, not decorative glass.
 
 ### Shadow Vocabulary
 
-- **Contacto leve:** sombra corta para controles o superficies que recién se separan del fondo.
-- **Tarjeta y barra activa:** sombra media para tarjetas al interactuar y navegación al desplazarse.
-- **Panel y modal:** sombra amplia para el drawer móvil y capas que deben estar inequívocamente encima del documento.
-- **Anillo de foco:** halo cian de 3px. Es obligatorio en controles navegables por teclado.
+- **Light contact:** a short shadow for controls or surfaces just separating from the background.
+- **Card and active bar:** a medium shadow for cards on interaction and navigation on scroll.
+- **Panel and modal:** a wide shadow for the mobile drawer and layers that must sit unambiguously above the document.
+- **Focus ring:** a 3px cyan halo. Mandatory on keyboard-navigable controls.
 
-**The Earned Elevation Rule.** Toda sombra debe explicar una relación espacial o un estado. El brillo difuso usado solo para verse moderno está prohibido.
+**The Earned Elevation Rule.** Every shadow must explain a spatial relationship or a state. Diffuse glow used only to look modern is forbidden.
 
 ## 5. Components
 
 ### Buttons
 
-Los botones son redondeados, robustos y verbales. Mantienen una altura mínima de 48px para que la acción se sienta fácil de tocar.
+Buttons are rounded, sturdy, and verbal. They keep a 48px minimum height so the action feels easy to tap.
 
-- **Shape:** píldora completa (9999px), con espaciado interno de 12px por 24px.
-- **Primary:** relleno naranjo con tinta oscura. Úsalo para adoptar, postular, donar o enviar.
-- **Secondary:** fondo cian suave, borde cian profundo y texto cian profundo. Úsalo para rutas alternativas que siguen siendo importantes.
-- **Ghost:** sin relleno ni borde permanente. Úsalo para detalles de baja presión, como ver una ficha.
-- **Hover / Focus:** transiciones rápidas con curva de salida pronunciada; foco visible mediante halo cian y nunca solo por color.
+- **Shape:** full pill (9999px), with 12px by 24px internal padding.
+- **Primary:** orange fill with dark ink. Use it for adopting, applying, donating, or sending.
+- **Secondary:** soft cyan background, deep cyan border and text. Use it for alternative routes that still matter.
+- **Ghost:** no permanent fill or border. Use it for low-pressure details, like viewing a profile.
+- **Hover / Focus:** fast transitions with a pronounced ease-out curve; visible focus via the cyan halo, never by color alone.
 
 ### Chips
 
-Los filtros y datos breves usan cápsulas compactas para permitir exploración sin transformar la página en una tabla.
+Filters and short data points use compact capsules to allow exploration without turning the page into a table.
 
-- **Style:** fondo de superficie o tinte funcional, texto legible y borde fino cuando hace falta separar.
-- **State:** el chip activo debe cambiar color y `aria-pressed`; no comuniques la selección solo por una diferencia sutil de tono.
+- **Style:** surface or functional-tint background, legible text, and a hairline border when separation is needed.
+- **State:** the active chip must change color and `aria-pressed`; do not communicate selection through a subtle tone shift alone.
 
 ### Cards / Containers
 
-Las tarjetas son contenedores para un caso real, no decoración repetida.
+Cards are containers for a real case, not repeated decoration.
 
-- **Corner Style:** curva generosa (20px) y borde de 1px, igual en tarjetas de adopción, destacadas y casos de éxito.
-- **Background:** fondo blanco sobre superficies ligeramente frías.
-- **Shadow Strategy:** elevación discreta al reposo (`--shadow-sm`) y un levantamiento suave al pasar el cursor.
-- **Internal Padding:** 24px para el contenido textual (16px en móvil).
-- **Image Behavior:** la foto ocupa una región clara y recortada con `object-fit: cover`; los controles de galería se superponen con contraste alto. Al pasar el cursor (o enfocar con teclado) la foto hace un zoom sutil, siempre condicionado a `prefers-reduced-motion: no-preference` y puntero con hover real.
-- **Hierarchy:** la necesidad actual del galgo se lee como ceja en mayúsculas sobre el nombre; los chips de sexo, edad y peso son metadatos y no se mezclan con esa ceja. La ficha se abre desde el nombre y desde la CTA fantasma.
-- **Class Systems:** `DogCard` usa solo clases `dog-card__*` y `StoryCard` solo `story-card__*`; cada familia de tarjetas se estila de forma independiente aunque compartan tokens.
+- **Corner Style:** generous curve (20px) and a 1px border, the same across adoption, featured, and success-story cards.
+- **Background:** white fill over slightly cool surfaces.
+- **Shadow Strategy:** discreet elevation at rest (`--shadow-sm`) and a gentle lift on hover.
+- **Internal Padding:** 24px for textual content (16px on mobile).
+- **Image Behavior:** the photo fills a clear, cropped region with `object-fit: cover`; gallery controls overlay it with high contrast. On hover (or keyboard focus) the photo zooms subtly, always gated on `prefers-reduced-motion: no-preference` and a real hover-capable pointer.
+- **Hierarchy:** the galgo's current need reads as an uppercase eyebrow above the name; the sex, age, and weight chips are metadata and do not mix with that eyebrow. The profile opens from the name and from the ghost CTA.
+- **Class Systems:** `DogCard` uses only `dog-card__*` classes and `StoryCard` only `story-card__*`; each card family is styled independently even when they share tokens.
 
 ### Inputs / Fields
 
-Los campos de contacto deben sentirse simples y seguros: etiqueta visible, contenido legible y un recorrido claro desde nombre hasta mensaje.
+Contact fields must feel simple and safe: visible label, legible content, and a clear path from name to message.
 
-- **Style:** etiqueta antes del control, superficie limpia, borde de una línea y radio medio.
-- **Focus:** halo cian visible y contraste suficiente. El error nunca puede depender solo del color.
-- **Error / Disabled:** explicar el estado con texto y asociación semántica además del estilo visual.
+- **Style:** label before the control, clean surface, single-line border, and medium radius.
+- **Focus:** visible cyan halo with sufficient contrast. An error may never depend on color alone.
+- **Error / Disabled:** explain the state with text and semantic association in addition to visual styling.
 
 ### Navigation
 
-La navegación mantiene al visitante orientado sin competir con la causa.
+Navigation keeps the visitor oriented without competing with the cause.
 
-- **Style:** barra fija de 64px con fondo translúcido de superficie y línea inferior fina.
-- **Desktop:** enlaces de texto claros y CTA de donación visible.
-- **Mobile:** botón circular de 40px que abre un panel lateral de 320px como diálogo modal, con cierre explícito y fondo bloqueado.
-- **Theme:** el control de tema está presente en la barra y los tokens deben responder en claro y oscuro.
+- **Style:** 64px sticky bar with a translucent surface background and a fine bottom line.
+- **Desktop:** clear text links and a visible donation CTA.
+- **Mobile:** a 40px circular button that opens a 320px side panel as a modal dialog, with an explicit close and a locked background.
+- **Theme:** the theme control lives in the bar, and tokens must respond in both light and dark.
 
-### Galería compartida
+### Shared gallery
 
-La galería permite conocer a cada galgo sin sacar al visitante del contexto de la ficha o tarjeta.
+The gallery lets visitors get to know each galgo without leaving the profile or card context.
 
-- **Style:** imagen protagonista, controles circulares oscuros y puntos de avance sobre la fotografía.
-- **Behavior:** las imágenes se abren para ver detalles; las alternativas de texto y el control por teclado son obligatorios.
+- **Style:** a leading image, dark circular controls, and progress dots over the photography.
+- **Behavior:** images open for detail viewing; text alternatives and keyboard control are mandatory.
 
-## 6. Jerarquía: sección, tarjeta y acción
+## 6. Hierarchy: section, card, and action
 
-Una página no puede tener ocho secciones que pesen lo mismo. Este vocabulario existe para que
-cada ruta declare qué es principal, qué acompaña y qué es un apunte al margen, eligiendo una
-variante en vez de inventar CSS por página. Todo es opcional: sin modificador, nada cambia.
+A page cannot have eight sections that weigh the same. This vocabulary exists so each route
+declares what is primary, what supports it, and what is a marginal note, by picking a variant
+instead of inventing per-page CSS. Everything is optional: without a modifier, nothing changes.
 
-### Peso de sección
+### Section weight
 
-Modificadores que se suman a `.section-padding`. Tres niveles, sin excepciones.
+Modifiers layered onto `.section-padding`. Three levels, no exceptions.
 
-- **`.section--lead`** — la decisión de la página. Ritmo vertical amplio (80px móvil / 96px
-  escritorio). Como máximo una o dos por ruta.
-- **`.section--support`** — contenido que sostiene esa decisión: prueba, proceso, contexto.
-  Reproduce exactamente el ritmo histórico (64px / 80px), así que agregarlo no cambia nada.
-- **`.section--quiet`** — apuntes, notas al pie, enlaces de servicio. Ritmo corto (40px / 48px)
-  sobre un tinte apenas perceptible (`--section-quiet-bg`) que la separa sin encenderla.
+- **`.section--lead`** — the page's decision. Generous vertical rhythm (80px mobile / 96px
+  desktop). At most one or two per route.
+- **`.section--support`** — content that backs that decision: proof, process, context. It
+  exactly reproduces the historical rhythm (64px / 80px), so adding it changes nothing.
+- **`.section--quiet`** — asides, footnotes, service links. A short rhythm (40px / 48px) over
+  a barely perceptible tint (`--section-quiet-bg`) that sets it apart without lighting it up.
 
-### Peso de titular y ceja
+### Heading and eyebrow weight
 
-El par ceja + titular sigue el mismo eje, para que una sección de apoyo no grite igual que una
-principal.
+The eyebrow + heading pair follows the same axis, so a support section does not shout like a
+lead one.
 
-- **`.section-heading--lead`** — escala fluida de titular, display en mayúsculas.
-- **`.section-heading--support`** — un escalón más abajo, misma voz condensada.
-- **`.section-heading--quiet`** — 1.75rem en caja normal, sin mayúsculas.
-- **`.eyebrow--lead` / `--support` / `--quiet`** — cian profundo, tinta atenuada, y tinta
-  atenuada más liviana, respectivamente.
+- **`.section-heading--lead`** — fluid headline scale, uppercase display.
+- **`.section-heading--support`** — one step down, same condensed voice.
+- **`.section-heading--quiet`** — 1.75rem in sentence case, no uppercase.
+- **`.eyebrow--lead` / `--support` / `--quiet`** — deep cyan, muted ink, and lighter muted
+  ink, respectively.
 
-**La regla de la mayúscula selectiva.** Las mayúsculas se reservan para cejas, etiquetas breves
-y titulares display. Nunca para texto corrido. Las mayúsculas en español conservan sus tildes
-siempre: `ADOPCIÓN`, jamás `ADOPCION`.
+**The selective uppercase rule.** Uppercase is reserved for eyebrows, short labels, and display
+headings. Never for body copy. Spanish uppercase keeps its accents always: `ADOPCIÓN`, never
+`ADOPCION`.
 
-### Peso de tarjeta
+### Card weight
 
-Dos niveles. La elevación es un recurso escaso; si todo flota, nada destaca.
+Two levels. Elevation is a scarce resource; if everything floats, nothing stands out.
 
-- **`.card` + `.card--elevated`** — fondo propio, borde fino y sombra de contacto. Para un caso
-  real que invita a decidir: un galgo, una historia, una vía de contacto.
-- **`.card` + `.card--plain`** — plano, sin relleno, solo una línea fina. Para información que
-  acompaña: requisitos, datos, comparaciones, listados densos.
+- **`.card` + `.card--elevated`** — its own background, hairline border, and contact shadow.
+  For a real case that invites a decision: a galgo, a story, a contact path.
+- **`.card` + `.card--plain`** — flat, no fill, just a hairline. For supporting information:
+  requirements, facts, comparisons, dense listings.
 
-`.cta-card--plain` aplica el mismo peso plano a la CTA de cierre cuando esa no es la conversión
-real de la página. Las tarjetas de ruta (`dog-card`, `story-card`, `route-card`) mantienen su
-propio sistema de clases y adoptan estos pesos cuando corresponda.
+`.cta-card--plain` applies the same flat weight to the closing CTA when that is not the page's
+real conversion. Route cards (`dog-card`, `story-card`) keep their own class systems and adopt
+these weights where appropriate.
 
-### Peso de acción
+### Action weight
 
-Tres niveles, y solo tres. Una agrupación con una acción principal más una terciaria debe leerse
-como una sola decisión.
+Three levels, and only three. A grouping with one primary action plus a tertiary one must read
+as a single decision.
 
-- **`.btn--primary`** — relleno naranjo. Una sola por agrupación: adoptar, postular, donar, enviar.
-- **`.btn--secondary`** — cian suave con borde. Una ruta alternativa que sigue importando.
-- **`.btn--ghost`** — sin relleno ni borde. Detalles de baja presión: ver una ficha, volver.
+- **`.btn--primary`** — orange fill. One per grouping: adopt, apply, donate, send.
+- **`.btn--secondary`** — soft cyan with border. An alternative route that still matters.
+- **`.btn--ghost`** — no fill or border. Low-pressure details: view a profile, go back.
 
-**Una sola primaria por ruta.** No por sección: por página completa. Si dos secciones compiten
-por la misma atención, una de las dos baja a secundaria. Repetir la _misma_ acción (el CTA del
-hero y el de cierre apuntando al mismo formulario) no cuenta como competencia: refuerza.
+**One primary per route.** Not per section: per whole page. If two sections compete for the
+same attention, one of them drops to secondary. Repeating the _same_ action (the hero CTA and
+the closing CTA pointing at the same form) does not count as competition: it reinforces.
 
-**Secundaria invertida sobre fondo oscuro.** En bandas oscuras como `.donation-banner`, la
-secundaria se dibuja con borde y tinta claros sobre fondo transparente. Mantiene el contraste AA
-sin recuperar el peso de una primaria.
+**Inverted secondary on dark backgrounds.** On dark bands like `.donation-banner`, the
+secondary is drawn with light border and ink over a transparent background. It keeps AA
+contrast without reclaiming the weight of a primary.
 
 ## 7. Do's and Don'ts
 
 ### Do:
 
-- **Do** usar el naranjo para una sola acción principal por agrupación y el cian para rutas secundarias, foco y orientación.
-- **Do** dar a cada fotografía de galgo un texto alternativo útil y un encuadre que preserve la presencia del perro.
-- **Do** mantener el cuerpo en tinta o tinta atenuada sobre fondos claros, con contraste de texto de al menos 4.5:1.
-- **Do** usar títulos Barlow Condensed en mayúsculas para jerarquía, pero mantener las decisiones y explicaciones en Barlow legible.
-- **Do** respetar la reducción de movimiento y dejar el contenido visible incluso cuando una animación no pueda ejecutarse.
-- **Do** mantener las CTA en verbos concretos y rutas claras: adoptar, dar hogar temporal, donar o escribir.
+- **Do** use orange for a single primary action per grouping and cyan for secondary routes, focus, and wayfinding.
+- **Do** give every galgo photograph useful alt text and framing that preserves the dog's presence.
+- **Do** keep body copy in ink or muted ink on light backgrounds, with text contrast of at least 4.5:1.
+- **Do** use uppercase Barlow Condensed headings for hierarchy, but keep decisions and explanations in legible Barlow.
+- **Do** respect reduced motion and keep content visible even when an animation cannot run.
+- **Do** keep CTAs in concrete verbs and clear routes: adopt, foster, donate, or write.
 
 ### Don't:
 
-- **Don't** parecer una ONG distante, institucional o genérica.
-- **Don't** usar culpa, urgencia vacía o relatos de sufrimiento sin salida para pedir una acción.
-- **Don't** reemplazar la claridad por gradientes decorativos, texto en gradiente, vidrio ornamental o sombras sin función.
-- **Don't** usar bordes laterales de color, rejillas interminables de tarjetas idénticas ni cejas pequeñas en mayúsculas sobre cada sección.
-- **Don't** reducir el contraste de texto para que la interfaz se vea más suave.
-- **Don't** ocultar el foco de teclado, la etiqueta de un campo o el significado de un estado solo porque el color ya lo sugiere.
+- **Don't** look like a distant, institutional, or generic NGO.
+- **Don't** use guilt, empty urgency, or dead-end suffering narratives to ask for an action.
+- **Don't** trade clarity for decorative gradients, gradient text, ornamental glass, or functionless shadows.
+- **Don't** use colored side borders, endless grids of identical cards, or small uppercase eyebrows over every section.
+- **Don't** reduce text contrast to make the interface look softer.
+- **Don't** hide keyboard focus, a field's label, or the meaning of a state just because color already hints at it.
+
+## 8. Open questions
+
+- **Should section headings stay uppercase?** `src/styles/global.css` applies
+  `text-transform: uppercase` to every `h1`–`h3`, and §6's `.section-heading--quiet` is the
+  opt-in escape hatch that drops to sentence case. During the UX hierarchy pass, the task text
+  asked for selective uppercase (eyebrows and short labels only, never section headings), but
+  removing uppercase globally was the largest visual change available and conflicted with that
+  pass's zero-visual-regression success condition — so uppercase headings shipped as a
+  deliberate deviation. The brand question underneath was never actually decided. Reversing it
+  means removing `text-transform: uppercase` from the `h1, h2, h3` rule in
+  `src/styles/global.css` and inverting `.section-heading--quiet` (it becomes the uppercase
+  opt-in, or is deleted) — a genuine redesign touching every page. Either way, Spanish accents
+  must survive: `ADOPCIÓN`, never `ADOPCION`.
