@@ -1,6 +1,6 @@
-# Brigada Galgos Voice and Tone
+# Voice and Tone
 
-Use this guide for all site copy. It is the source of truth for voice, tone, rhythm, punctuation, CTAs, adoption copy, foster copy, donation copy, FAQs, dog profiles, and success stories.
+This guide is the source of truth for all site copy: voice, tone, rhythm, punctuation, CTAs, and the per-page patterns for adoption, foster, donation, FAQ, dog profiles, and success stories. It governs the Spanish copy that ships in `src/`; the guide itself is written in English so editors and tooling can discuss the rules, but every example, banned phrase, and model sentence below is the actual Spanish copy pattern and must stay verbatim. For the Spanish domain terms used in schemas, routes, and copy (`adopcion`, `hogar temporal`, `ceja`, and friends), see `docs/glossary.md`.
 
 ## Brand Voice
 
@@ -64,11 +64,7 @@ Prefer:
 
 ### Home
 
-Explain who Brigada is and invite the three main actions fast: adopt, offer a hogar temporal, and donate.
-
-Use a mission line plus practical reassurance about galgos. Mention that they are calm indoors, need regular walks, and can become deeply loved family companions. Keep the CTAs clear and active.
-
-Use confirmed stats and short adopter quotes where they help build trust. Do not invent rescue counts, adoption counts, names, cities, or quotes.
+Explain who Brigada is and invite the three main actions fast: adopt, offer a hogar temporal, and donate. Use a mission line plus practical reassurance about galgos: they are calm indoors, need regular walks, and can become deeply loved family companions. Keep the CTAs clear and active. Use confirmed stats and short adopter quotes where they help build trust, and never invent rescue counts, adoption counts, names, cities, or quotes.
 
 Example:
 
@@ -106,9 +102,7 @@ Example:
 
 ### Dog Profiles
 
-Connect the visitor with an individual dog. Each profile or card should include a photo, name, age when known, and a short character sketch.
-
-Good profile copy names one concrete behavior and what it tells us:
+Connect the visitor with an individual dog. Each profile or card should include a photo, name, age when known, and a short character sketch. Good profile copy names one concrete behavior and what it tells us:
 
 > Bruno todavía se asusta con ruidos fuertes, pero ya aprendió que las manos significan mimos, no daño.
 
@@ -123,9 +117,7 @@ Explain what Brigada covers and what the foster provides:
 - Brigada covers veterinary care, vaccines, antiparasitics, and food when that is the confirmed policy.
 - The foster provides a safe space, daily walks, patience, and a calm routine.
 
-Normalize the exit. Do not guilt-trip. Make the bar feel human.
-
-Use short real foster stories when available. First-person quotes work well when they explain what goodbye feels like and why the temporary commitment is worth it.
+Normalize the exit. Do not guilt-trip. Make the bar feel human. Use short real foster stories when available; first-person quotes work well when they explain what goodbye feels like and why the temporary commitment is worth it.
 
 Example:
 
@@ -133,9 +125,7 @@ Example:
 
 ### Donations
 
-Make impact concrete. Connect money to visible outcomes like food, vaccines, antiparasitics, transport, exams, sterilization, medication, emergency care, or rehabilitation.
-
-Use confirmed amounts whenever possible. If amounts are estimates, say so plainly. One-time and recurring donations should both feel useful.
+Make impact concrete. Connect money to visible outcomes like food, vaccines, antiparasitics, transport, exams, sterilization, medication, emergency care, or rehabilitation. Use confirmed amounts whenever possible; if amounts are estimates, say so plainly. One-time and recurring donations should both feel useful.
 
 Examples:
 
@@ -143,9 +133,7 @@ Examples:
 
 > Tu aporte mensual sostiene la parte menos visible del rescate: alimento, controles, traslados y tratamientos mientras llega una familia.
 
-If Brigada receives no state funding, say it directly. Do not overstate corporate support or imply funding sources that are not confirmed.
-
-Maintain strict transparency about operational expenses. Clearly state that donations are not spent on salaries or remuneration (all volunteers), paid advertising, buying dogs, or physical office rents.
+If Brigada receives no state funding, say it directly, and do not overstate corporate support or imply funding sources that are not confirmed. Maintain strict transparency about operational expenses: state clearly that donations are not spent on salaries or remuneration (all volunteers), paid advertising, buying dogs, or physical office rents.
 
 ### Contact
 
@@ -159,7 +147,7 @@ If reply times are shown, state them plainly and only when they are confirmed.
 
 ### FAQs
 
-Answer the question directly first. Then add reassurance, context, or next steps. Keep answers useful and honest. If the answer depends on the dog, the home, or the available resources, say so.
+Answer the question directly first, then add reassurance, context, or next steps. Keep answers useful and honest; if the answer depends on the dog, the home, or the available resources, say so.
 
 Good FAQ copy should reduce anxiety around:
 
@@ -193,6 +181,16 @@ Making a donation ask:
 Closing a section:
 
 > ¿Crees que el hogar temporal podría ser para ti? Mándanos un mensaje y respondemos tus dudas sin apuro.
+
+## What the Build Enforces
+
+`npm run test:text` runs `scripts/check-text-quality.mjs`, which mechanically enforces exactly three things from this guide:
+
+1. **The "encajar" ban.** Any form of the verb (`encaja`, `encajan`, `encaje`, `encajar`, `encajaría`) fails the check. Applied only under `src/`.
+2. **Voseo detection.** Forms like "podés", "querés", "tenés", "intentá", "revisá", "contanos", "escribinos", "apoyanos" fail the check, because the site voice is Chilean neutral tuteo. Applied only under `src/`.
+3. **Mojibake and replacement characters.** The artifacts of double-encoded UTF-8 (codepoints U+00C3, U+00C2, and U+00E2 followed by a C1 control) and the U+FFFD replacement character fail the check across `src/`, `docs/`, `public/`, `tests/`, and `scripts/`. The script writes these patterns as regex escapes precisely so that quoting them does not trip the check; do the same here and never paste literal mojibake into any file.
+
+The voice rules are scoped to `src/` on purpose so docs and tooling (including this guide) can quote the banned counterexamples without failing the build. Everything else in this file (tuteo warmth, em dashes, exclamation inflation, three-of-a-kind phrasing, banned cliches beyond "encajar", per-page patterns, the checklist below) is **not enforced by any check**. It is human editorial judgment. See the "What no check enforces" section of `docs/quality.md` for the full list of unenforced rules across the repo.
 
 ## Final Checklist
 

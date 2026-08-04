@@ -1,234 +1,129 @@
 # Agent Guidance
 
-This repository is the public Astro site for **Brigada Galgos Chile**. It is a static site deployed to Cloudflare Pages from GitHub, written primarily in Astro, TypeScript, CSS, and Markdown content collections.
+This repository is the public Astro 7 static site for **Brigada Galgos Chile**, deployed to Cloudflare Pages from GitHub. It is a content-driven site (Astro, TypeScript, CSS, Markdown content collections) with strict editorial, accessibility, and source-hygiene constraints.
 
-The repo mixes product code, structured content, image assets, SEO/analytics rules, and a fairly strict test suite. Treat it as a content-driven site with strong editorial, accessibility, and source-hygiene constraints.
+The organizing rule: **every rule has exactly one owner document; change a rule only in its owner.** Read only the owners relevant to the task.
 
-## Primary Goal
+## Documentation ownership
 
-- Keep the site correct, fast, accessible, and maintainable.
-- Preserve the organization voice in Chilean Spanish.
-- Respect the content model for dogs, supporters, and story cards.
-- Keep verification green: formatting, linting, build, unit tests, browser tests, and Lighthouse when relevant.
+| Domain                                                                        | Owner                    |
+| ----------------------------------------------------------------------------- | ------------------------ |
+| Purpose, stack, setup, commands, repo map, env vars, deploy, doc index        | `README.md`              |
+| Recipes and agent invariants                                                  | `AGENTS.md` (this file)  |
+| Audience, purpose, conversion flows, key flows, success metrics, out-of-scope | `PRODUCT.md`             |
+| Visual system: tokens, hierarchy weights, components                          | `DESIGN.md`              |
+| **Mechanism** — how the site is built                                         | `docs/architecture.md`   |
+| **Requirements** — what must be true                                          | `docs/quality.md`        |
+| **Procedures** — how to change things                                         | `docs/maintenance.md`    |
+| Collection schemas, field tables, authoring rules                             | `docs/content-model.md`  |
+| Copy voice, banned words, per-page patterns                                   | `docs/voice-and-tone.md` |
+| Spanish domain terms → meaning → code location                                | `docs/glossary.md`       |
+| Command authority (the scripts)                                               | `package.json`           |
+| Redirect authority                                                            | `public/_redirects`      |
 
-## Working with Astro
+## Recipes
 
-- Use Astro Docs MCP for Astro framework questions, integrations, routing, content collections, image handling, and current best practices.
-- Verify current Astro APIs before changing areas that drift across versions: content collections, image handling, integrations, adapters, actions, and view transitions.
+Each recipe is the short version: the goal, the key steps, and the command that proves it. The full procedure lives in `docs/maintenance.md`.
 
-## Codex model routing
+### Add a dog
 
-- Default: the root Terra agent handles ordinary work. Do not spawn subagents for simple, clear, single-file, or mechanical tasks. The parent Terra agent owns the final decision and the final user-facing answer.
-- `luna_heartbeat`: cheap read-only checks (repo status, file or dependency presence, small-file summaries, simple classification, yes/no routing, change detection).
-- `terra_worker`: bounded implementation (clear small features, straightforward bug fixes, small refactors, tests, documentation tied to code changes).
-- `sol_escalation`: hard reasoning only (architecture decisions, complex debugging, security- or performance-sensitive review, risky multi-file refactors, unclear failures, final review before risky implementation).
-- `sol_max_review`: only when explicitly requested or when `sol_escalation` was insufficient.
-- Cost discipline: prefer no subagent, then Luna, then Terra, then Sol. Never spawn several tiers together unless the task explicitly benefits from parallel division. Subagents must return compact summaries, not raw logs, and must not spawn other subagents.
-
-## Project Snapshot
-
-- Framework: Astro 7, static output only.
-- Hosting: Cloudflare Pages.
-- Package manager: npm with committed `package-lock.json`.
-- Runtime: Node 22+ via `.nvmrc`.
-- Images: Astro assets with responsive AVIF/WebP generation; `image.responsiveStyles` is enabled and blog/editorial images use `layout="constrained"`.
-- Fonts: Astro Fonts API — `fonts` in `astro.config.mjs` plus `<Font>` components in `BaseLayout.astro`. No manual woff2 preloads or `@fontsource` file imports.
-- Environment: `PUBLIC_GTM_ID`, `PUBLIC_WEB3FORMS_KEY`, and `ENABLE_INDEXNOW` are typed via the `env.schema` in `astro.config.mjs` (`astro:env`); `.env.example` documents them.
-- Styling: site CSS remains the main styling layer. Tailwind has been removed from the project and should not be reintroduced casually.
-- Analytics: GTM-delivered GA4 only after consent, plus Cloudflare Web Analytics.
-- SEO: `@astrojs/sitemap` and `@jdevalk/astro-seo-graph`.
-- Feed: RSS is generated at `src/pages/feed.xml.ts` from the `blog` collection.
-- Tests: Vitest for source/unit tests, Playwright for browser, regression, and build-output checks.
-
-For the repo layout and full file tree, see `docs/spec.md`.
-
-## Architecture Essentials
-
-### Homepage and success stories
-
-- The homepage places `FeaturedAdoptionDogs` immediately after the hero divider. It picks three active adoption dogs (`status: "adopcion"` in the unified `dogs` collection) at random (shuffled per build); the optional `order` field in the schema is currently unused.
-- The homepage runs six sections after the hero, in this order and weight: `FeaturedAdoptionDogs` (lead), `MissionSection` (support, with `TrustStatsSection variant="compact"` in its slot and the rescue flow as a compact list), `WhyGalgosSection` (support), `StoriesSection` (support), `HelpCards` (quiet), `DonationBanner` (quiet band). Adoption is the page's single primary action; do not add a second competing primary.
-- `/adoptar/` remains the complete active listing. Do not turn the homepage preview into the full catalogue.
-- Dogs with `status: "exito"` power a three-story homepage preview, the complete `/casos-de-exito/` archive and selected stories on `/por-que-galgos/`.
-- The archive is static and server-rendered. Do not restore homepage story pagination, `/casos/exito-home.json`, or `src/scripts/stories-section.ts` without a new product requirement.
-
-### Layouts and page shells
-
-- `src/layouts/BaseLayout.astro` owns the document shell: global styles, SEO graph, canonical metadata, GTM noscript fallback, cookie banner, and client bootstrap scripts.
-- `src/layouts/PageLayout.astro` is the standard shell for most top-level pages. It wraps `BaseLayout` with `Navbar`, `main`, and `Footer`.
-- Prefer `PageLayout` for regular site pages instead of repeating `Navbar` and `Footer`.
-- Use the `afterShell` slot in `PageLayout` for page-level UI that must render outside `<main>`, such as `SharedGalleryLightbox`.
-
-### Links and outbound tracking
-
-- Navigation is defined once in `src/config/site.ts`: `NAV_ENTRIES` holds one entry per href/label, and `NAVBAR_LINKS` / `FOOTER_LINKS` derive the two independently ordered menus. Edit labels and URLs there, never inside `Navbar.astro` or `Footer.astro`.
-- External organizational URLs (forms, social, donation platforms) live in `SITE` — including `adoptionForm` and `fosterForm`. Do not hardcode them in components.
-- Reuse the link helpers (`src/components/TrackedLink.astro`, `WhatsAppLink.astro`, `InstagramLink.astro`) instead of hand-rolling outbound-link behavior.
-- `TrackedLink` is the shared primitive for outbound links: analytics metadata is optional, and `newTab` covers external links without tracking.
-- Keep new-tab semantics and external indicators consistent. Do not duplicate `target`, `rel`, or tracking attributes inline unless there is a clear exception.
-
-### Styling strategy
-
-- The site is still primarily styled with `src/styles/global.css` plus modular CSS files in `src/styles/components/`.
-- Express hierarchy with the shared weight vocabulary documented in `DESIGN.md` §6 rather than one-off spacing: section weights `.section--lead` / `.section--support` / `.section--quiet`, heading and eyebrow weights `.section-heading--{weight}` / `.eyebrow--{weight}`, card weights `.card--elevated` / `.card--plain`, and action weights `.btn--primary` / `.btn--secondary` / `.btn--ghost`. `PageHero` and `CtaCard` take an optional `weight` prop. Give each route exactly one primary action.
-- Tailwind is no longer part of this project.
-- Prefer existing patterns in the surrounding code and keep styling changes within the established CSS architecture instead of introducing a second styling system.
-- Preserve the current visual language and avoid “one-off” utility-heavy rewrites when editing established components.
-
-### Content-driven behavior
-
-- Dog cards and galleries are shaped through `src/utils/dog-content.ts`, which also derives success-story card excerpts (260-character default).
-- FAQ and structured-data copy are centralized in config and utility files. Prefer updating shared sources over duplicating text inside pages.
-- The blog collection powers the RSS feed and the `/blog/` listing and `/blog/<id>/` post pages. Posts with `draft: true` are excluded from both the pages and the feed. There is no markdown-alternate endpoint for blog posts right now.
-
-## Non-Negotiable Standards
-
-- Never use absolute filesystem paths in repo files or docs. Use repo-relative paths. Enforced by `tests/source-hygiene.test.ts` for `src/`, `public/`, `scripts/`, `tests/`, and root-level Markdown.
-- Preserve UTF-8 everywhere. Never introduce mojibake, replacement characters, or broken accents.
-- Prefer small, named, typed helpers over duplicated inline logic.
-- Do not hand-edit dependency versions into `package.json`; use npm commands when dependencies change.
-- Do not delete framework entrypoints because a generic dead-code tool labels them unused.
-- Avoid ad hoc client JS. If an interaction can stay server-rendered, keep it server-rendered.
-
-## Content and Voice
-
-- Follow `docs/site-brief.md` for audience and language defaults.
-- Follow `docs/voice-and-tone.md` for site voice. This is the source of truth for rhythm, phrasing, tone, and CTA style.
-- Spanish copy must use correct Chilean Spanish spelling, accents, punctuation, and natural phrasing.
-- Avoid generic NGO copy. Keep writing specific, humane, and grounded.
-- Keep repetition under control. If a wording update is requested across the site, vary nearby phrasing where needed so the copy still sounds natural.
-
-## Content Collections
-
-The canonical schemas live in `src/content.config.ts`; the editorial rules and field tables live in `docs/content-model.md`. Key rules (gallery caps, story length, hidden-dog metadata and expiry, redirect coverage) are enforced by the schema and `tests/source-hygiene.test.ts` — keep those the source of truth instead of restating them here.
-
-## Managing Dog Statuses
-
-The full editorial workflows, with examples, are in `docs/content-model.md`. The operational essentials:
-
-### Moving a Dog to Success
-
-All dogs live in `src/content/dogs/<slug>.md` with assets in `src/assets/casos/<slug>/`; neither moves when the dog is adopted.
-
-1. Edit the frontmatter: change `status` to `"exito"`, drop the adoption-only fields, and add a `story` (≤260 characters, mentions the adoption outcome). `gallery` paths stay the same.
-2. Add a permanent redirect for the retired profile URL in `public/_redirects`:
-
-   ```
-   /adoptar/<slug>/ /casos-de-exito/ 301
-   ```
-
-Profile URLs are shared on social media and must not 404 after the dog is adopted. `tests/source-hygiene.test.ts` fails the build when a retired or hidden profile is missing its redirect.
-
-### Hiding a Dog Temporarily
-
-Applies only to dogs with `status: "adopcion"`:
-
-```yaml
-active: false
-hiddenSince: YYYY-MM-DD
-hiddenReason: "Hogar temporal planea adoptar (no confirmado)"
-```
-
-- Hidden entries remain in the collection but lose their `/adoptar/<slug>/` page. Add the same `public/_redirects` entry for the duration of the hide, and remove it once the dog is active again.
-- Hidden entries older than 90 days fail the test suite.
-
-## Images and Asset Handling
-
-- Prefer imported images inside `src/assets/` so Astro can optimize them.
-- UI icons live in `src/assets/icons/` and are imported as inline SVG components (svgo-optimized at build). Do not add icons back under `public/icons/` or render them as `<img>`.
-- Dog galleries are intentionally capped at 3 images in both schema and UI helpers.
-- `SharedPhotoGallery` renders native Astro markup (no `set:html`) and requires a unique `transitionName` prop, derived from the content slug, for ClientRouter image morphing.
-- When normalizing dog image filenames or extensions, use the provided scripts instead of ad hoc renames:
-  - `npm run dog-images:check`
-  - `npm run dog-images:write`
-- Keep file extensions consistent within a dog’s folder. The repo currently normalizes to `.jpg` where applicable.
-- Do not add remote image dependencies or CDNs for dog photography.
-
-## SEO, Accessibility, and Performance
-
-- Every indexable page must have a unique title and meta description.
-- Keep one meaningful `h1` per page.
-- Maintain canonical and social metadata.
-- Keep JSON-LD generated from shared builders rather than duplicated literals.
-- Preserve accessible image alt text and decorative-image handling.
-- Respect heading hierarchy. Lighthouse will catch semantic skips that may still “look fine” visually.
-- The site targets 100 in Lighthouse categories for the checked pages; avoid regressions that add unnecessary JS, layout instability, or weak semantics.
-- `astro.config.mjs` currently uses `build.inlineStylesheets = "auto"` to avoid over-inlining CSS into HTML. Do not revert that casually.
-
-## Analytics and Consent
-
-- GTM is the only allowed delivery path for GA4.
-- Never add standalone `gtag.js`.
-- Do not load GTM before consent.
-- Push denied consent by default and granted consent after acceptance.
-- Rejection should clear known GA/GTM cookies.
-- `tests/analytics-consent.spec.ts` and `tests/source-hygiene.test.ts` protect these rules.
-
-## Security and Deployment
-
-- `public/_headers` is required for Cloudflare Pages.
-- `public/_redirects` handles URL migration and permanent redirects.
-- Keep CSP strict. Document each third-party allowance.
-- Maintain HTTPS-only assumptions and modern browser security headers.
-
-## Testing and Verification
-
-Run these before delivery unless the task clearly does not touch the relevant surface:
+Create `src/content/dogs/<slug>.md` with `status: "adopcion"` and 1–3 images in `src/assets/casos/<slug>/`. Fill the required frontmatter (`name`, `sex`, `age`, `weight`, `details`, `characterSketch`, `gallery`) and set `adoptionFacts.compatibility` with all four keys — the build fails without them.
 
 ```bash
-npm run format:check
-npm run lint
+npm run test:source
+```
+
+Full procedure: [Add a dog](docs/maintenance.md#add-a-dog).
+
+### Move a dog to success
+
+The markdown file and its `src/assets/casos/<slug>/` assets never move. In `src/content/dogs/<slug>.md`, change `status` to `"exito"`, drop the adoption-only fields, and add a `story` (≤260 characters, must mention the adoption outcome). Add `/adoptar/<slug>/ /casos-de-exito/ 301` to `public/_redirects` — retired profile URLs must not 404.
+
+```bash
+npm run test:source
+```
+
+Full procedure: [Move a dog to success](docs/maintenance.md#move-a-dog-to-success).
+
+### Hide a dog temporarily
+
+For `status: "adopcion"` only: set `active: false` plus `hiddenSince` and `hiddenReason` in the dog's frontmatter (the schema rejects `active: false` without them). Add the `/adoptar/<slug>/` redirect to `public/_redirects` for the duration of the hide and remove it on reactivation. Hides older than 90 days fail the suite.
+
+```bash
+npm run test:source
+```
+
+Full procedure: [Hide a dog temporarily](docs/maintenance.md#hide-a-dog-temporarily).
+
+### Add a supporter
+
+Put the logo in `src/assets/images/supporters/`, then create `src/content/supporters/<slug>.md` with the required fields (`name`, `description`, `website`, `kind`, `logo`, `logoAlt`) per `src/content.config.ts`.
+
+```bash
 npm run build
-npm test
 ```
 
-For major UX, SEO, or performance changes, also run:
+Full procedure: [Add a supporter](docs/maintenance.md#add-a-supporter).
+
+### Add a blog post
+
+Create `src/content/blog/<slug>.md` with `title`, `pubDate`, `author`, `description`; optional hero image from `src/assets/blog/<slug>/`. Start body headings at `##` — the page renders the only `h1` from `title`. Set `draft: true` to keep the post out of `/blog/` and the RSS feed until ready.
 
 ```bash
-npm run test:lighthouse
+npm run build
 ```
 
-Notes:
+Full procedure: [Add a blog post](docs/maintenance.md#add-a-blog-post).
 
-- `npm run lint` includes ESLint, Stylelint, text-quality checks, and `dog-images:check`.
-- `npm test` runs Vitest and Playwright.
-- Playwright uses `scripts/run-playwright-server.mjs` to build and start `astro preview` on `127.0.0.1`.
-- Visual-parity screenshots live in `capture/` (outside `testDir`) and run only on demand via `npm run capture:*`; `npm test` never runs them, locally or in CI.
-- If a required check is skipped, state that explicitly and explain why.
+### Add or replace dog images
 
-## Key Files Worth Knowing
+Dog images live in `src/assets/casos/<slug>/` — one flat directory per slug, no status split. Never rename files ad hoc: run the normalizer, then fix the `gallery` paths in the dog's markdown to match. Galleries are capped at 3 images.
 
-- `astro.config.mjs` — static build config, sitemap and SEO graph integrations. `indexNow` is intentionally gated behind `ENABLE_INDEXNOW === "true"`; `markdownAlternate` is intentionally disabled.
-- `src/layouts/BaseLayout.astro` — document shell, metadata, RSS link, cookie banner, `<Font>` preloads, and client bootstrap.
-- `src/layouts/PageLayout.astro` — shared page wrapper for `Navbar`, `<main>`, `Footer`, and the optional `afterShell` slot.
-- `src/components/TrackedLink.astro` — shared outbound-link primitive (optional analytics metadata).
-- `src/content.config.ts` — canonical content schemas.
-- `src/utils/dog-content.ts` — collection queries plus card/story shaping; carries the 260-character story-excerpt default.
-- `src/utils/structured-data.ts` — centralized JSON-LD builders, breadcrumbs, and FAQ structured data.
-- `tests/source-hygiene.test.ts` — enforces repository invariants that linters do not catch.
-- `playwright.config.ts` — browser test orchestration and preview server behavior.
+```bash
+npm run dog-images:write && npm run dog-images:check
+```
 
-## Known Gotchas
+Full procedure: [Add or replace dog images](docs/maintenance.md#add-or-replace-dog-images).
 
-- Do not recreate blog markdown alternate routes unless the product requirement changes. The site keeps `markdownAlternate: false`, and an old `.md` endpoint was intentionally removed because it became a build breaker on Astro 7.
-- Reuse `PageLayout` for ordinary pages instead of rebuilding the shell page by page.
-- Reuse the shared link components for WhatsApp, Instagram, tracked outbound CTAs, and simple external links.
-- When touching FAQ or “why galgos” copy, remember that similar text may also exist in structured data.
-- A build can pass while Lighthouse still fails on semantics. If you touch headings, buttons, labels, or link names, run Lighthouse.
+### Add a page
 
-## Editing Behavior
+Create `src/pages/<name>.astro` wrapped in `src/layouts/PageLayout.astro` (it provides `Navbar`, `<main>`, `Footer`). Give the page exactly one meaningful `h1` and a unique title and meta description — the seo-graph integration validates all three at build time. Add nav labels and URLs only in `src/config/site.ts`.
 
-- Respect existing user changes. Do not revert unrelated work.
-- Keep comments sparse and useful.
-- Keep changes small and defensible.
+```bash
+npm run build
+```
 
-## Documentation Expectations
+Full procedure: [Add a page](docs/maintenance.md#add-a-page).
 
-- `AGENTS.md` is the operational source for agents. Keep it specific and updated when workflows change.
-- `README.md` is for humans. Keep it illustrative, clear, and lighter on internal implementation detail.
-- `DESIGN.md` is the visual design system (colors, typography, components). Keep it aligned with `src/styles/tokens.css`.
-- `docs/site-brief.md` is the product-intent reference for scope decisions.
-- `docs/prd.md` captures the current functional requirements, shared components, and capabilities.
-- `docs/spec.md` describes architecture, file tree, data flow, integrations, analytics events, and image variants.
-- `docs/content-model.md` documents schemas, editorial rules, and content workflows.
-- `docs/voice-and-tone.md` is the source of truth for site copy.
+### Change published copy
+
+Follow `docs/voice-and-tone.md`. FAQ copy lives in `src/config/faq.ts` and feeds both the visible section and the JSON-LD in `src/utils/structured-data.ts` — grep for the phrase across `src/` before calling the change done.
+
+```bash
+npm run test:text
+```
+
+Full procedure: [Change published copy](docs/maintenance.md#change-published-copy).
+
+## Invariants agents violate without a second read
+
+- No absolute filesystem paths in `src/`, `public/`, `scripts/`, `tests/`, or root-level Markdown — repo-relative paths only. Enforced by `tests/source-hygiene.test.ts`.
+- Preserve UTF-8; never introduce mojibake, replacement characters, or broken accents (`npm run test:text` checks).
+- No Tailwind — it was removed; extend the modular CSS in `src/styles/` (`docs/architecture.md`, `DESIGN.md`).
+- Never hand-edit dependency versions into `package.json`; use npm commands.
+- Do not delete framework entrypoints because a dead-code tool flags them as unused.
+- Server-rendered by default; no ad hoc client JS beyond the sanctioned set in `src/scripts/` (`docs/architecture.md`).
+- GTM is the only analytics path, never loaded before consent; no standalone `gtag.js` (`docs/quality.md`).
+- Dog galleries are capped at 3 images — schema and UI helpers (`docs/content-model.md`).
+- No remote image CDNs for dog photography; images live in `src/assets/casos/<slug>/`.
+- Supporter logos go in `src/assets/images/supporters/` — there is no separate colaboradores asset directory.
+- Nav labels and URLs are edited only in `src/config/site.ts` (`NAV_ENTRIES`), never in `Navbar.astro` or `Footer.astro`.
+- External organizational URLs (forms, social, donation platforms) live in `SITE` in `src/config/site.ts`; do not hardcode them in components.
+- FAQ and "por qué galgos" copy is duplicated into structured data (`src/config/faq.ts`, `src/utils/structured-data.ts`) — update all copies, not just the visible one.
+- A build can pass while Lighthouse still fails on semantics. Touching headings, buttons, labels, or link names means running `npm run test:lighthouse` (budgets in `.lighthouserc.cjs`; re-run once before treating a failure as real).
+
+## Documentation updates
+
+- Git history is the archive: no historical narrative, no stage/wave/task numbering in docs.
+- Do not hardcode counts the build derives (route counts, test counts, asset counts).
+- When you change a rule, change it in its owner document only (see the ownership table).

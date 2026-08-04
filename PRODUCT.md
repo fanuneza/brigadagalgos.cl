@@ -1,48 +1,74 @@
-# Product
+# Product — Brigada Galgos website
 
-## Register
+This file is the product-intent reference: who the site serves, what it must achieve, and what stays out. Consult it first when deciding whether a feature, page, or content change belongs. It deliberately does not repeat the visual system (`DESIGN.md`), the copy rules (`docs/voice-and-tone.md`), the architecture (`docs/architecture.md`), or the quality gates (`docs/quality.md`).
 
-brand
+## Purpose
 
-## Platform
+A fast, accessible, static-only website that helps Brigada Galgos:
 
-web
+- Show galgos currently looking for adoption or a foster home.
+- Share adoption success stories.
+- Explain the adoption and foster processes.
+- Channel donations and other support.
+- Answer common questions before they become messages.
+- Make contact easy through WhatsApp, email, and social channels.
 
-## Users
+## Audience
 
-La audiencia principal son personas en Chile que evalúan adoptar un galgo o abrir su hogar temporalmente. Necesitan entender la rutina, los cuidados y el acompañamiento antes de dar el primer paso. También sirve a potenciales donantes, voluntariado, colaboradores y personas que quieren conocer y compartir el trabajo de Brigada Galgos.
+1. **Primary: potential adopters and foster homes in Chile.** They want to know what living with a galgo requires, how adoption works, and whether a specific dog fits their life.
+2. **Secondary: potential donors.** They want to know where the money goes, what impact it has, and how to give.
+3. **Tertiary: volunteers, supporters, and the curious.** They want to understand the organization and share its work.
 
-## Product Purpose
+## Positioning and brand personality
 
-El sitio público de Brigada Galgos muestra perros que buscan familia, cuenta historias de recuperación y adopción, explica los procesos de adopción y hogar temporal, facilita las donaciones y abre canales de contacto. Su éxito se ve en conversaciones calificadas por WhatsApp o formularios, aportes concretos y decisiones de adopción acompañadas. Debe seguir siendo rápido, accesible y fácil de mantener.
+Warm, direct, honest, and specific: a small volunteer team speaking in first person, not an institution. Facts carry the emotion; no invented detail, no generic NGO clichés. The enforceable copy rules (tuteo, banned phrases, CTA style) live in `docs/voice-and-tone.md`; the visual language lives in `DESIGN.md`.
 
-## Positioning
+## Conversion model
 
-Brigada Galgos acompaña cada rescate, desde el primer aviso hasta la vida del galgo en una familia segura.
+Adoption is the site's single primary action, and each route gets exactly one primary CTA. Conversion itself happens off-site: WhatsApp conversations, the adoption and foster forms (`SITE.adoptionForm` and `SITE.fosterForm` in `src/config/site.ts`), bank transfer, and eSponsor. The site never processes payments or applications itself.
 
-## Conversion & proof
+The homepage is a conversion funnel, not a catalogue. Section order in `src/pages/index.astro` (weights follow the vocabulary of `DESIGN.md` §6):
 
-- La acción principal es iniciar una conversación para adoptar; las alternativas principales son ofrecer hogar temporal, donar o escribir para resolver dudas.
-- La idea que debe permanecer es que adoptar, apoyar o dar acogida temporal es posible con orientación real, sin tener todo resuelto antes de contactar.
-- La progresión de confianza es: conocer al galgo y la realidad del rescate; entender los cuidados y el proceso; saber que Brigada acompaña antes, durante y después de la adopción; dar el primer paso por un canal directo.
-- La prueba disponible son las fichas de perros, historias de adopción, estadísticas confirmadas, fotos locales y logos de colaboradores mantenidos en las colecciones de contenido.
+1. Hero, with adoption as the only primary CTA; foster sits one weight below.
+2. `FeaturedAdoptionDogs` (lead): a rotating preview of active adoption dogs.
+3. `MissionSection` (support): mission, compact `TrustStatsSection`, compact rescue flow.
+4. `WhyGalgosSection` (support): education that lowers the perceived risk of adopting.
+5. `StoriesSection` (support): success-story preview linking to the full archive.
+6. `HelpCards` (quiet): the three ways to help.
+7. `DonationBanner` (quiet band): donation as the closing, lower-weight ask.
 
-## Brand Personality
+`/adoptar/` remains the complete active listing; do not grow the homepage preview into the catalogue. Foster and donation are secondary actions throughout, reachable one weight below the adoption CTA.
 
-Cálida, directa y honesta. Brigada habla como una amiga de confianza que está presente en una situación difícil: reconoce lo que vive cada galgo, explica acciones concretas y abre una posibilidad real. Usa español chileno con tuteo neutral y primera persona plural cuando habla la organización. Debe inspirar confianza, cuidado y una urgencia serena, nunca culpa ni dramatización.
+## Key flows
 
-## Anti-references
+| Flow                | Entry                            | Action                                                 | Success signal                                    |
+| ------------------- | -------------------------------- | ------------------------------------------------------ | ------------------------------------------------- |
+| Adopt a galgo       | Home, `/adoptar/`, dog profile   | WhatsApp message or adoption-form submission           | Visitor starts a conversation with Brigada        |
+| Offer a foster home | `/hogar-temporal/`, Home         | WhatsApp message                                       | Visitor asks about foster requirements            |
+| Donate              | `/donar/`, Home                  | Copy bank details, open eSponsor, or start a transfer  | Visitor reaches a donation channel                |
+| Learn about galgos  | `/por-que-galgos/`, FAQ          | Read, then move to adopt or contact                    | Visitor can judge whether a galgo fits their life |
+| Read a story        | Home preview, `/casos-de-exito/` | Browse the archive, open a gallery, return to adoption | Visitor connects emotionally with the cause       |
 
-No debe parecer una ONG distante, institucional o genérica; tampoco una campaña que use culpa, urgencia vacía o relatos de sufrimiento sin salida. Evitar promesas sin respaldo, lenguaje publicitario impersonal y una experiencia visual que sacrifique claridad, velocidad o accesibilidad.
+## Success metrics
 
-## Design Principles
+- **Qualified contact:** WhatsApp conversations and form submissions, tracked as GTM events after consent.
+- **Donation intent:** visitors reaching a donation channel (bank-details copy, eSponsor click).
+- **Adoption confidence:** movement from the educational pages (`/por-que-galgos/`, `/preguntas-frecuentes/`) into `/adoptar/` or contact.
+- **Quality gates stay green:** thresholds, commands, and Lighthouse targets are owned by `docs/quality.md`.
 
-1. Mostrar a cada galgo como individuo, con información concreta y una vida posible por delante.
-2. Reducir la incertidumbre antes de pedir una decisión: explicar procesos, cuidados y acompañamiento con claridad.
-3. Convertir la empatía en una acción concreta y cercana, con rutas simples para adoptar, acoger, donar o preguntar.
-4. Hacer visible la confianza con hechos confirmados, historias, fotos y apoyo posterior a la adopción.
-5. Cuidar la experiencia de todas las personas: rápida, legible, accesible y útil en móvil.
+## Out of scope
 
-## Accessibility & Inclusion
+- Server-side functionality: no login, dashboards, or dynamic APIs. The build is static-only.
+- On-site payments or e-commerce; donations go through bank transfer or eSponsor.
+- Third-party CDNs for dog photography; dog images are local assets optimized by Astro.
+- A markdown-alternate endpoint for blog posts (`markdownAlternate: false` is deliberate; the removed `.md` route was a build breaker).
+- Individual success-story detail pages; stories render as cards and lightboxes only.
+- Search and multi-language support: deferred nice-to-haves, not current requirements.
 
-La experiencia debe mantenerse rápida y accesible, con navegación clara en computador y móvil, semántica correcta, texto legible, alternativas de texto en imágenes, controles utilizables y respeto por preferencias de reducción de movimiento. El proyecto mantiene pruebas de accesibilidad sin violaciones de axe-core y el objetivo de Lighthouse 100 en las páginas evaluadas.
+## Related documents
+
+- `docs/voice-and-tone.md` — copy and brand voice rules.
+- `DESIGN.md` — visual design system and section-weight vocabulary.
+- `docs/architecture.md` — technical architecture and integrations.
+- `docs/content-model.md` — content schemas and editorial workflows.
+- `docs/quality.md` — verification commands, thresholds, and testing rules.
