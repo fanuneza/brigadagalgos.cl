@@ -12,6 +12,7 @@ export default [
       ".lighthouseci/**",
       "playwright-report/**",
       "test-results/**",
+      "prototypes/**",
     ],
   },
   ...eslintPluginAstro.configs.recommended,
