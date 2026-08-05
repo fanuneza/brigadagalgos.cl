@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototipos de inicio · Brigada Galgos</title>
+  <meta name="description" content="Cinco propuestas visuales para la página de inicio de Fundación Brigada Galgos.">
+  <style>
+    :root {
+      --bg: #f7f7f7;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --border: #d1d1d1;
+      --accent: #2f5ea8;
+      --accent-hover: #1e4482;
+      --focus: #d97706;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      padding: 1.5rem;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    a:focus-visible {
+      outline: 0.1875rem solid var(--focus);
+      outline-offset: 0.125rem;
+    }
+
+    main {
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .lede {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 60ch;
+    }
+
+    .prototype-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .prototype-list li {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+    }
+
+    .prototype-list a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-height: 2.75rem;
+      padding: 1rem 1.25rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: inherit;
+    }
+
+    .prototype-list a:hover {
+      background-color: #f0f4fa;
+    }
+
+    .prototype-list a:focus-visible {
+      outline-offset: -0.125rem;
+    }
+
+    .prototype-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .prototype-summary {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prototipos de inicio · Brigada Galgos</h1>
+    <p class="lede">Cinco direcciones visuales para la página de inicio. Cada propuesta conserva el mismo contenido real y el mismo orden de nueve secciones; solo cambia el sistema visual.</p>
+
+    <ul class="prototype-list">
+      <li>
+        <a href="editorial-documental/">
+          <span class="prototype-name">Editorial documental</span>
+          <span class="prototype-summary">Serif display + sans body, columnas de lectura estrechas, pies de foto documentales, paleta tinta/papel.</span>
+        </a>
+      </li>
+      <li>
+        <a href="calido-domestico/">
+          <span class="prototype-name">Cálido doméstico</span>
+          <span class="prototype-summary">Neutros cálidos, redondez contenida, la fotografía de vida hogareña lidera la composición.</span>
+        </a>
+      </li>
+      <li>
+        <a href="tipografico-audaz/">
+          <span class="prototype-name">Tipográfico audaz</span>
+          <span class="prototype-summary">Display condensado de gran tamaño, monocromo + un acento, composición que rompe la grilla.</span>
+        </a>
+      </li>
+      <li>
+        <a href="clinico-transparente/">
+          <span class="prototype-name">Clínico transparente</span>
+          <span class="prototype-summary">Primero la confianza, grupos de datos estructurados, paleta fría y contenida, secuencia del proceso.</span>
+        </a>
+      </li>
+      <li>
+        <a href="territorial-chileno/">
+          <span class="prototype-name">Territorial chileno</span>
+          <span class="prototype-summary">Paleta terrosa del paisaje chileno, bandas texturadas, secuencia horizontal de casos.</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer>
+      <p>Fundación Brigada Galgos Chile. Prototipos estáticos para revisión visual.</p>
+    </footer>
+  </main>
+</body>
+</html>

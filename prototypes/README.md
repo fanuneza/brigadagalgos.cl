@@ -228,8 +228,36 @@ Si la adopción no funciona, no te dejamos solo con el problema. Trabajamos junt
 
 ---
 
+## How to view
+
+These are static HTML files with relative assets, so any local static-file server works.
+
+From the repository root:
+
+```bash
+npx serve prototypes
+```
+
+Or, from inside `prototypes/`:
+
+```bash
+cd prototypes
+python3 -m http.server 8080
+```
+
+Then open the launcher at the server root (`http://localhost:3000` or `http://localhost:8080`, depending on the command) and pick a direction:
+
+- `editorial-documental/` — serif display + sans body, narrow reading columns, documentary captions, ink/paper palette.
+- `calido-domestico/` — warm neutrals, restrained roundness, home-life photography leads.
+- `tipografico-audaz/` — oversized condensed display type, monochrome + one accent, grid-breaking composition.
+- `clinico-transparente/` — trust-first, structured fact groups, cool restrained palette, process-led sequencing.
+- `territorial-chileno/` — earthy palette from Chilean landscape, textured bands, horizontal case sequences.
+
+---
+
 ## Content gaps
 
 - No foster-story first-person account exists in the repository. Any
   first-person foster quote in the prototypes must be marked as
   **contenido pendiente** until a real quote is provided.
+
